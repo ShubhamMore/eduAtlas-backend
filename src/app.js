@@ -28,20 +28,7 @@ app.use('/images',express.static(path.join('Server/images')));
 app.use(cookieParser());
 
 //"mongodb://localhost:27017/Eduatlas"
-mongoose.connect("mongodb://localhost:27017/Eduatlas"
- , {   
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
- })
-.then(()=>{
-  app.listen(port, () => console.log('Listening on', port));
-  console.log('Connected to database');
-})
-.catch((reason)=>{
-  console.error('Connection failed', '\n');
-  console.log(reason);
-});
+
 
 app.use('/', indexRouter);
 app.use('/users', require('./routes/users'));

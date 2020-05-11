@@ -1,4 +1,4 @@
-const response = require('../service/response');
+const response = require('./response');
 function errorHandler(error, res) {
     const statusCode = error.statusCode || 500;
     if(statusCode === 500) {
