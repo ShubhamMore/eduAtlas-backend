@@ -28,7 +28,7 @@ app.use(cookieParser());
 
 //"mongodb://localhost:27017/Eduatlas"
 mongoose
-  .connect(peocess.env.MONGODB_URL || 'mongodb://localhost:27017/Eduatlas', {
+  .connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/Eduatlas', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
