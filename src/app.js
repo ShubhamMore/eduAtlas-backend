@@ -13,22 +13,38 @@ const port = process.env.PORT || 5000;
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers',
+  res.setHeader(
+    'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, authorization'
   );
-  res.setHeader('Access-Control-Allow-Methods',
-    'GET, POST, PUT, PATCH, DELETE, OPTIONS'
-  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
   next();
 });
 app.use(logger('dev'));
-app.use(express.json({limit: '100mb'}));
+app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ extended: true, limit: '100mb' }));
-app.use('/images',express.static(path.join('Server/images')));
+app.use('/images', express.static(path.join('Server/images')));
 app.use(cookieParser());
 
 //"mongodb://localhost:27017/Eduatlas"
+<<<<<<< HEAD:src/app.js
 
+=======
+mongoose
+  .connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/Eduatlas', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
+  .then(() => {
+    app.listen(port, () => console.log('Listening on', port));
+    console.log('Connected to database');
+  })
+  .catch((reason) => {
+    console.error('Connection failed', '\n');
+    console.log(reason);
+  });
+>>>>>>> 50645a08ec892c705c22fde047476d61eba9d7bd:app.js
 
 app.use('/', indexRouter);
 app.use('/users', require('./routes/users'));
