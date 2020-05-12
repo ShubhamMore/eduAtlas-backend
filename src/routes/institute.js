@@ -6,9 +6,15 @@ const checkAuth = require('../middleware/checkAuth');
 const checkPayment = require('../middleware/checkPayment');
 const extractFile = require('../middleware/file');
 const roleController = require('../controller/role');
-const {varyfyOTP} = require('../controller/users');
+const { varyfyOTP } = require('../controller/users');
 //@Institute_Routes
-instituteRouter.post('/addInstitute', checkAuth, checkPayment, extractFile, instituteController.addInstitute);
+instituteRouter.post(
+  '/addInstitute',
+  checkAuth,
+  checkPayment,
+  extractFile,
+  instituteController.addInstitute
+);
 instituteRouter.get('/all', checkAuth, checkPayment, instituteController.getAllInstitutes);
 instituteRouter.delete('/:id', checkAuth, instituteController.deleteInstitute);
 instituteRouter.get('/oneInstitute/:id', checkAuth, instituteController.getOneInstitute);
@@ -33,7 +39,6 @@ instituteRouter.patch('/course/discount', checkAuth, couseConroller.updateDiscou
 instituteRouter.patch('/course/reciept/:instituteId', checkAuth, couseConroller.updateReciept);
 instituteRouter.patch('/course', checkAuth, couseConroller.updateCourse);
 
-
 instituteRouter.delete('/course/course', checkAuth, couseConroller.deleteCourse);
 instituteRouter.delete('/course/batch', checkAuth, couseConroller.deleteBatch);
 instituteRouter.delete('/course/discount', checkAuth, couseConroller.deleteDiscount);
@@ -55,4 +60,4 @@ instituteRouter.get('/attendence', checkAuth, instituteController.getAttendece);
 //@Role_assigne
 instituteRouter.post('/role', checkAuth, roleController.assignRole);
 
-module.exports = instituteRouter; 
+module.exports = instituteRouter;
