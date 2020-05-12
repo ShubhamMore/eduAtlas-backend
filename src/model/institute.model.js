@@ -25,6 +25,9 @@ const courseSchema = new Schema(
       enum: ['inclusive', 'exclusive'],
       default: 'exclusive',
     },
+    gstValue: {
+      type: String,
+    },
     totalFee: {
       type: String,
     },
