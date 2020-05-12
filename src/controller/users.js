@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-
+const otpFunction = require('./sms/otp')
 const User = require('../model/user.model');
 const jwt = require('jsonwebtoken');
 
@@ -10,7 +10,7 @@ const smsService = require('../service/sms');
 
 const errorHandler = require('../service/errorHandler');
 
-const { OneTimePassword, NewUser, getKeyByValue, user_role } = require('../clientStore');
+const {  NewUser, OneTimePassword ,getKeyByValue, user_role } = require('../clientStore');
 
 const Announcement = require('../model/announcement.model');
 
@@ -115,10 +115,10 @@ exports.findUser = async (req, res) => {
 
 function generateOTP(ph) {
   var digits = '0123456789';
-  let OTP = '';
-  for (let i = 0; i < 4; i++) {
-    OTP += digits[Math.floor(Math.random() * 10)];
-  }
+  let OTP = '1234';
+  // for (let i = 0; i < 4; i++) {
+  //   OTP += digits[Math.floor(Math.random() * 10)];
+  // }
   setTimeout(() => {
     OneTimePassword.deleteOTP(ph);
   }, 60050);
@@ -129,7 +129,7 @@ exports.sendOtp = async (req, res, next) => {
   try {
     const register = req.query.register;
     const phone = req.params.phone;
-
+    
     if (!phone) {
       response(res, 400, 'Phone number not provided');
       return;
@@ -148,12 +148,12 @@ exports.sendOtp = async (req, res, next) => {
 
     new OneTimePassword(phone, generateOTP(phone));
 
-    const smsRes = await smsService.sendSms(
-      phone,
-      'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
-    );
+    // const smsRes = await smsService.sendSms(
+    //   phone,
+    //   'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
+    // );
 
-    response(res, 200, smsRes + ' to ' + phone);
+    response(res, 200, 'smsRes' + ' to ' + phone); //Change later
   } catch (error) {
     console.log(error);
     response(res, 500, 'Internal server error');

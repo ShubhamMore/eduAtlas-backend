@@ -2,14 +2,13 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+require('env-cmd')
 const indexRouter = require('./routes/index');
 
 const cors = require('cors');
-const mongoose = require('mongoose');
 const app = express();
 
-const port = process.env.PORT || 5000;
+require('./database/mongoose')
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
