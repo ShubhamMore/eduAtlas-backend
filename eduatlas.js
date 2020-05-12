@@ -1,7 +1,9 @@
 const app = require('./src/app');
+const http = require('http');
 
-const port = process.env.PORT;
+const server = http.createServer(app);
+const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log('Server is up on port ' + port);
 });

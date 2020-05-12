@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const otpFunction = require('./sms/otp')
+const otpFunction = require('./sms/otp');
 const User = require('../model/user.model');
 const jwt = require('jsonwebtoken');
 
@@ -10,7 +10,7 @@ const smsService = require('../service/sms');
 
 const errorHandler = require('../service/errorHandler');
 
-const {  NewUser, OneTimePassword ,getKeyByValue, user_role } = require('../clientStore');
+const { NewUser, OneTimePassword, getKeyByValue, user_role } = require('../clientStore');
 
 const Announcement = require('../model/announcement.model');
 
@@ -79,6 +79,8 @@ exports.loginUser = async (req, res, next) => {
         'specify jwt-key here'
       );
 
+      console.log(token);
+
       res.status(200).json({
         token,
         expiresIn: 3600,
@@ -129,7 +131,7 @@ exports.sendOtp = async (req, res, next) => {
   try {
     const register = req.query.register;
     const phone = req.params.phone;
-    
+
     if (!phone) {
       response(res, 400, 'Phone number not provided');
       return;

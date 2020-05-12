@@ -1,9 +1,10 @@
 # EDUATLS (Back End)
 
 ## Prerequisites
+
 You need to install following dependencies.
 
-Use command "npm install", This command will automatically install 
+Use command "npm install", This command will automatically install
 all the required dependency.
 
 1. @hapi/joi
@@ -21,12 +22,11 @@ all the required dependency.
 
 ## Installing
 
-1. Use command "npm install", This command will automatically install 
+1. Use command "npm install", This command will automatically install
    all the required dependency.
 
-2. Make sure your mongoDb server is running locally. 
+2. Make sure your mongoDb server is running locally.
 
-2. After installing all the depencies (using "npm install") and
-   having the mongo server run, You may run the nodeJs sever using 
+3. After installing all the depencies (using "npm install") and
+   having the mongo server run, You may run the nodeJs sever using
    the command "npm start".
-
