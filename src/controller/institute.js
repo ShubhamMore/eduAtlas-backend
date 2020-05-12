@@ -7,7 +7,7 @@ const errorHandler = require('../service/errorHandler');
 const fs = require('fs');
 
 function deleteImage({filename}) {
-    fs.unlink(__dirname + "/../images/" + filename, (error) => {
+    fs.unlink(__dirname + "../../images/" + filename, (error) => {
         if(error) {
             console.log(error);
             const err = new Error('Error while deleting the image');
@@ -59,7 +59,7 @@ exports.addInstitute = async (req, res, next) => {
         institute = new Institute;
 
         institute.basicInfo = Object.assign({}, req.body.basicInfo); 
-        institute.basicInfo.logo.data = fs.readFileSync(__dirname + "/../images/" + image.filename);
+        institute.basicInfo.logo.data = fs.readFileSync(__dirname + "../../images/" + image.filename);
         institute.basicInfo.logo.contentType = 'image/png'; 
 
         institute.address = Object.assign({}, req.body.address);
