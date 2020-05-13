@@ -1,22 +1,28 @@
 const express = require('express');
 const authRouter = express.Router();
-const userConstroller = require('../controller/users');
 const checkAuth = require('../middleware/checkAuth');
+const userController = require('../controller/users');
 const otpController = require('../controller/sms/otp');
-authRouter.post('/signup', userConstroller.creatUser);
 
-authRouter.post('/login', userConstroller.loginUser);
+authRouter.post('/signup', userController.creatUser);
 
-authRouter.get('/varifyOTP', otpController.varyfyOTP);
-authRouter.get('/:phone', userConstroller.findUser);
+authRouter.post('/login', userController.loginUser);
+authRouter.post('/autoLogin', checkAuth, userController.autoLogin);
+authRouter.post('/logout', checkAuth, userController.logoutUser);
+
 authRouter.get('/sendOTP/:phone', otpController.sendOtp);
-authRouter.get('/announcement/:instituteId', checkAuth, userConstroller.getAnnouncement);
-authRouter.delete('/announcement/:instituteId', checkAuth, userConstroller.deleteAnnouncement);
+authRouter.get('/sendOtpForRegisteredUser/:phone', otpController.sendOtpForRegisteredUser);
+authRouter.post('/verifyUserOTP', otpController.verifyUserOTP);
+authRouter.post('/verifyOTP', otpController.verifyOTP);
 
-authRouter.patch('/resetPassword', userConstroller.varyfyOTP, userConstroller.resetPassword);
+authRouter.get('/:phone', userController.findUser);
+authRouter.get('/announcement/:instituteId', checkAuth, userController.getAnnouncement);
+authRouter.delete('/announcement/:instituteId', checkAuth, userController.deleteAnnouncement);
 
-// authRouter.delete('', userConstroller.deleteAllUsers);
+authRouter.patch('/resetPassword', userController.resetPassword);
 
-// authRouter.get('', userConstroller.getAllUsers);
+// authRouter.delete('', userController.deleteAllUsers);
+
+// authRouter.get('', userController.getAllUsers);
 
 module.exports = authRouter;

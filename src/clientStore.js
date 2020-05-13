@@ -28,8 +28,8 @@ class NewUser {
     NewUser.users[phone] = newUser;
   }
 
-  static saveUser(phone) {
-    return NewUser.users[phone].save();
+  static getUser(phone) {
+    return NewUser.users[phone];
   }
 
   static deleteUser(phone) {

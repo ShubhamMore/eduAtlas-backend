@@ -1,18 +1,10 @@
-const bcrypt = require('bcrypt');
-
 const User = require('../../model/user.model');
-const jwt = require('jsonwebtoken');
-
-const schema = require('../../service/joi');
 const response = require('../../service/response');
-
 const smsService = require('../../service/sms');
-
 const errorHandler = require('../../service/errorHandler');
+const { NewUser, OneTimePassword } = require('../../clientStore');
 
-const { NewUser, OneTimePassword, getKeyByValue, user_role } = require('../../clientStore');
-
-function generateOTP(ph) {
+const generateOTP = (ph) => {
   var digits = '0123456789';
   let OTP = '1234';
   // for (let i = 0; i < 4; i++) {
@@ -20,29 +12,17 @@ function generateOTP(ph) {
   // }
   setTimeout(() => {
     OneTimePassword.deleteOTP(ph);
-  }, 60050);
+  }, 60000);
   return OTP;
-}
+};
 
 exports.sendOtp = async (req, res, next) => {
   try {
-    const register = req.query.register;
     const phone = req.params.phone;
 
     if (!phone) {
       response(res, 400, 'Phone number not provided');
       return;
-    }
-
-    if (!register || register == false) {
-      // forgot password case
-
-      const user = await User.findOne({ phone });
-
-      if (!user) {
-        response(res, 404, 'User not found with ' + phone);
-        return;
-      }
     }
 
     new OneTimePassword(phone, generateOTP(phone));
@@ -52,66 +32,110 @@ exports.sendOtp = async (req, res, next) => {
     //   'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
     // );
 
-    response(res, 200, 'smsRes' + ' to ' + phone); //Change later
+    const smsRes = 'send sms'; // remove later
+    console.log('send');
+
+    res.status(200).send({ message: `${smsRes} to  ${phone}` }); //Change later
   } catch (error) {
     console.log(error);
     response(res, 500, 'Internal server error');
   }
 };
 
-exports.varyfyOTP = async (req, res, next) => {
+exports.sendOtpForRegisteredUser = async (req, res, next) => {
   try {
-    const type = req.query.varifyType;
-    const isVarify = req.query.isVarify;
-    const phone = req.query.phone;
-    const clientOTP = req.query.otp;
+    const phone = req.params.phone;
 
-    if (!clientOTP || !type || !phone) {
-      return response(res, 400, 'Insufficient or Wrong parameters provided');
+    if (!phone) {
+      response(res, 400, 'Phone number not provided');
+      return;
+    }
+
+    const user = await User.findOne({ phone });
+
+    if (!user) {
+      throw new Error('User not found with ' + phone);
+    }
+
+    new OneTimePassword(phone, generateOTP(phone));
+
+    // const smsRes = await smsService.sendSms(
+    //   phone,
+    //   'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
+    // );
+
+    const smsRes = 'send sms'; // remove later
+    console.log('send');
+
+    res.status(200).send({ message: `${smsRes} to  ${phone}` }); //Change later
+  } catch (error) {
+    console.log(error);
+    response(res, 500, 'Internal server error');
+  }
+};
+
+exports.verifyUserOTP = async (req, res, next) => {
+  try {
+    const verifyType = req.body.verifyType;
+    const phone = req.body.phone;
+    const clientOTP = req.body.otp;
+    console.log(req.body);
+    if (!clientOTP || !verifyType || !phone) {
+      throw new Error('Insufficient or Wrong parameters provided');
+    }
+
+    if (verifyType !== 'creatUser') {
+      throw new Error('Wrong User Type');
     }
 
     const otp = OneTimePassword.getOTP(phone);
+
     if (!otp) {
-      response(res, 400, `OTP for ${phone} has not been generated yet`);
-      next(new Error('OTP has not been generated yet'));
-    } else if (!clientOTP || otp < 0) {
-      otp < 0 ? response(res, 400, 'OTP Expired') : response(res, 400, 'OTP not provided');
-      next(new Error('OTP Error'));
+      throw new Error(`OTP for ${phone} has not been generated yet`);
+    } else if (otp < 0) {
+      throw new Error('OTP Expired');
     } else if (otp !== clientOTP) {
-      response(res, 400, 'Incorrect OTP');
-      next(new Error('Incorrect OTP'));
+      throw new Error('Incorrect OTP');
     } else if (otp === clientOTP) {
-      if (type == 'creatUser') {
-        NewUser.saveUser(phone)
-          .then((result) => {
-            res.status(201).json({
-              message: 'User created',
-              result,
-            });
-            NewUser.deleteUser(phone);
-          })
-          .catch(next);
-        return;
-      } else if (type == 'forgotPassword') {
-        if (isVarify == true) {
-          response(res, 200, 'OTP varified');
-          return;
-        }
-        next();
-        return;
-      } else if (type == 'roleAssign') {
-        const newUser = await NewUser.saveUser(phone);
-        res.status(200).json({
-          message: 'Role user created successfully',
-          newUser,
-        });
-        return;
-      } else {
-        response(res, 400, 'Varification type is not valid');
-        return;
-      }
+      const user = NewUser.getUser(phone);
+      await user.save();
+      NewUser.deleteUser(phone);
+      res.status(200).send({ success: 'New User Created Successfully' });
     } else {
-      next(new Error('Unknown OTP error'));
+      throw new Error('Unknown OTP error');
+    }
+  } catch (error) {
+    console.log(error);
+    errorHandler(error, res);
+  }
+};
+
+exports.verifyOTP = async (req, res, next) => {
+  try {
+    const verifyType = req.body.verifyType;
+    const phone = req.body.phone;
+    const clientOTP = req.body.otp;
+
+    if (!clientOTP || !verifyType || !phone) {
+      throw new Error('Insufficient or Wrong parameters provided');
+    }
+
+    if (verifyType !== 'forgotPassword') {
+      throw new Error('Wrong User Type');
+    }
+
+    const otp = OneTimePassword.getOTP(phone);
+
+    if (!otp) {
+      throw new Error(`OTP for ${phone} has not been generated yet`);
+    } else if (otp < 0) {
+      throw new Error('OTP Expired');
+    } else if (otp !== clientOTP) {
+      throw new Error('Incorrect OTP');
+    } else if (otp === clientOTP) {
+      res.status(200).send({ message: 'OTP verified' });
+    } else {
+      throw new Error('Unknown OTP error');
     }
   } catch (error) {
     errorHandler(error, res);
