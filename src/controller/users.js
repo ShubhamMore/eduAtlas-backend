@@ -56,21 +56,9 @@ exports.loginUser = async (req, res, next) => {
     const user = await User.findByCredentials(req.body.phone, req.body.password);
 
     const token = await user.generateAuthToken();
-    console.log(token);
-    let _id = user._id;
 
-    // if (user.role == 'student') {
-    //   const student = await Student.findOne({ email: user.email });
-    //   _id = student._id;
-    // } else if (user.role == 'staff') {
-    //   const staff = await Staff.findOne({ email: user.email });
-    //   _id = staff._id;
-    // } else if (user.role == 'branch') {
-    //   const branch = await Branch.findOne({ email: user.email });
-    //   _id = branch._id;
-    // }
     const data = {
-      _id: _id,
+      _id: user._id,
       email: user.email,
       phone: user.phone,
       role: user.role,
