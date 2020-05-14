@@ -1,7 +1,7 @@
 const errorHandler = require('../service/errorHandler');
 const response = require('../service/response');
 const schema = require('../service/joi');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const User = require('../model/user.model');
 const { NewUser } = require('../clientStore');
 
