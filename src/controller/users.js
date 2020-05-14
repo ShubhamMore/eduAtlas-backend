@@ -57,14 +57,19 @@ exports.loginUser = async (req, res, next) => {
 
     const token = await user.generateAuthToken();
 
+    const user_role = ['branchManager', 'teacher', 'councillor', 'student', 'institute'];
+
     const data = {
       _id: user._id,
+      name: user.name,
       email: user.email,
       phone: user.phone,
-      role: user.role,
+      role: user_role[+user.role],
       token,
       expiresIn: 36000,
     };
+
+    console.log(data);
 
     res.status(200).send(data);
   } catch (e) {
