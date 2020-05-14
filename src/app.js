@@ -9,6 +9,7 @@ const cors = require('cors');
 const app = express();
 
 require('./database/mongoose');
+app.use(cors());
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
