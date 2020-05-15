@@ -115,7 +115,8 @@ exports.getOneInstitute = async (req, res, next) => {
 exports.getAllInstitutes = async (req, res, next) => {
   try {
     const institutes = await Institute.find({ userPhone: req.user.phone });
-    res.status(200).json(institutes);
+
+    res.status(200).send(institutes);
   } catch (error) {
     console.log(error);
     response(res, 500, error.message);
