@@ -1,4 +1,3 @@
-const axios = require('axios');
 const Institute = require('../model/institute.model');
 const Student = require('../model/student.model');
 const Announcement = require('../model/announcement.model');
@@ -114,7 +113,9 @@ exports.getOneInstitute = async (req, res, next) => {
 
 exports.getAllInstitutes = async (req, res, next) => {
   try {
+    
     const institutes = await Institute.find({ userPhone: req.user.phone });
+    //console.log(institutes)
     res.status(200).json(institutes);
   } catch (error) {
     console.log(error);
