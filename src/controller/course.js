@@ -407,7 +407,8 @@ exports.addReciept = async (req, res, next) => {
 
 exports.updateReciept = async (req, res, next) => {
   try {
-    const instituteId = req.params.institute; // suppose to contain instituteId and recieptId
+    //console.log('id ',req.params)
+    const instituteId = req.params.instituteId; // suppose to contain instituteId and recieptId
 
     if (!instituteId) {
       const error = new Error('reciept Information not provided');

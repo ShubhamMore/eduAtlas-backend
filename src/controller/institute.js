@@ -148,8 +148,10 @@ exports.updateInstitute = async (req, res, next) => {
 };
 
 exports.makeAnouncement = async (req, res, next) => {
+  console.log(req.body)
   try {
-    const announcement = await Announcement.create(req.body);
+    const announcement = new Announcement(req.body)
+    await announcement.save();
     res.status(201).json(announcement);
   } catch (error) {
     console.log(error);
