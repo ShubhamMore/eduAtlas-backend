@@ -80,7 +80,7 @@ exports.updateCourse = async (req, res, next) => {
       { $set: { 'course.$': req.body } }
     );
 
-    res.status(200).send('Updatted successfully');
+    res.status(200).json('Updated successfully');
   } catch (error) {
     console.log(error);
     response(res, error.statusCode || 500, error.message);
@@ -174,7 +174,7 @@ exports.updateBatch = async (req, res, next) => {
       { $set: { 'batch.$': req.body } }
     );
 
-    res.status(200).send('Updatted successfully');
+    res.status(200).json('Updatted successfully');
   } catch (error) {
     console.log(error);
     response(res, error.statusCode || 500, error.message);
