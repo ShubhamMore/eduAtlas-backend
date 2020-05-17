@@ -5,7 +5,7 @@ const logger = require('morgan');
 require('env-cmd');
 const indexRouter = require('./routes/index');
 const bodyParser = require('body-parser');
-const path = require('path');
+
 
 const cors = require('cors');
 const app = express();
@@ -34,7 +34,8 @@ app.use(cookieParser());
 
 //"mongodb://localhost:27017/Eduatlas"
 
-app.use('/', indexRouter);
+//app.use('/', indexRouter);
+
 app.use('/users', require('./routes/users'));
 
 app.use('/institute/student', require('./routes/student'));
