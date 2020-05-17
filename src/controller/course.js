@@ -19,6 +19,23 @@ exports.addCourse = async (req, res, next) => {
       err.statusCode = 400;
       throw err;
     }
+
+    const courses = await Institute.findById(branchId, { course: 1, _id: 0 });
+
+    let alredyExist = false;
+
+    console.log(courses);
+
+    courses.course.forEach((course) => {
+      if (course.name === req.body.name) {
+        alredyExist = true;
+      }
+    });
+
+    if (alredyExist) {
+      throw new Error('This Course Alredy Exist');
+    }
+
     const updatedInstitute = await Institute.updateOne(
       {
         _id: branchId,
@@ -26,7 +43,9 @@ exports.addCourse = async (req, res, next) => {
       },
       { $push: { course: req.body } }
     );
+
     console.log('=======>', updatedInstitute);
+
     if (updatedInstitute.nModified > 0) {
       return res.status(200).json({ message: 'Course added successfully' });
     }
@@ -294,11 +313,11 @@ exports.updateDiscount = async (req, res, next) => {
     }
 
     await Institute.updateOne(
-      { _id: discountInfo.instituteId, 'discount._id': discountInfo.batchId },
+      { _id: discountInfo.instituteId, 'discount._id': discountInfo.discountId },
       { $set: { 'discount.$': req.body } }
     );
 
-    res.status(200).send('Updatted successfully');
+    res.status(200).json('Updatted successfully');
   } catch (error) {
     console.log(error);
     response(res, error.statusCode || 500, error.message);

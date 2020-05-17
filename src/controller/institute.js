@@ -62,6 +62,7 @@ exports.addInstitute = async (req, res, next) => {
     institute.basicInfo.logo.data = fs.readFileSync(
       path.join(__dirname + '../../../images/' + image.filename)
     );
+
     institute.basicInfo.logo.contentType = 'image/png';
 
     institute.address = Object.assign({}, req.body.address);
@@ -123,6 +124,28 @@ exports.getAllInstitutes = async (req, res, next) => {
   }
 };
 
+// exports.updateInstitute = async (req, res, next) => {
+//   try {
+//     if (!req.params.id) {
+//       response(res, 400, 'Institute id not provided');
+//       const err = new Error('Institute id not provided');
+//       err.statusCode = 400;
+//       throw err;
+//     }
+
+//     console.log(req.body);
+
+//     const id = req.params.id;
+
+//     const updatedInstitute = await Institute.findByIdAndUpdate(id, req.body);
+
+//     res.status(201).json({ updatedInstitute });
+//   } catch (error) {
+//     console.log(error);
+//     response(res, error.statusCode || 500, error.message);
+//   }
+// };
+
 exports.updateInstitute = async (req, res, next) => {
   try {
     if (!req.params.id) {
@@ -132,13 +155,49 @@ exports.updateInstitute = async (req, res, next) => {
       throw err;
     }
 
+    req.body.basicInfo = JSON.parse(req.body.basicInfo);
+    req.body.address = JSON.parse(req.body.address);
+    req.body.category = JSON.parse(req.body.category);
+    req.body.metaTag = JSON.parse(req.body.metaTag);
+    console.log('MULTER', req.file);
+    image = {
+      filename: req.file.filename,
+      encoding: req.file.encoding,
+    };
+
+    delete req.body.logo;
+
+    let institute;
+
+    institute = {};
+
+    institute.basicInfo = Object.assign({}, req.body.basicInfo);
+
+    institute.basicInfo.logo = {};
+
+    institute.basicInfo.logo.data = fs.readFileSync(
+      path.join(__dirname + '../../../images/' + image.filename)
+    );
+
+    institute.basicInfo.logo.contentType = 'image/png';
+
+    institute.address = Object.assign({}, req.body.address);
+
+    institute.category = req.body.category;
+
+    institute.metaTag = req.body.metaTag;
+
     const id = req.params.id;
+
+    console.log(institute);
 
     const updatedInstitute = await Institute.findByIdAndUpdate(
       id,
-      { $set: req.body },
+      { $set: institute },
       { new: true }
     );
+
+    deleteImage(image);
 
     res.status(201).json({ updatedInstitute });
   } catch (error) {

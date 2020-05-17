@@ -18,7 +18,12 @@ instituteRouter.post(
 instituteRouter.get('/all', checkAuth, checkPayment, instituteController.getAllInstitutes);
 instituteRouter.delete('/:id', checkAuth, instituteController.deleteInstitute);
 instituteRouter.get('/oneInstitute/:id', checkAuth, instituteController.getOneInstitute);
-instituteRouter.put('/updateInstitute/:id', checkAuth, instituteController.updateInstitute);
+instituteRouter.put(
+  '/updateInstitute/:id',
+  checkAuth,
+  extractFile,
+  instituteController.updateInstitute
+);
 
 //@course_Routes
 instituteRouter.post('/course/addCourse/:branchId', checkAuth, couseConroller.addCourse);

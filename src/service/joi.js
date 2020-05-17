@@ -39,7 +39,6 @@ const schema = {
   // login schema
   login: joi.object({
     phone: joi.custom(checkPhoneSignup, 'Phone number validator').required(),
-
     password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
   }),
 
