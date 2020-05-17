@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-mongoose.connect(process.env.MONGODB_LOCAL_URL, {
+const MONGO_SERVER = "mongodb+srv://userDB:aaouikika@bingbot-3awwl.mongodb.net/Eduatlas?retryWrites=true"
+mongoose.connect(MONGO_SERVER, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,

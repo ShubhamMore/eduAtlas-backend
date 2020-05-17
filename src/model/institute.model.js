@@ -149,7 +149,7 @@ const instituteSchemsa = new Schema(
           type: String,
         },
         pin: {
-          type: Number,
+          type: String,
         },
       },
       { _id: false }
