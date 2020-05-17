@@ -179,6 +179,8 @@ exports.addBatch = async (req, res, next) => {
 };
 
 exports.updateBatch = async (req, res, next) => {
+  console.log("params ",req.params)
+  console.log("body ",req.body)
   try {
     const batchInfo = req.query; // suppose to contain instituteId and batchId
 
@@ -251,7 +253,8 @@ exports.getBatche = async (req, res, next) => {
 exports.getBatches = async (req, res, next) => {
   try {
     const branchId = req.params.branchId;
-
+    
+    console.log("body batches ",req.body)
     if (!branchId) {
       const error = new Error('Branch Id not provided');
       error.statusCode = 400;
@@ -259,7 +262,18 @@ exports.getBatches = async (req, res, next) => {
     }
 
     const batches = await Institute.findById(branchId, { batch: 1, _id: 0 });
+    //console.log("batches ",batches)
+    for(var i=0; i < batches.batch.length;i++ ){
+      console.log("c id ",batches.batch[i].course)
+      let course = await Institute.findOne({ _id: branchId }, { course: 1, _id: 0 });
+      course = course.course;
+      course = course.filter((c) => c._id == batches.batch[i].course);
 
+      console.log("course ",course)
+      batches.batch[i].course = course[0].name 
+    }
+    console.log(batches)
+    //console.log(course)
     res.status(200).json(batches);
   } catch (error) {
     console.log(error);
@@ -426,7 +440,8 @@ exports.addReciept = async (req, res, next) => {
 
 exports.updateReciept = async (req, res, next) => {
   try {
-    const instituteId = req.params.institute; // suppose to contain instituteId and recieptId
+    //console.log('id ',req.params)
+    const instituteId = req.params.instituteId; // suppose to contain instituteId and recieptId
 
     if (!instituteId) {
       const error = new Error('reciept Information not provided');
