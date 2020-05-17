@@ -6709,7 +6709,8 @@ __webpack_require__.r(__webpack_exports__);
 //https://eduatlas-node-backend.herokuapp.com/
 const environment = {
     production: false,
-    server: 'http://localhost:5000',
+    server: '',
+    server_local: 'http://localhost:5000',
 };
 
 
