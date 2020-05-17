@@ -55,7 +55,7 @@ const schema = {
         locality: joi.string().allow(''),
         state: joi.string().allow(''),
         city: joi.string().allow(''),
-        pin: joi.number().allow(null),
+        pincode: joi.string().allow(''),
       })
       .optional(),
 

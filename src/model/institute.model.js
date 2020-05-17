@@ -148,7 +148,11 @@ const instituteSchemsa = new Schema(
         city: {
           type: String,
         },
+<<<<<<< HEAD
         pin: {
+=======
+        pincode: {
+>>>>>>> deffc0e7163581fe6accecfeff79b9b8a02ce663
           type: String,
         },
       },
