@@ -114,7 +114,6 @@ exports.getOneInstitute = async (req, res, next) => {
 
 exports.getAllInstitutes = async (req, res, next) => {
   try {
-    
     const institutes = await Institute.find({ userPhone: req.user.phone });
 
     res.status(200).send(institutes);
@@ -123,28 +122,6 @@ exports.getAllInstitutes = async (req, res, next) => {
     response(res, 500, error.message);
   }
 };
-
-// exports.updateInstitute = async (req, res, next) => {
-//   try {
-//     if (!req.params.id) {
-//       response(res, 400, 'Institute id not provided');
-//       const err = new Error('Institute id not provided');
-//       err.statusCode = 400;
-//       throw err;
-//     }
-
-//     console.log(req.body);
-
-//     const id = req.params.id;
-
-//     const updatedInstitute = await Institute.findByIdAndUpdate(id, req.body);
-
-//     res.status(201).json({ updatedInstitute });
-//   } catch (error) {
-//     console.log(error);
-//     response(res, error.statusCode || 500, error.message);
-//   }
-// };
 
 exports.updateInstitute = async (req, res, next) => {
   try {
@@ -183,6 +160,8 @@ exports.updateInstitute = async (req, res, next) => {
 
     institute.address = Object.assign({}, req.body.address);
 
+    console.log(institute.address);
+
     institute.category = req.body.category;
 
     institute.metaTag = req.body.metaTag;
@@ -207,9 +186,9 @@ exports.updateInstitute = async (req, res, next) => {
 };
 
 exports.makeAnouncement = async (req, res, next) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
-    const announcement = new Announcement(req.body)
+    const announcement = new Announcement(req.body);
     await announcement.save();
     res.status(201).json(announcement);
   } catch (error) {
