@@ -514,7 +514,7 @@ exports.getCoursesTD = async(req,res)=>{
       throw error;
     }
 
-    const courses = await Institute.findById(branchId, { course: 1,batch:1, _id: 0 });
+    const courses = await Institute.findById(branchId, { course: 1,batch:1, discount:1 ,_id: 0 });
 
     res.status(200).json(courses);
   } catch (error) {
