@@ -31,13 +31,16 @@ instituteRouter.post('/course/addBatch/:branchId', checkAuth, couseConroller.add
 instituteRouter.post('/course/addDiscount/:branchId', checkAuth, couseConroller.addDiscount);
 instituteRouter.post('/course/addReciept/:branchId', checkAuth, couseConroller.addReciept);
 
-instituteRouter.get('/course/all/:branchId', checkAuth, couseConroller.getCourses);
+instituteRouter.get('/course/all/:branchId', couseConroller.getCourses);
 instituteRouter.get('/course/one', checkAuth, couseConroller.getCourse);
 instituteRouter.get('/course/batch', checkAuth, couseConroller.getBatche);
 instituteRouter.get('/course/discount', checkAuth, couseConroller.getDiscount);
 instituteRouter.get('/course/batches/:branchId', checkAuth, couseConroller.getBatches);
 instituteRouter.get('/course/discounts/:branchId', checkAuth, couseConroller.getDiscounts);
 instituteRouter.get('/course/reciept/:branchId', checkAuth, couseConroller.getReciept);
+
+//TeamDevelopers API's
+instituteRouter.get('/getCourseTD/:branchId', couseConroller.getCoursesTD);
 
 instituteRouter.patch('/course/batch', checkAuth, couseConroller.updateBatch);
 instituteRouter.patch('/course/discount', checkAuth, couseConroller.updateDiscount);

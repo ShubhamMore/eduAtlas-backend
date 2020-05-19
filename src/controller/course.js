@@ -130,14 +130,14 @@ exports.getCourse = async (req, res, next) => {
 exports.getCourses = async (req, res, next) => {
   try {
     const branchId = req.params.branchId;
-
+    console.log("br ",branchId)
     if (!branchId) {
       const error = new Error('Branch Id not provided');
       error.statusCode = 400;
       throw error;
     }
 
-    const courses = await Institute.findById(branchId, { course: 1, _id: 0 });
+    const courses = await Institute.findById(branchId, { course: 1,batch:1, _id: 0 });
 
     res.status(200).json(courses);
   } catch (error) {
@@ -503,3 +503,22 @@ exports.deleteReciept = async (req, res, next) => {
     response(res, error.statusCode || 500, error.message);
   }
 };
+
+exports.getCoursesTD = async(req,res)=>{
+  try {
+    const branchId = req.params.branchId;
+
+    if (!branchId) {
+      const error = new Error('Branch Id not provided');
+      error.statusCode = 400;
+      throw error;
+    }
+
+    const courses = await Institute.findById(branchId, { course: 1,batch:1, _id: 0 });
+
+    res.status(200).json(courses);
+  } catch (error) {
+    console.log(error);
+    response(res, error.statusCode || 500, error.message);
+  }
+}
