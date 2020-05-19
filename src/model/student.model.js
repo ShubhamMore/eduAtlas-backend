@@ -9,7 +9,6 @@ const studentSchema = new Schema(
       require: 'Institude Id not provided',
       ref: 'Institute',
     },
-
     // basic details of student
     basicDetails: new Schema(
       {
@@ -57,8 +56,33 @@ const studentSchema = new Schema(
       },
       { _id: false, toJSON: { getters: true }, toObject: { getters: true } }
     ),
+    instituteDetails:[
+      {
 
-    // student course details
+        institudeID:{
+          type:String
+        },
+        courseId:{
+          type:String,
+        },
+        batchId:{
+          type:String
+        },
+        discount: {
+          type: String,
+          required: false,
+        },
+        additionalDiscount: {
+          type: String,
+          required: false,
+        },
+        nextPayble: {
+          type: String,
+          default: '',
+        },  
+      }
+    ],  
+      // student course details
     courseDetails: new Schema(
       {
         course: {
@@ -86,8 +110,7 @@ const studentSchema = new Schema(
     ),
 
     // student fees
-    fee: new Schema(
-      {
+    fee:[{
         installmentNumber: {
           type: String,
           required: false,
@@ -104,15 +127,14 @@ const studentSchema = new Schema(
           type: String,
           required: false,
         },
-      },
-      { _id: false, toJSON: { getters: true }, toObject: { getters: true } }
-    ),
+      }
+    ],
+    
 
     active: {
       type: Boolean,
       default: false,
     },
-
     materialRecord: {
       type: String,
       default: null,
