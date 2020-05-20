@@ -50,7 +50,19 @@ const userSchema = mongoose.Schema(
         }
       },
     },
-
+    eduAtlasId:{
+      type:String,
+      unique:true
+    },
+    verifyOTP:{
+        type:String,
+        default:"0"
+    },
+    verifyEmail:{
+      type:String,
+      default:"0"
+    },
+    
     tokens: [
       {
         token: {

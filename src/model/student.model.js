@@ -4,12 +4,17 @@ const Schema = mongoose.Schema;
 // student schema
 const studentSchema = new Schema(
   {
-    instituteId: {
-      type: Schema.Types.ObjectId,
-      require: 'Institude Id not provided',
-      ref: 'Institute',
-    },
     // basic details of student
+    // eduatlasId:{
+    //   type:String,
+    //   required:true,
+    //   unique:true
+    // },
+    studentEduId:{
+      type:String,
+      unique:true
+    },
+    
     basicDetails: new Schema(
       {
         name: {
@@ -58,15 +63,17 @@ const studentSchema = new Schema(
     ),
     instituteDetails:[
       {
-
-        institudeID:{
-          type:String
+        institudeId:{
+          type:String,
+          
         },
         courseId:{
           type:String,
+          
         },
         batchId:{
-          type:String
+          type:String,
+          default:''
         },
         discount: {
           type: String,
@@ -81,56 +88,39 @@ const studentSchema = new Schema(
           default: '',
         },  
       }
-    ],  
-      // student course details
-    courseDetails: new Schema(
-      {
-        course: {
-          type: String,
-          default: '',
-        },
-        batch: {
-          type: String,
-          default: '',
-        },
-        discount: {
-          type: String,
-          required: false,
-        },
-        additionalDiscount: {
-          type: String,
-          required: false,
-        },
-        nextPayble: {
-          type: String,
-          default: '',
-        },
-      },
-      { _id: false, toJSON: { getters: true }, toObject: { getters: true } }
-    ),
-
+    ], 
+    
     // student fees
     fee:[{
-        installmentNumber: {
-          type: String,
-          required: false,
+          institudeId:{
+            type:String,
+          }
         },
-        nextInstallment: {
-          type: String,
-          required: false,
+        {
+          courseId:{
+            type:String
+          }
         },
-        amountCollected: {
-          type: String,
-          required: false,
+        {
+          installmentNumber: {
+            type: String,
+            required: false,
         },
-        mode: {
-          type: String,
-          required: false,
+          nextInstallment: {
+            type: String,
+            required: false,
+        },
+          amountCollected: {
+            type: String,
+            required: false,
+        },
+          mode: {
+            type: String,
+            required: false,
         },
       }
     ],
     
-
     active: {
       type: Boolean,
       default: false,

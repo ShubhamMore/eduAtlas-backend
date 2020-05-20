@@ -1,23 +1,73 @@
 const response = require('../service/response');
 const schema = require('../service/joi');
 const Student = require('../model/student.model');
+const User = require('../model/user.model')
+const userController = require('../controller/users')
+const EduAtlasId = require('../model/eduatlasId.model')
+
+exports.addNewStudent = async(req,res)=>{
+  
+  try {
+      
+  } catch (error) {
+    console.log(error);
+    response(res, 500, error.message);
+  }
+}
 
 exports.addStudent = async (req, res, next) => {
   try {
-    const { error, value } = schema('addStudent').validate(req.body);
-    if (error) {
-      console.log(error);
-      return res.status(400).json({
-        message: error.message,
-      });
+      const user = await User.find({$or:[{
+          phone:req.body.phone
+      },{
+          email:req.body.email
+      }]
+    })
+    console.log(user)
+    
+    if(user.length != 0){
+      console.log("length ",user.length)
+      const error = new Error('User Already Exists');
+      //error.prototype.statusCode = 400;
+      throw error;  
     }
-
-    if (req.body.courseDetails.batch.length) {
-      req.body.active = true;
+    //EDU-2020-ST-000000
+    const eduatlasId = await EduAtlasId.find({})
+    var studentId= (eduatlasId[0].studentEduId).split("-")
+    var d  =new Date()
+    console.log(studentId[3])
+    var newEduAtlasId = "EDU-"+d.getFullYear()+"-ST-"+(parseInt(studentId[3])+1)
+    const newUser = {
+      name:req.body.name,
+      role:"student",
+      phone:req.body.phone,
+      email:req.body.email,
+      password:req.body.phone,
+      eduAtlasId: newEduAtlasId,
+    
     }
-    await Student.create(req.body);
+    const addUser =  new User(newUser)    
+    await addUser.save()
+    await EduAtlasId.updateOne({_id:eduatlasId[0]._id},{
+      studentEduId:newEduAtlasId
+    })
 
-    response(res, 201, 'Student added successfully');
+    const newStudent = {
+      
+      basicDetails:req.body.basicDetails,
+      parentDetails:req.body.parentDetails,
+      instituteDetails:req.body.instituteDetails,
+      studentEduId: newEduAtlasId,
+      fee:req.body.fee,
+      active:req.body.active,
+      materialRecord:req.body.materialRecord
+
+    }
+    const addStudent = new Student(newStudent)
+    await  addStudent.save()
+     
+    res.status(200).send(addUser)   
+    
   } catch (error) {
     console.log(error);
     response(res, 500, error.message);
@@ -137,3 +187,4 @@ exports.deleteStudent = async (req, res, next) => {
     response(res, error.prototype.statusCode || 500, error.message);
   }
 };
+//List of active and pending students APi Creation
