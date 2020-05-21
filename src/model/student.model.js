@@ -10,11 +10,10 @@ const studentSchema = new Schema(
     //   required:true,
     //   unique:true
     // },
-    studentEduId:{
+    eduAtlasId:{
       type:String,
-      unique:true
     },
-    
+
     basicDetails: new Schema(
       {
         name: {
@@ -94,14 +93,10 @@ const studentSchema = new Schema(
     fee:[{
           institudeId:{
             type:String,
-          }
-        },
-        {
+          },
           courseId:{
             type:String
-          }
-        },
-        {
+          },
           installmentNumber: {
             type: String,
             required: false,
