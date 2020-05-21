@@ -13,4 +13,5 @@ studentRouter.post('/updateStudent', studentController.addCourseStudent);
 
 studentRouter.delete('', checkAuth, studentController.deleteStudent);
 
+studentRouter.post('/getActiveStudents', studentController.getActiveStudents)
 module.exports = studentRouter;

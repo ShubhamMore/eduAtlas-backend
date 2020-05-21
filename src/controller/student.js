@@ -2,6 +2,7 @@ const response = require('../service/response');
 const schema = require('../service/joi');
 const Student = require('../model/student.model');
 const User = require('../model/user.model');
+const errorHandler = require('../service/errorHandler')
 const userController = require('../controller/users');
 const EduAtlasId = require('../model/eduatlasId.model');
 
@@ -81,7 +82,21 @@ exports.addStudent = async (req, res, next) => {
     response(res, 500, error.message);
   }
 };
-
+exports.getActiveStudents = async (req,res)=>{
+ try {
+   const students = await Student.find({
+     $and:{
+       "instituteDetails.instituteId":req.body.instituteId,
+       "instituteDetails.courseId":req.body.courseId,
+       "instituteDetails.active":true
+     }
+    })
+    console.log(students)
+    res.status(200).send(students) 
+ } catch (error) {
+   
+ } 
+}
 exports.getAllStudents = async (req, res, next) => {
   try {
     const instituteId = req.params.instituteId;
@@ -144,6 +159,7 @@ exports.getOneStudent = async (req, res, next) => {
 exports.addCourseStudent = async (req, res, next) => {
   //To add student in a course
   try {
+    
     console.log(req.body.instituteDetails.instituteId)
     const courseAvailabe =await Student.find({
       $and:[{
@@ -154,32 +170,35 @@ exports.addCourseStudent = async (req, res, next) => {
         "instituteDetails.courseId":req.body.instituteDetails.courseId
       }]
     })
+    
     console.log(courseAvailabe)
+    
     if(courseAvailabe.length!=0){
       console.log("length ",courseAvailabe.length)
       const error = new Error('Course Already Exists');
-      error.prototype.statusCode = 400;
+      error.statusCode = 400;
       throw error;
     }
 
-    // const studentInfo = req.body;
-    // console.log("req.body")
-    // const updatedStudent = await Student.update(
-    //   {
-    //     eduAtlasId:req.body.eduAtlasId
-    //   },
-    //   { 
-    //     $push: {
-    //       instituteDetails:req.body.instituteDetails,
-    //       fee:req.body.fee
-    //     } 
-    //   },
-    // );
+    const studentInfo = req.body;
+    console.log("req.body")
+    const updatedStudent = await Student.update(
+      {
+        eduAtlasId:req.body.eduAtlasId
+      },
+      { 
+        $push: {
+          instituteDetails:req.body.instituteDetails,
+          fee:req.body.fee
+        } 
+      },
+    );
 
     res.status(200).json(courseAvailabe);
   } catch (error) {
     console.log(error);
-    response(res, error.prototype.statusCode || 500, error.message);
+    errorHandler(error,res);
+    
   }
 };
 exports.updateStudentCourse = async(req,res)=>{
