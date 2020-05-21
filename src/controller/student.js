@@ -85,11 +85,14 @@ exports.addStudent = async (req, res, next) => {
 exports.getActiveStudents = async (req,res)=>{
  try {
    const students = await Student.find({
-     $and:{
-       "instituteDetails.instituteId":req.body.instituteId,
-       "instituteDetails.courseId":req.body.courseId,
-       "instituteDetails.active":true
-     }
+     $and:[ {
+      "instituteDetails.instituteId":req.body.instituteId,
+    },{
+      "instituteDetails.courseId":req.body.courseId,
+    },{
+      "instituteDetails.active":true
+    }
+  ]
     })
     console.log(students)
     res.status(200).send(students) 
@@ -97,6 +100,24 @@ exports.getActiveStudents = async (req,res)=>{
    
  } 
 }
+exports.getPendingStudents = async (req,res)=>{
+  try {
+    const students = await Student.find({
+      $and:[ {
+        "instituteDetails.instituteId":req.body.instituteId,
+      },{
+        "instituteDetails.courseId":req.body.courseId,
+      },{
+        "instituteDetails.active":false
+      }
+    ]
+     })
+     console.log(students)
+     res.status(200).send(students) 
+  } catch (error) {
+    
+  } 
+ }
 exports.getAllStudents = async (req, res, next) => {
   try {
     const instituteId = req.params.instituteId;
