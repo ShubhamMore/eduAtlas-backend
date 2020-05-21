@@ -1,4 +1,5 @@
 const response = require('../service/response');
+const errorHandler = require('../service/errorHandler');
 const schema = require('../service/joi');
 const Student = require('../model/student.model');
 const User = require('../model/user.model');
@@ -144,7 +145,30 @@ exports.getOneStudent = async (req, res, next) => {
 exports.addCourseStudent = async (req, res, next) => {
   //To add student in a course
   try {
+    console.log(req.body.instituteDetails.instituteId);
+    const courseAvailabe = await Student.find({
+      $and: [
+        {
+          eduAtlasId: req.body.eduAtlasId,
+        },
+        {
+          'instituteDetails.instituteId': req.body.instituteDetails.instituteId,
+        },
+        {
+          'instituteDetails.courseId': req.body.instituteDetails.courseId,
+        },
+      ],
+    });
+    console.log(courseAvailabe);
+    if (courseAvailabe.length != 0) {
+      console.log('length ', courseAvailabe.length);
+      const error = new Error('Course Already Exists');
+      error.statusCode = 400;
+      throw error;
+    }
+
     const studentInfo = req.body;
+    console.log('req.body');
     const updatedStudent = await Student.update(
       {
         eduAtlasId: req.body.eduAtlasId,
@@ -157,13 +181,31 @@ exports.addCourseStudent = async (req, res, next) => {
       }
     );
 
-    res.status(200).json(updatedStudent);
+    res.status(200).json(courseAvailabe);
   } catch (error) {
     console.log(error);
-    response(res, error.prototype.statusCode || 500, error.message);
+    errorHandler(error, res);
   }
 };
-exports.updateStudentCourse = async (req, res) => {};
+exports.updateStudentCourse = async (req, res) => {
+  try {
+    const updateStudent = await Student.updateOne(
+      {
+        eduAtlasId: req.body.eduatlasId,
+      },
+      {
+        $set: {
+          instituteDetails: req.body.instituteDetails,
+          fee: req.body.fee,
+        },
+      }
+    );
+  } catch (error) {}
+};
+exports.deleteCourseStudent = async (req, res) => {
+  try {
+  } catch (error) {}
+};
 exports.deleteStudent = async (req, res, next) => {
   try {
     const studentInfo = req.query;
