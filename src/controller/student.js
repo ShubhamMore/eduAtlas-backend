@@ -1,73 +1,76 @@
 const response = require('../service/response');
 const schema = require('../service/joi');
 const Student = require('../model/student.model');
-const User = require('../model/user.model')
-const userController = require('../controller/users')
-const EduAtlasId = require('../model/eduatlasId.model')
+const User = require('../model/user.model');
+const userController = require('../controller/users');
+const EduAtlasId = require('../model/eduatlasId.model');
 
-exports.addNewStudent = async(req,res)=>{
-  
+exports.addNewStudent = async (req, res) => {
   try {
-      
   } catch (error) {
     console.log(error);
     response(res, 500, error.message);
   }
-}
+};
 
 exports.addStudent = async (req, res, next) => {
   try {
-      const user = await User.find({$or:[{
-          phone:req.body.phone
-      },{
-          email:req.body.email
-      }]
-    })
-    console.log(user)
-    
-    if(user.length != 0){
-      console.log("length ",user.length)
+    const user = await User.find({
+      $or: [
+        {
+          phone: req.body.phone,
+        },
+        {
+          email: req.body.email,
+        },
+      ],
+    });
+    console.log(user);
+
+    if (user.length != 0) {
+      console.log('length ', user.length);
       const error = new Error('User Already Exists');
       //error.prototype.statusCode = 400;
-      throw error;  
+      throw error;
     }
     //EDU-2020-ST-000000
-    const eduatlasId = await EduAtlasId.find({})
-    var studentId= (eduatlasId[0].studentEduId).split("-")
-    var d  =new Date()
-    console.log(studentId[3])
-    var newEduAtlasId = "EDU-"+d.getFullYear()+"-ST-"+(parseInt(studentId[3])+1)
+    const eduatlasId = await EduAtlasId.find({});
+    var studentId = eduatlasId[0].studentEduId.split('-');
+    var d = new Date();
+    console.log(studentId[3]);
+    var newEduAtlasId = 'EDU-' + d.getFullYear() + '-ST-' + (parseInt(studentId[3]) + 1);
+    console.log(req.body);
     const newUser = {
-      name:req.body.name,
-      role:"student",
-      phone:req.body.phone,
-      email:req.body.email,
-      password:req.body.phone,
+      name: req.body.name,
+      role: 'student',
+      phone: req.body.phone,
+      email: req.body.email,
+      password: req.body.phone,
       eduAtlasId: newEduAtlasId,
-    
-    }
-    const addUser =  new User(newUser)    
-    await addUser.save()
-    await EduAtlasId.updateOne({_id:eduatlasId[0]._id},{
-      studentEduId:newEduAtlasId
-    })
+    };
+
+    const addUser = new User(newUser);
+    await addUser.save();
+    await EduAtlasId.updateOne(
+      { _id: eduatlasId[0]._id },
+      {
+        studentEduId: newEduAtlasId,
+      }
+    );
 
     const newStudent = {
-      
-      basicDetails:req.body.basicDetails,
-      parentDetails:req.body.parentDetails,
-      instituteDetails:req.body.instituteDetails,
+      basicDetails: req.body.basicDetails,
+      parentDetails: req.body.parentDetails,
+      instituteDetails: req.body.instituteDetails,
       studentEduId: newEduAtlasId,
-      fee:req.body.fee,
-      active:req.body.active,
-      materialRecord:req.body.materialRecord
+      fee: req.body.fee,
+      active: req.body.active,
+      materialRecord: req.body.materialRecord,
+    };
+    const addStudent = new Student(newStudent);
+    await addStudent.save();
 
-    }
-    const addStudent = new Student(newStudent)
-    await  addStudent.save()
-     
-    res.status(200).send(addUser)   
-    
+    res.status(200).send(addUser);
   } catch (error) {
     console.log(error);
     response(res, 500, error.message);
