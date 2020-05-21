@@ -9,7 +9,7 @@ studentRouter.get('/all/:instituteId', checkAuth, studentController.getAllStuden
 
 studentRouter.get('', checkAuth, studentController.getOneStudent);
 
-studentRouter.post('/updateStudent', studentController.updateStudent);
+// studentRouter.post('/updateStudent', studentController.updateStudent);
 
 studentRouter.delete('', checkAuth, studentController.deleteStudent);
 

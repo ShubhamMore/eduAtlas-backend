@@ -45,7 +45,7 @@ exports.addStudent = async (req, res, next) => {
       name: req.body.basicDetails.name,
       role: 'student',
       phone: req.body.basicDetails.studentContact,
-      email: req.body.basicDetails.email,
+      email: req.body.basicDetails.studentEmail,
       password: req.body.basicDetails.studentContact,
       eduAtlasId: newEduAtlasId,
     };
