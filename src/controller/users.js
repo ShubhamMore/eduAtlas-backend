@@ -155,12 +155,3 @@ exports.deleteAnnouncement = async (req, res, next) => {
   await Announcement.deleteOne({ instituteId });
   res.status(200).json({ message: 'Deleted successfully' });
 };
-
-// exports.deleteAllUsers = async (req, res, next) => {
-//   await User.deleteMany({});
-//   res.status(200).json({ 'message': 'All deleted' })
-// }
-
-// exports.getAllUsers = (req, res, next) => {
-//   User.find().then(users => res.send(users));
-// }

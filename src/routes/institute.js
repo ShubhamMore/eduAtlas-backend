@@ -40,7 +40,7 @@ instituteRouter.get('/course/discounts/:branchId', checkAuth, couseConroller.get
 instituteRouter.get('/course/reciept/:branchId', checkAuth, couseConroller.getReciept);
 
 //TeamDevelopers API's
-instituteRouter.get('/getCourseTD/:branchId',couseConroller.getCoursesTD)
+instituteRouter.get('/getCourseTD/:branchId', couseConroller.getCoursesTD);
 
 instituteRouter.patch('/course/batch', checkAuth, couseConroller.updateBatch);
 instituteRouter.patch('/course/discount', checkAuth, couseConroller.updateDiscount);
