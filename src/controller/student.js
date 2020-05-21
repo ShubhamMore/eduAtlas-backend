@@ -82,6 +82,21 @@ exports.addStudent = async (req, res, next) => {
     response(res, 500, error.message);
   }
 };
+exports.getActiveStudents = async (req, res) => {
+  try {
+    const students = await Student.find({
+      $and: [
+        { 'instituteDetails.instituteId': req.body.instituteId },
+        { 'instituteDetails.courseId': req.body.courseId },
+        { 'instituteDetails.active': true },
+      ],
+    });
+    console.log(students);
+    res.status(200).send(students);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 exports.getAllStudents = async (req, res, next) => {
   try {
@@ -159,7 +174,9 @@ exports.addCourseStudent = async (req, res, next) => {
         },
       ],
     });
+
     console.log(courseAvailabe);
+
     if (courseAvailabe.length != 0) {
       console.log('length ', courseAvailabe.length);
       const error = new Error('Course Already Exists');
