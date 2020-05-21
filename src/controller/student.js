@@ -144,41 +144,6 @@ exports.getOneStudent = async (req, res, next) => {
 exports.addCourseStudent = async (req, res, next) => {
   //To add student in a course
   try {
-<<<<<<< HEAD
-    console.log(req.body.instituteDetails.instituteId)
-    const courseAvailabe =await Student.find({
-      $and:[{
-        eduAtlasId:req.body.eduAtlasId,
-      },{
-        "instituteDetails.instituteId": req.body.instituteDetails.instituteId
-      },{
-        "instituteDetails.courseId":req.body.instituteDetails.courseId
-      }]
-    })
-    console.log(courseAvailabe)
-    if(courseAvailabe.length!=0){
-      console.log("length ",courseAvailabe.length)
-      const error = new Error('Course Already Exists');
-      error.prototype.statusCode = 400;
-      throw error;
-    }
-
-    // const studentInfo = req.body;
-    // console.log("req.body")
-    // const updatedStudent = await Student.update(
-    //   {
-    //     eduAtlasId:req.body.eduAtlasId
-    //   },
-    //   { 
-    //     $push: {
-    //       instituteDetails:req.body.instituteDetails,
-    //       fee:req.body.fee
-    //     } 
-    //   },
-    // );
-
-    res.status(200).json(courseAvailabe);
-=======
     const studentInfo = req.body;
     const updatedStudent = await Student.update(
       {
@@ -193,38 +158,12 @@ exports.addCourseStudent = async (req, res, next) => {
     );
 
     res.status(200).json(updatedStudent);
->>>>>>> b997f204ba5495169b228eb56612654ac23a27c6
   } catch (error) {
     console.log(error);
     response(res, error.prototype.statusCode || 500, error.message);
   }
 };
-<<<<<<< HEAD
-exports.updateStudentCourse = async(req,res)=>{
-  try {
-    const updateStudent = await Student.updateOne({
-      eduAtlasId:req.body.eduatlasId,
-    },{
-      $set:{
-        instituteDetails:req.body.instituteDetails,
-        fee:req.body.fee,
-      }
-    }
-    )
-  } catch (error) {
-    
-  }
-}
-exports.deleteCourseStudent = async(req,res)=>{
-  try {
-    
-  } catch (error) {
-    
-  }
-}
-=======
 exports.updateStudentCourse = async (req, res) => {};
->>>>>>> b997f204ba5495169b228eb56612654ac23a27c6
 exports.deleteStudent = async (req, res, next) => {
   try {
     const studentInfo = req.query;
