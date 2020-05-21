@@ -62,7 +62,7 @@ const studentSchema = new Schema(
     ),
     instituteDetails:[
       {
-        institudeId:{
+        instituteId:{
           type:String,
           
         },
@@ -85,6 +85,14 @@ const studentSchema = new Schema(
         nextPayble: {
           type: String,
           default: '',
+        },
+        active: {
+          type: Boolean,
+          default: false,
+        },
+        materialRecord: {
+          type: String,
+          default: null,
         },  
       }
     ], 
@@ -116,14 +124,7 @@ const studentSchema = new Schema(
       }
     ],
     
-    active: {
-      type: Boolean,
-      default: false,
-    },
-    materialRecord: {
-      type: String,
-      default: null,
-    },
+    
   },
   { toJSON: { getters: true }, toObject: { getters: true } }
 );
