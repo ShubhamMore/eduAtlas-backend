@@ -16,11 +16,12 @@ exports.addNewStudent = async(req,res)=>{
 }
 
 exports.addStudent = async (req, res, next) => {
-  try {
-      const user = await User.find({$or:[{
-          phone:req.body.phone
+  try {  
+    
+    const user = await Student.find({$or:[{
+          "basicDetails.phone":req.body.basicDetails.studentContact
       },{
-          email:req.body.email
+          "basicDetails.email":req.body.basicDetails.studentEmail
       }]
     })
     console.log(user)
@@ -33,39 +34,47 @@ exports.addStudent = async (req, res, next) => {
     }
     //EDU-2020-ST-000000
     const eduatlasId = await EduAtlasId.find({})
+ //   console.log("ID", eduatlasId[0])
     var studentId= (eduatlasId[0].studentEduId).split("-")
     var d  =new Date()
-    console.log(studentId[3])
     var newEduAtlasId = "EDU-"+d.getFullYear()+"-ST-"+(parseInt(studentId[3])+1)
+    console.log(newEduAtlasId)
+
     const newUser = {
-      name:req.body.name,
+      name:req.body.basicDetails.name,
       role:"student",
-      phone:req.body.phone,
-      email:req.body.email,
-      password:req.body.phone,
+      phone:req.body.basicDetails.studentContact,
+      email:req.body.basicDetails.email,
+      password:req.body.basicDetails.studentContact,
       eduAtlasId: newEduAtlasId,
     
     }
     const addUser =  new User(newUser)    
     await addUser.save()
-    await EduAtlasId.updateOne({_id:eduatlasId[0]._id},{
-      studentEduId:newEduAtlasId
-    })
+    console.log("ID", eduatlasId[0]._id)
+
 
     const newStudent = {
       
       basicDetails:req.body.basicDetails,
       parentDetails:req.body.parentDetails,
       instituteDetails:req.body.instituteDetails,
-      studentEduId: newEduAtlasId,
+      eduAtlasId: newEduAtlasId,
       fee:req.body.fee,
       active:req.body.active,
       materialRecord:req.body.materialRecord
 
     }
     const addStudent = new Student(newStudent)
+    console.log(addStudent)
     await  addStudent.save()
-     
+    
+    console.log()
+    await EduAtlasId.updateOne({_id:eduatlasId[0]._id},{
+      $set:{
+        studentEduId:newEduAtlasId
+      }
+    })
     res.status(200).send(addUser)   
     
   } catch (error) {
@@ -92,9 +101,20 @@ exports.getAllStudents = async (req, res, next) => {
     response(res, statusCode, error.message);
   }
 };
+exports.getOneStudentByInstitute = async (req,res)=>{
+  try {
+    console.log(req.body)
 
+    const student = await Student.find({
+      
+    })
+  } catch (error) {
+    
+  }
+}
 exports.getOneStudent = async (req, res, next) => {
   try {
+
     const studentInfo = req.query;
     if (!studentInfo.instituteId || !studentInfo.studentEmail) {
       const error = new Error('Student info not provided');
@@ -127,35 +147,21 @@ exports.getOneStudent = async (req, res, next) => {
   }
 };
 
-exports.updateStudent = async (req, res, next) => {
+exports.addCourseStudent = async (req, res, next) => {
+//To add student in a course
   try {
-    const studentInfo = req.query;
-
-    const { error, value } = schema('addStudent').validate(req.body);
-    if (!studentInfo.instituteId || !studentInfo.studentEmail || error) {
-      let err;
-      if (error) {
-        console.log(error);
-        err = new Error('Insufficient/Wrong parameters provided');
-      } else {
-        err = new Error('Student info not provided');
-      }
-      err.statusCode = 400;
-      throw err;
-    }
-    if (req.body.courseDetails.batch.length) {
-      req.body.active = true;
-    } else {
-      req.body.active = false;
-    }
-
-    const updatedStudent = await Student.findOneAndUpdate(
+    
+    const studentInfo = req.body;
+    const updatedStudent = await Student.update(
       {
-        instituteId: studentInfo.instituteId,
-        'basicDetails.studentEmail': studentInfo.studentEmail,
+        eduAtlasId:req.body.eduAtlasId
       },
-      { $set: req.body },
-      { new: true }
+      { 
+        $push: {
+          instituteDetails:req.body.instituteDetails,
+          fee:req.body.fee
+        } 
+      },
     );
 
     res.status(200).json(updatedStudent);
@@ -164,8 +170,11 @@ exports.updateStudent = async (req, res, next) => {
     response(res, error.prototype.statusCode || 500, error.message);
   }
 };
+exports.updateStudentCourse = async(req,res)=>{
 
+}
 exports.deleteStudent = async (req, res, next) => {
+
   try {
     const studentInfo = req.query;
     console.log('StudentInfo', studentInfo);
@@ -188,3 +197,6 @@ exports.deleteStudent = async (req, res, next) => {
   }
 };
 //List of active and pending students APi Creation
+exports.pendingStudents = async (req,res)=>{
+  
+}
