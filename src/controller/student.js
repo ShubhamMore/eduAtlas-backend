@@ -140,35 +140,36 @@ exports.getOneStudentByInstitute = async (req, res) => {
   try {
     console.log(req.body);
 
-    const student = await Student.find({});
+    const student = await Student.aggregate([{
+      $match:{
+        eduAtlasId:req.body.eduatlasId
+      },
+    },{
+     $unwind:"$instituteDetails"
+    },{
+      $match:{
+        "instituteDetails.instituteId":req.body.instituteId,
+        "instituteDetails.courseId":req.body.courseId
+      }
+    }
+  ]);
+  res.status(200).send(student)
   } catch (error) {}
 };
 exports.getOneStudent = async (req, res, next) => {
   try {
-    const studentInfo = req.query;
-    if (!studentInfo.instituteId || !studentInfo.studentEmail) {
-      const error = new Error('Student info not provided');
+    const studentInfo = req.post;
+    if (!studentInfo.eduAtlasId) {
+      const error = new Error('Student Eduatlas ID not provided');
       error.statusCode = 400;
       throw error;
     }
-
-    let student;
-
-    if (studentInfo.anouncement) {
-      student = await Student.findOne(
-        {
-          instituteId: studentInfo.instituteId,
-          'basicDetails.studentEmail': studentInfo.studentEmail,
-        },
-        { anouncement: 1, _id: 0 }
-      );
-    } else {
-      student = await Student.findOne({
-        instituteId: studentInfo.instituteId,
-        'basicDetails.studentEmail': studentInfo.studentEmail,
-      });
-    }
-
+    const student = await Student.findOne({
+      eduAtlasId:req.body.eduatlasId
+    },{
+      basicDetails:1,
+      parentDetails:1
+    })
     res.status(200).json({ student });
   } catch (error) {
     console.log(error);
@@ -237,11 +238,26 @@ exports.updateStudentCourse = async(req,res)=>{
     
   }
 }
-exports.deleteCourseStudent = async(req,res)=>{
+exports.deleteStudentCourse = async(req,res)=>{
   try {
-    
+    const deleteStudent = await Student.updateOne({
+      eduAtlasId:req.body.eduatlasId
+    },{
+      $pull:{
+        instituteDetails:{ 
+            "instituteId":req.body.instituteId,
+            "courseId":req.body.courseId
+        } 
+      }
+      
+    },{
+      multi:true
+    })
+    res.status(200).send(deleteStudent)
+
   } catch (error) {
-    
+    console.log(error)
+    res.send(error)
   }
 }
 exports.deleteStudent = async (req, res, next) => {
