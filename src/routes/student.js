@@ -2,23 +2,28 @@ const checkAuth = require('../middleware/checkAuth');
 
 const studentRouter = require('express').Router({ caseSensitive: true });
 const studentController = require('../controller/student');
-
+//to add new student - 1. create new user 2. add student
 studentRouter.post('/add', studentController.addStudent);
 
-studentRouter.get('/all/:instituteId', checkAuth, studentController.getAllStudents);
+//Add course to existing student
+studentRouter.post('/addCourseStudent', studentController.addCourseStudent);
 
-studentRouter.post('', checkAuth, studentController.getOneStudent);
+//to get list of active student of a courese
+studentRouter.post('/getActiveStudents', studentController.getActiveStudents);
 
-studentRouter.post('/updateStudent', studentController.addCourseStudent);
+//to get pending students
+studentRouter.post('/getPendingStudents', studentController.getPendingStudents);
+
+//to remove course from the student
+studentRouter.post('/deleteStudentCourse', studentController.deleteStudentCourse);
+
+//to get have course details of student
+studentRouter.post('/getOneStudentByInstitute', studentController.getOneStudentByInstitute);
+
+studentRouter.post('/getOneStudent', studentController.getOneStudent);
 
 studentRouter.delete('', checkAuth, studentController.deleteStudent);
 
-studentRouter.post('/getActiveStudents', studentController.getActiveStudents);
-
-studentRouter.post('/getPendingStudents', studentController.getPendingStudents);
-
-studentRouter.post('/deleteStudentCourse', studentController.deleteStudentCourse);
-
-studentRouter.post('/getOneStudentByInstitute', studentController.getOneStudentByInstitute);
+studentRouter.get('/all/:instituteId', checkAuth, studentController.getAllStudents);
 
 module.exports = studentRouter;
