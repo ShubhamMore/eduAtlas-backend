@@ -82,6 +82,7 @@ exports.addStudent = async (req, res, next) => {
     response(res, 500, error.message);
   }
 };
+
 exports.getActiveStudents = async (req, res) => {
   try {
     const students = await Student.aggregate([
@@ -110,9 +111,10 @@ exports.getActiveStudents = async (req, res) => {
     res.status(200).send(students);
   } catch (error) {}
 };
+
 exports.getPendingStudents = async (req, res) => {
   try {
-    const students = await Student.aggregate(
+    const students = await Student.aggregate([
       {
         $unwind: '$instituteDetails',
       },
@@ -120,61 +122,15 @@ exports.getPendingStudents = async (req, res) => {
         $match: {
           'instituteDetails.instituteId': req.body.instituteId,
           'instituteDetails.courseId': req.body.courseId,
-        },
-      }
-    );
-    //  const students = await Student.agg({
-    //    $and:[ {
-    //     "instituteDetails.instituteId":req.body.instituteId,
-    //   },{
-    //     "instituteDetails.courseId":req.body.courseId,
-    //   },{
-    //     "instituteDetails.active":true
-    //   }
-    // ]
-    //   })
-    console.log(students);
-    res.status(200).send(students);
-  } catch (error) {}
-};
-exports.getPendingStudents = async (req, res) => {
-  try {
-    const students = await Student.find({
-      $and: [
-        {
-          'instituteDetails.instituteId': req.body.instituteId,
-        },
-        {
-          'instituteDetails.courseId': req.body.courseId,
-        },
-        {
-          'instituteDetails.active': true,
-        },
-      ],
-    });
-    console.log(students);
-    res.status(200).send(students);
-  } catch (error) {}
-};
-exports.getPendingStudents = async (req, res) => {
-  try {
-    const students = await Student.find({
-      $and: [
-        {
-          'instituteDetails.instituteId': req.body.instituteId,
-        },
-        {
-          'instituteDetails.courseId': req.body.courseId,
-        },
-        {
           'instituteDetails.active': false,
         },
-      ],
-    });
+      },
+    ]);
     console.log(students);
     res.status(200).send(students);
   } catch (error) {}
 };
+
 exports.getAllStudents = async (req, res, next) => {
   try {
     const instituteId = req.params.instituteId;
@@ -279,7 +235,7 @@ exports.addCourseStudent = async (req, res, next) => {
     }
 
     const studentInfo = req.body;
-    console.log('req.body');
+    // console.log(req.body, req.body.eduAtlasId);
     const updatedStudent = await Student.update(
       {
         eduAtlasId: req.body.eduAtlasId,
@@ -312,8 +268,10 @@ exports.updateStudentPersonalDetails = async (req, res) => {
         },
       }
     );
+    res.status(200).send({ success: true });
   } catch (error) {}
 };
+
 exports.updateStudentCourse = async (req, res) => {
   try {
     const updateStudent = await Student.updateOne(
@@ -328,6 +286,7 @@ exports.updateStudentCourse = async (req, res) => {
         },
       }
     );
+    res.status(200).send({ success: true });
   } catch (error) {}
 };
 
@@ -348,6 +307,7 @@ exports.updateStudentCourseFee = async (req, res) => {
     } catch (error) {}
   } catch (error) {}
 };
+
 exports.deleteStudentCourse = async (req, res) => {
   console.log(req.body);
   try {
