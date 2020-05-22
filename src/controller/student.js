@@ -84,6 +84,34 @@ exports.addStudent = async (req, res, next) => {
 };
 exports.getActiveStudents = async (req, res) => {
   try {
+    const students = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.courseId': req.body.courseId,
+          'instituteDetails.active': true,
+        },
+      },
+    ]);
+    //  const students = await Student.agg({
+    //    $and:[ {
+    //     "instituteDetails.instituteId":req.body.instituteId,
+    //   },{
+    //     "instituteDetails.courseId":req.body.courseId,
+    //   },{
+    //     "instituteDetails.active":true
+    //   }
+    // ]
+    //   })
+    console.log(students);
+    res.status(200).send(students);
+  } catch (error) {}
+};
+exports.getPendingStudents = async (req, res) => {
+  try {
     const students = await Student.aggregate(
       {
         $unwind: '$instituteDetails',
