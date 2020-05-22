@@ -239,19 +239,20 @@ exports.updateStudentCourse = async(req,res)=>{
   }
 }
 exports.deleteStudentCourse = async(req,res)=>{
+  console.log(req.body)
   try {
-    const deleteStudent = await Student.updateOne({
+    const deleteStudent = await Student.update({
       eduAtlasId:req.body.eduatlasId
     },{
-      $pull:{
-        instituteDetails:{ 
-            "instituteId":req.body.instituteId,
-            "courseId":req.body.courseId
-        } 
+      $pull :{
+        instituteDetails:{
+          "_id":req.body._id 
+        }, 
       }
       
     },{
-      multi:true
+      multi:true,
+      upsert:false
     })
     res.status(200).send(deleteStudent)
 
