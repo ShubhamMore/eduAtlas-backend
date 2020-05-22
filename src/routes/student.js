@@ -26,6 +26,9 @@ studentRouter.post('/updateStudentCourse', studentController.updateStudentCourse
 //to update student course
 studentRouter.post('/updateStudentCourseFee', studentController.updateStudentCourseFee)
 
+//Update student personal Details
+studentRouter.post('/updateStudentPersonalDetails', studentController.updateStudentPersonalDetails)
+
 studentRouter.get('/all/:instituteId', checkAuth, studentController.getAllStudents);
 
 
