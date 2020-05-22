@@ -90,7 +90,8 @@ exports.getActiveStudents = async (req,res)=>{
    {
      $match:{
        "instituteDetails.instituteId":req.body.instituteId,
-       "instituteDetails.courseId":req.body.courseId
+       "instituteDetails.courseId":req.body.courseId,
+       "instituteDetails.active":false
      }
    })
   //  const students = await Student.agg({
