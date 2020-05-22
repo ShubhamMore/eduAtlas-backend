@@ -18,7 +18,17 @@ studentRouter.post('/getPendingStudents', studentController.getPendingStudents);
 studentRouter.post('/deleteStudentCourse', studentController.deleteStudentCourse);
 
 //to get have course details of student
-studentRouter.post('/getOneStudentByInstitute', studentController.getOneStudentByInstitute); //done
+studentRouter.post('/getOneStudentByInstitute', studentController.getOneStudentByInstitute);
+
+//to update student course
+studentRouter.post('/updateStudentCourse', studentController.updateStudentCourse);
+
+//to update student course
+studentRouter.post('/updateStudentCourseFee', studentController.updateStudentCourseFee);
+
+studentRouter.get('/all/:instituteId', checkAuth, studentController.getAllStudents);
+
+studentRouter.post('', checkAuth, studentController.getOneStudent);
 
 studentRouter.post('/getOneStudent', studentController.getOneStudent); //done
 

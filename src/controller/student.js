@@ -84,6 +84,33 @@ exports.addStudent = async (req, res, next) => {
 };
 exports.getActiveStudents = async (req, res) => {
   try {
+    const students = await Student.aggregate(
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.courseId': req.body.courseId,
+        },
+      }
+    );
+    //  const students = await Student.agg({
+    //    $and:[ {
+    //     "instituteDetails.instituteId":req.body.instituteId,
+    //   },{
+    //     "instituteDetails.courseId":req.body.courseId,
+    //   },{
+    //     "instituteDetails.active":true
+    //   }
+    // ]
+    //   })
+    console.log(students);
+    res.status(200).send(students);
+  } catch (error) {}
+};
+exports.getPendingStudents = async (req, res) => {
+  try {
     const students = await Student.find({
       $and: [
         {
@@ -243,12 +270,28 @@ exports.addCourseStudent = async (req, res, next) => {
     errorHandler(error, res);
   }
 };
-
+exports.updateStudentPersonalDetails = async (req, res) => {
+  try {
+    console.log(req.body);
+    const updateStudent = await Student.updateOne(
+      {
+        _id: req.body._id,
+      },
+      {
+        $set: {
+          basicDetails: req.body.basicDetails,
+          parentDetails: req.body.parentDetails,
+        },
+      }
+    );
+  } catch (error) {}
+};
 exports.updateStudentCourse = async (req, res) => {
   try {
     const updateStudent = await Student.updateOne(
       {
-        eduAtlasId: req.body.eduatlasId,
+        _id: req.body.studentId,
+        'instituteDetails._id': req.body.instituteId,
       },
       {
         $set: {
@@ -260,10 +303,27 @@ exports.updateStudentCourse = async (req, res) => {
   } catch (error) {}
 };
 
+exports.updateStudentCourseFee = async (req, res) => {
+  try {
+    try {
+      const updateStudent = await Student.updateOne(
+        {
+          _id: req.body.studentId,
+          'fee._id': req.body.feeId,
+        },
+        {
+          $set: {
+            'fee.$': req.body.fee,
+          },
+        }
+      );
+    } catch (error) {}
+  } catch (error) {}
+};
 exports.deleteStudentCourse = async (req, res) => {
   console.log(req.body);
   try {
-    const deleteStudent = await Student.update(
+    const deleteStudent = await Student.updateOne(
       {
         eduAtlasId: req.body.eduatlasId,
       },
@@ -273,10 +333,6 @@ exports.deleteStudentCourse = async (req, res) => {
             _id: req.body._id,
           },
         },
-      },
-      {
-        multi: true,
-        upsert: false,
       }
     );
     res.status(200).send(deleteStudent);
