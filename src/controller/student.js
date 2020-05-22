@@ -240,6 +240,7 @@ exports.addCourseStudent = async (req, res, next) => {
     errorHandler(error, res);
   }
 };
+
 exports.updateStudentCourse = async (req, res) => {
   try {
     const updateStudent = await Student.updateOne(
@@ -255,6 +256,7 @@ exports.updateStudentCourse = async (req, res) => {
     );
   } catch (error) {}
 };
+
 exports.deleteStudentCourse = async (req, res) => {
   try {
     const deleteStudent = await Student.updateOne(
@@ -279,6 +281,7 @@ exports.deleteStudentCourse = async (req, res) => {
     res.send(error);
   }
 };
+
 exports.deleteStudent = async (req, res, next) => {
   try {
     const studentInfo = req.query;
@@ -302,4 +305,5 @@ exports.deleteStudent = async (req, res, next) => {
   }
 };
 //List of active and pending students APi Creation
+
 exports.pendingStudents = async (req, res) => {};
