@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { user_role } = require('../clientStore');
 
 // User registration schema
 const userSchema = mongoose.Schema(
@@ -14,7 +13,6 @@ const userSchema = mongoose.Schema(
 
     role: {
       type: String,
-      set: parseRole,
       required: [true, 'Role is required'],
     },
 
@@ -131,15 +129,6 @@ userSchema.pre('save', async function (next) {
 
   next();
 });
-
-function parseRole(value) {
-  const roleCode = user_role[value];
-  // console.log('====parseRole====>', value, roleCode);
-  if (roleCode === undefined) {
-    return value;
-  }
-  return roleCode;
-}
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

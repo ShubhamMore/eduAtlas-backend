@@ -4,15 +4,49 @@ const bcrypt = require('bcryptjs');
 
 // order registration schema
 const orderSchema = mongoose.Schema({
-  name: {
+  order_id: {
     type: String,
-    required: true,
+    require: true,
   },
-
-  role: {
+  entity: {
     type: String,
-    set: parseRole,
-    required: [true, 'Role is required'],
+    require: true,
+  },
+  amount: {
+    type: String,
+    require: true,
+  },
+  amount_paid: {
+    type: String,
+    require: true,
+  },
+  amount_due: {
+    type: String,
+    require: true,
+  },
+  currency: {
+    type: String,
+    require: true,
+  },
+  receipt: {
+    type: String,
+    require: true,
+  },
+  offer_id: {
+    type: String,
+  },
+  status: {
+    type: String,
+    require: true,
+  },
+  attempts: {
+    type: String,
+    require: true,
+  },
+  notes: [],
+  created_at: {
+    type: Date,
+    require: true,
   },
 });
 

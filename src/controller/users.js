@@ -1,19 +1,16 @@
 const bcrypt = require('bcryptjs');
-const otpFunction = require('./sms/otp');
-const User = require('../model/user.model');
-const EduAtlasId = require('../model/eduatlasId.model');
 const jwt = require('jsonwebtoken');
 
-const schema = require('../service/joi');
-const response = require('../service/response');
+const User = require('../model/user.model');
+const EduAtlasId = require('../model/eduatlasId.model');
+const Announcement = require('../model/announcement.model');
 
 const smsService = require('../service/sms');
 
+const schema = require('../service/joi');
+
 const errorHandler = require('../service/errorHandler');
-
-const { NewUser, OneTimePassword, getKeyByValue, user_role } = require('../clientStore');
-
-const Announcement = require('../model/announcement.model');
+const response = require('../service/response');
 
 exports.creatUser = async (req, res, next) => {
   try {
@@ -135,13 +132,12 @@ exports.loginUser = async (req, res, next) => {
 
     if (user.verifyOTP === '1') {
       const token = await user.generateAuthToken();
-      const user_role = ['branchManager', 'teacher', 'councillor', 'student', 'institute'];
       const data = {
         _id: user._id,
         name: user.name,
         email: user.email,
         phone: user.phone,
-        role: user_role[+user.role],
+        role: user.role,
         token,
         expiresIn: 36000,
       };

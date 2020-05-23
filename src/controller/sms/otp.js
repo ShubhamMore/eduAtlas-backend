@@ -108,14 +108,13 @@ exports.verifyUserOTP = async (req, res, next) => {
         res.status(200).send({ success: 'New User Created Successfully' });
       } else if (verifyType === 'loginUser') {
         const token = await user.generateAuthToken();
-        const user_role = ['branchManager', 'teacher', 'councillor', 'student', 'institute'];
 
         const data = {
           _id: user._id,
           name: user.name,
           email: user.email,
           phone: user.phone,
-          role: user_role[+user.role],
+          role: user.role,
           token,
           expiresIn: 36000,
         };
