@@ -33,7 +33,7 @@ app.use(cookieParser());
 
 //"mongodb://localhost:27017/Eduatlas"
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/users', require('./routes/users'));
 app.use('/institute/payment', require('./routes/payment'));
 app.use('/institute/student', require('./routes/student'));

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node eduatlas.js",
+    "start": "env-cmd -f ./config/dev.env node eduatlas.js",
     "dev": "env-cmd -f ./config/dev.env nodemon eduatlas.js"
   },
   "engines": {
