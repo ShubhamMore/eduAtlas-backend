@@ -76,16 +76,16 @@ exports.sendOtpForRegisteredUser = async (req, res, next) => {
 
 exports.verifyUserOTP = async (req, res, next) => {
   try {
-    const verifyType = req.body.verifyType;
     const phone = req.body.phone;
     const clientOTP = req.body.otp;
+    const verifyType = req.body.verifyType;
     console.log(req.body);
     if (!clientOTP || !verifyType || !phone) {
       throw new Error('Insufficient or Wrong parameters provided');
     }
 
-    if (verifyType !== 'creatUser') {
-      throw new Error('Wrong User Type');
+    if (verifyType !== 'loginUser' && verifyType !== 'createUser') {
+      throw new Error('Invalid verify Type');
     }
 
     const otp = OneTimePassword.getOTP(phone);
@@ -97,10 +97,33 @@ exports.verifyUserOTP = async (req, res, next) => {
     } else if (otp !== clientOTP) {
       throw new Error('Incorrect OTP');
     } else if (otp === clientOTP) {
-      const user = NewUser.getUser(phone);
-      await user.save();
-      NewUser.deleteUser(phone);
-      res.status(200).send({ success: 'New User Created Successfully' });
+      // VALID OTP
+      const user = await User.findOneAndUpdate({ phone }, { verifyOTP: '1' });
+
+      if (!user) {
+        throw new Error('User does not Found');
+      }
+
+      if (verifyType === 'createUser') {
+        res.status(200).send({ success: 'New User Created Successfully' });
+      } else if (verifyType === 'loginUser') {
+        const token = await user.generateAuthToken();
+        const user_role = ['branchManager', 'teacher', 'councillor', 'student', 'institute'];
+
+        const data = {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+          role: user_role[+user.role],
+          token,
+          expiresIn: 36000,
+        };
+
+        res.status(200).send(data);
+      } else {
+        throw new Error('Invalid verify Type');
+      }
     } else {
       throw new Error('Unknown OTP error');
     }

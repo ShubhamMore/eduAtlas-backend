@@ -50,19 +50,22 @@ const userSchema = mongoose.Schema(
         }
       },
     },
-    eduAtlasId:{
-      type:String,
-      unique:true
+
+    eduAtlasId: {
+      type: String,
+      unique: true,
     },
-    verifyOTP:{
-        type:String,
-        default:"0"
+
+    verifyOTP: {
+      type: String,
+      default: '0',
     },
-    verifyEmail:{
-      type:String,
-      default:"0"
+
+    verifyEmail: {
+      type: String,
+      default: '0',
     },
-    
+
     tokens: [
       {
         token: {

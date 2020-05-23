@@ -15,7 +15,8 @@ authRouter.get('/sendOtpForRegisteredUser/:phone', otpController.sendOtpForRegis
 authRouter.post('/verifyUserOTP', otpController.verifyUserOTP);
 authRouter.post('/verifyOTP', otpController.verifyOTP);
 
-authRouter.get('/:phone', userController.findUser);
+authRouter.post('/findUser', userController.findUser);
+
 authRouter.get('/announcement/:instituteId', checkAuth, userController.getAnnouncement);
 authRouter.delete('/announcement/:instituteId', checkAuth, userController.deleteAnnouncement);
 
