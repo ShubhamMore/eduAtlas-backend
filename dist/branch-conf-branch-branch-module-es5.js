@@ -41,7 +41,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Batch</button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Manage Batch Here</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Course</th>\r\n          <th>Code</th>\r\n          <th>Description</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let batch of batches.batch\">\r\n          <td>{{ batch.course }}</td>\r\n          <td>{{ batch.batchCode }}</td>\r\n          <td>{{ batch.description }}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(batch._id)\">\r\n              Edit\r\n            </button>\r\n            <button nbButton status=\"danger\" (click)=\"delete(batch._id)\">\r\n              Del\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Batch</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Batch Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Course</th>\n          <th>Code</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let batch of batches.batch\">\n          <td>{{ batch.course }}</td>\n          <td>{{ batch.batchCode }}</td>\n          <td>{{ batch.description }}</td>\n          <td class=\"text-right\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(batch._id)\">\n              Edit\n            </button>\n            <button nbButton status=\"danger\" (click)=\"delete(batch._id)\">\n              Del\n            </button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -81,7 +81,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\r\n    ADD COURSES\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Manage Course Here</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Course Name</th>\r\n          <th>Code</th>\r\n          <th>Fees</th>\r\n          <th>GST</th>\r\n          <th>Total Fees (Rs.)</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let item of courses.course; let i = index\">\r\n          <td>{{ item.name }}</td>\r\n          <td>{{ item.courseCode }}</td>\r\n          <td>{{ item.fees }}</td>\r\n          <td>{{ item.gst }}</td>\r\n          <td>&#x20B9; {{ item.totalFee }}</td>\r\n          <td style=\"text-align: right;\">\r\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\r\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\n    ADD COURSES\n  </button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Course Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Course Name</th>\n          <th>Code</th>\n          <th>Fees</th>\n          <th>GST</th>\n          <th>Total Fees (Rs.)</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of courses.course; let i = index\">\n          <td>{{ item.name }}</td>\n          <td>{{ item.courseCode }}</td>\n          <td>{{ item.fees }}</td>\n          <td>{{ item.gst }}</td>\n          <td>&#x20B9; {{ item.totalFee }}</td>\n          <td style=\"text-align: right;\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -101,7 +101,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card>\r\n  <nb-card-body>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-5\">\r\n        <p>Id</p>\r\n      </div>\r\n      <div class=\"col-sm-5\">\r\n        <span>{{ courses.id }}</span>\r\n      </div>\r\n      <div class=\"col-sm-1\"></div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-5\">\r\n        <p>Course Name</p>\r\n      </div>\r\n      <div class=\"col-sm-5\">\r\n        <span>{{ courses.name }}</span>\r\n      </div>\r\n      <div class=\"col-sm-1\"></div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-5\">\r\n        <p>Code</p>\r\n      </div>\r\n      <div class=\"col-sm-5\">\r\n        <span>{{ courses.code }}</span>\r\n      </div>\r\n      <div class=\"col-sm-1\"></div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-5\">\r\n        <p>Fees</p>\r\n      </div>\r\n      <div class=\"col-sm-5\">\r\n        <span>{{ courses.fees }}</span>\r\n      </div>\r\n      <div class=\"col-sm-1\"></div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-5\">\r\n        <p>GST</p>\r\n      </div>\r\n      <div class=\"col-sm-5\">\r\n        <span>{{ courses.gst }}</span>\r\n      </div>\r\n      <div class=\"col-sm-1\"></div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-5\">\r\n        <p>Description</p>\r\n      </div>\r\n      <div class=\"col-sm-5\">\r\n        <span>{{ courses.discription }}</span>\r\n      </div>\r\n      <div class=\"col-sm-1\"></div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-5\">\r\n        <p>Total Fees</p>\r\n      </div>\r\n      <div class=\"col-sm-5\">\r\n        <span>{{ courses.totalFee }}</span>\r\n      </div>\r\n      <div class=\"col-sm-1\"></div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<nb-card>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Id</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.id }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Course Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.name }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Code</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.code }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Fees</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.fees }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>GST</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.gst }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Description</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.discription }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Total Fees</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.totalFee }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -121,7 +121,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<router-outlet></router-outlet>\r\n";
+    __webpack_exports__["default"] = "<router-outlet></router-outlet>\n";
     /***/
   },
 
@@ -141,7 +141,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"back()\" style=\"color: black;\">Manage Discount</button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Define Discount</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"discount\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <label for=\"code\">Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            id=\"code\"\r\n            status=\"basic\"\r\n            formControlName=\"discountCode\"\r\n            [status]=\"f.discountCode.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Code\"\r\n          />\r\n          <small *ngIf=\"f.discountCode.errors && submitted\" style=\"display: block;\"\r\n            >*This field req</small\r\n          >\r\n        </div>\r\n        <div class=\"col-sm-6\">\r\n          <label for=\"amt\">Amount in %</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            id=\"amt\"\r\n            status=\"basic\"\r\n            formControlName=\"amount\"\r\n            [status]=\"f.amount.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Amount in %\"\r\n          />\r\n          <small *ngIf=\"f.amount.errors && submitted\" style=\"display: block;\"\r\n            >*This field req</small\r\n          >\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"mt-3\">\r\n        <label for=\"des\">Description</label>\r\n        <textarea\r\n          name=\"discription\"\r\n          nbInput\r\n          id=\"des\"\r\n          fullWidth\r\n          status=\"basic\"\r\n          cols=\"40\"\r\n          rows=\"4\"\r\n          formControlName=\"description\"\r\n          placeholder=\"Description(Optional)\"\r\n        ></textarea>\r\n      </div>\r\n      <div class=\"mt-4\" style=\"text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"back()\" style=\"color: black;\">Manage Discount</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Define Discount</p>\n<nb-card>\n  <nb-card-body>\n    <form [formGroup]=\"discount\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <label for=\"code\">Code</label>\n          <input\n            type=\"text\"\n            nbInput\n            fullWidth\n            id=\"code\"\n            status=\"basic\"\n            formControlName=\"discountCode\"\n            [status]=\"f.discountCode.errors && submitted ? 'danger' : 'basic'\"\n            placeholder=\"Code\"\n          />\n          <small *ngIf=\"f.discountCode.errors && submitted\" style=\"display: block;\"\n            >*This field req</small\n          >\n        </div>\n        <div class=\"col-sm-6\">\n          <label for=\"amt\">Amount in %</label>\n          <input\n            type=\"text\"\n            nbInput\n            fullWidth\n            id=\"amt\"\n            status=\"basic\"\n            formControlName=\"amount\"\n            [status]=\"f.amount.errors && submitted ? 'danger' : 'basic'\"\n            placeholder=\"Amount in %\"\n          />\n          <small *ngIf=\"f.amount.errors && submitted\" style=\"display: block;\"\n            >*This field req</small\n          >\n        </div>\n      </div>\n\n      <div class=\"mt-3\">\n        <label for=\"des\">Description</label>\n        <textarea\n          name=\"discription\"\n          nbInput\n          id=\"des\"\n          fullWidth\n          status=\"basic\"\n          cols=\"40\"\n          rows=\"4\"\n          formControlName=\"description\"\n          placeholder=\"Description(Optional)\"\n        ></textarea>\n      </div>\n      <div class=\"mt-4\" style=\"text-align: right;\">\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -161,7 +161,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n<button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color:black;\">Add Discount</button>\r\n</div>\r\n<p style=\"color:black; font-weight:bold\">Manage Discoint Here</p>\r\n<nb-card>\r\n\t<nb-card-body>\r\n\t\t<table>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\r\n\t\t\t\t\t<th>Code</th>\r\n\t\t\t\t\t<th>Amount In %</th>\r\n\t\t\t\t\t<th>Description</th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of discounts.discount;let i=index\">\r\n\t\t\t\t\r\n\t\t\t\t\t<td>{{item.discountCode}}</td>\r\n\t\t\t\t\t<td>{{item.amount}}</td>\r\n\t\t\t\t\t<td>{{item.description}}</td>\r\n\t\t\t\t\t<td class=\"text-right\">\r\n\t\t\t\t\t\t<button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\r\n\t\t\t\t\t\t<button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t</nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Discount</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Discoint Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Code</th>\n          <th>Amount In %</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of discounts.discount; let i = index\">\n          <td>{{ item.discountCode }}</td>\n          <td>{{ item.amount }}</td>\n          <td>{{ item.description }}</td>\n          <td class=\"text-right\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -181,7 +181,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\" [hidden]=\"receipts\">Add Receipt</button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Manage Reciept</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Business Name</th>\r\n          <th>Address</th>\r\n          <th>GST Number</th>\r\n          <th>Terms & Conditions</th>\r\n          <th>Fee</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngIf=\"receipts\">\r\n          <td>{{ receipts.businessName }}</td>\r\n          <td>{{ receipts.address }}</td>\r\n          <td>{{ receipts.gstNumber }}</td>\r\n          <td>{{ receipts.termsAndCondition }}</td>\r\n          <td>{{ receipts.fee }}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(routerId)\">Edit</button>\r\n            <button nbButton status=\"danger\" (click)=\"delete(routerId)\">Del</button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\" [hidden]=\"receipts\">\r\n    Add Receipt\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Manage Reciept</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Business Name</th>\r\n          <th>Address</th>\r\n          <th>GST Number</th>\r\n          <th>Terms & Conditions</th>\r\n          <th>Fee</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngIf=\"receipts\">\r\n          <td>{{ receipts.businessName }}</td>\r\n          <td>{{ receipts.address }}</td>\r\n          <td>{{ receipts.gstNumber }}</td>\r\n          <td>{{ receipts.termsAndCondition }}</td>\r\n          <td>{{ receipts.fee }}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(routerId)\">Edit</button>\r\n            <button nbButton status=\"danger\" (click)=\"delete(routerId)\">Del</button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -201,7 +201,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button (click)=\"back()\" nbButton status=\"warning\" style=\"color: black;\">Manage Receipt</button>\r\n</div>\r\n<p style=\"font-weight: bold;\">Reciept Configuration</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"receipt\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"name\">Business Name</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"name\"\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"businessName\"\r\n            [status]=\"f.businessName.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Business Name\"\r\n          />\r\n          <small *ngIf=\"f.businessName.errors && submitted\">*Business Name is Required</small>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"gst\">GST Number (Optional)</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            id=\"gst\"\r\n            status=\"basic\"\r\n            formControlName=\"gstNumber\"\r\n            placeholder=\"GST Number (optional)\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"fee\">Fee</label>\r\n          <nb-select\r\n            placeholder=\"Fee\"\r\n            id=\"fee\"\r\n            status=\"basic\"\r\n            [status]=\"f.fee.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"fee\"\r\n          >\r\n            <nb-option *ngFor=\"let item of fees\" [value]=\"item\">{{ item }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.fee.errors && submitted\">*Fee is Required</small>\r\n        </div>\r\n      </div>\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"address\"\r\n            rows=\"5\"\r\n            [status]=\"f.address.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n\r\n          <small *ngIf=\"f.address.errors && submitted\">*Address is Required</small>\r\n        </div>\r\n      </div>\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"tc\">Terms & Conditions</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"tc\"\r\n            status=\"basic\"\r\n            fullWidth\r\n            formControlName=\"termsAndCondition\"\r\n            [status]=\"f.termsAndCondition.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Terms and Condtions\"\r\n            cols=\"15\"\r\n            rows=\"7\"\r\n          >\r\n          </textarea>\r\n          <small *ngIf=\"f.termsAndCondition.errors && submitted\">*Terms & Conditions is Required</small>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: right; margin: 1rem;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ edit ? 'Update' : 'Add' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button (click)=\"back()\" nbButton status=\"warning\" style=\"color: black;\">Manage Receipt</button>\r\n</div>\r\n<p style=\"font-weight: bold;\">Receipt Configuration</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"receipt\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"name\">Business Name</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"name\"\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"businessName\"\r\n            [status]=\"f.businessName.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Business Name\"\r\n          />\r\n          <small *ngIf=\"f.businessName.errors && submitted\">*Business Name is Required</small>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"gst\">GST Number (Optional)</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            id=\"gst\"\r\n            status=\"basic\"\r\n            formControlName=\"gstNumber\"\r\n            placeholder=\"GST Number (optional)\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"fee\">Fee</label>\r\n          <nb-select\r\n            placeholder=\"Fee\"\r\n            id=\"fee\"\r\n            status=\"basic\"\r\n            [status]=\"f.fee.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"fee\"\r\n          >\r\n            <nb-option *ngFor=\"let item of fees\" [value]=\"item\">{{ item }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.fee.errors && submitted\">*Fee is Required</small>\r\n        </div>\r\n      </div>\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"address\"\r\n            rows=\"5\"\r\n            [status]=\"f.address.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n\r\n          <small *ngIf=\"f.address.errors && submitted\">*Address is Required</small>\r\n        </div>\r\n      </div>\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"tc\">Terms & Conditions</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"tc\"\r\n            status=\"basic\"\r\n            fullWidth\r\n            formControlName=\"termsAndCondition\"\r\n            [status]=\"f.termsAndCondition.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Terms and Conditions\"\r\n            cols=\"15\"\r\n            rows=\"7\"\r\n          >\r\n          </textarea>\r\n          <small *ngIf=\"f.termsAndCondition.errors && submitted\"\r\n            >*Terms & Conditions is Required</small\r\n          >\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: right; margin: 1rem;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ edit ? 'Update' : 'Add' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -221,7 +221,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<p style=\"font-weight:bold\">Role Management</p>\r\n    <nb-card>\r\n      \r\n      <nb-card-body *ngIf=\"!display\">\r\n        <form [formGroup]=\"roleManage\" (ngSubmit)=\"onSubmit()\">\r\n         \r\n              <div class=\"row\">\r\n                <div class=\"col-sm-4\">\r\n                  <label for=\"phone\">*Phone Number</label>\r\n                <input type=\"phone\" nbInput id=\"phone\" maxlength=\"10\" fullWidth [status]=\"f.phone.errors && submitted ? 'danger':'basic'\" formControlName=\"phone\" placeholder=\"Phone Number\">\r\n                <small *ngIf=\"f.phone.errors && submitted\">*Phone Number is required</small>\r\n              </div>\r\n              <div class=\"col-sm-4\">\r\n                <label>*Password</label>\r\n                <input type=\"password\" nbInput fullWidth formControlName=\"password\" placeholder=\"Password\" \r\n                [status]=\"f.phone.errors && submitted ? 'danger':'basic'\">\r\n                <small *ngIf=\"f.password.errors && submitted\">*Password is required</small>\r\n              </div>\r\n              <div class=\"col-sm-4\">\r\n                  <label for=\"role\">*Assign Role</label>\r\n                      <nb-select status=\"basic\" id=\"role\" formControlName=\"role\" fullWidth [size]=\"selectedSize\" placeholder=\"Assign Role\">\r\n                        <nb-option value=\"branchManager\">Branch Manager</nb-option>\r\n                        <nb-option value=\"teacher\">Teacher</nb-option>\r\n                        <nb-option value=\"councillor\">Counselor</nb-option>\r\n                </nb-select>\r\n                <small *ngIf=\"f.role.errors && submitted\">*Role is required</small>\r\n       \r\n              </div>\r\n            \r\n              </div>\r\n              <div style=\"margin: 1rem; text-align:right\">\r\n                <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\r\n              </div>\r\n          \r\n     \r\n        </form>\r\n        </nb-card-body>\r\n        <nb-card-body [ngClass]=\"{'hide':!display}\">\r\n          <input type=\"text\" maxlength=\"4\" [(ngModel)]=otp nbInput placeholder=\"Enter OTP\">\r\n          <a class=\"btn btn-link\">Resend OTP</a>\r\n          <button nbButton (click)=\"varifyOtp()\">Varify OTP</button>\r\n        </nb-card-body>\r\n        </nb-card>\r\n\r\n        \r\n    \r\n";
+    __webpack_exports__["default"] = "<p style=\"font-weight: bold;\">Role Management</p>\n<nb-card>\n  <nb-card-body *ngIf=\"!display\">\n    <form [formGroup]=\"roleManage\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"row\">\n        <div class=\"col-sm-4\">\n          <label for=\"phone\">*Phone Number</label>\n          <input\n            type=\"phone\"\n            nbInput\n            id=\"phone\"\n            maxlength=\"10\"\n            fullWidth\n            [status]=\"f.phone.errors && submitted ? 'danger' : 'basic'\"\n            formControlName=\"phone\"\n            placeholder=\"Phone Number\"\n          />\n          <small *ngIf=\"f.phone.errors && submitted\">*Phone Number is required</small>\n        </div>\n        <div class=\"col-sm-4\">\n          <label>*Password</label>\n          <input\n            type=\"password\"\n            nbInput\n            fullWidth\n            formControlName=\"password\"\n            placeholder=\"Password\"\n            [status]=\"f.phone.errors && submitted ? 'danger' : 'basic'\"\n          />\n          <small *ngIf=\"f.password.errors && submitted\">*Password is required</small>\n        </div>\n        <div class=\"col-sm-4\">\n          <label for=\"role\">*Assign Role</label>\n          <nb-select\n            status=\"basic\"\n            id=\"role\"\n            formControlName=\"role\"\n            fullWidth\n            [size]=\"selectedSize\"\n            placeholder=\"Assign Role\"\n          >\n            <nb-option value=\"branchManager\">Branch Manager</nb-option>\n            <nb-option value=\"teacher\">Teacher</nb-option>\n            <nb-option value=\"councillor\">Counselor</nb-option>\n          </nb-select>\n          <small *ngIf=\"f.role.errors && submitted\">*Role is required</small>\n        </div>\n      </div>\n      <div style=\"margin: 1rem; text-align: right;\">\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n  <nb-card-body [ngClass]=\"{ hide: !display }\">\n    <input type=\"text\" maxlength=\"4\" [(ngModel)]=\"otp\" nbInput placeholder=\"Enter OTP\" />\n    <a class=\"btn btn-link\">Resend OTP</a>\n    <button nbButton (click)=\"varifyOtp()\">Varify OTP</button>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -241,7 +241,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "input,\nnb-select,\ntextarea {\n  display: block; }\n\nsmall {\n  color: red; }\n\np {\n  color: black;\n  font-weight: bold; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1iYXRjaGVzL0Y6XFxBa2FzaFxcUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXFBoYXNlXzFcXGVkdUF0bGFzLWNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGluc3RpdHV0ZVxcYnJhbmNoLWNvbmZcXGFkZC1iYXRjaGVzXFxhZGQtYmF0Y2hlcy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7O0VBR0UsY0FBYyxFQUFBOztBQUdoQjtFQUNFLFVBQVUsRUFBQTs7QUFFWjtFQUNFLFlBQVk7RUFDWixpQkFBaUIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2luc3RpdHV0ZS9icmFuY2gtY29uZi9hZGQtYmF0Y2hlcy9hZGQtYmF0Y2hlcy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlucHV0LFxyXG5uYi1zZWxlY3QsXHJcbnRleHRhcmVhIHtcclxuICBkaXNwbGF5OiBibG9jaztcclxufVxyXG5cclxuc21hbGwge1xyXG4gIGNvbG9yOiByZWQ7XHJcbn1cclxucCB7XHJcbiAgY29sb3I6IGJsYWNrO1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcbiJdfQ== */";
+    __webpack_exports__["default"] = "input,\nnb-select,\ntextarea {\n  display: block; }\n\nsmall {\n  color: red; }\n\np {\n  color: black;\n  font-weight: bold; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1iYXRjaGVzL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxhZGQtYmF0Y2hlc1xcYWRkLWJhdGNoZXMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7OztFQUdFLGNBQWMsRUFBQTs7QUFHaEI7RUFDRSxVQUFVLEVBQUE7O0FBRVo7RUFDRSxZQUFZO0VBQ1osaUJBQWlCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvYWRkLWJhdGNoZXMvYWRkLWJhdGNoZXMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpbnB1dCxcbm5iLXNlbGVjdCxcbnRleHRhcmVhIHtcbiAgZGlzcGxheTogYmxvY2s7XG59XG5cbnNtYWxsIHtcbiAgY29sb3I6IHJlZDtcbn1cbnAge1xuICBjb2xvcjogYmxhY2s7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuIl19 */";
     /***/
   },
 
@@ -341,20 +341,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this = this;
 
           this.active.queryParams.subscribe(function (data) {
-            console.log(data);
+            // console.log(data);
             _this.batchId = data.batchId;
             _this.edit = data.edit;
           });
-          this.routerId = this.active.snapshot.paramMap.get('id');
-          console.log('institute Id ' + this.routerId);
+          this.routerId = this.active.snapshot.paramMap.get('id'); // console.log('institute Id ' + this.routerId);
+
           this.getBatch(this.batchId, this.routerId);
           this.getCourses(this.routerId);
           this.batch = this.fb.group({
             course: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             batchCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             description: ['']
-          });
-          console.log('===============>', this.courses);
+          }); // console.log('===============>', this.courses);
         }
       }, {
         key: "getBatch",
@@ -365,9 +364,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           param = param.append('instituteId', instituteId);
           param = param.append('batchId', id);
           this.api.getBatch(param).subscribe(function (data) {
-            console.log(data);
-            _this2.batchUpdate = JSON.parse(JSON.stringify(data[0]));
-            console.log('batchInfo' + _this2.batchUpdate.batchCode);
+            // console.log(data);
+            _this2.batchUpdate = JSON.parse(JSON.stringify(data[0])); // console.log('batchInfo' + this.batchUpdate.batchCode);
           });
         }
       }, {
@@ -376,8 +374,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this3 = this;
 
           this.api.getCourses(id).subscribe(function (data) {
-            _this3.courses = JSON.parse(JSON.stringify(data));
-            console.log(_this3.courses);
+            _this3.courses = JSON.parse(JSON.stringify(data)); // console.log(this.courses);
 
             _this3.batch.patchValue({
               course: _this3.batchUpdate.course,
@@ -406,18 +403,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               _this4.router.navigate(['/pages/institute/branch-config/manage-batch/', _this4.routerId]);
             }, function (error) {
-              console.log(error);
-
+              // console.log(error);
               _this4.invalid('top-right', 'danger', error.error.message);
             });
-          }
+          } // console.log('batch => ', this.batch.value);
 
-          console.log('batch => ', this.batch.value);
 
           if (!this.edit) {
             this.api.addBatch(this.routerId, this.batch.value).subscribe(function () {
-              console.log('successfully added');
-
+              // console.log('successfully added');
               _this4.showToast('top-right', 'success', 'Successfully Added');
 
               setTimeout(function () {
@@ -505,7 +499,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1iYXRjaGVzL21hbmFnZS1iYXRjaC9GOlxcQWthc2hcXFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxQaGFzZV8xXFxlZHVBdGxhcy1jbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxhZGQtYmF0Y2hlc1xcbWFuYWdlLWJhdGNoXFxtYW5hZ2UtYmF0Y2guY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDQyxXQUNELEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvYWRkLWJhdGNoZXMvbWFuYWdlLWJhdGNoL21hbmFnZS1iYXRjaC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbInRhYmxle1xyXG5cdHdpZHRoOjEwMCVcclxufSJdfQ== */";
+    __webpack_exports__["default"] = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1iYXRjaGVzL21hbmFnZS1iYXRjaC9FOlxcUHJvamVjdHNcXEZyZWVsYW5jZSBQcm9qZWN0c1xcRWR1QXRsYXNcXGVkdWF0bGFzMVxcY2xpZW50L3NyY1xcYXBwXFxwYWdlc1xcaW5zdGl0dXRlXFxicmFuY2gtY29uZlxcYWRkLWJhdGNoZXNcXG1hbmFnZS1iYXRjaFxcbWFuYWdlLWJhdGNoLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0MsV0FDRCxFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1iYXRjaGVzL21hbmFnZS1iYXRjaC9tYW5hZ2UtYmF0Y2guY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0YWJsZXtcblx0d2lkdGg6MTAwJVxufSJdfQ== */";
     /***/
   },
 
@@ -607,16 +601,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "delete",
         value: function _delete(id) {
-          console.log(id);
+          // console.log(id);
           this.params = this.params.append('instituteId', this.routerId);
           this.params = this.params.append('batchId', id);
-          this.api.deleteBatch(this.params).subscribe(function () {
-            return console.log('successfully delete');
+          this.api.deleteBatch(this.params).subscribe(function (res) {// console.log('successfully delete ' + res);
           }, function (err) {
             return console.error(err);
           });
           var i = this.batches.batch.findIndex(function (e) {
-            return e._id == id;
+            return e._id === id;
           });
 
           if (i !== -1) {
@@ -673,7 +666,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "small {\n  color: red; }\n\ninput, textarea, nb-select {\n  display: block;\n  width: 100%; }\n\np {\n  color: black;\n  font-weight: bold; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1jb3Vyc2UvRjpcXEFrYXNoXFxQcm9qZWN0c1xcRWR1QXRsYXNcXGVkdWF0bGFzMVxcUGhhc2VfMVxcZWR1QXRsYXMtY2xpZW50L3NyY1xcYXBwXFxwYWdlc1xcaW5zdGl0dXRlXFxicmFuY2gtY29uZlxcYWRkLWNvdXJzZVxcYWRkLWNvdXJzZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLFVBQVUsRUFBQTs7QUFFZDtFQUNJLGNBQWM7RUFDZCxXQUFXLEVBQUE7O0FBRWY7RUFBRSxZQUFXO0VBQUMsaUJBQWdCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvYWRkLWNvdXJzZS9hZGQtY291cnNlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbnNtYWxse1xyXG4gICAgY29sb3I6IHJlZDtcclxufVxyXG5pbnB1dCx0ZXh0YXJlYSxuYi1zZWxlY3R7XHJcbiAgICBkaXNwbGF5OiBibG9jaztcclxuICAgIHdpZHRoOiAxMDAlO1xyXG59XHJcbnB7Y29sb3I6YmxhY2s7Zm9udC13ZWlnaHQ6Ym9sZH1cclxuIl19 */";
+    __webpack_exports__["default"] = "small {\n  color: red; }\n\ninput, textarea, nb-select {\n  display: block;\n  width: 100%; }\n\np {\n  color: black;\n  font-weight: bold; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1jb3Vyc2UvRTpcXFByb2plY3RzXFxGcmVlbGFuY2UgUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXGNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGluc3RpdHV0ZVxcYnJhbmNoLWNvbmZcXGFkZC1jb3Vyc2VcXGFkZC1jb3Vyc2UuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSxVQUFVLEVBQUE7O0FBRWQ7RUFDSSxjQUFjO0VBQ2QsV0FBVyxFQUFBOztBQUVmO0VBQUUsWUFBVztFQUFDLGlCQUFnQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1jb3Vyc2UvYWRkLWNvdXJzZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuc21hbGx7XG4gICAgY29sb3I6IHJlZDtcbn1cbmlucHV0LHRleHRhcmVhLG5iLXNlbGVjdHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICB3aWR0aDogMTAwJTtcbn1cbnB7Y29sb3I6YmxhY2s7Zm9udC13ZWlnaHQ6Ym9sZH1cbiJdfQ== */";
     /***/
   },
 
@@ -780,7 +773,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this.routerId = this.active.snapshot.paramMap.get('id');
           this.active.queryParams.subscribe(function (data) {
-            console.log(data);
+            // console.log(data);
             _this6.courseId = data.courseId;
             _this6.edit = data.edit;
           });
@@ -809,10 +802,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           param = param.append('instituteId', this.routerId);
           param = param.append('courseId', id);
           this.api.getCourse(param).subscribe(function (data) {
-            console.log('getCourse ' + JSON.stringify(data[0]));
-            _this7.updateCourse = JSON.parse(JSON.stringify(data[0]));
-            console.log('getOcurse ' + _this7.updateCourse.courseCode);
-            console.log(_this7.updateCourse);
+            // console.log('getCourse ' + JSON.stringify(data[0]));
+            _this7.updateCourse = JSON.parse(JSON.stringify(data[0])); // console.log('getCourse ' + this.updateCourse.courseCode);
+            // console.log(this.updateCourse);
 
             _this7.course.patchValue({
               name: _this7.updateCourse.name,
@@ -824,7 +816,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               totalFee: _this7.updateCourse.totalFee
             });
 
-            if (_this7.updateCourse.gst == 'Inclusive') {
+            if (_this7.updateCourse.gst === 'Inclusive') {
               _this7.gstCheckBox = true;
 
               _this7.course.get('gstValue').disable();
@@ -835,7 +827,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             _this7.fees = Number(_this7.updateCourse.fees);
           }, function (error) {
-            return console.log(error);
+            return console.error(error);
           });
         }
       }, {
@@ -844,10 +836,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this8 = this;
 
           this.api.getInstitutes().subscribe(function (data) {
-            _this8.institutes = data;
-            console.log('institutes - ' + JSON.stringify(_this8.institutes));
-            _this8.institute = JSON.parse(JSON.stringify(_this8.institutes));
-            console.log(_this8.institute);
+            _this8.institutes = data; // console.log('institutes - ' + JSON.stringify(this.institutes));
+
+            _this8.institute = JSON.parse(JSON.stringify(_this8.institutes)); // console.log(this.institute);
           });
           this.display = true;
         }
@@ -865,35 +856,30 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.course.invalid) {
             return;
-          }
+          } // console.log('editMode ' + this.edit);
 
-          console.log('editMode ' + this.edit);
 
           if (this.edit === 'true') {
             var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpParams"]();
             param = param.append('instituteId', this.routerId);
             param = param.append('courseId', this.courseId);
             this.api.updateCourse(param, this.course.value).subscribe(function (res) {
-              console.log(res);
-
+              // console.log(res);
               _this9.showToast('top-right', 'success', 'Course Updated');
 
               setTimeout(function () {
                 _this9.router.navigate(['/pages/institute/branch-config/manage-course/', _this9.routerId]);
               }, 1000);
             }, function (error) {
-              console.log(error);
-
+              // console.log(error);
               _this9.showToast('top-right', 'danger', 'Course Updation Failed');
             });
-          }
+          } // console.log(this.course.value);
 
-          console.log(this.course.value);
 
           if (!this.edit) {
             this.api.addCourse(this.routerId, this.course.value).subscribe(function (data) {
-              console.log(data);
-
+              // console.log(data);
               _this9.showToast('top-right', 'success', 'Course Added Successfully');
 
               setTimeout(function () {
@@ -932,7 +918,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function calculateTotalFees() {
           var total = 0;
 
-          if (this.course.get('gst').value == 'Inclusive') {
+          if (this.course.get('gst').value === 'Inclusive') {
             total = this.fees;
           } else {
             if (this.exclusiveGst == null) {
@@ -947,10 +933,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "exclusive",
         value: function exclusive(event) {
-          this.exclusiveGst = +event;
-          console.log('exclusive ', this.exclusiveGst);
-          var total = this.fees + this.exclusiveGst / 100 * this.fees;
-          console.log('type ', typeof this.fees, this.fees);
+          this.exclusiveGst = +event; // console.log('exclusive ', this.exclusiveGst);
+
+          var total = this.fees + this.exclusiveGst / 100 * this.fees; // console.log('type ', typeof this.fees, this.fees);
+
           this.course.patchValue({
             totalFee: total + '',
             gstValue: this.exclusiveGst === 0 ? '' : this.exclusiveGst + ''
@@ -1040,7 +1026,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1jb3Vyc2UvbWFuYWdlLWNvdXJzZS9GOlxcQWthc2hcXFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxQaGFzZV8xXFxlZHVBdGxhcy1jbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxhZGQtY291cnNlXFxtYW5hZ2UtY291cnNlXFxtYW5hZ2UtY291cnNlLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsV0FBVyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1jb3Vyc2UvbWFuYWdlLWNvdXJzZS9tYW5hZ2UtY291cnNlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xyXG4gIHdpZHRoOiAxMDAlO1xyXG59XHJcbiJdfQ== */";
+    __webpack_exports__["default"] = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1jb3Vyc2UvbWFuYWdlLWNvdXJzZS9FOlxcUHJvamVjdHNcXEZyZWVsYW5jZSBQcm9qZWN0c1xcRWR1QXRsYXNcXGVkdWF0bGFzMVxcY2xpZW50L3NyY1xcYXBwXFxwYWdlc1xcaW5zdGl0dXRlXFxicmFuY2gtY29uZlxcYWRkLWNvdXJzZVxcbWFuYWdlLWNvdXJzZVxcbWFuYWdlLWNvdXJzZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2luc3RpdHV0ZS9icmFuY2gtY29uZi9hZGQtY291cnNlL21hbmFnZS1jb3Vyc2UvbWFuYWdlLWNvdXJzZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbInRhYmxlIHtcbiAgd2lkdGg6IDEwMCU7XG59XG4iXX0= */";
     /***/
   },
 
@@ -1130,27 +1116,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this10 = this;
 
           this.api.getCourses(id).subscribe(function (data) {
-            //console.log(data);
-            //this.courses = JSON.stringify(data);
+            // console.log(data);
+            // this.courses = JSON.stringify(data);
             var course = JSON.stringify(data);
-            _this10.courses = JSON.parse(course);
-            console.log('=======> ', _this10.courses);
+            _this10.courses = JSON.parse(course); // console.log('=======> ', this.courses);
           });
         }
       }, {
         key: "delete",
         value: function _delete(id) {
-          console.log(id);
+          // console.log(id);
           var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpParams"]();
           param = param.append('instituteId', this.routerId);
           param = param.append('courseId', id);
-          this.api.deleteCourse(param).subscribe(function (res) {
-            return console.log(res);
+          this.api.deleteCourse(param).subscribe(function (res) {// console.log(res);
           }, function (error) {
-            return console.log(error);
+            return console.error(error);
           });
           var i = this.courses.course.findIndex(function (e) {
-            return e._id == id;
+            return e._id === id;
           });
 
           if (i !== -1) {
@@ -1215,7 +1199,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "p {\n  font-weight: bold; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1jb3Vyc2Uvdmlldy1jb3Vyc2UvRjpcXEFrYXNoXFxQcm9qZWN0c1xcRWR1QXRsYXNcXGVkdWF0bGFzMVxcUGhhc2VfMVxcZWR1QXRsYXMtY2xpZW50L3NyY1xcYXBwXFxwYWdlc1xcaW5zdGl0dXRlXFxicmFuY2gtY29uZlxcYWRkLWNvdXJzZVxcdmlldy1jb3Vyc2VcXHZpZXctY291cnNlLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsaUJBQWlCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvYWRkLWNvdXJzZS92aWV3LWNvdXJzZS92aWV3LWNvdXJzZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbInAge1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcbiJdfQ== */";
+    __webpack_exports__["default"] = "p {\n  font-weight: bold; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1jb3Vyc2Uvdmlldy1jb3Vyc2UvRTpcXFByb2plY3RzXFxGcmVlbGFuY2UgUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXGNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGluc3RpdHV0ZVxcYnJhbmNoLWNvbmZcXGFkZC1jb3Vyc2VcXHZpZXctY291cnNlXFx2aWV3LWNvdXJzZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGlCQUFpQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2FkZC1jb3Vyc2Uvdmlldy1jb3Vyc2Uvdmlldy1jb3Vyc2UuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJwIHtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59XG4iXX0= */";
     /***/
   },
 
@@ -1276,13 +1260,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function ngOnInit() {
           var _this11 = this;
 
-          this.routerId = +this.active.snapshot.paramMap.get('id');
-          console.log(this.active.snapshot.paramMap);
+          this.routerId = +this.active.snapshot.paramMap.get('id'); // console.log(this.active.snapshot.paramMap);
+
           this.api.getCourse(this.routerId).subscribe(function (data) {
-            console.log(data);
+            // console.log(data);
             _this11.courses = data;
           }, function (err) {
-            return console.log(err);
+            return console.error(err);
           });
         }
       }]);
@@ -1326,7 +1310,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "small {\n  color: red; }\n\ninput,\ntextarea {\n  margin: 10px; }\n\na {\n  margin: 1rem; }\n\n.active {\n  color: red; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL0Y6XFxBa2FzaFxcUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXFBoYXNlXzFcXGVkdUF0bGFzLWNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGluc3RpdHV0ZVxcYnJhbmNoLWNvbmZcXGJyYW5jaC1jb25mLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsVUFBVSxFQUFBOztBQUVaOztFQUVFLFlBQVksRUFBQTs7QUFFZDtFQUNFLFlBQVksRUFBQTs7QUFFZDtFQUNFLFVBQVUsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2luc3RpdHV0ZS9icmFuY2gtY29uZi9icmFuY2gtY29uZi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbInNtYWxsIHtcclxuICBjb2xvcjogcmVkO1xyXG59XHJcbmlucHV0LFxyXG50ZXh0YXJlYSB7XHJcbiAgbWFyZ2luOiAxMHB4O1xyXG59XHJcbmEge1xyXG4gIG1hcmdpbjogMXJlbTtcclxufVxyXG4uYWN0aXZlIHtcclxuICBjb2xvcjogcmVkO1xyXG59XHJcbiJdfQ== */";
+    __webpack_exports__["default"] = "small {\n  color: red; }\n\ninput,\ntextarea {\n  margin: 10px; }\n\na {\n  margin: 1rem; }\n\n.active {\n  color: red; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxicmFuY2gtY29uZi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFVBQVUsRUFBQTs7QUFFWjs7RUFFRSxZQUFZLEVBQUE7O0FBRWQ7RUFDRSxZQUFZLEVBQUE7O0FBRWQ7RUFDRSxVQUFVLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvYnJhbmNoLWNvbmYuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJzbWFsbCB7XG4gIGNvbG9yOiByZWQ7XG59XG5pbnB1dCxcbnRleHRhcmVhIHtcbiAgbWFyZ2luOiAxMHB4O1xufVxuYSB7XG4gIG1hcmdpbjogMXJlbTtcbn1cbi5hY3RpdmUge1xuICBjb2xvcjogcmVkO1xufVxuIl19 */";
     /***/
   },
 
@@ -1697,7 +1681,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "small {\n  color: red;\n  margin: 0 1rem; }\n\ninput,\ntextarea {\n  display: block; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2Rpc2NvdW50L0Y6XFxBa2FzaFxcUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXFBoYXNlXzFcXGVkdUF0bGFzLWNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGluc3RpdHV0ZVxcYnJhbmNoLWNvbmZcXGRpc2NvdW50XFxkaXNjb3VudC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFVBQVU7RUFDVixjQUFjLEVBQUE7O0FBRWhCOztFQUVFLGNBQWMsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2luc3RpdHV0ZS9icmFuY2gtY29uZi9kaXNjb3VudC9kaXNjb3VudC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbInNtYWxsIHtcclxuICBjb2xvcjogcmVkO1xyXG4gIG1hcmdpbjogMCAxcmVtO1xyXG59XHJcbmlucHV0LFxyXG50ZXh0YXJlYSB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbn1cclxuIl19 */";
+    __webpack_exports__["default"] = "small {\n  color: red;\n  margin: 0 1rem; }\n\ninput,\ntextarea {\n  display: block; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2Rpc2NvdW50L0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxkaXNjb3VudFxcZGlzY291bnQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxVQUFVO0VBQ1YsY0FBYyxFQUFBOztBQUVoQjs7RUFFRSxjQUFjLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvZGlzY291bnQvZGlzY291bnQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJzbWFsbCB7XG4gIGNvbG9yOiByZWQ7XG4gIG1hcmdpbjogMCAxcmVtO1xufVxuaW5wdXQsXG50ZXh0YXJlYSB7XG4gIGRpc3BsYXk6IGJsb2NrO1xufVxuIl19 */";
     /***/
   },
 
@@ -1795,7 +1779,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this.routerId = this.active.snapshot.paramMap.get('id');
           this.active.queryParams.subscribe(function (data) {
-            console.log(data);
+            // console.log(data);
             _this12.edit = data.edit;
             _this12.discountId = data.discountId;
 
@@ -1818,9 +1802,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           param = param.append('instituteId', this.routerId);
           param = param.append('discountId', id);
           this.api.getDiscount(param).subscribe(function (data) {
-            console.log('discount Data ', data);
-            _this13.discountUpdate = JSON.parse(JSON.stringify(data[0]));
-            console.log('CODE ', _this13.discountUpdate.discountCode);
+            // console.log('discount Data ', data);
+            _this13.discountUpdate = JSON.parse(JSON.stringify(data[0])); // console.log('CODE ', this.discountUpdate.discountCode);
 
             _this13.discount.patchValue({
               discountCode: _this13.discountUpdate.discountCode,
@@ -1845,23 +1828,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             param = param.append('instituteId', this.routerId);
             param = param.append('discountId', this.discountId);
             this.api.updateDiscount(param, this.discount.value).subscribe(function (res) {
-              console.log(res);
-
+              // console.log(res);
               _this14.showToast('top-right', 'success', 'Discount Updated');
 
               setTimeout(function () {
                 _this14.router.navigate(['/pages/institute/branch-config/manage-discount/', _this14.routerId]);
               }, 1000);
             }, function (error) {
-              console.log(error);
-
+              // console.log(error);
               _this14.showToast('top-right', 'danger', 'Discount Updation Failed');
             });
           } else {
-            console.log(this.discount.value);
+            // console.log(this.discount.value);
             this.api.addDiscount(this.routerId, this.discount.value).subscribe(function (data) {
-              console.log('add success' + ' ' + data);
-
+              // console.log('add success' + ' ' + data);
               _this14.showToast('top-right', 'success', 'Discount Added Successfully');
 
               setTimeout(function () {
@@ -1941,7 +1921,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2Rpc2NvdW50L21hbmFnZS1kaXNjb3VudC9GOlxcQWthc2hcXFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxQaGFzZV8xXFxlZHVBdGxhcy1jbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxkaXNjb3VudFxcbWFuYWdlLWRpc2NvdW50XFxtYW5hZ2UtZGlzY291bnQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFXLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvZGlzY291bnQvbWFuYWdlLWRpc2NvdW50L21hbmFnZS1kaXNjb3VudC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbInRhYmxlIHtcclxuICB3aWR0aDogMTAwJTtcclxufVxyXG4iXX0= */";
+    __webpack_exports__["default"] = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2Rpc2NvdW50L21hbmFnZS1kaXNjb3VudC9FOlxcUHJvamVjdHNcXEZyZWVsYW5jZSBQcm9qZWN0c1xcRWR1QXRsYXNcXGVkdWF0bGFzMVxcY2xpZW50L3NyY1xcYXBwXFxwYWdlc1xcaW5zdGl0dXRlXFxicmFuY2gtY29uZlxcZGlzY291bnRcXG1hbmFnZS1kaXNjb3VudFxcbWFuYWdlLWRpc2NvdW50LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsV0FBVyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2Rpc2NvdW50L21hbmFnZS1kaXNjb3VudC9tYW5hZ2UtZGlzY291bnQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0YWJsZSB7XG4gIHdpZHRoOiAxMDAlO1xufVxuIl19 */";
     /***/
   },
 
@@ -2024,10 +2004,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this15 = this;
 
           this.api.getDiscounts(id).subscribe(function (data) {
-            console.log(data);
+            // console.log(data);
             var dis = JSON.stringify(data);
-            _this15.discounts = JSON.parse(dis);
-            console.log('Discount' + _this15.discounts);
+            _this15.discounts = JSON.parse(dis); // console.log('Discount' + this.discounts);
           }, function (err) {
             return console.error(err);
           });
@@ -2048,13 +2027,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpParams"]();
           param = param.append('instituteId', this.routerId);
           param = param.append('discountId', id);
-          this.api.deleteDiscount(param).subscribe(function () {
-            return console.log('successfully deleted');
-          }, function (err) {
+          this.api.deleteDiscount(param).subscribe( //   () => console.log('successfully deleted'),
+          function (err) {
             return console.error(err);
           });
           var i = this.discounts.discount.findIndex(function (e) {
-            return e._id == id;
+            return e._id === id;
           });
 
           if (i !== -1) {
@@ -2109,7 +2087,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL3JlY2VpcHQtY29uZi9tYW5hZ2UtcmVjZWlwdC9GOlxcQWthc2hcXFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxQaGFzZV8xXFxlZHVBdGxhcy1jbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxyZWNlaXB0LWNvbmZcXG1hbmFnZS1yZWNlaXB0XFxtYW5hZ2UtcmVjZWlwdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2luc3RpdHV0ZS9icmFuY2gtY29uZi9yZWNlaXB0LWNvbmYvbWFuYWdlLXJlY2VpcHQvbWFuYWdlLXJlY2VpcHQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0YWJsZSB7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbn1cclxuIl19 */";
+    __webpack_exports__["default"] = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL3JlY2VpcHQtY29uZi9tYW5hZ2UtcmVjZWlwdC9FOlxcUHJvamVjdHNcXEZyZWVsYW5jZSBQcm9qZWN0c1xcRWR1QXRsYXNcXGVkdWF0bGFzMVxcY2xpZW50L3NyY1xcYXBwXFxwYWdlc1xcaW5zdGl0dXRlXFxicmFuY2gtY29uZlxccmVjZWlwdC1jb25mXFxtYW5hZ2UtcmVjZWlwdFxcbWFuYWdlLXJlY2VpcHQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFXLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvcmVjZWlwdC1jb25mL21hbmFnZS1yZWNlaXB0L21hbmFnZS1yZWNlaXB0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xuICB3aWR0aDogMTAwJTtcbn1cbiJdfQ== */";
     /***/
   },
 
@@ -2260,7 +2238,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "nb-select {\n  width: 80%; }\n\n.col-sm-2 {\n  margin: 0 10px; }\n\nsmall {\n  display: block;\n  color: red;\n  margin-left: 10px; }\n\ninput,\nnb-select {\n  display: block; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL3JlY2VpcHQtY29uZi9GOlxcQWthc2hcXFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxQaGFzZV8xXFxlZHVBdGxhcy1jbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxyZWNlaXB0LWNvbmZcXHJlY2VpcHQtY29uZi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFVBQVUsRUFBQTs7QUFFWjtFQUNFLGNBQWMsRUFBQTs7QUFFaEI7RUFDRSxjQUFjO0VBQ2QsVUFBVTtFQUNWLGlCQUFpQixFQUFBOztBQUVuQjs7RUFFRSxjQUFjLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvcmVjZWlwdC1jb25mL3JlY2VpcHQtY29uZi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIm5iLXNlbGVjdCB7XHJcbiAgd2lkdGg6IDgwJTtcclxufVxyXG4uY29sLXNtLTIge1xyXG4gIG1hcmdpbjogMCAxMHB4O1xyXG59XHJcbnNtYWxsIHtcclxuICBkaXNwbGF5OiBibG9jaztcclxuICBjb2xvcjogcmVkO1xyXG4gIG1hcmdpbi1sZWZ0OiAxMHB4O1xyXG59XHJcbmlucHV0LFxyXG5uYi1zZWxlY3Qge1xyXG4gIGRpc3BsYXk6IGJsb2NrO1xyXG59XHJcbiJdfQ== */";
+    __webpack_exports__["default"] = "nb-select {\n  width: 80%; }\n\n.col-sm-2 {\n  margin: 0 10px; }\n\nsmall {\n  display: block;\n  color: red;\n  margin-left: 10px; }\n\ninput,\nnb-select {\n  display: block; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL3JlY2VpcHQtY29uZi9FOlxcUHJvamVjdHNcXEZyZWVsYW5jZSBQcm9qZWN0c1xcRWR1QXRsYXNcXGVkdWF0bGFzMVxcY2xpZW50L3NyY1xcYXBwXFxwYWdlc1xcaW5zdGl0dXRlXFxicmFuY2gtY29uZlxccmVjZWlwdC1jb25mXFxyZWNlaXB0LWNvbmYuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxVQUFVLEVBQUE7O0FBRVo7RUFDRSxjQUFjLEVBQUE7O0FBRWhCO0VBQ0UsY0FBYztFQUNkLFVBQVU7RUFDVixpQkFBaUIsRUFBQTs7QUFFbkI7O0VBRUUsY0FBYyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL3JlY2VpcHQtY29uZi9yZWNlaXB0LWNvbmYuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJuYi1zZWxlY3Qge1xuICB3aWR0aDogODAlO1xufVxuLmNvbC1zbS0yIHtcbiAgbWFyZ2luOiAwIDEwcHg7XG59XG5zbWFsbCB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBjb2xvcjogcmVkO1xuICBtYXJnaW4tbGVmdDogMTBweDtcbn1cbmlucHV0LFxubmItc2VsZWN0IHtcbiAgZGlzcGxheTogYmxvY2s7XG59XG4iXX0= */";
     /***/
   },
 
@@ -2327,17 +2305,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     "./node_modules/@nebular/theme/fesm2015/index.js");
 
     var ReceiptConfComponent = /*#__PURE__*/function () {
-      function ReceiptConfComponent(fb, api, active, router, toasterSevice, location) {
+      function ReceiptConfComponent(fb, api, active, router, toasterService, location) {
         _classCallCheck(this, ReceiptConfComponent);
 
         this.fb = fb;
         this.api = api;
         this.active = active;
         this.router = router;
-        this.toasterSevice = toasterSevice;
+        this.toasterService = toasterService;
         this.location = location;
         this.submitted = false;
-        this.updateReciept = {
+        this.updateReceipt = {
           businessName: '',
           address: '',
           gstNumber: '',
@@ -2354,11 +2332,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this.routerId = this.active.snapshot.paramMap.get('id');
           this.active.queryParams.subscribe(function (data) {
-            _this18.recieptId = data.receiptId;
+            _this18.receiptId = data.receiptId;
             _this18.edit = data.edit;
 
             if (_this18.edit === 'true') {
-              _this18.getReciept(_this18.routerId);
+              _this18.getReceipt(_this18.routerId);
             }
           });
           this.receipt = this.fb.group({
@@ -2370,22 +2348,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           });
         }
       }, {
-        key: "getReciept",
-        value: function getReciept(id) {
+        key: "getReceipt",
+        value: function getReceipt(id) {
           var _this19 = this;
 
           this.api.getReceipt(id).subscribe(function (data) {
-            _this19.updateReciept = data;
+            _this19.updateReceipt = data;
 
             _this19.receipt.patchValue({
-              businessName: _this19.updateReciept.businessName,
-              address: _this19.updateReciept.address,
-              gstNumber: _this19.updateReciept.gstNumber,
-              termsAndCondition: _this19.updateReciept.termsAndCondition,
-              fee: _this19.updateReciept.fee
+              businessName: _this19.updateReceipt.businessName,
+              address: _this19.updateReceipt.address,
+              gstNumber: _this19.updateReceipt.gstNumber,
+              termsAndCondition: _this19.updateReceipt.termsAndCondition,
+              fee: _this19.updateReceipt.fee
             });
           }, function (err) {
-            return console.log(err);
+            return console.error(err);
           });
         }
       }, {
@@ -2401,7 +2379,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.edit === 'true') {
             this.api.updateReceipt(this.routerId, this.receipt.value).subscribe(function (data) {
-              _this20.message = 'Reciept Updated Successfully';
+              _this20.message = 'receipt Updated Successfully';
 
               _this20.showToast('top-right', 'success');
 
@@ -2415,7 +2393,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (!this.edit) {
             this.api.addReceipt(this.routerId, this.receipt.value).subscribe(function () {
-              _this20.message = 'Reciept Added Successfully';
+              _this20.message = 'receipt Added Successfully';
 
               _this20.showToast('top-right', 'success');
 
@@ -2435,7 +2413,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "showToast",
         value: function showToast(position, status) {
-          this.toasterSevice.show(status || 'Success', "".concat(this.message), {
+          this.toasterService.show(status || 'Success', "".concat(this.message), {
             position: position,
             status: status
           });
@@ -2443,7 +2421,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "invalidToast",
         value: function invalidToast(position, status) {
-          this.toasterSevice.show(status || 'Danger', "".concat(this.message), {
+          this.toasterService.show(status || 'Danger', "".concat(this.message), {
             position: position,
             status: status
           });
@@ -2502,7 +2480,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "small {\n  display: block;\n  color: red; }\n\ninput,\nnb-select {\n  display: block; }\n\n.hide {\n  visibility: hidden; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL3JvbGUtbWFuYWdlbWVudC9GOlxcQWthc2hcXFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxQaGFzZV8xXFxlZHVBdGxhcy1jbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxyb2xlLW1hbmFnZW1lbnRcXHJvbGUtbWFuYWdlbWVudC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGNBQWM7RUFDZCxVQUFVLEVBQUE7O0FBRVo7O0VBRUUsY0FBYyxFQUFBOztBQUVoQjtFQUNFLGtCQUFrQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL3JvbGUtbWFuYWdlbWVudC9yb2xlLW1hbmFnZW1lbnQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJzbWFsbCB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgY29sb3I6IHJlZDtcclxufVxyXG5pbnB1dCxcclxubmItc2VsZWN0IHtcclxuICBkaXNwbGF5OiBibG9jaztcclxufVxyXG4uaGlkZSB7XHJcbiAgdmlzaWJpbGl0eTogaGlkZGVuO1xyXG59XHJcbiJdfQ== */";
+    __webpack_exports__["default"] = "small {\n  display: block;\n  color: red; }\n\ninput,\nnb-select {\n  display: block; }\n\n.hide {\n  visibility: hidden; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL3JvbGUtbWFuYWdlbWVudC9FOlxcUHJvamVjdHNcXEZyZWVsYW5jZSBQcm9qZWN0c1xcRWR1QXRsYXNcXGVkdWF0bGFzMVxcY2xpZW50L3NyY1xcYXBwXFxwYWdlc1xcaW5zdGl0dXRlXFxicmFuY2gtY29uZlxccm9sZS1tYW5hZ2VtZW50XFxyb2xlLW1hbmFnZW1lbnQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxjQUFjO0VBQ2QsVUFBVSxFQUFBOztBQUVaOztFQUVFLGNBQWMsRUFBQTs7QUFFaEI7RUFDRSxrQkFBa0IsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2luc3RpdHV0ZS9icmFuY2gtY29uZi9yb2xlLW1hbmFnZW1lbnQvcm9sZS1tYW5hZ2VtZW50LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsic21hbGwge1xuICBkaXNwbGF5OiBibG9jaztcbiAgY29sb3I6IHJlZDtcbn1cbmlucHV0LFxubmItc2VsZWN0IHtcbiAgZGlzcGxheTogYmxvY2s7XG59XG4uaGlkZSB7XG4gIHZpc2liaWxpdHk6IGhpZGRlbjtcbn1cbiJdfQ== */";
     /***/
   },
 
@@ -2600,16 +2578,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.roleManage.invalid) {
             return;
-          }
+          } // console.log(this.roleManage.value);
 
-          console.log(this.roleManage.value);
+
           this.roleService.addRole(this.roleManage.value).subscribe(function (data) {
-            console.log(data);
+            // console.log(data);
             _this21.display = true;
 
             _this21.getOtp(_this21.roleManage.value.phone);
-          }, function (error) {
-            return console.log(error);
           });
         }
       }, {
@@ -2617,8 +2593,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function getOtp(phone) {
           var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpParams"]();
           param = param.append('register', '1');
-          this.roleService.getOtp(phone, param).subscribe(function (res) {
-            return console.log(res);
+          this.roleService.getOtp(phone, param).subscribe(function (res) {// console.log(res);
           });
         }
       }, {
@@ -2626,18 +2601,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function varifyOtp() {
           var _this22 = this;
 
-          console.log('otp====>', this.otp);
+          // console.log('otp====>', this.otp);
           var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpParams"]();
           param = param.append('varifyType', 'roleAssign');
           param = param.append('phone', this.roleManage.value.phone);
           param = param.append('otp', this.otp);
           this.roleService.verifyOtp(param).subscribe(function (res) {
-            console.log(res);
-
+            // console.log(res);
             _this22.valid('top-right', 'success');
           }, function (error) {
-            console.log(error);
-
+            // console.log(error);
             _this22.invalid('top-right', 'danger');
           });
         }
@@ -2762,8 +2735,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(RoleAssignService, [{
         key: "addRole",
         value: function addRole(role) {
-          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/role"), role, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (data) {
-            return console.log(data);
+          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/role"), role, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (data) {// console.log(data);
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
         }
       }, {
@@ -2771,8 +2743,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function getOtp(phone, params) {
           return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/users/sendOTP/").concat(phone), {
             params: params
-          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {
-            return console.log(res);
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {// console.log(res);
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
         }
       }, {
@@ -2782,8 +2753,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server + '/users/varifyOTP', {
             params: params
-          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {
-            return console.log(res);
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {// console.log(res);
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (err) {
             return _this23.handleError(err);
           }));
@@ -2791,7 +2761,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "handleError",
         value: function handleError(error) {
-          console.log(error);
+          // console.log(error);
           return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
         }
       }]);

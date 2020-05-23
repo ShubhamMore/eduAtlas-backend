@@ -1715,7 +1715,7 @@ AngularEditorModule.decorators = [
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-layout>\r\n  <nb-layout-column>\r\n    <nb-card>\r\n      <nb-card-body>\r\n        <h5 style=\"color: #ffd500;\">START NEW THREAD</h5>\r\n        <hr />\r\n        <div class=\"form-group-inline\">\r\n          <label for=\"title\">TITLE</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            id=\"title\"\r\n            status=\"warning\"\r\n            [(ngModel)]=\"announce.title\"\r\n            fullWidth\r\n          />\r\n        </div>\r\n        <hr />\r\n        <angular-editor\r\n          [placeholder]=\"'Enter text here...'\"\r\n          [(ngModel)]=\"announce.text\"\r\n        ></angular-editor>\r\n        <hr />\r\n        <div>\r\n          <!-- <input type=\"button\" value=\"Select Attachment\" nbInput (click)=\"attachment.click()\" fullWidth> -->\r\n          <label>SELECT ATTACHMENT</label>\r\n          <input type=\"file\" nbInput fullWidth status=\"warning\" value=\"select Attachment\" />\r\n        </div>\r\n        <hr />\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-10\">\r\n            <div class=\"row\">\r\n              <div class=\"col-sm-6\">\r\n                <nb-select\r\n                  placeholder=\"Select Batches\"\r\n                  fullWidth\r\n                  [(ngModel)]=\"announce.batchCodes\"\r\n                  multiple\r\n                  status=\"warning\"\r\n                >\r\n                  <nb-option [value]=\"undefined\">--Select Batch--</nb-option>\r\n                  <nb-option *ngFor=\"let i of batches.batch\" value=\"{{ i.batchCode }}\">{{\r\n                    i.batchCode\r\n                  }}</nb-option>\r\n                </nb-select>\r\n              </div>\r\n              <div class=\"col-sm-1\"></div>\r\n              <div class=\"col-sm-3\">\r\n                <nb-checkbox status=\"warning\" (checkedChange)=\"check($event)\"\r\n                  >SELECT ALL</nb-checkbox\r\n                >\r\n              </div>\r\n              <div class=\"col-sm-2\">\r\n                <nb-checkbox status=\"warning\">PIN THIS</nb-checkbox>\r\n              </div>\r\n            </div>\r\n            <hr />\r\n            <div class=\"row\">\r\n              <div class=\"col-sm-6\">\r\n                <nb-select\r\n                  placeholder=\"Select Category Tags\"\r\n                  multiple\r\n                  [(ngModel)]=\"announce.categories\"\r\n                  fullWidth\r\n                  status=\"warning\"\r\n                >\r\n                  <nb-option [value]=\"undefined\">--Select Category--</nb-option>\r\n                  <nb-option *ngFor=\"let i of institute.institute.category\" value=\"{{ i }}\">{{\r\n                    i\r\n                  }}</nb-option>\r\n                </nb-select>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-2\" style=\"border-left: 1px solid lightgrey;\">\r\n            <a (click)=\"onSubmit()\">\r\n              <img src=\"assets/img/rarrow.png\" width=\"100px\" height=\"100px\" />\r\n            </a>\r\n          </div>\r\n        </div>\r\n      </nb-card-body>\r\n    </nb-card>\r\n    <nb-card>\r\n      <nb-card-header style=\"background: #ffd500;\">DISCUSSION THREADS</nb-card-header>\r\n      <nb-card-body>\r\n        <div class=\"row\" *ngFor=\"let item of announcement; let i = index\">\r\n          <div class=\"col-sm-3\">\r\n            <span>Announcement {{ i }}</span>\r\n          </div>\r\n          <div class=\"col-sm-7\" [innerHTML] = \"item.text | safeHtml\">\r\n            \r\n          </div>\r\n          <div class=\"col-sm-2\">\r\n            <button class=\"btn btn-danger\" (click)=\"onDelete(routerId)\">Del</button>\r\n          </div>\r\n          <hr />\r\n        </div>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </nb-layout-column>\r\n</nb-layout>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-layout>\r\n  <nb-layout-column>\r\n    <nb-card>\r\n      <nb-card-body>\r\n        <h5 style=\"color: #ffd500;\">START NEW THREAD</h5>\r\n        <hr />\r\n        <div class=\"form-group-inline\">\r\n          <label for=\"title\">TITLE</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            id=\"title\"\r\n            status=\"warning\"\r\n            [(ngModel)]=\"announce.title\"\r\n            fullWidth\r\n          />\r\n        </div>\r\n        <hr />\r\n        <angular-editor\r\n          [placeholder]=\"'Enter text here...'\"\r\n          [(ngModel)]=\"announce.text\"\r\n        ></angular-editor>\r\n        <hr />\r\n        <div>\r\n          <!-- <input type=\"button\" value=\"Select Attachment\" nbInput (click)=\"attachment.click()\" fullWidth> -->\r\n          <label>SELECT ATTACHMENT</label>\r\n          <input type=\"file\" nbInput fullWidth status=\"warning\" value=\"select Attachment\" />\r\n        </div>\r\n        <hr />\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-10\">\r\n            <div class=\"row\">\r\n              <div class=\"col-sm-6\">\r\n                <nb-select\r\n                  placeholder=\"Select Batches\"\r\n                  fullWidth\r\n                  [(ngModel)]=\"announce.batchCodes\"\r\n                  multiple\r\n                  status=\"warning\"\r\n                >\r\n                  <nb-option [value]=\"undefined\">--Select Batch--</nb-option>\r\n                  <nb-option *ngFor=\"let i of batches.batch\" value=\"{{ i.batchCode }}\">{{\r\n                    i.batchCode\r\n                  }}</nb-option>\r\n                </nb-select>\r\n              </div>\r\n              <div class=\"col-sm-1\"></div>\r\n              <div class=\"col-sm-3\">\r\n                <nb-checkbox status=\"warning\" (checkedChange)=\"check($event)\"\r\n                  >SELECT ALL</nb-checkbox\r\n                >\r\n              </div>\r\n              <div class=\"col-sm-2\">\r\n                <nb-checkbox status=\"warning\">PIN THIS</nb-checkbox>\r\n              </div>\r\n            </div>\r\n            <hr />\r\n            <div class=\"row\">\r\n              <div class=\"col-sm-6\">\r\n                <nb-select\r\n                  placeholder=\"Select Category Tags\"\r\n                  multiple\r\n                  [(ngModel)]=\"announce.categories\"\r\n                  fullWidth\r\n                  status=\"warning\"\r\n                >\r\n                  <nb-option [value]=\"undefined\">--Select Category--</nb-option>\r\n                  <nb-option *ngFor=\"let i of institute.institute.category\" value=\"{{ i }}\">{{\r\n                    i\r\n                  }}</nb-option>\r\n                </nb-select>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-2\" style=\"border-left: 1px solid lightgrey;\">\r\n            <a (click)=\"onSubmit()\">\r\n              <img src=\"assets/img/rarrow.png\" width=\"100px\" height=\"100px\" />\r\n            </a>\r\n          </div>\r\n        </div>\r\n      </nb-card-body>\r\n    </nb-card>\r\n    <nb-card>\r\n      <nb-card-header style=\"background: #ffd500;\">DISCUSSION THREADS</nb-card-header>\r\n      <nb-card-body>\r\n        <div class=\"row\" *ngFor=\"let item of announcement; let i = index\">\r\n          <div class=\"col-sm-3\">\r\n            <span>Announcement {{ i }}</span>\r\n          </div>\r\n          <div class=\"col-sm-7\" [innerHTML]=\"item.text | safeHtml\"></div>\r\n          <div class=\"col-sm-2\">\r\n            <button class=\"btn btn-danger\" (click)=\"onDelete(routerId)\">Del</button>\r\n          </div>\r\n          <hr />\r\n        </div>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </nb-layout-column>\r\n</nb-layout>\r\n");
 
 /***/ }),
 
@@ -1728,7 +1728,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("#title {\n  border-color: #ffd500; }\n\ninput[type='file'],\nnb-select {\n  border-color: #ffd500; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9hbm5vdW5jZW1lbnRzL0Y6XFxBa2FzaFxcUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXFBoYXNlXzFcXGVkdUF0bGFzLWNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGNvbW11bmljYXRpb25cXGFubm91bmNlbWVudHNcXGFubm91bmNlbWVudHMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxxQkFBcUIsRUFBQTs7QUFFdkI7O0VBRUUscUJBQXFCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9jb21tdW5pY2F0aW9uL2Fubm91bmNlbWVudHMvYW5ub3VuY2VtZW50cy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiN0aXRsZSB7XHJcbiAgYm9yZGVyLWNvbG9yOiAjZmZkNTAwO1xyXG59XHJcbmlucHV0W3R5cGU9J2ZpbGUnXSxcclxubmItc2VsZWN0IHtcclxuICBib3JkZXItY29sb3I6ICNmZmQ1MDA7XHJcbn1cclxuIl19 */");
+/* harmony default export */ __webpack_exports__["default"] = ("#title {\n  border-color: #ffd500; }\n\ninput[type='file'],\nnb-select {\n  border-color: #ffd500; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9hbm5vdW5jZW1lbnRzL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxjb21tdW5pY2F0aW9uXFxhbm5vdW5jZW1lbnRzXFxhbm5vdW5jZW1lbnRzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UscUJBQXFCLEVBQUE7O0FBRXZCOztFQUVFLHFCQUFxQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9hbm5vdW5jZW1lbnRzL2Fubm91bmNlbWVudHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjdGl0bGUge1xyXG4gIGJvcmRlci1jb2xvcjogI2ZmZDUwMDtcclxufVxyXG5pbnB1dFt0eXBlPSdmaWxlJ10sXHJcbm5iLXNlbGVjdCB7XHJcbiAgYm9yZGVyLWNvbG9yOiAjZmZkNTAwO1xyXG59XHJcbiJdfQ== */");
 
 /***/ }),
 
@@ -1800,28 +1800,28 @@ let AnnouncementsComponent = class AnnouncementsComponent {
         this.api.getBatches(id).subscribe((data) => {
             const batch = JSON.stringify(data);
             this.batches = JSON.parse(batch);
-            console.log('my batch' + JSON.parse(JSON.stringify(data)));
+            // console.log('my batch' + JSON.parse(JSON.stringify(data)));
         });
     }
     getAnnouncement(id) {
         this.announceService.getAnnouncement(id).subscribe((data) => {
             this.announcement = data;
-            console.log('announce =>', this.announcement);
+            // console.log('announce =>', this.announcement);
         });
     }
     getInstitute(id) {
         this.api.getInstitute(id).subscribe((data) => {
             const inst = JSON.stringify(data);
             this.institute = JSON.parse(inst);
-            console.log(this.institute.institute);
+            // console.log(this.institute.institute);
         });
     }
     check(event) {
-        console.log(event);
+        // console.log(event);
         this.announce.selectAll = event;
     }
     onSubmit() {
-        //console.log('text =>', this.announce);
+        // console.log('text =>', this.announce);
         this.announceService.postAnnouncement(this.announce).subscribe((res) => {
             // this.announcement.push(res);
         });
@@ -1829,10 +1829,10 @@ let AnnouncementsComponent = class AnnouncementsComponent {
     }
     onDelete(id) {
         this.announceService.deleteAnnouncement(id).subscribe((res) => {
-            //console.log(res);
+            // console.log(res);
         });
-        const i = this.announcement.findIndex((e) => e._id == id);
-        console.log(i);
+        const i = this.announcement.findIndex((e) => e._id === id);
+        // console.log(i);
         if (i !== -1) {
             this.announcement.splice(i, 1);
         }
@@ -2059,17 +2059,23 @@ let AnnouncementService = class AnnouncementService {
     postAnnouncement(announcement) {
         return this.http
             .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/announcement`, announcement, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((response) => console.log(response)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((response) => {
+            // console.log(response);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
     }
     getAnnouncement(id) {
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/users/announcement/${id}`, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((res) => console.log(res)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((res) => {
+            // console.log(res);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
     }
     deleteAnnouncement(id) {
         return this.http
             .delete(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/users/announcement/${id}`, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((res) => console.log(res)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((res) => {
+            // console.log(res);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
     }
     handleError(error) {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["throwError"])(error);
