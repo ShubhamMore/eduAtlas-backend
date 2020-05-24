@@ -38,5 +38,5 @@ app.use('/users', require('./routes/users'));
 app.use('/institute/payment', require('./routes/payment'));
 app.use('/institute/student', require('./routes/student'));
 app.use('/institute', require('./routes/institute'));
-
+app.use('/institute/employee', require('./routes/employee'))
 module.exports = app;

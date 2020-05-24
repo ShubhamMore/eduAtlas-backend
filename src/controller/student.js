@@ -16,13 +16,13 @@ exports.addNewStudent = async (req, res) => {
 
 exports.addStudent = async (req, res, next) => {
   try {
-    const user = await Student.find({
+    const user = await User.find({
       $or: [
         {
-          'basicDetails.phone': req.body.basicDetails.studentContact,
+          'phone': req.body.basicDetails.studentContact,
         },
         {
-          'basicDetails.email': req.body.basicDetails.studentEmail,
+          'email': req.body.basicDetails.studentEmail,
         },
       ],
     });
@@ -278,6 +278,7 @@ exports.updateStudentCourse = async (req, res) => {
       {
         _id: req.body.studentId,
         'instituteDetails._id': req.body.instituteId,
+
       },
       {
         $set: {

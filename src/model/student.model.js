@@ -92,7 +92,7 @@ const studentSchema = new Schema(
         },
         materialRecord: {
           type: String,
-          default: null,
+          default: '',
         },  
       }
     ], 
