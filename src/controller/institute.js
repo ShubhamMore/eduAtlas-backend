@@ -7,8 +7,8 @@ const errorHandler = require('../service/errorHandler');
 const fs = require('fs');
 const path = require('path');
 
-function deleteImage({ filename }) {
-  fs.unlink(path.join(__dirname + '../../../images/' + filename), (error) => {
+const deleteImage = (filePath) => {
+  fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
     if (error) {
       console.log(error);
       const err = new Error('Error while deleting the image');
@@ -17,7 +17,7 @@ function deleteImage({ filename }) {
     }
     console.log('File Deleted successfully');
   });
-}
+};
 
 exports.addInstitute = async (req, res, next) => {
   try {
@@ -62,7 +62,7 @@ exports.addInstitute = async (req, res, next) => {
 
     const logo = {
       image_name: image.fileName,
-      secure_url: path.join(process.env.SERVER + image.filePath),
+      secure_url: process.env.SERVER + image.filePath,
       public_id: image.filePath,
       created_at: Date.now(),
     };
@@ -92,7 +92,10 @@ exports.deleteInstitute = async (req, res, next) => {
     if (!id) {
       return response(res, 400, 'Institute Id not provided');
     }
-    await Institute.findByIdAndDelete(id);
+    const institute = await Institute.findByIdAndDelete(id);
+    if (institute.basicInfo.logo.public_id) {
+      deleteImage(institute.basicInfo.logo.public_id);
+    }
     response(res, 202, 'Institute deleted successfully');
   } catch (error) {
     console.log(error);
@@ -127,7 +130,9 @@ exports.getAllInstitutes = async (req, res, next) => {
 
 exports.updateInstitute = async (req, res, next) => {
   try {
-    if (!req.params.id) {
+    const id = req.params.id;
+
+    if (!id) {
       response(res, 400, 'Institute id not provided');
       const err = new Error('Institute id not provided');
       err.statusCode = 400;
@@ -138,47 +143,51 @@ exports.updateInstitute = async (req, res, next) => {
     req.body.address = JSON.parse(req.body.address);
     req.body.category = JSON.parse(req.body.category);
     req.body.metaTag = JSON.parse(req.body.metaTag);
-    console.log('MULTER', req.file);
-    image = {
-      filename: req.file.filename,
-      encoding: req.file.encoding,
-    };
+
+    const institute = await Institute.findById(id);
+
+    let logo = institute.basicInfo.logo;
+
+    if (req.file) {
+      const image = {
+        filePath: req.file.path,
+        fileName: `${req.file.filename.substring(
+          0,
+          req.file.filename.lastIndexOf('-')
+        )}.${req.file.filename.substring(req.file.filename.lastIndexOf('.') + 1)}`,
+      };
+
+      if (logo.public_id) {
+        deleteImage(logo.public_id);
+      }
+
+      logo = {
+        image_name: image.fileName,
+        secure_url: process.env.SERVER + image.filePath,
+        public_id: image.filePath,
+        created_at: Date.now(),
+      };
+    }
 
     delete req.body.logo;
 
-    let institute;
+    newInstitute = {};
 
-    institute = {};
+    newInstitute.basicInfo = Object.assign({}, req.body.basicInfo);
 
-    institute.basicInfo = Object.assign({}, req.body.basicInfo);
+    newInstitute.basicInfo.logo = logo;
 
-    institute.basicInfo.logo = {};
+    newInstitute.address = Object.assign({}, req.body.address);
 
-    institute.basicInfo.logo.data = fs.readFileSync(
-      path.join(__dirname + '../../../images/' + image.filename)
-    );
+    newInstitute.category = req.body.category;
 
-    institute.basicInfo.logo.contentType = 'image/png';
-
-    institute.address = Object.assign({}, req.body.address);
-
-    console.log(institute.address);
-
-    institute.category = req.body.category;
-
-    institute.metaTag = req.body.metaTag;
-
-    const id = req.params.id;
-
-    console.log(institute);
+    newInstitute.metaTag = req.body.metaTag;
 
     const updatedInstitute = await Institute.findByIdAndUpdate(
       id,
-      { $set: institute },
+      { $set: newInstitute },
       { new: true }
     );
-
-    deleteImage(image);
 
     res.status(201).json({ updatedInstitute });
   } catch (error) {
@@ -199,7 +208,7 @@ exports.makeAnouncement = async (req, res, next) => {
   }
 };
 
-//@Attendence APIs----------
+//@ Attendence APIs----------
 
 exports.addAttendence = async (req, res, next) => {
   try {
