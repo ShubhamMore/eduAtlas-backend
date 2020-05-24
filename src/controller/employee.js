@@ -272,7 +272,9 @@ exports.deleteEmployeeInstitute = async (req,res) =>{
       _id:req.body.empId
     },{
       $pull:{
-        "instituteDetails.instituteId":req.body.instituteId
+        instituteDetails:{
+          instituteId:req.body.instituteId
+        }
       }
     })
     res.status(200).send(updateEmployee)
