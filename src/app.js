@@ -38,10 +38,6 @@ app.use('/users', require('./routes/users'));
 app.use('/institute', require('./routes/institute'));
 app.use('/institute/payment', require('./routes/payment'));
 app.use('/institute/student', require('./routes/student'));
-<<<<<<< HEAD
 app.use('/institute', require('./routes/institute'));
 app.use('/institute/employee', require('./routes/employee'))
-=======
-
->>>>>>> 3af0cd8166b885e7d58b4007ad0eb3b3e544bd95
 module.exports = app;

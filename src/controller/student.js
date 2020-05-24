@@ -234,7 +234,7 @@ exports.addCourseStudent = async (req, res, next) => {
       throw error;
     }
 
-    const studentInfo = req.body;
+    //const studentInfo = req.body;
     // console.log(req.body, req.body.eduAtlasId);
     const updatedStudent = await Student.update(
       {

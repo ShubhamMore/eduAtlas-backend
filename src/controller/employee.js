@@ -75,3 +75,209 @@ exports.addEmployee = async(req,res)=>{
         response(res, 500, error.message);
       }
 }
+
+exports.addEmployeeInstitute = async(req,res)=>{
+  try {
+    const check = await Employee.find({
+      $and:[
+        {
+          _id:req.body.eduatlasId
+        },
+        {
+          "instituteDetails.instituteId":req.body.instituteDetails.instituteId
+        }
+      ]
+    })
+
+    if(check.length!=0){
+      console.log('length ', check.length);
+      const error = new Error('Employee Already Exists');
+      error.statusCode = 400;
+      throw error;
+    }
+    
+    const updateEmployee = await Employee.updateOne({
+      eduAtlasId:req.body.eduAtlasId
+    },{
+      $push:{
+        instituteDetails:req.body.instituteDetails
+      }
+    })
+    
+    res.status(200).json(updateEmployee);
+
+  } catch (error) {
+    errorHandler(error, res);
+  }
+}
+
+exports.getOneEmployeeByInstitute = async(req,res)=>{
+  try {
+    const getEmployee = await Employee.find({
+      $and:[
+        {
+          _id:req.body.empId
+        },
+        {
+          "instituteDetails.instituteId":req.body.instituteId
+        }
+      ]
+    })
+    
+    if(getEmployee.length==0){
+      console.log('length ', getEmployee.length);
+      const error = new Error('Employee Not Found');
+      error.statusCode = 400;
+      throw error;
+    }
+    res.status(200).send(getEmployee)
+
+  } catch (error) {
+
+  errorHandler(error,res)   
+  }
+},
+
+exports.getEmployeesByInstituteId = async(req,res) =>{
+  try {
+    const getEmployees = await Employee.find({
+      "instituteDetails.instituteId":req.body.instituteId
+    })
+
+    if(getEmployees.length == 0){
+      const error = new Error('Employees not Found')
+      error.statusCode = 400
+      throw error
+    }
+
+    res.status(200).send(getEmployees)
+
+  } catch (error) {
+    errorHandler(error,res)   
+
+  }
+}
+
+exports.getEmployeePersonalDetails = async (req,res)=>{
+  try {
+    const employeeDetails = await Employee.find({
+      $and:[{
+        _id:req.body.empId,
+      },{
+        eduatlasId:req.body.eduAtlasId
+      }]
+    },{
+      basicDetails:1
+    })
+
+    if(employeeDetails.length == 0){
+      const error = new Error('Employee not Found')
+      error.statusCode = 400
+      throw error
+    }
+
+    res.status(200).send(employeeDetails)
+  } catch (error) {
+    errorHandler(error,res)
+  }
+}
+
+exports.updateEmployeePersonalDetails = async (req,res)=>{
+  try {
+    const employeeDetails = await Employee.find({
+      $and:[{
+        _id:req.body.empId,
+      },{
+        eduatlasId:req.body.eduAtlasId
+      }]
+    })
+
+    if(employeeDetails.length == 0){
+      const error = new Error('Employee not Found')
+      error.statusCode = 400
+      throw error
+    }
+
+
+    const updateEmployee = await Employee.updateOne({
+      _id:req.body.empId
+    },
+    {
+      basicDetails:req.body.basicDetails
+    })
+
+    console.log(updateEmployee)
+  } catch (error) {
+    errorHandler(error,res)   
+  }
+}
+
+exports.updateEmployeeInstituteDetails = async (req,res)=>{
+  try {
+    const check = await Employee.find({
+      $and:[{
+        _id:req.body.empId
+      },{
+        "instituteDetails.instituteId":req.body.instituteDetails.instituteId
+      }
+    ]
+    })
+
+    if(check.length == 0){
+      const error = new Error("Employee not found")
+      error.statusCode = 400
+      throw error
+    }
+
+    const updateEmployee = await Employee.updateOne({
+        $and:[{
+          _id:req.body.empId
+        },{
+          "instituteDetails.instituteId":req.body.instituteDetails.instituteId
+        }
+      ]
+    },{
+      $set:{
+        instituteDetails:req.body.instituteDetails
+      }
+    },{
+      upsert:false
+    })
+
+    res.status(200).send(updateEmployee)
+  } catch (error) {
+    errorHandler(error,res)   
+
+  }
+},
+
+exports.deleteEmployeeInstitute = async (req,res) =>{
+  try {
+    const check = await Employee.find({
+      $and:[{
+        _id:req.body.empId
+      },{
+        "instituteDetails.instituteId":req.body.instituteId
+      }
+    ]
+  })
+
+    if(check.length == 0){
+      const error = new Error("Employee not found")
+      error.statusCode = 400
+      throw error
+    }
+
+    const updateEmployee = await Employee.updateOne({
+      _id:req.body.empId
+    },{
+      $pull:{
+        "instituteDetails.instituteId":req.body.instituteId
+      }
+    })
+    res.status(200).send(updateEmployee)
+
+} catch (error) {
+  errorHandler(error,res)    
+  }
+}
