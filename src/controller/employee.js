@@ -78,7 +78,7 @@ exports.addEmployeeInstitute = async (req, res) => {
     const check = await Employee.find({
       $and: [
         {
-          _id: req.body.eduatlasId,
+          eduAtlasId: req.body.eduAtlasId,
         },
         {
           'instituteDetails.instituteId': req.body.instituteDetails.instituteId,
@@ -87,13 +87,14 @@ exports.addEmployeeInstitute = async (req, res) => {
     });
 
     if (check.length != 0) {
-      console.log('length ', check.length);
       const error = new Error('Employee Already Exists');
       error.statusCode = 400;
       throw error;
     }
 
-    const updateEmployee = await Employee.updateOne(
+    console.log(req.body);
+
+    const updateEmployee = await Employee.update(
       {
         eduAtlasId: req.body.eduAtlasId,
       },
@@ -104,6 +105,8 @@ exports.addEmployeeInstitute = async (req, res) => {
       }
     );
 
+    console.log(updateEmployee);
+
     res.status(200).json(updateEmployee);
   } catch (error) {
     errorHandler(error, res);
@@ -112,16 +115,25 @@ exports.addEmployeeInstitute = async (req, res) => {
 
 exports.getEmployeeByEduatlasId = async (req, res) => {
   try {
-    const getEmployee = await Employee.find({
-      eduAtlasId: req.body.eduAtlasId,
-    });
+    const getEmployee = await Employee.find(
+      {
+        eduAtlasId: req.body.eduAtlasId,
+      },
+      { instituteDetails: 0 }
+    );
+
+    console.log(getEmployee);
 
     if (getEmployee.length == 0) {
-      const error = new Error('Wrong Employee Id');
+      throw new Error('Wrong Employee Id');
     }
+
     res.status(200).send(getEmployee);
-  } catch (error) {}
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
+
 exports.getOneEmployeeByInstitute = async (req, res) => {
   try {
     const getEmployee = await Employee.find({

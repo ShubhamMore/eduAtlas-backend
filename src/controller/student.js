@@ -19,10 +19,10 @@ exports.addStudent = async (req, res, next) => {
     const user = await User.find({
       $or: [
         {
-          'phone': req.body.basicDetails.studentContact,
+          phone: req.body.basicDetails.studentContact,
         },
         {
-          'email': req.body.basicDetails.studentEmail,
+          email: req.body.basicDetails.studentEmail,
         },
       ],
     });
@@ -211,7 +211,7 @@ exports.addCourseStudent = async (req, res, next) => {
   //To add student in a course
   try {
     console.log(req.body.instituteDetails.instituteId);
-    const courseAvailabe = await Student.find({
+    const courseAvailable = await Student.find({
       $and: [
         {
           eduAtlasId: req.body.eduAtlasId,
@@ -225,10 +225,10 @@ exports.addCourseStudent = async (req, res, next) => {
       ],
     });
 
-    console.log(courseAvailabe);
+    console.log(courseAvailable);
 
-    if (courseAvailabe.length != 0) {
-      console.log('length ', courseAvailabe.length);
+    if (courseAvailable.length != 0) {
+      console.log('length ', courseAvailable.length);
       const error = new Error('Course Already Exists');
       error.statusCode = 400;
       throw error;
@@ -254,6 +254,7 @@ exports.addCourseStudent = async (req, res, next) => {
     errorHandler(error, res);
   }
 };
+
 exports.updateStudentPersonalDetails = async (req, res) => {
   try {
     console.log(req.body);
@@ -278,7 +279,6 @@ exports.updateStudentCourse = async (req, res) => {
       {
         _id: req.body.studentId,
         'instituteDetails._id': req.body.instituteId,
-
       },
       {
         $set: {

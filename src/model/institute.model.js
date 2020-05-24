@@ -247,6 +247,7 @@ const instituteSchema = new Schema(
       type: String,
       required: true,
     },
+
     expiryDate: {
       type: Date,
       required: true,
