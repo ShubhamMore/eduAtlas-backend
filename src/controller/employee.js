@@ -1,8 +1,6 @@
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
-const Student = require('../model/student.model');
 const User = require('../model/user.model');
-const userController = require('../controller/users');
 const EduAtlasId = require('../model/eduatlasId.model');
 const Employee = require('../model/employee.model')
 

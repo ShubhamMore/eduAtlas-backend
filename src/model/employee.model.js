@@ -32,7 +32,6 @@ const employeeSchema = new Schema ({
         {
           instituteId:{
             type:String,
-            unique:true
             
           },
           courseId:{
