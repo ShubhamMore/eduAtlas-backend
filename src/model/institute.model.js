@@ -119,8 +119,22 @@ const instituteSchemsa = new Schema(
     basicInfo: new Schema(
       {
         logo: {
-          data: Buffer,
-          contentType: String,
+          image_name: {
+            type: String,
+            required: true,
+          },
+          secure_url: {
+            type: String,
+            required: true,
+          },
+          public_id: {
+            type: String,
+            required: true,
+          },
+          created_at: {
+            type: Date,
+            default: Date.now(),
+          },
         },
         name: {
           type: String,

@@ -6,6 +6,7 @@ const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
 const fs = require('fs');
 const path = require('path');
+
 function deleteImage({ filename }) {
   fs.unlink(path.join(__dirname + '../../../images/' + filename), (error) => {
     if (error) {
@@ -18,51 +19,55 @@ function deleteImage({ filename }) {
   });
 }
 
-function base64Converter(buff) {
-  let typed_array = new Uint8Array(buff);
-  const string_char = typed_array.reduce((data, byte) => {
-    return data + String.fromCharCode(byte);
-  }, '');
-  return btoa(string_char);
-}
-
 exports.addInstitute = async (req, res, next) => {
-  let image;
   try {
     req.body.basicInfo = JSON.parse(req.body.basicInfo);
     req.body.address = JSON.parse(req.body.address);
     req.body.category = JSON.parse(req.body.category);
     req.body.metaTag = JSON.parse(req.body.metaTag);
+
     console.log('MULTER', req.file);
-    image = {
-      filename: req.file.filename,
-      encoding: req.file.encoding,
+
+    if (!req.file) {
+      throw new Error('Institute Logo is Required');
+    }
+
+    console.log(req.file);
+
+    const image = {
+      filePath: req.file.path,
+      fileName: `${req.file.filename.substring(
+        0,
+        req.file.filename.lastIndexOf('-')
+      )}.${req.file.filename.substring(req.file.filename.lastIndexOf('.') + 1)}`,
     };
+
     delete req.body.logo;
+
     const { error, value } = schema('addInstitute').validate(req.body);
     if (error) {
       console.log(error);
-      const err = new Error('Insufficiant/wrong parameter provided');
+      const err = new Error('Insufficient/wrong parameter provided');
       err.statusCode = 400;
       throw err;
     }
-    let institute;
 
     if (!req.user.phone) {
       throw new Error('req.user.phone is empty');
     }
 
-    const tempObj = Object.assign({}, req.body);
-    tempObj.userPhone = req.user.phone;
-
-    institute = new Institute();
+    let institute = new Institute();
 
     institute.basicInfo = Object.assign({}, req.body.basicInfo);
-    institute.basicInfo.logo.data = fs.readFileSync(
-      path.join(__dirname + '../../../images/' + image.filename)
-    );
 
-    institute.basicInfo.logo.contentType = 'image/png';
+    const logo = {
+      image_name: image.fileName,
+      secure_url: path.join(process.env.SERVER + image.filePath),
+      public_id: image.filePath,
+      created_at: Date.now(),
+    };
+
+    institute.basicInfo.logo = logo;
 
     institute.address = Object.assign({}, req.body.address);
 
@@ -74,13 +79,10 @@ exports.addInstitute = async (req, res, next) => {
 
     await institute.save();
 
-    deleteImage(image);
-
     response(res, 201, 'Institute added successfully');
   } catch (error) {
-    console.log(error, req.body);
-    deleteImage(image);
-    response(res, error.statusCode || 500, error.message);
+    console.log(error);
+    // response(res, error.statusCode || 500, error.message);
   }
 };
 
@@ -88,7 +90,7 @@ exports.deleteInstitute = async (req, res, next) => {
   try {
     const id = req.params.id;
     if (!id) {
-      return response(res, 400, 'Intitute Id not provided');
+      return response(res, 400, 'Institute Id not provided');
     }
     await Institute.findByIdAndDelete(id);
     response(res, 202, 'Institute deleted successfully');
