@@ -25,14 +25,11 @@ exports.addInstitute = async (req, res, next) => {
     req.body.address = JSON.parse(req.body.address);
     req.body.category = JSON.parse(req.body.category);
     req.body.metaTag = JSON.parse(req.body.metaTag);
-
-    console.log('MULTER', req.file);
+    req.body.paymentDetails = JSON.parse(req.body.paymentDetails);
 
     if (!req.file) {
       throw new Error('Institute Logo is Required');
     }
-
-    console.log(req.file);
 
     const image = {
       filePath: req.file.path,
@@ -46,7 +43,6 @@ exports.addInstitute = async (req, res, next) => {
 
     const { error, value } = schema('addInstitute').validate(req.body);
     if (error) {
-      console.log(error);
       const err = new Error('Insufficient/wrong parameter provided');
       err.statusCode = 400;
       throw err;
@@ -76,6 +72,20 @@ exports.addInstitute = async (req, res, next) => {
     institute.metaTag = req.body.metaTag;
 
     institute.userPhone = req.user.phone;
+
+    institute.paymentDetails.push(Object.assign({}, req.body.paymentDetails));
+    console.log(institute.paymentDetails);
+
+    institute.currentPlan = req.body.paymentDetails.planType;
+    console.log(institute.currentPlan);
+
+    const date = new Date();
+    const year = date.getFullYear() + 1;
+    date.setFullYear(year);
+    console.log(date);
+
+    institute.expiryDate = date;
+    console.log(institute.expiryDate);
 
     await institute.save();
 
