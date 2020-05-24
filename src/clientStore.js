@@ -21,32 +21,8 @@ class OneTimePassword {
   }
 }
 
-class NewUser {
-  static users = {};
-
-  constructor(phone, newUser) {
-    NewUser.users[phone] = newUser;
-  }
-
-  static getUser(phone) {
-    return NewUser.users[phone];
-  }
-
-  static deleteUser(phone) {
-    delete NewUser.users[phone];
-  }
-}
-
-const user_role = {
-  branchManager: 0,
-  teacher: 1,
-  councillor: 2,
-  student: 3,
-  institute: 4,
-};
-
 const getKeyByValue = (object, value) => {
   return Object.keys(object).find((key) => object[key] == value);
 };
 
-module.exports = { OneTimePassword, NewUser, user_role, getKeyByValue };
+module.exports = { OneTimePassword, getKeyByValue };

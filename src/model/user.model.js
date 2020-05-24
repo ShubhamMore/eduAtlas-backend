@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { user_role } = require('../clientStore');
 
 // User registration schema
 const userSchema = mongoose.Schema(
@@ -14,7 +13,6 @@ const userSchema = mongoose.Schema(
 
     role: {
       type: String,
-      set: parseRole,
       required: [true, 'Role is required'],
     },
 
@@ -50,19 +48,22 @@ const userSchema = mongoose.Schema(
         }
       },
     },
-    eduAtlasId:{
-      type:String,
-      unique:true
+
+    eduAtlasId: {
+      type: String,
+      unique: true,
     },
-    verifyOTP:{
-        type:String,
-        default:"0"
+
+    verifyOTP: {
+      type: String,
+      default: '0',
     },
-    verifyEmail:{
-      type:String,
-      default:"0"
+
+    verifyEmail: {
+      type: String,
+      default: '0',
     },
-    
+
     tokens: [
       {
         token: {
@@ -128,15 +129,6 @@ userSchema.pre('save', async function (next) {
 
   next();
 });
-
-function parseRole(value) {
-  const roleCode = user_role[value];
-  // console.log('====parseRole====>', value, roleCode);
-  if (roleCode === undefined) {
-    return value;
-  }
-  return roleCode;
-}
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
