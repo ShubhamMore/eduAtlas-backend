@@ -109,6 +109,20 @@ exports.addEmployeeInstitute = async(req,res)=>{
   }
 }
 
+exports.getEmployeeByEduatlasId = async(req,res) =>{
+  try {
+    const getEmployee = await Employee.find({
+      eduAtlasId:req.body.eduAtlasId
+    })
+
+    if(getEmployee.length == 0) {
+      const error = new Error('Wrong Employee Id')
+    }
+    res.status(200).send(getEmployee)
+  } catch (error) {
+    
+  }
+}
 exports.getOneEmployeeByInstitute = async(req,res)=>{
   try {
     const getEmployee = await Employee.find({
