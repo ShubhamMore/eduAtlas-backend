@@ -23,6 +23,6 @@ employeeRouter.post('/updateEmployeeInstituteDetails',employeeController.updateE
 
 employeeRouter.post('/deleteEmployeeInstitute',employeeController.deleteEmployeeInstitute)
 
-//employeeRouter.post('/')
+employeeRouter.post('/getEmployeeByEduatlasId',employeeController.getEmployeeByEduatlasId)
 
 module.exports = employeeRouter

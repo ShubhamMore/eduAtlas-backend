@@ -110,7 +110,19 @@ exports.addEmployeeInstitute = async (req, res) => {
   }
 };
 
-(exports.getOneEmployeeByInstitute = async (req, res) => {
+exports.getEmployeeByEduatlasId = async (req, res) => {
+  try {
+    const getEmployee = await Employee.find({
+      eduAtlasId: req.body.eduAtlasId,
+    });
+
+    if (getEmployee.length == 0) {
+      const error = new Error('Wrong Employee Id');
+    }
+    res.status(200).send(getEmployee);
+  } catch (error) {}
+};
+exports.getOneEmployeeByInstitute = async (req, res) => {
   try {
     const getEmployee = await Employee.find({
       $and: [
@@ -133,24 +145,25 @@ exports.addEmployeeInstitute = async (req, res) => {
   } catch (error) {
     errorHandler(error, res);
   }
-}),
-  (exports.getEmployeesByInstituteId = async (req, res) => {
-    try {
-      const getEmployees = await Employee.find({
-        'instituteDetails.instituteId': req.body.instituteId,
-      });
+};
 
-      if (getEmployees.length == 0) {
-        const error = new Error('Employees not Found');
-        error.statusCode = 400;
-        throw error;
-      }
+exports.getEmployeesByInstituteId = async (req, res) => {
+  try {
+    const getEmployees = await Employee.find({
+      'instituteDetails.instituteId': req.body.instituteId,
+    });
 
-      res.status(200).send(getEmployees);
-    } catch (error) {
-      errorHandler(error, res);
+    if (getEmployees.length == 0) {
+      const error = new Error('Employees not Found');
+      error.statusCode = 400;
+      throw error;
     }
-  });
+
+    res.status(200).send(getEmployees);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
 
 exports.getEmployeePersonalDetails = async (req, res) => {
   try {
