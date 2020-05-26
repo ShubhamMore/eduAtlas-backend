@@ -72,10 +72,8 @@ exports.verifyPayment = async (req, res) => {
     hmac.update(payment.razorpay_order_id + '|' + payment.razorpay_payment_id);
     let generatedSignature = hmac.digest('hex');
 
-    console.log(generatedSignature);
-
     if (generatedSignature == payment.razorpay_signature) {
-      res.status(200).send({ msg: 'payment is successful' });
+      res.status(200).send({ orderId: receipt.orderId, receiptId: receipt._id });
 
       await Receipt.findByIdAndUpdate(receipt._id, { success: '1' });
 

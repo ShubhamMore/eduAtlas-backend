@@ -24,6 +24,10 @@ const receiptSchema = mongoose.Schema({
     type: String,
     require: true,
   },
+  planType: {
+    type: String,
+    require: true,
+  },
   success: {
     type: String,
     default: '0',

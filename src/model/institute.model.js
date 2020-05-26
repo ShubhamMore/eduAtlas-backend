@@ -67,8 +67,8 @@ const discountSchema = new Schema(
   { toJSON: { getters: true }, toObject: { getters: true } }
 );
 
-// Attendence schema
-const attendenceSchema = new Schema({
+// Attendance schema
+const attendanceSchema = new Schema({
   batchId: {
     type: Schema.Types.ObjectId,
     required: true,
@@ -84,8 +84,8 @@ const attendenceSchema = new Schema({
   },
 });
 
-// Reciept schema
-const recieptConfigSchema = new Schema(
+// Receipt schema
+const receiptConfigSchema = new Schema(
   {
     businessName: {
       type: String,
@@ -113,14 +113,51 @@ const recieptConfigSchema = new Schema(
   { _id: false, toJSON: { getters: true }, toObject: { getters: true } }
 );
 
+// Payment Details
+const paymentDetailsSchema = new Schema(
+  {
+    orderId: {
+      type: String,
+      required: true,
+    },
+    receiptId: {
+      type: String,
+      required: true,
+    },
+    amount: {
+      type: String,
+      required: true,
+    },
+    planType: {
+      type: String,
+      required: true,
+    },
+  },
+  { toJSON: { getters: true }, toObject: { getters: true } }
+);
+
 // institute schema
-const instituteSchemsa = new Schema(
+const instituteSchema = new Schema(
   {
     basicInfo: new Schema(
       {
         logo: {
-          data: Buffer,
-          contentType: String,
+          image_name: {
+            type: String,
+            required: true,
+          },
+          secure_url: {
+            type: String,
+            required: true,
+          },
+          public_id: {
+            type: String,
+            required: true,
+          },
+          created_at: {
+            type: Date,
+            default: Date.now(),
+          },
         },
         name: {
           type: String,
@@ -192,30 +229,31 @@ const instituteSchemsa = new Schema(
     },
 
     reciept: {
-      type: recieptConfigSchema,
+      type: receiptConfigSchema,
       default: null,
     },
 
     attendence: {
-      type: [attendenceSchema],
+      type: [attendanceSchema],
       default: [],
+    },
+
+    paymentDetails: {
+      type: [paymentDetailsSchema],
+      required: true,
+    },
+
+    currentPlan: {
+      type: String,
+      required: true,
+    },
+
+    expiryDate: {
+      type: Date,
+      required: true,
     },
   },
   { toJSON: { getters: true }, toObject: { getters: true } }
 );
 
-function parseNumber(value) {
-  if (value == '') {
-    return null;
-  }
-  return parseInt(value);
-}
-
-function parseString(value) {
-  if (value == null) {
-    return '';
-  }
-  return value.toString();
-}
-
-module.exports = mongoose.model('Institute', instituteSchemsa);
+module.exports = mongoose.model('Institute', instituteSchema);

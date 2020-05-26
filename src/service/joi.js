@@ -59,6 +59,13 @@ const schema = {
       })
       .optional(),
 
+    paymentDetails: joi.object({
+      amount: joi.string().required(),
+      planType: joi.string().required(),
+      orderId: joi.string().required(),
+      receiptId: joi.string().required(),
+    }),
+
     location: joi
       .object({
         type: joi.string().trim(),
