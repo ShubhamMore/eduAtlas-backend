@@ -118,17 +118,9 @@ exports.autoLogin = async (req, res, next) => {
 };
 
 exports.loginUser = async (req, res, next) => {
-  const { error, value } = schema('login').validate(req.body, { abortEarly: true });
-  if (error) {
-    console.log('Joi error - ', error);
-    res.status(400).json({
-      message: 'Invalid parameters provided',
-    });
-    return;
-  }
-
+  
   try {
-    const user = await User.findByCredentials(req.body.phone, req.body.password);
+    const user = await User.findByCredentials(req.body.userId, req.body.password);
 
     if (user.verifyOTP === '1') {
       const token = await user.generateAuthToken();

@@ -103,8 +103,15 @@ userSchema.methods.generateAuthToken = async function () {
   return token;
 };
 
-userSchema.statics.findByCredentials = async (phone, password) => {
-  const user = await User.findOne({ phone });
+userSchema.statics.findByCredentials = async (userId, password) => {
+  const user = await User.findOne({ 
+    $or:[{
+      phone:userId
+    },{
+      email:userId
+    }
+
+  ] });
 
   if (!user) {
     throw new Error('User does not found, Please Register');
