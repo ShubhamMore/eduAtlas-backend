@@ -146,7 +146,7 @@ exports.loginUser = async (req, res, next) => {
 
       res.status(200).send(data);
     } else {
-      res.status(200).send({ verifyOtp: true });
+      res.status(200).send({ verifyOtp: true, phone: user.phone });
     }
   } catch (e) {
     console.log(e);
