@@ -32,7 +32,23 @@ const scheduleSchema = new Schema({
   letter: {
     type: String,
     default: 'pending',
-  },
+  }
+  // Days:[{
+    
+  //   dayName:{
+  //     type:String
+  //   },
+  //   lectureNo:{
+      
+  //   },
+  //   startTime:{
+
+  //   },
+  //   endTime:{
+
+  //   }    
+    
+  // }]
 });
 
 module.exports = mongoose.model('Schedule', scheduleSchema);

@@ -78,18 +78,6 @@ exports.addEmployeeInstitute = async (req, res) => {
     const check = await Employee.find({
       $and: [
         {
-<<<<<<< HEAD
-          eduAtlasId:req.body.eduAtlasId
-        },
-        {
-          "instituteDetails.instituteId":req.body.instituteDetails.instituteId
-        }
-      ]
-    })
-    console.log(check)
-    if(check.length!=0){
-      console.log('length ', check.length);
-=======
           eduAtlasId: req.body.eduAtlasId,
         },
         {
@@ -99,7 +87,6 @@ exports.addEmployeeInstitute = async (req, res) => {
     });
 
     if (check.length != 0) {
->>>>>>> 8160c8dc21afd980795a93ca693f9a2d8b3d23c7
       const error = new Error('Employee Already Exists');
       error.statusCode = 400;
       throw error;
