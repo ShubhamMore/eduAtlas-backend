@@ -35,6 +35,9 @@ const courseSchema = new Schema(
     totalFee: {
       type: String,
     },
+    duration:{
+      type:String,
+    }
   },
   { toJSON: { getters: true }, toObject: { getters: true } }
 );

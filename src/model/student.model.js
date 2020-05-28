@@ -95,36 +95,7 @@ const studentSchema = new Schema(
           default: '',
         },  
       }
-    ], 
-    
-    // student fees
-    fee:[{
-          institudeId:{
-            type:String,
-          },
-          courseId:{
-            type:String
-          },
-          installmentNumber: {
-            type: String,
-            required: false,
-        },
-          nextInstallment: {
-            type: String,
-            required: false,
-        },
-          amountCollected: {
-            type: String,
-            required: false,
-        },
-          mode: {
-            type: String,
-            required: false,
-        },
-      }
-    ],
-    
-    
+    ],     
   },
   { toJSON: { getters: true }, toObject: { getters: true } }
 );
