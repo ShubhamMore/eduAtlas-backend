@@ -8,7 +8,7 @@ const scheduleSchema = new Schema({
     ref: 'Institute',
     required: true,
   },
-  batchCode: {
+  batchId: {
     type: String,
   },
   scheduleStart: {
@@ -32,23 +32,23 @@ const scheduleSchema = new Schema({
   letter: {
     type: String,
     default: 'pending',
-  }
-  // Days:[{
+  },
+  Days:[{
     
-  //   dayName:{
-  //     type:String
-  //   },
-  //   lectureNo:{
+    dayName:{
+      type:String
+    },
+    lectureNo:{
       
-  //   },
-  //   startTime:{
+    },
+    startTime:{
 
-  //   },
-  //   endTime:{
+    },
+    endTime:{
 
-  //   }    
+    }    
     
-  // }]
+  }]
 });
 
 module.exports = mongoose.model('Schedule', scheduleSchema);

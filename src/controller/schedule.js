@@ -5,16 +5,18 @@ const response = require('../service/response');
 
 exports.addSchedule = async (req, res, next) => {
   try {
-    const { error, value } = schema('addSchedule').validate(req.body);
-
-    if (error) {
-      console.log(error);
-      const err = new Error('Wrong or insufficient parameters provided');
-      err.statusCode = 400;
-      throw err;
+    
+    const check = await Schedule.find({
+      instituteDetailsId: req.body.instituteDetailsId
+    })  
+    
+    if(check.length != 0){
+      
     }
 
-    await Schedule.create(req.body);
+    const batchSchedule = new Schedule(req.body);
+
+    await batchSchedule.save()
 
     response(res, 201, 'Schedule added successfully');
   } catch (error) {

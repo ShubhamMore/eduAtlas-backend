@@ -12,7 +12,7 @@ exports.addFee = async (req,res)=>{
             $and:[{
                 studentId:req.body.studentId
             },{
-                'instituteDetails._id':req.body.instituteId
+                'instituteDetails._id':req.body.instituteDetailsId
             }]
         })
 
