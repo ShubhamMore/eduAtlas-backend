@@ -69,7 +69,7 @@ exports.updateFeeOfStudent = async(req,res)=>{
         
         const updateFee = await Fee.updateOne({
             $and:[{
-                _id:req.body.feeId
+                _id:req.body._id
             },{
                 'installments.installmentId':req.body.installment._id
             }]
