@@ -12,7 +12,9 @@ exports.addFee = async (req,res)=>{
             $and:[{
                 studentId:req.body.studentId
             },{
-                'instituteDetails._id':req.body.instituteDetailsId
+                'instituteDetails.instituteId':req.body.instituteId
+            },{
+                'instituteDetails.courseId':req.body.courseId
             }]
         })
 
@@ -51,42 +53,20 @@ exports.getFeeOfStudentByCourse = async(req,res)=>{
     try {
         const studentCourseFee = await Fee.find({
             studentId:req.body.studentId,
-            instituteDetailsId:req.body.instituteDetailsId
+            instituteId:req.body.instituteId,
+            courseId:req.body.courseId
         })
 
         res.status(200).send(studentCourseFee)
     } catch (error) {
-        
+        res.status(400).send(error)
     }
 }
 
-exports.getFeeByCourse = async(req,res)=>{
-    try {
-        const CourseFeeDetails = await Fee.find({
-            instituteDetailsId:req.body.instituteDetailsId
-        })
-        res.status(200).send()
-    } catch (error) {
-        
-    }
-}
 
 exports.updateFeeOfStudent = async(req,res)=>{
     try {
-        const check = await Fee.findOne({
-            $and:[{
-                studentId:req.body.studentId
-            },{
-                instituteDetailsId:req.body.instituteDetailsId
-            }]
-        })
         
-        if(!check){
-            const error = new Error('No Student Fee Available');
-            error.statusCode = 400;
-            throw error;
-        }
-
         const updateFee = await Fee.updateOne({
             $and:[{
                 _id:req.body.feeId

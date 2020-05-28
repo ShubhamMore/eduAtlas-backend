@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const feeSchema = new Schema({
-        instituteDetailsId:{
+        courseId:{
             type:String
         },
         instituteId:{
