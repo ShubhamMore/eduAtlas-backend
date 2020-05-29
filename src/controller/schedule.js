@@ -6,7 +6,6 @@ const Institute = require('../model/institute.model')
 
 exports.addSchedule = async (req, res, next) => {
   try {
-<<<<<<< HEAD
     const checkBatch = await Institute.find({
       $and:[{
         _id:req.body.instituteId
@@ -21,10 +20,6 @@ exports.addSchedule = async (req, res, next) => {
       error.statusCode = 400
       throw error;
     }
-=======
-    // if(check.length != 0){
-    // }
->>>>>>> 1050efda68d772139eea01f2299fa88a055fad89
     const batchSchedule = new Schedule(req.body);
 
     await batchSchedule.save();
@@ -68,11 +63,7 @@ exports.getScheduleByBatch = async (req, res) => {
 
     res.status(200).send(batchSchedule);
   } catch (error) {
-<<<<<<< HEAD
-    errorHandler(error, res);
-=======
     res.status(400).send(error);
->>>>>>> 1050efda68d772139eea01f2299fa88a055fad89
   }
 };
 
