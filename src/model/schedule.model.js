@@ -4,53 +4,48 @@ const Schema = mongoose.Schema;
 // Schedule schema
 const scheduleSchema = new Schema({
   instituteId: {
-    type:String  
+    type: String,
+    required: true,
   },
-  courseId:{
-    type:String
+  courseId: {
+    type: String,
+    required: true,
   },
-
   batchId: {
     type: String,
+    required: true,
   },
   scheduleStart: {
-    type: Date,
-    required: false,
+    type: String,
+    required: true,
   },
   scheduleEnd: {
-    type: Date,
-    required: false,
-  },
-  topic: {
     type: String,
-  },
-  teacher: {
-    type: String,
+    required: true,
   },
   recurrence: {
-    type: Boolean,
-    default: false,
-  },
-  letter: {
     type: String,
-    default: 'pending',
+    default: 'false',
   },
-  Days:[{
-    
-    dayName:{
-      type:String
+  days: [
+    {
+      day: {
+        type: String,
+      },
+      date: {
+        type: String,
+      },
+      time: {
+        type: String,
+      },
+      teacher: {
+        type: String,
+      },
+      topic: {
+        type: String,
+      },
     },
-    lectureNo:{
-      
-    },
-    startTime:{
-
-    },
-    endTime:{
-
-    }    
-    
-  }]
+  ],
 });
 
 module.exports = mongoose.model('Schedule', scheduleSchema);

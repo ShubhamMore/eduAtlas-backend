@@ -20,6 +20,10 @@ const courseSchema = new Schema(
       type: String,
       default: '',
     },
+    duration: {
+      type: String,
+      required: true,
+    },
     gst: {
       type: String,
       enum: ['inclusive', 'exclusive'],

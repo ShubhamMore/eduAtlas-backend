@@ -119,6 +119,7 @@ const schema = {
     courseCode: joi.string().required(),
     fees: joi.string().allow(''),
     discription: joi.string().allow(''),
+    duration: joi.string().allow(''),
     gst: joi.string().allow(''),
     gstValue: joi.string().allow(''),
     totalFee: joi.string().allow(''),
