@@ -7,9 +7,7 @@ const Fee = require('../model/fee.model');
 
 exports.addFee = async (req, res) => {
   try {
-    console.log(req.body, req.body.studentId, req.body.instituteId, req.body.courseId);
-
-    const checkStudent = await Student.findOne({
+    const checkStudent = await Student.find({
       $and: [
         {
           _id: req.body.studentId,
@@ -23,17 +21,19 @@ exports.addFee = async (req, res) => {
       ],
     });
 
-    console.log('student', checkStudent);
-
-    if (!checkStudent) {
-      throw new Error('Course for Student doesnt exists');
+    if (checkStudent.length == 0) {
+      console.log('in error');
+      const error = new Error('Course for Student doesnt exists');
+      //error.prototype.statusCode = 400;
+      throw error;
     }
+
+    console.log(req.body);
 
     const fee = new Fee(req.body);
     await fee.save();
     res.status(200).send(fee);
   } catch (error) {
-    console.log(error);
     res.status(400).send(error);
   }
 };
@@ -70,23 +70,24 @@ exports.getFeeOfStudentByCourse = async (req, res) => {
 
 exports.updateFeeOfStudent = async (req, res) => {
   try {
-    const updateFee = await Fee.updateOne(
-      {
-        $and: [
-          {
-            _id: req.body._id,
-          },
-          {
-            'installments.installmentId': req.body.installment._id,
-          },
-        ],
-      },
-      {
-        $set: {
-          installments: req.body.installments,
-        },
-      }
-    );
+    // const updateFee = await Fee.updateOne(
+    //   {
+    //     $and: [
+    //       {
+    //         _id: req.body._id,
+    //       },
+    //       {
+    //         'installments.installmentId': req.body.installment._id,
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     $set: {
+    //       installments: req.body.installments,
+    //     },
+    //   }
+    // );
+    const updateFee = await Fee.findByIdAndUpdate(req.body._id, req.body);
 
     res.status(200).send(updateFee);
   } catch (error) {}

@@ -35,8 +35,8 @@ const feeSchema = new Schema({
   installments: [
     {
       paidStatus: {
-        type: Boolean,
-        default: false,
+        type: String,
+        default: 'false',
       },
       installmentNo: {
         type: String,

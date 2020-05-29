@@ -2,6 +2,7 @@ const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
 const schema = require('../service/joi');
 const Student = require('../model/student.model');
+const Fees = require('../model/fee.model');
 const User = require('../model/user.model');
 const userController = require('../controller/users');
 const EduAtlasId = require('../model/eduatlasId.model');
@@ -168,16 +169,16 @@ exports.getOneStudentByInstitute = async (req, res) => {
           'instituteDetails.courseId': req.body.courseId,
         },
       },
-      {
-        $unwind: '$fee',
-      },
-      {
-        $match: {
-          'fee.courseId': req.body.courseId,
-        },
-      },
     ]);
-    console.log(student);
+
+    const fee = await Fees.findOne({
+      eduAtlasId: req.body.eduatlasId,
+      instituteId: req.body.instituteId,
+      courseId: req.body.courseId,
+    });
+
+    student[0].fees = fee;
+
     res.status(200).send(student);
   } catch (error) {}
 };
