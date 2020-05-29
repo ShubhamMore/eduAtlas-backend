@@ -2,12 +2,24 @@ const Schedule = require('../model/schedule.model');
 const errorHandler = require('../service/errorHandler');
 const schema = require('../service/joi');
 const response = require('../service/response');
+const Institute = require('../model/institute.model')
 
 exports.addSchedule = async (req, res, next) => {
   try {
-    
-    // if(check.length != 0){
-    // }
+    const checkBatch = await Institute.find({
+      $and:[{
+        _id:req.body.instituteId
+      },{
+        "course._id":req.body.courseId
+      },{
+        "batch._id":req.body.batchId
+      }]
+    })
+    if(checkBatch.length == 0){
+      const error = new Error("Batch not Found")
+      error.statusCode = 400
+      throw error;
+    }
     const batchSchedule = new Schedule(req.body);
 
     await batchSchedule.save()
@@ -53,7 +65,7 @@ exports.getScheduleByBatch =async (req,res)=>{
 
     res.status(200).send(batchSchedule)
   } catch (error) {
-    res.status(400).send(error)
+    errorHandler(error, res);
   }
 }
 
