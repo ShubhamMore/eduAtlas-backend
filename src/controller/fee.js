@@ -2,32 +2,39 @@ const errorHandler = require('../service/errorHandler');
 const User = require('../model/user.model');
 const EduAtlasId = require('../model/eduatlasId.model');
 const Institute = require('../model/institute.model');
-const Student = require('../model/schedule.model');
+const Student = require('../model/student.model');
 const Fee = require('../model/fee.model');
 
 exports.addFee = async (req, res) => {
   try {
+    console.log(req.body, req.body.studentId, req.body.instituteId, req.body.courseId);
+
     const checkStudent = await Student.findOne({
       $and: [
         {
-          studentId: req.body.studentId,
+          _id: req.body.studentId,
         },
         {
-          'instituteDetails._id': req.body.instituteId,
+          'instituteDetails.instituteId': req.body.instituteId,
+        },
+        {
+          'instituteDetails.courseId': req.body.courseId,
         },
       ],
     });
 
+    console.log('student', checkStudent);
+
     if (!checkStudent) {
-      const error = new Error('Course for Student doesnt exists');
-      //error.prototype.statusCode = 400;
-      throw error;
+      throw new Error('Course for Student doesnt exists');
     }
 
     const fee = new Fee(req.body);
     await fee.save();
+    res.status(200).send(fee);
   } catch (error) {
-    response(res, 500, error.message);
+    console.log(error);
+    res.status(400).send(error);
   }
 };
 
@@ -46,50 +53,28 @@ exports.getFeeOfStudent = async (req, res) => {
     res.status(200).send(studentFee);
   } catch (error) {}
 };
+
 exports.getFeeOfStudentByCourse = async (req, res) => {
   try {
     const studentCourseFee = await Fee.find({
       studentId: req.body.studentId,
-      instituteDetailsId: req.body.instituteDetailsId,
+      instituteId: req.body.instituteId,
+      courseId: req.body.courseId,
     });
 
     res.status(200).send(studentCourseFee);
-  } catch (error) {}
-};
-
-exports.getFeeByCourse = async (req, res) => {
-  try {
-    const CourseFeeDetails = await Fee.find({
-      instituteDetailsId: req.body.instituteDetailsId,
-    });
-    res.status(200).send();
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
 
 exports.updateFeeOfStudent = async (req, res) => {
   try {
-    const check = await Fee.findOne({
-      $and: [
-        {
-          studentId: req.body.studentId,
-        },
-        {
-          instituteDetailsId: req.body.instituteDetailsId,
-        },
-      ],
-    });
-
-    if (!check) {
-      const error = new Error('No Student Fee Available');
-      error.statusCode = 400;
-      throw error;
-    }
-
     const updateFee = await Fee.updateOne(
       {
         $and: [
           {
-            _id: req.body.feeId,
+            _id: req.body._id,
           },
           {
             'installments.installmentId': req.body.installment._id,

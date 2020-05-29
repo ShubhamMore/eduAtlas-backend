@@ -6,14 +6,8 @@ const response = require('../service/response');
 exports.addSchedule = async (req, res, next) => {
   try {
     
-    const check = await Schedule.find({
-      instituteDetailsId: req.body.instituteDetailsId
-    })  
-    
-    if(check.length != 0){
-      
-    }
-
+    // if(check.length != 0){
+    // }
     const batchSchedule = new Schedule(req.body);
 
     await batchSchedule.save()
@@ -26,21 +20,14 @@ exports.addSchedule = async (req, res, next) => {
 
 exports.updateSchedule = async (req, res, next) => {
   try {
-    const scheduleInfo = req.query;
-
-    if (!scheduleInfo.instituteId || !scheduleInfo.batchCode) {
-      const err = new Error('schedule information not provided');
-      err.statusCode = 400;
-      throw err;
-    }
-
+    
     const updatedSchedule = await Schedule.findOneAndUpdate(
       {
-        instituteId: scheduleInfo.instituteId,
-        batchCode: scheduleInfo.batchCode,
+        _id: req.body._id,
+        
       },
       { $set: req.body },
-      { new: true }
+      { upsert: true }
     );
 
     res.status(200).json(updatedSchedule);
@@ -138,8 +125,7 @@ exports.deleteSchedule = async (req, res, next) => {
     }
 
     await Schedule.deleteOne({
-      instituteId: scheduleInfo.instituteId,
-      batchCode: scheduleInfo.batchCode,
+      _id:req.body._id
     });
 
     response(res, 200, 'Schedule deleted successfully');

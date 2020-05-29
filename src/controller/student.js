@@ -76,7 +76,7 @@ exports.addStudent = async (req, res, next) => {
         },
       }
     );
-    res.status(200).send(addUser);
+    res.status(200).send(addStudent);
   } catch (error) {
     console.log(error);
     response(res, 500, error.message);
@@ -248,7 +248,7 @@ exports.addCourseStudent = async (req, res, next) => {
       }
     );
 
-    res.status(200).json(courseAvailabe);
+    res.status(200).json(updatedStudent);
   } catch (error) {
     console.log(error);
     errorHandler(error, res);
