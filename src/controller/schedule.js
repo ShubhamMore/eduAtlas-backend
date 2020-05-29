@@ -5,12 +5,11 @@ const response = require('../service/response');
 
 exports.addSchedule = async (req, res, next) => {
   try {
-    
     // if(check.length != 0){
     // }
     const batchSchedule = new Schedule(req.body);
 
-    await batchSchedule.save()
+    await batchSchedule.save();
 
     response(res, 201, 'Schedule added successfully');
   } catch (error) {
@@ -20,11 +19,9 @@ exports.addSchedule = async (req, res, next) => {
 
 exports.updateSchedule = async (req, res, next) => {
   try {
-    
     const updatedSchedule = await Schedule.findOneAndUpdate(
       {
         _id: req.body._id,
-        
       },
       { $set: req.body },
       { upsert: true }
@@ -35,55 +32,49 @@ exports.updateSchedule = async (req, res, next) => {
     errorHandler(error, res);
   }
 };
-exports.getScheduleByBatch =async (req,res)=>{
+exports.getScheduleByBatch = async (req, res) => {
   try {
     const batchSchedule = await Schedule.find({
-      $and:[
+      $and: [
         {
-          instituteId:req.body.instituteId
+          instituteId: req.body.instituteId,
         },
         {
-          courseId:req.body.courseId
+          courseId: req.body.courseId,
         },
         {
-          batchId:req.body.batchId
-        }
-      ]
-    })
+          batchId: req.body.batchId,
+        },
+      ],
+    });
 
-    res.status(200).send(batchSchedule)
+    res.status(200).send(batchSchedule);
   } catch (error) {
-    res.status(400).send(error)
+    res.status(400).send(error);
   }
-}
+};
 
 exports.getSchedule = async (req, res, next) => {
   try {
-    const singleSchedule = await Schedule.find({
-      _id:req.body.scheduleId
-    })
-    res.status(200).send(singleSchedule)
+    console.log(req.body);
+    const singleSchedule = await Schedule.findOne({
+      _id: req.body.scheduleId,
+    });
+
+    res.status(200).send(singleSchedule);
   } catch (error) {
     errorHandler(error, res);
   }
 };
 
-// exports.deleteSchedule = async (req, res, next) => {
-//   try {
-//     const scheduleInfo = req.query;
+exports.deleteSchedule = async (req, res, next) => {
+  try {
+    await Schedule.deleteOne({
+      _id: req.body.scheduleId,
+    });
 
-//     if (!scheduleInfo.instituteId || !scheduleInfo.batchCode) {
-//       const err = new Error('schedule information not provided');
-//       err.statusCode = 400;
-//       throw err;
-//     }
-
-//     await Schedule.deleteOne({
-//       _id:req.body._id
-//     });
-
-//     response(res, 200, 'Schedule deleted successfully');
-//   } catch (error) {
-//     errorHandler(error, res);
-//   }
-// };
+    res.status(200).send({ msg: 'Schedule Deleted Successfully' });
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
