@@ -2,23 +2,25 @@ const errorHandler = require('../service/errorHandler');
 const User = require('../model/user.model');
 const EduAtlasId = require('../model/eduatlasId.model');
 const Institute = require('../model/institute.model')
-const Student = require('../model/schedule.model');
+const Student = require('../model/student.model');
 const Fee = require('../model/fee.model')
 
 
 exports.addFee = async (req,res)=>{
     try {
-        const checkStudent = await Student.findOne({
+        const checkStudent = await Student.find({
             $and:[{
-                studentId:req.body.studentId
+                _id:req.body.studentId
             },{
                 'instituteDetails.instituteId':req.body.instituteId
             },{
                 'instituteDetails.courseId':req.body.courseId
             }]
         })
+        console.log(checkStudent)
 
-        if(!checkStudent){
+        if(checkStudent.length == 0){
+            console.log('in error')
             const error = new Error('Course for Student doesnt exists');
             //error.prototype.statusCode = 400;
             throw error;
@@ -26,9 +28,9 @@ exports.addFee = async (req,res)=>{
 
         const fee = new Fee(req.body)
         await fee.save()
+        res.status(200).send(fee)
     } catch (error) {
-        response(res, 500, error.message);
-
+        res.status(400).send(error)
     }
 }
 
