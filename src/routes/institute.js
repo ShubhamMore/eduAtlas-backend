@@ -55,10 +55,6 @@ instituteRouter.delete('/course/reciept/:instituteId', checkAuth, couseConroller
 //@make_anounce
 instituteRouter.post('/announcement', checkAuth, instituteController.makeAnouncement);
 
-//@schedule_Routes
-instituteRouter.post('/schedule', checkAuth, scheduleController.addSchedule);
-instituteRouter.put('/schedule', checkAuth, scheduleController.updateSchedule);
-instituteRouter.get('/schedule', checkAuth, scheduleController.getSchedule);
 
 //@Attendence_Routes
 instituteRouter.post('/attendence/:instituteId', checkAuth, instituteController.addAttendence);

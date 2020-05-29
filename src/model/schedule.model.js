@@ -4,10 +4,12 @@ const Schema = mongoose.Schema;
 // Schedule schema
 const scheduleSchema = new Schema({
   instituteId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Institute',
-    required: true,
+    type:String  
   },
+  courseId:{
+    type:String
+  },
+
   batchId: {
     type: String,
   },
