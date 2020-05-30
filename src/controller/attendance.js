@@ -1,113 +1,127 @@
-const Attendance = require('../model/attendance.model')
-const Institute = require('../model/institute.model')
-const errorHandler = require('../service/errorHandler')
-const Student = require('../model/student.model')
-
-exports.addAttendance = async(req,res)=>{
-    try {
-        console.log(req.body)
-        const check = await Institute.find({
-            $and:[{
-                _id:req.body.instituteId
-            },{
-                "course._id":req.body.courseId
-            },{
-                "batch._id":req.body.batchId
-            }]        
-        })
-
-        if(check.length == 0){
-            const error = new Error('Batch not Found');
-            error.statusCode = 400;
-            throw error;
-        }
-
-        const addAtt = await Attendance.updateOne({
-            $and:[{
-                date:req.body.date
-            },{
-                instituteId:req.body.instituteId    
-            },{
-                courseId:req.body.courseId,
-            },{
-                batchId:req.body.batchId
-            }]
+const Attendance = require('../model/attendance.model');
+const Institute = require('../model/institute.model');
+const errorHandler = require('../service/errorHandler');
+const Student = require('../model/student.model');
+const mongoose = require('mongoose');
+exports.addAttendance = async (req, res) => {
+  try {
+    console.log(req.body);
+    const check = await Institute.find({
+      $and: [
+        {
+          _id: req.body.instituteId,
         },
-          req.body    
-        ,{
-            upsert:true
-        })
+        {
+          'course._id': req.body.courseId,
+        },
+        {
+          'batch._id': req.body.batchId,
+        },
+      ],
+    });
 
-        res.status(200).send(addAtt)
-    } catch (error) {
-        errorHandler(error, res);
+    if (check.length == 0) {
+      const error = new Error('Batch not Found');
+      error.statusCode = 400;
+      throw error;
     }
-}
 
-exports.getAttendanceByDate = async(req,res)=>{
-    try {
-        
-        console.log(req.body)
-        const attendanceRecord = await Attendance.findOne({
-            $and:[{
-                date:req.body.date
-            },{
-                instituteId:req.body.instituteId    
-            },{
-                courseId:req.body.courseId,
-            },{
-                batchId:req.body.batchId
-            }]
-        })
-        let response = {}
-        if(!attendanceRecord){
-            const students = await Student.aggregate([
-                {
-                  $unwind: '$instituteDetails',
-                },
-                {
-                  $match: {
-                    'instituteDetails.instituteId': req.body.instituteId,
-                    'instituteDetails.courseId': req.body.courseId,
-                    'instituteDetails.batchId': req.body.batchId    ,
-                  },
-                },
-              ]);
-              response = { students }
+    const addAtt = await Attendance.updateOne(
+      {
+        $and: [
+          {
+            date: req.body.date,
+          },
+          {
+            instituteId: req.body.instituteId,
+          },
+          {
+            courseId: req.body.courseId,
+          },
+          {
+            batchId: req.body.batchId,
+          },
+        ],
+      },
+      req.body,
+      {
+        upsert: true,
+      }
+    );
 
-        } else {
-            let studentDetails = new Array()
+    res.status(200).send(addAtt);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
 
-            for (var i = 0; i<attendanceRecord.attendance.length;i++){
-            
-                const search = await Student.aggregate([{
-                $unwind:'$instituteDetails'
-                },{
-                    $match:{
-                    "_id":attendanceRecord.days[i].studentId,
-                    "instituteDetails.instituteId":attendanceRecord.instituteId,
-                    "instituteDetails.courseId":attendanceRecord.courseId,
-                    "instituteDetails.batchId":attendanceRecord.batchId
-                    }
-                }])
-                var details = {
-                    studentName: search[0].basicDetails.name,
-                    rollNo:search[0].instituteDetails.rollNo
-                }
+exports.getAttendanceByDate = async (req, res) => {
+  try {
+    console.log(req.body);
+    const attendanceRecord = await Attendance.findOne({
+      $and: [
+        {
+          date: req.body.date,
+        },
+        {
+          instituteId: req.body.instituteId,
+        },
+        {
+          courseId: req.body.courseId,
+        },
+        {
+          batchId: req.body.batchId,
+        },
+      ],
+    });
+    let response = {};
+    if (!attendanceRecord) {
+      const students = await Student.aggregate([
+        {
+          $unwind: '$instituteDetails',
+        },
+        {
+          $match: {
+            'instituteDetails.instituteId': req.body.instituteId,
+            'instituteDetails.courseId': req.body.courseId,
+            'instituteDetails.batchId': req.body.batchId,
+          },
+        },
+      ]);
 
-                studentDetails.push(details)
-            
-            }
-            response = { attendanceRecord, studentDetails}
-        }
+      response = { students };
+    } else {
+      let studentDetails = new Array();
+      console.log(attendanceRecord);
+      for (var i = 0; i < attendanceRecord.attendance.length; i++) {
+        const search = await Student.aggregate([
+          {
+            $unwind: '$instituteDetails',
+          },
+          {
+            $match: {
+              _id: mongoose.Types.ObjectId(attendanceRecord.attendance[i].studentId),
+              'instituteDetails.instituteId': attendanceRecord.instituteId,
+              'instituteDetails.courseId': attendanceRecord.courseId,
+              'instituteDetails.batchId': attendanceRecord.batchId,
+            },
+          },
+        ]);
 
-        
-        res.status(200).send(response)
+        var details = {
+          studentName: search[0].basicDetails.name,
+          rollNo: search[0].instituteDetails.rollNo,
+        };
 
-    } catch (error) {
-        errorHandler(error,res)
+        studentDetails.push(details);
+      }
+      response = { attendanceRecord, studentDetails };
     }
-}
 
+    console.log(response);
 
-
+    res.status(200).send(response);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
