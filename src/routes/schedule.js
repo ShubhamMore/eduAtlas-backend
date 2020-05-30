@@ -11,6 +11,7 @@ scheduleRouter.post('/getScheduleByBatch', scheduleController.getScheduleByBatch
 
 scheduleRouter.post('/getSchedule', scheduleController.getSchedule);
 
-scheduleRouter.post('/deleteSchedule', scheduleController.deleteSchedule);
+scheduleRouter.post('/getScheduleDetails', scheduleController.getScheduleDetails);
+
 
 module.exports = scheduleRouter;
