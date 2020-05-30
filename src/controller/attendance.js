@@ -57,38 +57,50 @@ exports.getAttendanceByDate = async(req,res)=>{
                 batchId:req.body.batchId
             }]
         })
+        let response = {}
         if(!attendanceRecord){
-            const error = new Error('Attendance Record Not Found')
-            error.statusCode = 400
-            throw error
-        }
+            const students = await Student.aggregate([
+                {
+                  $unwind: '$instituteDetails',
+                },
+                {
+                  $match: {
+                    'instituteDetails.instituteId': req.body.instituteId,
+                    'instituteDetails.courseId': req.body.courseId,
+                    'instituteDetails.batchId': req.body.batchId    ,
+                  },
+                },
+              ]);
+              response = { students }
 
-        let studentDetails = new Array()
+        } else {
+            let studentDetails = new Array()
 
-        for (var i = 0; i<attendanceRecord.attendance.length;i++){
+            for (var i = 0; i<attendanceRecord.attendance.length;i++){
             
-            const search = await Student.aggregate([{
+                const search = await Student.aggregate([{
                 $unwind:'$instituteDetails'
-            },{
-                $match:{
+                },{
+                    $match:{
                     "_id":attendanceRecord.days[i].studentId,
                     "instituteDetails.instituteId":attendanceRecord.instituteId,
                     "instituteDetails.courseId":attendanceRecord.courseId,
                     "instituteDetails.batchId":attendanceRecord.batchId
+                    }
+                }])
+                var details = {
+                    studentName: search[0].basicDetails.name,
+                    rollNo:search[0].instituteDetails.rollNo
                 }
-            }])
-            var details = {
-                studentName: search[0].basicDetails.name,
-                rollNo:search[0].instituteDetails.rollNo
-            }
 
-            studentDetails.push(details)
+                studentDetails.push(details)
             
+            }
+            var response = { attendanceRecord, studentDetails}
         }
-        res.status(200).send({
-            attendanceRecord,
-            studentDetails
-        })
+
+        
+        res.status(200).send(response)
 
     } catch (error) {
         errorHandler(error,res)
