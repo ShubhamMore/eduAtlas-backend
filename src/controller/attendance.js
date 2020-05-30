@@ -52,7 +52,7 @@ exports.getAttendanceByDate = async(req,res)=>{
             },{
                 instituteId:req.body.instituteId    
             },{
-                courseId:courseId,
+                courseId:req.body.courseId,
             },{
                 batchId:req.body.batchId
             }]
