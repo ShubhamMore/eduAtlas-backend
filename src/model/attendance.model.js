@@ -21,7 +21,7 @@ const attendanceSchema = new Schema({
       attendance: [
         {
           studentId: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             require: true
           },
           attendanceStatus: {
