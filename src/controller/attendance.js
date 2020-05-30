@@ -57,7 +57,6 @@ exports.addAttendance = async (req, res) => {
 
 exports.getAttendanceByDate = async (req, res) => {
   try {
-    console.log(req.body);
     const attendanceRecord = await Attendance.findOne({
       $and: [
         {
@@ -74,7 +73,9 @@ exports.getAttendanceByDate = async (req, res) => {
         },
       ],
     });
-    let response = {};
+
+    const studentsArray = new Array();
+
     if (!attendanceRecord) {
       const students = await Student.aggregate([
         {
@@ -89,9 +90,19 @@ exports.getAttendanceByDate = async (req, res) => {
         },
       ]);
 
-      response = { students };
+      students.forEach((curStudent) => {
+        // console.log(curStudent);
+        const student = {
+          studentId: curStudent._id,
+          studentName: curStudent.basicDetails.name,
+          studentRollNo: curStudent.instituteDetails.rollNumber,
+        };
+        console.log(student);
+        studentsArray.push(student);
+      });
     } else {
       let studentDetails = new Array();
+
       console.log(attendanceRecord);
       for (var i = 0; i < attendanceRecord.attendance.length; i++) {
         const search = await Student.aggregate([
@@ -108,19 +119,21 @@ exports.getAttendanceByDate = async (req, res) => {
           },
         ]);
 
+        // console.log(search);
+
         var details = {
           studentName: search[0].basicDetails.name,
-          rollNo: search[0].instituteDetails.rollNo,
+          rollNo: search[0].instituteDetails.rollNumber,
         };
 
         studentDetails.push(details);
       }
-      response = { attendanceRecord, studentDetails };
+      response = studentsArray;
     }
 
-    console.log(response);
+    // console.log(response);
 
-    res.status(200).send(response);
+    res.status(200).send(studentsArray);
   } catch (error) {
     errorHandler(error, res);
   }

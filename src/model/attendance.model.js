@@ -2,34 +2,34 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const attendanceSchema = new Schema({
-    date: {
+  date: {
+    type: String,
+    required: true,
+  },
+  courseId: {
+    type: String,
+    required: true,
+  },
+  batchId: {
+    type: String,
+    required: true,
+  },
+  instituteId: {
+    type: String,
+    required: true,
+  },
+  attendance: [
+    {
+      studentId: {
         type: String,
-        required: true
+        require: true,
       },
-      courseId: {
-        type: String,
-        required: true
+      attendanceStatus: {
+        type: Boolean,
+        require: true,
       },
-      batchId: {
-        type: String,
-        required: true
-      },
-      instituteId: {
-        type: String,
-        required: true
-      },
-      attendance: [
-        {
-          studentId: {
-            type: String,
-            require: true
-          },
-          attendanceStatus: {
-            type: String,
-            require: true
-          }
-        }
-      ]
-})
+    },
+  ],
+});
 
-module.exports = mongoose.model('Attendance', attendanceSchema)
+module.exports = mongoose.model('Attendance', attendanceSchema);
