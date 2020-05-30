@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Schedule = require('../model/schedule.model');
 const errorHandler = require('../service/errorHandler');
 const schema = require('../service/joi');
@@ -92,27 +93,28 @@ exports.getScheduleDetails = async (req, res) => {
       _id: req.body.scheduleId,
     });
     let schdeduleDetails = req.body;
-
-    const courseDetails = await Institute.findOne({
-      $and:[{
-        _id:singleSchedule.instituteId
+    console.log(singleSchedule)
+    const courseDetails = await Institute.aggregate([
+      {
+        $unwind: '$course'
       },{
-        "course._id":singleSchedule.courseId
+        $unwind: '$batch'
       },{
-        "batch._id":singleSchedule.batchId
-      }]
-    },{
-      "course":1,
-      "batch":1
-    })
-    console.log(courseDetails)
+        $match:{
+          _id:mongoose.Types.ObjectId(singleSchedule.instituteId),
+          "course._id": mongoose.Types.ObjectId(singleSchedule.courseId),
+          "batch._id":mongoose.Types.ObjectId(singleSchedule.batchId)
+        }
+      }
+        ])
+    console.log("here ",courseDetails)
     if(courseDetails.length == 0){
       const error = new Error("Batch not found")
       error.statusCode = 400
       throw error;
     }
-    singleSchedule.courseId = courseDetails.course[0].name
-    singleSchedule.batchId = courseDetails.batch[0].batchCode
+    singleSchedule.courseId = courseDetails[0].course.name
+    singleSchedule.batchId = courseDetails[0].batch.batchCode
 
     for (var i = 0; i < singleSchedule.days.length; i++) {
       const teacherInfo = await Employee.findOne({
