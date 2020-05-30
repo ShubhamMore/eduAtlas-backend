@@ -96,7 +96,7 @@ exports.getAttendanceByDate = async(req,res)=>{
                 studentDetails.push(details)
             
             }
-            var response = { attendanceRecord, studentDetails}
+            response = { attendanceRecord, studentDetails}
         }
 
         
