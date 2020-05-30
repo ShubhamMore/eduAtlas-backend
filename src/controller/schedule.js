@@ -116,15 +116,9 @@ exports.getScheduleDetails = async (req, res) => {
 
     for (var i = 0; i < singleSchedule.days.length; i++) {
       const teacherInfo = await Employee.findOne({
-<<<<<<< HEAD
         _id:singleSchedule.days[i].teacher
       })
       singleSchedule.days[i].teacher = teacherInfo.basicDetails.name
-=======
-        _id: singleSchedule.days[i].teacher,
-      });
-      singleSchedule.days[i].teacherName = teacherInfo.basicDetails.name;
->>>>>>> 084a05151d71ac202b6de88224f6cc51c007839f
     }
     res.status(200).send(singleSchedule);
   } catch (error) {

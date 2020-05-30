@@ -28,4 +28,19 @@ exports.addAttendance = async(req,res)=>{
     }
 }
 
+exports.getAttendanceByDate = async(req,res)=>{
+    try {
+        
+        console.log(req.body)
+        const attendanceRecord = await Attendance.find({
+            $and:[{
+                date:req
+            }]
+        })
+
+    } catch (error) {
+        
+    }
+}
+
 module.exports
