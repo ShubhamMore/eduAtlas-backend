@@ -2,23 +2,27 @@ const Schedule = require('../model/schedule.model');
 const errorHandler = require('../service/errorHandler');
 const schema = require('../service/joi');
 const response = require('../service/response');
-const Institute = require('../model/institute.model')
-const Employee = require('../model/employee.model')
+const Institute = require('../model/institute.model');
+const Employee = require('../model/employee.model');
 
 exports.addSchedule = async (req, res, next) => {
   try {
     const checkBatch = await Institute.find({
-      $and:[{
-        _id:req.body.instituteId
-      },{
-        "course._id":req.body.courseId
-      },{
-        "batch._id":req.body.batchId
-      }]
-    })
-    if(checkBatch.length == 0){
-      const error = new Error("Batch not Found")
-      error.statusCode = 400
+      $and: [
+        {
+          _id: req.body.instituteId,
+        },
+        {
+          'course._id': req.body.courseId,
+        },
+        {
+          'batch._id': req.body.batchId,
+        },
+      ],
+    });
+    if (checkBatch.length == 0) {
+      const error = new Error('Batch not Found');
+      error.statusCode = 400;
       throw error;
     }
     const batchSchedule = new Schedule(req.body);
@@ -81,39 +85,44 @@ exports.getSchedule = async (req, res, next) => {
   }
 };
 
-exports.getScheduleDetails = async(req,res)=>{
+exports.getScheduleDetails = async (req, res) => {
   try {
-    console.log(req.body)
-    let schdeduleDetails = req.body
-    const courseDetails = await Institute.find({
-      $and:[{
-        "course._id":req.body.courseId
-      },{
-        "batch._id":req.body.batchId
-      }]
-    },{
-      "course.name":1,
-      "batch.name":1
-    })
-    if(courseDetails.length == 0){
-      const error = new Error("Batch not found")
-      error.statusCode = 400
+    console.log(req.body);
+    let schdeduleDetails = req.body;
+    const courseDetails = await Institute.find(
+      {
+        $and: [
+          {
+            'course._id': req.body.courseId,
+          },
+          {
+            'batch._id': req.body.batchId,
+          },
+        ],
+      },
+      {
+        'course.name': 1,
+        'batch.name': 1,
+      }
+    );
+    if (courseDetails.length == 0) {
+      const error = new Error('Batch not found');
+      error.statusCode = 400;
       throw error;
     }
-    schdeduleDetails.courseName = courseDetails.course.name
-    schdeduleDetails.batchName = courseDetails.batch.name
+    schdeduleDetails.courseName = courseDetails.course.name;
+    schdeduleDetails.batchName = courseDetails.batch.name;
 
-    for(var i = 0; i < req.body.days.length ; i++){
+    for (var i = 0; i < req.body.days.length; i++) {
       const teacherName = await Employee.findOne({
-        _id:req.body.days[i].teacher
-      })
-      schdeduleDetails.days[i].teacherName = teacherName.basicDetails.name
+        _id: req.body.days[i].teacher,
+      });
+      schdeduleDetails.days[i].teacherName = teacherName.basicDetails.name;
     }
-    
   } catch (error) {
-    errorHandler(error,res)
+    errorHandler(error, res);
   }
-}
+};
 
 exports.deleteSchedule = async (req, res, next) => {
   try {
