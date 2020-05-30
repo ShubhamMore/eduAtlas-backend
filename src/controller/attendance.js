@@ -91,7 +91,6 @@ exports.getAttendanceByDate = async (req, res) => {
       ]);
 
       students.forEach((curStudent) => {
-        // console.log(curStudent);
         const student = {
           studentId: curStudent._id,
           studentName: curStudent.basicDetails.name,
@@ -101,11 +100,8 @@ exports.getAttendanceByDate = async (req, res) => {
         studentsArray.push(student);
       });
     } else {
-      let studentDetails = new Array();
-
-      console.log(attendanceRecord);
-      for (var i = 0; i < attendanceRecord.attendance.length; i++) {
-        const search = await Student.aggregate([
+      for (let i = 0; i < attendanceRecord.attendance.length; i++) {
+        const student = await Student.aggregate([
           {
             $unwind: '$instituteDetails',
           },
@@ -119,19 +115,15 @@ exports.getAttendanceByDate = async (req, res) => {
           },
         ]);
 
-        // console.log(search);
-
         var details = {
-          studentName: search[0].basicDetails.name,
-          rollNo: search[0].instituteDetails.rollNumber,
+          studentId: attendanceRecord.attendance[i].studentId,
+          studentName: student[0].basicDetails.name,
+          studentRollNo: student[0].instituteDetails.rollNumber,
+          attendanceStatus: attendanceRecord.attendance[i].attendanceStatus,
         };
-
-        studentDetails.push(details);
+        studentsArray.push(details);
       }
-      response = studentsArray;
     }
-
-    // console.log(response);
 
     res.status(200).send(studentsArray);
   } catch (error) {
