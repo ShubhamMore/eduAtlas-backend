@@ -35,7 +35,10 @@ const scheduleSchema = new Schema({
       date: {
         type: String,
       },
-      time: {
+      startTime: {
+        type: String,
+      },
+      endTime: {
         type: String,
       },
       teacher: {

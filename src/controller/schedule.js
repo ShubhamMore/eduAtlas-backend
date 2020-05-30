@@ -93,34 +93,38 @@ exports.getScheduleDetails = async (req, res) => {
       _id: req.body.scheduleId,
     });
     let schdeduleDetails = req.body;
-    console.log(singleSchedule)
+    console.log(singleSchedule);
     const courseDetails = await Institute.aggregate([
       {
-        $unwind: '$course'
-      },{
-        $unwind: '$batch'
-      },{
-        $match:{
-          _id:mongoose.Types.ObjectId(singleSchedule.instituteId),
-          "course._id": mongoose.Types.ObjectId(singleSchedule.courseId),
-          "batch._id":mongoose.Types.ObjectId(singleSchedule.batchId)
-        }
-      }
-        ])
-    console.log("here ",courseDetails)
-    if(courseDetails.length == 0){
-      const error = new Error("Batch not found")
-      error.statusCode = 400
+        $unwind: '$course',
+      },
+      {
+        $unwind: '$batch',
+      },
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(singleSchedule.instituteId),
+          'course._id': mongoose.Types.ObjectId(singleSchedule.courseId),
+          'batch._id': mongoose.Types.ObjectId(singleSchedule.batchId),
+        },
+      },
+    ]);
+    console.log('here ', courseDetails);
+    if (courseDetails.length == 0) {
+      const error = new Error('Batch not found');
+      error.statusCode = 400;
       throw error;
     }
-    singleSchedule.courseId = courseDetails[0].course.name
-    singleSchedule.batchId = courseDetails[0].batch.batchCode
+    singleSchedule.courseId = courseDetails[0].course.name;
+    singleSchedule.batchId = courseDetails[0].batch.batchCode;
 
     for (var i = 0; i < singleSchedule.days.length; i++) {
-      const teacherInfo = await Employee.findOne({
-        _id:singleSchedule.days[i].teacher
-      })
-      singleSchedule.days[i].teacher = teacherInfo.basicDetails.name
+      if (singleSchedule.days[i].teacher != '') {
+        const teacherInfo = await Employee.findOne({
+          _id: singleSchedule.days[i].teacher,
+        });
+        singleSchedule.days[i].teacher = teacherInfo.basicDetails.name;
+      }
     }
     res.status(200).send(singleSchedule);
   } catch (error) {
