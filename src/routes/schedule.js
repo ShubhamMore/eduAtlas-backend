@@ -13,5 +13,6 @@ scheduleRouter.post('/getSchedule', scheduleController.getSchedule);
 
 scheduleRouter.post('/getScheduleDetails', scheduleController.getScheduleDetails);
 
+scheduleRouter.post('/deleteSchedule', scheduleController.deleteSchedule);
 
 module.exports = scheduleRouter;
