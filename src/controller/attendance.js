@@ -1,6 +1,7 @@
 const Attendance = require('../model/attendance.model')
 const Institute = require('../model/institute.model')
 const errorHandler = require('../service/errorHandler')
+const Student = require('../model/student.model')
 
 exports.addAttendance = async(req,res)=>{
     try {
@@ -45,7 +46,7 @@ exports.getAttendanceByDate = async(req,res)=>{
     try {
         
         console.log(req.body)
-        const attendanceRecord = await Attendance.find({
+        const attendanceRecord = await Attendance.findOne({
             $and:[{
                 date:req.body.date
             },{
@@ -56,13 +57,38 @@ exports.getAttendanceByDate = async(req,res)=>{
                 batchId:req.body.batchId
             }]
         })
-        if(attendanceRecord.length == 0){
+        if(!attendanceRecord){
             const error = new Error('Attendance Record Not Found')
             error.statusCode = 400
             throw error
         }
 
-        res.status(200).send(attendanceRecord)
+        let studentDetails = new Array()
+
+        for (var i = 0; i<attendanceRecord.attendance.length;i++){
+            
+            const search = await Student.aggregate([{
+                $unwind:'$instituteDetails'
+            },{
+                $match:{
+                    "_id":attendanceRecord.days[i].studentId,
+                    "instituteDetails.instituteId":attendanceRecord.instituteId,
+                    "instituteDetails.courseId":attendanceRecord.courseId,
+                    "instituteDetails.batchId":attendanceRecord.batchId
+                }
+            }])
+            var details = {
+                studentName: search[0].basicDetails.name,
+                rollNo:search[0].instituteDetails.rollNo
+            }
+
+            studentDetails.push(details)
+            
+        }
+        res.status(200).send({
+            attendanceRecord,
+            studentDetails
+        })
 
     } catch (error) {
         errorHandler(error,res)
@@ -71,4 +97,3 @@ exports.getAttendanceByDate = async(req,res)=>{
 
 
 
-module.exports
