@@ -3,6 +3,7 @@ const errorHandler = require('../service/errorHandler');
 const schema = require('../service/joi');
 const response = require('../service/response');
 const Institute = require('../model/institute.model')
+const Employee = require('../model/employee.model')
 
 exports.addSchedule = async (req, res, next) => {
   try {
@@ -79,6 +80,40 @@ exports.getSchedule = async (req, res, next) => {
     errorHandler(error, res);
   }
 };
+
+exports.getScheduleDetails = async(req,res)=>{
+  try {
+    console.log(req.body)
+    let schdeduleDetails = req.body
+    const courseDetails = await Institute.find({
+      $and:[{
+        "course._id":req.body.courseId
+      },{
+        "batch._id":req.body.batchId
+      }]
+    },{
+      "course.name":1,
+      "batch.name":1
+    })
+    if(courseDetails.length == 0){
+      const error = new Error("Batch not found")
+      error.statusCode = 400
+      throw error;
+    }
+    schdeduleDetails.courseName = courseDetails.course.name
+    schdeduleDetails.batchName = courseDetails.batch.name
+
+    for(var i = 0; i < req.body.days.length ; i++){
+      const teacherName = await Employee.findOne({
+        _id:req.body.days[i].teacher
+      })
+      schdeduleDetails.days[i].teacherName = teacherName.basicDetails.name
+    }
+    
+  } catch (error) {
+    errorHandler(error,res)
+  }
+}
 
 exports.deleteSchedule = async (req, res, next) => {
   try {
