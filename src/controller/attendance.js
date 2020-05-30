@@ -37,6 +37,8 @@ exports.addAttendance = async(req,res)=>{
         ,{
             upsert:true
         })
+
+        res.status(200).send(addAtt)
     } catch (error) {
         errorHandler(error, res);
     }
