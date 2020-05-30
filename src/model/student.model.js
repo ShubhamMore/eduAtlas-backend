@@ -20,10 +20,6 @@ const studentSchema = new Schema(
           type: String,
           required: 'Name is required',
         },
-        rollNumber: {
-          type: String,
-          required: 'Roll number is required',
-        },
         studentEmail: {
           type: String,
           required: 'email is required',
@@ -74,6 +70,9 @@ const studentSchema = new Schema(
           type:String,
           default:''
         },
+        rollNumber: {
+          type: String,
+        },
         discount: {
           type: String,
           required: false,
@@ -93,7 +92,11 @@ const studentSchema = new Schema(
         materialRecord: {
           type: String,
           default: '',
-        },  
+        },
+        invite:{
+          type:Boolean,
+          default:false
+        }  
       }
     ],     
   },

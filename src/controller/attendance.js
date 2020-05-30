@@ -21,8 +21,21 @@ exports.addAttendance = async(req,res)=>{
             throw error;
         }
 
-        const addAtt = new Attendance(req.body)
-        await addAtt.save()
+        const addAtt = await Attendance.updateOne({
+            $and:[{
+                date:req.body.date
+            },{
+                instituteId:req.body.instituteId    
+            },{
+                courseId:courseId,
+            },{
+                batchId:req.body.batchId
+            }]
+        },
+          req.body    
+        ,{
+            upsert:true
+        })
     } catch (error) {
         errorHandler(error, res);
     }
@@ -34,13 +47,28 @@ exports.getAttendanceByDate = async(req,res)=>{
         console.log(req.body)
         const attendanceRecord = await Attendance.find({
             $and:[{
-                date:req
+                date:req.body.date
+            },{
+                instituteId:req.body.instituteId    
+            },{
+                courseId:courseId,
+            },{
+                batchId:req.body.batchId
             }]
         })
+        if(attendanceRecord.length == 0){
+            const error = new Error('Attendance Record Not Found')
+            error.statusCode = 400
+            throw error
+        }
+
+        res.status(200).send(attendanceRecord)
 
     } catch (error) {
-        
+        errorHandler(error,res)
     }
 }
+
+
 
 module.exports

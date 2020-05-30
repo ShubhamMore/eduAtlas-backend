@@ -7,13 +7,6 @@ const User = require('../model/user.model');
 const userController = require('../controller/users');
 const EduAtlasId = require('../model/eduatlasId.model');
 
-exports.addNewStudent = async (req, res) => {
-  try {
-  } catch (error) {
-    console.log(error);
-    response(res, 500, error.message);
-  }
-};
 
 exports.addStudent = async (req, res, next) => {
   try {
@@ -354,6 +347,9 @@ exports.deleteStudent = async (req, res, next) => {
     response(res, error.prototype.statusCode || 500, error.message);
   }
 };
+
+//Api for accepting invites
+
 //List of active and pending students APi Creation
 
 exports.pendingStudents = async (req, res) => {};
