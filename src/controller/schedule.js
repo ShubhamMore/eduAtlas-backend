@@ -89,30 +89,32 @@ exports.getScheduleDetails = async(req,res)=>{
     });
     let schdeduleDetails = req.body
 
-    const courseDetails = await Institute.find({
+    const courseDetails = await Institute.findOne({
       $and:[{
+        _id:singleSchedule.instituteId
+      },{
         "course._id":singleSchedule.courseId
       },{
         "batch._id":singleSchedule.batchId
       }]
     },{
-      "course.name":1,
-      "batch.name":1
+      "course":1,
+      "batch":1
     })
-
+    console.log(courseDetails)
     if(courseDetails.length == 0){
       const error = new Error("Batch not found")
       error.statusCode = 400
       throw error;
     }
-    singleSchedule.courseName = courseDetails.course.name
-    singleSchedule.batchName = courseDetails.batch.name
+    singleSchedule.courseId = courseDetails.course[0].name
+    singleSchedule.batchId = courseDetails.batch[0].batchCode
 
     for(var i = 0; i < singleSchedule.days.length ; i++){
       const teacherInfo = await Employee.findOne({
         _id:singleSchedule.days[i].teacher
       })
-      singleSchedule.days[i].teacherName = teacherInfo.basicDetails.name
+      singleSchedule.days[i].teacher = teacherInfo.basicDetails.name
     }
     res.status(200).send(singleSchedule)
   } catch (error) {
