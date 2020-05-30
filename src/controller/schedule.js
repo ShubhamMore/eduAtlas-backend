@@ -88,37 +88,46 @@ exports.getSchedule = async (req, res, next) => {
 exports.getScheduleDetails = async (req, res) => {
   try {
     console.log(req.body);
+    let singleSchedule = await Schedule.findOne({
+      _id: req.body.scheduleId,
+    });
     let schdeduleDetails = req.body;
-    const courseDetails = await Institute.find(
+
+    const courseDetails = await Institute.findOne(
       {
         $and: [
           {
-            'course._id': req.body.courseId,
+            _id: singleSchedule.instituteId,
           },
           {
-            'batch._id': req.body.batchId,
+            'course._id': singleSchedule.courseId,
+          },
+          {
+            'batch._id': singleSchedule.batchId,
           },
         ],
       },
       {
-        'course.name': 1,
-        'batch.name': 1,
+        course: 1,
+        batch: 1,
       }
     );
+    console.log(courseDetails);
     if (courseDetails.length == 0) {
       const error = new Error('Batch not found');
       error.statusCode = 400;
       throw error;
     }
-    schdeduleDetails.courseName = courseDetails.course.name;
-    schdeduleDetails.batchName = courseDetails.batch.name;
+    singleSchedule.courseId = courseDetails.course[0].name;
+    singleSchedule.batchId = courseDetails.batch[0].batchCode;
 
-    for (var i = 0; i < req.body.days.length; i++) {
-      const teacherName = await Employee.findOne({
-        _id: req.body.days[i].teacher,
+    for (var i = 0; i < singleSchedule.days.length; i++) {
+      const teacherInfo = await Employee.findOne({
+        _id: singleSchedule.days[i].teacher,
       });
-      schdeduleDetails.days[i].teacherName = teacherName.basicDetails.name;
+      singleSchedule.days[i].teacher = teacherInfo.basicDetails.name;
     }
+    res.status(200).send(singleSchedule);
   } catch (error) {
     errorHandler(error, res);
   }
