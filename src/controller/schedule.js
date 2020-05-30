@@ -2,23 +2,27 @@ const Schedule = require('../model/schedule.model');
 const errorHandler = require('../service/errorHandler');
 const schema = require('../service/joi');
 const response = require('../service/response');
-const Institute = require('../model/institute.model')
-const Employee = require('../model/employee.model')
+const Institute = require('../model/institute.model');
+const Employee = require('../model/employee.model');
 
 exports.addSchedule = async (req, res, next) => {
   try {
     const checkBatch = await Institute.find({
-      $and:[{
-        _id:req.body.instituteId
-      },{
-        "course._id":req.body.courseId
-      },{
-        "batch._id":req.body.batchId
-      }]
-    })
-    if(checkBatch.length == 0){
-      const error = new Error("Batch not Found")
-      error.statusCode = 400
+      $and: [
+        {
+          _id: req.body.instituteId,
+        },
+        {
+          'course._id': req.body.courseId,
+        },
+        {
+          'batch._id': req.body.batchId,
+        },
+      ],
+    });
+    if (checkBatch.length == 0) {
+      const error = new Error('Batch not Found');
+      error.statusCode = 400;
       throw error;
     }
     const batchSchedule = new Schedule(req.body);
@@ -81,13 +85,13 @@ exports.getSchedule = async (req, res, next) => {
   }
 };
 
-exports.getScheduleDetails = async(req,res)=>{
+exports.getScheduleDetails = async (req, res) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
     let singleSchedule = await Schedule.findOne({
       _id: req.body.scheduleId,
     });
-    let schdeduleDetails = req.body
+    let schdeduleDetails = req.body;
 
     const courseDetails = await Institute.findOne({
       $and:[{
@@ -110,17 +114,23 @@ exports.getScheduleDetails = async(req,res)=>{
     singleSchedule.courseId = courseDetails.course[0].name
     singleSchedule.batchId = courseDetails.batch[0].batchCode
 
-    for(var i = 0; i < singleSchedule.days.length ; i++){
+    for (var i = 0; i < singleSchedule.days.length; i++) {
       const teacherInfo = await Employee.findOne({
+<<<<<<< HEAD
         _id:singleSchedule.days[i].teacher
       })
       singleSchedule.days[i].teacher = teacherInfo.basicDetails.name
+=======
+        _id: singleSchedule.days[i].teacher,
+      });
+      singleSchedule.days[i].teacherName = teacherInfo.basicDetails.name;
+>>>>>>> 084a05151d71ac202b6de88224f6cc51c007839f
     }
-    res.status(200).send(singleSchedule)
+    res.status(200).send(singleSchedule);
   } catch (error) {
-    errorHandler(error,res)
+    errorHandler(error, res);
   }
-}
+};
 
 exports.deleteSchedule = async (req, res, next) => {
   try {
