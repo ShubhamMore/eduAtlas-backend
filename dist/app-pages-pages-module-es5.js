@@ -764,7 +764,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h4 class=\"font-weight-bolder text-center mb-5\" style=\"text-transform: uppercase;\">\r\n  {{ myInstitute.institute.basicInfo.name }}\r\n</h4>\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\">\r\n      <nb-card-header\r\n        >UPCOMING CLASS\r\n        <input id=\"date\" placeholder=\"Date\" [nbDatepicker]=\"formpicker\" />\r\n        <nb-datepicker #formpicker></nb-datepicker>\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: 50px auto auto; width: 100%;\"\r\n          >\r\n            <div\r\n              class=\"text-center mr-2\"\r\n              style=\"border-radius: 5px; background-color: skyblue;\"\r\n            ></div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>STUDENT REQUETS </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n          >\r\n            <div>\r\n              <span\r\n                ><img\r\n                  src=\"assets/images/nick.png\"\r\n                  width=\"30px\"\r\n                  height=\"30px\"\r\n                  style=\"border-radius: 100%;\"\r\n              /></span>\r\n            </div>\r\n            <div class=\"pr-3 pl-3\"></div>\r\n\r\n            <div style=\"text-align: right;\">\r\n              <a href=\"#\" class=\"mr-2\">\r\n                <img src=\"assets/img/check.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n              <a href=\"#\">\r\n                <img src=\"assets/img/cross.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card style=\"max-height: 35vh;\">\r\n      <nb-card-header style=\"background-color: skyblue; color: black;\">\r\n        STUDY MATERIALS\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div style=\"display: grid; grid-template-columns: 50px auto; width: 100%;\">\r\n            <img\r\n              src=\"assets/images/nick.png\"\r\n              width=\"30px\"\r\n              height=\"30px\"\r\n              style=\"border-radius: 100%;\"\r\n            />\r\n\r\n            <div></div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>LEADS </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div class=\"mb-3\" style=\"display: grid; grid-template-columns: auto; width: 100%;\">\r\n            <div class=\"pr-3 pl-3\" *ngFor=\"let i of students\" [hidden]=\"!i.active\">\r\n              {{ i.basicDetails.name }} {{ i.basicDetails.studentEmail }}\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n";
+    __webpack_exports__["default"] = "<h4 class=\"font-weight-bolder text-center mb-5\" style=\"text-transform: uppercase;\" *ngIf=\"display\">\r\n  {{ myInstitute.institute.basicInfo.name }}\r\n</h4>\r\n\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>\r\n        UPCOMING CLASS\r\n        <input id=\"date\" placeholder=\"Date\" [nbDatepicker]=\"formPicker\" />\r\n        <nb-datepicker #formPicker></nb-datepicker>\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: 50px auto auto; width: 100%;\"\r\n          >\r\n            <div\r\n              class=\"text-center mr-2\"\r\n              style=\"border-radius: 5px; background-color: skyblue;\"\r\n            ></div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>STUDENT REQUESTS </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n          >\r\n            <div>\r\n              <span\r\n                ><img\r\n                  src=\"assets/images/nick.png\"\r\n                  width=\"30px\"\r\n                  height=\"30px\"\r\n                  style=\"border-radius: 100%;\"\r\n              /></span>\r\n            </div>\r\n            <div class=\"pr-3 pl-3\"></div>\r\n\r\n            <div style=\"text-align: right;\">\r\n              <a href=\"#\" class=\"mr-2\">\r\n                <img src=\"../../../assets/img/check.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n              <a href=\"#\">\r\n                <img src=\"../../../assets/img/cross.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card style=\"max-height: 35vh;\">\r\n      <nb-card-header style=\"background-color: skyblue; color: black;\">\r\n        STUDY MATERIALS\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div style=\"display: grid; grid-template-columns: 50px auto; width: 100%;\">\r\n            <img\r\n              src=\"../../../assets/images/nick.png\"\r\n              width=\"30px\"\r\n              height=\"30px\"\r\n              style=\"border-radius: 100%;\"\r\n            />\r\n\r\n            <div></div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>LEADS</nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div class=\"mb-3\" style=\"display: grid; grid-template-columns: auto; width: 100%;\">\r\n            <div class=\"pr-3 pl-3\" *ngFor=\"let i of students\" [hidden]=\"!i.active\">\r\n              {{ i.basicDetails.name }} {{ i.basicDetails.studentEmail }}\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n";
     /***/
   },
 
@@ -784,7 +784,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card [hidden]=\"display\">\r\n  <nb-card-body>\r\n    <div class=\"text-center\">\r\n      <img src=\"assets/img/institute.png\" width=\"100px\" height=\"100px\" />\r\n      <h3 class=\"mt-4\">NO INSTITUTE ADDED</h3>\r\n      <small>Click on add Institute Button to create other branches</small>\r\n      <div class=\"mt-4\">\r\n        <button nbButton status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\r\n          ADD INSTITUTE\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"basic\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>\r\n        MY INSTITUTES\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item *ngFor=\"let item of institute; let i = index\">\r\n          <a (click)=\"viewInstitute(item._id)\" style=\"width: 100%; cursor: pointer;\">\r\n            <span\r\n              ><img [src]=\"imageUrl[i]\" width=\"30px\" height=\"30px\" style=\"border-radius: 100%;\"\r\n            /></span>\r\n\r\n            <span class=\"ml-3\">{{ item.basicInfo.name }}</span>\r\n            <span class=\"ml-3\">{{ item.address.city }}</span>\r\n            <span style=\"float: right;\">\r\n              <!-- <nb-icon icon=\"arrow-forward-outline\" status=\"warning\"></nb-icon> -->\r\n              <img src=\"assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n            </span>\r\n          </a>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card>\r\n      <nb-card-body>\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-2\">\r\n            <img src=\"../../../assets/img/home-yellow.png\" alt=\"Add Institute\" />\r\n          </div>\r\n          <div class=\"col-sm-8\">\r\n            <p class=\"font-weight-bold pt-3\">\r\n              ADD INSTITUTE\r\n            </p>\r\n          </div>\r\n          <div class=\"col-sm-2\">\r\n            <a routerLink=\"/pages/membership\">\r\n              <img src=\"assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n            </a>\r\n          </div>\r\n        </div>\r\n      </nb-card-body>\r\n    </nb-card>\r\n    <nb-card>\r\n      <nb-card-body>\r\n        <p class=\"font-weight-bold\">\r\n          SMS BALANCE\r\n        </p>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header\r\n        >UPCOMING CLASS\r\n        <nb-select status=\"control\" placeholder=\"institute\" style=\"float: right;\">\r\n          <nb-option [value]=\"undefined\">Select</nb-option>\r\n          <nb-option *ngFor=\"let item of institute\" value=\"{{ item.basicInfo.name }}\">{{\r\n            item.basicInfo.name\r\n          }}</nb-option>\r\n        </nb-select>\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div class=\"mb-3\" style=\"display: grid; grid-template-columns: 50px auto auto;\">\r\n            <div\r\n              class=\"text-center mr-2\"\r\n              style=\"border-radius: 5px; background-color: skyblue;\"\r\n            ></div>\r\n            <div></div>\r\n\r\n            <div class=\"text-right\"></div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>STUDENT REQUETS </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n          >\r\n            <div>\r\n              <span\r\n                ><img\r\n                  src=\"assets/images/nick.png\"\r\n                  width=\"30px\"\r\n                  height=\"30px\"\r\n                  style=\"border-radius: 100%;\"\r\n              /></span>\r\n            </div>\r\n            <div class=\"pr-3 pl-3\"></div>\r\n\r\n            <div style=\"text-align: right;\">\r\n              <a href=\"#\" class=\"mr-2\">\r\n                <img src=\"assets/img/check.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n              <a href=\"#\">\r\n                <img src=\"assets/img/cross.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header style=\"background-color: skyblue; color: black;\">\r\n        PENDING FEES\r\n        <input id=\"date\" placeholder=\"Pick Date\" [nbDatepicker]=\"formpicker\" />\r\n        <nb-datepicker #formpicker></nb-datepicker>\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            *ngFor=\"let item of studentPendingFee\"\r\n            style=\"display: grid; grid-template-columns: 50px auto auto;\"\r\n          >\r\n            <div class=\"text-center mr-2\" style=\"border-radius: 5px; background-color: skyblue;\">\r\n              <small>\r\n                <b>{{ item.date }}</b>\r\n              </small>\r\n              <small style=\"display: block;\">{{ item.month }}</small>\r\n            </div>\r\n            <div>\r\n              <small\r\n                ><b>{{ item.name }}</b></small\r\n              >\r\n              <small style=\"display: block;\">{{ item.institute }}</small>\r\n              <small style=\"display: block;\">{{ item.batch }}</small>\r\n              <small style=\"display: block;\">{{ item.roll }}</small>\r\n            </div>\r\n            <div style=\"text-align: right;\">\r\n              <small>INR</small>\r\n              <small style=\"display: block;\">{{ item.fee }}</small>\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>LEADS </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n            *ngFor=\"let item of studentReq\"\r\n          >\r\n            <div>\r\n              <span\r\n                ><img\r\n                  src=\"assets/images/nick.png\"\r\n                  width=\"30px\"\r\n                  height=\"30px\"\r\n                  style=\"border-radius: 100%;\"\r\n              /></span>\r\n            </div>\r\n            <div class=\"pr-3 pl-3\">\r\n              <small\r\n                ><b>{{ item.name }}</b> {{ item.msg }} <b>{{ item.institute }}</b></small\r\n              >\r\n              <small style=\"display: block;\">email: {{ item.email }}</small>\r\n              <small style=\"display: block;\">contact: {{ item.contact }}</small>\r\n            </div>\r\n\r\n            <div style=\"text-align: right;\">\r\n              <button nbButton status=\"success\">RESPOND</button>\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>Messages</nb-card-header>\r\n      <nb-list></nb-list>\r\n    </nb-card>\r\n  </div>\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header> New Leads</nb-card-header>\r\n      <nb-list>\r\n        <div\r\n          class=\"mb-3\"\r\n          style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n          *ngFor=\"let msg of messages\"\r\n        ></div>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n";
+    __webpack_exports__["default"] = "<nb-card [hidden]=\"display\">\r\n  <nb-card-body>\r\n    <div class=\"text-center\">\r\n      <img src=\"../../../assets/img/institute.png\" width=\"100px\" height=\"100px\" />\r\n      <h3 class=\"mt-4\">NO INSTITUTE ADDED</h3>\r\n      <small>Click on add Institute Button to create other branches</small>\r\n      <div class=\"mt-4\">\r\n        <button nbButton status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\r\n          ADD INSTITUTE\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"basic\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>\r\n        MY INSTITUTES\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item *ngFor=\"let item of institute; let i = index\">\r\n          <a (click)=\"viewInstitute(item._id)\" style=\"width: 100%; cursor: pointer;\">\r\n            <span\r\n              ><img\r\n                [src]=\"item.basicInfo.logo.secure_url\"\r\n                width=\"30px\"\r\n                height=\"30px\"\r\n                style=\"border-radius: 100%;\"\r\n            /></span>\r\n\r\n            <span class=\"ml-3\">{{ item.basicInfo.name }}</span>\r\n            <span class=\"ml-3\">{{ item.address.city }}</span>\r\n            <span style=\"float: right;\">\r\n              <img src=\"../../../assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n            </span>\r\n          </a>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card>\r\n      <nb-card-body>\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-2\">\r\n            <img src=\"../../../assets/img/home-yellow.png\" alt=\"Add Institute\" />\r\n          </div>\r\n          <div class=\"col-sm-8\">\r\n            <p class=\"font-weight-bold pt-3\">\r\n              ADD INSTITUTE\r\n            </p>\r\n          </div>\r\n          <div class=\"col-sm-2\">\r\n            <a routerLink=\"/pages/membership\">\r\n              <img src=\"assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n            </a>\r\n          </div>\r\n        </div>\r\n      </nb-card-body>\r\n    </nb-card>\r\n    <nb-card>\r\n      <nb-card-body>\r\n        <p class=\"font-weight-bold\">\r\n          SMS BALANCE\r\n        </p>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header\r\n        >UPCOMING CLASS\r\n        <nb-select status=\"control\" placeholder=\"institute\" style=\"float: right;\">\r\n          <nb-option [value]=\"undefined\">Select</nb-option>\r\n          <nb-option *ngFor=\"let item of institute\" value=\"{{ item.basicInfo.name }}\">{{\r\n            item.basicInfo.name\r\n          }}</nb-option>\r\n        </nb-select>\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div class=\"mb-3\" style=\"display: grid; grid-template-columns: 50px auto auto;\">\r\n            <div\r\n              class=\"text-center mr-2\"\r\n              style=\"border-radius: 5px; background-color: skyblue;\"\r\n            ></div>\r\n            <div></div>\r\n\r\n            <div class=\"text-right\"></div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>STUDENT REQUETS </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n          >\r\n            <div>\r\n              <span\r\n                ><img\r\n                  src=\"assets/images/nick.png\"\r\n                  width=\"30px\"\r\n                  height=\"30px\"\r\n                  style=\"border-radius: 100%;\"\r\n              /></span>\r\n            </div>\r\n            <div class=\"pr-3 pl-3\"></div>\r\n\r\n            <div style=\"text-align: right;\">\r\n              <a href=\"#\" class=\"mr-2\">\r\n                <img src=\"assets/img/check.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n              <a href=\"#\">\r\n                <img src=\"assets/img/cross.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header style=\"background-color: skyblue; color: black;\">\r\n        PENDING FEES\r\n        <input id=\"date\" placeholder=\"Pick Date\" [nbDatepicker]=\"formpicker\" />\r\n        <nb-datepicker #formpicker></nb-datepicker>\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            *ngFor=\"let item of studentPendingFee\"\r\n            style=\"display: grid; grid-template-columns: 50px auto auto;\"\r\n          >\r\n            <div class=\"text-center mr-2\" style=\"border-radius: 5px; background-color: skyblue;\">\r\n              <small>\r\n                <b>{{ item.date }}</b>\r\n              </small>\r\n              <small style=\"display: block;\">{{ item.month }}</small>\r\n            </div>\r\n            <div>\r\n              <small\r\n                ><b>{{ item.name }}</b></small\r\n              >\r\n              <small style=\"display: block;\">{{ item.institute }}</small>\r\n              <small style=\"display: block;\">{{ item.batch }}</small>\r\n              <small style=\"display: block;\">{{ item.roll }}</small>\r\n            </div>\r\n            <div style=\"text-align: right;\">\r\n              <small>INR</small>\r\n              <small style=\"display: block;\">{{ item.fee }}</small>\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>LEADS </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n            *ngFor=\"let item of studentReq\"\r\n          >\r\n            <div>\r\n              <span\r\n                ><img\r\n                  src=\"assets/images/nick.png\"\r\n                  width=\"30px\"\r\n                  height=\"30px\"\r\n                  style=\"border-radius: 100%;\"\r\n              /></span>\r\n            </div>\r\n            <div class=\"pr-3 pl-3\">\r\n              <small\r\n                ><b>{{ item.name }}</b> {{ item.msg }} <b>{{ item.institute }}</b></small\r\n              >\r\n              <small style=\"display: block;\">email: {{ item.email }}</small>\r\n              <small style=\"display: block;\">contact: {{ item.contact }}</small>\r\n            </div>\r\n\r\n            <div style=\"text-align: right;\">\r\n              <button nbButton status=\"success\">RESPOND</button>\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>Messages</nb-card-header>\r\n      <nb-list></nb-list>\r\n    </nb-card>\r\n  </div>\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header> New Leads</nb-card-header>\r\n      <nb-list>\r\n        <div\r\n          class=\"mb-3\"\r\n          style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n          *ngFor=\"let msg of messages\"\r\n        ></div>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n";
     /***/
   },
 
@@ -804,7 +804,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-layout>\r\n  <nb-layout-column>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-12 text-center\">\r\n        <nb-card>\r\n          <nb-card-body>\r\n            <nb-list>\r\n              <nb-list-item>\r\n                <div class=\"row\" style=\"width: 100%;\">\r\n                  <div class=\"col-sm-6\"></div>\r\n                  <div class=\"col-sm-2\" style=\"background-color: #ffde00; width: 50%;\">\r\n                    <span style=\"color: white;\">LITE</span><br />\r\n                    <span><b>Rs. 4999</b></span>\r\n                    <small class=\"d-block\">(+18% GST)</small>\r\n                  </div>\r\n                  <div class=\"col-sm-1\"></div>\r\n                  <div class=\"col-sm-2\" style=\"background-color: #009acd; width: 50%;\">\r\n                    <span><b>POWER</b></span\r\n                    ><br />\r\n                    <span style=\"color: white;\"><b>Rs. 14999</b></span>\r\n                    <small class=\"d-block\" style=\"color: white;\">(+18% GST)</small>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\">\r\n                  <span class=\"text-left\">CLASS MANAGEMENT</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>STUDENT MANAGEMENT</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>ATTENDANCE MANAGEMENT</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>STUDY MATERIAL STORAGE & SHARING</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>STUDENT PERFORMANCE TRACKER</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>SMART COMMUNICATION MODULE</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>FEE MANAGEMENT</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>INSIGHTFUL BUSINESS REPORTS</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>REAL TIME NOTIFICATIONS</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>REMINDER AND ALERTS</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>MOBILE APP ACCESS</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>LEADS MANAGER</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>ONLINE COURSE CREATION</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>LIVE CLASSES</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"close-outline\" status=\"danger\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>RECORDED CLASSES</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"close-outline\" status=\"danger\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left pb-4\"\r\n                  style=\"\r\n                    display: grid;\r\n                    grid-template-columns: 40% auto auto;\r\n                    width: 100%;\r\n                    background-color: #373435;\r\n                  \"\r\n                >\r\n                  <span><br /></span>\r\n                  <span><br /></span>\r\n                  <span><br /></span>\r\n                  <span></span>\r\n                  <div class=\"text-center\">\r\n                    <button\r\n                      nbButton\r\n                      status=\"warning\"\r\n                      style=\"color: black; width: 50%;\"\r\n                      (click)=\"onClick()\"\r\n                    >\r\n                      Activate\r\n                    </button>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <button nbButton style=\"color: white; width: 50%; background-color: #009acd;\">\r\n                      Comming Soon\r\n                    </button>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n            </nb-list>\r\n          </nb-card-body>\r\n        </nb-card>\r\n      </div>\r\n    </div>\r\n  </nb-layout-column>\r\n</nb-layout>\r\n";
+    __webpack_exports__["default"] = "<nb-layout>\r\n  <nb-layout-column>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-12 text-center\">\r\n        <nb-card>\r\n          <nb-card-body>\r\n            <nb-list>\r\n              <nb-list-item>\r\n                <div class=\"row\" style=\"width: 100%;\">\r\n                  <div class=\"col-sm-6\"></div>\r\n                  <div class=\"col-sm-2\" style=\"background-color: #ffde00; width: 50%;\">\r\n                    <span style=\"color: white;\">LITE</span><br />\r\n                    <span><b>Rs. 4999</b></span>\r\n                    <small class=\"d-block\">(+18% GST)</small>\r\n                  </div>\r\n                  <div class=\"col-sm-1\"></div>\r\n                  <div class=\"col-sm-2\" style=\"background-color: #009acd; width: 50%;\">\r\n                    <span><b>POWER</b></span\r\n                    ><br />\r\n                    <span style=\"color: white;\"><b>Rs. 14999</b></span>\r\n                    <small class=\"d-block\" style=\"color: white;\">(+18% GST)</small>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\">\r\n                  <span class=\"text-left\">CLASS MANAGEMENT</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>STUDENT MANAGEMENT</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>ATTENDANCE MANAGEMENT</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>STUDY MATERIAL STORAGE & SHARING</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>STUDENT PERFORMANCE TRACKER</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>SMART COMMUNICATION MODULE</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>FEE MANAGEMENT</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>INSIGHTFUL BUSINESS REPORTS</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>REAL TIME NOTIFICATIONS</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>REMINDER AND ALERTS</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>MOBILE APP ACCESS</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>LEADS MANAGER</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>ONLINE COURSE CREATION</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>LIVE CLASSES</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"close-outline\" status=\"danger\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left\"\r\n                  style=\"display: grid; grid-template-columns: 40% auto auto; width: 100%;\"\r\n                >\r\n                  <span>RECORDED CLASSES</span>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"close-outline\" status=\"danger\"></nb-icon>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <nb-icon icon=\"checkmark-outline\" status=\"success\"></nb-icon>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n              <nb-list-item>\r\n                <div\r\n                  class=\"text-left pb-4\"\r\n                  style=\"\r\n                    display: grid;\r\n                    grid-template-columns: 40% auto auto;\r\n                    width: 100%;\r\n                    background-color: #373435;\r\n                  \"\r\n                >\r\n                  <span><br /></span>\r\n                  <span><br /></span>\r\n                  <span><br /></span>\r\n                  <span></span>\r\n                  <div class=\"text-center\">\r\n                    <button\r\n                      nbButton\r\n                      status=\"warning\"\r\n                      style=\"color: black; width: 50%;\"\r\n                      (click)=\"activate('4999', 'Lite')\"\r\n                    >\r\n                      Activate\r\n                    </button>\r\n                  </div>\r\n                  <div class=\"text-center\">\r\n                    <button nbButton style=\"color: white; width: 50%; background-color: #009acd;\">\r\n                      Comming Soon\r\n                    </button>\r\n                  </div>\r\n                </div>\r\n              </nb-list-item>\r\n            </nb-list>\r\n          </nb-card-body>\r\n        </nb-card>\r\n      </div>\r\n    </div>\r\n  </nb-layout-column>\r\n</nb-layout>\r\n";
     /***/
   },
 
@@ -905,27 +905,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.api = api;
         this.router = router;
         this.active = active;
-        this.institutes = [];
-        this.institute = [];
-        this.myInstitute = {
-          institute: {
-            basicInfo: {
-              name: '',
-              logo: null,
-              instituteContact: ''
-            },
-            address: {
-              addressLine: '',
-              city: '',
-              state: '',
-              pincode: ''
-            },
-            category: [''],
-            instituteMetaTag: ['']
-          }
-        };
         this.students = [];
-        this.display = false;
         this.studentReq = [];
         this.classes = [];
         this.studentPendingFee = [];
@@ -935,72 +915,55 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ECommerceComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.getInstitutes();
-          this.routerId = this.active.snapshot.paramMap.get('id');
-          this.getStudents(this.routerId);
-          this.getInstitute(this.routerId);
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][11].link = '/pages/institute/manage-schedule/' + this.routerId;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][12].link = '/pages/institute/attandance/' + this.routerId;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][2].link = '/pages/dashboard/' + this.routerId;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][5].children[0].link = '/pages/institute/add-students/' + this.routerId;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][5].children[1].link = '/pages/institute/manage-students/' + this.routerId;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][5].children[2].link = '/pages/institute/pending-students/' + this.routerId;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].children[0].link = '/pages/institute/branch-config/manage-course/' + this.routerId;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].children[1].link = '/pages/institute/branch-config/manage-batch/' + this.routerId;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].children[2].link = '/pages/institute/branch-config/manage-discount/' + this.routerId;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].children[3].link = '/pages/institute/branch-config/manage-receipt/' + this.routerId;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].children[4].link = '/pages/institute/branch-config/manage-role-management/' + this.routerId;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][6].children[0].link = '/pages/communication/announcements/' + this.routerId;
-        }
-      }, {
-        key: "getInstitutes",
-        value: function getInstitutes() {
-          var _this = this;
-
-          this.api.getInstitutes().subscribe(function (data) {
-            _this.institutes = data; // console.log('institutes - ' + JSON.stringify(this.institutes));
-
-            _this.institute = JSON.parse(JSON.stringify(_this.institutes)); // console.log(this.institute);
-          });
-          this.display = true;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][1].hidden = true;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][2].hidden = false;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][3].hidden = false;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].hidden = false;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][5].hidden = false;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][6].hidden = false; //    MENU_ITEMS[7].hidden =false;
-          //    MENU_ITEMS[8].hidden =false;
-          //    MENU_ITEMS[9].hidden =false;
-          //    MENU_ITEMS[10].hidden =false;
-
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][11].hidden = false;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][12].hidden = false;
+          this.display = false;
+          this.instituteId = this.active.snapshot.paramMap.get('id');
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][11].link = '/pages/institute/manage-schedule/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][12].link = '/pages/institute/attandance/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][2].link = '/pages/dashboard/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][5].children[0].link = '/pages/institute/add-students/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][5].children[1].link = '/pages/institute/manage-students/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][5].children[2].link = '/pages/institute/pending-students/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].children[0].link = '/pages/institute/branch-config/manage-course/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].children[1].link = '/pages/institute/branch-config/manage-batch/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].children[2].link = '/pages/institute/branch-config/manage-discount/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].children[3].link = '/pages/institute/branch-config/manage-receipt/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].children[4].link = '/pages/institute/branch-config/manage-employee/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][6].children[0].link = '/pages/communication/announcements/' + this.instituteId;
+          this.getStudents(this.instituteId);
+          this.getInstitute(this.instituteId);
         }
       }, {
         key: "getInstitute",
         value: function getInstitute(id) {
-          var _this2 = this;
+          var _this = this;
 
           this.api.getInstitute(id).subscribe(function (res) {
-            var inst = JSON.stringify(res);
-            _this2.myInstitute = JSON.parse(inst); // console.log(this.myInstitute);
+            _this.myInstitute = res;
+            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][1].hidden = true;
+            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][2].hidden = false;
+            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][3].hidden = false;
+            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].hidden = false;
+            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][5].hidden = false;
+            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][6].hidden = false; // MENU_ITEMS[7].hidden = false;
+            // MENU_ITEMS[8].hidden = false;
+            // MENU_ITEMS[9].hidden = false;
+            // MENU_ITEMS[10].hidden = false;
+
+            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][11].hidden = false;
+            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][12].hidden = false;
+            _this.display = true;
           });
         }
       }, {
         key: "getStudents",
         value: function getStudents(id) {
-          var _this3 = this;
+          var _this2 = this;
 
-          this.api.getStudents(id).subscribe(function (data) {
-            _this3.students = data; // console.log('students =>', this.students);
+          this.api.getStudents(id).subscribe(function (res) {
+            _this2.students = res;
           }, function (err) {
             return console.error(err);
           });
-        }
-      }, {
-        key: "onClick",
-        value: function onClick() {
-          this.router.navigate(['/pages/institute/add-institute']);
         }
       }]);
 
@@ -1114,11 +1077,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.active = active;
         this.domSanitizer = domSanitizer;
         this.institute = [];
-        this.images = [];
         this.students = [];
-        this.display = false;
         this.studentReq = [];
-        this.imageUrl = [];
         this.classes = [];
         this.fee = ['week', 'month'];
         this.studentPendingFee = [];
@@ -1129,6 +1089,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(HomeComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          this.display = false;
           this.getInstitutes();
           _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][1].hidden = false;
           _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][2].hidden = true;
@@ -1140,51 +1101,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][8].hidden = true;
           _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][9].hidden = true;
           _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][10].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][11].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][12].hidden = true;
         }
       }, {
         key: "getInstitutes",
         value: function getInstitutes() {
-          var _this4 = this;
+          var _this3 = this;
 
-          setTimeout(function () {
-            _this4.api.getInstitutes().subscribe(function (data) {
-              _this4.institutes = data; // console.log('institutes - ' + JSON.stringify(this.institutes));
+          this.api.getInstitutes().subscribe(function (data) {
+            _this3.institutes = data;
+            _this3.institute = JSON.parse(JSON.stringify(_this3.institutes));
 
-              _this4.institute = JSON.parse(JSON.stringify(_this4.institutes)); // console.log('from home===============>',this.institute);
-
-              if (_this4.institute.length) {
-                _this4.display = true; // console.log(this.display);
-              } // tslint:disable-next-line: no-shadowed-variable
-
-
-              _this4.institute.forEach(function (data, i, a) {
-                // console.log('=>' ,data.basicInfo.logo.data.data)
-                var TYPED_ARRAY = new Uint8Array(data.basicInfo.logo.data.data);
-                _this4.STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY); // console.log('string char => ', i , '  ', this.STRING_CHAR);
-                // tslint:disable-next-line: no-shadowed-variable
-
-                _this4.STRING_CHAR = TYPED_ARRAY.reduce(function (data, _byte) {
-                  return data + String.fromCharCode(_byte);
-                }, '');
-                _this4.base64String = btoa(_this4.STRING_CHAR); // console.log('base64'+ i, this.base64String);
-
-                _this4.imageUrl.push(_this4.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + _this4.base64String)); // console.log('imageUrls => ', this.imageUrl);
-
-              }, _this4);
-            });
-          }, 0);
-        } // getInstitutes(){
-        // 	this.api.getInstitutes().subscribe(data => {
-        // 		this.institutes = data;
-        // 			console.log(this.institutes);
-        // 			if(this.institutes[1])
-        // 		{
-        // 			this.display = true;
-        // 			console.log(this.display);
-        // 		}
-        // 	},err=>console.error(err))
-        // }
-
+            if (_this3.institute.length) {
+              _this3.display = true;
+            }
+          });
+        }
       }, {
         key: "onClick",
         value: function onClick() {
@@ -1198,11 +1131,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngOnDestroy",
         value: function ngOnDestroy() {
-          var _this5 = this;
-
-          setTimeout(function () {
-            _this5.institutes = null;
-          }, 0);
+          this.institutes = null;
         }
       }]);
 
@@ -1302,48 +1231,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/fesm2015/router.js"); // declare var Razorpay: any;
-
+    "./node_modules/@angular/router/fesm2015/router.js");
 
     var MembershipComponent = /*#__PURE__*/function () {
-      // rzp1 = new Razorpay(this.options);
-      function MembershipComponent(router, paymentService) {
-        var _this6 = this;
-
+      function MembershipComponent(paymentService, router, route) {
         _classCallCheck(this, MembershipComponent);
 
-        this.router = router;
         this.paymentService = paymentService;
-        this.options = {
-          key: '',
-          amount: '',
-          currency: 'INR',
-          name: 'eduatlas',
-          description: 'Test Transaction',
-          image: 'https://example.com/your_logo',
-          order_id: '',
-          handler: function handler(response) {
-            console.log(response);
-
-            _this6.verifyPayment(response);
-          },
-          modal: {
-            ondismiss: function ondismiss() {
-              console.log('Checkout form closed');
-            }
-          },
-          prefill: {
-            name: '',
-            email: '',
-            contact: ''
-          },
-          notes: {
-            address: 'Razorpay Corporate Office'
-          },
-          theme: {
-            color: '#ffd500'
-          }
-        };
+        this.router = router;
+        this.route = route;
       }
 
       _createClass(MembershipComponent, [{
@@ -1360,38 +1256,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           _pages_menu__WEBPACK_IMPORTED_MODULE_3__["MENU_ITEMS"][10].hidden = true;
         }
       }, {
-        key: "pay",
-        value: function pay() {// this.rzp1.open();
-        }
-      }, {
-        key: "generateOrder",
-        value: function generateOrder() {
-          var _this7 = this;
-
-          this.paymentService.generateOrder('', {}).subscribe(function (res) {
-            console.log(res);
-            _this7.options.amount = res.amount;
-            _this7.options.order_id = res.id;
-            _this7.options.currency = res.currency; // this.rzp1 = new Razorpay(this.options);
-
-            _this7.pay();
-          }, function (err) {
-            console.log(err);
+        key: "activate",
+        value: function activate(amount, planType) {
+          this.paymentService.setPaymentDetails(amount, planType);
+          this.router.navigate(['/pages/institute/add-institute'], {
+            relativeTo: this.route
           });
-        }
-      }, {
-        key: "verifyPayment",
-        value: function verifyPayment(data) {
-          this.paymentService.verifyPayment('', data).subscribe(function (res) {
-            console.log(res);
-          }, function (err) {
-            console.log(err);
-          });
-        }
-      }, {
-        key: "onClick",
-        value: function onClick() {
-          this.router.navigate(['/pages/institute/add-institute']);
         }
       }]);
 
@@ -1400,9 +1270,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     MembershipComponent.ctorParameters = function () {
       return [{
+        type: _services_payment_service__WEBPACK_IMPORTED_MODULE_1__["PaymentService"]
+      }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
       }, {
-        type: _services_payment_service__WEBPACK_IMPORTED_MODULE_1__["PaymentService"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
       }];
     };
 
@@ -1414,7 +1286,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./membership.component.scss */
       "./src/app/pages/membership/membership.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _services_payment_service__WEBPACK_IMPORTED_MODULE_1__["PaymentService"]])], MembershipComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_payment_service__WEBPACK_IMPORTED_MODULE_1__["PaymentService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]])], MembershipComponent);
     /***/
   },
 
@@ -1755,50 +1627,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       hidden: true,
       children: [{
         title: 'Courses',
-        // children:[
-        //   {
-        //     title:'Add Course',
-        // link:'/pages/institute/branch-config/add-courses'
-        // },
-        // {
-        //   title:'Manage Courses',
         link: '/pages/institute/branch-config/manage-course'
       }, {
         title: 'Batches',
-        //  children:[
-        //   {
-        //     title:'Add Batches',
-        // link:'/pages/institute/branch-config/add-batches'
-        //   },
-        //   {
-        //     title:'Manage Batches',
         link: '/pages/institute/branch-config/manage-batch'
       }, {
         title: 'Discount',
-        //  children:[
-        //   {
-        //     title:'Add Discount',
-        // link:'/pages/institute/branch-config/discount'
-        //   },
-        //   {
-        //     title:'Manage Discount',
         link: '/pages/institute/branch-config/manage-discount'
       }, {
         title: 'Receipt',
-        // children:[
-        //   {
-        //     title:'Add Receipt',
-        // link:'/pages/institute/branch-config/receipt-conf'
-        //   },
-        //   {
-        //     title:'Manage Receipt',
         link: '/pages/institute/branch-config/manage-receipt'
       }, {
-        title: 'Role',
-        // children:[
-        //   {
-        //     title:'Add Role',
-        link: '/pages/institute/branch-config/role-management'
+        title: 'Manage Employee',
+        link: '/pages/institute/branch-config/manage-employee'
       }]
     }, {
       title: 'Students',
@@ -2233,22 +2074,46 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         _classCallCheck(this, PaymentService);
 
         this.http = http;
+        this.paymentDetails = {
+          amount: null,
+          planType: null
+        };
       }
 
       _createClass(PaymentService, [{
+        key: "getPaymentDetails",
+        value: function getPaymentDetails() {
+          return this.paymentDetails;
+        }
+      }, {
+        key: "setPaymentDetails",
+        value: function setPaymentDetails(amount, planType) {
+          this.paymentDetails.amount = amount;
+          this.paymentDetails.planType = planType;
+        }
+      }, {
+        key: "deleteOrder",
+        value: function deleteOrder(id) {
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/payment/deleteOrder/', {
+            _id: id
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        }
+      }, {
         key: "generateOrder",
-        value: function generateOrder(id, options) {
-          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/payment/orderGenerate/' + id, options).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        value: function generateOrder(order) {
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/payment/orderGenerate/', order).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
         key: "verifyPayment",
-        value: function verifyPayment(id, payment) {
-          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/payment/verifyPayment/' + id, payment).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        value: function verifyPayment(payment, placedOrder) {
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/payment/verifyPayment/', {
+            payment: payment,
+            receipt: placedOrder
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
         key: "handleError",
         value: function handleError(error) {
-          // console.log(error);
           return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
         }
       }]);

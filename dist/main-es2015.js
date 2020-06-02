@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"header-container\">\n  <div class=\"logo-container\">\n    <a (click)=\"toggleSidebar()\" href=\"#\" class=\"sidebar-toggle\">\n      <nb-icon icon=\"menu-2-outline\"></nb-icon>\n    </a>\n    <a class=\"logo\" href=\"#\" (click)=\"navigateHome()\">\n      <img src=\"../../../../assets/img/eduatlas.png\" width=\"100%\" />\n    </a>\n  </div>\n  <nb-card class=\"mt-4\">\n    <nb-select status=\"primary\" placeholder=\"Select Institute\" (selectedChange)=\"onSelect($event)\">\n      <nb-option value=\"undefined\">Select Institute</nb-option>\n      <nb-option *ngFor=\"let item of institute\" value=\"{{ item._id }}\">{{\n        item.basicInfo.name\n      }}</nb-option>\n    </nb-select>\n  </nb-card>\n</div>\n\n<div class=\"header-container\">\n  <nb-actions size=\"small\">\n    <nb-action class=\"control-item\" icon=\"email-outline\"></nb-action>\n    <nb-action class=\"control-item\" icon=\"bell-outline\"></nb-action>\n    <nb-action class=\"control-item\" icon=\"power\" (click)=\"logout()\"></nb-action>\n\n    <nb-action class=\"user-action\" *nbIsGranted=\"['view', 'user']\">\n      <nb-user [name]=\"name\" [nbContextMenu]=\"userMenu\"> </nb-user>\n    </nb-action>\n  </nb-actions>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"header-container\">\n  <div class=\"logo-container\">\n    <a (click)=\"toggleSidebar()\" href=\"#\" class=\"sidebar-toggle\">\n      <nb-icon icon=\"menu-2-outline\"></nb-icon>\n    </a>\n    <a class=\"logo\" href=\"#\" (click)=\"navigateHome()\">\n      <img src=\"../../../../assets/img/eduatlas.png\" width=\"100%\" />\n    </a>\n  </div>\n\n  <nb-card class=\"mt-4\">\n    <nb-select\n      status=\"primary\"\n      placeholder=\"Select Institute\"\n      fullWidth\n      (selectedChange)=\"onSelect($event)\"\n    >\n      <nb-option value=\"undefined\">Select Institute</nb-option>\n      <nb-option *ngFor=\"let item of institute\" value=\"{{ item._id }}\">{{\n        item.basicInfo.name\n      }}</nb-option>\n    </nb-select>\n  </nb-card>\n</div>\n\n<div class=\"header-container\">\n  <nb-actions size=\"small\">\n    <nb-action class=\"control-item\" icon=\"email-outline\"></nb-action>\n    <nb-action class=\"control-item\" icon=\"bell-outline\"></nb-action>\n    <nb-action class=\"control-item\" icon=\"power\" (click)=\"logout()\"></nb-action>\n    <nb-action class=\"user-action\" *nbIsGranted=\"['view', 'user']\">\n      <nb-user [name]=\"name\" [nbContextMenu]=\"userMenu\"> </nb-user>\n    </nb-action>\n  </nb-actions>\n</div>\n");
 
 /***/ }),
 
@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"wrapper fadeInDown\" style=\"background-color: #fce062;\">\r\n  <div id=\"formContent\">\r\n    <!-- Tabs Titles -->\r\n    <nb-layout>\r\n      <nb-layout-column style=\"background-color: white; height: auto;\">\r\n        <nb-card style=\"box-shadow: none;\">\r\n          <nb-card-body\r\n            class=\"text-center\"\r\n            style=\"\r\n              background-image: url('assets/images/loginBack.png');\r\n              background-size: cover;\r\n              background-repeat: no-repeat;\r\n              box-shadow: none;\r\n              background-position: 0 15rem;\r\n            \"\r\n          >\r\n            <!-- <h2 class=\"inactive underlineHover\">Sign Up </h2> -->\r\n\r\n            <!-- Icon -->\r\n            <div class=\"fadeIn first mb-5\" style=\"margin-top: -15px;\">\r\n              <img src=\"assets/img/EA FAVI.png\" id=\"icon\" alt=\"User Icon\" style=\"width: 25%;\" />\r\n            </div>\r\n\r\n            <span\r\n              style=\"color: #fce062; font-size: 70px; letter-spacing: -6px; font-weight: bolder;\"\r\n              >HELLO\r\n            </span>\r\n            <span style=\"font-size: 15px; color: #192038; display: block;\"\r\n              >Sign in to your account</span\r\n            >\r\n            <!-- Login Form -->\r\n            <form class=\"mt-3\" [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\r\n              <input\r\n                type=\"text\"\r\n                maxlength=\"10\"\r\n                class=\"fadeIn second\"\r\n                formControlName=\"phone\"\r\n                placeholder=\"Enter Phone Number\"\r\n              />\r\n              <div\r\n                *ngIf=\"\r\n                  loginForm.get('phone').errors &&\r\n                  loginForm.get('phone').invalid &&\r\n                  loginForm.get('phone').touched\r\n                \"\r\n              >\r\n                <small *ngIf=\"loginForm.get('phone').errors?.required\"\r\n                  >*This field is required</small\r\n                >\r\n                <small *ngIf=\"loginForm.get('phone').errors?.pattern\"\r\n                  >*Enter Correct Phone Number</small\r\n                >\r\n              </div>\r\n              <input\r\n                type=\"password\"\r\n                class=\"fadeIn third\"\r\n                name=\"password\"\r\n                formControlName=\"password\"\r\n                placeholder=\"Password\"\r\n              />\r\n              <div *ngIf=\"loginForm.get('password').invalid && loginForm.get('password').touched\">\r\n                <small>*Enter Password</small>\r\n              </div>\r\n              <br /><br />\r\n              <button type=\"submit\" class=\"fadeIn fourth\">Login</button>\r\n              <a routerLink=\"/forgot-password\" style=\"color: black; margin-top: -1rem;\"\r\n                >Forgot Password ?</a\r\n              >\r\n            </form>\r\n\r\n            <div class=\"text-right\">\r\n              <h1 class=\"pt-1\" style=\"font-weight: bolder; letter-spacing: -2px;\">NEW USER?</h1>\r\n              <p class=\"float-right\" style=\"color: white;\">\r\n                Creat your FREE Eduatlas <br />accounu8bt today\r\n              </p>\r\n              <button class=\"fadeIn text-right\" routerLink=\"/sign-up\">Sign Up</button><br />\r\n            </div>\r\n          </nb-card-body>\r\n        </nb-card>\r\n      </nb-layout-column>\r\n    </nb-layout>\r\n  </div>\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"wrapper fadeInDown\" style=\"background-color: #fce062;\">\r\n  <div id=\"formContent\">\r\n    <!-- Tabs Titles -->\r\n    <nb-layout>\r\n      <nb-layout-column style=\"background-color: white; height: auto;\">\r\n        <nb-card style=\"box-shadow: none;\">\r\n          <nb-card-body\r\n            class=\"text-center\"\r\n            style=\"\r\n              background-image: url('assets/images/loginBack.png');\r\n              background-size: cover;\r\n              background-repeat: no-repeat;\r\n              box-shadow: none;\r\n              background-position: 0 15rem;\r\n            \"\r\n          >\r\n            <!-- <h2 class=\"inactive underlineHover\">Sign Up </h2> -->\r\n\r\n            <!-- Icon -->\r\n            <div class=\"fadeIn first mb-5\" style=\"margin-top: -15px;\">\r\n              <img src=\"assets/img/EA FAVI.png\" id=\"icon\" alt=\"User Icon\" style=\"width: 25%;\" />\r\n            </div>\r\n\r\n            <span\r\n              style=\"color: #fce062; font-size: 70px; letter-spacing: -6px; font-weight: bolder;\"\r\n              >HELLO\r\n            </span>\r\n            <span style=\"font-size: 15px; color: #192038; display: block;\"\r\n              >Sign in to your account</span\r\n            >\r\n            <!-- Login Form -->\r\n            <form class=\"mt-3\" [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\r\n              <input\r\n                type=\"text\"\r\n                maxlength=\"100\"\r\n                class=\"fadeIn second\"\r\n                formControlName=\"userId\"\r\n                placeholder=\"Enter Email or Phone Number\"\r\n              />\r\n              <div\r\n                *ngIf=\"\r\n                  loginForm.get('userId').errors &&\r\n                  loginForm.get('userId').invalid &&\r\n                  loginForm.get('userId').touched\r\n                \"\r\n              >\r\n                <small *ngIf=\"loginForm.get('userId').errors?.required\"\r\n                  >*This field is required</small\r\n                >\r\n                <!-- <small *ngIf=\"loginForm.get('userId').errors?.pattern\"\r\n                  >*Enter Correct Email or Phone Number</small\r\n                > -->\r\n              </div>\r\n              <input\r\n                type=\"password\"\r\n                class=\"fadeIn third\"\r\n                name=\"password\"\r\n                formControlName=\"password\"\r\n                placeholder=\"Password\"\r\n              />\r\n              <div *ngIf=\"loginForm.get('password').invalid && loginForm.get('password').touched\">\r\n                <small>*Enter Password</small>\r\n              </div>\r\n              <br /><br />\r\n              <button type=\"submit\" class=\"fadeIn fourth\">Login</button>\r\n              <a routerLink=\"/forgot-password\" style=\"color: black; margin-top: -1rem;\"\r\n                >Forgot Password ?</a\r\n              >\r\n            </form>\r\n\r\n            <div class=\"text-right\">\r\n              <h1 class=\"pt-1\" style=\"font-weight: bolder; letter-spacing: -2px;\">NEW USER?</h1>\r\n              <p class=\"float-right\" style=\"color: white;\">\r\n                Creat your FREE Eduatlas <br />account today\r\n              </p>\r\n              <button class=\"fadeIn text-right\" routerLink=\"/sign-up\">Sign Up</button><br />\r\n            </div>\r\n          </nb-card-body>\r\n        </nb-card>\r\n      </nb-layout-column>\r\n    </nb-layout>\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -5239,15 +5239,12 @@ let ForgotPasswordComponent = class ForgotPasswordComponent {
     getOtp() {
         if (this.forgotPasswordForm.controls.phone.valid) {
             this.phone = this.forgotPasswordForm.value.phone;
-            // console.log(this.phone);
             let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpParams"]();
             param = param.append('register', '0');
             this.otpService.getOtpForRegisteredUser(this.phone, param).subscribe((data) => {
-                // console.log(data);
                 this.otpSend = true;
                 this.showToast('top-right', 'success', 'OTP Send');
             }, (error) => {
-                // console.log(error);
                 this.showToast('top-right', 'danger', 'This Phone Number is not valid');
             });
         }
@@ -5262,11 +5259,9 @@ let ForgotPasswordComponent = class ForgotPasswordComponent {
                 phone: this.phone,
             };
             this.otpService.verifyOtp(verificationData).subscribe((data) => {
-                // console.log(data);
                 this.otpVerified = true;
                 this.showToast('top-right', 'success', 'Verified Successfully');
             }, (error) => {
-                // console.log(error);
                 this.showToast('top-right', 'danger', 'Invalid OTP');
             });
         }
@@ -5280,11 +5275,9 @@ let ForgotPasswordComponent = class ForgotPasswordComponent {
                 password: this.forgotPasswordForm.value.password,
             };
             this.otpService.setPassword(data).subscribe((res) => {
-                // console.log(res);
                 this.showToast('top-right', 'success', 'Successfully set password');
                 this.router.navigate(['/login'], { relativeTo: this.route });
             }, (err) => {
-                // console.log(err);
                 this.showToast('top-right', 'danger', 'Error While Resetting Password');
             });
         }
@@ -5359,23 +5352,23 @@ let LoginComponent = class LoginComponent {
     }
     ngOnInit() {
         this.loginForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
-            phone: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required] }),
+            userId: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required] }),
             password: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required] }),
-        });
+        }, {});
     }
     onSubmit() {
         if (this.loginForm.invalid) {
             return;
         }
-        const phone = this.loginForm.value.phone;
+        const userId = this.loginForm.value.userId;
         const password = this.loginForm.value.password;
         let authObs;
-        authObs = this.authService.login(phone, password);
+        authObs = this.authService.login(userId, password);
         authObs.subscribe((resData) => {
             if (resData.verifyOtp) {
                 this.router.navigate(['/otp'], {
                     relativeTo: this.route,
-                    queryParams: { phone, type: 'login' },
+                    queryParams: { phone: resData.phone, type: 'login' },
                 });
             }
             else {
@@ -5393,10 +5386,9 @@ let LoginComponent = class LoginComponent {
             }
             this.loginForm.reset();
         }, (errorMessage) => {
-            this.showToast('top-right', 'danger', 'Invalid Password');
+            this.showToast('top-right', 'danger', 'Invalid User Id or Password');
         });
     }
-    //  console.log(this.login.value);
     showToast(position, status, message) {
         this.toasterService.show(status, message, {
             position,
@@ -5481,9 +5473,9 @@ let OtpComponent = class OtpComponent {
     }
     getOtp() {
         this.otpService.getOtp(this.phone).subscribe((res) => {
-            // console.log(res);
-        }, (error) => {
-            // console.log(error);
+            this.showToast('top-right', 'success', 'OTP Sent to ' + this.phone);
+        }, (err) => {
+            this.showToast('top-right', 'danger', err.error.message);
         });
     }
     verifyOtp(otp) {
@@ -5496,7 +5488,7 @@ let OtpComponent = class OtpComponent {
             if (this.loginOTP) {
                 if (res._id) {
                     this.authService.loginSuccess(res);
-                    this.showToast('top-right', 'success', 'OTO Verification Successful');
+                    this.showToast('top-right', 'success', 'OTP Verification Successful');
                     setTimeout(() => {
                         this.router.navigate(['/pages/home'], {
                             relativeTo: this.route,
@@ -5505,13 +5497,12 @@ let OtpComponent = class OtpComponent {
                 }
             }
             else {
-                this.showToast('top-right', 'success', 'Successfully Registered');
+                this.showToast('top-right', 'success', 'OTP verified, Successfully Registered');
                 setTimeout(() => {
                     this.router.navigate(['/login']);
                 }, 1000);
             }
         }, (err) => {
-            // console.log(err);
             this.showToast('top-right', 'danger', err.error.message);
         });
     }
@@ -5571,9 +5562,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth-services/auth.service */ "./src/app/services/auth-services/auth.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _services_auth_services_otp_otp_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/auth-services/otp/otp.service */ "./src/app/services/auth-services/otp/otp.service.ts");
-/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
-
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
 
 
 
@@ -5581,11 +5570,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SignUpComponent = class SignUpComponent {
-    constructor(authService, router, toasterService, otpService) {
+    constructor(authService, router, toasterService) {
         this.authService = authService;
         this.router = router;
         this.toasterService = toasterService;
-        this.otpService = otpService;
         this.tnc = false;
     }
     ngOnInit() {
@@ -5610,7 +5598,6 @@ let SignUpComponent = class SignUpComponent {
     }
     acceptTermsAndConditions(tnc) {
         this.tnc = tnc;
-        // console.log(tnc);
     }
     onSignUp() {
         if (this.signUpForm.invalid || !this.tnc) {
@@ -5623,24 +5610,15 @@ let SignUpComponent = class SignUpComponent {
             password: this.signUpForm.value.password,
             role: this.signUpForm.value.role,
         };
-        // this.registerUser.removeControl(name)
-        // console.log(user);
         this.authService.findUser(user.phone, user.email).subscribe((res) => {
-            // console.log(res);
             if (res.success) {
-                this.authService.signUp(user).subscribe((signupRes) => {
-                    // console.log(signupRes);
-                    //  this.dialog.open(SuccessComponent,
-                    //   {context:{title:'title'},
-                    // })
+                this.authService.signUp(user).subscribe((signUpRes) => {
                     this.router.navigate(['/otp'], { queryParams: { phone: user.phone } });
                 }, (err) => {
-                    // console.log(err);
                     this.showToast('top-right', 'danger', 'This Email or Phone already exist');
                 });
             }
         }, (err) => {
-            // console.log(err.error.message);
             this.showToast('top-right', 'danger', err.error.message);
         });
     }
@@ -5651,8 +5629,7 @@ let SignUpComponent = class SignUpComponent {
 SignUpComponent.ctorParameters = () => [
     { type: _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
-    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_6__["NbToastrService"] },
-    { type: _services_auth_services_otp_otp_service__WEBPACK_IMPORTED_MODULE_5__["OtpService"] }
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"] }
 ];
 SignUpComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -5662,8 +5639,7 @@ SignUpComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
         _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
-        _nebular_theme__WEBPACK_IMPORTED_MODULE_6__["NbToastrService"],
-        _services_auth_services_otp_otp_service__WEBPACK_IMPORTED_MODULE_5__["OtpService"]])
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"]])
 ], SignUpComponent);
 
 
@@ -5868,11 +5844,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_otp_otp_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./admin/otp/otp.component */ "./src/app/admin/otp/otp.component.ts");
 /* harmony import */ var _admin_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./admin/forgot-password/forgot-password.component */ "./src/app/admin/forgot-password/forgot-password.component.ts");
 
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 
 
 
@@ -5920,7 +5891,6 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbStepperModule"],
             _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbInputModule"],
             _nebular_eva_icons__WEBPACK_IMPORTED_MODULE_12__["NbEvaIconsModule"],
-            // InMemoryWebApiModule.forRoot(UserData),
             _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbToastrModule"].forRoot(),
             _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"],
             _theme_theme_module__WEBPACK_IMPORTED_MODULE_6__["ThemeModule"].forRoot(),
@@ -5965,7 +5935,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AuthGuard = class AuthGuard {
-    // Inject Router so we can hand off the user to the Login Page
     constructor(authService, router) {
         this.authService = authService;
         this.router = router;
@@ -6029,12 +5998,9 @@ let ApiService = class ApiService {
     }
     getInstitute(id) {
         const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/oneInstitute/${id}`;
-        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
-    addInstitute(institute) {
-        // console.log('Institute - ', institute);
+    addInstitute(institute, paymentDetails) {
         const postData = new FormData();
         const data = {
             basicInfo: {
@@ -6055,12 +6021,11 @@ let ApiService = class ApiService {
         postData.append('address', JSON.stringify(data.address));
         postData.append('metaTag', JSON.stringify(institute.instituteMetaTag));
         postData.append('category', JSON.stringify(institute.category));
+        postData.append('paymentDetails', JSON.stringify(paymentDetails));
         postData.append('logo', institute.logo, institute.name);
         return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/addInstitute', postData).pipe(
         // tslint:disable-next-line: no-shadowed-variable
-        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     updateInstitute(id, institute) {
         const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/updateInstitute/${id}`;
@@ -6084,7 +6049,9 @@ let ApiService = class ApiService {
         postData.append('address', JSON.stringify(data.address));
         postData.append('metaTag', JSON.stringify(institute.instituteMetaTag));
         postData.append('category', JSON.stringify(institute.category));
-        postData.append('logo', institute.logo, institute.name);
+        if (institute.logo) {
+            postData.append('logo', institute.logo, institute.name);
+        }
         return this.http.put(url, postData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(() => institute), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     deleteInstitute(id) {
@@ -6094,9 +6061,7 @@ let ApiService = class ApiService {
     // =====================STUDENT API===================
     getCourseTD(id) {
         const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/getCourseTD/${id}`;
-        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     //  ADD NEW STUDENT
     addStudent(student, instituteId) {
@@ -6117,88 +6082,64 @@ let ApiService = class ApiService {
                 instituteId: instituteId,
                 courseId: student.courseDetails.course,
                 batchId: student.courseDetails.batch,
-                discount: student.courseDetails.discount,
-                additionalDiscount: student.courseDetails.additionalDiscount,
-                nextPayble: student.courseDetails.netPayable,
-                active: student.courseDetails.batch === '' ? false : true,
-                materialRecord: student.materialRecod,
-            },
-            fee: {
-                instituteId: instituteId,
-                courseId: student.courseDetails.course,
-                installmentNumber: student.feeDetails.installments,
-                nextInstallment: student.feeDetails.nextInstallment,
-                amountCollected: student.feeDetails.amountCollected,
-                mode: student.feeDetails.mode,
-            },
-        };
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/add', data).pipe(
-        // tslint:disable-next-line: no-shadowed-variable
-        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
-    }
-    //  GET ONE STUDENT BY EDU-ATLAS ID
-    getOneStudent(data) {
-        return this.http
-            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getOneStudent', { eduatlasId: data })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => {
-            // console.log(res);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
-    }
-    //  GET ONE STUDENT FOR EDITING AND VIEWING
-    getOneStudentByInstitute(data) {
-        return this.http
-            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getOneStudentByInstitute', data)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => {
-            // console.log(dres);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
-    }
-    //  GET ACTIVE STUDENTs
-    getActiveStudents(id, courseId, batchId) {
-        const data = { instituteId: id, courseId };
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getActiveStudents', data).pipe(
-        // tslint:disable-next-line: no-shadowed-variable
-        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
-    }
-    //  GET PENDING STUDENTs
-    getPendingStudents(id, courseId) {
-        const data = { instituteId: id, courseId };
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getPendingStudents', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
-    }
-    //  ADD STUDENT COURSE
-    addStudentCourse(student, instituteId, eduAtlasId) {
-        const data = {
-            eduAtlasId: eduAtlasId,
-            instituteDetails: {
-                instituteId: instituteId,
-                courseId: student.courseDetails.course,
-                batchId: student.courseDetails.batch,
+                rollNumber: student.courseDetails.rollNo,
                 discount: student.courseDetails.discount,
                 additionalDiscount: student.courseDetails.additionalDiscount,
                 nextPayble: student.courseDetails.netPayable,
                 active: student.courseDetails.batch === '' ? false : true,
                 materialRecord: student.materialRecord,
             },
-            fee: {
+        };
+        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/add', data).pipe(
+        // tslint:disable-next-line: no-shadowed-variable
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    //  GET ONE STUDENT BY EDU-ATLAS ID
+    getOneStudent(data) {
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getOneStudent', { eduatlasId: data })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    //  GET ONE STUDENT FOR EDITING AND VIEWING
+    getOneStudentByInstitute(data) {
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getOneStudentByInstitute', data)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    //  GET ACTIVE STUDENTs
+    getActiveStudents(id, courseId, batchId) {
+        const data = { instituteId: id, courseId };
+        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getActiveStudents', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    //  GET PENDING STUDENTs
+    getPendingStudents(id, courseId) {
+        const data = { instituteId: id, courseId };
+        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getPendingStudents', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    //  ADD STUDENT COURSE
+    addStudentCourse(student, instituteId, eduAtlasId) {
+        console.log(student.courseDetails.rollNo);
+        const data = {
+            eduAtlasId: eduAtlasId,
+            instituteDetails: {
                 instituteId: instituteId,
                 courseId: student.courseDetails.course,
-                installmentNumber: student.feeDetails.installments,
-                nextInstallment: student.feeDetails.nextInstallment,
-                amountCollected: student.feeDetails.amountCollected,
-                mode: student.feeDetails.mode,
+                batchId: student.courseDetails.batch,
+                rollNumber: student.courseDetails.rollNo,
+                discount: student.courseDetails.discount,
+                additionalDiscount: student.courseDetails.additionalDiscount,
+                nextPayble: student.courseDetails.netPayable,
+                active: student.courseDetails.batch === '' ? false : true,
+                materialRecord: student.materialRecord,
             },
         };
         return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/addCourseStudent', data).pipe(
         // tslint:disable-next-line: no-shadowed-variable
-        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     //  UPDATE STUDENT COURSE
     updateStudentCourse(student, stdId, instObjId, instituteId, eduAtlasId) {
+        console.log(student.courseDetails.rollNo);
         const data = {
             studentId: stdId,
             eduAtlasId: eduAtlasId,
@@ -6207,37 +6148,27 @@ let ApiService = class ApiService {
                 instituteId: instituteId,
                 courseId: student.courseDetails.course,
                 batchId: student.courseDetails.batch,
+                rollNumber: student.courseDetails.rollNo,
                 discount: student.courseDetails.discount,
                 additionalDiscount: student.courseDetails.additionalDiscount,
                 nextPayble: student.courseDetails.netPayable,
                 active: student.courseDetails.batch === '' ? false : true,
                 materialRecord: student.materialRecord,
             },
-            fee: {
-                instituteId: instituteId,
-                courseId: student.courseDetails.course,
-                installmentNumber: student.feeDetails.installments,
-                nextInstallment: student.feeDetails.nextInstallment,
-                amountCollected: student.feeDetails.amountCollected,
-                mode: student.feeDetails.mode,
-            },
         };
         return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/updateStudentCourse', data).pipe(
         // tslint:disable-next-line: no-shadowed-variable
-        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     //  UPDATE STUDENT PERSONAL DETAILS
-    updateStudentPersonalDetails(id, student, eduAtlasId) {
+    updateStudentPersonalDetails(id, student, eduAtlasId, studentContact, studentEmail) {
         const data = {
             _id: id,
             eduAtlasId: eduAtlasId,
             basicDetails: {
                 name: student.name,
-                rollNumber: student.rollNo,
-                studentEmail: student.studentEmail,
-                studentContact: student.contact,
+                studentEmail: studentEmail,
+                studentContact: studentContact,
             },
             parentDetails: {
                 name: student.parentName,
@@ -6257,17 +6188,178 @@ let ApiService = class ApiService {
             _id: instituteId,
             eduatlasId: eduAtlasId,
         })
-            .pipe(
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    // =====================Fees API===================
+    addStudentFees(studentObjId, studentInstituteId, studentEduAtlasId, studentCourseId, studentFees) {
+        const data = {
+            studentId: studentObjId,
+            eduAtlasId: studentEduAtlasId,
+            instituteId: studentInstituteId,
+            courseId: studentCourseId,
+            installmentType: studentFees.installmentType,
+            date: studentFees.date,
+            noOfInstallments: studentFees.noOfInstallments,
+            amountCollected: studentFees.amountCollected,
+            totalAmount: studentFees.totalAmount,
+            pendingAmount: studentFees.pendingAmount,
+            installments: [],
+        };
+        studentFees.installments.forEach((curInstallment) => {
+            const installment = {
+                installmentNo: curInstallment.installmentNo,
+                paidStatus: curInstallment.paidStatus ? 'true' : 'false',
+                paidOn: curInstallment.paidOn,
+                amount: curInstallment.amount,
+                paymentMode: curInstallment.paymentMode,
+                amountPending: curInstallment.amountPending,
+            };
+            data.installments.push(installment);
+        });
+        console.log(data);
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/fee/addFee`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    updateStudentFees(feeObjId, studentFees) {
+        const data = {
+            _id: feeObjId,
+            installmentType: studentFees.installmentType,
+            date: studentFees.date,
+            noOfInstallments: studentFees.noOfInstallments,
+            amountCollected: studentFees.amountCollected,
+            totalAmount: studentFees.totalFees,
+            pendingAmount: studentFees.pendingFees,
+            installments: [],
+        };
+        studentFees.installments.forEach((curInstallment) => {
+            const installment = {
+                installmentNo: curInstallment.installmentNo,
+                paidStatus: curInstallment.paidStatus ? 'true' : 'false',
+                paidOn: curInstallment.paidOn,
+                amount: curInstallment.amount,
+                paymentMode: curInstallment.paymentMode,
+                amountPending: curInstallment.amountPending,
+            };
+            data.installments.push(installment);
+        });
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/fee/updateFeeOfStudent`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getStudentFees(studentObjId, studentInstituteId, studentEduAtlasId, studentCourseId) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/getFees`;
+        return this.http
+            .post(url, {
+            studentId: studentObjId,
+            instituteId: studentInstituteId,
+            eduatlasID: studentEduAtlasId,
+            courseId: studentCourseId,
+        })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    deleteStudentFees(id) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/deleteFees`;
+        return this.http.post(url, { _id: id }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    // =====================Employee API===================
+    //  ADD NEW EMPLOYEE
+    addEmployee(employee, instituteId) {
+        const data = {
+            basicDetails: {
+                name: employee.name,
+                employeeAddress: employee.address,
+                employeeEmail: employee.employeeEmail,
+                employeeContact: employee.contact,
+            },
+            instituteDetails: {
+                instituteId: instituteId,
+                role: employee.role,
+            },
+        };
+        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/addEmployee', data).pipe(
         // tslint:disable-next-line: no-shadowed-variable
         Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
             // console.log(data);
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
+    //  GET ONE EMPLOYEE BY EDU-ATLAS ID
+    getOneEmployee(data) {
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/getEmployeeByEduatlasId', {
+            eduAtlasId: data,
+        })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => {
+            // console.log(res);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    //  GET ONE EMPLOYEE FOR EDITING AND VIEWING
+    getOneEmployeeByInstitute(data) {
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/getOneEmployeeByInstitute', data)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => {
+            // console.log(dres);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    //  GET INSTITUTE EMPLOYEES
+    getEmployeesByInstituteId(id) {
+        const data = { instituteId: id };
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/getEmployeesByInstituteId', data)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    // ADD INSTITUTE TO EMPLOYEE
+    addEmployeeInstitute(eduId, instituteId, employee) {
+        const data = {
+            eduAtlasId: eduId,
+            instituteDetails: {
+                instituteId: instituteId,
+                role: employee.role,
+            },
+        };
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/addEmployeeInstitute', data)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    // UPDATE EMPLOYEE Role Details
+    updateEmployeeInstituteDetails(employeeObjectId, instituteId, role) {
+        const data = {
+            empId: employeeObjectId,
+            instituteDetails: {
+                role: role,
+                instituteId: instituteId,
+            },
+        };
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/updateEmployeeInstituteDetails', data)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(() => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    //  UPDATE EMPLOYEE PERSONAL DETAILS
+    updateEmployeePersonalDetails(id, employee, eduAtlasId) {
+        const data = {
+            _id: id,
+            eduAtlasId: eduAtlasId,
+            basicDetails: {
+                name: employee.name,
+                rollNumber: employee.rollNo,
+                employeeEmail: employee.employeeEmail,
+                employeeContact: employee.contact,
+            },
+        };
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/updateStudentPersonalDetails', data)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(() => employee), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    //  DELETE STUDENT COURSE
+    deleteEmployeeInstitute(instituteId, eduAtlasId) {
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/deleteEmployeeInstitute', {
+            instituteId: instituteId,
+            empId: eduAtlasId,
+        })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
     /* ********************* ONLY FOR E-COMMERCE ****************** */
     getStudent(data) {
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getStudent', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => {
-            // console.log(res);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res.student), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getStudent', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res.student), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     deleteStudent(param) {
         return this.http
@@ -6278,20 +6370,14 @@ let ApiService = class ApiService {
     }
     getStudents(instituteId) {
         const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/student/all/${instituteId}`;
-        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     // ========================COURSE API=====================
     getCourses(id) {
-        return this.http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/all/${id}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        return this.http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/all/${id}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     addCourse(id, course) {
-        return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/addCourse/${id}`, course).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/addCourse/${id}`, course).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     getCourse(params) {
         return this.http
@@ -6316,9 +6402,7 @@ let ApiService = class ApiService {
     }
     // =====================BATCHES API=================
     getBatches(branchId) {
-        return this.http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/batches/${branchId}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        return this.http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/batches/${branchId}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     getBatch(params) {
         return this.http
@@ -6330,9 +6414,7 @@ let ApiService = class ApiService {
     addBatch(branchId, batch) {
         return this.http
             .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/addBatch/${branchId}`, batch)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     deleteBatch(params) {
         return this.http
@@ -6350,9 +6432,7 @@ let ApiService = class ApiService {
     }
     // =======================DISCOUNT API======================
     getDiscounts(id) {
-        return this.http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/discounts/${id}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        return this.http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/discounts/${id}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     getDiscount(params) {
         return this.http
@@ -6364,9 +6444,7 @@ let ApiService = class ApiService {
     addDiscount(id, discount) {
         return this.http
             .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/addDiscount/${id}`, discount)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     deleteDiscount(params) {
         return this.http
@@ -6388,9 +6466,7 @@ let ApiService = class ApiService {
     }
     addReceipt(id, receipt) {
         receipt.id = null;
-        return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/addReciept/${id}`, receipt).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => {
-            // console.log(data);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/addReciept/${id}`, receipt).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     updateReceipt(id, reciept) {
         const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/reciept/${id}`;
@@ -6401,14 +6477,18 @@ let ApiService = class ApiService {
             .delete(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/course/reciept/${id}`)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
-    //
-    display(show) {
-        const display = show;
-        return display;
-    }
     handleError(error) {
-        // console.log(error);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
+    }
+    // =====================Attendance API===================
+    //  ADD NEW EMPLOYEE
+    getStudentsAttendance(attendanceRequest) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/attendance/getAttendanceByDate`;
+        return this.http.post(url, attendanceRequest).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    addAttendance(attendanceRequest) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/attendance/addAttendance`;
+        return this.http.post(url, attendanceRequest).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
 };
 ApiService.ctorParameters = () => [
@@ -6541,9 +6621,9 @@ let AuthService = class AuthService {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["throwError"])(msg);
         }));
     }
-    login(phone, password) {
+    login(userId, password) {
         const data = {
-            phone,
+            userId,
             password,
         };
         return this.http
@@ -6809,18 +6889,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
-//https://eduatlas-node-backend.herokuapp.com/
 const environment = {
     production: false,
+    razorpayKeyId: 'rzp_test_uyyXNzgLBF3hTU',
     // server: 'http://localhost:5000',
     server: '',
 };
