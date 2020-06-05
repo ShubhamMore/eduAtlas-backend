@@ -31,7 +31,6 @@ const userSchema = mongoose.Schema(
 
     phone: {
       type: String,
-      unique: true,
       required: [true, 'Phone is required'],
       minlength: 10,
       maxlength: 10,
@@ -104,14 +103,16 @@ userSchema.methods.generateAuthToken = async function () {
 };
 
 userSchema.statics.findByCredentials = async (userId, password) => {
-  const user = await User.findOne({ 
-    $or:[{
-      phone:userId
-    },{
-      email:userId
-    }
-
-  ] });
+  const user = await User.findOne({
+    $or: [
+      {
+        phone: userId,
+      },
+      {
+        email: userId,
+      },
+    ],
+  });
 
   if (!user) {
     throw new Error('User does not found, Please Register');

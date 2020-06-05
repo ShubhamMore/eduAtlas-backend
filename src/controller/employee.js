@@ -39,21 +39,21 @@ exports.addEmployee = async (req, res) => {
       phone: req.body.basicDetails.employeeContact,
       email: req.body.basicDetails.employeeEmail,
       password: req.body.basicDetails.employeeContact,
-      eduAtlasId: newEduAtlasId,
+      eduAtlasId: newEduAtlasId.split('-').join(''),
     };
 
     const addUser = new User(newUser);
     await addUser.save();
     console.log('ID', eduatlasId[0]._id);
 
-    const newEmpolyee = {
+    const newEmployee = {
       basicDetails: req.body.basicDetails,
       instituteDetails: req.body.instituteDetails,
-      eduAtlasId: newEduAtlasId,
+      eduAtlasId: newEduAtlasId.split('-').join(''),
     };
-    console.log(newEmpolyee);
+    console.log(newEmployee);
 
-    const addEmployee = new Employee(newEmpolyee);
+    const addEmployee = new Employee(newEmployee);
     console.log(addEmployee);
     await addEmployee.save();
 
@@ -66,6 +66,9 @@ exports.addEmployee = async (req, res) => {
         },
       }
     );
+
+    // Send Mail Here
+
     res.status(200).send(addUser);
   } catch (error) {
     console.log(error);
@@ -115,16 +118,27 @@ exports.addEmployeeInstitute = async (req, res) => {
 
 exports.getEmployeeByEduatlasId = async (req, res) => {
   try {
-    const getEmployee = await Employee.find(
+    console.log(req.body);
+    const getEmployee = await Employee.findOne(
       {
-        eduAtlasId: req.body.eduAtlasId,
+        $or: [
+          {
+            eduAtlasId: req.body.eduAtlasId,
+          },
+          {
+            'basicDetails.employeeEmail': req.body.eduAtlasId,
+          },
+        ],
       },
-      { instituteDetails: 0 }
+      {
+        basicDetails: 1,
+        eduAtlasId: 1,
+      }
     );
 
     console.log(getEmployee);
 
-    if (getEmployee.length == 0) {
+    if (!getEmployee) {
       throw new Error('Wrong Employee Id');
     }
 

@@ -12,6 +12,7 @@ authRouter.post('/logout', checkAuth, userController.logoutUser);
 
 authRouter.get('/sendOTP/:phone', otpController.sendOtp);
 authRouter.get('/sendOtpForRegisteredUser/:phone', otpController.sendOtpForRegisteredUser);
+authRouter.post('/sendOtpForGetUserDetails', otpController.sendOtpForGetUserDetails);
 authRouter.post('/verifyUserOTP', otpController.verifyUserOTP);
 authRouter.post('/verifyOTP', otpController.verifyOTP);
 
