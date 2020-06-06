@@ -3,6 +3,7 @@ const errorHandler = require('../service/errorHandler');
 const User = require('../model/user.model');
 const EduAtlasId = require('../model/eduatlasId.model');
 const Employee = require('../model/employee.model');
+const Institute = require('../model/institute.model');
 
 exports.addEmployee = async (req, res) => {
   try {
@@ -116,6 +117,44 @@ exports.addEmployeeInstitute = async (req, res) => {
   }
 };
 
+exports.getEmployeeInstitutes = async (req, res) => {
+  try {
+    const employeeInstitutes = await Employee.find(
+      {
+        'basicDetails.employeeEmail': req.body.email,
+      },
+      {
+        instituteDetails: 1,
+      }
+    );
+
+    const empInst = employeeInstitutes[0].instituteDetails;
+
+    const instituteArray = new Array();
+    const institutes = await Institute.find({}, { _id: 1, basicInfo: 1, address: 1 });
+
+    empInst.forEach((inst) => {
+      const institute = institutes.find((curInst) => curInst._id == inst.instituteId);
+
+      if (institute) {
+        const data = {
+          _id: institute._id,
+          role: inst.role,
+          basicInfo: institute.basicInfo,
+          address: institute.address,
+        };
+        instituteArray.push(data);
+      }
+    });
+
+    console.log(instituteArray);
+
+    res.status(200).send(instituteArray);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
+
 exports.getEmployeeByEduatlasId = async (req, res) => {
   try {
     console.log(req.body);
@@ -168,6 +207,23 @@ exports.getOneEmployeeByInstitute = async (req, res) => {
       throw error;
     }
     res.status(200).send(getEmployee);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
+
+exports.getEmployeesByEmail = async (req, res) => {
+  try {
+    const employee = await Employee.findOne({
+      'basicDetails.employeeEmail': req.body.email,
+    });
+
+    if (!employee) {
+      const error = new Error('Employee Not Found');
+      error.statusCode = 400;
+      throw error;
+    }
+    res.status(200).send(employee);
   } catch (error) {
     errorHandler(error, res);
   }
