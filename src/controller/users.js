@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/user.model');
 const EduAtlasId = require('../model/eduatlasId.model');
 const Announcement = require('../model/announcement.model');
-
+const Student = require('../model/student.model')
 const smsService = require('../service/sms');
 
 const schema = require('../service/joi');
@@ -41,6 +41,17 @@ exports.creatUser = async (req, res, next) => {
           },
         }
       );
+      let newStudent = {
+        eduatlasId:newEduAtlasId,
+        basicDetails:{
+          name:req.body.name,
+          studentEmail:req.body.email,
+          studentContact:req.body.contact
+
+        }
+      }
+      const addStudent = new Student(newStudent)
+      await addStudent.save()
     } else if (user.role === 'institute') {
       const instId = eduatlasId[0].instEduId.split('-');
       newEduAtlasId = 'EDU-' + d.getFullYear() + '-INST-' + (parseInt(instId[3]) + 1);
