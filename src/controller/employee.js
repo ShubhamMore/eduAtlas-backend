@@ -231,9 +231,15 @@ exports.getEmployeesByEmail = async (req, res) => {
 
 exports.getEmployeesByInstituteId = async (req, res) => {
   try {
-    const getEmployees = await Employee.find({
-      'instituteDetails.instituteId': req.body.instituteId,
-    });
+    const getEmployees = await Employee.aggregate([
+      {
+        $unwind:"$instituteDetails"
+      },{
+        $match:{
+          "institudeDetails.instituteId":req.body.instituteId
+        }
+      }
+    ]);
 
     if (getEmployees.length == 0) {
       const error = new Error('Employees not Found');
