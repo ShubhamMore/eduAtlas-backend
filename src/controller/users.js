@@ -63,11 +63,7 @@ exports.creatUser = async (req, res, next) => {
           },
         }
       );
-    } else if (
-      user.role === 'branchManager' ||
-      user.role === 'teacher' ||
-      user.role === 'councillor'
-    ) {
+    } else if (user.role === 'employee') {
       const empId = eduatlasId[0].empEduId.split('-');
       newEduAtlasId = 'EDU-' + d.getFullYear() + '-EMP-' + (parseInt(empId[3]) + 1);
       await EduAtlasId.updateOne(
@@ -82,9 +78,11 @@ exports.creatUser = async (req, res, next) => {
       throw new Error('Role is Not Assign or Invalid Role');
     }
 
-    user.eduAtlasId = newEduAtlasId;
+    user.eduAtlasId = newEduAtlasId.split('-').join('');
 
     await new User(user).save();
+
+    // Send Mail Here
 
     response(res, 200, 'Verify OTP now');
   } catch (error) {
@@ -129,7 +127,6 @@ exports.autoLogin = async (req, res, next) => {
 };
 
 exports.loginUser = async (req, res, next) => {
-  
   try {
     const user = await User.findByCredentials(req.body.userId, req.body.password);
 

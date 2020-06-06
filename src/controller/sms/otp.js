@@ -74,6 +74,48 @@ exports.sendOtpForRegisteredUser = async (req, res, next) => {
   }
 };
 
+exports.sendOtpForGetUserDetails = async (req, res, next) => {
+  try {
+    const id = req.body.eduAtlasId;
+
+    console.log(req.body);
+    if (!id) {
+      response(res, 400, 'Edu Atlas Id or Email Not Provided');
+      return;
+    }
+
+    const user = await User.findOne({
+      $or: [
+        {
+          email: id,
+        },
+        {
+          eduAtlasId: id,
+        },
+      ],
+    });
+
+    if (!user) {
+      throw new Error('User not found with for ID ' + id);
+    }
+
+    new OneTimePassword(user.phone, generateOTP(user.phone));
+
+    // const smsRes = await smsService.sendSms(
+    //   phone,
+    //   'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
+    // );
+
+    const smsRes = 'send sms'; // remove later
+    console.log('send');
+
+    res.status(200).send({ message: `${smsRes} to  ${user.phone}`, phone: user.phone }); //Change later
+  } catch (error) {
+    console.log(error);
+    response(res, 500, 'Internal server error');
+  }
+};
+
 exports.verifyUserOTP = async (req, res, next) => {
   try {
     const phone = req.body.phone;
@@ -142,7 +184,7 @@ exports.verifyOTP = async (req, res, next) => {
       throw new Error('Insufficient or Wrong parameters provided');
     }
 
-    if (verifyType !== 'forgotPassword') {
+    if (verifyType !== 'verifyUser' && verifyType !== 'forgotPassword') {
       throw new Error('Wrong User Type');
     }
 

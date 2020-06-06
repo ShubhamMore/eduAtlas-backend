@@ -55,7 +55,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"header-container\">\n  <div class=\"logo-container\">\n    <a (click)=\"toggleSidebar()\" href=\"#\" class=\"sidebar-toggle\">\n      <nb-icon icon=\"menu-2-outline\"></nb-icon>\n    </a>\n    <a class=\"logo\" href=\"#\" (click)=\"navigateHome()\">\n      <img src=\"../../../../assets/img/eduatlas.png\" width=\"100%\" />\n    </a>\n  </div>\n  <nb-card class=\"mt-4\">\n    <nb-select status=\"primary\" placeholder=\"Select Institute\" (selectedChange)=\"onSelect($event)\">\n      <nb-option value=\"undefined\">Select Institute</nb-option>\n      <nb-option *ngFor=\"let item of institute\" value=\"{{ item._id }}\">{{\n        item.basicInfo.name\n      }}</nb-option>\n    </nb-select>\n  </nb-card>\n</div>\n\n<div class=\"header-container\">\n  <nb-actions size=\"small\">\n    <nb-action class=\"control-item\" icon=\"email-outline\"></nb-action>\n    <nb-action class=\"control-item\" icon=\"bell-outline\"></nb-action>\n    <nb-action class=\"control-item\" icon=\"power\" (click)=\"logout()\"></nb-action>\n\n    <nb-action class=\"user-action\" *nbIsGranted=\"['view', 'user']\">\n      <nb-user [name]=\"name\" [nbContextMenu]=\"userMenu\"> </nb-user>\n    </nb-action>\n  </nb-actions>\n</div>\n";
+    __webpack_exports__["default"] = "<div class=\"header-container\">\n  <div class=\"logo-container\">\n    <a (click)=\"toggleSidebar()\" href=\"#\" class=\"sidebar-toggle\">\n      <nb-icon icon=\"menu-2-outline\"></nb-icon>\n    </a>\n    <a class=\"logo\" href=\"#\" (click)=\"navigateHome()\">\n      <img src=\"../../../../assets/img/eduatlas.png\" width=\"100%\" />\n    </a>\n  </div>\n\n  <nb-card class=\"mt-4\">\n    <nb-select\n      status=\"primary\"\n      placeholder=\"Select Institute\"\n      fullWidth\n      (selectedChange)=\"onSelect($event)\"\n    >\n      <nb-option value=\"undefined\">Select Institute</nb-option>\n      <nb-option *ngFor=\"let item of institute\" value=\"{{ item._id }}\">{{\n        item.basicInfo.name\n      }}</nb-option>\n    </nb-select>\n  </nb-card>\n</div>\n\n<div class=\"header-container\">\n  <nb-actions size=\"small\">\n    <nb-action class=\"control-item\" icon=\"email-outline\"></nb-action>\n    <nb-action class=\"control-item\" icon=\"bell-outline\"></nb-action>\n    <nb-action class=\"control-item\" icon=\"power\" (click)=\"logout()\"></nb-action>\n    <nb-action class=\"user-action\" *nbIsGranted=\"['view', 'user']\">\n      <nb-user [name]=\"name\" [nbContextMenu]=\"userMenu\"> </nb-user>\n    </nb-action>\n  </nb-actions>\n</div>\n";
     /***/
   },
 
@@ -95,7 +95,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"wrapper fadeInDown\" style=\"background-color: #fce062;\">\r\n  <div id=\"formContent\">\r\n    <!-- Tabs Titles -->\r\n    <nb-layout>\r\n      <nb-layout-column style=\"background-color: white; height: auto;\">\r\n        <nb-card style=\"box-shadow: none;\">\r\n          <nb-card-body\r\n            class=\"text-center\"\r\n            style=\"\r\n              background-image: url('assets/images/loginBack.png');\r\n              background-size: cover;\r\n              background-repeat: no-repeat;\r\n              box-shadow: none;\r\n              background-position: 0 15rem;\r\n            \"\r\n          >\r\n            <!-- <h2 class=\"inactive underlineHover\">Sign Up </h2> -->\r\n\r\n            <!-- Icon -->\r\n            <div class=\"fadeIn first mb-5\" style=\"margin-top: -15px;\">\r\n              <img src=\"assets/img/EA FAVI.png\" id=\"icon\" alt=\"User Icon\" style=\"width: 25%;\" />\r\n            </div>\r\n\r\n            <span\r\n              style=\"color: #fce062; font-size: 70px; letter-spacing: -6px; font-weight: bolder;\"\r\n              >HELLO\r\n            </span>\r\n            <span style=\"font-size: 15px; color: #192038; display: block;\"\r\n              >Sign in to your account</span\r\n            >\r\n            <!-- Login Form -->\r\n            <form class=\"mt-3\" [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\r\n              <input\r\n                type=\"text\"\r\n                maxlength=\"10\"\r\n                class=\"fadeIn second\"\r\n                formControlName=\"phone\"\r\n                placeholder=\"Enter Phone Number\"\r\n              />\r\n              <div\r\n                *ngIf=\"\r\n                  loginForm.get('phone').errors &&\r\n                  loginForm.get('phone').invalid &&\r\n                  loginForm.get('phone').touched\r\n                \"\r\n              >\r\n                <small *ngIf=\"loginForm.get('phone').errors?.required\"\r\n                  >*This field is required</small\r\n                >\r\n                <small *ngIf=\"loginForm.get('phone').errors?.pattern\"\r\n                  >*Enter Correct Phone Number</small\r\n                >\r\n              </div>\r\n              <input\r\n                type=\"password\"\r\n                class=\"fadeIn third\"\r\n                name=\"password\"\r\n                formControlName=\"password\"\r\n                placeholder=\"Password\"\r\n              />\r\n              <div *ngIf=\"loginForm.get('password').invalid && loginForm.get('password').touched\">\r\n                <small>*Enter Password</small>\r\n              </div>\r\n              <br /><br />\r\n              <button type=\"submit\" class=\"fadeIn fourth\">Login</button>\r\n              <a routerLink=\"/forgot-password\" style=\"color: black; margin-top: -1rem;\"\r\n                >Forgot Password ?</a\r\n              >\r\n            </form>\r\n\r\n            <div class=\"text-right\">\r\n              <h1 class=\"pt-1\" style=\"font-weight: bolder; letter-spacing: -2px;\">NEW USER?</h1>\r\n              <p class=\"float-right\" style=\"color: white;\">\r\n                Creat your FREE Eduatlas <br />accounu8bt today\r\n              </p>\r\n              <button class=\"fadeIn text-right\" routerLink=\"/sign-up\">Sign Up</button><br />\r\n            </div>\r\n          </nb-card-body>\r\n        </nb-card>\r\n      </nb-layout-column>\r\n    </nb-layout>\r\n  </div>\r\n</div>\r\n";
+    __webpack_exports__["default"] = "<div class=\"wrapper fadeInDown\" style=\"background-color: #fce062;\">\r\n  <div id=\"formContent\">\r\n    <!-- Tabs Titles -->\r\n    <nb-layout>\r\n      <nb-layout-column style=\"background-color: white; height: auto;\">\r\n        <nb-card style=\"box-shadow: none;\">\r\n          <nb-card-body\r\n            class=\"text-center\"\r\n            style=\"\r\n              background-image: url('assets/images/loginBack.png');\r\n              background-size: cover;\r\n              background-repeat: no-repeat;\r\n              box-shadow: none;\r\n              background-position: 0 15rem;\r\n            \"\r\n          >\r\n            <!-- <h2 class=\"inactive underlineHover\">Sign Up </h2> -->\r\n\r\n            <!-- Icon -->\r\n            <div class=\"fadeIn first mb-5\" style=\"margin-top: -15px;\">\r\n              <img src=\"assets/img/EA FAVI.png\" id=\"icon\" alt=\"User Icon\" style=\"width: 25%;\" />\r\n            </div>\r\n\r\n            <span\r\n              style=\"color: #fce062; font-size: 70px; letter-spacing: -6px; font-weight: bolder;\"\r\n              >HELLO\r\n            </span>\r\n            <span style=\"font-size: 15px; color: #192038; display: block;\"\r\n              >Sign in to your account</span\r\n            >\r\n            <!-- Login Form -->\r\n            <form class=\"mt-3\" [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\r\n              <input\r\n                type=\"text\"\r\n                maxlength=\"100\"\r\n                class=\"fadeIn second\"\r\n                formControlName=\"userId\"\r\n                placeholder=\"Enter Email or Phone Number\"\r\n              />\r\n              <div\r\n                *ngIf=\"\r\n                  loginForm.get('userId').errors &&\r\n                  loginForm.get('userId').invalid &&\r\n                  loginForm.get('userId').touched\r\n                \"\r\n              >\r\n                <small *ngIf=\"loginForm.get('userId').errors?.required\"\r\n                  >*This field is required</small\r\n                >\r\n                <!-- <small *ngIf=\"loginForm.get('userId').errors?.pattern\"\r\n                  >*Enter Correct Email or Phone Number</small\r\n                > -->\r\n              </div>\r\n              <input\r\n                type=\"password\"\r\n                class=\"fadeIn third\"\r\n                name=\"password\"\r\n                formControlName=\"password\"\r\n                placeholder=\"Password\"\r\n              />\r\n              <div *ngIf=\"loginForm.get('password').invalid && loginForm.get('password').touched\">\r\n                <small>*Enter Password</small>\r\n              </div>\r\n              <br /><br />\r\n              <button type=\"submit\" class=\"fadeIn fourth\">Login</button>\r\n              <a routerLink=\"/forgot-password\" style=\"color: black; margin-top: -1rem;\"\r\n                >Forgot Password ?</a\r\n              >\r\n            </form>\r\n\r\n            <div class=\"text-right\">\r\n              <h1 class=\"pt-1\" style=\"font-weight: bolder; letter-spacing: -2px;\">NEW USER?</h1>\r\n              <p class=\"float-right\" style=\"color: white;\">\r\n                Creat your FREE Eduatlas <br />account today\r\n              </p>\r\n              <button class=\"fadeIn text-right\" routerLink=\"/sign-up\">Sign Up</button><br />\r\n            </div>\r\n          </nb-card-body>\r\n        </nb-card>\r\n      </nb-layout-column>\r\n    </nb-layout>\r\n  </div>\r\n</div>\r\n";
     /***/
   },
 
@@ -8047,17 +8047,14 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
           var _this33 = this;
 
           if (this.forgotPasswordForm.controls.phone.valid) {
-            this.phone = this.forgotPasswordForm.value.phone; // console.log(this.phone);
-
+            this.phone = this.forgotPasswordForm.value.phone;
             var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpParams"]();
             param = param.append('register', '0');
             this.otpService.getOtpForRegisteredUser(this.phone, param).subscribe(function (data) {
-              // console.log(data);
               _this33.otpSend = true;
 
               _this33.showToast('top-right', 'success', 'OTP Send');
             }, function (error) {
-              // console.log(error);
               _this33.showToast('top-right', 'danger', 'This Phone Number is not valid');
             });
           }
@@ -8074,12 +8071,10 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
               phone: this.phone
             };
             this.otpService.verifyOtp(verificationData).subscribe(function (data) {
-              // console.log(data);
               _this34.otpVerified = true;
 
               _this34.showToast('top-right', 'success', 'Verified Successfully');
             }, function (error) {
-              // console.log(error);
               _this34.showToast('top-right', 'danger', 'Invalid OTP');
             });
           }
@@ -8095,14 +8090,12 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
               password: this.forgotPasswordForm.value.password
             };
             this.otpService.setPassword(data).subscribe(function (res) {
-              // console.log(res);
               _this35.showToast('top-right', 'success', 'Successfully set password');
 
               _this35.router.navigate(['/login'], {
                 relativeTo: _this35.route
               });
             }, function (err) {
-              // console.log(err);
               _this35.showToast('top-right', 'danger', 'Error While Resetting Password');
             });
           }
@@ -8234,13 +8227,13 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
         key: "ngOnInit",
         value: function ngOnInit() {
           this.loginForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
-            phone: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, {
+            userId: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, {
               validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]
             }),
             password: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, {
               validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]
             })
-          });
+          }, {});
         }
       }, {
         key: "onSubmit",
@@ -8251,16 +8244,16 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
             return;
           }
 
-          var phone = this.loginForm.value.phone;
+          var userId = this.loginForm.value.userId;
           var password = this.loginForm.value.password;
           var authObs;
-          authObs = this.authService.login(phone, password);
+          authObs = this.authService.login(userId, password);
           authObs.subscribe(function (resData) {
             if (resData.verifyOtp) {
               _this36.router.navigate(['/otp'], {
                 relativeTo: _this36.route,
                 queryParams: {
-                  phone: phone,
+                  phone: resData.phone,
                   type: 'login'
                 }
               });
@@ -8280,10 +8273,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
             _this36.loginForm.reset();
           }, function (errorMessage) {
-            _this36.showToast('top-right', 'danger', 'Invalid Password');
+            _this36.showToast('top-right', 'danger', 'Invalid User Id or Password');
           });
-        } //  console.log(this.login.value);
-
+        }
       }, {
         key: "showToast",
         value: function showToast(position, status, message) {
@@ -8428,14 +8420,18 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       }, {
         key: "getOtp",
         value: function getOtp() {
-          this.otpService.getOtp(this.phone).subscribe(function (res) {// console.log(res);
-          }, function (error) {// console.log(error);
+          var _this38 = this;
+
+          this.otpService.getOtp(this.phone).subscribe(function (res) {
+            _this38.showToast('top-right', 'success', 'OTP Sent to ' + _this38.phone);
+          }, function (err) {
+            _this38.showToast('top-right', 'danger', err.error.message);
           });
         }
       }, {
         key: "verifyOtp",
         value: function verifyOtp(otp) {
-          var _this38 = this;
+          var _this39 = this;
 
           var otpData = {
             verifyType: this.loginOTP ? 'loginUser' : 'createUser',
@@ -8443,28 +8439,27 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
             phone: this.phone
           };
           this.otpService.userVerify(otpData).subscribe(function (res) {
-            if (_this38.loginOTP) {
+            if (_this39.loginOTP) {
               if (res._id) {
-                _this38.authService.loginSuccess(res);
+                _this39.authService.loginSuccess(res);
 
-                _this38.showToast('top-right', 'success', 'OTO Verification Successful');
+                _this39.showToast('top-right', 'success', 'OTP Verification Successful');
 
                 setTimeout(function () {
-                  _this38.router.navigate(['/pages/home'], {
-                    relativeTo: _this38.route
+                  _this39.router.navigate(['/pages/home'], {
+                    relativeTo: _this39.route
                   });
                 }, 1000);
               }
             } else {
-              _this38.showToast('top-right', 'success', 'Successfully Registered');
+              _this39.showToast('top-right', 'success', 'OTP verified, Successfully Registered');
 
               setTimeout(function () {
-                _this38.router.navigate(['/login']);
+                _this39.router.navigate(['/login']);
               }, 1000);
             }
           }, function (err) {
-            // console.log(err);
-            _this38.showToast('top-right', 'danger', err.error.message);
+            _this39.showToast('top-right', 'danger', err.error.message);
           });
         }
       }, {
@@ -8578,24 +8573,17 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     /* harmony import */
 
 
-    var _services_auth_services_otp_otp_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-    /*! ../../services/auth-services/otp/otp.service */
-    "./src/app/services/auth-services/otp/otp.service.ts");
-    /* harmony import */
-
-
-    var _nebular_theme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @nebular/theme */
     "./node_modules/@nebular/theme/fesm2015/index.js");
 
     var SignUpComponent = /*#__PURE__*/function () {
-      function SignUpComponent(authService, router, toasterService, otpService) {
+      function SignUpComponent(authService, router, toasterService) {
         _classCallCheck(this, SignUpComponent);
 
         this.authService = authService;
         this.router = router;
         this.toasterService = toasterService;
-        this.otpService = otpService;
         this.tnc = false;
       }
 
@@ -8639,12 +8627,12 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       }, {
         key: "acceptTermsAndConditions",
         value: function acceptTermsAndConditions(tnc) {
-          this.tnc = tnc; // console.log(tnc);
+          this.tnc = tnc;
         }
       }, {
         key: "onSignUp",
         value: function onSignUp() {
-          var _this39 = this;
+          var _this40 = this;
 
           if (this.signUpForm.invalid || !this.tnc) {
             return;
@@ -8656,30 +8644,21 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
             phone: this.signUpForm.value.phone,
             password: this.signUpForm.value.password,
             role: this.signUpForm.value.role
-          }; // this.registerUser.removeControl(name)
-          // console.log(user);
-
+          };
           this.authService.findUser(user.phone, user.email).subscribe(function (res) {
-            // console.log(res);
             if (res.success) {
-              _this39.authService.signUp(user).subscribe(function (signupRes) {
-                // console.log(signupRes);
-                //  this.dialog.open(SuccessComponent,
-                //   {context:{title:'title'},
-                // })
-                _this39.router.navigate(['/otp'], {
+              _this40.authService.signUp(user).subscribe(function (signUpRes) {
+                _this40.router.navigate(['/otp'], {
                   queryParams: {
                     phone: user.phone
                   }
                 });
               }, function (err) {
-                // console.log(err);
-                _this39.showToast('top-right', 'danger', 'This Email or Phone already exist');
+                _this40.showToast('top-right', 'danger', 'This Email or Phone already exist');
               });
             }
           }, function (err) {
-            // console.log(err.error.message);
-            _this39.showToast('top-right', 'danger', err.error.message);
+            _this40.showToast('top-right', 'danger', err.error.message);
           });
         }
       }, {
@@ -8701,9 +8680,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
       }, {
-        type: _nebular_theme__WEBPACK_IMPORTED_MODULE_6__["NbToastrService"]
-      }, {
-        type: _services_auth_services_otp_otp_service__WEBPACK_IMPORTED_MODULE_5__["OtpService"]
+        type: _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"]
       }];
     };
 
@@ -8715,7 +8692,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./sign-up.component.scss */
       "./src/app/admin/sign-up/sign-up.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _nebular_theme__WEBPACK_IMPORTED_MODULE_6__["NbToastrService"], _services_auth_services_otp_otp_service__WEBPACK_IMPORTED_MODULE_5__["OtpService"]])], SignUpComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"]])], SignUpComponent);
     /***/
   },
 
@@ -8933,7 +8910,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       _createClass(AppComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this40 = this;
+          var _this41 = this;
 
           this.analytics.trackPageViews();
           this.seoService.trackCanonicalChanges();
@@ -8944,10 +8921,10 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
           }
 
           this.authService.autoLogin().subscribe(function (resData) {
-            _this40.authService.loadUser(userData);
+            _this41.authService.loadUser(userData);
           }, function (errorMessage) {
-            _this40.router.navigate(['/login'], {
-              relativeTo: _this40.route
+            _this41.router.navigate(['/login'], {
+              relativeTo: _this41.route
             });
           });
         }
@@ -9109,13 +9086,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
     var _admin_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
     /*! ./admin/forgot-password/forgot-password.component */
-    "./src/app/admin/forgot-password/forgot-password.component.ts");
-    /**
-     * @license
-     * Copyright Akveo. All Rights Reserved.
-     * Licensed under the MIT License. See License.txt in the project root for license information.
-     */
-    // import { HomeComponent } from './home/home.component';
+    "./src/app/admin/forgot-password/forgot-password.component.ts"); // import { HomeComponent } from './home/home.component';
 
 
     var AppModule = function AppModule() {
@@ -9124,8 +9095,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
       declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"], _admin_login_login_component__WEBPACK_IMPORTED_MODULE_15__["LoginComponent"], _admin_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_16__["SignUpComponent"], _admin_otp_otp_component__WEBPACK_IMPORTED_MODULE_17__["OtpComponent"], _admin_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_18__["ForgotPasswordComponent"]],
-      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_2__["BrowserAnimationsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"], _angular_common__WEBPACK_IMPORTED_MODULE_10__["CommonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbSelectModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbCardModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbLayoutModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbButtonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbCheckboxModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbPopoverModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbRadioModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbStepperModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbInputModule"], _nebular_eva_icons__WEBPACK_IMPORTED_MODULE_12__["NbEvaIconsModule"], // InMemoryWebApiModule.forRoot(UserData),
-      _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbToastrModule"].forRoot(), _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"], _theme_theme_module__WEBPACK_IMPORTED_MODULE_6__["ThemeModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbSidebarModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbMenuModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbDatepickerModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbDialogModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbWindowModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbToastrModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbChatModule"].forRoot({
+      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_2__["BrowserAnimationsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"], _angular_common__WEBPACK_IMPORTED_MODULE_10__["CommonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbSelectModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbCardModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbLayoutModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbButtonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbCheckboxModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbPopoverModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbRadioModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbStepperModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbInputModule"], _nebular_eva_icons__WEBPACK_IMPORTED_MODULE_12__["NbEvaIconsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbToastrModule"].forRoot(), _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"], _theme_theme_module__WEBPACK_IMPORTED_MODULE_6__["ThemeModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbSidebarModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbMenuModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbDatepickerModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbDialogModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbWindowModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbToastrModule"].forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_14__["NbChatModule"].forRoot({
         messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY'
       }), _core_core_module__WEBPACK_IMPORTED_MODULE_5__["CoreModule"].forRoot()],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
@@ -9189,7 +9159,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     "./node_modules/rxjs/_esm2015/operators/index.js");
 
     var AuthGuard = /*#__PURE__*/function () {
-      // Inject Router so we can hand off the user to the Login Page
       function AuthGuard(authService, router) {
         _classCallCheck(this, AuthGuard);
 
@@ -9200,7 +9169,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       _createClass(AuthGuard, [{
         key: "canActivate",
         value: function canActivate(roure, router) {
-          var _this41 = this;
+          var _this42 = this;
 
           return this.authService.user.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (user) {
             var isAuth = !!user;
@@ -9209,7 +9178,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
               return true;
             }
 
-            return _this41.router.createUrlTree(['/login']);
+            return _this42.router.createUrlTree(['/login']);
           }));
         }
       }]);
@@ -9304,13 +9273,11 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
         key: "getInstitute",
         value: function getInstitute(id) {
           var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/oneInstitute/").concat(id);
-          return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
         key: "addInstitute",
-        value: function addInstitute(institute) {
-          // console.log('Institute - ', institute);
+        value: function addInstitute(institute, paymentDetails) {
           var postData = new FormData();
           var data = {
             basicInfo: {
@@ -9331,10 +9298,10 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
           postData.append('address', JSON.stringify(data.address));
           postData.append('metaTag', JSON.stringify(institute.instituteMetaTag));
           postData.append('category', JSON.stringify(institute.category));
+          postData.append('paymentDetails', JSON.stringify(paymentDetails));
           postData.append('logo', institute.logo, institute.name);
           return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/addInstitute', postData).pipe( // tslint:disable-next-line: no-shadowed-variable
-          Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
         key: "updateInstitute",
@@ -9360,7 +9327,11 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
           postData.append('address', JSON.stringify(data.address));
           postData.append('metaTag', JSON.stringify(institute.instituteMetaTag));
           postData.append('category', JSON.stringify(institute.category));
-          postData.append('logo', institute.logo, institute.name);
+
+          if (institute.logo) {
+            postData.append('logo', institute.logo, institute.name);
+          }
+
           return this.http.put(url, postData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function () {
             return institute;
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
@@ -9376,8 +9347,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
         key: "getCourseTD",
         value: function getCourseTD(id) {
           var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/getCourseTD/").concat(id);
-          return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         } //  ADD NEW STUDENT
 
       }, {
@@ -9400,24 +9370,16 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
               instituteId: instituteId,
               courseId: student.courseDetails.course,
               batchId: student.courseDetails.batch,
+              rollNumber: student.courseDetails.rollNo,
               discount: student.courseDetails.discount,
               additionalDiscount: student.courseDetails.additionalDiscount,
               nextPayble: student.courseDetails.netPayable,
               active: student.courseDetails.batch === '' ? false : true,
-              materialRecord: student.materialRecod
-            },
-            fee: {
-              instituteId: instituteId,
-              courseId: student.courseDetails.course,
-              installmentNumber: student.feeDetails.installments,
-              nextInstallment: student.feeDetails.nextInstallment,
-              amountCollected: student.feeDetails.amountCollected,
-              mode: student.feeDetails.mode
+              materialRecord: student.materialRecord
             }
           };
           return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/add', data).pipe( // tslint:disable-next-line: no-shadowed-variable
-          Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         } //  GET ONE STUDENT BY EDU-ATLAS ID
 
       }, {
@@ -9425,8 +9387,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
         value: function getOneStudent(data) {
           return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getOneStudent', {
             eduatlasId: data
-          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {// console.log(res);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
             return res;
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         } //  GET ONE STUDENT FOR EDITING AND VIEWING
@@ -9434,10 +9395,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       }, {
         key: "getOneStudentByInstitute",
         value: function getOneStudentByInstitute(data) {
-          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getOneStudentByInstitute', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {// console.log(dres);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-            return res;
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getOneStudentByInstitute', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         } //  GET ACTIVE STUDENTs
 
       }, {
@@ -9447,9 +9405,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
             instituteId: id,
             courseId: courseId
           };
-          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getActiveStudents', data).pipe( // tslint:disable-next-line: no-shadowed-variable
-          Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getActiveStudents', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         } //  GET PENDING STUDENTs
 
       }, {
@@ -9459,41 +9415,35 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
             instituteId: id,
             courseId: courseId
           };
-          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getPendingStudents', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getPendingStudents', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         } //  ADD STUDENT COURSE
 
       }, {
         key: "addStudentCourse",
         value: function addStudentCourse(student, instituteId, eduAtlasId) {
+          console.log(student.courseDetails.rollNo);
           var data = {
             eduAtlasId: eduAtlasId,
             instituteDetails: {
               instituteId: instituteId,
               courseId: student.courseDetails.course,
               batchId: student.courseDetails.batch,
+              rollNumber: student.courseDetails.rollNo,
               discount: student.courseDetails.discount,
               additionalDiscount: student.courseDetails.additionalDiscount,
               nextPayble: student.courseDetails.netPayable,
               active: student.courseDetails.batch === '' ? false : true,
               materialRecord: student.materialRecord
-            },
-            fee: {
-              instituteId: instituteId,
-              courseId: student.courseDetails.course,
-              installmentNumber: student.feeDetails.installments,
-              nextInstallment: student.feeDetails.nextInstallment,
-              amountCollected: student.feeDetails.amountCollected,
-              mode: student.feeDetails.mode
             }
           };
           return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/addCourseStudent', data).pipe( // tslint:disable-next-line: no-shadowed-variable
-          Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         } //  UPDATE STUDENT COURSE
 
       }, {
         key: "updateStudentCourse",
         value: function updateStudentCourse(student, stdId, instObjId, instituteId, eduAtlasId) {
+          console.log(student.courseDetails.rollNo);
           var data = {
             studentId: stdId,
             eduAtlasId: eduAtlasId,
@@ -9502,37 +9452,28 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
               instituteId: instituteId,
               courseId: student.courseDetails.course,
               batchId: student.courseDetails.batch,
+              rollNumber: student.courseDetails.rollNo,
               discount: student.courseDetails.discount,
               additionalDiscount: student.courseDetails.additionalDiscount,
               nextPayble: student.courseDetails.netPayable,
               active: student.courseDetails.batch === '' ? false : true,
               materialRecord: student.materialRecord
-            },
-            fee: {
-              instituteId: instituteId,
-              courseId: student.courseDetails.course,
-              installmentNumber: student.feeDetails.installments,
-              nextInstallment: student.feeDetails.nextInstallment,
-              amountCollected: student.feeDetails.amountCollected,
-              mode: student.feeDetails.mode
             }
           };
           return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/updateStudentCourse', data).pipe( // tslint:disable-next-line: no-shadowed-variable
-          Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         } //  UPDATE STUDENT PERSONAL DETAILS
 
       }, {
         key: "updateStudentPersonalDetails",
-        value: function updateStudentPersonalDetails(id, student, eduAtlasId) {
+        value: function updateStudentPersonalDetails(id, student, eduAtlasId, studentContact, studentEmail) {
           var data = {
             _id: id,
             eduAtlasId: eduAtlasId,
             basicDetails: {
               name: student.name,
-              rollNumber: student.rollNo,
-              studentEmail: student.studentEmail,
-              studentContact: student.contact
+              studentEmail: studentEmail,
+              studentContact: studentContact
             },
             parentDetails: {
               name: student.parentName,
@@ -9552,17 +9493,195 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
           return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/deleteStudentCourse', {
             _id: instituteId,
             eduatlasId: eduAtlasId
-          }).pipe( // tslint:disable-next-line: no-shadowed-variable
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        } // =====================Fees API===================
+
+      }, {
+        key: "addStudentFees",
+        value: function addStudentFees(studentObjId, studentInstituteId, studentEduAtlasId, studentCourseId, studentFees) {
+          var data = {
+            studentId: studentObjId,
+            eduAtlasId: studentEduAtlasId,
+            instituteId: studentInstituteId,
+            courseId: studentCourseId,
+            installmentType: studentFees.installmentType,
+            date: studentFees.date,
+            noOfInstallments: studentFees.noOfInstallments,
+            amountCollected: studentFees.amountCollected,
+            totalAmount: studentFees.totalAmount,
+            pendingAmount: studentFees.pendingAmount,
+            installments: []
+          };
+          studentFees.installments.forEach(function (curInstallment) {
+            var installment = {
+              installmentNo: curInstallment.installmentNo,
+              paidStatus: curInstallment.paidStatus ? 'true' : 'false',
+              paidOn: curInstallment.paidOn,
+              amount: curInstallment.amount,
+              paymentMode: curInstallment.paymentMode,
+              amountPending: curInstallment.amountPending
+            };
+            data.installments.push(installment);
+          });
+          console.log(data);
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/fee/addFee");
+          return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        }
+      }, {
+        key: "updateStudentFees",
+        value: function updateStudentFees(feeObjId, studentFees) {
+          var data = {
+            _id: feeObjId,
+            installmentType: studentFees.installmentType,
+            date: studentFees.date,
+            noOfInstallments: studentFees.noOfInstallments,
+            amountCollected: studentFees.amountCollected,
+            totalAmount: studentFees.totalFees,
+            pendingAmount: studentFees.pendingFees,
+            installments: []
+          };
+          studentFees.installments.forEach(function (curInstallment) {
+            var installment = {
+              installmentNo: curInstallment.installmentNo,
+              paidStatus: curInstallment.paidStatus ? 'true' : 'false',
+              paidOn: curInstallment.paidOn,
+              amount: curInstallment.amount,
+              paymentMode: curInstallment.paymentMode,
+              amountPending: curInstallment.amountPending
+            };
+            data.installments.push(installment);
+          });
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/fee/updateFeeOfStudent");
+          return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        }
+      }, {
+        key: "getStudentFees",
+        value: function getStudentFees(studentObjId, studentInstituteId, studentEduAtlasId, studentCourseId) {
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/getFees");
+          return this.http.post(url, {
+            studentId: studentObjId,
+            instituteId: studentInstituteId,
+            eduatlasID: studentEduAtlasId,
+            courseId: studentCourseId
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        }
+      }, {
+        key: "deleteStudentFees",
+        value: function deleteStudentFees(id) {
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/deleteFees");
+          return this.http.post(url, {
+            _id: id
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        } // =====================Employee API===================
+        //  ADD NEW EMPLOYEE
+
+      }, {
+        key: "addEmployee",
+        value: function addEmployee(employee, instituteId) {
+          var data = {
+            basicDetails: {
+              name: employee.name,
+              employeeAddress: employee.address,
+              employeeEmail: employee.employeeEmail,
+              employeeContact: employee.contact
+            },
+            instituteDetails: {
+              instituteId: instituteId,
+              role: employee.role
+            }
+          };
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/addEmployee', data).pipe( // tslint:disable-next-line: no-shadowed-variable
           Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        } //  GET ONE EMPLOYEE BY EDU-ATLAS ID
+
+      }, {
+        key: "getOneEmployee",
+        value: function getOneEmployee(data) {
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/getEmployeeByEduatlasId', {
+            eduAtlasId: data
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {// console.log(res);
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+            return res;
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        } //  GET ONE EMPLOYEE FOR EDITING AND VIEWING
+
+      }, {
+        key: "getOneEmployeeByInstitute",
+        value: function getOneEmployeeByInstitute(data) {
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/getOneEmployeeByInstitute', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {// console.log(dres);
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+            return res;
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        } //  GET INSTITUTE EMPLOYEES
+
+      }, {
+        key: "getEmployeesByInstituteId",
+        value: function getEmployeesByInstituteId(id) {
+          var data = {
+            instituteId: id
+          };
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/getEmployeesByInstituteId', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        } // ADD INSTITUTE TO EMPLOYEE
+
+      }, {
+        key: "addEmployeeInstitute",
+        value: function addEmployeeInstitute(eduId, instituteId, employee) {
+          var data = {
+            eduAtlasId: eduId,
+            instituteDetails: {
+              instituteId: instituteId,
+              role: employee.role
+            }
+          };
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/addEmployeeInstitute', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        } // UPDATE EMPLOYEE Role Details
+
+      }, {
+        key: "updateEmployeeInstituteDetails",
+        value: function updateEmployeeInstituteDetails(employeeObjectId, instituteId, role) {
+          var data = {
+            empId: employeeObjectId,
+            instituteDetails: {
+              role: role,
+              instituteId: instituteId
+            }
+          };
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/updateEmployeeInstituteDetails', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function () {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        } //  UPDATE EMPLOYEE PERSONAL DETAILS
+
+      }, {
+        key: "updateEmployeePersonalDetails",
+        value: function updateEmployeePersonalDetails(id, employee, eduAtlasId) {
+          var data = {
+            _id: id,
+            eduAtlasId: eduAtlasId,
+            basicDetails: {
+              name: employee.name,
+              rollNumber: employee.rollNo,
+              employeeEmail: employee.employeeEmail,
+              employeeContact: employee.contact
+            }
+          };
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/updateStudentPersonalDetails', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function () {
+            return employee;
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        } //  DELETE STUDENT COURSE
+
+      }, {
+        key: "deleteEmployeeInstitute",
+        value: function deleteEmployeeInstitute(instituteId, eduAtlasId) {
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/deleteEmployeeInstitute', {
+            instituteId: instituteId,
+            empId: eduAtlasId
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
         /* ********************* ONLY FOR E-COMMERCE ****************** */
 
       }, {
         key: "getStudent",
         value: function getStudent(data) {
-          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getStudent', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {// console.log(res);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getStudent', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
             return res.student;
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
@@ -9577,21 +9696,18 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
         key: "getStudents",
         value: function getStudents(instituteId) {
           var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/student/all/").concat(instituteId);
-          return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         } // ========================COURSE API=====================
 
       }, {
         key: "getCourses",
         value: function getCourses(id) {
-          return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/all/").concat(id)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/all/").concat(id)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
         key: "addCourse",
         value: function addCourse(id, course) {
-          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/addCourse/").concat(id), course).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/addCourse/").concat(id), course).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
         key: "getCourse",
@@ -9620,8 +9736,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       }, {
         key: "getBatches",
         value: function getBatches(branchId) {
-          return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/batches/").concat(branchId)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/batches/").concat(branchId)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
         key: "getBatch",
@@ -9633,8 +9748,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       }, {
         key: "addBatch",
         value: function addBatch(branchId, batch) {
-          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/addBatch/").concat(branchId), batch).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/addBatch/").concat(branchId), batch).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
         key: "deleteBatch",
@@ -9656,8 +9770,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       }, {
         key: "getDiscounts",
         value: function getDiscounts(id) {
-          return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/discounts/").concat(id)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/discounts/").concat(id)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
         key: "getDiscount",
@@ -9669,8 +9782,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       }, {
         key: "addDiscount",
         value: function addDiscount(id, discount) {
-          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/addDiscount/").concat(id), discount).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/addDiscount/").concat(id), discount).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
         key: "deleteDiscount",
@@ -9700,8 +9812,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
         key: "addReceipt",
         value: function addReceipt(id, receipt) {
           receipt.id = null;
-          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/addReciept/").concat(id), receipt).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/addReciept/").concat(id), receipt).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
         key: "updateReceipt",
@@ -9715,19 +9826,25 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
         key: "deleteReceipt",
         value: function deleteReceipt(id) {
           return this.http["delete"]("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/course/reciept/").concat(id)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
-        } //
-
-      }, {
-        key: "display",
-        value: function display(show) {
-          var display = show;
-          return display;
         }
       }, {
         key: "handleError",
         value: function handleError(error) {
-          // console.log(error);
           return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
+        } // =====================Attendance API===================
+        //  ADD NEW EMPLOYEE
+
+      }, {
+        key: "getStudentsAttendance",
+        value: function getStudentsAttendance(attendanceRequest) {
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/attendance/getAttendanceByDate");
+          return this.http.post(url, attendanceRequest).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        }
+      }, {
+        key: "addAttendance",
+        value: function addAttendance(attendanceRequest) {
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/attendance/addAttendance");
+          return this.http.post(url, attendanceRequest).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }]);
 
@@ -9963,16 +10080,16 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
         }
       }, {
         key: "login",
-        value: function login(phone, password) {
-          var _this42 = this;
+        value: function login(userId, password) {
+          var _this43 = this;
 
           var data = {
-            phone: phone,
+            userId: userId,
             password: password
           };
           return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].server + '/users/login', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (resData) {
             if (!resData.verifyOtp) {
-              _this42.handleAuthentication(resData._id, resData.name, resData.email, resData.phone, resData.role, resData.token, +resData.expiresIn);
+              _this43.handleAuthentication(resData._id, resData.name, resData.email, resData.phone, resData.role, resData.token, +resData.expiresIn);
             }
           }));
         }
@@ -10043,44 +10160,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
       }, {
         key: "logout",
         value: function logout() {
-          var _this43 = this;
-
-          var token = '';
-
-          if (localStorage.getItem('userData')) {
-            token = 'Bearer ' + JSON.parse(localStorage.getItem('userData'))._token;
-          }
-
-          var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('Authorization', token);
-          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].server + '/users/logout', {}, {
-            headers: headers
-          }).subscribe(function (resData) {
-            _this43.user.next(null);
-
-            _this43.router.navigate(['/login']);
-
-            localStorage.removeItem('userData');
-
-            if (_this43.tokenExpirationTimer) {
-              clearTimeout(_this43.tokenExpirationTimer);
-            }
-
-            _this43.tokenExpirationTimer = null;
-          }, function (errorMessage) {// console.log(errorMessage);
-          });
-        }
-      }, {
-        key: "removeUser",
-        value: function removeUser() {
-          if (localStorage.getItem('userData')) {
-            localStorage.removeItem('userData');
-          }
-
-          this.user.next(null);
-        }
-      }, {
-        key: "logoutAll",
-        value: function logoutAll() {
           var _this44 = this;
 
           var token = '';
@@ -10090,7 +10169,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
           }
 
           var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('Authorization', token);
-          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].server + '/users/logoutAll', {}, {
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].server + '/users/logout', {}, {
             headers: headers
           }).subscribe(function (resData) {
             _this44.user.next(null);
@@ -10108,12 +10187,50 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
           });
         }
       }, {
-        key: "autoLogout",
-        value: function autoLogout(expirationDuration) {
+        key: "removeUser",
+        value: function removeUser() {
+          if (localStorage.getItem('userData')) {
+            localStorage.removeItem('userData');
+          }
+
+          this.user.next(null);
+        }
+      }, {
+        key: "logoutAll",
+        value: function logoutAll() {
           var _this45 = this;
 
+          var token = '';
+
+          if (localStorage.getItem('userData')) {
+            token = 'Bearer ' + JSON.parse(localStorage.getItem('userData'))._token;
+          }
+
+          var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('Authorization', token);
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].server + '/users/logoutAll', {}, {
+            headers: headers
+          }).subscribe(function (resData) {
+            _this45.user.next(null);
+
+            _this45.router.navigate(['/login']);
+
+            localStorage.removeItem('userData');
+
+            if (_this45.tokenExpirationTimer) {
+              clearTimeout(_this45.tokenExpirationTimer);
+            }
+
+            _this45.tokenExpirationTimer = null;
+          }, function (errorMessage) {// console.log(errorMessage);
+          });
+        }
+      }, {
+        key: "autoLogout",
+        value: function autoLogout(expirationDuration) {
+          var _this46 = this;
+
           this.tokenExpirationTimer = setTimeout(function () {
-            _this45.logout();
+            _this46.logout();
           }, expirationDuration);
         }
       }, {
@@ -10367,20 +10484,10 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! tslib */
     "./node_modules/tslib/tslib.es6.js");
-    /**
-     * @license
-     * Copyright Akveo. All Rights Reserved.
-     * Licensed under the MIT License. See License.txt in the project root for license information.
-     */
-    // The file contents for the current environment will overwrite these during build.
-    // The build system defaults to the dev environment which uses `environment.ts`, but if you do
-    // `ng build --env=prod` then `environment.prod.ts` will be used instead.
-    // The list of which env maps to which file can be found in `.angular-cli.json`.
-    //https://eduatlas-node-backend.herokuapp.com/
-
 
     var environment = {
       production: false,
+      razorpayKeyId: 'rzp_test_uyyXNzgLBF3hTU',
       // server: 'http://localhost:5000',
       server: ''
     };

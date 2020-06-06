@@ -7,7 +7,6 @@ const User = require('../model/user.model');
 const userController = require('../controller/users');
 const EduAtlasId = require('../model/eduatlasId.model');
 
-
 exports.addStudent = async (req, res, next) => {
   try {
     const user = await User.find({
@@ -42,7 +41,7 @@ exports.addStudent = async (req, res, next) => {
       phone: req.body.basicDetails.studentContact,
       email: req.body.basicDetails.studentEmail,
       password: req.body.basicDetails.studentContact,
-      eduAtlasId: newEduAtlasId,
+      eduAtlasId: newEduAtlasId.split('-').join(''),
     };
     const addUser = new User(newUser);
     await addUser.save();
@@ -52,11 +51,14 @@ exports.addStudent = async (req, res, next) => {
       basicDetails: req.body.basicDetails,
       parentDetails: req.body.parentDetails,
       instituteDetails: req.body.instituteDetails,
-      eduAtlasId: newEduAtlasId,
+      eduAtlasId: newEduAtlasId.split('-').join(''),
       fee: req.body.fee,
       active: req.body.active,
       materialRecord: req.body.materialRecord,
     };
+
+    // Send Mail Code Here
+
     const addStudent = new Student(newStudent);
     console.log(addStudent);
     await addStudent.save();
@@ -186,16 +188,28 @@ exports.getOneStudent = async (req, res, next) => {
     }
     const student = await Student.findOne(
       {
-        eduAtlasId: req.body.eduatlasId,
+        $or: [
+          {
+            eduAtlasId: req.body.eduatlasId,
+          },
+          {
+            'basicDetails.studentEmail': req.body.eduatlasId,
+          },
+        ],
       },
       {
         basicDetails: 1,
         parentDetails: 1,
+        eduAtlasId: 1,
       }
     );
+    if (!student) {
+      throw new Error('Student Not Found');
+    }
     res.status(200).json(student);
   } catch (error) {
     console.log(error);
+    res.status(400).json(error);
 
     response(res, error.statusCode || 500, error.message);
   }

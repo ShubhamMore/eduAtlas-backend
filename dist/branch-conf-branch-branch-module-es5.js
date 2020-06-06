@@ -61,7 +61,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"back()\">\r\n    MANAGE COURSES\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Add Course Here</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"course\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"name\">Course Name</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"name\"\r\n            fullWidth\r\n            [status]=\"f.name.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"name\"\r\n            placeholder=\"Course Name\"\r\n          />\r\n          <small *ngIf=\"f.name.errors && submitted\">*Course name is req.</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"code\">Course Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"code\"\r\n            fullWidth\r\n            [status]=\"f.courseCode.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"courseCode\"\r\n            placeholder=\"Course Code\"\r\n          />\r\n          <small *ngIf=\"f.courseCode.errors && submitted\">*Course code is req.</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"fees\">Course Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            #fees\r\n            (keyup)=\"courseFee(fees.value)\"\r\n            id=\"fees\"\r\n            formControlName=\"fees\"\r\n            placeholder=\"Course Fees\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"gst\">GST</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"gstValue\"\r\n            #ex\r\n            (keyup)=\"exclusive(ex.value)\"\r\n            placeholder=\"Exclusive GST in %\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-1\"><br /><br />Or</div>\r\n        <div class=\"col-sm-3\">\r\n          <br />\r\n          <nb-checkbox (checkedChange)=\"inclusiveGst($event)\" [(ngModel)]=\"gstCheckBox\" [ngModelOptions]=\"{standalone: true}\" fullWidth status=\"warning\"\r\n            >Inclusive GST</nb-checkbox\r\n          >\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label>Total Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"totalFee\"\r\n            disabled=\"true\"\r\n            placeholder=\"TotalFee\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"des\">Description</label>\r\n          <textarea\r\n            name=\"discription\"\r\n            id=\"des\"\r\n            status=\"basic\"\r\n            nbInput\r\n            fullWidth\r\n            formControlName=\"discription\"\r\n            placeholder=\"Description\"\r\n            cols=\"100\"\r\n            rows=\"4\"\r\n            id=\"dis\"\r\n          ></textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"display: block; margin-top: 1rem; text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ edit === 'true' ? 'Update Course' : 'Add Course' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"back()\">\r\n    MANAGE COURSES\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Add Course Here</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"course\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"name\">Course Name</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"name\"\r\n            fullWidth\r\n            [status]=\"f.name.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"name\"\r\n            placeholder=\"Course Name\"\r\n          />\r\n          <small *ngIf=\"f.name.errors && submitted\">*Course name is req.</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"code\">Course Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"code\"\r\n            fullWidth\r\n            [status]=\"f.courseCode.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"courseCode\"\r\n            placeholder=\"Course Code\"\r\n          />\r\n          <small *ngIf=\"f.courseCode.errors && submitted\">*Course code is required</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"fees\">Course Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            #fees\r\n            (keyup)=\"courseFee(fees.value)\"\r\n            id=\"fees\"\r\n            formControlName=\"fees\"\r\n            placeholder=\"Course Fees\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">Course Duration</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"duration\"\r\n            maxlength=\"2\"\r\n            minlength=\"1\"\r\n            placeholder=\"Duration\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">GST</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"gstValue\"\r\n            #ex\r\n            (keyup)=\"exclusive(ex.value)\"\r\n            placeholder=\"Exclusive GST in %\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-1\"><br /><br />Or</div>\r\n        <div class=\"col-sm-2\">\r\n          <br />\r\n          <nb-checkbox\r\n            (checkedChange)=\"inclusiveGst($event)\"\r\n            [(ngModel)]=\"gstCheckBox\"\r\n            [ngModelOptions]=\"{ standalone: true }\"\r\n            fullWidth\r\n            status=\"warning\"\r\n            >Inclusive GST</nb-checkbox\r\n          >\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>Total Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"totalFee\"\r\n            disabled=\"true\"\r\n            placeholder=\"TotalFee\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"des\">Description</label>\r\n          <textarea\r\n            name=\"discription\"\r\n            id=\"des\"\r\n            status=\"basic\"\r\n            nbInput\r\n            fullWidth\r\n            formControlName=\"discription\"\r\n            placeholder=\"Description\"\r\n            cols=\"100\"\r\n            rows=\"4\"\r\n            id=\"dis\"\r\n          ></textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"display: block; margin-top: 1rem; text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ edit === 'true' ? 'Update Course' : 'Add Course' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -81,7 +81,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\n    ADD COURSES\n  </button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Course Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Course Name</th>\n          <th>Code</th>\n          <th>Fees</th>\n          <th>GST</th>\n          <th>Total Fees (Rs.)</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of courses.course; let i = index\">\n          <td>{{ item.name }}</td>\n          <td>{{ item.courseCode }}</td>\n          <td>{{ item.fees }}</td>\n          <td>{{ item.gst }}</td>\n          <td>&#x20B9; {{ item.totalFee }}</td>\n          <td style=\"text-align: right;\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\n    ADD COURSES\n  </button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Course Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Course Name</th>\n          <th>Code</th>\n          <th>Duration</th>\n          <th>Fees</th>\n          <th>GST</th>\n          <th>Total Fees (Rs.)</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of courses; let i = index\">\n          <td>{{ item.name }}</td>\n          <td>{{ item.courseCode }}</td>\n          <td>{{ item.duration }}</td>\n          <td>{{ item.fees }}</td>\n          <td>{{ item.gst }}</td>\n          <td>&#x20B9; {{ item.totalFee }}</td>\n          <td style=\"text-align: right;\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -101,7 +101,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Id</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.id }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Course Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.name }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Code</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.code }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Fees</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.fees }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>GST</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.gst }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Description</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.discription }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Total Fees</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.totalFee }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<nb-card>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Id</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.id }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Course Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.name }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Code</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.code }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Duration</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.duration }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Fees</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.fees }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>GST</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.gst }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Description</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.discription }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p>Total Fees</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <span>{{ courses.totalFee }}</span>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -161,7 +161,67 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Discount</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Discoint Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Code</th>\n          <th>Amount In %</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of discounts.discount; let i = index\">\n          <td>{{ item.discountCode }}</td>\n          <td>{{ item.amount }}</td>\n          <td>{{ item.description }}</td>\n          <td class=\"text-right\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Discount</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Discount Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Code</th>\n          <th>Amount In %</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of discounts.discount; let i = index\">\n          <td>{{ item.discountCode }}</td>\n          <td>{{ item.amount }}</td>\n          <td>{{ item.description }}</td>\n          <td class=\"text-right\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/branch-conf/employee-management/add-employee.component.html":
+  /*!***********************************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/branch-conf/employee-management/add-employee.component.html ***!
+    \***********************************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppPagesInstituteBranchConfEmployeeManagementAddEmployeeComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<p style=\"color: black; font-weight: bold;\">Add employeeForm Here</p>\r\n\r\n<nb-card status=\"warning\">\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit\"\r\n      >Already Registered Employee</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasEmployeeForm\"\r\n      (ngSubmit)=\"onEmployeeFormSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch Employee</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"3\"\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.idInput1.errors &&\r\n              eduAtlasEmployeeFormControl.idInput1.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput1\"\r\n            disabled=\"true\"\r\n            fullWidth\r\n            formControlName=\"idInput1\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"4\"\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.idInput2.errors &&\r\n              eduAtlasEmployeeFormControl.idInput2.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput2\"\r\n            fullWidth\r\n            formControlName=\"idInput2\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"3\"\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.idInput3.errors &&\r\n              eduAtlasEmployeeFormControl.idInput3.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput3\"\r\n            disabled=\"true\"\r\n            fullWidth\r\n            formControlName=\"idInput3\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"6\"\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.idInput4.errors &&\r\n              eduAtlasEmployeeFormControl.idInput4.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput4\"\r\n            fullWidth\r\n            formControlName=\"idInput4\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" nbButton status=\"warning\" [disabled]=\"!eduAtlasEmployeeForm.valid\" style=\"color: black;\" *ngIf=\"!edit\">\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form [formGroup]=\"employeeForm\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Employee Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">*Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Employee name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.employeeEmail.errors && f.employeeEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"employeeEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.employeeEmail.errors && f.employeeEmail.touched\"\r\n              >*Employee email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Employee Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Employee Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Employee Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>*Role</label>\r\n          <nb-select\r\n            placeholder=\"Select Role\"\r\n            [status]=\"f.role.errors && f.role.touched ? 'danger' : 'basic'\"\r\n            status=\"basic\"\r\n            formControlName=\"role\"\r\n          >\r\n            <nb-option [value]=\"null\">Select Role</nb-option>\r\n            <nb-option *ngFor=\"let role of roles\" value=\"{{ role }}\">{{ role }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.role.errors && f.role.touched\">*Employee Role is required.</small>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ employeeEduId ? 'Update Employee' : 'Add Employee' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/branch-conf/employee-management/manage-employee/manage-employee.component.html":
+  /*!******************************************************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/branch-conf/employee-management/manage-employee/manage-employee.component.html ***!
+    \******************************************************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppPagesInstituteBranchConfEmployeeManagementManageEmployeeManageEmployeeComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\" [hidden]=\"receipts\">\r\n    Add Employee\r\n  </button>\r\n</div>\r\n\r\n<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Employees</p>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"employees.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Contact</th>\r\n          <th>Role</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let employee of employees; let i = index\">\r\n          <td>{{ employee.basicDetails.name }}</td>\r\n          <td>{{ employee.basicDetails.employeeContact }}</td>\r\n          <td>{{ employee.instituteDetails[0].role }}</td>\r\n          <!-- <td>{{ employee.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"primary\"\r\n              (click)=\"view(employee.eduAtlasId, employee._id)\"\r\n            >\r\n              View\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"warning`\"\r\n              (click)=\"edit(employee.eduAtlasId, employee._id)\"\r\n            >\r\n              Edit\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"danger\" (click)=\"delete(employee._id)\">\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"employees.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/branch-conf/employee-management/view-employee/view-employee.component.html":
+  /*!**************************************************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/branch-conf/employee-management/view-employee/view-employee.component.html ***!
+    \**************************************************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppPagesInstituteBranchConfEmployeeManagementViewEmployeeViewEmployeeComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"employee\">\r\n  <nb-card-body>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-5\">\r\n        <p class=\"font-weight-bold\">Name</p>\r\n      </div>\r\n      <div class=\"col-sm-5\">\r\n        <p>{{ employee.basicDetails.name }}</p>\r\n      </div>\r\n      <div class=\"col-sm-1\"></div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-5\">\r\n        <p class=\"font-weight-bold\">Role</p>\r\n      </div>\r\n      <div class=\"col-sm-5\">\r\n        <p>{{ employee.instituteDetails[0].role }}</p>\r\n      </div>\r\n      <div class=\"col-sm-1\"></div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-5\">\r\n        <p class=\"font-weight-bold\">Email</p>\r\n      </div>\r\n      <div class=\"col-sm-5\">\r\n        <p>{{ employee.basicDetails.employeeEmail }}</p>\r\n      </div>\r\n      <div class=\"col-sm-1\"></div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-5\">\r\n        <p class=\"font-weight-bold\">Contact</p>\r\n      </div>\r\n      <div class=\"col-sm-5\">\r\n        <p>{{ employee.basicDetails.employeeContact }}</p>\r\n      </div>\r\n      <div class=\"col-sm-1\"></div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-5\">\r\n        <p class=\"font-weight-bold\">Address</p>\r\n      </div>\r\n      <div class=\"col-sm-5\">\r\n        <p>{{ employee.basicDetails.employeeAddress }}</p>\r\n      </div>\r\n      <div class=\"col-sm-1\"></div>\r\n    </div>\r\n    <hr />\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -314,12 +374,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     "./node_modules/@nebular/theme/fesm2015/index.js");
 
     var AddBatchesComponent = /*#__PURE__*/function () {
-      function AddBatchesComponent(fb, api, active, router, location, toasterService) {
+      function AddBatchesComponent(fb, api, route, router, location, toasterService) {
         _classCallCheck(this, AddBatchesComponent);
 
         this.fb = fb;
         this.api = api;
-        this.active = active;
+        this.route = route;
         this.router = router;
         this.location = location;
         this.toasterService = toasterService;
@@ -340,20 +400,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function ngOnInit() {
           var _this = this;
 
-          this.active.queryParams.subscribe(function (data) {
-            // console.log(data);
+          this.route.queryParams.subscribe(function (data) {
             _this.batchId = data.batchId;
             _this.edit = data.edit;
           });
-          this.routerId = this.active.snapshot.paramMap.get('id'); // console.log('institute Id ' + this.routerId);
-
-          this.getBatch(this.batchId, this.routerId);
-          this.getCourses(this.routerId);
+          this.instituteId = this.route.snapshot.paramMap.get('id');
+          this.getBatch(this.batchId, this.instituteId);
+          this.getCourses(this.instituteId);
           this.batch = this.fb.group({
             course: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             batchCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             description: ['']
-          }); // console.log('===============>', this.courses);
+          });
         }
       }, {
         key: "getBatch",
@@ -364,8 +422,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           param = param.append('instituteId', instituteId);
           param = param.append('batchId', id);
           this.api.getBatch(param).subscribe(function (data) {
-            // console.log(data);
-            _this2.batchUpdate = JSON.parse(JSON.stringify(data[0])); // console.log('batchInfo' + this.batchUpdate.batchCode);
+            _this2.batchUpdate = JSON.parse(JSON.stringify(data[0]));
           });
         }
       }, {
@@ -374,7 +431,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this3 = this;
 
           this.api.getCourses(id).subscribe(function (data) {
-            _this3.courses = JSON.parse(JSON.stringify(data)); // console.log(this.courses);
+            _this3.courses = JSON.parse(JSON.stringify(data));
 
             _this3.batch.patchValue({
               course: _this3.batchUpdate.course,
@@ -396,46 +453,37 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.edit === 'true') {
             var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpParams"]();
-            param = param.append('instituteId', this.routerId);
+            param = param.append('instituteId', this.instituteId);
             param = param.append('batchId', this.batchId);
-            this.api.updateBatch(param, this.batch.value).subscribe(function (res) {
+            var batch = this.batch.value;
+            batch._id = this.batchId;
+            this.api.updateBatch(param, batch).subscribe(function (res) {
               _this4.showToast('top-right', 'success', 'Successfully Updated');
 
-              _this4.router.navigate(['/pages/institute/branch-config/manage-batch/', _this4.routerId]);
+              _this4.router.navigate(['/pages/institute/branch-config/manage-batch/', _this4.instituteId]);
             }, function (error) {
-              // console.log(error);
-              _this4.invalid('top-right', 'danger', error.error.message);
+              _this4.showToast('top-right', 'danger', error.error.message);
             });
-          } // console.log('batch => ', this.batch.value);
-
+          }
 
           if (!this.edit) {
-            this.api.addBatch(this.routerId, this.batch.value).subscribe(function () {
-              // console.log('successfully added');
+            this.api.addBatch(this.instituteId, this.batch.value).subscribe(function () {
               _this4.showToast('top-right', 'success', 'Successfully Added');
 
               setTimeout(function () {
-                _this4.router.navigate(['/pages/institute/branch-config/manage-batch/', _this4.routerId]);
+                _this4.router.navigate(['/pages/institute/branch-config/manage-batch/', _this4.instituteId]);
               }, 1000);
             }, function (err) {
               console.error(err);
 
-              _this4.invalid('top-right', 'danger', err.error.message);
+              _this4.showToast('top-right', 'danger', err.error.message);
             });
           }
         }
       }, {
         key: "showToast",
         value: function showToast(position, status, message) {
-          this.toasterService.show(status || 'Success', message, {
-            position: position,
-            status: status
-          });
-        }
-      }, {
-        key: "invalid",
-        value: function invalid(position, status, errMessage) {
-          this.toasterService.show(status || 'Danger', errMessage, {
+          this.toasterService.show(status, message, {
             position: position,
             status: status
           });
@@ -531,36 +579,42 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @nebular/theme */
+    "./node_modules/@nebular/theme/fesm2015/index.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/common/http */
     "./node_modules/@angular/common/fesm2015/http.js");
     /* harmony import */
 
 
-    var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ../../../../../services/api.service */
     "./src/app/services/api.service.ts");
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
 
     var ManageBatchComponent = /*#__PURE__*/function () {
-      function ManageBatchComponent(api, router, active, http) {
+      function ManageBatchComponent(api, router, route, toasterService) {
         _classCallCheck(this, ManageBatchComponent);
 
         this.api = api;
         this.router = router;
-        this.active = active;
-        this.http = http;
+        this.route = route;
+        this.toasterService = toasterService;
         this.batches = {
           batch: [{
             _id: '',
@@ -569,14 +623,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             description: ''
           }]
         };
-        this.params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]();
+        this.params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]();
       }
 
       _createClass(ManageBatchComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.routerId = this.active.snapshot.paramMap.get('id');
-          this.getBatches(this.routerId);
+          this.instituteId = this.route.snapshot.paramMap.get('id');
+          this.getBatches(this.instituteId);
         }
       }, {
         key: "getBatches",
@@ -591,7 +645,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "edit",
         value: function edit(id) {
-          this.router.navigate(["/pages/institute/branch-config/add-batch/".concat(this.routerId)], {
+          this.router.navigate(["/pages/institute/branch-config/add-batch/".concat(this.instituteId)], {
             queryParams: {
               batchId: id,
               edit: true
@@ -601,11 +655,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "delete",
         value: function _delete(id) {
-          // console.log(id);
-          this.params = this.params.append('instituteId', this.routerId);
+          this.params = this.params.append('instituteId', this.instituteId);
           this.params = this.params.append('batchId', id);
-          this.api.deleteBatch(this.params).subscribe(function (res) {// console.log('successfully delete ' + res);
-          }, function (err) {
+          this.api.deleteBatch(this.params).subscribe(function (res) {}, function (err) {
             return console.error(err);
           });
           var i = this.batches.batch.findIndex(function (e) {
@@ -617,9 +669,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
         }
       }, {
+        key: "showToast",
+        value: function showToast(position, status, message) {
+          this.toasterService.show(status, message, {
+            position: position,
+            status: status
+          });
+        }
+      }, {
         key: "onClick",
         value: function onClick() {
-          this.router.navigate(['/pages/institute/branch-config/add-batch', this.routerId]);
+          this.router.navigate(['/pages/institute/branch-config/add-batch', this.instituteId]);
         }
       }]);
 
@@ -628,17 +688,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     ManageBatchComponent.ctorParameters = function () {
       return [{
-        type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]
+        type: _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"]
       }, {
-        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+        type: _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"]
       }];
     };
 
-    ManageBatchComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    ManageBatchComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
       selector: 'ngx-manage-batch',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./manage-batch.component.html */
@@ -646,7 +706,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./manage-batch.component.scss */
       "./src/app/pages/institute/branch-conf/add-batches/manage-batch/manage-batch.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])], ManageBatchComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"], _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"]])], ManageBatchComponent);
     /***/
   },
 
@@ -739,31 +799,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     "./node_modules/@angular/common/fesm2015/http.js");
 
     var AddCourseComponent = /*#__PURE__*/function () {
-      function AddCourseComponent(fb, api, active, location, toasterService, router) {
+      function AddCourseComponent(fb, api, route, location, toasterService, router) {
         _classCallCheck(this, AddCourseComponent);
 
         this.fb = fb;
         this.api = api;
-        this.active = active;
+        this.route = route;
         this.location = location;
         this.toasterService = toasterService;
         this.router = router;
         this.submitted = false;
         this.institutes = [];
-        this.institute = []; // students:any[]=[];
-
         this.display = false;
         this.exclusiveGst = null;
-        this.fees = null;
-        this.updateCourse = {
-          courseCode: '',
-          name: '',
-          fees: '',
-          gst: '',
-          gstValue: '',
-          discription: '',
-          totalFee: ''
-        };
+        this.fees = 0;
       }
 
       _createClass(AddCourseComponent, [{
@@ -771,27 +820,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function ngOnInit() {
           var _this6 = this;
 
-          this.routerId = this.active.snapshot.paramMap.get('id');
-          this.active.queryParams.subscribe(function (data) {
-            // console.log(data);
-            _this6.courseId = data.courseId;
-            _this6.edit = data.edit;
+          this.instituteId = this.route.snapshot.paramMap.get('id');
+          this.route.queryParams.subscribe(function (param) {
+            _this6.courseId = param.courseId;
+            _this6.edit = param.edit;
           });
-
-          if (this.edit === 'true') {
-            this.getCourse(this.courseId);
-          }
-
           this.course = this.fb.group({
             name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             courseCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             fees: [''],
+            duration: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             gst: [''],
             gstValue: [''],
             discription: [''],
             totalFee: ['']
           });
-          this.inclusiveGst(false);
+
+          if (this.edit === 'true') {
+            this.getCourse(this.courseId);
+          } else {
+            this.inclusiveGst(false);
+          }
         }
       }, {
         key: "getCourse",
@@ -799,33 +848,36 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this7 = this;
 
           var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpParams"]();
-          param = param.append('instituteId', this.routerId);
+          param = param.append('instituteId', this.instituteId);
           param = param.append('courseId', id);
-          this.api.getCourse(param).subscribe(function (data) {
-            // console.log('getCourse ' + JSON.stringify(data[0]));
-            _this7.updateCourse = JSON.parse(JSON.stringify(data[0])); // console.log('getCourse ' + this.updateCourse.courseCode);
-            // console.log(this.updateCourse);
+          this.api.getCourse(param).subscribe(function (res) {
+            _this7.updateCourse = res[0];
 
             _this7.course.patchValue({
               name: _this7.updateCourse.name,
               courseCode: _this7.updateCourse.courseCode,
               fees: _this7.updateCourse.fees,
+              duration: _this7.updateCourse.duration,
               gst: _this7.updateCourse.gst,
               gstValue: _this7.updateCourse.gstValue,
               discription: _this7.updateCourse.discription,
               totalFee: _this7.updateCourse.totalFee
             });
 
+            _this7.exclusiveGst = Number(_this7.updateCourse.gstValue);
+            _this7.fees = Number(_this7.updateCourse.fees);
+
             if (_this7.updateCourse.gst === 'Inclusive') {
               _this7.gstCheckBox = true;
+
+              _this7.inclusiveGst(true);
 
               _this7.course.get('gstValue').disable();
             } else {
               _this7.gstCheckBox = false;
-              _this7.exclusiveGst = Number(_this7.updateCourse.gstValue);
-            }
 
-            _this7.fees = Number(_this7.updateCourse.fees);
+              _this7.inclusiveGst(false);
+            }
           }, function (error) {
             return console.error(error);
           });
@@ -836,9 +888,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this8 = this;
 
           this.api.getInstitutes().subscribe(function (data) {
-            _this8.institutes = data; // console.log('institutes - ' + JSON.stringify(this.institutes));
-
-            _this8.institute = JSON.parse(JSON.stringify(_this8.institutes)); // console.log(this.institute);
+            _this8.institutes = data;
           });
           this.display = true;
         }
@@ -856,39 +906,36 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.course.invalid) {
             return;
-          } // console.log('editMode ' + this.edit);
-
+          }
 
           if (this.edit === 'true') {
             var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpParams"]();
-            param = param.append('instituteId', this.routerId);
+            param = param.append('instituteId', this.instituteId);
             param = param.append('courseId', this.courseId);
-            this.api.updateCourse(param, this.course.value).subscribe(function (res) {
-              // console.log(res);
+            var course = this.course.value;
+            course._id = this.courseId;
+            this.api.updateCourse(param, course).subscribe(function (res) {
               _this9.showToast('top-right', 'success', 'Course Updated');
 
               setTimeout(function () {
-                _this9.router.navigate(['/pages/institute/branch-config/manage-course/', _this9.routerId]);
+                _this9.router.navigate(['/pages/institute/branch-config/manage-course/', _this9.instituteId]);
               }, 1000);
             }, function (error) {
-              // console.log(error);
               _this9.showToast('top-right', 'danger', 'Course Updation Failed');
             });
-          } // console.log(this.course.value);
-
+          }
 
           if (!this.edit) {
-            this.api.addCourse(this.routerId, this.course.value).subscribe(function (data) {
-              // console.log(data);
+            this.api.addCourse(this.instituteId, this.course.value).subscribe(function (data) {
               _this9.showToast('top-right', 'success', 'Course Added Successfully');
 
               setTimeout(function () {
-                _this9.router.navigate(['/pages/institute/branch-config/manage-course/', _this9.routerId]);
+                _this9.router.navigate(['/pages/institute/branch-config/manage-course/', _this9.instituteId]);
               }, 1000);
             }, function (err) {
               console.error(err);
 
-              _this9.invalid('top-right', 'danger', err.error.message);
+              _this9.showToast('top-right', 'danger', err.error.message ? err.error.message : 'This course id already added');
             });
           }
         }
@@ -902,9 +949,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.course.patchValue({
               gst: 'Inclusive'
             });
-          }
-
-          if (!inclusive || null) {
+          } else if (!inclusive || null) {
             this.course.get('gstValue').enable();
             this.course.patchValue({
               gst: 'Exclusive'
@@ -933,10 +978,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "exclusive",
         value: function exclusive(event) {
-          this.exclusiveGst = +event; // console.log('exclusive ', this.exclusiveGst);
-
-          var total = this.fees + this.exclusiveGst / 100 * this.fees; // console.log('type ', typeof this.fees, this.fees);
-
+          this.exclusiveGst = +event;
+          var total = this.fees + this.exclusiveGst / 100 * this.fees;
           this.course.patchValue({
             totalFee: total + '',
             gstValue: this.exclusiveGst === 0 ? '' : this.exclusiveGst + ''
@@ -952,25 +995,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "showToast",
         value: function showToast(position, status, message) {
-          this.toasterService.show(status || 'Success', message, {
+          this.toasterService.show(status, message, {
             position: position,
             status: status
           });
-        }
-      }, {
-        key: "invalid",
-        value: function invalid(position, status, errorMessage) {
-          if (errorMessage) {
-            this.toasterService.show(status || 'Danger', errorMessage, {
-              position: position,
-              status: status
-            });
-          } else {
-            this.toasterService.show(status || 'Danger', 'This course id already added', {
-              position: position,
-              status: status
-            });
-          }
         }
       }, {
         key: "f",
@@ -1087,28 +1115,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.api = api;
         this.router = router;
         this.active = active;
-        this.courses = {
-          course: [{
-            courseCode: '',
-            discription: '',
-            fees: '',
-            gst: '',
-            name: '',
-            totalFee: '',
-            _id: ''
-          }]
-        };
-        this.institutes = [];
-        this.institute = []; // students:any[]=[];
-
         this.display = false;
+        this.courses = [];
+        this.institutes = [];
+        this.institute = [];
       }
 
       _createClass(ManageCourseComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.routerId = this.active.snapshot.paramMap.get('id');
-          this.getCourses(this.routerId);
+          this.instituteId = this.active.snapshot.paramMap.get('id');
+          this.getCourses(this.instituteId);
         }
       }, {
         key: "getCourses",
@@ -1116,35 +1133,33 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this10 = this;
 
           this.api.getCourses(id).subscribe(function (data) {
-            // console.log(data);
-            // this.courses = JSON.stringify(data);
-            var course = JSON.stringify(data);
-            _this10.courses = JSON.parse(course); // console.log('=======> ', this.courses);
+            _this10.courses = data.course;
           });
         }
       }, {
         key: "delete",
         value: function _delete(id) {
-          // console.log(id);
+          var _this11 = this;
+
           var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpParams"]();
-          param = param.append('instituteId', this.routerId);
+          param = param.append('instituteId', this.instituteId);
           param = param.append('courseId', id);
-          this.api.deleteCourse(param).subscribe(function (res) {// console.log(res);
+          this.api.deleteCourse(param).subscribe(function (res) {
+            var i = _this11.courses.findIndex(function (e) {
+              return e._id === id;
+            });
+
+            if (i !== -1) {
+              _this11.courses.splice(i, 1);
+            }
           }, function (error) {
             return console.error(error);
           });
-          var i = this.courses.course.findIndex(function (e) {
-            return e._id === id;
-          });
-
-          if (i !== -1) {
-            this.courses.course.splice(i, 1);
-          }
         }
       }, {
         key: "edit",
         value: function edit(id) {
-          this.router.navigate(["/pages/institute/branch-config/add-courses/".concat(this.routerId)], {
+          this.router.navigate(["/pages/institute/branch-config/add-courses/".concat(this.instituteId)], {
             queryParams: {
               courseId: id,
               edit: true
@@ -1154,7 +1169,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onClick",
         value: function onClick() {
-          this.router.navigate(['/pages/institute/branch-config/add-courses/', this.routerId]);
+          this.router.navigate(['/pages/institute/branch-config/add-courses/', this.instituteId]);
         }
       }]);
 
@@ -1258,13 +1273,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ViewCourseComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this11 = this;
+          var _this12 = this;
 
-          this.routerId = +this.active.snapshot.paramMap.get('id'); // console.log(this.active.snapshot.paramMap);
-
-          this.api.getCourse(this.routerId).subscribe(function (data) {
-            // console.log(data);
-            _this11.courses = data;
+          this.instituteId = +this.active.snapshot.paramMap.get('id');
+          this.api.getCourse(this.instituteId).subscribe(function (data) {
+            _this12.courses = data;
           }, function (err) {
             return console.error(err);
           });
@@ -1474,6 +1487,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _branch_conf_receipt_conf_manage_receipt_manage_receipt_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! ../../branch-conf/receipt-conf/manage-receipt/manage-receipt.component */
     "./src/app/pages/institute/branch-conf/receipt-conf/manage-receipt/manage-receipt.component.ts");
+    /* harmony import */
+
+
+    var _employee_management_manage_employee_manage_employee_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+    /*! ../employee-management/manage-employee/manage-employee.component */
+    "./src/app/pages/institute/branch-conf/employee-management/manage-employee/manage-employee.component.ts");
+    /* harmony import */
+
+
+    var _employee_management_add_employee_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+    /*! ../employee-management/add-employee.component */
+    "./src/app/pages/institute/branch-conf/employee-management/add-employee.component.ts");
+    /* harmony import */
+
+
+    var _employee_management_view_employee_view_employee_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+    /*! ../employee-management/view-employee/view-employee.component */
+    "./src/app/pages/institute/branch-conf/employee-management/view-employee/view-employee.component.ts");
 
     var routes = [{
       path: '',
@@ -1508,6 +1539,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         path: 'manage-role-management/:id',
         component: _role_management_role_management_component__WEBPACK_IMPORTED_MODULE_6__["RoleManagementComponent"]
+      }, {
+        path: 'add-employee/:id',
+        component: _employee_management_add_employee_component__WEBPACK_IMPORTED_MODULE_15__["AddEmployee"]
+      }, {
+        path: 'add-employee/:id/edit',
+        component: _employee_management_add_employee_component__WEBPACK_IMPORTED_MODULE_15__["AddEmployee"]
+      }, {
+        path: 'manage-employee/:id',
+        component: _employee_management_manage_employee_manage_employee_component__WEBPACK_IMPORTED_MODULE_14__["ManageEmployee"]
+      }, {
+        path: 'view-employee/:id',
+        component: _employee_management_view_employee_view_employee_component__WEBPACK_IMPORTED_MODULE_16__["ViewEmployee"]
       }, {
         path: '',
         redirectTo: 'add-courses',
@@ -1602,65 +1645,83 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _employee_management_manage_employee_manage_employee_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! ../employee-management/manage-employee/manage-employee.component */
+    "./src/app/pages/institute/branch-conf/employee-management/manage-employee/manage-employee.component.ts");
+    /* harmony import */
+
+
+    var _employee_management_add_employee_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    /*! ../employee-management/add-employee.component */
+    "./src/app/pages/institute/branch-conf/employee-management/add-employee.component.ts");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! @angular/forms */
     "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
-    var _nebular_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! @nebular/theme */
     "./node_modules/@nebular/theme/fesm2015/index.js");
     /* harmony import */
 
 
-    var _discount_discount_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    var _discount_discount_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! ../discount/discount.component */
     "./src/app/pages/institute/branch-conf/discount/discount.component.ts");
     /* harmony import */
 
 
-    var _receipt_conf_receipt_conf_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    var _receipt_conf_receipt_conf_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! ../receipt-conf/receipt-conf.component */
     "./src/app/pages/institute/branch-conf/receipt-conf/receipt-conf.component.ts");
     /* harmony import */
 
 
-    var _branch_conf_add_course_manage_course_manage_course_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    var _branch_conf_add_course_manage_course_manage_course_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
     /*! ../../branch-conf/add-course/manage-course/manage-course.component */
     "./src/app/pages/institute/branch-conf/add-course/manage-course/manage-course.component.ts");
     /* harmony import */
 
 
-    var _branch_conf_add_course_view_course_view_course_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+    var _branch_conf_add_course_view_course_view_course_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
     /*! ../../branch-conf/add-course/view-course/view-course.component */
     "./src/app/pages/institute/branch-conf/add-course/view-course/view-course.component.ts");
     /* harmony import */
 
 
-    var _branch_conf_add_batches_manage_batch_manage_batch_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+    var _branch_conf_add_batches_manage_batch_manage_batch_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
     /*! ../../branch-conf/add-batches/manage-batch/manage-batch.component */
     "./src/app/pages/institute/branch-conf/add-batches/manage-batch/manage-batch.component.ts");
     /* harmony import */
 
 
-    var _branch_conf_discount_manage_discount_manage_discount_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+    var _branch_conf_discount_manage_discount_manage_discount_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
     /*! ../../branch-conf/discount/manage-discount/manage-discount.component */
     "./src/app/pages/institute/branch-conf/discount/manage-discount/manage-discount.component.ts");
     /* harmony import */
 
 
-    var _branch_conf_receipt_conf_manage_receipt_manage_receipt_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
+    var _branch_conf_receipt_conf_manage_receipt_manage_receipt_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
     /*! ../../branch-conf/receipt-conf/manage-receipt/manage-receipt.component */
     "./src/app/pages/institute/branch-conf/receipt-conf/manage-receipt/manage-receipt.component.ts");
+    /* harmony import */
+
+
+    var _employee_management_view_employee_view_employee_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(
+    /*! ../employee-management/view-employee/view-employee.component */
+    "./src/app/pages/institute/branch-conf/employee-management/view-employee/view-employee.component.ts");
 
     var BranchModule = function BranchModule() {
       _classCallCheck(this, BranchModule);
     };
 
     BranchModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      declarations: [_branch_conf_component__WEBPACK_IMPORTED_MODULE_4__["BranchConfComponent"], _add_course_add_course_component__WEBPACK_IMPORTED_MODULE_5__["AddCourseComponent"], _add_batches_add_batches_component__WEBPACK_IMPORTED_MODULE_6__["AddBatchesComponent"], _role_management_role_management_component__WEBPACK_IMPORTED_MODULE_8__["RoleManagementComponent"], _discount_discount_component__WEBPACK_IMPORTED_MODULE_11__["DiscountComponent"], _receipt_conf_receipt_conf_component__WEBPACK_IMPORTED_MODULE_12__["ReceiptConfComponent"], _branch_conf_add_course_manage_course_manage_course_component__WEBPACK_IMPORTED_MODULE_13__["ManageCourseComponent"], _branch_conf_add_course_view_course_view_course_component__WEBPACK_IMPORTED_MODULE_14__["ViewCourseComponent"], _branch_conf_add_batches_manage_batch_manage_batch_component__WEBPACK_IMPORTED_MODULE_15__["ManageBatchComponent"], _branch_conf_discount_manage_discount_manage_discount_component__WEBPACK_IMPORTED_MODULE_16__["ManageDiscountComponent"], _branch_conf_receipt_conf_manage_receipt_manage_receipt_component__WEBPACK_IMPORTED_MODULE_17__["ManageReceiptComponent"]],
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _branch_routing_module__WEBPACK_IMPORTED_MODULE_7__["BranchRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbCardModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbLayoutModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbInputModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbButtonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbCheckboxModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbSelectModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbMenuModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbAccordionModule"], _nebular_eva_icons__WEBPACK_IMPORTED_MODULE_3__["NbEvaIconsModule"]]
+      declarations: [_branch_conf_component__WEBPACK_IMPORTED_MODULE_4__["BranchConfComponent"], _add_course_add_course_component__WEBPACK_IMPORTED_MODULE_5__["AddCourseComponent"], _add_batches_add_batches_component__WEBPACK_IMPORTED_MODULE_6__["AddBatchesComponent"], _role_management_role_management_component__WEBPACK_IMPORTED_MODULE_8__["RoleManagementComponent"], _employee_management_manage_employee_manage_employee_component__WEBPACK_IMPORTED_MODULE_9__["ManageEmployee"], _employee_management_add_employee_component__WEBPACK_IMPORTED_MODULE_10__["AddEmployee"], _employee_management_view_employee_view_employee_component__WEBPACK_IMPORTED_MODULE_20__["ViewEmployee"], _discount_discount_component__WEBPACK_IMPORTED_MODULE_13__["DiscountComponent"], _receipt_conf_receipt_conf_component__WEBPACK_IMPORTED_MODULE_14__["ReceiptConfComponent"], _branch_conf_add_course_manage_course_manage_course_component__WEBPACK_IMPORTED_MODULE_15__["ManageCourseComponent"], _branch_conf_add_course_view_course_view_course_component__WEBPACK_IMPORTED_MODULE_16__["ViewCourseComponent"], _branch_conf_add_batches_manage_batch_manage_batch_component__WEBPACK_IMPORTED_MODULE_17__["ManageBatchComponent"], _branch_conf_discount_manage_discount_manage_discount_component__WEBPACK_IMPORTED_MODULE_18__["ManageDiscountComponent"], _branch_conf_receipt_conf_manage_receipt_manage_receipt_component__WEBPACK_IMPORTED_MODULE_19__["ManageReceiptComponent"]],
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _branch_routing_module__WEBPACK_IMPORTED_MODULE_7__["BranchRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ReactiveFormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_12__["NbCardModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_12__["NbLayoutModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_12__["NbInputModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_12__["NbButtonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_12__["NbCheckboxModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_12__["NbDatepickerModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_12__["NbSelectModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_12__["NbMenuModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_12__["NbAccordionModule"], _nebular_eva_icons__WEBPACK_IMPORTED_MODULE_3__["NbEvaIconsModule"]]
     })], BranchModule);
     /***/
   },
@@ -1775,16 +1836,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(DiscountComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this12 = this;
+          var _this13 = this;
 
-          this.routerId = this.active.snapshot.paramMap.get('id');
+          this.instituteId = this.active.snapshot.paramMap.get('id');
           this.active.queryParams.subscribe(function (data) {
-            // console.log(data);
-            _this12.edit = data.edit;
-            _this12.discountId = data.discountId;
+            _this13.edit = data.edit;
+            _this13.discountId = data.discountId;
 
-            if (_this12.edit) {
-              _this12.getDiscount(_this12.discountId);
+            if (_this13.edit) {
+              _this13.getDiscount(_this13.discountId);
             }
           });
           this.discount = this.fb.group({
@@ -1796,26 +1856,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getDiscount",
         value: function getDiscount(id) {
-          var _this13 = this;
+          var _this14 = this;
 
           var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]();
-          param = param.append('instituteId', this.routerId);
+          param = param.append('instituteId', this.instituteId);
           param = param.append('discountId', id);
           this.api.getDiscount(param).subscribe(function (data) {
-            // console.log('discount Data ', data);
-            _this13.discountUpdate = JSON.parse(JSON.stringify(data[0])); // console.log('CODE ', this.discountUpdate.discountCode);
+            _this14.discountUpdate = data[0];
 
-            _this13.discount.patchValue({
-              discountCode: _this13.discountUpdate.discountCode,
-              description: _this13.discountUpdate.description,
-              amount: _this13.discountUpdate.amount
+            _this14.discount.patchValue({
+              discountCode: _this14.discountUpdate.discountCode,
+              description: _this14.discountUpdate.description,
+              amount: _this14.discountUpdate.amount
             });
           });
         }
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this14 = this;
+          var _this15 = this;
 
           this.submitted = true;
 
@@ -1825,32 +1884,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.edit === 'true') {
             var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]();
-            param = param.append('instituteId', this.routerId);
+            param = param.append('instituteId', this.instituteId);
             param = param.append('discountId', this.discountId);
             this.api.updateDiscount(param, this.discount.value).subscribe(function (res) {
-              // console.log(res);
-              _this14.showToast('top-right', 'success', 'Discount Updated');
+              _this15.showToast('top-right', 'success', 'Discount Updated');
 
               setTimeout(function () {
-                _this14.router.navigate(['/pages/institute/branch-config/manage-discount/', _this14.routerId]);
+                _this15.router.navigate(['/pages/institute/branch-config/manage-discount/', _this15.instituteId]);
               }, 1000);
             }, function (error) {
-              // console.log(error);
-              _this14.showToast('top-right', 'danger', 'Discount Updation Failed');
+              _this15.showToast('top-right', 'danger', 'Discount Updation Failed');
             });
           } else {
-            // console.log(this.discount.value);
-            this.api.addDiscount(this.routerId, this.discount.value).subscribe(function (data) {
-              // console.log('add success' + ' ' + data);
-              _this14.showToast('top-right', 'success', 'Discount Added Successfully');
+            this.api.addDiscount(this.instituteId, this.discount.value).subscribe(function (data) {
+              _this15.showToast('top-right', 'success', 'Discount Added Successfully');
 
               setTimeout(function () {
-                _this14.router.navigate(['/pages/institute/branch-config/manage-discount/', _this14.routerId]);
+                _this15.router.navigate(['/pages/institute/branch-config/manage-discount/', _this15.instituteId]);
               }, 1000);
             }, function (err) {
               console.error(err);
 
-              _this14.showToast('top-right', 'danger', 'This Discount already added');
+              _this15.showToast('top-right', 'danger', 'This Discount already added');
             });
           }
         }
@@ -1953,6 +2008,674 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @nebular/theme */
+    "./node_modules/@nebular/theme/fesm2015/index.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../../../../../services/api.service */
+    "./src/app/services/api.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/fesm2015/http.js");
+
+    var ManageDiscountComponent = /*#__PURE__*/function () {
+      function ManageDiscountComponent(api, router, active, toasterService) {
+        _classCallCheck(this, ManageDiscountComponent);
+
+        this.api = api;
+        this.router = router;
+        this.active = active;
+        this.toasterService = toasterService;
+        this.discounts = {
+          discount: [{
+            discountCode: '',
+            description: '',
+            _id: '',
+            amount: ''
+          }]
+        };
+      }
+
+      _createClass(ManageDiscountComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          this.instituteId = this.active.snapshot.paramMap.get('id');
+          this.getDiscounts(this.instituteId);
+        }
+      }, {
+        key: "getDiscounts",
+        value: function getDiscounts(id) {
+          var _this16 = this;
+
+          this.api.getDiscounts(id).subscribe(function (data) {
+            _this16.discounts = data;
+          }, function (err) {
+            return console.error(err);
+          });
+        }
+      }, {
+        key: "edit",
+        value: function edit(id) {
+          this.router.navigate(["/pages/institute/branch-config/add-discount/".concat(this.instituteId)], {
+            queryParams: {
+              discountId: id,
+              edit: true
+            }
+          });
+        }
+      }, {
+        key: "delete",
+        value: function _delete(id) {
+          var confirm = window.prompt('Are u sure, you want to Delete This Discount?');
+
+          if (confirm) {
+            var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpParams"]();
+            param = param.append('instituteId', this.instituteId);
+            param = param.append('discountId', id);
+            this.api.deleteDiscount(param).subscribe(function (err) {
+              return console.error(err);
+            });
+            var i = this.discounts.discount.findIndex(function (e) {
+              return e._id === id;
+            });
+
+            if (i !== -1) {
+              this.discounts.discount.splice(i, 1);
+              this.showToast('top-right', 'success', 'Discount Deleted Successfully!');
+            }
+          }
+        }
+      }, {
+        key: "showToast",
+        value: function showToast(position, status, message) {
+          this.toasterService.show(status, message, {
+            position: position,
+            status: status
+          });
+        }
+      }, {
+        key: "onClick",
+        value: function onClick() {
+          this.router.navigate(['/pages/institute/branch-config/add-discount/', this.instituteId]);
+        }
+      }]);
+
+      return ManageDiscountComponent;
+    }();
+
+    ManageDiscountComponent.ctorParameters = function () {
+      return [{
+        type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
+      }, {
+        type: _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"]
+      }];
+    };
+
+    ManageDiscountComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+      selector: 'ngx-manage-discount',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./manage-discount.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/branch-conf/discount/manage-discount/manage-discount.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./manage-discount.component.scss */
+      "./src/app/pages/institute/branch-conf/discount/manage-discount/manage-discount.component.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"]])], ManageDiscountComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/institute/branch-conf/employee-management/add-employee.component.scss":
+  /*!*********************************************************************************************!*\
+    !*** ./src/app/pages/institute/branch-conf/employee-management/add-employee.component.scss ***!
+    \*********************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppPagesInstituteBranchConfEmployeeManagementAddEmployeeComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "small {\n  color: red; }\n\n.details {\n  display: grid;\n  grid-gap: 10px;\n  grid-template-columns: repeat(auto-fill, 224px); }\n\n.feeDetail {\n  display: grid;\n  grid-gap: 10px;\n  grid-template-columns: repeat(auto-fill, 224px); }\n\nnb-select {\n  display: block; }\n\np {\n  color: black;\n  font-weight: bold; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2VtcGxveWVlLW1hbmFnZW1lbnQvRTpcXFByb2plY3RzXFxGcmVlbGFuY2UgUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXGNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGluc3RpdHV0ZVxcYnJhbmNoLWNvbmZcXGVtcGxveWVlLW1hbmFnZW1lbnRcXGFkZC1lbXBsb3llZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLFVBQVUsRUFBQTs7QUFFZDtFQUNJLGFBQWE7RUFDYixjQUFhO0VBQ2IsK0NBQStDLEVBQUE7O0FBR25EO0VBQ0csYUFBYTtFQUNiLGNBQWM7RUFDZCwrQ0FBK0MsRUFBQTs7QUFHbEQ7RUFBVSxjQUFhLEVBQUE7O0FBQ3ZCO0VBQUUsWUFBVztFQUFDLGlCQUFnQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2VtcGxveWVlLW1hbmFnZW1lbnQvYWRkLWVtcGxveWVlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbnNtYWxse1xyXG4gICAgY29sb3I6IHJlZDtcclxufVxyXG4uZGV0YWlsc3tcclxuICAgIGRpc3BsYXk6IGdyaWQ7XHJcbiAgICBncmlkLWdhcDoxMHB4O1xyXG4gICAgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiByZXBlYXQoYXV0by1maWxsLCAyMjRweCk7IFxyXG59XHJcblxyXG4uZmVlRGV0YWlse1xyXG4gICBkaXNwbGF5OiBncmlkO1xyXG4gICBncmlkLWdhcDogMTBweDtcclxuICAgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiByZXBlYXQoYXV0by1maWxsLCAyMjRweCk7IFxyXG4gICBcclxufVxyXG5uYi1zZWxlY3R7ZGlzcGxheTpibG9ja31cclxucHtjb2xvcjpibGFjaztmb250LXdlaWdodDpib2xkfVxyXG5cclxuICAgXHJcbiJdfQ== */";
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/institute/branch-conf/employee-management/add-employee.component.ts":
+  /*!*******************************************************************************************!*\
+    !*** ./src/app/pages/institute/branch-conf/employee-management/add-employee.component.ts ***!
+    \*******************************************************************************************/
+
+  /*! exports provided: AddEmployee */
+
+  /***/
+  function srcAppPagesInstituteBranchConfEmployeeManagementAddEmployeeComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "AddEmployee", function () {
+      return AddEmployee;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../../../../services/api.service */
+    "./src/app/services/api.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @nebular/theme */
+    "./node_modules/@nebular/theme/fesm2015/index.js");
+
+    var AddEmployee = /*#__PURE__*/function () {
+      function AddEmployee(fb, api, router, active, toasterService) {
+        _classCallCheck(this, AddEmployee);
+
+        this.fb = fb;
+        this.api = api;
+        this.router = router;
+        this.active = active;
+        this.toasterService = toasterService;
+        this.roles = ['Teacher', 'Manager', 'Counselor '];
+      }
+
+      _createClass(AddEmployee, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          var _this17 = this;
+
+          this.alreadyRegistered = false;
+          this.instituteId = this.active.snapshot.paramMap.get('id');
+          this.active.queryParams.subscribe(function (data) {
+            _this17.employeeEduId = data.eduAtlasId;
+            var employeeObjId = data.employeeObjId;
+            _this17.edit = data.edit;
+            _this17.employeeForm = _this17.fb.group({
+              name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+              employeeEmail: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email])],
+              contact: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
+              address: [''],
+              role: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
+            });
+            _this17.eduAtlasEmployeeForm = _this17.fb.group({
+              idInput1: ['EDU', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+              idInput2: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+              idInput3: ['EMP', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+              idInput4: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
+            });
+
+            if (_this17.edit === 'true') {
+              _this17.alreadyRegistered = true;
+
+              _this17.getOneEmployeeByInstitute(employeeObjId, _this17.instituteId);
+            }
+          });
+        }
+      }, {
+        key: "onEmployeeFormSearch",
+        value: function onEmployeeFormSearch() {
+          var _this18 = this;
+
+          this.employeeForm.reset();
+
+          if (this.eduAtlasEmployeeForm.valid) {
+            var employeeEduId = "".concat(this.eduAtlasEmployeeFormControl['idInput1'].value, "-").concat(this.eduAtlasEmployeeFormControl['idInput2'].value, "-").concat(this.eduAtlasEmployeeFormControl['idInput3'].value, "-").concat(this.eduAtlasEmployeeFormControl['idInput4'].value);
+            this.api.getOneEmployee(employeeEduId).subscribe(function (data) {
+              if (data) {
+                _this18.employeeEduId = employeeEduId;
+                _this18.employee = data[0];
+                console.log(_this18.employee);
+
+                _this18.employeeForm.patchValue({
+                  name: _this18.employee.basicDetails.name,
+                  employeeEmail: _this18.employee.basicDetails.employeeEmail,
+                  contact: _this18.employee.basicDetails.employeeContact,
+                  address: _this18.employee.basicDetails.employeeAddress
+                });
+              } else {
+                _this18.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
+              }
+            }, function (error) {
+              _this18.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
+            });
+          }
+        }
+      }, {
+        key: "changeAlreadyRegistered",
+        value: function changeAlreadyRegistered(e) {
+          this.alreadyRegistered = e;
+
+          if (!e) {
+            this.eduAtlasEmployeeForm.reset({
+              idInput1: 'EDU',
+              idInput3: 'EMP'
+            });
+          }
+        }
+      }, {
+        key: "getOneEmployeeByInstitute",
+        value: function getOneEmployeeByInstitute(employeeObjId, institute) {
+          var _this19 = this;
+
+          this.api.getOneEmployeeByInstitute({
+            empId: employeeObjId,
+            instituteId: institute
+          }).subscribe(function (data) {
+            _this19.employee = data[0]; // console.log(this.employee);
+
+            var eduAtlId = _this19.employeeEduId.split('-');
+
+            _this19.eduAtlasEmployeeForm.patchValue({
+              idInput1: eduAtlId[0],
+              idInput2: eduAtlId[1],
+              idInput3: eduAtlId[2],
+              idInput4: eduAtlId[3]
+            });
+
+            _this19.eduAtlasEmployeeForm.get('idInput2').disable();
+
+            _this19.eduAtlasEmployeeForm.get('idInput4').disable();
+
+            _this19.employeeForm.patchValue({
+              name: _this19.employee.basicDetails.name,
+              employeeEmail: _this19.employee.basicDetails.employeeEmail,
+              contact: _this19.employee.basicDetails.employeeContact,
+              address: _this19.employee.basicDetails.employeeAddress,
+              role: _this19.employee.instituteDetails[0].role
+            });
+
+            _this19.employeeForm.get('name').disable();
+
+            _this19.employeeForm.get('address').disable();
+
+            _this19.employeeForm.get('employeeEmail').disable();
+
+            _this19.employeeForm.get('contact').disable();
+          });
+        }
+      }, {
+        key: "onSubmit",
+        value: function onSubmit() {
+          var _this20 = this;
+
+          if (this.employeeForm.invalid) {
+            return;
+          }
+
+          if (this.edit === 'true') {
+            this.api.updateEmployeeInstituteDetails(this.employee._id, this.instituteId, this.f['role'].value).subscribe(function (res) {
+              _this20.showToaster('top-right', 'success', 'Employee Updated Successfully!');
+
+              _this20.router.navigate(["/pages/institute/branch-config/manage-employee/".concat(_this20.instituteId)]);
+            }, function (err) {
+              return _this20.showToaster('top-right', 'danger', err.error.message);
+            });
+          }
+
+          if (!this.edit) {
+            if (!this.alreadyRegistered) {
+              this.api.addEmployee(this.employeeForm.value, this.instituteId).subscribe(function (data) {
+                _this20.showToaster('top-right', 'success', 'New Employee Added Successfully!');
+
+                setTimeout(function () {
+                  _this20.router.navigate(["/pages/institute/branch-config/manage-employee/".concat(_this20.instituteId)]);
+                }, 1000);
+              }, function (err) {
+                if (err.error.message.includes('E11000 duplicate key error collection')) {
+                  _this20.showToaster('top-right', 'danger', 'This Employee Already Exist, Please Search Employee By EDU-Atlas ID');
+
+                  _this20.alreadyRegistered = true;
+                  return;
+                }
+
+                _this20.alreadyRegistered = true;
+
+                _this20.showToaster('top-right', 'danger', err.error.message);
+              });
+            } else {
+              if (this.employeeEduId) {
+                this.api.addEmployeeInstitute(this.employeeEduId, this.instituteId, this.employeeForm.value).subscribe(function (res) {
+                  _this20.showToaster('top-right', 'success', 'Employee Added to Institute Successfully!');
+
+                  _this20.router.navigate(["/pages/institute/branch-config/manage-employee/".concat(_this20.instituteId)]);
+                }, function (err) {
+                  return _this20.showToaster('top-right', 'danger', err.error.message);
+                });
+              } else {
+                this.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
+              }
+            }
+          }
+        }
+      }, {
+        key: "showToaster",
+        value: function showToaster(position, status, message) {
+          this.toasterService.show(status, message, {
+            position: position,
+            status: status
+          });
+        }
+      }, {
+        key: "f",
+        get: function get() {
+          return this.employeeForm.controls;
+        }
+      }, {
+        key: "eduAtlasEmployeeFormControl",
+        get: function get() {
+          return this.eduAtlasEmployeeForm.controls;
+        }
+      }]);
+
+      return AddEmployee;
+    }();
+
+    AddEmployee.ctorParameters = function () {
+      return [{
+        type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]
+      }, {
+        type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
+      }, {
+        type: _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"]
+      }];
+    };
+
+    AddEmployee = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'ngx-add-employee',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./add-employee.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/branch-conf/employee-management/add-employee.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./add-employee.component.scss */
+      "./src/app/pages/institute/branch-conf/employee-management/add-employee.component.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"]])], AddEmployee);
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/institute/branch-conf/employee-management/manage-employee/manage-employee.component.scss":
+  /*!****************************************************************************************************************!*\
+    !*** ./src/app/pages/institute/branch-conf/employee-management/manage-employee/manage-employee.component.scss ***!
+    \****************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppPagesInstituteBranchConfEmployeeManagementManageEmployeeManageEmployeeComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "table {\n  width: 100%;\n  height: 5vh; }\n\n.input-group-text {\n  background-color: #fce062;\n  color: #000; }\n\n.noRecFound {\n  position: fixed;\n  top: 50%;\n  left: 50%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2VtcGxveWVlLW1hbmFnZW1lbnQvbWFuYWdlLWVtcGxveWVlL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxlbXBsb3llZS1tYW5hZ2VtZW50XFxtYW5hZ2UtZW1wbG95ZWVcXG1hbmFnZS1lbXBsb3llZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQVc7RUFDWCxXQUFXLEVBQUE7O0FBR2I7RUFDRSx5QkFBeUI7RUFDekIsV0FBVyxFQUFBOztBQUViO0VBQ0UsZUFBZTtFQUNmLFFBQVE7RUFDUixTQUFTLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvZW1wbG95ZWUtbWFuYWdlbWVudC9tYW5hZ2UtZW1wbG95ZWUvbWFuYWdlLWVtcGxveWVlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBoZWlnaHQ6IDV2aDtcclxuICB9XHJcbiAgXHJcbiAgLmlucHV0LWdyb3VwLXRleHQge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2ZjZTA2MjtcclxuICAgIGNvbG9yOiAjMDAwO1xyXG4gIH1cclxuICAubm9SZWNGb3VuZHtcclxuICAgIHBvc2l0aW9uOiBmaXhlZDtcclxuICAgIHRvcDogNTAlO1xyXG4gICAgbGVmdDogNTAlO1xyXG4gIH0iXX0= */";
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/institute/branch-conf/employee-management/manage-employee/manage-employee.component.ts":
+  /*!**************************************************************************************************************!*\
+    !*** ./src/app/pages/institute/branch-conf/employee-management/manage-employee/manage-employee.component.ts ***!
+    \**************************************************************************************************************/
+
+  /*! exports provided: ManageEmployee */
+
+  /***/
+  function srcAppPagesInstituteBranchConfEmployeeManagementManageEmployeeManageEmployeeComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ManageEmployee", function () {
+      return ManageEmployee;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../../../../../services/api.service */
+    "./src/app/services/api.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+
+    var ManageEmployee = /*#__PURE__*/function () {
+      function ManageEmployee(api, router, active) {
+        _classCallCheck(this, ManageEmployee);
+
+        this.api = api;
+        this.router = router;
+        this.active = active;
+        this.employees = [];
+      }
+
+      _createClass(ManageEmployee, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          this.employees = [];
+          this.course = '';
+          this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            course: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', {
+              validators: []
+            }),
+            batch: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', {
+              validators: []
+            })
+          });
+          this.instituteId = this.active.snapshot.paramMap.get('id');
+          this.getEmployees(this.instituteId);
+        }
+      }, {
+        key: "getEmployees",
+        value: function getEmployees(instituteId) {
+          var _this21 = this;
+
+          this.api.getEmployeesByInstituteId(instituteId).subscribe(function (data) {
+            console.log(data);
+            _this21.employees = data;
+          });
+        }
+      }, {
+        key: "view",
+        value: function view(eduAtlasId, employeeObjId) {
+          this.router.navigate(["/pages/institute/branch-config/view-employee/".concat(this.instituteId)], {
+            queryParams: {
+              eduAtlasId: eduAtlasId,
+              employeeObjId: employeeObjId
+            }
+          });
+        }
+      }, {
+        key: "edit",
+        value: function edit(eduAtlasId, employeeObjId) {
+          this.router.navigate(["/pages/institute/branch-config/add-employee/".concat(this.instituteId, "/edit")], {
+            queryParams: {
+              eduAtlasId: eduAtlasId,
+              employeeObjId: employeeObjId,
+              edit: 'true'
+            }
+          });
+        }
+      }, {
+        key: "delete",
+        value: function _delete(employeeObjId) {
+          var _this22 = this;
+
+          var confirm = window.confirm('Are u sure, You want to Delete this Employee?');
+
+          if (confirm) {
+            this.api.deleteEmployeeInstitute(this.instituteId, employeeObjId).subscribe(function () {
+              var i = _this22.employees.findIndex(function (employee) {
+                return employee._id === employeeObjId;
+              });
+
+              if (i !== -1) {
+                _this22.employees.splice(i, 1);
+              }
+            });
+          }
+        }
+      }, {
+        key: "onClick",
+        value: function onClick() {
+          this.router.navigate(["/pages/institute/branch-config/add-employee/".concat(this.instituteId)]);
+        }
+      }]);
+
+      return ManageEmployee;
+    }();
+
+    ManageEmployee.ctorParameters = function () {
+      return [{
+        type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
+      }];
+    };
+
+    ManageEmployee = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'ngx-manage-employee',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./manage-employee.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/branch-conf/employee-management/manage-employee/manage-employee.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./manage-employee.component.scss */
+      "./src/app/pages/institute/branch-conf/employee-management/manage-employee/manage-employee.component.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]])], ManageEmployee);
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/institute/branch-conf/employee-management/view-employee/view-employee.component.scss":
+  /*!************************************************************************************************************!*\
+    !*** ./src/app/pages/institute/branch-conf/employee-management/view-employee/view-employee.component.scss ***!
+    \************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppPagesInstituteBranchConfEmployeeManagementViewEmployeeViewEmployeeComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2luc3RpdHV0ZS9icmFuY2gtY29uZi9lbXBsb3llZS1tYW5hZ2VtZW50L3ZpZXctZW1wbG95ZWUvdmlldy1lbXBsb3llZS5jb21wb25lbnQuc2NzcyJ9 */";
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/institute/branch-conf/employee-management/view-employee/view-employee.component.ts":
+  /*!**********************************************************************************************************!*\
+    !*** ./src/app/pages/institute/branch-conf/employee-management/view-employee/view-employee.component.ts ***!
+    \**********************************************************************************************************/
+
+  /*! exports provided: ViewEmployee */
+
+  /***/
+  function srcAppPagesInstituteBranchConfEmployeeManagementViewEmployeeViewEmployeeComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ViewEmployee", function () {
+      return ViewEmployee;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
@@ -1968,106 +2691,61 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
-    /* harmony import */
 
-
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-    /*! @angular/common/http */
-    "./node_modules/@angular/common/fesm2015/http.js");
-
-    var ManageDiscountComponent = /*#__PURE__*/function () {
-      function ManageDiscountComponent(api, router, active) {
-        _classCallCheck(this, ManageDiscountComponent);
+    var ViewEmployee = /*#__PURE__*/function () {
+      function ViewEmployee(api, route) {
+        _classCallCheck(this, ViewEmployee);
 
         this.api = api;
-        this.router = router;
-        this.active = active;
-        this.discounts = {
-          discount: [{
-            discountCode: '',
-            description: '',
-            _id: '',
-            amount: ''
-          }]
-        };
+        this.route = route;
       }
 
-      _createClass(ManageDiscountComponent, [{
+      _createClass(ViewEmployee, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.routerId = this.active.snapshot.paramMap.get('id');
-          this.getDiscounts(this.routerId);
-        }
-      }, {
-        key: "getDiscounts",
-        value: function getDiscounts(id) {
-          var _this15 = this;
+          var _this23 = this;
 
-          this.api.getDiscounts(id).subscribe(function (data) {
-            // console.log(data);
-            var dis = JSON.stringify(data);
-            _this15.discounts = JSON.parse(dis); // console.log('Discount' + this.discounts);
-          }, function (err) {
-            return console.error(err);
+          this.instituteId = this.route.snapshot.paramMap.get('id');
+          this.route.queryParams.subscribe(function (data) {
+            _this23.employeeEduId = data.eduAtlasId;
+            _this23.employeeObjId = data.employeeObjId;
           });
+          this.getEmployee(this.employeeObjId);
         }
       }, {
-        key: "edit",
-        value: function edit(id) {
-          this.router.navigate(["/pages/institute/branch-config/add-discount/".concat(this.routerId)], {
-            queryParams: {
-              discountId: id,
-              edit: true
-            }
-          });
-        }
-      }, {
-        key: "delete",
-        value: function _delete(id) {
-          var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpParams"]();
-          param = param.append('instituteId', this.routerId);
-          param = param.append('discountId', id);
-          this.api.deleteDiscount(param).subscribe( //   () => console.log('successfully deleted'),
-          function (err) {
-            return console.error(err);
-          });
-          var i = this.discounts.discount.findIndex(function (e) {
-            return e._id === id;
-          });
+        key: "getEmployee",
+        value: function getEmployee(employeeObjId) {
+          var _this24 = this;
 
-          if (i !== -1) {
-            this.discounts.discount.splice(i, 1);
-          }
-        }
-      }, {
-        key: "onClick",
-        value: function onClick() {
-          this.router.navigate(['/pages/institute/branch-config/add-discount/', this.routerId]);
+          this.api.getOneEmployeeByInstitute({
+            empId: employeeObjId,
+            instituteId: this.instituteId
+          }).subscribe(function (data) {
+            _this24.employee = data[0];
+          });
         }
       }]);
 
-      return ManageDiscountComponent;
+      return ViewEmployee;
     }();
 
-    ManageDiscountComponent.ctorParameters = function () {
+    ViewEmployee.ctorParameters = function () {
       return [{
         type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
-      }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
       }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
       }];
     };
 
-    ManageDiscountComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-      selector: 'ngx-manage-discount',
+    ViewEmployee = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'ngx-add-employee',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
-      /*! raw-loader!./manage-discount.component.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/branch-conf/discount/manage-discount/manage-discount.component.html"))["default"],
+      /*! raw-loader!./view-employee.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/branch-conf/employee-management/view-employee/view-employee.component.html"))["default"],
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
-      /*! ./manage-discount.component.scss */
-      "./src/app/pages/institute/branch-conf/discount/manage-discount/manage-discount.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])], ManageDiscountComponent);
+      /*! ./view-employee.component.scss */
+      "./src/app/pages/institute/branch-conf/employee-management/view-employee/view-employee.component.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])], ViewEmployee);
     /***/
   },
 
@@ -2119,29 +2797,36 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @nebular/theme */
+    "./node_modules/@nebular/theme/fesm2015/index.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ../../../../../services/api.service */
     "./src/app/services/api.service.ts");
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
 
     var ManageReceiptComponent = /*#__PURE__*/function () {
-      function ManageReceiptComponent(api, router, active) {
+      function ManageReceiptComponent(api, router, route, toasterService) {
         _classCallCheck(this, ManageReceiptComponent);
 
         this.api = api;
         this.router = router;
-        this.active = active;
+        this.route = route;
+        this.toasterService = toasterService;
         this.receipts = {
           businessName: '',
           address: '',
@@ -2154,22 +2839,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ManageReceiptComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.routerId = this.active.snapshot.paramMap.get('id');
-          this.getReceipts(this.routerId);
+          this.instituteId = this.route.snapshot.paramMap.get('id');
+          this.getReceipts(this.instituteId);
         }
       }, {
         key: "getReceipts",
         value: function getReceipts(id) {
-          var _this16 = this;
+          var _this25 = this;
 
           this.api.getReceipt(id).subscribe(function (data) {
-            _this16.receipts = JSON.parse(JSON.stringify(data));
+            _this25.receipts = JSON.parse(JSON.stringify(data));
           });
         }
       }, {
         key: "edit",
         value: function edit(id) {
-          this.router.navigate(["/pages/institute/branch-config/add-receipt/".concat(this.routerId)], {
+          this.router.navigate(["/pages/institute/branch-config/add-receipt/".concat(this.instituteId)], {
             queryParams: {
               recieptId: id,
               edit: true
@@ -2179,21 +2864,32 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "delete",
         value: function _delete(id) {
-          var _this17 = this;
+          var _this26 = this;
 
-          this.api.deleteReceipt(id).subscribe(function () {
-            _this17.receipts = null;
-          }, function (err) {
-            return console.error(err);
-          }); // const i = this.receipts.reciepts.findIndex(e => e.id == id)
-          // if(i !== -1){
-          // this.receipts.splice(i,1);
-          // }
+          var confirm = window.prompt('Are u sure, You want to delete this Receipt?');
+
+          if (confirm) {
+            this.api.deleteReceipt(id).subscribe(function () {
+              _this26.receipts = null;
+
+              _this26.showToast('top-right', 'success', 'Receipt Deleted Successfully');
+            }, function (err) {
+              return console.error(err);
+            });
+          }
+        }
+      }, {
+        key: "showToast",
+        value: function showToast(position, status, message) {
+          this.toasterService.show(status, message, {
+            position: position,
+            status: status
+          });
         }
       }, {
         key: "onClick",
         value: function onClick() {
-          this.router.navigate(["/pages/institute/branch-config/add-receipt/".concat(this.routerId)]);
+          this.router.navigate(["/pages/institute/branch-config/add-receipt/".concat(this.instituteId)]);
         }
       }]);
 
@@ -2202,15 +2898,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     ManageReceiptComponent.ctorParameters = function () {
       return [{
-        type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+        type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
+      }, {
+        type: _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"]
       }];
     };
 
-    ManageReceiptComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    ManageReceiptComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
       selector: 'ngx-manage-receipt',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./manage-receipt.component.html */
@@ -2218,7 +2916,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./manage-receipt.component.scss */
       "./src/app/pages/institute/branch-conf/receipt-conf/manage-receipt/manage-receipt.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])], ManageReceiptComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"]])], ManageReceiptComponent);
     /***/
   },
 
@@ -2328,15 +3026,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ReceiptConfComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this18 = this;
+          var _this27 = this;
 
-          this.routerId = this.active.snapshot.paramMap.get('id');
+          this.instituteId = this.active.snapshot.paramMap.get('id');
           this.active.queryParams.subscribe(function (data) {
-            _this18.receiptId = data.receiptId;
-            _this18.edit = data.edit;
+            _this27.receiptId = data.receiptId;
+            _this27.edit = data.edit;
 
-            if (_this18.edit === 'true') {
-              _this18.getReceipt(_this18.routerId);
+            if (_this27.edit === 'true') {
+              _this27.getReceipt(_this27.instituteId);
             }
           });
           this.receipt = this.fb.group({
@@ -2350,17 +3048,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getReceipt",
         value: function getReceipt(id) {
-          var _this19 = this;
+          var _this28 = this;
 
           this.api.getReceipt(id).subscribe(function (data) {
-            _this19.updateReceipt = data;
+            _this28.updateReceipt = data;
 
-            _this19.receipt.patchValue({
-              businessName: _this19.updateReceipt.businessName,
-              address: _this19.updateReceipt.address,
-              gstNumber: _this19.updateReceipt.gstNumber,
-              termsAndCondition: _this19.updateReceipt.termsAndCondition,
-              fee: _this19.updateReceipt.fee
+            _this28.receipt.patchValue({
+              businessName: _this28.updateReceipt.businessName,
+              address: _this28.updateReceipt.address,
+              gstNumber: _this28.updateReceipt.gstNumber,
+              termsAndCondition: _this28.updateReceipt.termsAndCondition,
+              fee: _this28.updateReceipt.fee
             });
           }, function (err) {
             return console.error(err);
@@ -2369,7 +3067,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this20 = this;
+          var _this29 = this;
 
           this.submitted = true;
 
@@ -2378,30 +3076,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           if (this.edit === 'true') {
-            this.api.updateReceipt(this.routerId, this.receipt.value).subscribe(function (data) {
-              _this20.message = 'receipt Updated Successfully';
+            this.api.updateReceipt(this.instituteId, this.receipt.value).subscribe(function (data) {
+              _this29.showToast('top-right', 'success', 'receipt Updated Successfully');
 
-              _this20.showToast('top-right', 'success');
-
-              _this20.router.navigate(['/pages/institute/branch-config/manage-receipt/', _this20.routerId]);
+              _this29.router.navigate(['/pages/institute/branch-config/manage-receipt/', _this29.instituteId]);
             }, function (err) {
-              _this20.message = err.error.message;
-
-              _this20.invalidToast('top-right', 'danger');
+              _this29.showToast('top-right', 'danger', err.error.message);
             });
           }
 
           if (!this.edit) {
-            this.api.addReceipt(this.routerId, this.receipt.value).subscribe(function () {
-              _this20.message = 'receipt Added Successfully';
+            this.api.addReceipt(this.instituteId, this.receipt.value).subscribe(function () {
+              _this29.showToast('top-right', 'success', 'Receipt Added Successfully');
 
-              _this20.showToast('top-right', 'success');
-
-              _this20.router.navigate(['/pages/institute/branch-config/manage-receipt/', _this20.routerId]);
+              _this29.router.navigate(['/pages/institute/branch-config/manage-receipt/', _this29.instituteId]);
             }, function (err) {
-              _this20.message = err.error.message;
-
-              _this20.invalidToast('top-right', 'danger');
+              _this29.showToast('top-right', 'danger', err.error.message);
             });
           }
         }
@@ -2412,16 +3102,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
       }, {
         key: "showToast",
-        value: function showToast(position, status) {
-          this.toasterService.show(status || 'Success', "".concat(this.message), {
-            position: position,
-            status: status
-          });
-        }
-      }, {
-        key: "invalidToast",
-        value: function invalidToast(position, status) {
-          this.toasterService.show(status || 'Danger', "".concat(this.message), {
+        value: function showToast(position, status, message) {
+          this.toasterService.show(status, message, {
             position: position,
             status: status
           });
@@ -2572,7 +3254,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this21 = this;
+          var _this30 = this;
 
           this.submitted = true;
 
@@ -2583,9 +3265,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this.roleService.addRole(this.roleManage.value).subscribe(function (data) {
             // console.log(data);
-            _this21.display = true;
+            _this30.display = true;
 
-            _this21.getOtp(_this21.roleManage.value.phone);
+            _this30.getOtp(_this30.roleManage.value.phone);
           });
         }
       }, {
@@ -2599,7 +3281,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "varifyOtp",
         value: function varifyOtp() {
-          var _this22 = this;
+          var _this31 = this;
 
           // console.log('otp====>', this.otp);
           var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpParams"]();
@@ -2608,10 +3290,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           param = param.append('otp', this.otp);
           this.roleService.verifyOtp(param).subscribe(function (res) {
             // console.log(res);
-            _this22.valid('top-right', 'success');
+            _this31.valid('top-right', 'success');
           }, function (error) {
             // console.log(error);
-            _this22.invalid('top-right', 'danger');
+            _this31.invalid('top-right', 'danger');
           });
         }
       }, {
@@ -2725,43 +3407,34 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         _classCallCheck(this, RoleAssignService);
 
         this.http = http;
-        this.token = localStorage.getItem('token');
-        this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]().set('authorization', 'Bearer ' + this.token);
-        this.httpOptions = {
-          headers: this.headers
-        };
       }
 
       _createClass(RoleAssignService, [{
         key: "addRole",
         value: function addRole(role) {
-          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/role"), role, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (data) {// console.log(data);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/role"), role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
         }
       }, {
         key: "getOtp",
         value: function getOtp(phone, params) {
           return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/users/sendOTP/").concat(phone), {
             params: params
-          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {// console.log(res);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
         }
       }, {
         key: "verifyOtp",
         value: function verifyOtp(params) {
-          var _this23 = this;
+          var _this32 = this;
 
-          return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server + '/users/varifyOTP', {
+          return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server + '/users/verifyOTP', {
             params: params
-          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {// console.log(res);
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (err) {
-            return _this23.handleError(err);
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (err) {
+            return _this32.handleError(err);
           }));
         }
       }, {
         key: "handleError",
         value: function handleError(error) {
-          // console.log(error);
           return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
         }
       }]);

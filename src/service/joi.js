@@ -26,12 +26,12 @@ const schema = {
 
     email: joi
       .string()
-      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'io', 'in', 'co'] } })
       .required(),
 
     phone: joi.custom(checkPhoneSignup, 'Phone number validator'),
 
-    password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    password: joi.string().required(),
 
     role: joi.string().required(),
   }),
@@ -39,7 +39,7 @@ const schema = {
   // login schema
   login: joi.object({
     phone: joi.custom(checkPhoneSignup, 'Phone number validator').required(),
-    password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    password: joi.string().required(),
   }),
 
   // adding institute shchema
@@ -80,7 +80,7 @@ const schema = {
 
   resetPassword: joi.object({
     phone: joi.custom(checkPhone, 'Phone number validator').required(),
-    password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
+    password: joi.string().required(),
   }),
 
   //@addStudent schema
@@ -133,6 +133,7 @@ const schema = {
 
   addDiscount: joi.object({
     discountCode: joi.string().required(),
+    discountType: joi.string().required(),
     description: joi.string().allow(''),
     amount: joi.string().required(),
   }),

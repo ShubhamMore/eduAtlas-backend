@@ -2050,32 +2050,15 @@ __webpack_require__.r(__webpack_exports__);
 let AnnouncementService = class AnnouncementService {
     constructor(http) {
         this.http = http;
-        this.authToken = localStorage.getItem('token');
-        this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]().set('authorization', 'Bearer ' + this.authToken);
-        this.httpOptions = {
-            headers: this.headers,
-        };
     }
     postAnnouncement(announcement) {
-        return this.http
-            .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/announcement`, announcement, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((response) => {
-            // console.log(response);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
+        return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/announcement`, announcement).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((response) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
     }
     getAnnouncement(id) {
-        return this.http
-            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/users/announcement/${id}`, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((res) => {
-            // console.log(res);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
+        return this.http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/users/announcement/${id}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
     }
     deleteAnnouncement(id) {
-        return this.http
-            .delete(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/users/announcement/${id}`, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((res) => {
-            // console.log(res);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
+        return this.http.delete(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/users/announcement/${id}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
     }
     handleError(error) {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["throwError"])(error);

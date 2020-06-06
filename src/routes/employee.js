@@ -11,6 +11,10 @@ employeeRouter.post('/addEmployeeInstitute', employeeController.addEmployeeInsti
 //To get one Employee by EmpID and InstituteID
 employeeRouter.post('/getOneEmployeeByInstitute', employeeController.getOneEmployeeByInstitute);
 
+employeeRouter.post('/getEmployeeInstitutes', employeeController.getEmployeeInstitutes);
+
+employeeRouter.post('/getEmployeesByEmail', employeeController.getEmployeesByEmail);
+
 employeeRouter.post('/getEmployeesByInstituteId', employeeController.getEmployeesByInstituteId);
 
 employeeRouter.post('/getEmployeePersonalDetails', employeeController.getEmployeePersonalDetails);

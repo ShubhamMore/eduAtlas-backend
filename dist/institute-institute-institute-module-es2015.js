@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p style=\"color: black; font-weight: bold;\">Create New Branch</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <nb-stepper #stepper [linear]=\"true\">\r\n      <nb-step [stepControl]=\"firstForm\" label=\"Basic Details\">\r\n        <form [formGroup]=\"firstForm\" (ngSubmit)=\"firstFormSubmit()\" #myForm1=\"ngForm\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Add Institute/Branch*</label>\r\n                <input\r\n                  type=\"text\"\r\n                  nbInput\r\n                  fullWidth\r\n                  formControlName=\"name\"\r\n                  id=\"name\"\r\n                  [status]=\"first.name.errors && myForm1.submitted ? 'danger' : 'basic'\"\r\n                  placeholder=\"Add Institute/Branch *\"\r\n                />\r\n\r\n                <small *ngIf=\"first.name.errors && myForm1.submitted\"\r\n                  >*Institute name is required</small\r\n                >\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"logo\">Add logo/avatar *</label>\r\n\r\n                <input\r\n                  type=\"file\"\r\n                  nbInput\r\n                  status=\"basic\"\r\n                  fullWidth\r\n                  id=\"logo\"\r\n                  (change)=\"onImagePicked($event)\"\r\n                />\r\n              </div>\r\n              <div *ngIf=\"imagePreview !== '' || (imagePreview && firstForm.get('logo').valid)\">\r\n                <img [src]=\"imagePreview\" alt=\"logo\" width=\"100px\" height=\"100px\" />\r\n              </div>\r\n              <div *ngIf=\"first.logo.errors\">\r\n                <small>Format should be .png, .jpg, .jpeg</small>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button type=\"submit\" nbButton status=\"warning\">Next</button>\r\n        </form>\r\n      </nb-step>\r\n\r\n      <nb-step [stepControl]=\"secondForm\" label=\"Contact Details\">\r\n        <form [formGroup]=\"secondForm\" (ngSubmit)=\"secondFormSubmit()\" #myForm2=\"ngForm\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"contact\">Institute Contact Number</label>\r\n                <input\r\n                  type=\"text\"\r\n                  nbInput\r\n                  fullWidth\r\n                  id=\"contact\"\r\n                  maxlength=\"10\"\r\n                  pattern=\"\\d*\"\r\n                  minlength=\"10\"\r\n                  formControlName=\"instituteContact\"\r\n                  [status]=\"\r\n                    second.instituteContact.errors && myForm2.submitted ? 'danger' : 'basic'\r\n                  \"\r\n                  placeholder=\"Institute Contact Number\"\r\n                />\r\n                <small *ngIf=\"second.instituteContact.errors && myForm2.submitted\"\r\n                  >*Enter Correct Phone no.</small\r\n                >\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-12\">\r\n              <div formGroupName=\"address\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-4\">\r\n                    <label>State</label>\r\n                    <nb-select\r\n                      formControlName=\"state\"\r\n                      status=\"basic\"\r\n                      (selectedChange)=\"onChangeState($event)\"\r\n                      [selected]=\"1\"\r\n                      placeholder=\"State\"\r\n                    >\r\n                      <nb-option [value]=\"\">--Select State--</nb-option>\r\n                      <nb-option *ngFor=\"let state of stateInfo; let j = index\" value=\"{{ j }}\">{{\r\n                        state.StateName\r\n                      }}</nb-option>\r\n                    </nb-select>\r\n                  </div>\r\n                  <div class=\"col-sm-4\">\r\n                    <label>City</label>\r\n                    <nb-select formControlName=\"city\" fullWidth status=\"basic\" placeholder=\"City\">\r\n                      <nb-option [value]=\"undefined\">--Select City--</nb-option>\r\n                      <nb-option *ngFor=\"let city of cityInfo; let i = index\" value=\"{{ city }}\">{{\r\n                        city\r\n                      }}</nb-option>\r\n                    </nb-select>\r\n                  </div>\r\n                  <div class=\"col-sm-4\">\r\n                    <label>Pin Code</label>\r\n                    <input\r\n                      type=\"text\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"pin\"\r\n                      formControlName=\"pincode\"\r\n                      placeholder=\"Pin Code\"\r\n                    />\r\n                  </div>\r\n                </div>\r\n                <br />\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                    <label for=\"address\">Address Line</label>\r\n\r\n                    <input\r\n                      type=\"text\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"address\"\r\n                      formControlName=\"addressLine\"\r\n                      placeholder=\"Address line\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"col-sm-6\">\r\n                    <label for=\"locality\">Locality</label>\r\n                    <input\r\n                      type=\"tex\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"locality\"\r\n                      formControlName=\"locality\"\r\n                      placeholder=\"Locality\"\r\n                    />\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button type=\"submit\" nbButton status=\"warning\">Next</button>\r\n        </form>\r\n      </nb-step>\r\n\r\n      <nb-step [stepControl]=\"thirdForm\" label=\"Other Details\">\r\n        <form [formGroup]=\"thirdForm\" (ngSubmit)=\"thirdFormSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <label>Institute Category (Multi Select)</label>\r\n              <br />\r\n              <nb-select\r\n                formControlName=\"category\"\r\n                class=\"mt-2\"\r\n                multiple\r\n                status=\"basic\"\r\n                fullWidth\r\n                placeholder=\"Select Institute Category\"\r\n              >\r\n                <nb-option *ngFor=\"let item of category\" [value]=\"item.name\">{{\r\n                  item.name\r\n                }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n            <div class=\"col-sm-6\" formArrayName=\"instituteMetaTag\">\r\n              <label>Institute Meta Tag </label>\r\n\r\n              <div *ngFor=\"let tag of instituteMetaTag.controls; let i = index\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"mt-2\"\r\n                      [formControlName]=\"i\"\r\n                      nbInput\r\n                      status=\"basic\"\r\n                      fullWidth\r\n                    />\r\n                  </div>\r\n                  <div class=\"col-sm-4\" [hidden]=\"i > 0\">\r\n                    <a class=\"metaButton mr-5\" nbButton (click)=\"addMetaTag()\" status=\"basic\">+</a>\r\n                    <a\r\n                      class=\"metaButton\"\r\n                      nbButton\r\n                      (click)=\"removeMetaTag()\"\r\n                      [hidden]=\"instituteMetaTag.length == 1\"\r\n                      status=\"basic\"\r\n                      >-</a\r\n                    >\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button type=\"submit\" nbButton>Submit</button>\r\n        </form>\r\n      </nb-step>\r\n      <!-- <nb-step [stepControl]=\"forthForm\" [hidden]=\"true\" label=\"Form Complete\">\r\n          <div class=\"step-container\">\r\n            <h1>Final Step</h1>\r\n            <button nbButton (click)=\"onSubmit()\">Submit</button>\r\n          </div>\r\n        </nb-step> -->\r\n    </nb-stepper>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<p style=\"color: black; font-weight: bold;\">{{ !edit ? 'Create New Branch' : 'Edit Branch' }}</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <nb-stepper #stepper [linear]=\"true\">\r\n      <nb-step [stepControl]=\"firstForm\" label=\"Basic Details\">\r\n        <form [formGroup]=\"firstForm\" (ngSubmit)=\"firstFormSubmit()\" #myForm1=\"ngForm\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Add Institute/Branch*</label>\r\n                <input\r\n                  type=\"text\"\r\n                  nbInput\r\n                  fullWidth\r\n                  formControlName=\"name\"\r\n                  id=\"name\"\r\n                  [status]=\"first.name.errors && myForm1.submitted ? 'danger' : 'basic'\"\r\n                  placeholder=\"Add Institute/Branch *\"\r\n                />\r\n\r\n                <small *ngIf=\"first.name.errors && myForm1.submitted\"\r\n                  >*Institute name is required</small\r\n                >\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"logo\">*Add Logo</label>\r\n\r\n                <input\r\n                  type=\"file\"\r\n                  nbInput\r\n                  status=\"basic\"\r\n                  fullWidth\r\n                  id=\"logo\"\r\n                  (change)=\"onImagePicked($event)\"\r\n                />\r\n              </div>\r\n\r\n              <div div *ngIf=\"imagePreview\">\r\n                <img [src]=\"imagePreview\" alt=\"logo\" width=\"100px\" height=\"100px\" />\r\n              </div>\r\n              <div *ngIf=\"imageRequired\">\r\n                <small>*Logo Required</small>\r\n              </div>\r\n              <div *ngIf=\"invalidImage\">\r\n                <small>Logo Format should be *.png, *.jpg, *.jpeg</small>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <button class=\"float-right mt-3\" type=\"submit\" nbButton status=\"warning\">Next</button>\r\n        </form>\r\n      </nb-step>\r\n\r\n      <nb-step [stepControl]=\"secondForm\" label=\"Contact Details\">\r\n        <form [formGroup]=\"secondForm\" (ngSubmit)=\"secondFormSubmit()\" #myForm2=\"ngForm\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"contact\">*Institute Contact Number</label>\r\n                <input\r\n                  type=\"text\"\r\n                  nbInput\r\n                  fullWidth\r\n                  id=\"contact\"\r\n                  maxlength=\"10\"\r\n                  pattern=\"\\d*\"\r\n                  minlength=\"10\"\r\n                  formControlName=\"instituteContact\"\r\n                  [status]=\"\r\n                    second.instituteContact.errors && myForm2.submitted ? 'danger' : 'basic'\r\n                  \"\r\n                  placeholder=\"Institute Contact Number\"\r\n                />\r\n                <small *ngIf=\"second.instituteContact.errors && myForm2.submitted\"\r\n                  >*Enter Correct Phone no.</small\r\n                >\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-12\">\r\n              <div formGroupName=\"address\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-4\">\r\n                    <label>State</label>\r\n                    <nb-select\r\n                      formControlName=\"state\"\r\n                      status=\"basic\"\r\n                      (selectedChange)=\"onChangeState($event)\"\r\n                      [selected]=\"1\"\r\n                      placeholder=\"State\"\r\n                    >\r\n                      <nb-option [value]=\"\">--Select State--</nb-option>\r\n                      <nb-option *ngFor=\"let state of stateInfo; let j = index\" value=\"{{ j }}\">{{\r\n                        state.StateName\r\n                      }}</nb-option>\r\n                    </nb-select>\r\n                  </div>\r\n                  <div class=\"col-sm-4\">\r\n                    <label>City</label>\r\n                    <nb-select formControlName=\"city\" fullWidth status=\"basic\" placeholder=\"City\">\r\n                      <nb-option [value]=\"undefined\">--Select City--</nb-option>\r\n                      <nb-option *ngFor=\"let city of cityInfo; let i = index\" value=\"{{ city }}\">{{\r\n                        city\r\n                      }}</nb-option>\r\n                    </nb-select>\r\n                  </div>\r\n                  <div class=\"col-sm-4\">\r\n                    <label>Pin Code</label>\r\n                    <input\r\n                      type=\"text\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"pin\"\r\n                      formControlName=\"pincode\"\r\n                      placeholder=\"Pin Code\"\r\n                    />\r\n                  </div>\r\n                </div>\r\n                <br />\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                    <label for=\"address\">Address Line</label>\r\n\r\n                    <input\r\n                      type=\"text\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"address\"\r\n                      formControlName=\"addressLine\"\r\n                      placeholder=\"Address line\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"col-sm-6\">\r\n                    <label for=\"locality\">Locality</label>\r\n                    <input\r\n                      type=\"tex\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"locality\"\r\n                      formControlName=\"locality\"\r\n                      placeholder=\"Locality\"\r\n                    />\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button class=\"float-right mt-3\" type=\"submit\" nbButton status=\"warning\">Next</button>\r\n        </form>\r\n      </nb-step>\r\n\r\n      <nb-step [stepControl]=\"thirdForm\" label=\"Other Details\">\r\n        <form [formGroup]=\"thirdForm\" (ngSubmit)=\"thirdFormSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <label>Institute Category (Multi Select)</label>\r\n              <br />\r\n              <nb-select\r\n                formControlName=\"category\"\r\n                class=\"mt-2\"\r\n                multiple\r\n                status=\"basic\"\r\n                fullWidth\r\n                placeholder=\"Select Institute Category\"\r\n              >\r\n                <nb-option *ngFor=\"let item of category\" [value]=\"item.name\">{{\r\n                  item.name\r\n                }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n            <div class=\"col-sm-6\" formArrayName=\"instituteMetaTag\">\r\n              <label>Institute Meta Tag </label>\r\n\r\n              <div *ngFor=\"let tag of instituteMetaTag.controls; let i = index\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"mt-2\"\r\n                      [formControlName]=\"i\"\r\n                      nbInput\r\n                      status=\"basic\"\r\n                      fullWidth\r\n                    />\r\n                  </div>\r\n                  <div class=\"col-sm-4\" [hidden]=\"i > 0\">\r\n                    <a class=\"metaButton mr-5\" nbButton (click)=\"addMetaTag()\" status=\"basic\">+</a>\r\n                    <a\r\n                      class=\"metaButton\"\r\n                      nbButton\r\n                      (click)=\"removeMetaTag()\"\r\n                      [hidden]=\"instituteMetaTag.length == 1\"\r\n                      status=\"basic\"\r\n                      >-</a\r\n                    >\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button class=\"float-right mt-3\" type=\"submit\" nbButton>Submit</button>\r\n        </form>\r\n      </nb-step>\r\n    </nb-stepper>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-2 text-center\"><b>Institute/Branch Name</b></div>\n      <div class=\"col-sm-3 text-center\"><b>Institute Address</b></div>\n      <div class=\"col-sm-2 text-center\"><b>Institute Contact</b></div>\n    </div>\n\n    <div class=\"row mt-3\" *ngFor=\"let i of institute\">\n      <div class=\"col-sm-2 text-center\">\n        {{ i.basicInfo.name }}\n      </div>\n      <div class=\"col-sm-3 text-center\">\n        {{ i.address.addressLine }} {{ i.address.locality }} {{ i.address.state }}\n        {{ i.address.city }}\n      </div>\n      <div class=\"col-sm-2 text-center\">\n        {{ i.basicInfo.instituteContact }}\n      </div>\n      <!-- \t\t\t<div *ngIf=\"item.id>0\" class=\"col-sm-4\">\n\t\t\t\t<button class=\"mr-3\" nbButton status=\"primary\" (click)=\"getInstitute(item.id)\"\n\t\t\t\t>View</button>\n\t\t\t\t<button class=\"mr-3\" nbButton status=\"warning\" (click)=\"updateInstitute(item.id)\"\n\t\t\t\t[routerLink]=\"['/edit-institute',item.id]\">Edit</button>\n\t\t\t\t<button nbButton status=\"danger\" (click)=\"delete(item.id)\">Del</button>\n\t\t\t</div> -->\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-4\">\n        <button class=\"mr-3\" nbButton status=\"primary\" (click)=\"getInstitute(i._id)\">View</button>\n        <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"updateInstitute(i._id)\">\n          Edit\n        </button>\n        <button class=\"mr-3\" nbButton status=\"danger\" (click)=\"delete(i._id)\">Del</button>\n      </div>\n    </div>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"institutes.length > 0; else no_institute\">\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-2 text-center\"><b>Institute/Branch Name</b></div>\n      <div class=\"col-sm-3 text-center\"><b>Institute Address</b></div>\n      <div class=\"col-sm-2 text-center\"><b>Institute Contact</b></div>\n    </div>\n\n    <div class=\"row mt-3\" *ngFor=\"let i of institutes\">\n      <div class=\"col-sm-2 text-center\">\n        {{ i.basicInfo.name }}\n      </div>\n      <div class=\"col-sm-3 text-center\">\n        {{ i.address.addressLine }} {{ i.address.locality }} {{ i.address.state }}\n        {{ i.address.city }}\n      </div>\n      <div class=\"col-sm-2 text-center\">\n        {{ i.basicInfo.instituteContact }}\n      </div>\n\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-4\">\n        <button class=\"mr-3\" nbButton status=\"primary\" (click)=\"getInstitute(i._id)\">View</button>\n        <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"updateInstitute(i._id)\">\n          Edit\n        </button>\n        <button class=\"mr-3\" nbButton status=\"danger\" (click)=\"delete(i._id)\">Del</button>\n      </div>\n    </div>\n  </nb-card-body>\n</nb-card>\n<ng-template #no_institute>\n  <nb-card>\n    <nb-card-body>\n      <div class=\"text-center\">\n        <img src=\"../../../assets/img/institute.png\" width=\"100px\" height=\"100px\" />\n        <h3 class=\"mt-4\">NO INSTITUTE ADDED</h3>\n        <small>Click on add Institute Button to create other branches</small>\n        <div class=\"mt-4\">\n          <button nbButton status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\n            ADD INSTITUTE\n          </button>\n        </div>\n      </div>\n    </nb-card-body>\n  </nb-card>\n</ng-template>\n");
 
 /***/ }),
 
@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p style=\"color: black; font-weight: bold;\">Add Students Here</p>\r\n\r\n<nb-card status=\"warning\">\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit\"\r\n      >Already Registered Student</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasStudentForm\"\r\n      (ngSubmit)=\"onStudentSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch student</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"3\"\r\n            [status]=\"\r\n              eduAtlasStudentFormControl.idInput1.errors &&\r\n              eduAtlasStudentFormControl.idInput1.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput1\"\r\n            disabled=\"true\"\r\n            fullWidth\r\n            formControlName=\"idInput1\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"4\"\r\n            [status]=\"\r\n              eduAtlasStudentFormControl.idInput2.errors &&\r\n              eduAtlasStudentFormControl.idInput2.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput2\"\r\n            fullWidth\r\n            formControlName=\"idInput2\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"3\"\r\n            [status]=\"\r\n              eduAtlasStudentFormControl.idInput3.errors &&\r\n              eduAtlasStudentFormControl.idInput3.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput3\"\r\n            disabled=\"true\"\r\n            fullWidth\r\n            formControlName=\"idInput3\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"6\"\r\n            [status]=\"\r\n              eduAtlasStudentFormControl.idInput4.errors &&\r\n              eduAtlasStudentFormControl.idInput4.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput4\"\r\n            fullWidth\r\n            formControlName=\"idInput4\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\" *ngIf=\"!edit\">\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form [formGroup]=\"students\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Student Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Student name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"roll\">*Roll Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.rollNo.errors && f.rollNo.touched ? 'danger' : 'basic'\"\r\n              id=\"roll\"\r\n              formControlName=\"rollNo\"\r\n              fullWidth\r\n              placeholder=\"Roll Number\"\r\n            />\r\n            <small *ngIf=\"f.rollNo.errors && f.rollNo.touched\">*Student Roll no. is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.studentEmail.errors && f.studentEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"studentEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.studentEmail.errors && f.studentEmail.touched\"\r\n              >*Student email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Student Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Student Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Student Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Parents Details</p>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"pname\">Parent Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              status=\"basic\"\r\n              id=\"pname\"\r\n              formControlName=\"parentName\"\r\n              fullWidth\r\n              placeholder=\"Parent Name\"\r\n            />\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"pcontact\">Parent Contact</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              status=\"basic\"\r\n              maxlength=\"10\"\r\n              id=\"pcontact\"\r\n              formControlName=\"parentContact\"\r\n              fullWidth\r\n              placeholder=\"Parent Contact\"\r\n            />\r\n            <small *ngIf=\"f.parentContact.errors\">*Enter Correct Phone no.</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"pemail\">Parent Email Id</label>\r\n          <input\r\n            type=\"email\"\r\n            nbInput\r\n            status=\"basic\"\r\n            id=\"pemail\"\r\n            formControlName=\"parentEmail\"\r\n            fullWidth\r\n            placeholder=\"Parent Email Id\"\r\n          />\r\n          <small *ngIf=\"f.parentEmail.errors\">*Enter Correct Email</small>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Course Details</p>\r\n\r\n      <div formGroupName=\"courseDetails\" class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"cdetail\">*Select Course</label>\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            status=\"basic\"\r\n            formControlName=\"course\"\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"batch\">Batch</label>\r\n          <nb-select placeholder=\"Select Batch\" formControlName=\"batch\" status=\"basic\">\r\n            <nb-option value=\"\">No Batch Assign</nb-option>\r\n            <nb-option *ngFor=\"let item of batches\" [value]=\"item._id\">{{\r\n              item.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-2\">\r\n          <label for=\"dis\">Discount</label>\r\n          <nb-select\r\n            placeholder=\"Discount\"\r\n            formControlName=\"discount\"\r\n            status=\"basic\"\r\n            (selectedChange)=\"onSelectDiscount($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Discount</nb-option>\r\n            <nb-option *ngFor=\"let i of discounts\" [value]=\"i._id\">{{\r\n              i.discountCode + ' (' + i.amount + '%)'\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-2\">\r\n          <label for=\"adis\">Additional Discount</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"additionalDiscount\"\r\n            fullWidth\r\n            placeholder=\"Additional Discount\"\r\n            (input)=\"calculateNetPayableAmount()\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-2\">\r\n          <label for=\"net\">Net Payable</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"net\"\r\n            status=\"basic\"\r\n            formControlName=\"netPayable\"\r\n            fullWidth\r\n            placeholder=\"Net Payable\"\r\n            disabled=\"true\"\r\n          />\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Fees</p>\r\n\r\n      <div formGroupName=\"feeDetails\" class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"fee\">No. of Installments</label>\r\n          <input\r\n            type=\"text\"\r\n            id=\"fee\"\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"installments\"\r\n            fullWidth\r\n            placeholder=\"No. of Installments\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"no\">Next Installment</label>\r\n          <input\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"nextInstallment\"\r\n            fullWidth\r\n            placeholder=\"Next Installment\"\r\n            [nbDatepicker]=\"formpicker\"\r\n          />\r\n          <nb-datepicker #formpicker></nb-datepicker>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"amt\">Amount Collected</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"amt\"\r\n            status=\"basic\"\r\n            formControlName=\"amountCollected\"\r\n            fullWidth\r\n            placeholder=\"Amount Collected\"\r\n            (input)=\"calculateAmountPending()\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label>Mode</label>\r\n          <nb-select placeholder=\"Select Mode\" status=\"basic\" formControlName=\"mode\">\r\n            <nb-option [value]=\"null\">Select Mode</nb-option>\r\n            <nb-option *ngFor=\"let i of modes\" value=\"{{ i }}\">{{ i }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\" style=\"padding-top: 10px;\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"fee\">Amount Pending</label>\r\n          <input\r\n            type=\"text\"\r\n            id=\"amountPending\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            placeholder=\"Amount Pending\"\r\n            disabled=\"true\"\r\n            [value]=\"amountPending\"\r\n          />\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Material Record</p>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <div class=\"form-group\">\r\n            <textarea\r\n              type=\"text\"\r\n              nbInput\r\n              id=\"material\"\r\n              status=\"basic\"\r\n              fullWidth\r\n              formControlName=\"materialRecord\"\r\n              placeholder=\"Material Record\"\r\n            >\r\n            </textarea>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ studentEduId ? 'Update Student' : 'Add Student' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<p style=\"color: black; font-weight: bold;\">Add Students Here</p>\r\n\r\n<nb-card status=\"warning\">\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit\"\r\n      >Already Registered Student</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasStudentIdForm\"\r\n      (ngSubmit)=\"onStudentSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch student</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"3\"\r\n            [status]=\"\r\n              eduAtlasStudentIdControl.idInput1.errors && eduAtlasStudentIdControl.idInput1.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput1\"\r\n            disabled=\"true\"\r\n            fullWidth\r\n            formControlName=\"idInput1\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"4\"\r\n            [status]=\"\r\n              eduAtlasStudentIdControl.idInput2.errors && eduAtlasStudentIdControl.idInput2.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput2\"\r\n            fullWidth\r\n            formControlName=\"idInput2\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"3\"\r\n            [status]=\"\r\n              eduAtlasStudentIdControl.idInput3.errors && eduAtlasStudentIdControl.idInput3.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput3\"\r\n            disabled=\"true\"\r\n            fullWidth\r\n            formControlName=\"idInput3\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"6\"\r\n            [status]=\"\r\n              eduAtlasStudentIdControl.idInput4.errors && eduAtlasStudentIdControl.idInput4.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput4\"\r\n            fullWidth\r\n            formControlName=\"idInput4\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\" *ngIf=\"!edit\">\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form [formGroup]=\"studentForm\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Student Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Student name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.studentEmail.errors && f.studentEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"studentEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.studentEmail.errors && f.studentEmail.touched\"\r\n              >*Student email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Student Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Student Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Student Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Parents Details</p>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"pname\">Parent Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              status=\"basic\"\r\n              id=\"pname\"\r\n              formControlName=\"parentName\"\r\n              fullWidth\r\n              placeholder=\"Parent Name\"\r\n            />\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"p-contact\">Parent Contact</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              status=\"basic\"\r\n              maxlength=\"10\"\r\n              id=\"p-contact\"\r\n              formControlName=\"parentContact\"\r\n              fullWidth\r\n              placeholder=\"Parent Contact\"\r\n            />\r\n            <small *ngIf=\"f.parentContact.errors\">*Enter Correct Phone no.</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"p-email\">Parent Email Id</label>\r\n          <input\r\n            type=\"email\"\r\n            nbInput\r\n            status=\"basic\"\r\n            id=\"p-email\"\r\n            formControlName=\"parentEmail\"\r\n            fullWidth\r\n            placeholder=\"Parent Email Id\"\r\n          />\r\n          <small *ngIf=\"f.parentEmail.errors\">*Enter Correct Email</small>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Course Details</p>\r\n\r\n      <div formGroupName=\"courseDetails\" class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"course\">*Select Course</label>\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            id=\"course\"\r\n            status=\"basic\"\r\n            formControlName=\"course\"\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"batch\">Batch</label>\r\n          <nb-select placeholder=\"Select Batch\" formControlName=\"batch\" status=\"basic\">\r\n            <nb-option value=\"\">No Batch Assign</nb-option>\r\n            <nb-option *ngFor=\"let item of batches\" [value]=\"item._id\">{{\r\n              item.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"roll\">*Roll Number</label>\r\n            <input\r\n              type=\"text\"\r\n              pattern=\"\\d*\"\r\n              nbInput\r\n              [status]=\"'basic'\"\r\n              id=\"roll\"\r\n              formControlName=\"rollNo\"\r\n              fullWidth\r\n              placeholder=\"Roll Number\"\r\n            />\r\n            <!-- <small *ngIf=\"f.rollNo.errors && f.rollNo.touched\">*Student Roll no. is required</small> -->\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"dis\">Discount</label>\r\n          <nb-select\r\n            placeholder=\"Discount\"\r\n            formControlName=\"discount\"\r\n            status=\"basic\"\r\n            (selectedChange)=\"onSelectDiscount($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Discount</nb-option>\r\n            <nb-option *ngFor=\"let i of discounts\" [value]=\"i._id\">{{\r\n              i.discountCode + ' (' + i.amount + '%)'\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"additionalDiscount\">Additional Discount</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"additionalDiscount\"\r\n            fullWidth\r\n            placeholder=\"Additional Discount\"\r\n            (input)=\"calculateNetPayableAmount()\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"net\">Net Payable</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"net\"\r\n            status=\"basic\"\r\n            formControlName=\"netPayable\"\r\n            fullWidth\r\n            placeholder=\"Net Payable\"\r\n            disabled=\"true\"\r\n          />\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Fees</p>\r\n\r\n      <div class=\"row\" [formGroup]=\"feeDetailsForm\">\r\n        <div class=\"col-12\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"installmentType\">Installment Type</label>\r\n              <nb-select\r\n                placeholder=\"Select Installment Type\"\r\n                formControlName=\"installmentType\"\r\n                status=\"basic\"\r\n                (selectedChange)=\"onSelectInstallmentType($event)\"\r\n              >\r\n                <nb-option value=\"0\">Paid Once</nb-option>\r\n                <nb-option value=\"1\">Custom</nb-option>\r\n              </nb-select>\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"noOfInstallments\">No. of Installments</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                maxlength=\"2\"\r\n                id=\"noOfInstallments\"\r\n                nbInput\r\n                status=\"basic\"\r\n                formControlName=\"noOfInstallments\"\r\n                fullWidth\r\n                placeholder=\"No. of Installments\"\r\n                (input)=\"generateNoOfInstallments($event.target.value)\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"totalAmount\">Total Amount</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"totalAmount\"\r\n                status=\"basic\"\r\n                formControlName=\"totalAmount\"\r\n                fullWidth\r\n                placeholder=\"Total Amount\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"pendingAmount\">Pending Amount</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"pendingAmount\"\r\n                status=\"basic\"\r\n                formControlName=\"pendingAmount\"\r\n                fullWidth\r\n                placeholder=\"Pending Amount\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"amountCollected\">Amount Collected</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"amountCollected\"\r\n                status=\"basic\"\r\n                formControlName=\"amountCollected\"\r\n                fullWidth\r\n                placeholder=\"Amount Collected\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"date\">Date</label>\r\n              <input\r\n                type=\"date\"\r\n                nbInput\r\n                status=\"basic\"\r\n                formControlName=\"date\"\r\n                fullWidth\r\n                placeholder=\"Installment Date\"\r\n                (input)=\"dateChanged($event.target.value)\"\r\n              />\r\n              <!-- [nbDatepicker]=\"datePicker\"\r\n              <nb-datepicker #datePicker></nb-datepicker> -->\r\n            </div>\r\n          </div>\r\n\r\n          <hr />\r\n\r\n          <div class=\"row\">\r\n            <div class=\"col-12\">\r\n              <div class=\"table-responsive\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>Installment No.</th>\r\n                      <th>Paid</th>\r\n                      <th>Installment Date</th>\r\n                      <th>Amount</th>\r\n                      <th>payment Mode</th>\r\n                      <th>Amount Pending</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody formArrayName=\"installments\">\r\n                    <ng-container\r\n                      *ngFor=\"\r\n                        let installment of feeDetailsForm.get('installments')['controls'];\r\n                        let i = index\r\n                      \"\r\n                    >\r\n                      <tr [formGroupName]=\"i\">\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"installmentNo\"\r\n                            fullWidth\r\n                            placeholder=\"Installment No\"\r\n                            disabled=\"true\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <nb-checkbox\r\n                            formControlName=\"paidStatus\"\r\n                            status=\"basic\"\r\n                            (checkedChange)=\"onPaidAmount($event, i)\"\r\n                          ></nb-checkbox>\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"date\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"paidOn\"\r\n                            fullWidth\r\n                            placeholder=\"Installment Date\"\r\n                            disabled=\"true\"\r\n                          />\r\n                          <!-- [nbDatepicker]=\"datePicker\"\r\n                          <nb-datepicker #datePicker></nb-datepicker> -->\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            fullWidth\r\n                            formControlName=\"amount\"\r\n                            placeholder=\"Amount\"\r\n                            disabled=\"true\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <nb-select\r\n                            placeholder=\"Select Mode\"\r\n                            status=\"basic\"\r\n                            formControlName=\"paymentMode\"\r\n                            placeholder=\"Payment Mode\"\r\n                            (selectedChange)=\"onSelectPaymentMode()\"\r\n                          >\r\n                            <nb-option *ngFor=\"let mode of modes\" [value]=\"mode\">{{\r\n                              mode\r\n                            }}</nb-option>\r\n                          </nb-select>\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"amountPending\"\r\n                            fullWidth\r\n                            placeholder=\"Amount Pending\"\r\n                            disabled=\"true\"\r\n                          />\r\n                        </td>\r\n                      </tr>\r\n                    </ng-container>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Material Record</p>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <div class=\"form-group\">\r\n            <textarea\r\n              type=\"text\"\r\n              nbInput\r\n              id=\"material\"\r\n              status=\"basic\"\r\n              fullWidth\r\n              formControlName=\"materialRecord\"\r\n              placeholder=\"Material Record\"\r\n            >\r\n            </textarea>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ studentEduId ? 'Update Student' : 'Add Student' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -61,7 +61,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Active Students</p>\r\n  </div>\r\n\r\n  <div class=\"col-sm-3\"></div>\r\n\r\n  <div class=\"col-sm-3\">\r\n    <div class=\"form-group\">\r\n      <nb-select\r\n        placeholder=\"Select Course\"\r\n        status=\"basic\"\r\n        fullWidth\r\n        (selectedChange)=\"onSelectCourse($event)\"\r\n      >\r\n        <nb-option value=\"\">Select Course</nb-option>\r\n        <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n      </nb-select>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"students.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Roll No.</th>\r\n          <th>Contact</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let student of students; let i = index\">\r\n          <td>{{ student.basicDetails.name }}</td>\r\n          <td>{{ student.basicDetails.rollNumber }}</td>\r\n          <td>{{ student.basicDetails.studentContact }}</td>\r\n          <!-- <td>{{ student.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button class=\"mr-2\" nbButton status=\"primary\" (click)=\"view(student.eduAtlasId)\">\r\n              View\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"warning`\" (click)=\"edit(student.eduAtlasId)\">\r\n              Edit\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"danger\"\r\n              (click)=\"delete(student.eduAtlasId, student.instituteDetails._id)\"\r\n            >\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"students.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Active Students</p>\r\n  </div>\r\n\r\n  <div class=\"col-sm-3\"></div>\r\n\r\n  <div class=\"col-sm-3\">\r\n    <div class=\"form-group\">\r\n      <nb-select\r\n        placeholder=\"Select Course\"\r\n        status=\"basic\"\r\n        fullWidth\r\n        (selectedChange)=\"onSelectCourse($event)\"\r\n      >\r\n        <nb-option value=\"\">Select Course</nb-option>\r\n        <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n      </nb-select>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"students.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Roll No.</th>\r\n          <th>Contact</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let student of students; let i = index\">\r\n          <td>{{ student.basicDetails.name }}</td>\r\n          <td>{{ student.instituteDetails.rollNumber }}</td>\r\n          <td>{{ student.basicDetails.studentContact }}</td>\r\n          <!-- <td>{{ student.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button class=\"mr-2\" nbButton status=\"primary\" (click)=\"view(student.eduAtlasId)\">\r\n              View\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"warning`\" (click)=\"edit(student.eduAtlasId)\">\r\n              Edit\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"danger\"\r\n              (click)=\"delete(student.eduAtlasId, student.instituteDetails._id)\"\r\n            >\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"students.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n");
 
 /***/ }),
 
@@ -74,7 +74,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"student\">\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Roll Number</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.rollNumber }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Email</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.studentEmail }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.studentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent Email</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentEmail }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Address</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.address }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"student\">\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Roll Number</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.instituteDetails.rollNumber }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Email</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.studentEmail }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.studentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent Email</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentEmail }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Address</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.address }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -87,7 +87,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Pending Students</p>\r\n  </div>\r\n\r\n  <div class=\"col-sm-3\"></div>\r\n\r\n  <div class=\"col-sm-3\">\r\n    <div class=\"form-group\">\r\n      <nb-select\r\n        placeholder=\"Select Course\"\r\n        status=\"basic\"\r\n        fullWidth\r\n        (selectedChange)=\"onSelectCourse($event)\"\r\n      >\r\n        <nb-option value=\"\">Select Course</nb-option>\r\n        <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n      </nb-select>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"students.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Roll No.</th>\r\n          <th>Contact</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let student of students; let i = index\">\r\n          <td>{{ student.basicDetails.name }}</td>\r\n          <td>{{ student.basicDetails.rollNumber }}</td>\r\n          <td>{{ student.basicDetails.studentContact }}</td>\r\n          <!-- <td>{{ student.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button class=\"mr-2\" nbButton status=\"primary\" (click)=\"view(student.eduAtlasId)\">\r\n              View\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"warning`\" (click)=\"edit(student.eduAtlasId)\">\r\n              Edit\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"danger\"\r\n              (click)=\"delete(student.eduAtlasId, student.instituteDetails._id)\"\r\n            >\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"students.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Pending Students</p>\r\n  </div>\r\n\r\n  <div class=\"col-sm-3\"></div>\r\n\r\n  <div class=\"col-sm-3\">\r\n    <div class=\"form-group\">\r\n      <nb-select\r\n        placeholder=\"Select Course\"\r\n        status=\"basic\"\r\n        fullWidth\r\n        (selectedChange)=\"onSelectCourse($event)\"\r\n      >\r\n        <nb-option value=\"\">Select Course</nb-option>\r\n        <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n      </nb-select>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"students.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Roll No.</th>\r\n          <th>Contact</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let student of students; let i = index\">\r\n          <td>{{ student.basicDetails.name }}</td>\r\n          <td>{{ student.instituteDetails.rollNumber }}</td>\r\n          <td>{{ student.basicDetails.studentContact }}</td>\r\n          <!-- <td>{{ student.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button class=\"mr-2\" nbButton status=\"primary\" (click)=\"view(student.eduAtlasId)\">\r\n              View\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"warning`\" (click)=\"edit(student.eduAtlasId)\">\r\n              Edit\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"danger\"\r\n              (click)=\"delete(student.eduAtlasId, student.instituteDetails._id)\"\r\n            >\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"students.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n");
 
 /***/ }),
 
@@ -100,7 +100,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p style=\"font-weight: bold;\">Add Attandance</p>\n<nb-card>\n  <nb-card-body>\n    <form [formGroup]=\"attandance\">\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <nb-select placeholder=\"Select Course\" state=\"basic\" fullWidth>\n            <nb-option *ngFor=\"let course of courses.course\" value=\"course.name\">{{\n              course.name\n            }}</nb-option>\n          </nb-select>\n        </div>\n        <div class=\"col-sm-6\">\n          <nb-select formControlName=\"batch\" placeholder=\"Select Batch\" state=\"basic\" fullWidth>\n            <nb-option *ngFor=\"let batch of batches.batch\" value=\"batch.batchCode\">{{\n              batch.batchCode\n            }}</nb-option>\n          </nb-select>\n        </div>\n      </div>\n      <div class=\"row mt-3\">\n        <div class=\"col-sm-6\">\n          <nb-checkbox (checkedChange)=\"present($event)\">\n            All Students are present\n          </nb-checkbox>\n        </div>\n\n        <div class=\"col-sm-6\">\n          <nb-select\n            multiple\n            status=\"basic\"\n            placeholder=\"Select Absentees\"\n            formControlName=\"absentees\"\n            fullWidth\n          >\n            <nb-option *ngFor=\"let i of students\" value=\"i.basicDetails.studentEmail\"\n              >{{ i.basicDetails.name }} {{ i.basicDetails.rollNumber }}</nb-option\n            >\n          </nb-select>\n        </div>\n      </div>\n      <div class=\"mt-3\">\n        <nb-checkbox (checkedChange)=\"clone($event)\">\n          Ask for clonning letter\n        </nb-checkbox>\n      </div>\n      <div class=\"mt-3 text-right\">\n        <button nbButton type=\"submit\" status=\"warning\" style=\"color: black;\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<p style=\"font-weight: bold;\">Add Attandance</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"attandanceform\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            formControlName=\"courseId\"\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n            state=\"basic\"\r\n            fullWidth\r\n          >\r\n            <nb-option *ngFor=\"let course of courses\" value=\"{{ course.id }}\">{{\r\n              course.name\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n        <div class=\"col-sm-6\">\r\n          <nb-select\r\n            formControlName=\"batchId\"\r\n            placeholder=\"Select Batch\"\r\n            (selectedChange)=\"onSelectBatch()\"\r\n            state=\"basic\"\r\n            fullWidth\r\n          >\r\n            <nb-option *ngFor=\"let batch of availableBatches\" value=\"{{ batch._id }}\">{{\r\n              batch.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n      </div>\r\n      <div class=\"row mt-3\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"date\"\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"date\"\r\n            fullWidth\r\n            placeholder=\"Pick Date\"\r\n            (input)=\"getStudents()\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-6 text-right\" *ngIf=\"students.length > 0\">\r\n          <button\r\n            nbButton\r\n            type=\"submit\"\r\n            status=\"warning\"\r\n            [disabled]=\"!attandanceform.valid\"\r\n            style=\"color: black;\"\r\n          >\r\n            Submit\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n    <hr />\r\n    <div class=\"row attendanceList\" *ngIf=\"students.length > 0; else empty_students\">\r\n      <div class=\"table-responsive\">\r\n        <table>\r\n          <thead>\r\n            <tr>\r\n              <th class=\"text-center\">Roll No</th>\r\n              <th class=\"text-center\">Student</th>\r\n              <th class=\"text-center\">Mark Attendance</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr  *ngFor=\"let student of students; let i = index\">\r\n              <td>{{student.studentRollNo}}</td>\r\n              <td>\r\n                {{student.studentName}}\r\n              </td>\r\n              <td>\r\n                <div class=\"attendance-selector text-center\">\r\n                  <input\r\n                    type=\"checkbox\"\r\n                    [id]=\"student.studentId\"\r\n                    class=\"attendance\"\r\n                    [checked]=\"student.attendanceStatus\"\r\n                    (change)=\"markAttendance($event, student.studentId, i)\"\r\n                  />\r\n                </div>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n    <ng-template #empty_students>\r\n      <p class=\"pl-3 text-center\">No Students Found</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -126,7 +126,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"back()\" style=\"color: black;\">Manage Schedule</button>\n</div>\n<p style=\"font-weight: bold;\">Add Schedule</p>\n<nb-card>\n  <nb-card-body>\n    <form [formGroup]=\"schedule\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <label>From</label>\n          <input\n            nbInput\n            placeholder=\"Pick Date\"\n            [nbDatepicker]=\"from\"\n            formControlName=\"scheduleStart\"\n            fullWidth\n          />\n          <nb-datepicker #from></nb-datepicker>\n          <div *ngIf=\"f.scheduleStart.errors && submitted\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-6\">\n          <label>To</label>\n          <input\n            nbInput\n            placeholder=\"Pick Date\"\n            [nbDatepicker]=\"to\"\n            formControlName=\"scheduleEnd\"\n            fullWidth\n          />\n          <nb-datepicker #to></nb-datepicker>\n          <div *ngIf=\"f.scheduleEnd.errors && submitted\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n      </div>\n      <div class=\"row mt-4\">\n        <div class=\"col-sm-4\">\n          <label>Select Batch</label>\n          <nb-select\n            formControlName=\"batchCode\"\n            placeholder=\"Select Batch\"\n            status=\"basic\"\n            fullWidth\n          >\n            <nb-option *ngFor=\"let batch of batches.batch\" value=\"{{ batch.batchCode }}\">{{\n              batch.batchCode\n            }}</nb-option>\n          </nb-select>\n          <div *ngIf=\"f.batchCode.errors && submitted\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n        <div class=\"col-sm-4\">\n          <label for=\"topic\">Topic</label>\n          <input\n            type=\"text\"\n            nbInput\n            placeholder=\"Select Topic\"\n            id=\"topic\"\n            formControlName=\"topic\"\n            fullWidth\n          />\n        </div>\n        <div class=\"col-sm-4\">\n          <label for=\"teacher\">Teacher</label>\n          <input\n            type=\"text\"\n            nbInput\n            placeholder=\"Select Teacher\"\n            id=\"teacher\"\n            formControlName=\"teacher\"\n            fullWidth\n          />\n          <div *ngIf=\"f.teacher.errors && submitted\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n      </div>\n      <div class=\"mt-4\">\n        <nb-checkbox (checkedChange)=\"recurrance($event)\">\n          Ask for recurrence at the time of definition\n        </nb-checkbox>\n      </div>\n      <div class=\"text-right mt-4\">\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"back()\" style=\"color: black;\">Manage Schedule</button>\n</div>\n<p style=\"font-weight: bold;\">Add Schedule</p>\n<nb-card *ngIf=\"display\">\n  <nb-card-body>\n    <form [formGroup]=\"scheduleForm\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"row\">\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleStart\">From</label>\n          <input\n            type=\"date\"\n            nbInput\n            id=\"scheduleStart\"\n            status=\"basic\"\n            formControlName=\"scheduleStart\"\n            fullWidth\n            placeholder=\"Schedule From\"\n            (input)=\"fromDatePicked($event.target.value)\"\n          />\n          <!-- [nbDatepicker]=\"fromDatePicker\"\n        <nb-datepicker #fromDatePicker></nb-datepicker> -->\n\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleStart').invalid && scheduleForm.get('scheduleStart').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleEnd\">To</label>\n          <input\n            type=\"date\"\n            nbInput\n            id=\"scheduleEnd\"\n            status=\"basic\"\n            formControlName=\"scheduleEnd\"\n            fullWidth\n            placeholder=\"Schedule To\"\n            (input)=\"toDatePicked($event.target.value)\"\n          />\n          <!-- [nbDatepicker]=\"toDatePicker\"\n        <nb-datepicker #toDatePicker></nb-datepicker> -->\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleEnd').invalid && scheduleForm.get('scheduleEnd').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n          <div\n            *ngIf=\"scheduleForm.hasError('invalidDate') && scheduleForm.get('scheduleEnd').touched\"\n          >\n            <small>*Select Valid End Date</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"course\">*Select Course</label>\n          <nb-select\n            placeholder=\"Select Course\"\n            status=\"basic\"\n            fullWidth\n            formControlName=\"courseId\"\n            (selectedChange)=\"onSelectCourse($event)\"\n          >\n            <nb-option value=\"\">Select Course</nb-option>\n            <nb-option *ngFor=\"let course of institute.course\" [value]=\"course._id\">{{\n              course.name\n            }}</nb-option>\n          </nb-select>\n          <div *ngIf=\"scheduleForm.get('courseId').invalid && scheduleForm.get('courseId').touched\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"batch\">Batch</label>\n          <nb-select placeholder=\"Select Batch\" formControlName=\"batchId\" fullWidth status=\"basic\">\n            <nb-option value=\"\">Select Batch</nb-option>\n            <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n              batch.batchCode\n            }}</nb-option>\n          </nb-select>\n          <div *ngIf=\"scheduleForm.get('batchId').invalid && scheduleForm.get('batchId').touched\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n      </div>\n\n      <hr />\n\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>Day</th>\n                  <th>Date</th>\n                  <th>Start Time</th>\n                  <th>End Time</th>\n                  <th>Topic</th>\n                  <th>Teacher</th>\n                </tr>\n              </thead>\n              <tbody formArrayName=\"days\">\n                <ng-container\n                  *ngFor=\"let scheduleDay of scheduleForm.get('days')['controls']; let i = index\"\n                >\n                  <tr [formGroupName]=\"i\">\n                    <td>\n                      <input\n                        type=\"text\"\n                        nbInput\n                        formControlName=\"day\"\n                        status=\"basic\"\n                        fullWidth\n                        placeholder=\"Day\"\n                        disabled=\"true\"\n                      />\n                    </td>\n                    <td>\n                      <input\n                        type=\"date\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"date\"\n                        fullWidth\n                        placeholder=\"Date\"\n                        disabled=\"true\"\n                      />\n                      <!-- [nbDatepicker]=\"datePicker\"\n                      <nb-datepicker #datePicker></nb-datepicker> -->\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"time\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"startTime\"\n                        fullWidth\n                        placeholder=\"Start Time\"\n                      />\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"time\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"endTime\"\n                        fullWidth\n                        placeholder=\"End Time\"\n                      />\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"text\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"topic\"\n                        fullWidth\n                        placeholder=\"Topic\"\n                      />\n                    </td>\n\n                    <td>\n                      <nb-select\n                        placeholder=\"Select Teacher\"\n                        status=\"basic\"\n                        formControlName=\"teacher\"\n                        fullWidth\n                      >\n                        <nb-option value=\"\">Select Teacher</nb-option>\n                        <nb-option *ngFor=\"let teacher of teachers\" [value]=\"teacher._id\">{{\n                          teacher.basicDetails.name\n                        }}</nb-option>\n                      </nb-select>\n                    </td>\n                  </tr>\n                </ng-container>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"mt-4\">\n        <nb-checkbox formControlName=\"recurrence\" (checkedChange)=\"recurrence($event)\">\n          Ask for recurrence at the time of definition\n        </nb-checkbox>\n      </div>\n\n      <div class=\"text-right mt-4\">\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -139,7 +139,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"goAddSchedule()\" style=\"color: black;\">\n    Add Schedule\n  </button>\n</div>\n<p style=\"font-weight: bold;\">Manage Schedule</p>\n<nb-card>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-2\">\n        <h6>Teacher</h6>\n      </div>\n      <div class=\"col-sm-2\">\n        <h6>Topic</h6>\n      </div>\n      <div class=\"col-sm-2\">\n        <h6>Start</h6>\n      </div>\n      <div class=\"col-sm-2\">\n        <h6>End</h6>\n      </div>\n    </div>\n    <div *ngIf=\"schedules\">\n      <div class=\"row\" *ngFor=\"let i of schedules\">\n        <div class=\"col-sm-2\">\n          <p>{{ i.teacher }}</p>\n        </div>\n        <div class=\"col-sm-2\">\n          <p>{{ i.topic }}</p>\n        </div>\n        <div class=\"col-sm-2\">\n          <p>{{ i.scheduleStart }}</p>\n        </div>\n        <div class=\"col-sm-2\">\n          <p>{{ i.scheduleEnd }}</p>\n        </div>\n        <div class=\"col-sm-4 text-right\">\n          <button class=\"mr-3\" nbButton status=\"primary\" (click)=\"view(i.batchCode)\">View</button>\n          <button nbButton status=\"danger\" (click)=\"delete()\">Del</button>\n        </div>\n      </div>\n    </div>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"addSchedule()\" style=\"color: black;\">\n    Add Schedule\n  </button>\n</div>\n<p style=\"font-weight: bold;\">Manage Schedule</p>\n<nb-card>\n  <nb-card-body *ngIf=\"display\">\n    <div class=\"row\">\n      <div class=\"col-sm-6\"></div>\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Course\"\n          status=\"basic\"\n          fullWidth\n          (selectedChange)=\"onSelectCourse($event)\"\n        >\n          <nb-option value=\"\">Select Course</nb-option>\n          <nb-option *ngFor=\"let course of institute.course\" [value]=\"course._id\">{{\n            course.name\n          }}</nb-option>\n        </nb-select>\n      </div>\n\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Batch\"\n          fullWidth\n          status=\"basic\"\n          (selectedChange)=\"onSelectBatch($event)\"\n        >\n          <nb-option value=\"\">Select Batch</nb-option>\n          <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n            batch.batchCode\n          }}</nb-option>\n        </nb-select>\n      </div>\n    </div>\n\n    <br />\n\n    <div *ngIf=\"schedules.length > 0; else no_schedule\">\n      <div class=\"row\">\n        <div class=\"col-sm-2\">\n          <h6>#</h6>\n        </div>\n        <div class=\"col-sm-2\">\n          <h6>Start</h6>\n        </div>\n        <div class=\"col-sm-2\">\n          <h6>End</h6>\n        </div>\n      </div>\n\n      <br />\n\n      <div>\n        <div class=\"row\" *ngFor=\"let schedule of schedules; let i = index\">\n          <div class=\"col-sm-2\">\n            <p>{{ i + 1 }}</p>\n          </div>\n          <div class=\"col-sm-2\">\n            <p>{{ schedule.scheduleStart }}</p>\n          </div>\n          <div class=\"col-sm-2\">\n            <p>{{ schedule.scheduleEnd }}</p>\n          </div>\n          <div class=\"col-sm-4 text-right\">\n            <button class=\"mr-3\" nbButton status=\"primary\" (click)=\"viewSchedule(schedule._id)\">\n              View\n            </button>\n            <button class=\"mr-3\" nbButton status=\"\" (click)=\"editSchedule(schedule._id)\">\n              Edit\n            </button>\n            <button nbButton status=\"danger\" (click)=\"deleteSchedule(schedule._id)\">Del</button>\n          </div>\n        </div>\n      </div>\n    </div>\n    <ng-template #no_schedule>\n      <h6 class=\"text-center mt-5\">No Schedule</h6>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -152,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<button nbButton (click)=\"back()\" status=\"warning\" style=\"color: black;\">Manage Schedule</button>\n<nb-card>\n  <nb-card-body>\n    <div class=\"row\" *ngIf=\"batch.length || batch[0].institute[0].batch.length\">\n      <div class=\"col-sm-6\">\n        <h6>Course</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ batch[0].institute[0].batch[0].course }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Batch Code</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ batch[0].batchCode }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Schdule Start</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ batch[0].scheduleStart }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Schedule End</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ batch[0].scheduleEnd }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Teacher</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ batch[0].teacher }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Topic</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ batch[0].topic }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Recurrance at the time of definition</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        {{ batch[0].recurrence ? 'Yes' : 'No' }}\n      </div>\n    </div>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<button nbButton (click)=\"back()\" status=\"warning\" style=\"color: black;\">Manage Schedule</button>\n<nb-card *ngIf=\"display\">\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Course</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.courseId }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Batch</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.batchId }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Schedule Start</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.scheduleStart }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Schedule End</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.scheduleEnd }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Recurrence at the time of definition</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        {{ schedule.recurrence === 'true' ? 'Yes' : 'No' }}\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-12\">\n        <div class=\"table-responsive\">\n          <table class=\"table table-borderless\">\n            <thead>\n              <tr>\n                <th>#</th>\n                <th>Day</th>\n                <th>Date</th>\n                <th>Start Time</th>\n                <th>End Time</th>\n                <th>Topic</th>\n                <th>Teacher</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let day of schedule.days; let i = index\">\n                <td>\n                  {{ i + 1 }}\n                </td>\n                <td>\n                  {{ day.day }}\n                </td>\n                <td>\n                  {{ day.date }}\n                </td>\n                <td>\n                  {{ day.startTime ? day.startTime : '--' }}\n                </td>\n                <td>\n                  {{ day.endTime ? day.endTime : '--' }}\n                </td>\n                <td>\n                  {{ day.topic ? day.topic : '--' }}\n                </td>\n                <td>\n                  {{ day.teacher ? day.teacher : '--' }}\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n    </div>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -160,27 +160,25 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************!*\
   !*** ./src/app/bManager.guard.ts ***!
   \***********************************/
-/*! exports provided: bManagerGuard */
+/*! exports provided: BranchManagerGuard */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bManagerGuard", function() { return bManagerGuard; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BranchManagerGuard", function() { return BranchManagerGuard; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 
 
 
-let bManagerGuard = class bManagerGuard {
-    // Inject Router so we can hand off the user to the Login Page
+let BranchManagerGuard = class BranchManagerGuard {
     constructor(router) {
         this.router = router;
         this.role = localStorage.getItem('role');
     }
     canActivate(next, state) {
         if ((localStorage.getItem('token') && this.role === 'branchManager') || 'institute') {
-            console.log('bManagerGuard running', this.role);
             // Token from the LogIn is avaiable, so the user can pass to the route
             return true;
         }
@@ -190,15 +188,15 @@ let bManagerGuard = class bManagerGuard {
         }
     }
 };
-bManagerGuard.ctorParameters = () => [
+BranchManagerGuard.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
 ];
-bManagerGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+BranchManagerGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root',
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
-], bManagerGuard);
+], BranchManagerGuard);
 
 
 
@@ -228,15 +226,19 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddInstituteComponent", function() { return AddInstituteComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/api.service */ "./src/app/services/api.service.ts");
-/* harmony import */ var _services_country_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services/country.service */ "./src/app/services/country.service.ts");
-/* harmony import */ var _pages_menu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../pages-menu */ "./src/app/pages/pages-menu.ts");
-/* harmony import */ var _mime_type_validator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./mime-type.validator */ "./src/app/pages/institute/add-institute/mime-type.validator.ts");
-/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_payment_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../services/payment.service */ "./src/app/services/payment.service.ts");
+/* harmony import */ var _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../services/auth-services/auth.service */ "./src/app/services/auth-services/auth.service.ts");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var _services_country_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../services/country.service */ "./src/app/services/country.service.ts");
+/* harmony import */ var _pages_menu__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../pages-menu */ "./src/app/pages/pages-menu.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
 
 
 
@@ -248,14 +250,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AddInstituteComponent = class AddInstituteComponent {
-    constructor(fb, api, country, active, router, toastrService, domSanitizer) {
+    constructor(fb, api, country, route, router, toastrService, domSanitizer, paymentService, authService) {
         this.fb = fb;
         this.api = api;
         this.country = country;
-        this.active = active;
+        this.route = route;
         this.router = router;
         this.toastrService = toastrService;
         this.domSanitizer = domSanitizer;
+        this.paymentService = paymentService;
+        this.authService = authService;
         this.institute = {
             name: '',
             logo: null,
@@ -265,18 +269,6 @@ let AddInstituteComponent = class AddInstituteComponent {
             instituteMetaTag: [''],
         };
         this.submitted = false;
-        this.myInstitute = {
-            institute: {
-                address: { addressLine: '', locality: '', state: '', city: '', pincode: '' },
-                basicInfo: { name: '', instituteContact: '', logo: '' },
-                category: [],
-                course: [{ name: '' }],
-                batch: [{ code: '' }],
-                discount: [{ amount: '' }],
-                metaTag: [],
-                location: { type: '', coordinates: [] },
-            },
-        };
         this.stateInfo = [];
         this.countryInfo = [];
         this.cityInfo = [];
@@ -291,17 +283,52 @@ let AddInstituteComponent = class AddInstituteComponent {
         ];
     }
     ngOnInit() {
-        this.active.queryParams.subscribe((data) => {
-            // console.log('query params ', data);
-            this.edit = data.edit;
-            this.instituteId = data.instituteId;
+        this.display = true;
+        this.invalidImage = false;
+        this.imageRequired = false;
+        this.user = this.authService.getUser();
+        this.route.queryParams.subscribe((param) => {
+            this.edit = param.edit;
+            this.instituteId = param.instituteId;
         });
+        if (!this.edit) {
+            this.options = {
+                key: _environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].razorpayKeyId,
+                amount: '',
+                currency: 'INR',
+                name: 'eduatlas',
+                description: 'Test Transaction',
+                image: 'https://example.com/your_logo',
+                // tslint:disable-next-line: max-line-length
+                order_id: '',
+                handler: (response) => {
+                    // console.log(response);
+                    this.verifyPayment(response);
+                },
+                modal: {
+                    ondismiss: () => {
+                        this.deleteOrder();
+                    },
+                },
+                prefill: {
+                    name: '',
+                    email: '',
+                    contact: '',
+                },
+                notes: {
+                    address: 'Eduatlas Office',
+                },
+                theme: {
+                    color: '#ffd500',
+                },
+            };
+            this.razorPay = new Razorpay(this.options);
+        }
         this.firstForm = this.fb.group({
-            name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            logo: [null, { Validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required], asyncValidators: [_mime_type_validator__WEBPACK_IMPORTED_MODULE_7__["mimeType"]] }],
+            name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
         });
         this.secondForm = this.fb.group({
-            instituteContact: ['', { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required] }],
+            instituteContact: ['', { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required] }],
             address: this.fb.group({
                 addressLine: [''],
                 locality: [''],
@@ -314,19 +341,81 @@ let AddInstituteComponent = class AddInstituteComponent {
             category: [['']],
             instituteMetaTag: this.fb.array([this.fb.control('')]),
         });
-        _pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = true;
-        _pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = true;
-        _pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][4].hidden = true;
-        _pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = false;
+        _pages_menu__WEBPACK_IMPORTED_MODULE_8__["MENU_ITEMS"][2].hidden = true;
+        _pages_menu__WEBPACK_IMPORTED_MODULE_8__["MENU_ITEMS"][3].hidden = true;
+        _pages_menu__WEBPACK_IMPORTED_MODULE_8__["MENU_ITEMS"][4].hidden = true;
+        _pages_menu__WEBPACK_IMPORTED_MODULE_8__["MENU_ITEMS"][1].hidden = false;
         this.getCountries();
-        if (this.edit) {
-            this.getInstitute(this.instituteId);
-        }
+    }
+    pay() {
+        this.razorPay.open();
+    }
+    deleteOrder() {
+        this.paymentService.deleteOrder(this.placedOrderReceipt._id).subscribe((res) => {
+            this.placedOrderReceipt = null;
+            // console.log(res);
+        }, (err) => {
+            // console.log(err);
+        });
+    }
+    generateOrder(order) {
+        this.paymentService.generateOrder(order).subscribe((res) => {
+            // console.log(res);
+            this.placedOrderReceipt = res.receipt;
+            // this.options.amount = res.order.amount;
+            this.options.amount = '1';
+            this.options.order_id = res.order.id;
+            this.options.currency = res.order.currency;
+            this.options.prefill.name = this.user.name;
+            this.options.prefill.email = this.user.email;
+            this.options.prefill.contact = this.user.phone;
+            this.razorPay = new Razorpay(this.options);
+            this.pay();
+        }, (err) => {
+            // console.log(err);
+            this.showToast('top-right', 'danger', err.error.message || 'Order Generation Failed');
+        });
+    }
+    verifyPayment(payment) {
+        this.paymentService.verifyPayment(payment, this.placedOrderReceipt).subscribe((res) => {
+            // console.log(res);
+            this.showToast('top-right', 'success', 'Payment Verified Successfully');
+            setTimeout(() => {
+                this.addInstituteAfterPayment(this.institute, res.orderId, res.receiptId);
+            }, 1000);
+        }, (err) => {
+            // console.log(err);
+            this.showToast('top-right', 'danger', err.error.message || 'Payment Verification Failed');
+        });
+    }
+    addInstituteAfterPayment(institute, orderId, ReceiptId) {
+        const paymentDetails = {
+            amount: this.paymentDetails.amount,
+            planType: this.paymentDetails.planType,
+            orderId: orderId,
+            receiptId: ReceiptId,
+        };
+        this.api.addInstitute(institute, paymentDetails).subscribe((data) => {
+            this.user = data;
+            this.showToast('top-right', 'success', 'Institute Added Successfully');
+            setTimeout(() => {
+                this.router.navigate(['/pages/home']);
+            }, 1000);
+        }, (error) => {
+            this.showToast('top-right', 'danger', error.message || 'Something bad happened');
+        });
     }
     onImagePicked(event) {
         const file = event.target.files[0];
-        this.firstForm.patchValue({ logo: file });
-        this.firstForm.get('logo').updateValueAndValidity();
+        const imgExt = ['jpg', 'png'];
+        const ext = file.name.substring(file.name.lastIndexOf('.') + 1).toLowerCase();
+        if (!(imgExt.indexOf(ext) !== -1)) {
+            this.invalidImage = true;
+            return;
+        }
+        this.imageRequired = false;
+        this.invalidImage = false;
+        this.logo = file;
         const reader = new FileReader();
         reader.onload = () => {
             this.imagePreview = reader.result;
@@ -336,22 +425,29 @@ let AddInstituteComponent = class AddInstituteComponent {
     getInstitute(id) {
         this.api.getInstitute(id).subscribe((data) => {
             this.myInstitute = data;
-            // console.log('myInstitute==========>', this.myInstitute);
-            // console.log('myInstitute==========>', this.myInstitute.institute.basicInfo.name);
             this.firstForm.patchValue({
                 name: this.myInstitute.institute.basicInfo.name,
-                logo: this.myInstitute.institute.basicInfo.logo,
             });
+            this.imagePreview = this.myInstitute.institute.basicInfo.logo.secure_url;
             this.secondForm.patchValue({
                 instituteContact: this.myInstitute.institute.basicInfo.instituteContact,
                 address: {
                     addressLine: this.myInstitute.institute.address.addressLine,
                     locality: this.myInstitute.institute.address.locality,
                     state: this.myInstitute.institute.address.state,
-                    city: this.myInstitute.institute.address.city,
                     pincode: this.myInstitute.institute.address.pincode,
                 },
             });
+            if (this.myInstitute.institute.address.state) {
+                this.onChangeState(this.myInstitute.institute.address.state);
+            }
+            setTimeout(() => {
+                this.secondForm.patchValue({
+                    address: {
+                        city: this.myInstitute.institute.address.city,
+                    },
+                });
+            }, 2000);
             this.thirdForm.patchValue({
                 category: this.myInstitute.institute.category,
             });
@@ -362,21 +458,25 @@ let AddInstituteComponent = class AddInstituteComponent {
                 }
             });
         });
+        this.display = false;
     }
     getCountries() {
         this.country.allCountries().subscribe((data) => {
             this.countryInfo = data.Countries;
             this.stateInfo = this.countryInfo[100].States;
             this.cityInfo = this.stateInfo[0].Cities;
-            // console.log(this.stateInfo[0]);
+            if (this.edit) {
+                this.getInstitute(this.instituteId);
+            }
+            else {
+                this.display = false;
+            }
         }, (err) => {
-            // console.log(err);
-        }, () => {
-            // console.log('complete');
+            this.showToast('top-right', 'danger', err.error.message || 'Cant fetch Countries');
+            this.display = false;
         });
     }
     onChangeState(stateValue) {
-        // console.log(stateValue);
         this.cityInfo = this.stateInfo[stateValue].Cities;
     }
     get instituteMetaTag() {
@@ -400,50 +500,49 @@ let AddInstituteComponent = class AddInstituteComponent {
     firstFormSubmit() {
         this.firstForm.markAsDirty();
         this.institute.name = this.firstForm.value.name;
-        this.institute.logo = this.firstForm.value.logo;
-        // console.log(this.first.logo.errors);
+        if (!this.edit && !this.logo) {
+            this.imageRequired = true;
+            return;
+        }
+        if (this.invalidImage) {
+            return;
+        }
+        this.institute.logo = this.logo;
         this.stepper.next();
-        // console.log('firstForm=>', this.institute);
     }
     secondFormSubmit() {
         this.secondForm.markAsDirty();
         this.institute.instituteContact = this.secondForm.value.instituteContact;
         this.institute.address = this.secondForm.value.address;
         this.stepper.next();
-        // console.log('sec form=>', this.institute);
     }
     thirdFormSubmit() {
         this.thirdForm.markAsDirty();
         this.institute.category = this.thirdForm.value.category;
         this.institute.instituteMetaTag = this.thirdForm.value.instituteMetaTag;
-        // console.log(this.institute);
         if (this.edit === 'true') {
             this.api.updateInstitute(this.instituteId, this.institute).subscribe((res) => {
-                // console.log(res);
                 this.showToast('top-right', 'success', 'Institute Updated Successfully');
                 setTimeout(() => {
                     this.router.navigate(['/pages/home']);
                 }, 1000);
             }, (error) => {
                 this.showToast('top-right', 'danger', error.message || 'Something bad happened');
-                // console.log(err);
             });
         }
-        // console.log(this.institute);
         if (!this.edit) {
-            this.api.addInstitute(this.institute).subscribe((data) => {
-                this.user = data;
-                // console.log(this.user);
-                this.showToast('top-right', 'success', 'Institute Added Successfully');
-                setTimeout(() => {
-                    this.router.navigate(['/pages/home']);
-                }, 1000);
-                // this.stepper.reset();
-            }, (error) => {
-                this.showToast('top-right', 'danger', error.message || 'Something bad happened');
-            });
+            // this.addInstituteAfterPayment(this.institute, '1233', '1234');
+            this.paymentDetails = this.paymentService.getPaymentDetails();
+            const orderDetails = {
+                userId: this.user._id,
+                userPhone: this.user._phone,
+                userName: this.user.name,
+                userEmail: this.user.email,
+                amount: this.paymentDetails.amount,
+                planType: this.paymentDetails.planType,
+            };
+            this.generateOrder(orderDetails);
         }
-        // console.log('forth form =>', this.institute);
     }
     showToast(position, status, message) {
         this.toastrService.show(status, message, {
@@ -451,36 +550,37 @@ let AddInstituteComponent = class AddInstituteComponent {
             status,
         });
     }
-    change(event) {
-        // console.log(event.target.value);
-    }
 };
 AddInstituteComponent.ctorParameters = () => [
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"] },
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] },
-    { type: _services_country_service__WEBPACK_IMPORTED_MODULE_5__["CountryService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["ActivatedRoute"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"] },
-    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbToastrService"] },
-    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"] }
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_6__["ApiService"] },
+    { type: _services_country_service__WEBPACK_IMPORTED_MODULE_7__["CountryService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_11__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbToastrService"] },
+    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["DomSanitizer"] },
+    { type: _services_payment_service__WEBPACK_IMPORTED_MODULE_1__["PaymentService"] },
+    { type: _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"])('stepper', { static: false }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbStepperComponent"])
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ViewChild"])('stepper', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbStepperComponent"])
 ], AddInstituteComponent.prototype, "stepper", void 0);
 AddInstituteComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
         selector: 'ngx-add-institute',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./add-institute.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/add-institute/add-institute.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./add-institute.component.scss */ "./src/app/pages/institute/add-institute/add-institute.component.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"],
-        _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"],
-        _services_country_service__WEBPACK_IMPORTED_MODULE_5__["CountryService"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_9__["ActivatedRoute"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"],
-        _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbToastrService"],
-        _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"],
+        _services_api_service__WEBPACK_IMPORTED_MODULE_6__["ApiService"],
+        _services_country_service__WEBPACK_IMPORTED_MODULE_7__["CountryService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_11__["ActivatedRoute"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_10__["NbToastrService"],
+        _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["DomSanitizer"],
+        _services_payment_service__WEBPACK_IMPORTED_MODULE_1__["PaymentService"],
+        _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
 ], AddInstituteComponent);
 
 
@@ -511,53 +611,39 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ManageInstituteComponent", function() { return ManageInstituteComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/api.service */ "./src/app/services/api.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _pages_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../pages-menu */ "./src/app/pages/pages-menu.ts");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _pages_menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../pages-menu */ "./src/app/pages/pages-menu.ts");
+
 
 
 
 
 
 let ManageInstituteComponent = class ManageInstituteComponent {
-    constructor(api, router) {
+    constructor(api, router, toastrService) {
         this.api = api;
         this.router = router;
-        this.institute = [
-            {
-                address: { addressLine: '', locality: '', state: '', city: '' },
-                attendance: [],
-                basicInfo: { logo: null, name: '', instituteContact: '' },
-                batch: [],
-                category: [],
-                course: [],
-                discount: [],
-                _id: '',
-                metaTag: [],
-            },
-        ];
+        this.toastrService = toastrService;
+    }
+    ngOnInit() {
+        this.institutes = [];
+        this.getInstitutes();
     }
     getInstitutes() {
-        this.api.getInstitutes().subscribe((data) => {
-            this.institutes = data;
-            // console.log('institutes - ' + JSON.stringify(this.institutes));
-            this.institute = JSON.parse(JSON.stringify(this.institutes));
-            // console.log(this.institute);
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][2].hidden = true;
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][3].hidden = true;
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].hidden = true;
+        this.api.getInstitutes().subscribe((institutes) => {
+            this.institutes = institutes;
+            if (institutes.length > 0) {
+                _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][2].hidden = true;
+                _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][3].hidden = true;
+                _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][4].hidden = true;
+            }
         });
     }
     getInstitute(id) {
-        // this.api.getInstitute(id).subscribe(data=>{
-        // 	this.user = data;
-        // 	this.displayData = true;
-        // });
         this.router.navigate(['/pages/dashboard', id]);
-    }
-    ngOnInit() {
-        this.getInstitutes();
     }
     updateInstitute(id) {
         this.router.navigate(['/pages/institute/add-institute'], {
@@ -565,36 +651,48 @@ let ManageInstituteComponent = class ManageInstituteComponent {
         });
     }
     delete(id) {
-        this.api.deleteInstitute(id).subscribe((res) => {
-            // console.log(`institute with id ${id} deleted`);
-        }, (err) => {
-            // console.log(err);
-        });
-        const i = this.institute.findIndex((e) => e._id === id);
-        if (i !== -1) {
-            this.institute.splice(i, 1);
-        }
-        if (this.institutes.length < 2) {
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][2].hidden = true;
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][3].hidden = true;
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].hidden = true;
+        const confirm = window.confirm('Are u sure, You want to delete this Institute/Branch?');
+        if (confirm) {
+            this.api.deleteInstitute(id).subscribe((res) => {
+                const i = this.institutes.findIndex((inst) => inst._id === id);
+                if (i !== -1) {
+                    this.institutes.splice(i, 1);
+                    this.showToast('top-right', 'success', 'Institute Successfully deleted.');
+                }
+                if (this.institutes.length < 2) {
+                    _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][2].hidden = true;
+                    _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][3].hidden = true;
+                    _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][4].hidden = true;
+                }
+            }, (err) => {
+                this.showToast('top-right', 'danger', 'Institute deletion Failed.');
+            });
         }
     }
-    confirm(value) {
-        this.confirmDelete = value;
+    showToast(position, status, message) {
+        this.toastrService.show(status, message, {
+            position,
+            status,
+        });
+    }
+    onClick() {
+        this.router.navigate(['/pages/membership']);
     }
 };
 ManageInstituteComponent.ctorParameters = () => [
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"] }
 ];
 ManageInstituteComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         selector: 'ngx-manage-institute',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./manage-institute.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/add-institute/manage-institute/manage-institute.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./manage-institute.component.scss */ "./src/app/pages/institute/add-institute/manage-institute/manage-institute.component.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"]])
 ], ManageInstituteComponent);
 
 
@@ -638,19 +736,10 @@ let ViewInstituteComponent = class ViewInstituteComponent {
     constructor(api, router) {
         this.api = api;
         this.router = router;
-        this.institute = {
-            institute: {
-                basicInfo: { logo: '', name: '', contactNumber: null },
-                address: { addressLine: '', locality: '', state: '', city: '' },
-                category: [''],
-                metaTag: [''],
-            },
-        };
     }
     ngOnInit() {
-        this.routerId = this.router.snapshot.paramMap.get('id');
-        this.getInstitute(this.routerId);
-        this.api.display(true); //
+        this.instituteId = this.router.snapshot.paramMap.get('id');
+        this.getInstitute(this.instituteId);
         _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][2].hidden = false;
         _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][3].hidden = false;
         _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].hidden = false;
@@ -676,66 +765,6 @@ ViewInstituteComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
 ], ViewInstituteComponent);
 
-
-
-/***/ }),
-
-/***/ "./src/app/pages/institute/add-institute/mime-type.validator.ts":
-/*!**********************************************************************!*\
-  !*** ./src/app/pages/institute/add-institute/mime-type.validator.ts ***!
-  \**********************************************************************/
-/*! exports provided: mimeType */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mimeType", function() { return mimeType; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-
-
-const mimeType = (control) => {
-    if (typeof control.value === 'string') {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(null);
-    }
-    const file = control.value;
-    const fileReader = new FileReader();
-    const frObs = rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"].create((observer) => {
-        fileReader.addEventListener('loadend', () => {
-            const arr = new Uint8Array(fileReader.result).subarray(0, 4);
-            let header = '';
-            let isValid = false;
-            // tslint:disable-next-line: prefer-for-of
-            for (let i = 0; i < arr.length; i++) {
-                header += arr[i].toString(16);
-            }
-            switch (header) {
-                case '89504e47':
-                    isValid = true;
-                    break;
-                case 'ffd8ffe0':
-                case 'ffd8ffe1':
-                case 'ffd8ffe2':
-                case 'ffd8ffe3':
-                case 'ffd8ffe8':
-                    isValid = true;
-                    break;
-                default:
-                    isValid = false; // Or you can use the blob.type as fallback
-                    break;
-            }
-            if (isValid) {
-                observer.next(null);
-            }
-            else {
-                observer.next({ invalidMimeType: true });
-            }
-            observer.complete();
-        });
-        fileReader.readAsArrayBuffer(file);
-    });
-    return frObs;
-};
 
 
 /***/ }),
@@ -776,76 +805,108 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AddStudentsComponent = class AddStudentsComponent {
-    constructor(fb, api, router, active, toasterService) {
+    constructor(fb, api, router, route, toasterService) {
         this.fb = fb;
         this.api = api;
         this.router = router;
-        this.active = active;
+        this.route = route;
         this.toasterService = toasterService;
-        this.modes = ['Cash', 'Chaque/DD', 'Card', 'Others'];
-        this.amountPending = 0;
+        // Mode of Payments
+        this.modes = ['Cash', 'Cheque/DD', 'Card', 'Others'];
     }
     ngOnInit() {
+        this.alreadyRegistered = false;
+        this.feesUpdated = false;
+        this.installmentType = '0';
+        this.netPayable = 0;
+        this.pendingAmount = 0;
+        this.amountCollected = 0;
         this.courses = [];
         this.batches = [];
         this.discounts = [];
-        this.alreadyRegistered = false;
-        this.routerId = this.active.snapshot.paramMap.get('id');
-        this.active.queryParams.subscribe((data) => {
+        this.duration = 12;
+        this.date = Date.now();
+        // Set institute Id
+        this.instituteId = this.route.snapshot.paramMap.get('id');
+        // Get and set query parameters
+        this.route.queryParams.subscribe((data) => {
             this.studentEduId = data.student;
             this.courseId = data.course;
             this.edit = data.edit;
-            this.students = this.fb.group({
-                name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-                rollNo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-                studentEmail: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email])],
-                contact: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
-                parentName: [''],
-                parentContact: [''],
-                parentEmail: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email],
-                address: [''],
-                courseDetails: this.fb.group({
-                    course: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-                    batch: [''],
-                    discount: [''],
-                    additionalDiscount: [''],
-                    netPayable: [''],
-                }),
-                feeDetails: this.fb.group({
-                    installments: [''],
-                    nextInstallment: [''],
-                    amountCollected: [''],
-                    mode: [''],
-                }),
-                materialRecord: [''],
-            });
-            this.eduAtlasStudentForm = this.fb.group({
+            // Construct Eduatlas Id Form
+            this.eduAtlasStudentIdForm = this.fb.group({
                 idInput1: ['EDU', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
                 idInput2: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
                 idInput3: ['ST', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
                 idInput4: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             });
-            this.getCourseTd(this.routerId);
+            // Construct Student Form
+            this.studentForm = this.fb.group({
+                // Student Basic Details
+                name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+                studentEmail: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email])],
+                contact: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
+                // Student Parent Details
+                parentName: [''],
+                parentContact: [''],
+                parentEmail: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email],
+                address: [''],
+                // Student Course Details
+                courseDetails: this.fb.group({
+                    course: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+                    batch: [''],
+                    rollNo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+                    discount: [''],
+                    additionalDiscount: [''],
+                    netPayable: [''],
+                }),
+                // Course Material Records
+                materialRecord: [''],
+            });
+            // Fee Details Form
+            this.feeDetailsForm = this.fb.group({
+                installmentType: [this.installmentType],
+                date: [this.constructDate(this.date)],
+                noOfInstallments: ['1'],
+                amountCollected: ['0'],
+                totalAmount: ['0'],
+                pendingAmount: ['0'],
+                // Installments Form Array
+                installments: this.fb.array([]),
+            });
+            // Initially Installment Type is Disabled
+            this.feeDetailsForm.get('installmentType').disable();
+            // Call onSelectInstallmentType() with initial Value i.e. 0
+            this.onSelectInstallmentType(this.installmentType);
+            // Call GetCourseTd() to get all courses related to Institute
+            this.getCourseTd(this.instituteId);
+            // Check Editing Mode
             if (this.edit === 'true') {
+                // Already Registered is set to true
                 this.alreadyRegistered = true;
-                this.getStudent(this.studentEduId, this.routerId, this.courseId);
+                // get Student for Editing using studentEduId, instituteId and CourseId
+                this.getStudent(this.studentEduId, this.instituteId, this.courseId);
             }
         });
     }
+    // get Student Form
     get f() {
-        return this.students.controls;
+        return this.studentForm.controls;
     }
-    get eduAtlasStudentFormControl() {
-        return this.eduAtlasStudentForm.controls;
+    // get Eduatlas Form
+    get eduAtlasStudentIdControl() {
+        return this.eduAtlasStudentIdForm.controls;
     }
+    // Search Student By Eduatlas Id
     onStudentSearch() {
-        if (this.eduAtlasStudentForm.valid) {
-            const studentEduId = `${this.eduAtlasStudentFormControl['idInput1'].value}-${this.eduAtlasStudentFormControl['idInput2'].value}-${this.eduAtlasStudentFormControl['idInput3'].value}-${this.eduAtlasStudentFormControl['idInput4'].value}`;
+        if (this.eduAtlasStudentIdForm.valid) {
+            // Construct Eduatlas Id to search student
+            const studentEduId = `${this.eduAtlasStudentIdControl['idInput1'].value}-${this.eduAtlasStudentIdControl['idInput2'].value}-${this.eduAtlasStudentIdControl['idInput3'].value}-${this.eduAtlasStudentIdControl['idInput4'].value}`;
             this.api.getOneStudent(studentEduId).subscribe((data) => {
                 if (data) {
-                    this.students.patchValue({
+                    // Set Student Form Values
+                    this.studentForm.patchValue({
                         name: data.basicDetails.name,
-                        rollNo: data.basicDetails.rollNumber,
                         studentEmail: data.basicDetails.studentEmail,
                         contact: data.basicDetails.studentContact,
                         parentName: data.parentDetails.name,
@@ -853,6 +914,13 @@ let AddStudentsComponent = class AddStudentsComponent {
                         parentEmail: data.parentDetails.parentEmail,
                         address: data.parentDetails.address,
                     });
+                    // IN editing Mode or Already Registered mode Student Email field is Disabled
+                    // (Enable Only in Add New Student Mode)
+                    this.studentForm.get('studentEmail').disable();
+                    // IN editing Mode or Already Registered mode Student Contact field is Disabled
+                    // (Enable Only in Add New Student Mode)
+                    this.studentForm.get('contact').disable();
+                    // Set Class Level Eduatlas Id
                     this.studentEduId = studentEduId;
                 }
                 else {
@@ -861,36 +929,84 @@ let AddStudentsComponent = class AddStudentsComponent {
             });
         }
     }
+    // Change if Student is Already Registered
     changeAlreadyRegistered(e) {
+        // set true or false
         this.alreadyRegistered = e;
         if (!e) {
-            this.eduAtlasStudentForm.reset();
-            this.students.reset();
+            // if False i.e. Student is New to Eduatlas
+            // reset eduatlas form
+            this.eduAtlasStudentIdForm.reset({ idInput1: 'EDU', idInput3: 'ST' });
+            // reset Student Form
+            // this.studentForm.reset
+            // set to null if previously set
+            this.studentEduId = null;
         }
     }
+    // Get All Courses of Institute / Get one Institute
     getCourseTd(id) {
         this.api.getCourseTD(id).subscribe((data) => {
             this.institute = data;
             this.courses = data.course;
-            // this.onSelectCourse(this.courses[0]._id);
             this.discounts = data.discount;
         });
     }
+    // Fee Details Form Date is Changed
+    dateChanged(date) {
+        this.date = new Date(date).getTime();
+        // Set Installment Dates
+        this.setDates();
+    }
+    // Construct date in yyyy-MM-dd format to set in DOM form field
+    constructDate(dateInMillisecond) {
+        const date = new Date(dateInMillisecond);
+        return `${date.getFullYear()}-${this.appendZero(date.getMonth() + 1)}-${this.appendZero(date.getDate())}`;
+    }
+    // Append zero for single digit Date and Month
+    appendZero(n) {
+        if (n < 10) {
+            return '0' + n;
+        }
+        return '' + n;
+    }
+    // Change Course From DOM
     onSelectCourse(id) {
+        // Find Batches of Selected Course
         this.batches = this.institute.batch.filter((b) => b.course === id);
+        // Set Selected Course
         this.selectedCourse = this.courses.find((course) => course.id === id);
-        this.students.get('courseDetails').patchValue({ batch: '' });
-        this.students.get('feeDetails').reset();
-        this.students.get('materialRecord').reset();
+        // Set Selected Course Duration
+        this.duration = +this.selectedCourse.duration;
+        // reset Course Details Batch in DOM
+        this.studentForm.get('courseDetails').patchValue({ batch: '' });
+        // reset Course Material Records
+        this.studentForm.get('materialRecord').reset();
+        // Enable Installment Type
+        this.feeDetailsForm.get('installmentType').enable();
+        this.installmentType = '0';
+        this.feeDetailsForm.patchValue({ installmentType: this.installmentType });
+        if (this.edit) {
+            this.date = new Date().getTime();
+            this.feeDetailsForm.get('date').enable();
+            this.feeDetailsForm.patchValue({ date: this.constructDate(this.date) });
+        }
+        // Calculate Net Payable Amount
         this.calculateNetPayableAmount();
     }
+    // Select Discount From DOM
     onSelectDiscount(id) {
+        // Set Selected Discount
         this.selectedDiscount = this.discounts.find((dicount) => dicount.id === id);
+        // Calculate Net Payable Amount
         this.calculateNetPayableAmount();
     }
+    // Calculate Net Payable Amount
     calculateNetPayableAmount() {
+        // Set Class Level netPayable to 0
+        this.netPayable = 0;
         let calculatedAmount = 0;
-        const additionalDiscount = this.students.get(['courseDetails', 'additionalDiscount']).value;
+        // Get Additional Discount
+        const additionalDiscount = this.studentForm.get(['courseDetails', 'additionalDiscount']).value;
         if (this.selectedCourse && this.selectedCourse.fees) {
             calculatedAmount = this.selectedCourse.fees;
             if (this.selectedDiscount && this.selectedDiscount.amount) {
@@ -902,19 +1018,155 @@ let AddStudentsComponent = class AddStudentsComponent {
                 calculatedAmount = calculatedAmount - (additionalDiscount / 100) * calculatedAmount;
             }
         }
-        this.students.get('courseDetails').patchValue({ netPayable: calculatedAmount });
-        this.calculateAmountPending();
+        // Set Class Level netPayable to Calculated Net PAyable
+        this.netPayable = calculatedAmount;
+        // Set netPayable in DOM
+        this.studentForm.get('courseDetails').patchValue({ netPayable: calculatedAmount });
+        this.feeDetailsForm.patchValue({ totalAmount: calculatedAmount });
+        // Calculate Pending Amount
+        this.calculatePendingAmount();
+        // Call onSelectInstallmentType() for class level installmentType
+        this.onSelectInstallmentType(this.installmentType);
     }
-    calculateAmountPending() {
-        const netPayableAmount = this.students.get(['courseDetails', 'netPayable']).value;
-        const amountCollected = this.students.get(['feeDetails', 'amountCollected']).value;
-        if (amountCollected && netPayableAmount) {
-            this.amountPending = netPayableAmount - amountCollected;
+    // Calculate Pending Amount
+    calculatePendingAmount() {
+        // Set Class level pending amount to 0
+        this.pendingAmount = 0;
+        const amountPaid = this.feeDetailsForm.get('amountCollected').value;
+        this.pendingAmount = +this.netPayable - (amountPaid ? amountPaid : 0);
+        this.feeDetailsForm.patchValue({ pendingAmount: this.pendingAmount });
+    }
+    // Change paid amount from Fee Detail Form in DOM
+    onPaidAmount(paid, i) {
+        // Initially confirm is true
+        let confirm = true;
+        if (this.edit) {
+            this.feesUpdated = true;
+        }
+        if (paid) {
+            confirm = null;
+            // Confirm if User really wants to make this installment as paid ot not
+            confirm = window.confirm('Do you want to make this installment as Paid?');
+        }
+        // id confirm is true
+        if (confirm) {
+            // Get installment array from FeeDetails form
+            const installment = this.feeDetailsForm.get('installments');
+            // get selected installment amount
+            const amount = +installment.controls[i].get('amount').value;
+            // if paid = true i.e Checked in dom
+            if (paid) {
+                // Set paid Status to true
+                installment.controls[i].patchValue({ paidStatus: true });
+                // Calculate and set Amount collected
+                this.amountCollected = +this.amountCollected + amount;
+            }
+            else {
+                // Set paid Status to false i.e. Unchecked
+                installment.controls[i].patchValue({ paidStatus: false });
+                // Calculate and set Amount collected
+                this.amountCollected = +this.amountCollected - amount;
+            }
+            // Set amount collected in DOM
+            this.feeDetailsForm.patchValue({ amountCollected: this.amountCollected });
+            // Calculate Pending Amount
+            this.calculatePendingAmount();
+        }
+    }
+    // Change Installment Type from DOM
+    onSelectInstallmentType(installmentType) {
+        // Initial amount collected is set to 0
+        this.feeDetailsForm.patchValue({ amountCollected: '0' });
+        this.installmentType = installmentType;
+        if (installmentType === '0') {
+            // on payment once installment Type noOfInstallments id disabled
+            this.feeDetailsForm.get('noOfInstallments').disable();
+            // call generateNoOfInstallments for only one installment
+            this.generateNoOfInstallments('1');
         }
         else {
-            this.amountPending = netPayableAmount;
+            // on custom installment Type noOfInstallments id enabled
+            this.feeDetailsForm.get('noOfInstallments').enable();
+            // call generateNoOfInstallments for noOfInstallments
+            this.generateNoOfInstallments(this.noOfInstallments);
         }
     }
+    // Generate No of installments
+    generateNoOfInstallments(noOfInstallments) {
+        this.noOfInstallments = noOfInstallments;
+        // Set Initial Amount collected to 0
+        this.amountCollected = 0;
+        this.feeDetailsForm.patchValue({ noOfInstallments: this.noOfInstallments });
+        const installment = this.feeDetailsForm.get('installments');
+        installment.controls = [];
+        // Generate installment form group in dom for no of installments
+        for (let i = 0; i < +noOfInstallments; i++) {
+            const installmentData = {
+                installmentNo: (i + 1).toString(),
+                paidStatus: false,
+                paidOn: '',
+                amount: '',
+                paymentMode: '',
+                amountPending: '',
+            };
+            this.addInstallment(installmentData);
+        }
+        // Construct and Set Dates for Fee Details Instalment
+        this.setDates();
+        // Calculate and Set fees for Fee Details Instalment
+        this.setFees();
+    }
+    // Calculate and Set fees for Fee Details Instalment
+    setFees() {
+        const amount = this.netPayable / +this.noOfInstallments;
+        const installments = this.feeDetailsForm.get('installments');
+        installments.controls.forEach((installment, i) => {
+            let amountPending = this.pendingAmount - +(amount * (i + 1));
+            amountPending = amountPending < 0 ? 0 : amountPending;
+            installment.patchValue({
+                amount: amount.toFixed(2),
+                amountPending: amountPending.toFixed(2),
+            });
+        });
+    }
+    // calculate and Set Dates for Fee Details Instalment
+    setDates() {
+        const interval = 2592000000; // 30 Days Interval in milliseconds
+        // calculate next installment duration
+        const installmentDuration = this.duration / +this.noOfInstallments;
+        const installments = this.feeDetailsForm.get('installments');
+        installments.controls.forEach((installment, i) => {
+            // Construct next Installment Date (first installment date is current date)
+            const date = this.constructDate(this.date + interval * (installmentDuration * i));
+            // set next installment Date
+            installment.patchValue({
+                paidOn: date,
+            });
+        });
+    }
+    // Installment Form Group
+    installment(installmentData) {
+        // Construct and return Installment Form Group and set default control values to given values if provided
+        return this.fb.group({
+            installmentNo: [installmentData.installmentNo ? installmentData.installmentNo : ''],
+            paidStatus: [installmentData.paidStatus === 'true' ? true : false],
+            paidOn: [installmentData.paidOn ? installmentData.paidOn : ''],
+            amount: [installmentData.amount ? installmentData.amount : ''],
+            paymentMode: [installmentData.paymentMode ? installmentData.paymentMode : ''],
+            amountPending: [installmentData.amountPending ? installmentData.amountPending : ''],
+        });
+    }
+    // Add INstallment FormGroup to INstallment FormArray in fee details form
+    addInstallment(installmentData) {
+        const installment = this.feeDetailsForm.get('installments');
+        installment.push(this.installment(installmentData));
+    }
+    // Remove INstallment FormGroup to INstallment FormArray from fee details form
+    removeInstallment(i) {
+        const installment = this.feeDetailsForm.get('installments');
+        installment.removeAt(installment[i]);
+    }
+    // Get Student Function (call only in editing mode)
     getStudent(studentEduId, institute, course) {
         this.api
             .getOneStudentByInstitute({
@@ -924,117 +1176,204 @@ let AddStudentsComponent = class AddStudentsComponent {
         })
             .subscribe((data) => {
             this.student = data[0];
-            // console.log(this.student);
+            // Assign student fees (Later change)
+            this.studentFees = this.student.fees;
             const eduAtlId = this.studentEduId.split('-');
-            this.eduAtlasStudentForm.patchValue({
+            // Set Student EduAtlas Id
+            this.eduAtlasStudentIdForm.patchValue({
                 idInput1: eduAtlId[0],
                 idInput2: eduAtlId[1],
                 idInput3: eduAtlId[2],
                 idInput4: eduAtlId[3],
             });
-            this.eduAtlasStudentForm.get('idInput2').disable();
-            this.eduAtlasStudentForm.get('idInput4').disable();
-            this.students.patchValue({
+            // Disable Eduatlas Id Input fields in editing Mode
+            this.eduAtlasStudentIdForm.get('idInput2').disable();
+            this.eduAtlasStudentIdForm.get('idInput4').disable();
+            // Set Student Form Values
+            this.studentForm.patchValue({
+                // Set Student Basic Details
                 name: this.student.basicDetails.name,
-                rollNo: this.student.basicDetails.rollNumber,
                 studentEmail: this.student.basicDetails.studentEmail,
                 contact: this.student.basicDetails.studentContact,
+                // Set Student Parent Details
                 parentName: this.student.parentDetails.name,
                 parentContact: this.student.parentDetails.parentContact,
                 parentEmail: this.student.parentDetails.parentEmail,
+                // Set Student address
                 address: this.student.parentDetails.address,
+                // Set Student Course Details
                 courseDetails: {
                     course: this.student.instituteDetails.courseId,
                     discount: this.student.instituteDetails.discount,
+                    rollNo: this.student.instituteDetails.rollNumber,
                     additionalDiscount: this.student.instituteDetails.additionalDiscount,
-                    netPayable: this.student.instituteDetails.nextPayble,
-                },
-                feeDetails: {
-                    installments: this.student.fee.installmentNumber,
-                    nextInstallment: this.student.fee.nextInstallment,
-                    amountCollected: this.student.fee.amountCollected,
-                    mode: this.student.fee.mode,
+                    netPayable: this.student.instituteDetails.netPayble,
                 },
                 materialRecord: this.student.instituteDetails.materialRecord,
             });
-            this.students.get('studentEmail').disable();
-            this.students.get('contact').disable();
+            // Disable Student email in editing mode
+            this.studentForm.get('studentEmail').disable();
+            // Disable Student contact in editing mode
+            this.studentForm.get('contact').disable();
+            // Select and set Student Course
             this.onSelectCourse(this.student.instituteDetails.courseId);
+            // Select Student batch if assigned
             setTimeout(() => {
-                this.students
+                this.studentForm
                     .get('courseDetails')
                     .patchValue({ batch: this.student.instituteDetails.batchId });
             }, 200);
-            this.calculateAmountPending();
+            // Set Fee Details Form
+            this.feeDetailsForm.patchValue({
+                installmentType: this.studentFees.installmentType,
+                noOfInstallments: this.studentFees.noOfInstallments,
+                date: this.studentFees.date,
+                totalAmount: this.studentFees.totalAmount,
+                pendingAmount: this.studentFees.pendingAmount,
+                amountCollected: this.studentFees.amountCollected,
+            });
+            this.feeDetailsForm.get('installmentType').disable();
+            this.feeDetailsForm.get('noOfInstallments').disable();
+            this.feeDetailsForm.get('date').disable();
+            this.netPayable = this.studentFees.totalAmount;
+            this.pendingAmount = this.studentFees.pendingAmount;
+            this.amountCollected = this.studentFees.amountCollected;
+            const installment = this.feeDetailsForm.get('installments');
+            installment.controls = [];
+            this.studentFees.installments.forEach((curInstallment, i) => {
+                const installmentData = {
+                    installmentNo: curInstallment.installmentNo,
+                    paidStatus: curInstallment.paidStatus,
+                    paidOn: curInstallment.paidOn,
+                    amount: curInstallment.amount,
+                    paymentMode: curInstallment.paymentMode,
+                    amountPending: curInstallment.amountPending,
+                };
+                this.addInstallment(installmentData);
+                // if (curInstallment.paidStatus === 'true') {
+                //   installment.controls[i].get('paidStatus').disable();
+                //   installment.controls[i].get('paymentMode').disable();
+                // }
+            });
         });
     }
+    addFees(studentId, studentEduatlasId) {
+        this.feeDetailsForm.value.noOfInstallments = this.noOfInstallments;
+        this.api
+            .addStudentFees(studentId, this.instituteId, studentEduatlasId, this.studentForm.get('courseDetails').value.course, this.feeDetailsForm.value)
+            .subscribe((res) => {
+            this.showToaster('top-right', 'success', 'New Student Course Added Successfully!');
+            this.router.navigate([`/pages/institute/manage-students/${this.instituteId}`]);
+        }, (err) => {
+            this.showToaster('top-right', 'danger', err.error.message);
+        });
+    }
+    onSelectPaymentMode() {
+        if (this.edit) {
+            this.feesUpdated = true;
+        }
+    }
+    updateFees(studentId, feeId) {
+        this.feeDetailsForm.value.noOfInstallments = this.noOfInstallments;
+        this.api.updateStudentFees(this.studentFees._id, this.feeDetailsForm.value).subscribe((res) => {
+            this.showToaster('top-right', 'success', 'Student Fees Successfully!');
+            this.router.navigate([`/pages/institute/manage-students/${this.instituteId}`]);
+        }, (err) => {
+            this.showToaster('top-right', 'danger', err.error.message);
+        });
+    }
+    // Submit form From DOM
     onSubmit() {
-        if (this.students.invalid) {
+        if (this.studentForm.invalid) {
+            // If Form is invalid then return
             return;
         }
-        if (this.students.value.courseDetails.batch === null ||
-            this.students.value.courseDetails.course === null) {
-            this.students.value.courseDetails.batch = '';
-            this.students.value.courseDetails.course = '';
+        // Check if batch is null then  set course Details batch to '' (to store in DB)
+        if (this.studentForm.value.courseDetails.batch === null) {
+            this.studentForm.value.courseDetails.batch = '';
         }
+        // In editing Mode
         if (this.edit === 'true') {
-            if (this.student.instituteDetails.courseId !== this.students.value.courseDetails.course) {
-                // console.log('addStudentCourse');
-                this.api.addStudentCourse(this.students.value, this.routerId, this.studentEduId).subscribe((res) => {
-                    this.showToaster('top-right', 'success', 'New Student Course Added Successfully!');
-                    this.router.navigate([`/pages/institute/manage-students/${this.routerId}`]);
+            if (this.student.instituteDetails.courseId !== this.studentForm.value.courseDetails.course) {
+                // If Course Changed add course to student course
+                this.api
+                    .addStudentCourse(this.studentForm.value, this.instituteId, this.studentEduId)
+                    .subscribe((res) => {
+                    // Call Student Add Fees Api
+                    this.addFees(this.student._id, this.studentEduId);
                 }, (err) => this.showToaster('top-right', 'danger', err.error.message));
             }
-            else if (this.student.instituteDetails.batchId !== this.students.value.courseDetails.batch) {
-                // console.log('updateStudentCourse');
+            else if (this.student.instituteDetails.batchId !== this.studentForm.value.courseDetails.batch ||
+                this.student.instituteDetails.rollNumber !== this.studentForm.value.courseDetails.rollNo) {
+                // If Batch changed then update student batch in student Course
                 this.api
-                    .updateStudentCourse(this.students.value, this.student._id, this.student.instituteDetails._id, this.routerId, this.studentEduId)
+                    .updateStudentCourse(this.studentForm.value, this.student._id, this.student.instituteDetails._id, this.instituteId, this.studentEduId)
                     .subscribe((res) => {
-                    this.showToaster('top-right', 'success', 'Student Course Updated Successfully!');
-                    this.router.navigate([`/pages/institute/manage-students/${this.routerId}`]);
+                    if (this.feesUpdated) {
+                        this.updateFees(this.student._id, this.studentFees._id);
+                    }
+                    else {
+                        this.showToaster('top-right', 'success', 'Student Course Updated Successfully!');
+                        this.router.navigate([`/pages/institute/manage-students/${this.instituteId}`]);
+                    }
                 }, (err) => this.showToaster('top-right', 'danger', err.error.message));
+            }
+            else if (this.feesUpdated) {
+                this.updateFees(this.student._id, this.studentFees._id);
             }
             else {
-                // console.log('updateStudentPersonalDetails');
-                this.api
-                    .updateStudentPersonalDetails(this.student._id, this.students.value, this.studentEduId)
-                    .subscribe((res) => {
-                    this.showToaster('top-right', 'success', 'Student Personal details Updated!');
-                    this.router.navigate([`/pages/institute/manage-students/${this.routerId}`]);
-                }, (err) => this.showToaster('top-right', 'danger', err.error.message));
+                // Student Personal Details Changed
+                //   this.api
+                //     .updateStudentPersonalDetails(
+                //       this.student._id,
+                //       this.studentForm.value,
+                //       this.studentEduId,
+                //       this.student.basicDetails.studentContact,
+                //       this.student.basicDetails.studentEmail,
+                //     )
+                //     .subscribe(
+                //       (res: any) => {
+                //         this.showToaster('top-right', 'success', 'Student Personal details Updated!');
+                //         this.router.navigate([`/pages/institute/manage-students/${this.instituteId}`]);
+                //       },
+                //       (err) => this.showToaster('top-right', 'danger', err.error.message),
+                //     );
+                this.router.navigate([`/pages/institute/manage-students/${this.instituteId}`]);
             }
         }
+        // If not Editing Mode
         if (!this.edit) {
             if (!this.alreadyRegistered) {
-                this.api.addStudent(this.students.value, this.routerId).subscribe((data) => {
-                    this.showToaster('top-right', 'success', 'New Student Added Successfully!');
-                    setTimeout(() => {
-                        this.router.navigate([`/pages/institute/manage-students/${this.routerId}`]);
-                    }, 1000);
+                // If student is not already registered then Add new Student in DB
+                this.api.addStudent(this.studentForm.value, this.instituteId).subscribe((res) => {
+                    this.addFees(res._id, res.eduAtlasId);
                 }, (err) => {
                     if (err.error.message.includes('E11000 duplicate key error collection')) {
                         this.showToaster('top-right', 'danger', 'This Student Already Exist, Please Search Student By EDU-Atlas ID');
                         this.alreadyRegistered = true;
                         return;
                     }
+                    this.alreadyRegistered = true;
                     this.showToaster('top-right', 'danger', err.error.message);
                 });
             }
             else {
                 if (this.studentEduId) {
+                    // If Student is Already registered then add new course to Student Course
                     this.api
-                        .addStudentCourse(this.students.value, this.routerId, this.studentEduId)
+                        .addStudentCourse(this.studentForm.value, this.instituteId, this.studentEduId)
                         .subscribe((res) => {
-                        this.showToaster('top-right', 'success', 'Student Course Added Successfully!');
-                        this.router.navigate([`/pages/institute/manage-students/${this.routerId}`]);
+                        // Call Student Add Fees Api
+                        this.addFees(this.student._id, this.studentEduId);
                     }, (err) => this.showToaster('top-right', 'danger', err.error.message));
                 }
                 else {
-                    this.showToaster('top-right', 'danger', 'Invalud Eduatlas ID');
+                    this.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
                 }
             }
         }
     }
+    // Show Toaster
     showToaster(position, status, message) {
         this.toasterService.show(status, message, {
             position,
@@ -1090,35 +1429,37 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ManageStudentsComponent", function() { return ManageStudentsComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/api.service */ "./src/app/services/api.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 
 
 
 let ManageStudentsComponent = class ManageStudentsComponent {
-    constructor(api, router, active) {
+    constructor(api, router, route, toasterService) {
         this.api = api;
         this.router = router;
-        this.active = active;
+        this.route = route;
+        this.toasterService = toasterService;
         this.students = [];
     }
     ngOnInit() {
         this.students = [];
         this.course = '';
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
-            course: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', { validators: [] }),
-            batch: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', { validators: [] }),
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            course: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', { validators: [] }),
+            batch: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', { validators: [] }),
         });
-        this.routerId = this.active.snapshot.paramMap.get('id');
-        this.getCourseTd(this.routerId);
+        this.instituteId = this.route.snapshot.paramMap.get('id');
+        this.getCourseTd(this.instituteId);
     }
     getStudents(id, courseId, batchId) {
         this.api.getActiveStudents(id, courseId, batchId).subscribe((data) => {
-            console.log(data);
             this.students = data;
         });
     }
@@ -1131,47 +1472,54 @@ let ManageStudentsComponent = class ManageStudentsComponent {
     onSelectCourse(id) {
         if (id !== '') {
             this.course = id;
-            // this.form.patchValue({ batch: '' });
-            this.getStudents(this.routerId, id, id);
-            // this.batches = this.institute.batch.filter((b: any) => b.course === id);
+            this.getStudents(this.instituteId, id, id);
         }
     }
-    // onSelectBatch(id: string) {
-    //   console.log(id);
-    //   this.getStudents(this.routerId, this.form.value.course, id);
-    // }
     view(student) {
-        this.router.navigate([`/pages/institute/view-student/${this.routerId}`], {
+        this.router.navigate([`/pages/institute/view-student/${this.instituteId}`], {
             queryParams: { student, course: this.course },
         });
     }
     edit(student) {
-        // console.log('from manag edit => ', email);
-        this.router.navigate([`/pages/institute/add-students/${this.routerId}/edit`], {
+        this.router.navigate([`/pages/institute/add-students/${this.instituteId}/edit`], {
             queryParams: { student, course: this.course, edit: 'true' },
         });
     }
     delete(eduAtlId, courseObjId) {
-        this.api.deleteStudentCourse(courseObjId, eduAtlId).subscribe(() => {
-            const i = this.students.findIndex((student) => student.instituteDetails._id === courseObjId);
-            if (i !== -1) {
-                this.students.splice(i, 1);
-            }
+        const confirm = window.confirm('Are u sure, You want to delete this Student?');
+        if (confirm) {
+            this.api.deleteStudentCourse(courseObjId, eduAtlId).subscribe(() => {
+                const i = this.students.findIndex((student) => student.instituteDetails._id === courseObjId);
+                if (i !== -1) {
+                    this.students.splice(i, 1);
+                    this.showToaster('top-right', 'success', 'New Student Deleted Successfully!');
+                }
+            });
+        }
+    }
+    showToaster(position, status, message) {
+        this.toasterService.show(status, message, {
+            position,
+            status,
         });
     }
 };
 ManageStudentsComponent.ctorParameters = () => [
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"] }
 ];
 ManageStudentsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'ngx-manage-students',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./manage-students.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/add-students/manage-students/manage-students.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./manage-students.component.scss */ "./src/app/pages/institute/add-students/manage-students/manage-students.component.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"]])
 ], ManageStudentsComponent);
 
 
@@ -1210,17 +1558,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ViewStudentComponent = class ViewStudentComponent {
-    constructor(api, active) {
+    constructor(api, route) {
         this.api = api;
-        this.active = active;
+        this.route = route;
     }
     ngOnInit() {
-        this.routerId = this.active.snapshot.paramMap.get('id');
-        this.active.queryParams.subscribe((data) => {
+        this.instituteId = this.route.snapshot.paramMap.get('id');
+        this.route.queryParams.subscribe((data) => {
             this.studentEduId = data.student;
             this.courseId = data.course;
         });
-        this.getStudent(this.studentEduId, this.routerId, this.courseId);
+        this.getStudent(this.studentEduId, this.instituteId, this.courseId);
     }
     getStudent(student, institute, course) {
         this.api
@@ -1271,35 +1619,37 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PendingStudentComponent", function() { return PendingStudentComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/api.service */ "./src/app/services/api.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 
 
 
 let PendingStudentComponent = class PendingStudentComponent {
-    constructor(api, router, active) {
+    constructor(api, router, route, toasterService) {
         this.api = api;
         this.router = router;
-        this.active = active;
+        this.route = route;
+        this.toasterService = toasterService;
         this.students = [];
     }
     ngOnInit() {
         this.students = [];
         this.course = '';
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
-            course: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', { validators: [] }),
-            batch: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', { validators: [] }),
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            course: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', { validators: [] }),
+            batch: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', { validators: [] }),
         });
-        this.routerId = this.active.snapshot.paramMap.get('id');
-        this.getCourseTd(this.routerId);
+        this.instituteId = this.route.snapshot.paramMap.get('id');
+        this.getCourseTd(this.instituteId);
     }
     getStudents(id, courseId, batchId) {
         this.api.getPendingStudents(id, courseId).subscribe((data) => {
-            console.log(data);
             this.students = data;
         });
     }
@@ -1312,47 +1662,54 @@ let PendingStudentComponent = class PendingStudentComponent {
     onSelectCourse(id) {
         if (id !== '') {
             this.course = id;
-            // this.form.patchValue({ batch: '' });
-            this.getStudents(this.routerId, id, id);
-            // this.batches = this.institute.batch.filter((b: any) => b.course === id);
+            this.getStudents(this.instituteId, id, id);
         }
     }
-    // onSelectBatch(id: string) {
-    //   console.log(id);
-    //   this.getStudents(this.routerId, this.form.value.course, id);
-    // }
     view(student) {
-        this.router.navigate([`/pages/institute/view-student/${this.routerId}`], {
+        this.router.navigate([`/pages/institute/view-student/${this.instituteId}`], {
             queryParams: { student, course: this.course },
         });
     }
     edit(student) {
-        // console.log('from manag edit => ', email);
-        this.router.navigate([`/pages/institute/add-students/${this.routerId}/edit`], {
+        this.router.navigate([`/pages/institute/add-students/${this.instituteId}/edit`], {
             queryParams: { student, course: this.course, edit: 'true' },
         });
     }
     delete(eduAtlId, courseObjId) {
-        this.api.deleteStudentCourse(courseObjId, eduAtlId).subscribe(() => {
-            const i = this.students.findIndex((student) => student.instituteDetails._id === courseObjId);
-            if (i !== -1) {
-                this.students.splice(i, 1);
-            }
+        const confirm = window.confirm('Are u sure, You want to delete this Student?');
+        if (confirm) {
+            this.api.deleteStudentCourse(courseObjId, eduAtlId).subscribe(() => {
+                const i = this.students.findIndex((student) => student.instituteDetails._id === courseObjId);
+                if (i !== -1) {
+                    this.students.splice(i, 1);
+                    this.showToaster('top-right', 'success', 'New Student Deleted Successfully!');
+                }
+            });
+        }
+    }
+    showToaster(position, status, message) {
+        this.toasterService.show(status, message, {
+            position,
+            status,
         });
     }
 };
 PendingStudentComponent.ctorParameters = () => [
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"] }
 ];
 PendingStudentComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'ngx-pending-student',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./pending-student.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/add-students/pending-student/pending-student.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./pending-student.component.scss */ "./src/app/pages/institute/add-students/pending-student/pending-student.component.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"]])
 ], PendingStudentComponent);
 
 
@@ -1368,7 +1725,7 @@ PendingStudentComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2luc3RpdHV0ZS9hdHRhbmRhbmNlL2F0dGFuZGFuY2UuY29tcG9uZW50LnNjc3MifQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("table {\n  width: 100%;\n  height: 5vh; }\n\ntable td {\n  text-align: center;\n  padding-top: 5px; }\n\n.attendanceList {\n  padding: 15px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2F0dGFuZGFuY2UvRTpcXFByb2plY3RzXFxGcmVlbGFuY2UgUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXGNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGluc3RpdHV0ZVxcYXR0YW5kYW5jZVxcYXR0YW5kYW5jZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQVc7RUFDWCxXQUFXLEVBQUE7O0FBR2Y7RUFDSSxrQkFBa0I7RUFDbEIsZ0JBQWUsRUFBQTs7QUFHbkI7RUFDSSxhQUFZLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYXR0YW5kYW5jZS9hdHRhbmRhbmNlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBoZWlnaHQ6IDV2aDtcclxuICB9XHJcblxyXG50YWJsZSB0ZHtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIHBhZGRpbmctdG9wOjVweDtcclxufVxyXG5cclxuLmF0dGVuZGFuY2VMaXN0e1xyXG4gICAgcGFkZGluZzoxNXB4O1xyXG59XHJcbiJdfQ== */");
 
 /***/ }),
 
@@ -1387,69 +1744,134 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/api.service */ "./src/app/services/api.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+
 
 
 
 
 
 let AttandanceComponent = class AttandanceComponent {
-    constructor(api, active, fb) {
+    constructor(api, active, fb, toasterService) {
         this.api = api;
         this.active = active;
         this.fb = fb;
-        this.courses = { course: [{ discription: '', gst: '', _id: '', name: '', totalFee: '' }] };
-        this.batches = { batch: [{ batchCode: '', course: '', description: '', _id: '' }] };
-        this.students = [
-            {
-                active: false,
-                anouncement: '',
-                basicDetails: { name: '', rollNumber: '', studentContact: '', studentEmail: '' },
-                courseDetails: { course: '', batch: '' },
-            },
-        ];
+        this.toasterService = toasterService;
     }
     ngOnInit() {
-        this.getCourses(this.active.snapshot.paramMap.get('id'));
-        this.getBatches(this.active.snapshot.paramMap.get('id'));
-        this.getStudents(this.active.snapshot.paramMap.get('id'));
-        this.attandance = this.fb.group({
-            // course: ['', Validators.required],
+        this.date = Date.now();
+        this.courses = [];
+        this.batches = [];
+        this.students = [];
+        this.availableBatches = [];
+        this.attendance = [];
+        this.instituteId = this.active.snapshot.paramMap.get('id');
+        this.getCourseTd(this.instituteId);
+        this.attandanceform = this.fb.group({
+            courseId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             batchId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             allStudentsPresent: [],
-            absentees: [['']],
+            date: [this.constructDate(this.date), _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
         });
     }
-    getCourses(id) {
-        this.api.getCourses(id).subscribe((data) => {
-            this.courses = JSON.parse(JSON.stringify(data));
-            // console.log('courses=> ', this.courses);
+    onSelectCourse(id) {
+        // Find Batches of Selected Course
+        this.students = [];
+        this.attandanceform.get('batchId').setValue(null);
+        this.availableBatches = this.batches.filter((b) => b.course === id);
+        this.getStudents();
+    }
+    onSelectBatch() {
+        this.getStudents();
+    }
+    getStudents() {
+        this.students = [];
+        this.attendance = [];
+        if (this.attandanceform.get('batchId').value &&
+            this.attandanceform.get('courseId').value &&
+            this.attandanceform.get('date').value) {
+            var studentsRequest = {
+                date: this.attandanceform.get('date').value,
+                instituteId: this.instituteId,
+                courseId: this.attandanceform.get('courseId').value,
+                batchId: this.attandanceform.get('batchId').value,
+            };
+            this.api.getStudentsAttendance(studentsRequest).subscribe((data) => {
+                this.students = data;
+                this.students.sort((student1, student2) => {
+                    if (parseInt(student1.studentRollNo) >= parseInt(student2.studentRollNo)) {
+                        return 1;
+                    }
+                    else {
+                        return -1;
+                    }
+                });
+                this.students.map(function (student) {
+                    student.attendanceStatus = student.attendanceStatus ? true : false;
+                    return student;
+                });
+                this.students.forEach((student) => {
+                    const attendance = {
+                        studentId: student.studentId,
+                        attendanceStatus: student.attendanceStatus ? true : false,
+                    };
+                    this.attendance.push(attendance);
+                });
+            });
+        }
+    }
+    getCourseTd(id) {
+        this.api.getCourseTD(id).subscribe((data) => {
+            this.batches = data.batch;
+            this.courses = data.course;
         });
     }
-    getBatches(id) {
-        this.api.getBatches(id).subscribe((data) => {
-            this.batches = JSON.parse(JSON.stringify(data));
-            // console.log('batches=> ', this.batches);
+    constructDate(dateInMillisecond) {
+        const date = new Date(dateInMillisecond);
+        return `${date.getFullYear()}-${this.appendZero(date.getMonth() + 1)}-${this.appendZero(date.getDate())}`;
+    }
+    appendZero(n) {
+        if (n < 10) {
+            return '0' + n;
+        }
+        return '' + n;
+    }
+    markAttendance(event, studentId, index) {
+        if (event.target.checked) {
+            this.attendance[index].attendanceStatus = true;
+        }
+        else {
+            this.attendance[index].attendanceStatus = false;
+        }
+    }
+    showToaster(position, status, message) {
+        this.toasterService.show(status, message, {
+            position,
+            status,
         });
     }
-    getStudents(id) {
-        this.api.getStudents(id).subscribe((res) => {
-            this.students = res;
-            // console.log('students=> ', this.students);
-        });
-    }
-    present(check) {
-        this.attandance.patchValue({
-            allStudentsPresent: check,
-        });
-    }
-    clone(check) {
-        // console.log(check);
+    onSubmit() {
+        var attendanceRequest = {
+            date: this.attandanceform.get('date').value,
+            instituteId: this.instituteId,
+            courseId: this.attandanceform.get('courseId').value,
+            batchId: this.attandanceform.get('batchId').value,
+            attendance: this.attendance,
+        };
+        this.api.addAttendance(attendanceRequest).subscribe((res) => {
+            this.attandanceform.reset();
+            this.attandanceform.get('date').setValue(this.constructDate(this.date));
+            this.students = [];
+            this.attendance = [];
+            this.showToaster('top-right', 'success', 'Attendance Updated Succesfully');
+        }, (err) => this.showToaster('top-right', 'danger', err.error.message));
     }
 };
 AttandanceComponent.ctorParameters = () => [
     { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] }
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"] }
 ];
 AttandanceComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1457,7 +1879,10 @@ AttandanceComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./attandance.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/attandance/attandance.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./attandance.component.scss */ "./src/app/pages/institute/attandance/attandance.component.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"]])
 ], AttandanceComponent);
 
 
@@ -1561,17 +1986,18 @@ const routes = [
             { path: 'manage-institute', component: _add_institute_manage_institute_manage_institute_component__WEBPACK_IMPORTED_MODULE_6__["ManageInstituteComponent"] },
             { path: 'manage-students/:id', component: _add_students_manage_students_manage_students_component__WEBPACK_IMPORTED_MODULE_7__["ManageStudentsComponent"] },
             { path: 'manage-institute', component: _add_institute_manage_institute_manage_institute_component__WEBPACK_IMPORTED_MODULE_6__["ManageInstituteComponent"] },
-            { path: 'add-schedule/:id', component: _schedule_add_schedule_add_schedule_component__WEBPACK_IMPORTED_MODULE_10__["AddScheduleComponent"] },
             { path: 'attandance/:id', component: _attandance_attandance_component__WEBPACK_IMPORTED_MODULE_11__["AttandanceComponent"], canActivate: [] },
             { path: 'view-institute/:id', component: _add_institute_manage_institute_view_institute_view_institute_component__WEBPACK_IMPORTED_MODULE_8__["ViewInstituteComponent"] },
             { path: 'view-student/:id', component: _add_students_manage_students_view_student_view_student_component__WEBPACK_IMPORTED_MODULE_9__["ViewStudentComponent"] },
-            { path: 'manage-schedule/:id', component: _schedule_manage_schedule_manage_schedule_component__WEBPACK_IMPORTED_MODULE_13__["ManageScheduleComponent"] },
             { path: 'pending-students/:id', component: _add_students_pending_student_pending_student_component__WEBPACK_IMPORTED_MODULE_12__["PendingStudentComponent"] },
+            { path: 'add-schedule/:id', component: _schedule_add_schedule_add_schedule_component__WEBPACK_IMPORTED_MODULE_10__["AddScheduleComponent"] },
+            { path: 'manage-schedule/:id', component: _schedule_manage_schedule_manage_schedule_component__WEBPACK_IMPORTED_MODULE_13__["ManageScheduleComponent"] },
             { path: 'view-schedule/:id', component: _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_14__["ViewScheduleComponent"] },
+            { path: 'edit-schedule/:id', component: _schedule_add_schedule_add_schedule_component__WEBPACK_IMPORTED_MODULE_10__["AddScheduleComponent"] },
             {
                 path: 'branch-config',
                 loadChildren: () => __webpack_require__.e(/*! import() | branch-conf-branch-branch-module */ "branch-conf-branch-branch-module").then(__webpack_require__.bind(null, /*! ../branch-conf/branch/branch.module */ "./src/app/pages/institute/branch-conf/branch/branch.module.ts")).then((m) => m.BranchModule),
-                canActivate: [_bManager_guard__WEBPACK_IMPORTED_MODULE_15__["bManagerGuard"]],
+                canActivate: [_bManager_guard__WEBPACK_IMPORTED_MODULE_15__["BranchManagerGuard"]],
             },
         ],
     },
@@ -1672,7 +2098,7 @@ InstituteModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbStepperModule"],
             _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrModule"].forRoot(),
         ],
-        providers: [_teacher_guard__WEBPACK_IMPORTED_MODULE_18__["TeacherGuard"], _bManager_guard__WEBPACK_IMPORTED_MODULE_19__["bManagerGuard"]],
+        providers: [_teacher_guard__WEBPACK_IMPORTED_MODULE_18__["TeacherGuard"], _bManager_guard__WEBPACK_IMPORTED_MODULE_19__["BranchManagerGuard"]],
     })
 ], InstituteModule);
 
@@ -1720,57 +2146,195 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AddScheduleComponent = class AddScheduleComponent {
-    constructor(fb, api, active, scheduleService, toasterService, location) {
+    constructor(fb, api, router, route, scheduleService, toasterService, location) {
         this.fb = fb;
         this.api = api;
-        this.active = active;
+        this.router = router;
+        this.route = route;
         this.scheduleService = scheduleService;
         this.toasterService = toasterService;
         this.location = location;
-        this.submitted = false;
-        this.batches = { batch: [{ _id: '', course: '', batchCode: '', description: '' }] };
+        this.batches = [];
+        this.teachers = [];
+        this.days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     }
     ngOnInit() {
-        this.getBatches(this.active.snapshot.paramMap.get('id'));
-        this.routerId = this.active.snapshot.paramMap.get('id');
-        this.schedule = this.fb.group({
-            instituteId: [this.routerId],
-            scheduleStart: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+        this.display = false;
+        this.date = Date.now();
+        this.instituteId = this.route.snapshot.paramMap.get('id');
+        this.route.queryParams.subscribe((param) => {
+            this.edit = param.edit;
+            this.scheduleId = param.schedule;
+        });
+        this.scheduleForm = this.fb.group({
+            instituteId: [this.instituteId],
+            courseId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            batchId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            scheduleStart: [this.constructDate(this.date), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             scheduleEnd: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            batchCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            topic: [''],
-            teacher: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            recurrence: [],
+            days: this.fb.array([]),
+            recurrence: [false],
+        }, {
+            validators: this.dateValidator.bind(this),
+        });
+        this.getCourses(this.instituteId);
+        this.fromDatePicked(this.date);
+    }
+    dateValidator(group) {
+        if (this.getDate(group.value.scheduleStart).getTime() >
+            this.getDate(group.value.scheduleEnd).getTime()) {
+            return { invalidSchedule: true };
+        }
+        return null;
+    }
+    getEmployees(instituteId) {
+        this.api.getEmployeesByInstituteId(instituteId).subscribe((data) => {
+            this.teachers = data;
+            if (this.edit) {
+                this.getSchedule(this.scheduleId);
+            }
+            else {
+                this.display = true;
+            }
         });
     }
-    get f() {
-        return this.schedule.controls;
-    }
-    getBatches(id) {
-        this.api.getBatches(id).subscribe((data) => {
-            this.batches = JSON.parse(JSON.stringify(data));
-            // console.log('my Batch =>', this.batches);
+    getSchedule(id) {
+        this.scheduleService.getSchedule(id).subscribe((res) => {
+            this.schedule = res;
+            this.scheduleForm.patchValue({
+                courseId: this.schedule.courseId,
+                scheduleStart: this.schedule.scheduleStart,
+                scheduleEnd: this.schedule.scheduleEnd,
+                recurrence: this.schedule.recurrence === 'true' ? true : false,
+            });
+            this.onSelectCourse(this.schedule.courseId);
+            this.scheduleForm.patchValue({ batchId: this.schedule.batchId });
+            this.scheduleForm.get('scheduleStart').disable();
+            this.scheduleForm.get('scheduleEnd').disable();
+            const scheduleDays = this.scheduleForm.get('days');
+            scheduleDays.controls = [];
+            this.schedule.days.forEach((day) => {
+                const scheduleData = {
+                    day: day.day,
+                    date: day.date,
+                    startTime: day.startTime,
+                    endTime: day.endTime,
+                    teacher: day.teacher,
+                    topic: day.topic,
+                };
+                this.addScheduleDay(scheduleData);
+            });
+            this.display = true;
+        }, (error) => {
+            this.showToast('top-right', 'danger', error.error.message);
+            console.error(error);
         });
     }
-    recurrance(check) {
-        this.schedule.patchValue({
+    scheduleDay(dayData) {
+        return this.fb.group({
+            day: [dayData.day ? dayData.day : ''],
+            date: [dayData.date ? dayData.date : ''],
+            startTime: [dayData.startTime ? dayData.startTime : ''],
+            endTime: [dayData.endTime ? dayData.endTime : ''],
+            teacher: [dayData.teacher ? dayData.teacher : ''],
+            topic: [dayData.topic ? dayData.topic : ''],
+        });
+    }
+    addScheduleDay(scheduleData) {
+        const scheduleDays = this.scheduleForm.get('days');
+        scheduleDays.push(this.scheduleDay(scheduleData));
+    }
+    generateSchedule() {
+        const scheduleDays = this.scheduleForm.get('days');
+        scheduleDays.controls = [];
+        // const currentDay = this.getDate(this.date).getDay();
+        for (let i = 0; i < this.noOfDays; i++) {
+            const date = this.constructDate(this.date + i * 24 * 60 * 60 * 1000);
+            const day = new Date(date).getDay();
+            const scheduleData = {
+                day: this.days[day],
+                date: date,
+                startTime: '',
+                endTime: '',
+                teacher: '',
+                topic: '',
+            };
+            this.addScheduleDay(scheduleData);
+        }
+    }
+    getDate(date) {
+        return new Date(date);
+    }
+    fromDatePicked(date) {
+        this.date = new Date(date).getTime();
+        const noOfDays = 7 - this.getDate(this.date).getDay();
+        const nextSunday = this.constructDate(this.date + noOfDays * (24 * 60 * 60 * 1000));
+        this.scheduleForm.patchValue({ scheduleEnd: nextSunday });
+        this.noOfDays = noOfDays + 1;
+        this.generateSchedule();
+    }
+    toDatePicked(date) {
+        date = new Date(date).getTime();
+        this.noOfDays = (date - this.date) / (24 * 60 * 60 * 1000) + 1;
+        this.generateSchedule();
+    }
+    // Construct date in yyyy-MM-dd format to set in DOM form field
+    constructDate(dateInMillisecond) {
+        const date = new Date(dateInMillisecond);
+        return `${date.getFullYear()}-${this.appendZero(date.getMonth() + 1)}-${this.appendZero(date.getDate())}`;
+    }
+    // Append zero for single digit Date and Month
+    appendZero(n) {
+        if (n < 10) {
+            return '0' + n;
+        }
+        return '' + n;
+    }
+    getCourses(id) {
+        this.api.getCourseTD(id).subscribe((data) => {
+            this.institute = data;
+            this.getEmployees(this.instituteId);
+        });
+    }
+    onSelectCourse(id) {
+        this.batches = this.institute.batch.filter((b) => b.course === id);
+    }
+    recurrence(check) {
+        this.scheduleForm.patchValue({
             recurrence: check,
         });
     }
     onSubmit() {
-        this.submitted = true;
-        if (this.schedule.invalid) {
+        if (this.scheduleForm.invalid) {
             return;
         }
-        // console.log('onSubmit => ', this.schedule.value);
-        const routerId = this.active.snapshot.paramMap.get('id');
-        this.scheduleService.addSchedule(this.schedule.value).subscribe((res) => {
-            // console.log('from api =>', res);
-            this.showToast('top-right', 'success');
-        }, (error) => console.error(error));
+        if (!this.edit) {
+            this.scheduleService.addSchedule(this.scheduleForm.value).subscribe((res) => {
+                this.showToast('top-right', 'success', 'Schedule Added Successfully');
+                setTimeout(() => {
+                    this.back();
+                }, 1000);
+            }, (error) => {
+                this.showToast('top-right', 'danger', error.error.message);
+                console.error(error);
+            });
+        }
+        else {
+            this.scheduleForm.value.scheduleStart = this.schedule.scheduleStart;
+            this.scheduleForm.value.scheduleEnd = this.schedule.scheduleEnd;
+            this.scheduleService.updateSchedule(this.scheduleForm.value, this.schedule._id).subscribe((res) => {
+                this.showToast('top-right', 'success', 'Schedule Updated Successfully');
+                setTimeout(() => {
+                    this.back();
+                }, 1000);
+            }, (error) => {
+                this.showToast('top-right', 'danger', error.error.message);
+                console.error(error);
+            });
+        }
     }
-    showToast(position, status) {
-        this.toasterService.show(status || 'Success', 'Schedule Added Successfully', {
+    showToast(position, status, message) {
+        this.toasterService.show(status, message, {
             position,
             status,
         });
@@ -1782,6 +2346,7 @@ let AddScheduleComponent = class AddScheduleComponent {
 AddScheduleComponent.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
     { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
     { type: _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_5__["ScheduleService"] },
     { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_6__["NbToastrService"] },
@@ -1795,6 +2360,7 @@ AddScheduleComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
         _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
         _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
         _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_5__["ScheduleService"],
         _nebular_theme__WEBPACK_IMPORTED_MODULE_6__["NbToastrService"],
@@ -1829,72 +2395,102 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ManageScheduleComponent", function() { return ManageScheduleComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/schedule/schedule.service */ "./src/app/services/schedule/schedule.service.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services/schedule/schedule.service */ "./src/app/services/schedule/schedule.service.ts");
+
 
 
 
 
 
 let ManageScheduleComponent = class ManageScheduleComponent {
-    constructor(router, active, scheduleService) {
+    constructor(router, api, scheduleService, toasterService, active) {
         this.router = router;
-        this.active = active;
+        this.api = api;
         this.scheduleService = scheduleService;
-        this.schedules = [
-            {
-                batchCode: '',
-                course: '',
-                instituteId: '',
-                letter: '',
-                recurrence: '',
-                scheduleEnd: '',
-                scheduleStart: '',
-                teacher: '',
-                topic: '',
-            },
-        ];
+        this.toasterService = toasterService;
+        this.active = active;
+        this.batches = [];
+        this.schedules = [];
     }
     ngOnInit() {
-        this.routerId = this.active.snapshot.paramMap.get('id');
-        this.getSchedules();
+        this.display = false;
+        this.instituteId = this.active.snapshot.paramMap.get('id');
+        this.getCourses(this.instituteId);
     }
-    goAddSchedule() {
-        this.router.navigate(['/pages/institute/add-schedule', this.routerId]);
+    getCourses(id) {
+        this.api.getCourseTD(id).subscribe((data) => {
+            this.institute = data;
+            this.display = true;
+        });
     }
-    getSchedules() {
-        let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpParams"]();
-        param = param.append('many', '1');
-        param = param.append('instituteId', this.routerId);
-        this.scheduleService.getSchedule(param).subscribe((res) => {
+    onSelectCourse(id) {
+        this.courseId = id;
+        this.batches = this.institute.batch.filter((b) => b.course === id);
+    }
+    onSelectBatch(id) {
+        this.getSchedules(this.instituteId, this.courseId, id);
+    }
+    addSchedule() {
+        this.router.navigate(['/pages/institute/add-schedule', this.instituteId]);
+    }
+    getSchedules(instituteId, courseId, batchId) {
+        this.scheduleService
+            .getScheduleByBatch(instituteId, courseId, batchId)
+            .subscribe((res) => {
             this.schedules = res;
-            // console.log('sch==>', this.schedules);
         });
     }
-    view(code) {
-        // console.log('batchCode', code);
-        this.router.navigate(['/pages/institute/view-schedule', this.routerId], {
-            queryParams: { batchCode: code },
+    viewSchedule(code) {
+        this.router.navigate(['/pages/institute/view-schedule', this.instituteId], {
+            queryParams: { schedule: code },
         });
     }
-    delete() { }
+    editSchedule(code) {
+        this.router.navigate(['/pages/institute/edit-schedule', this.instituteId], {
+            queryParams: { schedule: code, edit: 'true' },
+        });
+    }
+    deleteSchedule(code) {
+        const confirm = window.confirm('Are u sure, You want to Delete this Schedule?');
+        if (confirm) {
+            this.scheduleService.deleteSchedule(code).subscribe((res) => {
+                const i = this.schedules.findIndex((s) => s._id === code);
+                this.schedules.splice(i, 1);
+                this.showToast('top-right', 'success', 'Schedule Deleted Successfully!');
+            }, (err) => {
+                this.showToast('top-right', 'danger', err.error.message);
+            });
+        }
+    }
+    showToast(position, status, message) {
+        this.toasterService.show(status, message, {
+            position,
+            status,
+        });
+    }
 };
 ManageScheduleComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
-    { type: _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_3__["ScheduleService"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"] },
+    { type: _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_5__["ScheduleService"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
 ];
 ManageScheduleComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'ngx-manage-schedule',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./manage-schedule.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/schedule/manage-schedule/manage-schedule.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./manage-schedule.component.scss */ "./src/app/pages/schedule/manage-schedule/manage-schedule.component.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-        _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_3__["ScheduleService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+        _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"],
+        _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_5__["ScheduleService"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]])
 ], ManageScheduleComponent);
 
 
@@ -1927,49 +2523,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/schedule/schedule.service */ "./src/app/services/schedule/schedule.service.ts");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
-
+/* harmony import */ var _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/schedule/schedule.service */ "./src/app/services/schedule/schedule.service.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 
 
 
 
 
 let ViewScheduleComponent = class ViewScheduleComponent {
-    constructor(active, router, schduleService, location) {
+    constructor(active, scheduleService, location) {
         this.active = active;
-        this.router = router;
-        this.schduleService = schduleService;
+        this.scheduleService = scheduleService;
         this.location = location;
-        this.batch = [
-            {
-                batchCode: '',
-                instututeId: '',
-                letter: '',
-                recurrence: false,
-                scheduleEnd: '',
-                scheduleStart: '',
-                teacher: '',
-                topic: '',
-                _id: '',
-                institute: [{ batch: [{ batchCode: '', course: '', description: '', _id: '' }] }],
-            },
-        ];
     }
     ngOnInit() {
-        this.active.queryParams.subscribe((data) => (this.batchCode = data.batchCode));
-        this.routerId = this.active.snapshot.paramMap.get('id');
-        this.getSchedule(this.routerId, this.batchCode);
+        this.display = false;
+        this.instituteId = this.active.snapshot.paramMap.get('id');
+        this.active.queryParams.subscribe((param) => {
+            const schedule = param.schedule;
+            this.getSchedule(schedule);
+        });
     }
-    getSchedule(id, code) {
-        let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]();
-        param = param.append('many', '0');
-        param = param.append('instituteId', id);
-        param = param.append('batchCode', code);
-        this.schduleService.getSchedule(param).subscribe((res) => {
-            this.batch = JSON.parse(JSON.stringify(res));
-            // console.log('bathc=> ', this.batch);
+    getSchedule(id) {
+        console.log(id);
+        this.scheduleService.getScheduleDetails(id).subscribe((res) => {
+            this.schedule = res;
+            this.display = true;
         }, (error) => console.error(error));
     }
     back() {
@@ -1978,9 +2557,8 @@ let ViewScheduleComponent = class ViewScheduleComponent {
 };
 ViewScheduleComponent.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
-    { type: _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_4__["ScheduleService"] },
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"] }
+    { type: _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_3__["ScheduleService"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["Location"] }
 ];
 ViewScheduleComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1989,9 +2567,8 @@ ViewScheduleComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./view-schedule.component.scss */ "./src/app/pages/schedule/view-schedule/view-schedule.component.scss")).default]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-        _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_4__["ScheduleService"],
-        _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"]])
+        _services_schedule_schedule_service__WEBPACK_IMPORTED_MODULE_3__["ScheduleService"],
+        _angular_common__WEBPACK_IMPORTED_MODULE_4__["Location"]])
 ], ViewScheduleComponent);
 
 
@@ -2061,29 +2638,45 @@ __webpack_require__.r(__webpack_exports__);
 let ScheduleService = class ScheduleService {
     constructor(http) {
         this.http = http;
-        this.authToken = localStorage.getItem('token');
-        this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]().set('authorization', 'Bearer ' + this.authToken);
-        this.httpOptions = {
-            headers: this.headers,
-        };
     }
     addSchedule(schedule) {
-        return this.http
-            .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/schedule`, schedule, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((res) => {
-            // console.log(res);
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+        return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/schedule/addSchedule`, schedule).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
     }
-    getSchedule(params) {
+    updateSchedule(schedule, scheduleId) {
+        schedule._id = scheduleId;
+        return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/schedule/updateSchedule`, schedule).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+    }
+    getScheduleByBatch(instituteId, courseId, batchId) {
         return this.http
-            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/schedule/`, {
-            params: params,
-            headers: this.headers,
+            .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/schedule/getScheduleByBatch`, {
+            instituteId,
+            courseId,
+            batchId,
+        })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+    }
+    getSchedule(scheduleId) {
+        return this.http
+            .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/schedule/getSchedule`, {
+            scheduleId,
+        })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+    }
+    getScheduleDetails(scheduleId) {
+        return this.http
+            .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/schedule/getScheduleDetails`, {
+            scheduleId,
+        })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+    }
+    deleteSchedule(scheduleId) {
+        return this.http
+            .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/schedule/deleteSchedule`, {
+            scheduleId,
         })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
     }
     handleError(error) {
-        // console.log(error);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
     }
 };
