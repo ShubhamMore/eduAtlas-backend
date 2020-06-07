@@ -3,7 +3,7 @@ const Zoomuser = require('../model/zoomCredentials.model')
 const zoomAuth = async(req,res,next)=>{
     try {
         const user = await Zoomuser.findOne({
-            userId:req.body.instituteId
+            userId:req.body.userId
             
         })
         const redirectURL = "http://localhost:5000/institute/zoom/generateZoomAuthToken?userId="+user.userId   

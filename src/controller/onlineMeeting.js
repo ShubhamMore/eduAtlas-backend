@@ -42,9 +42,11 @@ exports.getCredentials = async(req,res)=>{
 
 exports.createMeeting = async(req,res)=>{
     try {
+        
         const teacher = await Employee.findOne({
             _id:req.body.teacherId
         })
+        
         //"start_time": "2020-06-02T12:02:00Z"
         let createMeeting = {
             "topic": req.body.topic,
@@ -84,7 +86,7 @@ exports.createMeeting = async(req,res)=>{
             url: 'https://api.zoom.us/v2/users/me/meetings',
             headers: {
                 'Content-Type': 'application/json',
-                authorization:"Bearer " + user.access_token
+                authorization:"Bearer " + req.zoom.access_token
              },
              body:createMeeting,
              json:true,
@@ -115,6 +117,7 @@ exports.createMeeting = async(req,res)=>{
 
 exports.getMeetingByBatch = async(req,res)=>{
     try {
+        
         const meetings = await OnlineClass.find({
             $and:[
                 {
@@ -124,8 +127,18 @@ exports.getMeetingByBatch = async(req,res)=>{
                 }
             ]
         })
+
+        res.status(200).send(meetings)
+
+    } catch (error) {
+        res.status(400).send(error)
+    }
+}
+
+exports.updateMeeting = async(req,res)=>{
+    try {
+        
     } catch (error) {
         
     }
 }
-

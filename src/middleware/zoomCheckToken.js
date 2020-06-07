@@ -54,6 +54,10 @@ const checkTokenAuth = async(req,res)=>{
             },{
                 multi:true
             })  
+            user.access_token = body.access_token
+            user.refresh_token = body.refresh_token
+            user.expires_in = body.expires_in
+            req.zoom = user
             next()
             return
         }
