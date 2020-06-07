@@ -4,11 +4,7 @@ const User = require('../model/user.model');
 const EduAtlasId = require('../model/eduatlasId.model');
 const Employee = require('../model/employee.model');
 const Institute = require('../model/institute.model');
-<<<<<<< HEAD
-      
-=======
 const mongoose = require('mongoose');
->>>>>>> e06d6ef45daa83a6f1d5008476249985c87329fc
 exports.addEmployee = async (req, res) => {
   try {
     console.log(req.body);
@@ -238,14 +234,6 @@ exports.getEmployeesByInstituteId = async (req, res) => {
   try {
     const getEmployees = await Employee.aggregate([
       {
-<<<<<<< HEAD
-        $unwind:"$instituteDetails"
-      },{
-        $match:{
-          "instituteDetails.instituteId":req.body.instituteId
-        }
-      }
-=======
         $unwind: '$instituteDetails',
       },
       {
@@ -253,7 +241,6 @@ exports.getEmployeesByInstituteId = async (req, res) => {
           'instituteDetails.instituteId': req.body.instituteId,
         },
       },
->>>>>>> e06d6ef45daa83a6f1d5008476249985c87329fc
     ]);
 
     console.log(getEmployees);
