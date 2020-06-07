@@ -4,7 +4,7 @@ const User = require('../model/user.model');
 const EduAtlasId = require('../model/eduatlasId.model');
 const Employee = require('../model/employee.model');
 const Institute = require('../model/institute.model');
-
+      
 exports.addEmployee = async (req, res) => {
   try {
     console.log(req.body);
@@ -236,7 +236,7 @@ exports.getEmployeesByInstituteId = async (req, res) => {
         $unwind:"$instituteDetails"
       },{
         $match:{
-          "institudeDetails.instituteId":req.body.instituteId
+          "instituteDetails.instituteId":req.body.instituteId
         }
       }
     ]);

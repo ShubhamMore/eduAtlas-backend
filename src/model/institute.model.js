@@ -179,6 +179,9 @@ const instituteSchema = new Schema(
           type: Number,
           required: [true, 'Phone is required'],
         },
+        parentUser:{
+          type:String
+        },
       },
       { _id: false }
     ),

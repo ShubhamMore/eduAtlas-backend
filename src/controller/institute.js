@@ -21,12 +21,14 @@ const deleteImage = (filePath) => {
 
 exports.addInstitute = async (req, res, next) => {
   try {
+    
     req.body.basicInfo = JSON.parse(req.body.basicInfo);
     req.body.address = JSON.parse(req.body.address);
     req.body.category = JSON.parse(req.body.category);
     req.body.metaTag = JSON.parse(req.body.metaTag);
     req.body.paymentDetails = JSON.parse(req.body.paymentDetails);
-
+    req.body.basicInfo.parentUser = JSON.parse(req.user._id)
+    
     if (!req.file) {
       throw new Error('Institute Logo is Required');
     }
