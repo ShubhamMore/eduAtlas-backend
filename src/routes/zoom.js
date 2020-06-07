@@ -9,6 +9,6 @@ const onlineMeetingController = require('../controller/onlineMeeting')
 
 zoomRouter.post('/getZoomAuth',checkAuth, zoomAuth)
 zoomRouter.post('/generateZoomAuthToken',zoomGenerateToken)
-zoomRouter.post('/addCredemtials', checkAuth, onlineMeetingController.addCredentials)
+zoomRouter.post('/addCredentials', checkAuth, onlineMeetingController.addCredentials)
 
 module.exports = zoomRouter

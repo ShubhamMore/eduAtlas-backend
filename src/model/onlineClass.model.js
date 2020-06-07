@@ -10,6 +10,9 @@ const onlineClassSchema = new mongoose.Schema({
     startUrl:{
         type:String
     },
+    instituteId:{
+        type:String
+    },
     batchId:{
         type:String
     },
