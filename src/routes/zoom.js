@@ -8,7 +8,7 @@ const zoomRouter = require('express').Router()
 const onlineMeetingController = require('../controller/onlineMeeting')
 
 zoomRouter.post('/getZoomAuth',checkAuth, zoomAuth)
-zoomRouter.post('/generateZoomAuthToken',zoomGenerateToken)
+zoomRouter.get('/generateZoomAuthToken',zoomGenerateToken)
 zoomRouter.post('/addCredentials', checkAuth, onlineMeetingController.addCredentials)
 zoomRouter.get('/getCredentials',checkAuth,onlineMeetingController.getCredentials)
 zoomRouter.get('/createMeeting',checkAuth,onlineMeetingController.createMeeting)
