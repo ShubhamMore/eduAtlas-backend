@@ -10,7 +10,7 @@ const rp = require('request-promise')
 exports.addCredentials = async(req,res)=>{
     try {
         const addCrendentials = await Zoomuser.updateOne({
-            userId = req.user._id
+            userId: req.user._id
         },
             req.body,
         {
@@ -76,7 +76,7 @@ exports.createMeeting = async(req,res)=>{
           let meetingDetails = await rp(options)
 
           let newMeeting = {
-            joinUrl = meetingDetails.join_url,
+            joinUrl:meetingDetails.join_url,
             meetingId: meetingDetails.id,
             startUrl:meetingDetails.startUrl
 

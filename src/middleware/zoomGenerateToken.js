@@ -13,7 +13,7 @@ const zoomToken = async(req,res)=>{
         if(!user){
             throw new Error("No Zoom Credentials Found");
         }
-        const redirectURL = "http://localhost:4000/institute/zoom/generateZoomAuthToken?userId="+req.query.userId
+        const redirectURL = "http://localhost:5000/institute/zoom/generateZoomAuthToken?userId="+req.query.userId
         let options = {
             method: 'POST',
             url: 'https://zoom.us/oauth/token',

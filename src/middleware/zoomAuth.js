@@ -6,7 +6,7 @@ const zoomAuth = async(req,res,next)=>{
             userId:req.body.instituteId
             
         })
-        const redirectURL = "http://localhost:4000/institute/zoom/generateZoomAuthToken?userId="+user.userId   
+        const redirectURL = "http://localhost:5000/institute/zoom/generateZoomAuthToken?userId="+user.userId   
         const authLink = 'https://zoom.us/oauth/authorize?response_type=code&client_id=' + user.client_id + '&redirect_uri=' + redirectURL  
         
         res.send({authLink})

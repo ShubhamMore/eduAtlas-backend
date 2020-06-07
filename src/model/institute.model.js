@@ -151,6 +151,10 @@ const paymentDetailsSchema = new Schema(
 // institute schema
 const instituteSchema = new Schema(
   {
+    parentUser:{
+      type:String,
+      required:true
+    },
     basicInfo: new Schema(
       {
         logo: {
@@ -178,10 +182,7 @@ const instituteSchema = new Schema(
         instituteContact: {
           type: Number,
           required: [true, 'Phone is required'],
-        },
-        parentUser:{
-          type:String
-        },
+        },  
       },
       { _id: false }
     ),

@@ -27,7 +27,7 @@ exports.addInstitute = async (req, res, next) => {
     req.body.category = JSON.parse(req.body.category);
     req.body.metaTag = JSON.parse(req.body.metaTag);
     req.body.paymentDetails = JSON.parse(req.body.paymentDetails);
-    req.body.basicInfo.parentUser = JSON.parse(req.user._id)
+    req.body.parentUser = JSON.parse(req.user._id)
     
     if (!req.file) {
       throw new Error('Institute Logo is Required');
