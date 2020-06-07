@@ -39,7 +39,7 @@ const userSchema = mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Password is required'],
-      minlength: 7,
+      minlength: [7, 'Minimum Password Length 7'],
       trim: true,
       validate(value) {
         if (value.toLowerCase().includes('password')) {

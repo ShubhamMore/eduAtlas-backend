@@ -10,7 +10,7 @@ const rp = require('request-promise')
 exports.addCredentials = async(req,res)=>{
     try {
         const addCrendentials = await Zoomuser.updateOne({
-            userId = req.user_id
+            userId = req.user._id
         },
             req.body,
         {

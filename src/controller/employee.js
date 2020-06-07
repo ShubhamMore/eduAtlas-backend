@@ -4,7 +4,11 @@ const User = require('../model/user.model');
 const EduAtlasId = require('../model/eduatlasId.model');
 const Employee = require('../model/employee.model');
 const Institute = require('../model/institute.model');
+<<<<<<< HEAD
       
+=======
+const mongoose = require('mongoose');
+>>>>>>> e06d6ef45daa83a6f1d5008476249985c87329fc
 exports.addEmployee = async (req, res) => {
   try {
     console.log(req.body);
@@ -189,16 +193,17 @@ exports.getEmployeeByEduatlasId = async (req, res) => {
 
 exports.getOneEmployeeByInstitute = async (req, res) => {
   try {
-    const getEmployee = await Employee.find({
-      $and: [
-        {
-          _id: req.body.empId,
-        },
-        {
+    const getEmployee = await Employee.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body.empId),
           'instituteDetails.instituteId': req.body.instituteId,
         },
-      ],
-    });
+      },
+    ]);
 
     if (getEmployee.length == 0) {
       console.log('length ', getEmployee.length);
@@ -233,13 +238,25 @@ exports.getEmployeesByInstituteId = async (req, res) => {
   try {
     const getEmployees = await Employee.aggregate([
       {
+<<<<<<< HEAD
         $unwind:"$instituteDetails"
       },{
         $match:{
           "instituteDetails.instituteId":req.body.instituteId
         }
       }
+=======
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          'instituteDetails.instituteId': req.body.instituteId,
+        },
+      },
+>>>>>>> e06d6ef45daa83a6f1d5008476249985c87329fc
     ]);
+
+    console.log(getEmployees);
 
     if (getEmployees.length == 0) {
       const error = new Error('Employees not Found');
