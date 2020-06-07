@@ -1,8 +1,12 @@
 const Institute = require('../model/institute.model');
 const Student = require('../model/student.model');
 const Zoomuser = require('../model/zoomCredentials.model')
+const Employee = require('../model/employee.model')
+const OnlineClass = require('../model/onlineClass.model')
+
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
+
 const request = require('request')
 const rp = require('request-promise')
 
@@ -24,9 +28,23 @@ exports.addCredentials = async(req,res)=>{
     }
 }
 
+exports.getCredentials = async(req,res)=>{
+    try {
+        const credentials = await Zoomuser.findOne({
+            userId:req.user._id
+        })
+        res.status(200).send(credentials)
+    } catch (error) {
+        console.log(error)
+        res.status(400).send(error)
+    }
+}
+
 exports.createMeeting = async(req,res)=>{
     try {
-
+        const teacher = await Employee.findOne({
+            _id:req.body.teacherId
+        })
         //"start_time": "2020-06-02T12:02:00Z"
         let createMeeting = {
             "topic": req.body.topic,
@@ -49,6 +67,7 @@ exports.createMeeting = async(req,res)=>{
               "approval_type": 2,
               "registration_type": 1,
               "audio": "both",
+              "alternative_hosts":teacher.basicInfo.employeeEmail,
               "auto_recording": "none",
               "enforce_login": false,
               "enforce_login_domains": null,
@@ -60,7 +79,7 @@ exports.createMeeting = async(req,res)=>{
             }
           }
 
-          var options = {
+        var options = {
             method: 'POST',
             url: 'https://api.zoom.us/v2/users/me/meetings',
             headers: {
@@ -69,19 +88,44 @@ exports.createMeeting = async(req,res)=>{
              },
              body:createMeeting,
              json:true,
-             
-            
-          };
+                         
+        };
 
-          let meetingDetails = await rp(options)
+        let meetingDetails = await rp(options)
 
-          let newMeeting = {
+        let newMeeting = {
             joinUrl:meetingDetails.join_url,
             meetingId: meetingDetails.id,
-            startUrl:meetingDetails.startUrl
+            startUrl:meetingDetails.startUrl,
+            startTime:req.body.startTime,
+            batchId:req.body.instituteId,
+            courseId:req.body.courseId,
+            instituteId:req.body.instituteId,
+            teacherId:req.body.teacherId
+        }
+        const newOnlineClass = new OnlineClass(newMeeting)
+        await newOnlineClass.save() 
 
-          }
+        res.status(200).send(newOnlineClass)
+
     } catch (error) {
         console.log(error)
     }
 }
+
+exports.getMeetingByBatch = async(req,res)=>{
+    try {
+        const meetings = await OnlineClass.find({
+            $and:[
+                {
+                    instituteId:req.body.instituteId
+                },{
+                    batchId:req.body.batchId
+                }
+            ]
+        })
+    } catch (error) {
+        
+    }
+}
+
