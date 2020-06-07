@@ -41,7 +41,7 @@ const zoomToken = async(req,res)=>{
         const expires_in = body.expires_in + currentTime
 
         const update = await Zoomuser.updateOne({
-            userId:req.body.userId
+            userId:req.query.userId
         },{
             $set:{
                 access_token: body.access_token,
@@ -51,6 +51,7 @@ const zoomToken = async(req,res)=>{
         },{
             multi:true
         })
+
         res.status(200).send(body)
         
     } catch (error) {

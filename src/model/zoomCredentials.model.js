@@ -17,7 +17,7 @@ const ZoomUserSchema = new mongoose.Schema({
     refresh_token:{
         type:String
     },
-    expiresIn:{
+    expires_in:{
         type:Number
     }
 
