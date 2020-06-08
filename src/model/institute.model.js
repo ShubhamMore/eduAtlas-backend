@@ -12,6 +12,7 @@ const courseSchema = new Schema(
     courseCode: {
       type: String,
       required: true,
+      unique:true
     },
     fees: {
       type: String,
@@ -51,6 +52,7 @@ const batchSchema = new Schema({
   batchCode: {
     type: String,
     required: true,
+    unique:true
   },
   description: {
     type: String,

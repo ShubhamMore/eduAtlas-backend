@@ -10,6 +10,9 @@ const onlineClassSchema = new mongoose.Schema({
     startUrl:{
         type:String
     },
+    startTime:{
+        type:String
+    },
     instituteId:{
         type:String
     },
@@ -22,7 +25,10 @@ const onlineClassSchema = new mongoose.Schema({
     topic:{
         type:String
     },
-    teacherId:{
+    hostId:{
+        type:String
+    },
+    hostName:{
         type:String
     }
 })

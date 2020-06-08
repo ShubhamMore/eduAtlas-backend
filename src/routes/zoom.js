@@ -12,4 +12,7 @@ zoomRouter.get('/generateZoomAuthToken',zoomGenerateToken)
 zoomRouter.post('/addCredentials', checkAuth, onlineMeetingController.addCredentials)
 zoomRouter.get('/getCredentials',checkAuth,onlineMeetingController.getCredentials)
 zoomRouter.post('/createMeeting',checkAuth,zoomCheckToken,onlineMeetingController.createMeeting)
+zoomRouter.post('/updateMeeting',checkAuth,zoomCheckToken,onlineMeetingController.updateMeeting)
+zoomRouter.post('/deleteMeeting',checkAuth,zoomCheckToken,onlineMeetingController.deleteMeeting)
+zoomRouter.post('/getMeetingByBatch',checkAuth,onlineMeetingController.getMeetingByBatch)
 module.exports = zoomRouter

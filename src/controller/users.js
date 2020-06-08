@@ -220,15 +220,9 @@ exports.resetPassword = async (req, res, next) => {
 
 exports.getAnnouncement = async (req, res, next) => {
   const instituteId = req.params.instituteId;
-  if (req.user.role == 4) {
-    const announcements = await Announcement.find({ instituteId });
+      const announcements = await Announcement.find({ instituteId });
     res.status(200).json(announcements);
-  } else if (req.user.role == 3) {
-    const announcements = await Announcement.find({});
-    res.status(200).json(announcements);
-  } else {
-    res.end();
-  }
+  
 };
 
 exports.deleteAnnouncement = async (req, res, next) => {

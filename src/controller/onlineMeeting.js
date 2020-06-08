@@ -46,7 +46,7 @@ exports.createMeeting = async(req,res)=>{
         const teacher = await Employee.findOne({
             _id:req.body.teacherId
         })
-        
+        console.log(req.body)
         //"start_time": "2020-06-02T12:02:00Z"
         let createMeeting = {
             "topic": req.body.topic,
@@ -58,27 +58,27 @@ exports.createMeeting = async(req,res)=>{
             "password": req.body.password,
             "agenda": req.body.agenda,
             "settings": {
-              "host_video": true,
-              "participant_video": true,
-              "cn_meeting": false,
-              "in_meeting": true,
-              "join_before_host": true,
-              "mute_upon_entry": true,
-              "watermark": false,
-              "use_pmi": false,
-              "approval_type": 2,
-              "registration_type": 1,
-              "audio": "both",
-              "alternative_hosts":teacher.basicDetails.employeeEmail,
-              "auto_recording": "none",
-              "enforce_login": false,
-              "enforce_login_domains": null,
-              "alternative_hosts": null,
-              "global_dial_in_countries": [
-                
-              ],
-              "registrants_email_notification": false
-            }
+                "host_video": false,
+                "participant_video": false,
+                "cn_meeting": false,
+                "in_meeting": true,
+                "join_before_host": true,
+                "mute_upon_entry": true,
+                "watermark": false,
+                "use_pmi": false,
+                "approval_type": 2,
+                "registration_type": 1,
+                "audio": "both",
+                "alternative_hosts":teacher.basicDetails.employeeEmail,
+                "auto_recording": "none",
+                "enforce_login": false,
+                "enforce_login_domains": null,
+                "alternative_hosts": null,
+                "global_dial_in_countries": [
+                  
+                ],
+                "registrants_email_notification": false
+              }
           }
 
         var options = {
@@ -103,7 +103,8 @@ exports.createMeeting = async(req,res)=>{
             batchId:req.body.instituteId,
             courseId:req.body.courseId,
             instituteId:req.body.instituteId,
-            teacherId:req.body.teacherId
+            hostId:req.body.teacherId,
+            hostName:teacher.basicDetails.name
         }
         const newOnlineClass = new OnlineClass(newMeeting)
         await newOnlineClass.save() 
@@ -138,7 +139,97 @@ exports.getMeetingByBatch = async(req,res)=>{
 exports.updateMeeting = async(req,res)=>{
     try {
         
-    } catch (error) {
+        const teacher = await Employee.findOne({
+            _id:req.body.teacherId
+        })
+        let updateMeeting = {
+            "topic": req.body.topic,
+            "type": 2,
+            "start_time": req.body.startTime,
+            "duration": req.body.duration,
+            "timezone": "Asia/Calcutta",
+            "password": req.body.password,
+            "agenda": req.body.agenda,
+            "settings": {
+                "host_video": false,
+                "participant_video": false,
+                "cn_meeting": false,
+                "in_meeting": true,
+                "join_before_host": true,
+                "mute_upon_entry": true,
+                "watermark": false,
+                "use_pmi": false,
+                "approval_type": 2,
+                "registration_type": 1,
+                "audio": "both",
+                "alternative_hosts":teacher.basicDetails.employeeEmail,
+                "auto_recording": "none",
+                "enforce_login": false,
+                "enforce_login_domains": null,
+                "alternative_hosts": null,
+                "global_dial_in_countries": [
+                  
+                ],
+                "registrants_email_notification": false
+              }
+          }
+          let  options = {
+            method: 'PATCH',
+            url: 'https://api.zoom.us/v2/users/me/meetings/'+req.body.meetingId,
+            headers: {
+                'Content-Type': 'application/json',
+                authorization:"Bearer " + req.zoom.access_token
+             },
+             body:updateMeeting,
+             json:true,
+                         
+        };
         
+        let meetingDetails = await rp(options)
+
+        let newMeeting = {
+            joinUrl:meetingDetails.join_url,
+            meetingId: meetingDetails.id,
+            startUrl:meetingDetails.start_url,
+            startTime:req.body.startTime,
+            batchId:req.body.instituteId,
+            courseId:req.body.courseId,
+            instituteId:req.body.instituteId,
+            hostId:req.body.teacherId,
+            hostName:teacher.basicDetails.name
+        }
+
+        const updatedMeeting = await OnlineClass.updateOne({
+            _id:req.body._id
+        },newMeeting)
+        res.status(200).send(updatedMeeting)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+}
+
+exports.deleteMeeting = async(req,res)=>{
+    try {
+        const meeting = await OnlineClass.findOne({
+            _id:req.body._id
+        })
+
+        if(!meeting){
+            throw new Error("No Meeting Found")
+        }
+
+        let  options = {
+            method: 'DELETE',
+            url: 'https://api.zoom.us/v2/users/me/meetings/'+req.body.meetingId,
+            headers: {
+                'Content-Type': 'application/json',
+                authorization:"Bearer " + req.zoom.access_token
+             },
+                         
+        };
+        const info = await rp(options)
+        res.status(200).send(info)
+    } catch (error) {
+        res.status(400).send(error)
     }
 }
