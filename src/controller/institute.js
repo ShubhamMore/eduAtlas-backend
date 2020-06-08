@@ -27,7 +27,7 @@ exports.addInstitute = async (req, res, next) => {
     req.body.category = JSON.parse(req.body.category);
     req.body.metaTag = JSON.parse(req.body.metaTag);
     req.body.paymentDetails = JSON.parse(req.body.paymentDetails);
-    req.body.parentUser = JSON.parse(req.user._id)
+    req.body.parentUser = req.user._id
     
     if (!req.file) {
       throw new Error('Institute Logo is Required');
@@ -42,13 +42,6 @@ exports.addInstitute = async (req, res, next) => {
     };
 
     delete req.body.logo;
-
-    const { error, value } = schema('addInstitute').validate(req.body);
-    if (error) {
-      const err = new Error('Insufficient/wrong parameter provided');
-      err.statusCode = 400;
-      throw err;
-    }
 
     if (!req.user.phone) {
       throw new Error('req.user.phone is empty');
@@ -74,7 +67,7 @@ exports.addInstitute = async (req, res, next) => {
     institute.metaTag = req.body.metaTag;
 
     institute.userPhone = req.user.phone;
-
+    institute.parentUser = req.body.parentUser
     institute.paymentDetails.push(Object.assign({}, req.body.paymentDetails));
     console.log(institute.paymentDetails);
 
