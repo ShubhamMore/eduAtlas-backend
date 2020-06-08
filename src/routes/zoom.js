@@ -11,5 +11,5 @@ zoomRouter.post('/getZoomAuth',checkAuth, zoomAuth)
 zoomRouter.get('/generateZoomAuthToken',zoomGenerateToken)
 zoomRouter.post('/addCredentials', checkAuth, onlineMeetingController.addCredentials)
 zoomRouter.get('/getCredentials',checkAuth,onlineMeetingController.getCredentials)
-zoomRouter.get('/createMeeting',checkAuth,onlineMeetingController.createMeeting)
+zoomRouter.post('/createMeeting',checkAuth,zoomCheckToken,onlineMeetingController.createMeeting)
 module.exports = zoomRouter

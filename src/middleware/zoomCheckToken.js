@@ -3,11 +3,11 @@ const errorHandler = require('../service/errorHandler');
 const request = require('request')
 const rp = require('request-promise')
 
-const checkTokenAuth = async(req,res)=>{
+const checkTokenAuth = async(req,res,next)=>{
     try {
     
         const user = await Zoomuser.findOne({
-            userId:req.body.userId
+            userId:req.user._id
         })
 
         if(!user){
@@ -30,7 +30,7 @@ const checkTokenAuth = async(req,res)=>{
                 headers: {
                     /**The credential below is a sample base64 encoded credential. Replace it with "Authorization: 'Basic ' + Buffer.from(your_app_client_id + ':' + your_app_client_secret).toString('base64')"
                     **/
-                    authorization: 'Basic '+Buffer.from(user.client_id+':'+user.client_secret_id).toString('base64')
+                    Authorization: 'Basic '+Buffer.from(user.client_id+':'+user.client_secret_id).toString('base64')
                     }
             };
         
@@ -43,7 +43,7 @@ const checkTokenAuth = async(req,res)=>{
             const currentTime = new Date().getTime() / 1000
 
             const expires_in = body.expires_in + currentTime
-            const update = await ZoomUser.updateOne({
+            const update = await Zoomuser.updateOne({
                 userName:req.query.userName
             },{
                 $set:{
@@ -57,9 +57,6 @@ const checkTokenAuth = async(req,res)=>{
             user.access_token = body.access_token
             user.refresh_token = body.refresh_token
             user.expires_in = body.expires_in
-            req.zoom = user
-            next()
-            return
         }
         req.zoom = user
         next()    

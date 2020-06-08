@@ -69,7 +69,7 @@ exports.createMeeting = async(req,res)=>{
               "approval_type": 2,
               "registration_type": 1,
               "audio": "both",
-              "alternative_hosts":teacher.basicInfo.employeeEmail,
+              "alternative_hosts":teacher.basicDetails.employeeEmail,
               "auto_recording": "none",
               "enforce_login": false,
               "enforce_login_domains": null,
@@ -98,7 +98,7 @@ exports.createMeeting = async(req,res)=>{
         let newMeeting = {
             joinUrl:meetingDetails.join_url,
             meetingId: meetingDetails.id,
-            startUrl:meetingDetails.startUrl,
+            startUrl:meetingDetails.start_url,
             startTime:req.body.startTime,
             batchId:req.body.instituteId,
             courseId:req.body.courseId,

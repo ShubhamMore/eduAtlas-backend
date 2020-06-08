@@ -70,25 +70,27 @@ exports.getFeeOfStudentByCourse = async (req, res) => {
 
 exports.updateFeeOfStudent = async (req, res) => {
   try {
-    // const updateFee = await Fee.updateOne(
-    //   {
-    //     $and: [
-    //       {
-    //         _id: req.body._id,
-    //       },
-    //       {
-    //         'installments.installmentId': req.body.installment._id,
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     $set: {
-    //       installments: req.body.installments,
-    //     },
-    //   }
-    // );
     const updateFee = await Fee.findByIdAndUpdate(req.body._id, req.body);
 
     res.status(200).send(updateFee);
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).send(error)
+  }
 };
+
+exports.getPendingFeeByInstitute = async(req,res)=>{
+  try {
+
+    const feeDetails = await Fee.find({
+      instituteId:req.body.instituteId,
+      pendingAmount:{
+        $ne:"0"
+      }
+    })
+    
+    res.status(200).send(feeDetails)
+
+  } catch (error) {
+    res.status(400).send(error)    
+  }
+}
