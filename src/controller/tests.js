@@ -3,10 +3,10 @@ const fs = require('fs').promises;
 const path = require('path');
 const XLSX = require('xlsx');
 const Institute = require('../model/institute.model')
-
-const response = require('../service/response');
-const errorHandler = require('../service/errorHandler');
+const Student = require('../model/student.model')
 const excelToJson = require('convert-excel-to-json');
+const errorHandler = require('../service/errorHandler');
+const response = require('../service/response');
 
 const request = require('request');
 const rp = require('request-promise');
@@ -104,11 +104,12 @@ exports.addScoreUsingExcel = async(req,res)=>{
 
                 columnToKey:{
                     A:"rollNo",
-                    B:"Name",
+                    B:"_id",
                     C:"marks"
                 }
             }]
         })
+
         console.log(excelData)
 
         const getBatch = await Institute.findOne({
@@ -119,7 +120,13 @@ exports.addScoreUsingExcel = async(req,res)=>{
             }]
         })
 
-        const testDetails = await Test.find({
+        if(!batch){
+            const error = new Error('Batch not Found');
+            error.statusCode = 400;
+            throw error;
+        }
+
+        const testDetails = await Test.findOne({
             $and:[{
                 testName:excelData.Sheet1.testName
             },{
@@ -128,11 +135,44 @@ exports.addScoreUsingExcel = async(req,res)=>{
                batchId:getBatch.batch._id 
             }]    
         })
+        if(!testDetails){
+            const error = new Error('Test not Found');
+            error.statusCode = 400;
+            throw error; 
+        }
 
-        
-        res.status(200).send(excelData)
+        for(var i = 0;i<excelData.Sheet2.length;i++){
+            const student = await Student.findOne({
+                $and:[{
+                    "instituteDetails.courseId" : getBatch.course._id,
+                },
+                {
+                    "instituteDetails.batch" : getBatch.batch._id
+                },{
+                    "instituteDetails.rollNo": excelData.Sheet2[i].rollNo
+                }]
+            })
+            if(!student){
+                const error = new Error('student not Found');
+                error.statusCode = 400;
+                throw error; 
+            }
+            excelData.Sheet2[i]._id = student._id
+        }
+
+        const updateScore = await Test.updateOne({
+            _id:testDetails._id
+        },{
+            $set:{
+                scores:excelData.Sheet2
+            }
+        })
+
+        res.status(200).send(updateScore)
     } catch (error) {
-     console.log(error)   
+     console.log(error)
+     errorHandler(error, res);
+   
     }
 }
 exports.updateTest = async (req, res) => {
