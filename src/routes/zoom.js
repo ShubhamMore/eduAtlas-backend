@@ -14,6 +14,7 @@ zoomRouter.get('/getCredentials', checkAuth, onlineMeetingController.getCredenti
 zoomRouter.post('/createMeeting', checkAuth, zoomCheckToken, onlineMeetingController.createMeeting);
 zoomRouter.post('/updateMeeting', checkAuth, zoomCheckToken, onlineMeetingController.updateMeeting);
 zoomRouter.post('/deleteMeeting', checkAuth, zoomCheckToken, onlineMeetingController.deleteMeeting);
+zoomRouter.post('/getAllMeetings', checkAuth, onlineMeetingController.getAllMeetings);
 zoomRouter.post('/getMeetingByBatch', checkAuth, onlineMeetingController.getMeetingByBatch);
 zoomRouter.post('/getOneMeeting', checkAuth, onlineMeetingController.getOneMeeting);
 module.exports = zoomRouter;
