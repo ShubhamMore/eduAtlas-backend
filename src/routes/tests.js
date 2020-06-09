@@ -13,7 +13,8 @@ testRouter.post('/updateTest', checkAuth, testsController.updateTest);
 testRouter.post('/addTestScore', checkAuth, testsController.addTestScore);
 
 testRouter.post('/getTestByStudent', checkAuth, testsController.getScoreOfStudentByBatch);
-// testRouter.post('/addTest',checkAuth,testsController.addTest)
+
+testRouter.post('/deleteTest', checkAuth, testsController.deleteTest);
 // testRouter.post('/addTest',checkAuth,testsController.addTest)
 // testRouter.post('/addTest',checkAuth,testsController.addTest)
 // testRouter.post('/addTest',checkAuth,testsController.addTest)

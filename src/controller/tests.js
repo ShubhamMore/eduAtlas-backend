@@ -120,5 +120,11 @@ exports.getScoresOfStutdent = async (req, res) => {
 
 exports.deleteTest = async (req, res) => {
   try {
-  } catch (error) {}
+    const deleteTest = await Test.deleteOne({
+      _id: req.body._id,
+    });
+    res.status(200).send(deleteTest);
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
