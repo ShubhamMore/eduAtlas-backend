@@ -110,6 +110,7 @@ exports.addScoreUsingExcel = async(req,res)=>{
             }]
         })
         console.log(excelData)
+
         const getBatch = await Institute.findOne({
             $and:[{
                 "course.courseCode":excelData.Sheet1.courseCode    
@@ -117,6 +118,7 @@ exports.addScoreUsingExcel = async(req,res)=>{
                 "batch.batchCode":excelData.Sheet1.batchCode
             }]
         })
+
         const testDetails = await Test.find({
             $and:[{
                 testName:excelData.Sheet1.testName
@@ -127,6 +129,7 @@ exports.addScoreUsingExcel = async(req,res)=>{
             }]    
         })
 
+        
         res.status(200).send(excelData)
     } catch (error) {
      console.log(error)   

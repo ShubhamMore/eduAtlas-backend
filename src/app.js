@@ -55,6 +55,7 @@ app.use('/institute/schedule', require('./routes/schedule'));
 app.use('/institute/attendance', require('./routes/attendance'));
 app.use('/institute/zoom', require('./routes/zoom'));
 app.use('/institute/tests', require('./routes/tests'));
+app.use('/institute/ptm',require('./routes/ptm'))
 app.use((req, res, next) => {
   const error = new Error('NOT FOUND');
   error.status = 404;
