@@ -14,6 +14,7 @@
     "@hapi/joi": "^17.1.1",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
+    "convert-excel-to-json": "^1.7.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",

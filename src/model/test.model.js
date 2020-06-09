@@ -24,6 +24,9 @@ const testSchema = new mongoose.Schema({
             studentId:{
                 type:String
             },
+            rollNo:{
+                type:String
+            },
             marks:{
                 type:String
             }

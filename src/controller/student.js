@@ -361,9 +361,27 @@ exports.deleteStudent = async (req, res, next) => {
     response(res, error.prototype.statusCode || 500, error.message);
   }
 };
+exports.getStudentsByBatch = async(req,res)=>{
+  try {
+    const students = await Student.aggregate([{
+      $unwind:"$instituteDetails"
+    },{
+      $match:{
+        "instituteDetails.instituteId":req.body.instituteId,
+        "instituteDetails.courseId":req.body.courseId,
+        "instituteDetails.batchId":req.body.batchId
+      }
+    }])
 
+    res.status(200).send(students)
+  } catch (error) {
+    res.status(400).send(error)
+  }
+}
 //Api for accepting invites
 
 //List of active and pending students APi Creation
 
-exports.pendingStudents = async (req, res) => {};
+exports.pendingStudents = async (req, res) => {
+
+};

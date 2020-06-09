@@ -15,7 +15,8 @@ testRouter.post('/addTestScore',checkAuth,testsController.addTestScore)
 testRouter.post('/getTestByStudent',checkAuth,testsController.getScoreOfStudentByBatch)
 
 testRouter.post('/deleteTest',checkAuth,testsController.deleteTest)
-// testRouter.post('/addTest',checkAuth,testsController.addTest)
+
+testRouter.post('/addScoreUsingExcel',testsController.addScoreUsingExcel)
 // testRouter.post('/addTest',checkAuth,testsController.addTest)
 // testRouter.post('/addTest',checkAuth,testsController.addTest)
 

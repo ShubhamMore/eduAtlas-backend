@@ -2,6 +2,7 @@ const Test = require('../model/test.model')
 
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
+const excelToJson = require('convert-excel-to-json');
 
 const request = require('request');
 const rp = require('request-promise');
@@ -75,7 +76,37 @@ exports.addTestScore = async(req,res)=>{
         res.status(400).send(error)
     }
 }
+exports.addScoreUsingExcel = async(req,res)=>{
+    try {
+        console.log("in here")
+        const excelData =  excelToJson({
+            sourceFile:req.file,
+            headers:{
+                rows:1
+            },
+            sheets:[{
+                name:"sheet1",
+                columnToKey:{
+                    A:"testName",
+                    B:"batchCode",
+                    C:"courseCode"
+                }
+            },{
+                name:"sheet2",
+                columnToKey:{
+                    A:"rollNo",
+                    B:"Name",
+                    C:"marks"
+                }
+            }]
+        })
+        console.log(excelData)
 
+        res.status(200).send(excelData)
+    } catch (error) {
+     console.log(error)   
+    }
+}
 exports.getScoreOfStudentByBatch = async(req,res)=>{
     try {
         const studentScoreByBatch = await Test.aggregate([{
