@@ -22,7 +22,7 @@ exports.addPtm = async(req,res)=>{
         }
         const newPtm = new Ptm(req.body)
         await newPtm.save()
-        response(200,newPtm)
+        res.status(200).send(newPtm)
     } catch (error) {
         errorHandler(error, res);
 
