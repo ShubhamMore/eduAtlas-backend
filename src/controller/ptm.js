@@ -2,6 +2,8 @@ const Ptm = require('../model/ptm.model')
 const Institute = require('../model/institute.model')
 const errorHandler = require('../service/errorHandler');
 const response = require('../service/response');
+const mongoose = require('mongoose');
+
 
 exports.addPtm = async(req,res)=>{
     try {
@@ -42,9 +44,9 @@ exports.getPtmOfInstitutes = async(req,res)=>{
                     $unwind:"$course"
                 },{
                     $match:{
-                        _id:ptm[i].instituteId,
-                        "batch._id":ptm[i].batchId,
-                        "course._id":ptm[i].courseId,
+                        _id:mongoose.Types.ObjectId(ptm[i].instituteId) ,
+                        "batch._id":mongoose.Types.ObjectId(ptm[i].batchId),
+                        "course._id":mongoose.Types.ObjectId(ptm[i].courseId),
                         "batch.course":ptm[i].courseId
                     }                
             }])
