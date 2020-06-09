@@ -28,7 +28,35 @@ exports.addPtm = async(req,res)=>{
 
     }
 }
+exports.getPtmOfInstitutes = async(req,res)=>{
+    try {
+        const ptm = await Ptm.find({
+            instituteId:req.body.instituteId
+        })
 
+        for(var i =0 ; i <ptm.length ; i++){
+            const institute = await Institute.aggregate([
+                {
+                    $unwind:"$batch"
+                },{
+                    $unwind:"$course"
+                },{
+                    $match:{
+                        _id:ptm[i].instituteId,
+                        "batch._id":ptm[i].batchId,
+                        "course._id":ptm[i].courseId,
+                        "batch.course":ptm[i].courseId
+                    }                
+            }])
+            ptm[i].batchId = institute.batch.batchCode,
+            ptm[i].courseId = institute.course.name
+
+        }
+        res.status(200).send(ptm)
+    } catch (error) {
+        
+    }
+}
 exports.getPtmByInstitute = async(req,res)=>{
     try {
         const ptm = await Ptm.find({
