@@ -193,9 +193,21 @@ exports.updateMeeting = async (req, res) => {
         registrants_email_notification: false,
       },
     };
+    
+    console.log(req.body)
+    // console.log(req.body.meetingId);
 
-    console.log(req.body.meetingId);
+    // let tempOptions = {
+    //     method: 'GET',
+    //     url: 'https://api.zoom.us/v2/meetings/' + req.body.meetingId,
+    //     headers: {
+    //       'content-type': 'application/json',
+    //       authorization: 'Bearer ' + req.zoom.access_token,  
+    //     }
+    // }
 
+    // let getMeeting = await rp(tempOptions)
+    //console.log("meeting :",getMeeting)
     let options = {
       method: 'PATCH',
       url: 'https://api.zoom.us/v2/meetings/' + req.body.meetingId,
@@ -211,31 +223,43 @@ exports.updateMeeting = async (req, res) => {
 
     console.log(meetingDetails);
 
-    let newMeeting = {
-      topic: req.body.topic,
-      duration: req.body.duration,
-      password: req.body.password,
-      agenda: req.body.agenda,
-      joinUrl: meetingDetails.join_url,
-      meetingId: meetingDetails.id,
-      startUrl: meetingDetails.start_url,
-      startTime: req.body.startTime,
-      batchId: req.body.batchId,
-      courseId: req.body.courseId,
-      instituteId: req.body.instituteId,
-      hostId: req.body.teacherId,
-      hostEmail: teacher.basicDetails.employeeEmail,
-      hostName: teacher.basicDetails.name,
-    };
+    // let newMeeting = {
+    //   topic: req.body.topic,
+    //   duration: req.body.duration,
+    //   password: req.body.password,
+    //   agenda: req.body.agenda, 
+    //   startTime: req.body.startTime,
+    //   batchId: req.body.batchId,
+    //   courseId: req.body.courseId,
+    //   instituteId: req.body.instituteId,
+    //   hostId: req.body.teacherId,
+    //   hostEmail: teacher.basicDetails.employeeEmail,
+    //   hostName: teacher.basicDetails.name,
+    // };
 
     const updatedMeeting = await OnlineClass.updateOne(
       {
         _id: req.body._id,
       },
-      newMeeting
+      {
+          $set:{
+            topic: req.body.topic,
+            duration: req.body.duration,
+            password: req.body.password,
+            agenda: req.body.agenda, 
+            startTime: req.body.startTime,
+            batchId: req.body.batchId,
+            courseId: req.body.courseId,
+            instituteId: req.body.instituteId,
+            hostId: req.body.teacherId,
+            hostEmail: teacher.basicDetails.employeeEmail,
+            hostName: teacher.basicDetails.name,
+          }
+      }
     );
     res.status(200).send(updatedMeeting);
-  } catch (error) {
+  
+} catch (error) {
     console.log(error);
     res.status(400).send(error);
   }
@@ -246,21 +270,26 @@ exports.deleteMeeting = async (req, res) => {
     const meeting = await OnlineClass.findOne({
       _id: req.body._id,
     });
-
+    console.log("meeting found",meeting)
     if (!meeting) {
       throw new Error('No Meeting Found');
     }
 
     let options = {
       method: 'DELETE',
-      url: 'https://api.zoom.us/v2/users/me/meetings/' + req.body.meetingId,
+      url: 'https://api.zoom.us/v2/meetings/' + meeting.meetingId,
       headers: {
         'Content-Type': 'application/json',
         authorization: 'Bearer ' + req.zoom.access_token,
       },
     };
     const info = await rp(options);
-    res.status(200).send(info);
+    console.log(info)
+
+    const deletedMeeting  = await OnlineClass.deleteOne({
+        _id:req.body._id
+    })
+    res.status(200).send(deletedMeeting);
   } catch (error) {
     res.status(400).send(error);
   }
