@@ -50,13 +50,13 @@ exports.getPtmOfInstitutes = async(req,res)=>{
                         "batch.course":ptm[i].courseId
                     }                
             }])
-            ptm[i].batchId = institute.batch.batchCode,
-            ptm[i].courseId = institute.course.name
+            ptm[i].batchId = institute[0].batch.batchCode,
+            ptm[i].courseId = institute[0].course.name
 
         }
         res.status(200).send(ptm)
     } catch (error) {
-        
+        res.status(400).send(error)
     }
 }
 exports.getPtmByInstitute = async(req,res)=>{
