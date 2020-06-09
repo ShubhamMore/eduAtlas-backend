@@ -101,6 +101,13 @@ exports.getScoreOfStudentByBatch = async(req,res)=>{
                 "students.studentId":req.body.studentId
             }
         }])
+        res.status(200).send(studentScoreByBatch)
+
+    }
+    catch(error){
+        res.status(400).send(error)
+    }  
+}      
 exports.updateTest = async (req, res) => {
   try {
     const updateTest = await Test.updateOne(
@@ -156,7 +163,7 @@ exports.getScoresOfStutdent = async (req, res) => {
   } catch (error) {
     res.status(400).send(error);
   }
-};
+}
 
 exports.deleteTest = async (req, res) => {
   try {
@@ -167,4 +174,4 @@ exports.deleteTest = async (req, res) => {
   } catch (error) {
     res.status(400).send(error);
   }
-};
+}
