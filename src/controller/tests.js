@@ -91,23 +91,6 @@ exports.addScoreUsingExcel = async(req,res)=>{
      console.log(error)   
     }
 }
-exports.getScoreOfStudentByBatch = async(req,res)=>{
-    try {
-        const studentScoreByBatch = await Test.aggregate([{
-            $unwind:'$students'
-        },{
-            $match:{
-                batchId:req.body.batchId,
-                "students.studentId":req.body.studentId
-            }
-        }])
-        res.status(200).send(studentScoreByBatch)
-
-    }
-    catch(error){
-        res.status(400).send(error)
-    }  
-}      
 exports.updateTest = async (req, res) => {
   try {
     const updateTest = await Test.updateOne(
