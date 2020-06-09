@@ -117,6 +117,16 @@ exports.createMeeting = async (req, res) => {
   }
 };
 
+exports.getAllMeetings = async (req, res) => {
+  try {
+    const meetings = await OnlineClass.find();
+
+    res.status(200).send(meetings);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 exports.getMeetingByBatch = async (req, res) => {
   try {
     const meetings = await OnlineClass.find({
