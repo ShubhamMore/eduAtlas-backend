@@ -16,7 +16,7 @@ const testSchema = new mongoose.Schema({
     batchId:{
         type:String
     },
-    markingSystem:{ 
+    totalMarks:{ 
         type:String
     },
     students:[
