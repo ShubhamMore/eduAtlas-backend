@@ -17,6 +17,7 @@ exports.addTest = async(req,res)=>{
 }
 
 exports.getTestByBatch = async(req,res)=>{
+    
     try {
         const batchTest = await Test.find({
             courseId:req.body.courseId,
@@ -30,5 +31,89 @@ exports.getTestByBatch = async(req,res)=>{
         res.status(200).send(batchTest)
     } catch (error) {
         res.status(400).send(error)
+    }
+}
+
+exports.getSingleTest = async(req,res)=>{
+    try {
+        const singleTest = await Test.findOne({
+            _id:req.body._id
+        })
+        if(!singleTest){
+            throw new Error("No test Found")
+        }
+
+    } catch (error) {
+        res.status(400).send(error)
+    }
+}
+
+exports.updateTest = async(req,res)=>{
+    try {
+        const updateTest = await Test.updateOne({
+            _id:req.body._id
+        },req.body,{
+            upsert:false
+        })
+        res.status(200).send(updateTest)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+}
+
+exports.addTestScore = async(req,res)=>{
+    try {
+        const updateScore = await Test.updateOne({
+            _id:req.body._id
+        },{
+            $set: {
+                students: req.body.scores
+            }
+        })  
+        res.status(200).send(updateScore)         
+    } catch (error) {
+        res.status(400).send(error)
+    }
+}
+
+exports.getScoreOfStudentByBatch = async(req,res)=>{
+    try {
+        const studentScoreByBatch = await Test.aggregate([{
+            $unwind:'$students'
+        },{
+            $match:{
+                batchId:req.body.batchId,
+                "students.studentId":req.body.studentId
+            }
+        }])
+
+        res.status(200).send(studentScoreByBatch)
+    } catch (error) {
+        res.status(400).send(error)
+        
+    }
+}
+
+exports.getScoresOfStutdent = async(req,res)=>{
+    try {
+        const score = await Test.aggregate([{
+            $unwind:'$students'
+        },{
+            $match:{
+                "students.studentId":req.body.studentId
+            }
+        }])
+        res.status(200).send(score)
+
+    } catch (error) {
+        res.status(400).send(error)        
+    }
+}
+
+exports.deleteTest = async(req,res)=>{
+    try {
+        
+    } catch (error) {
+        
     }
 }
