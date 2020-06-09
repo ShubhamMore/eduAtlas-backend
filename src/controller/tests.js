@@ -46,23 +46,6 @@ exports.getSingleTest = async (req, res) => {
   }
 };
 
-exports.updateTest = async (req, res) => {
-  try {
-    const updateTest = await Test.updateOne(
-      {
-        _id: req.body._id,
-      },
-      req.body,
-      {
-        upsert: false,
-      }
-    );
-    res.status(200).send(updateTest);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-};
-
 exports.addTestScore = async (req, res) => {
   try {
     const updateScore = await Test.updateOne(
@@ -76,6 +59,74 @@ exports.addTestScore = async (req, res) => {
       }
     );
     res.status(200).send(updateScore);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+exports.addScoreUsingExcel = async (req, res) => {
+  try {
+    console.log('in here');
+    const excelData = excelToJson({
+      sourceFile: req.file,
+      headers: {
+        rows: 1,
+      },
+      sheets: [
+        {
+          name: 'sheet1',
+          columnToKey: {
+            A: 'testName',
+            B: 'batchCode',
+            C: 'courseCode',
+          },
+        },
+        {
+          name: 'sheet2',
+          columnToKey: {
+            A: 'rollNo',
+            B: 'Name',
+            C: 'marks',
+          },
+        },
+      ],
+    });
+    console.log(excelData);
+
+    res.status(200).send(excelData);
+  } catch (error) {
+    console.log(error);
+  }
+};
+exports.getScoreOfStudentByBatch = async (req, res) => {
+  try {
+    const studentScoreByBatch = await Test.aggregate([
+      {
+        $unwind: '$students',
+      },
+      {
+        $match: {
+          batchId: req.body.batchId,
+          'students.studentId': req.body.studentId,
+        },
+      },
+    ]);
+    res.status(200).send(studentScoreByBatch);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+exports.updateTest = async (req, res) => {
+  try {
+    const updateTest = await Test.updateOne(
+      {
+        _id: req.body._id,
+      },
+      req.body,
+      {
+        upsert: false,
+      }
+    );
+    res.status(200).send(updateTest);
   } catch (error) {
     res.status(400).send(error);
   }
