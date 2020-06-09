@@ -1,7 +1,7 @@
 const testRouter = require('express').Router();
 const testsController = require('../controller/tests');
 const checkAuth = require('../middleware/checkAuth');
-
+const xcelUpload = require('../middleware/xcelFile')
 testRouter.post('/addTest', checkAuth, testsController.addTest);
 
 testRouter.post('/getTestByBatch', checkAuth, testsController.getTestByBatch);
@@ -16,7 +16,7 @@ testRouter.post('/getTestByStudent', checkAuth, testsController.getScoreOfStuden
 
 testRouter.post('/deleteTest',checkAuth,testsController.deleteTest)
 
-testRouter.post('/addScoreUsingExcel',testsController.addScoreUsingExcel)
+testRouter.post('/addScoreUsingExcel',xcelUpload,testsController.addScoreUsingExcel)
 // testRouter.post('/addTest',checkAuth,testsController.addTest)
 // testRouter.post('/addTest',checkAuth,testsController.addTest)
 
