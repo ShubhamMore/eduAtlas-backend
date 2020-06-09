@@ -14,4 +14,6 @@ ptmRouter.post('/updatePtm',checkAuth, ptmController.updatePtm)
 
 ptmRouter.post('/deletePtm',checkAuth, ptmController.deletePtm)
 
+ptmRouter.post('/getPtmOfInstitutes',checkAuth,ptmController.getPtmOfInstitutes)
+
 module.exports = ptmRouter
