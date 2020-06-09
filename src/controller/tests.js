@@ -46,7 +46,6 @@ exports.getSingleTest = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
 exports.addTestScore = async(req,res)=>{
     try {
         const updateScore = await Test.updateOne({
@@ -102,7 +101,6 @@ exports.getScoreOfStudentByBatch = async(req,res)=>{
                 "students.studentId":req.body.studentId
             }
         }])
-=======
 exports.updateTest = async (req, res) => {
   try {
     const updateTest = await Test.updateOne(
@@ -120,24 +118,7 @@ exports.updateTest = async (req, res) => {
   }
 };
 
-exports.addTestScore = async (req, res) => {
-  try {
-    const updateScore = await Test.updateOne(
-      {
-        _id: req.body._id,
-      },
-      {
-        $set: {
-          students: req.body.scores,
-        },
-      }
-    );
-    res.status(200).send(updateScore);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-};
->>>>>>> 854f2d296a627746ee50008d417f36b5daf542df
+
 
 exports.getScoreOfStudentByBatch = async (req, res) => {
   try {
