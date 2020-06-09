@@ -363,6 +363,8 @@ exports.deleteStudent = async (req, res, next) => {
 };
 exports.getStudentsByBatch = async(req,res)=>{
   try {
+    const studentsArray = new Array();
+
     const students = await Student.aggregate([{
       $unwind:"$instituteDetails"
     },{

@@ -1,4 +1,8 @@
 const Test = require('../model/test.model');
+const fs = require('fs').promises;
+const path = require('path');
+const XLSX = require('xlsx');
+const Institute = require('../model/institute.model')
 
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
@@ -6,6 +10,18 @@ const excelToJson = require('convert-excel-to-json');
 
 const request = require('request');
 const rp = require('request-promise');
+
+const deleteFile = (filePath) => {
+    fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
+      if (error) {
+        console.log(error);
+        const err = new Error('Error while deleting the File');
+        err.statusCode = 500;
+        throw err;
+      }
+      console.log('File Deleted successfully');
+    });
+  };
 
 exports.addTest = async (req, res) => {
   try {
@@ -62,21 +78,30 @@ exports.addTestScore = async(req,res)=>{
 }
 exports.addScoreUsingExcel = async(req,res)=>{
     try {
-        console.log("in here")
+        console.log("in here",path.join(__dirname + '../../../' + req.file.path))
+
+        const file = path.join(__dirname + '../../../' + req.file.path)
         const excelData =  excelToJson({
-            sourceFile:req.file,
-            headers:{
-                rows:1
-            },
+            sourceFile:file,
+            
             sheets:[{
-                name:"sheet1",
+                name:"Sheet1",
+                
+                header:{
+                    rows:1
+                },
                 columnToKey:{
                     A:"testName",
                     B:"batchCode",
                     C:"courseCode"
                 }
             },{
-                name:"sheet2",
+                name:"Sheet2",
+
+                header:{
+                    rows:1
+                },
+
                 columnToKey:{
                     A:"rollNo",
                     B:"Name",
@@ -85,6 +110,22 @@ exports.addScoreUsingExcel = async(req,res)=>{
             }]
         })
         console.log(excelData)
+        const getBatch = await Institute.findOne({
+            $and:[{
+                "course.courseCode":excelData.Sheet1.courseCode    
+            },{
+                "batch.batchCode":excelData.Sheet1.batchCode
+            }]
+        })
+        const testDetails = await Test.find({
+            $and:[{
+                testName:excelData.Sheet1.testName
+            },{
+                courseId:getBatch.course._id
+            },{
+               batchId:getBatch.batch._id 
+            }]    
+        })
 
         res.status(200).send(excelData)
     } catch (error) {
