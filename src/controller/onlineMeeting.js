@@ -117,6 +117,28 @@ exports.createMeeting = async (req, res) => {
   }
 };
 
+exports.getMeetingsFromZoom = async(req,res)=>{
+  try {
+    var options = {
+      method: 'GET',
+      url: 'https://api.zoom.us/v2/users/me/meetings',
+      qs:{
+        type: req.body.type
+      },
+      headers: {
+        authorization: 'Bearer ' + req.zoom.access_token,
+      },
+    };
+
+      
+    const meetings = await OnlineClass.find();
+
+    res.status(200).send(meetings);
+  } catch (error) {
+    
+  }
+}
+
 exports.getAllMeetings = async (req, res) => {
   try {
 
