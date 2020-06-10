@@ -55,7 +55,7 @@ exports.getTestsForReports = async(req,res)=>{
       instituteId: req.body.instituteId,
       batchId: req.body.batchId,
       students:{
-        $exists:false
+        $exists:true
       }
     });
 

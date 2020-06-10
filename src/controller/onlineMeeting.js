@@ -130,7 +130,11 @@ exports.getMeetingsFromZoom = async(req,res)=>{
       },
     };
 
-      
+    const listMeetings = await rp(options)
+    
+    for(var i=0;i<listMeetings.meetings.length;i++){
+
+    }
     const meetings = await OnlineClass.find();
 
     res.status(200).send(meetings);

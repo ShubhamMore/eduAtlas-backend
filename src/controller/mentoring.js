@@ -5,9 +5,9 @@ const Employee = require('../model/employee.model')
 
 exports.addMentoring = async(req,res)=>{
     try {
-
         const addMentoring = new Mentoring(req.body)
         await addMentoring.save()
+        res.status(200).send(addMentoring)
     } catch (error) {
         error.statusCode = 400
         errorHandler(error,res);
