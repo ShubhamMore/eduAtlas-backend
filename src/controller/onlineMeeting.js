@@ -130,7 +130,8 @@ exports.getMeetingsFromZoom = async(req,res)=>{
       },
     };
 
-    const listMeetings = await rp(options)
+    let listMeetings = await rp(options)
+    listMeetings = JSON.parse(listMeetings)
     let getMeetings = new Array()
     for(var i=0;i<listMeetings.meetings.length;i++){
       
@@ -139,8 +140,9 @@ exports.getMeetingsFromZoom = async(req,res)=>{
         batchId:req.body.batchId,
         meetingId:listMeetings.meetings[i].uuid
       })
-
-      getMeetings.push(meetings)
+      if(meetings){
+        getMeetings.push(meetings)
+      }
     }
 
     res.status(200).send(getMeetings);
