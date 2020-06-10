@@ -13,6 +13,7 @@ const rp = require('request-promise');
 
 const deleteFile = (filePath) => {
   fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
+    console.log("deleteFile")
     if (error) {
       console.log(error);
       const err = new Error('Error while deleting the File');
@@ -94,99 +95,61 @@ exports.addScoreUsingExcel = async (req, res) => {
           header: {
             rows: 1,
           },
-          columnToKey: {
-            A: 'testName',
-            B: 'batchCode',
-            C: 'courseCode',
-          },
-        },
-        {
-          name: 'Sheet2',
-
-          header: {
-            rows: 1,
-          },
 
           columnToKey: {
             A: 'rollNo',
             B: '_id',
             C: 'marks',
           },
-        },
+
+        }, 
       ],
     });
 
     console.log(excelData);
 
-    const getBatch = await Institute.findOne({
-      $and: [
-        {
-          'course.courseCode': excelData.Sheet1.courseCode,
-        },
-        {
-          'batch.batchCode': excelData.Sheet1.batchCode,
-        },
-      ],
-    });
-
-    if (!batch) {
-      const error = new Error('Batch not Found');
-      error.statusCode = 400;
-      throw error;
-    }
-
+    
     const testDetails = await Test.findOne({
-      $and: [
-        {
-          testName: excelData.Sheet1.testName,
-        },
-        {
-          courseId: getBatch.course._id,
-        },
-        {
-          batchId: getBatch.batch._id,
-        },
-      ],
+      _id:req.body._id
     });
+    console.log(testDetails)
+
     if (!testDetails) {
       const error = new Error('Test not Found');
       error.statusCode = 400;
       throw error;
     }
-
-    for (var i = 0; i < excelData.Sheet2.length; i++) {
-      const student = await Student.findOne({
-        $and: [
-          {
-            'instituteDetails.courseId': getBatch.course._id,
+    
+    for (var i = 0; i < excelData.Sheet1.length; i++) {
+      const student = await Student.aggregate([
+        {
+         $unwind:"$instituteDetails" 
+        },{
+        $match: {
+            'instituteDetails.courseId': testDetails.courseId,
+            'instituteDetails.batchId': testDetails.batchId,
+            'instituteDetails.rollNumber': excelData.Sheet1[i].rollNo+"",
           },
-          {
-            'instituteDetails.batch': getBatch.batch._id,
-          },
-          {
-            'instituteDetails.rollNo': excelData.Sheet2[i].rollNo,
-          },
-        ],
-      });
-      if (!student) {
+      }]);
+      if (student.length == 0) {
         const error = new Error('student not Found');
         error.statusCode = 400;
         throw error;
       }
-      excelData.Sheet2[i]._id = student._id;
+      excelData.Sheet1[i]._id = student[0]._id;
     }
-
+    
     const updateScore = await Test.updateOne(
       {
-        _id: testDetails._id,
+        _id: req.body._id,
       },
       {
         $set: {
-          scores: excelData.Sheet2,
+          students: excelData.Sheet1,
         },
       }
     );
-
+      deleteFile(req.file.path)
     res.status(200).send(updateScore);
   } catch (error) {
     console.log(error);
