@@ -31,7 +31,6 @@ studentRouter.post('/updateStudentPersonalDetails', studentController.updateStud
 
 studentRouter.post('/getStudentsByBatch',checkAuth,studentController.getStudentsByBatch)
 
-studentRouter.get('/all/:instituteId', checkAuth, studentController.getAllStudents);
 
 studentRouter.post('', checkAuth, studentController.getOneStudent);
 
@@ -40,5 +39,7 @@ studentRouter.post('/getOneStudent', studentController.getOneStudent); //done
 studentRouter.delete('', checkAuth, studentController.deleteStudent);
 
 studentRouter.get('/all/:instituteId', checkAuth, studentController.getAllStudents);
+
+studentRouter.post('/getStudentsByInstitute',checkAuth, studentController.getStudentsByInstitute)
 
 module.exports = studentRouter;
