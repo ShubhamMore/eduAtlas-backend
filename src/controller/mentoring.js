@@ -69,4 +69,24 @@ exports.getMentoringOfStudentByInstitute = async(req,res)=>{
     }
 }
 
-exports.updateMentoring = async
+exports.updateMentoring = async(req,res)=>{
+    try {
+        const updateMentoring = await Mentoring.updateOne({
+            _id:req.body._id
+        },req.body)
+        res.status(200).send(updateMentoring)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+}
+
+exports.deleteMentoring = async(req,res)=>{
+    try {
+        const deleteMentoring = await Mentoring.deleteOne({
+            _id:req.body._id
+        })
+        res.status(200).send(deleteMentoring)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+}
