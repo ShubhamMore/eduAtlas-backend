@@ -4,750 +4,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["app-pages-pages-module"], {
-  /***/
-  "./node_modules/primeng/button.js":
-  /*!****************************************!*\
-    !*** ./node_modules/primeng/button.js ***!
-    \****************************************/
-
-  /*! no static exports found */
-
-  /***/
-  function node_modulesPrimengButtonJs(module, exports, __webpack_require__) {
-    "use strict";
-    /* Shorthand */
-
-    function __export(m) {
-      for (var p in m) {
-        if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-      }
-    }
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true
-    });
-
-    __export(__webpack_require__(
-    /*! ./components/button/button */
-    "./node_modules/primeng/components/button/button.js"));
-    /***/
-
-  },
-
-  /***/
-  "./node_modules/primeng/components/button/button.js":
-  /*!**********************************************************!*\
-    !*** ./node_modules/primeng/components/button/button.js ***!
-    \**********************************************************/
-
-  /*! no static exports found */
-
-  /***/
-  function node_modulesPrimengComponentsButtonButtonJs(module, exports, __webpack_require__) {
-    "use strict";
-
-    var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
-      var c = arguments.length,
-          r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-          d;
-      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
-        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-      }
-      return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-
-    var __metadata = this && this.__metadata || function (k, v) {
-      if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true
-    });
-
-    var core_1 = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/fesm2015/core.js");
-
-    var domhandler_1 = __webpack_require__(
-    /*! ../dom/domhandler */
-    "./node_modules/primeng/components/dom/domhandler.js");
-
-    var common_1 = __webpack_require__(
-    /*! @angular/common */
-    "./node_modules/@angular/common/fesm2015/common.js");
-
-    var ButtonDirective =
-    /** @class */
-    function () {
-      function ButtonDirective(el) {
-        this.el = el;
-        this.iconPos = 'left';
-        this.cornerStyleClass = 'ui-corner-all';
-      }
-
-      ButtonDirective.prototype.ngAfterViewInit = function () {
-        domhandler_1.DomHandler.addMultipleClasses(this.el.nativeElement, this.getStyleClass());
-
-        if (this.icon) {
-          var iconElement = document.createElement("span");
-          iconElement.setAttribute("aria-hidden", "true");
-          var iconPosClass = this.iconPos == 'right' ? 'ui-button-icon-right' : 'ui-button-icon-left';
-          iconElement.className = iconPosClass + ' ui-clickable ' + this.icon;
-          this.el.nativeElement.appendChild(iconElement);
-        }
-
-        var labelElement = document.createElement("span");
-        labelElement.className = 'ui-button-text ui-clickable';
-        labelElement.appendChild(document.createTextNode(this.label || 'ui-btn'));
-        this.el.nativeElement.appendChild(labelElement);
-        this.initialized = true;
-      };
-
-      ButtonDirective.prototype.getStyleClass = function () {
-        var styleClass = 'ui-button ui-widget ui-state-default ' + this.cornerStyleClass;
-
-        if (this.icon) {
-          if (this.label != null && this.label != undefined) {
-            if (this.iconPos == 'left') styleClass = styleClass + ' ui-button-text-icon-left';else styleClass = styleClass + ' ui-button-text-icon-right';
-          } else {
-            styleClass = styleClass + ' ui-button-icon-only';
-          }
-        } else {
-          if (this.label) {
-            styleClass = styleClass + ' ui-button-text-only';
-          } else {
-            styleClass = styleClass + ' ui-button-text-empty';
-          }
-        }
-
-        return styleClass;
-      };
-
-      Object.defineProperty(ButtonDirective.prototype, "label", {
-        get: function get() {
-          return this._label;
-        },
-        set: function set(val) {
-          this._label = val;
-
-          if (this.initialized) {
-            domhandler_1.DomHandler.findSingle(this.el.nativeElement, '.ui-button-text').textContent = this._label;
-
-            if (!this.icon) {
-              if (this._label) {
-                domhandler_1.DomHandler.removeClass(this.el.nativeElement, 'ui-button-text-empty');
-                domhandler_1.DomHandler.addClass(this.el.nativeElement, 'ui-button-text-only');
-              } else {
-                domhandler_1.DomHandler.addClass(this.el.nativeElement, 'ui-button-text-empty');
-                domhandler_1.DomHandler.removeClass(this.el.nativeElement, 'ui-button-text-only');
-              }
-            }
-          }
-        },
-        enumerable: true,
-        configurable: true
-      });
-      Object.defineProperty(ButtonDirective.prototype, "icon", {
-        get: function get() {
-          return this._icon;
-        },
-        set: function set(val) {
-          this._icon = val;
-
-          if (this.initialized) {
-            var iconPosClass = this.iconPos == 'right' ? 'ui-button-icon-right' : 'ui-button-icon-left';
-            domhandler_1.DomHandler.findSingle(this.el.nativeElement, '.ui-clickable').className = iconPosClass + ' ui-clickable ' + this.icon;
-          }
-        },
-        enumerable: true,
-        configurable: true
-      });
-
-      ButtonDirective.prototype.ngOnDestroy = function () {
-        while (this.el.nativeElement.hasChildNodes()) {
-          this.el.nativeElement.removeChild(this.el.nativeElement.lastChild);
-        }
-
-        this.initialized = false;
-      };
-
-      __decorate([core_1.Input(), __metadata("design:type", String)], ButtonDirective.prototype, "iconPos", void 0);
-
-      __decorate([core_1.Input(), __metadata("design:type", String)], ButtonDirective.prototype, "cornerStyleClass", void 0);
-
-      __decorate([core_1.Input(), __metadata("design:type", String), __metadata("design:paramtypes", [String])], ButtonDirective.prototype, "label", null);
-
-      __decorate([core_1.Input(), __metadata("design:type", String), __metadata("design:paramtypes", [String])], ButtonDirective.prototype, "icon", null);
-
-      ButtonDirective = __decorate([core_1.Directive({
-        selector: '[pButton]'
-      }), __metadata("design:paramtypes", [core_1.ElementRef])], ButtonDirective);
-      return ButtonDirective;
-    }();
-
-    exports.ButtonDirective = ButtonDirective;
-
-    var Button =
-    /** @class */
-    function () {
-      function Button() {
-        this.iconPos = 'left';
-        this.onClick = new core_1.EventEmitter();
-        this.onFocus = new core_1.EventEmitter();
-        this.onBlur = new core_1.EventEmitter();
-      }
-
-      __decorate([core_1.Input(), __metadata("design:type", String)], Button.prototype, "type", void 0);
-
-      __decorate([core_1.Input(), __metadata("design:type", String)], Button.prototype, "iconPos", void 0);
-
-      __decorate([core_1.Input(), __metadata("design:type", String)], Button.prototype, "icon", void 0);
-
-      __decorate([core_1.Input(), __metadata("design:type", String)], Button.prototype, "label", void 0);
-
-      __decorate([core_1.Input(), __metadata("design:type", Boolean)], Button.prototype, "disabled", void 0);
-
-      __decorate([core_1.Input(), __metadata("design:type", Object)], Button.prototype, "style", void 0);
-
-      __decorate([core_1.Input(), __metadata("design:type", String)], Button.prototype, "styleClass", void 0);
-
-      __decorate([core_1.Output(), __metadata("design:type", core_1.EventEmitter)], Button.prototype, "onClick", void 0);
-
-      __decorate([core_1.Output(), __metadata("design:type", core_1.EventEmitter)], Button.prototype, "onFocus", void 0);
-
-      __decorate([core_1.Output(), __metadata("design:type", core_1.EventEmitter)], Button.prototype, "onBlur", void 0);
-
-      Button = __decorate([core_1.Component({
-        selector: 'p-button',
-        template: "\n        <button [attr.type]=\"type\" [class]=\"styleClass\" [style]=\"style\" [disabled]=\"disabled\"\n            [ngClass]=\"{'ui-button ui-widget ui-state-default ui-corner-all':true,\n                        'ui-button-icon-only': (icon && !label),\n                        'ui-button-text-icon-left': (icon && label && iconPos === 'left'),\n                        'ui-button-text-icon-right': (icon && label && iconPos === 'right'),\n                        'ui-button-text-only': (!icon && label),\n                        'ui-button-text-empty': (!icon && !label),\n                        'ui-state-disabled': disabled}\"\n                        (click)=\"onClick.emit($event)\" (focus)=\"onFocus.emit($event)\" (blur)=\"onBlur.emit($event)\">\n            <ng-content></ng-content>\n            <span [ngClass]=\"{'ui-clickable': true,\n                        'ui-button-icon-left': (iconPos === 'left'), \n                        'ui-button-icon-right': (iconPos === 'right')}\"\n                        [class]=\"icon\" *ngIf=\"icon\"></span>\n            <span class=\"ui-button-text ui-clickable\">{{label||'ui-btn'}}</span>\n        </button>\n    "
-      })], Button);
-      return Button;
-    }();
-
-    exports.Button = Button;
-
-    var ButtonModule =
-    /** @class */
-    function () {
-      function ButtonModule() {}
-
-      ButtonModule = __decorate([core_1.NgModule({
-        imports: [common_1.CommonModule],
-        exports: [ButtonDirective, Button],
-        declarations: [ButtonDirective, Button]
-      })], ButtonModule);
-      return ButtonModule;
-    }();
-
-    exports.ButtonModule = ButtonModule; //# sourceMappingURL=button.js.map
-
-    /***/
-  },
-
-  /***/
-  "./node_modules/primeng/components/dom/domhandler.js":
-  /*!***********************************************************!*\
-    !*** ./node_modules/primeng/components/dom/domhandler.js ***!
-    \***********************************************************/
-
-  /*! no static exports found */
-
-  /***/
-  function node_modulesPrimengComponentsDomDomhandlerJs(module, exports, __webpack_require__) {
-    "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true
-    });
-
-    var DomHandler =
-    /** @class */
-    function () {
-      function DomHandler() {}
-
-      DomHandler.addClass = function (element, className) {
-        if (element.classList) element.classList.add(className);else element.className += ' ' + className;
-      };
-
-      DomHandler.addMultipleClasses = function (element, className) {
-        if (element.classList) {
-          var styles = className.split(' ');
-
-          for (var i = 0; i < styles.length; i++) {
-            element.classList.add(styles[i]);
-          }
-        } else {
-          var styles = className.split(' ');
-
-          for (var i = 0; i < styles.length; i++) {
-            element.className += ' ' + styles[i];
-          }
-        }
-      };
-
-      DomHandler.removeClass = function (element, className) {
-        if (element.classList) element.classList.remove(className);else element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-      };
-
-      DomHandler.hasClass = function (element, className) {
-        if (element.classList) return element.classList.contains(className);else return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
-      };
-
-      DomHandler.siblings = function (element) {
-        return Array.prototype.filter.call(element.parentNode.children, function (child) {
-          return child !== element;
-        });
-      };
-
-      DomHandler.find = function (element, selector) {
-        return Array.from(element.querySelectorAll(selector));
-      };
-
-      DomHandler.findSingle = function (element, selector) {
-        if (element) {
-          return element.querySelector(selector);
-        }
-
-        return null;
-      };
-
-      DomHandler.index = function (element) {
-        var children = element.parentNode.childNodes;
-        var num = 0;
-
-        for (var i = 0; i < children.length; i++) {
-          if (children[i] == element) return num;
-          if (children[i].nodeType == 1) num++;
-        }
-
-        return -1;
-      };
-
-      DomHandler.indexWithinGroup = function (element, attributeName) {
-        var children = element.parentNode.childNodes;
-        var num = 0;
-
-        for (var i = 0; i < children.length; i++) {
-          if (children[i] == element) return num;
-          if (children[i].attributes && children[i].attributes[attributeName] && children[i].nodeType == 1) num++;
-        }
-
-        return -1;
-      };
-
-      DomHandler.relativePosition = function (element, target) {
-        var elementDimensions = element.offsetParent ? {
-          width: element.offsetWidth,
-          height: element.offsetHeight
-        } : this.getHiddenElementDimensions(element);
-        var targetHeight = target.offsetHeight;
-        var targetOffset = target.getBoundingClientRect();
-        var viewport = this.getViewport();
-        var top, left;
-
-        if (targetOffset.top + targetHeight + elementDimensions.height > viewport.height) {
-          top = -1 * elementDimensions.height;
-
-          if (targetOffset.top + top < 0) {
-            top = -1 * targetOffset.top;
-          }
-        } else {
-          top = targetHeight;
-        }
-
-        if (elementDimensions.width > viewport.width) {
-          // element wider then viewport and cannot fit on screen (align at left side of viewport)
-          left = targetOffset.left * -1;
-        } else if (targetOffset.left + elementDimensions.width > viewport.width) {
-          // element wider then viewport but can be fit on screen (align at right side of viewport)
-          left = (targetOffset.left + elementDimensions.width - viewport.width) * -1;
-        } else {
-          // element fits on screen (align with target)
-          left = 0;
-        }
-
-        element.style.top = top + 'px';
-        element.style.left = left + 'px';
-      };
-
-      DomHandler.absolutePosition = function (element, target) {
-        var elementDimensions = element.offsetParent ? {
-          width: element.offsetWidth,
-          height: element.offsetHeight
-        } : this.getHiddenElementDimensions(element);
-        var elementOuterHeight = elementDimensions.height;
-        var elementOuterWidth = elementDimensions.width;
-        var targetOuterHeight = target.offsetHeight;
-        var targetOuterWidth = target.offsetWidth;
-        var targetOffset = target.getBoundingClientRect();
-        var windowScrollTop = this.getWindowScrollTop();
-        var windowScrollLeft = this.getWindowScrollLeft();
-        var viewport = this.getViewport();
-        var top, left;
-
-        if (targetOffset.top + targetOuterHeight + elementOuterHeight > viewport.height) {
-          top = targetOffset.top + windowScrollTop - elementOuterHeight;
-
-          if (top < 0) {
-            top = windowScrollTop;
-          }
-        } else {
-          top = targetOuterHeight + targetOffset.top + windowScrollTop;
-        }
-
-        if (targetOffset.left + targetOuterWidth + elementOuterWidth > viewport.width) left = Math.max(0, targetOffset.left + windowScrollLeft + targetOuterWidth - elementOuterWidth);else left = targetOffset.left + windowScrollLeft;
-        element.style.top = top + 'px';
-        element.style.left = left + 'px';
-      };
-
-      DomHandler.getHiddenElementOuterHeight = function (element) {
-        element.style.visibility = 'hidden';
-        element.style.display = 'block';
-        var elementHeight = element.offsetHeight;
-        element.style.display = 'none';
-        element.style.visibility = 'visible';
-        return elementHeight;
-      };
-
-      DomHandler.getHiddenElementOuterWidth = function (element) {
-        element.style.visibility = 'hidden';
-        element.style.display = 'block';
-        var elementWidth = element.offsetWidth;
-        element.style.display = 'none';
-        element.style.visibility = 'visible';
-        return elementWidth;
-      };
-
-      DomHandler.getHiddenElementDimensions = function (element) {
-        var dimensions = {};
-        element.style.visibility = 'hidden';
-        element.style.display = 'block';
-        dimensions.width = element.offsetWidth;
-        dimensions.height = element.offsetHeight;
-        element.style.display = 'none';
-        element.style.visibility = 'visible';
-        return dimensions;
-      };
-
-      DomHandler.scrollInView = function (container, item) {
-        var borderTopValue = getComputedStyle(container).getPropertyValue('borderTopWidth');
-        var borderTop = borderTopValue ? parseFloat(borderTopValue) : 0;
-        var paddingTopValue = getComputedStyle(container).getPropertyValue('paddingTop');
-        var paddingTop = paddingTopValue ? parseFloat(paddingTopValue) : 0;
-        var containerRect = container.getBoundingClientRect();
-        var itemRect = item.getBoundingClientRect();
-        var offset = itemRect.top + document.body.scrollTop - (containerRect.top + document.body.scrollTop) - borderTop - paddingTop;
-        var scroll = container.scrollTop;
-        var elementHeight = container.clientHeight;
-        var itemHeight = this.getOuterHeight(item);
-
-        if (offset < 0) {
-          container.scrollTop = scroll + offset;
-        } else if (offset + itemHeight > elementHeight) {
-          container.scrollTop = scroll + offset - elementHeight + itemHeight;
-        }
-      };
-
-      DomHandler.fadeIn = function (element, duration) {
-        element.style.opacity = 0;
-        var last = +new Date();
-        var opacity = 0;
-
-        var tick = function tick() {
-          opacity = +element.style.opacity.replace(",", ".") + (new Date().getTime() - last) / duration;
-          element.style.opacity = opacity;
-          last = +new Date();
-
-          if (+opacity < 1) {
-            window.requestAnimationFrame && requestAnimationFrame(tick) || setTimeout(tick, 16);
-          }
-        };
-
-        tick();
-      };
-
-      DomHandler.fadeOut = function (element, ms) {
-        var opacity = 1,
-            interval = 50,
-            duration = ms,
-            gap = interval / duration;
-        var fading = setInterval(function () {
-          opacity = opacity - gap;
-
-          if (opacity <= 0) {
-            opacity = 0;
-            clearInterval(fading);
-          }
-
-          element.style.opacity = opacity;
-        }, interval);
-      };
-
-      DomHandler.getWindowScrollTop = function () {
-        var doc = document.documentElement;
-        return (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
-      };
-
-      DomHandler.getWindowScrollLeft = function () {
-        var doc = document.documentElement;
-        return (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
-      };
-
-      DomHandler.matches = function (element, selector) {
-        var p = Element.prototype;
-
-        var f = p['matches'] || p.webkitMatchesSelector || p['mozMatchesSelector'] || p['msMatchesSelector'] || function (s) {
-          return [].indexOf.call(document.querySelectorAll(s), this) !== -1;
-        };
-
-        return f.call(element, selector);
-      };
-
-      DomHandler.getOuterWidth = function (el, margin) {
-        var width = el.offsetWidth;
-
-        if (margin) {
-          var style = getComputedStyle(el);
-          width += parseFloat(style.marginLeft) + parseFloat(style.marginRight);
-        }
-
-        return width;
-      };
-
-      DomHandler.getHorizontalPadding = function (el) {
-        var style = getComputedStyle(el);
-        return parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
-      };
-
-      DomHandler.getHorizontalMargin = function (el) {
-        var style = getComputedStyle(el);
-        return parseFloat(style.marginLeft) + parseFloat(style.marginRight);
-      };
-
-      DomHandler.innerWidth = function (el) {
-        var width = el.offsetWidth;
-        var style = getComputedStyle(el);
-        width += parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
-        return width;
-      };
-
-      DomHandler.width = function (el) {
-        var width = el.offsetWidth;
-        var style = getComputedStyle(el);
-        width -= parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
-        return width;
-      };
-
-      DomHandler.getInnerHeight = function (el) {
-        var height = el.offsetHeight;
-        var style = getComputedStyle(el);
-        height += parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
-        return height;
-      };
-
-      DomHandler.getOuterHeight = function (el, margin) {
-        var height = el.offsetHeight;
-
-        if (margin) {
-          var style = getComputedStyle(el);
-          height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
-        }
-
-        return height;
-      };
-
-      DomHandler.getHeight = function (el) {
-        var height = el.offsetHeight;
-        var style = getComputedStyle(el);
-        height -= parseFloat(style.paddingTop) + parseFloat(style.paddingBottom) + parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
-        return height;
-      };
-
-      DomHandler.getWidth = function (el) {
-        var width = el.offsetWidth;
-        var style = getComputedStyle(el);
-        width -= parseFloat(style.paddingLeft) + parseFloat(style.paddingRight) + parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
-        return width;
-      };
-
-      DomHandler.getViewport = function () {
-        var win = window,
-            d = document,
-            e = d.documentElement,
-            g = d.getElementsByTagName('body')[0],
-            w = win.innerWidth || e.clientWidth || g.clientWidth,
-            h = win.innerHeight || e.clientHeight || g.clientHeight;
-        return {
-          width: w,
-          height: h
-        };
-      };
-
-      DomHandler.getOffset = function (el) {
-        var rect = el.getBoundingClientRect();
-        return {
-          top: rect.top + document.body.scrollTop,
-          left: rect.left + document.body.scrollLeft
-        };
-      };
-
-      DomHandler.replaceElementWith = function (element, replacementElement) {
-        var parentNode = element.parentNode;
-        if (!parentNode) throw "Can't replace element";
-        return parentNode.replaceChild(replacementElement, element);
-      };
-
-      DomHandler.getUserAgent = function () {
-        return navigator.userAgent;
-      };
-
-      DomHandler.isIE = function () {
-        var ua = window.navigator.userAgent;
-        var msie = ua.indexOf('MSIE ');
-
-        if (msie > 0) {
-          // IE 10 or older => return version number
-          return true;
-        }
-
-        var trident = ua.indexOf('Trident/');
-
-        if (trident > 0) {
-          // IE 11 => return version number
-          var rv = ua.indexOf('rv:');
-          return true;
-        }
-
-        var edge = ua.indexOf('Edge/');
-
-        if (edge > 0) {
-          // Edge (IE 12+) => return version number
-          return true;
-        } // other browser
-
-
-        return false;
-      };
-
-      DomHandler.isIOS = function () {
-        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window['MSStream'];
-      };
-
-      DomHandler.isAndroid = function () {
-        return /(android)/i.test(navigator.userAgent);
-      };
-
-      DomHandler.appendChild = function (element, target) {
-        if (this.isElement(target)) target.appendChild(element);else if (target.el && target.el.nativeElement) target.el.nativeElement.appendChild(element);else throw 'Cannot append ' + target + ' to ' + element;
-      };
-
-      DomHandler.removeChild = function (element, target) {
-        if (this.isElement(target)) target.removeChild(element);else if (target.el && target.el.nativeElement) target.el.nativeElement.removeChild(element);else throw 'Cannot remove ' + element + ' from ' + target;
-      };
-
-      DomHandler.isElement = function (obj) {
-        return typeof HTMLElement === "object" ? obj instanceof HTMLElement : obj && typeof obj === "object" && obj !== null && obj.nodeType === 1 && typeof obj.nodeName === "string";
-      };
-
-      DomHandler.calculateScrollbarWidth = function (el) {
-        if (el) {
-          var style = getComputedStyle(el);
-          return el.offsetWidth - el.clientWidth - parseFloat(style.borderLeftWidth) - parseFloat(style.borderRightWidth);
-        } else {
-          if (this.calculatedScrollbarWidth !== null) return this.calculatedScrollbarWidth;
-          var scrollDiv = document.createElement("div");
-          scrollDiv.className = "ui-scrollbar-measure";
-          document.body.appendChild(scrollDiv);
-          var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-          document.body.removeChild(scrollDiv);
-          this.calculatedScrollbarWidth = scrollbarWidth;
-          return scrollbarWidth;
-        }
-      };
-
-      DomHandler.calculateScrollbarHeight = function () {
-        if (this.calculatedScrollbarHeight !== null) return this.calculatedScrollbarHeight;
-        var scrollDiv = document.createElement("div");
-        scrollDiv.className = "ui-scrollbar-measure";
-        document.body.appendChild(scrollDiv);
-        var scrollbarHeight = scrollDiv.offsetHeight - scrollDiv.clientHeight;
-        document.body.removeChild(scrollDiv);
-        this.calculatedScrollbarWidth = scrollbarHeight;
-        return scrollbarHeight;
-      };
-
-      DomHandler.invokeElementMethod = function (element, methodName, args) {
-        element[methodName].apply(element, args);
-      };
-
-      DomHandler.clearSelection = function () {
-        if (window.getSelection) {
-          if (window.getSelection().empty) {
-            window.getSelection().empty();
-          } else if (window.getSelection().removeAllRanges && window.getSelection().rangeCount > 0 && window.getSelection().getRangeAt(0).getClientRects().length > 0) {
-            window.getSelection().removeAllRanges();
-          }
-        } else if (document['selection'] && document['selection'].empty) {
-          try {
-            document['selection'].empty();
-          } catch (error) {//ignore IE bug
-          }
-        }
-      };
-
-      DomHandler.getBrowser = function () {
-        if (!this.browser) {
-          var matched = this.resolveUserAgent();
-          this.browser = {};
-
-          if (matched.browser) {
-            this.browser[matched.browser] = true;
-            this.browser['version'] = matched.version;
-          }
-
-          if (this.browser['chrome']) {
-            this.browser['webkit'] = true;
-          } else if (this.browser['webkit']) {
-            this.browser['safari'] = true;
-          }
-        }
-
-        return this.browser;
-      };
-
-      DomHandler.resolveUserAgent = function () {
-        var ua = navigator.userAgent.toLowerCase();
-        var match = /(chrome)[ \/]([\w.]+)/.exec(ua) || /(webkit)[ \/]([\w.]+)/.exec(ua) || /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) || /(msie) ([\w.]+)/.exec(ua) || ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) || [];
-        return {
-          browser: match[1] || "",
-          version: match[2] || "0"
-        };
-      };
-
-      DomHandler.isInteger = function (value) {
-        if (Number.isInteger) {
-          return Number.isInteger(value);
-        } else {
-          return typeof value === "number" && isFinite(value) && Math.floor(value) === value;
-        }
-      };
-
-      DomHandler.isHidden = function (element) {
-        return element.offsetParent === null;
-      };
-
-      DomHandler.zindex = 1000;
-      DomHandler.calculatedScrollbarWidth = null;
-      DomHandler.calculatedScrollbarHeight = null;
-      return DomHandler;
-    }();
-
-    exports.DomHandler = DomHandler; //# sourceMappingURL=domhandler.js.map
-
-    /***/
-  },
-
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["pages-pages-module"], {
   /***/
   "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/e-commerce/e-commerce.component.html":
   /*!**************************************************************************************************!*\
@@ -764,7 +21,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h4 class=\"font-weight-bolder text-center mb-5\" style=\"text-transform: uppercase;\" *ngIf=\"display\">\r\n  {{ myInstitute.institute.basicInfo.name }}\r\n</h4>\r\n\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>\r\n        UPCOMING CLASS\r\n        <input id=\"date\" placeholder=\"Date\" [nbDatepicker]=\"formPicker\" />\r\n        <nb-datepicker #formPicker></nb-datepicker>\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: 50px auto auto; width: 100%;\"\r\n          >\r\n            <div\r\n              class=\"text-center mr-2\"\r\n              style=\"border-radius: 5px; background-color: skyblue;\"\r\n            ></div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>STUDENT REQUESTS </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n          >\r\n            <div>\r\n              <span\r\n                ><img\r\n                  src=\"assets/images/nick.png\"\r\n                  width=\"30px\"\r\n                  height=\"30px\"\r\n                  style=\"border-radius: 100%;\"\r\n              /></span>\r\n            </div>\r\n            <div class=\"pr-3 pl-3\"></div>\r\n\r\n            <div style=\"text-align: right;\">\r\n              <a href=\"#\" class=\"mr-2\">\r\n                <img src=\"../../../assets/img/check.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n              <a href=\"#\">\r\n                <img src=\"../../../assets/img/cross.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card style=\"max-height: 35vh;\">\r\n      <nb-card-header style=\"background-color: skyblue; color: black;\">\r\n        STUDY MATERIALS\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div style=\"display: grid; grid-template-columns: 50px auto; width: 100%;\">\r\n            <img\r\n              src=\"../../../assets/images/nick.png\"\r\n              width=\"30px\"\r\n              height=\"30px\"\r\n              style=\"border-radius: 100%;\"\r\n            />\r\n\r\n            <div></div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>LEADS</nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div class=\"mb-3\" style=\"display: grid; grid-template-columns: auto; width: 100%;\">\r\n            <div class=\"pr-3 pl-3\" *ngFor=\"let i of students\" [hidden]=\"!i.active\">\r\n              {{ i.basicDetails.name }} {{ i.basicDetails.studentEmail }}\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n";
+    __webpack_exports__["default"] = "<h4 class=\"font-weight-bolder text-center mb-5\" style=\"text-transform: uppercase;\" *ngIf=\"display\">\r\n  {{ myInstitute.institute.basicInfo.name }}\r\n</h4>\r\n\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>\r\n        UPCOMING CLASS\r\n        <input id=\"date\" placeholder=\"Date\" [nbDatepicker]=\"formPicker\" />\r\n        <nb-datepicker #formPicker></nb-datepicker>\r\n      </nb-card-header>\r\n      <nb-card-body>\r\n        <p class=\"text-center\">No Upcoming Classes Available</p>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>STUDENT REQUESTS </nb-card-header>\r\n      <nb-card-body>\r\n        <p class=\"text-center\">No Student Request Available</p>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card style=\"max-height: 35vh;\">\r\n      <nb-card-header style=\"background-color: skyblue; color: black;\">\r\n        STUDY MATERIALS\r\n      </nb-card-header>\r\n      <nb-card-body>\r\n        <p class=\"text-center\">No Study Material Available</p>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>LEADS</nb-card-header>\r\n      <nb-card-body>\r\n        <p class=\"text-center\">No Leads Available</p>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n";
     /***/
   },
 
@@ -784,7 +41,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card [hidden]=\"display\">\r\n  <nb-card-body>\r\n    <div class=\"text-center\">\r\n      <img src=\"../../../assets/img/institute.png\" width=\"100px\" height=\"100px\" />\r\n      <h3 class=\"mt-4\">NO INSTITUTE ADDED</h3>\r\n      <small>Click on add Institute Button to create other branches</small>\r\n      <div class=\"mt-4\">\r\n        <button nbButton status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\r\n          ADD INSTITUTE\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"basic\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>\r\n        MY INSTITUTES\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item *ngFor=\"let item of institute; let i = index\">\r\n          <a (click)=\"viewInstitute(item._id)\" style=\"width: 100%; cursor: pointer;\">\r\n            <span\r\n              ><img\r\n                [src]=\"item.basicInfo.logo.secure_url\"\r\n                width=\"30px\"\r\n                height=\"30px\"\r\n                style=\"border-radius: 100%;\"\r\n            /></span>\r\n\r\n            <span class=\"ml-3\">{{ item.basicInfo.name }}</span>\r\n            <span class=\"ml-3\">{{ item.address.city }}</span>\r\n            <span style=\"float: right;\">\r\n              <img src=\"../../../assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n            </span>\r\n          </a>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card>\r\n      <nb-card-body>\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-2\">\r\n            <img src=\"../../../assets/img/home-yellow.png\" alt=\"Add Institute\" />\r\n          </div>\r\n          <div class=\"col-sm-8\">\r\n            <p class=\"font-weight-bold pt-3\">\r\n              ADD INSTITUTE\r\n            </p>\r\n          </div>\r\n          <div class=\"col-sm-2\">\r\n            <a routerLink=\"/pages/membership\">\r\n              <img src=\"assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n            </a>\r\n          </div>\r\n        </div>\r\n      </nb-card-body>\r\n    </nb-card>\r\n    <nb-card>\r\n      <nb-card-body>\r\n        <p class=\"font-weight-bold\">\r\n          SMS BALANCE\r\n        </p>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header\r\n        >UPCOMING CLASS\r\n        <nb-select status=\"control\" placeholder=\"institute\" style=\"float: right;\">\r\n          <nb-option [value]=\"undefined\">Select</nb-option>\r\n          <nb-option *ngFor=\"let item of institute\" value=\"{{ item.basicInfo.name }}\">{{\r\n            item.basicInfo.name\r\n          }}</nb-option>\r\n        </nb-select>\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div class=\"mb-3\" style=\"display: grid; grid-template-columns: 50px auto auto;\">\r\n            <div\r\n              class=\"text-center mr-2\"\r\n              style=\"border-radius: 5px; background-color: skyblue;\"\r\n            ></div>\r\n            <div></div>\r\n\r\n            <div class=\"text-right\"></div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>STUDENT REQUETS </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n          >\r\n            <div>\r\n              <span\r\n                ><img\r\n                  src=\"assets/images/nick.png\"\r\n                  width=\"30px\"\r\n                  height=\"30px\"\r\n                  style=\"border-radius: 100%;\"\r\n              /></span>\r\n            </div>\r\n            <div class=\"pr-3 pl-3\"></div>\r\n\r\n            <div style=\"text-align: right;\">\r\n              <a href=\"#\" class=\"mr-2\">\r\n                <img src=\"assets/img/check.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n              <a href=\"#\">\r\n                <img src=\"assets/img/cross.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header style=\"background-color: skyblue; color: black;\">\r\n        PENDING FEES\r\n        <input id=\"date\" placeholder=\"Pick Date\" [nbDatepicker]=\"formpicker\" />\r\n        <nb-datepicker #formpicker></nb-datepicker>\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            *ngFor=\"let item of studentPendingFee\"\r\n            style=\"display: grid; grid-template-columns: 50px auto auto;\"\r\n          >\r\n            <div class=\"text-center mr-2\" style=\"border-radius: 5px; background-color: skyblue;\">\r\n              <small>\r\n                <b>{{ item.date }}</b>\r\n              </small>\r\n              <small style=\"display: block;\">{{ item.month }}</small>\r\n            </div>\r\n            <div>\r\n              <small\r\n                ><b>{{ item.name }}</b></small\r\n              >\r\n              <small style=\"display: block;\">{{ item.institute }}</small>\r\n              <small style=\"display: block;\">{{ item.batch }}</small>\r\n              <small style=\"display: block;\">{{ item.roll }}</small>\r\n            </div>\r\n            <div style=\"text-align: right;\">\r\n              <small>INR</small>\r\n              <small style=\"display: block;\">{{ item.fee }}</small>\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>LEADS </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n            *ngFor=\"let item of studentReq\"\r\n          >\r\n            <div>\r\n              <span\r\n                ><img\r\n                  src=\"assets/images/nick.png\"\r\n                  width=\"30px\"\r\n                  height=\"30px\"\r\n                  style=\"border-radius: 100%;\"\r\n              /></span>\r\n            </div>\r\n            <div class=\"pr-3 pl-3\">\r\n              <small\r\n                ><b>{{ item.name }}</b> {{ item.msg }} <b>{{ item.institute }}</b></small\r\n              >\r\n              <small style=\"display: block;\">email: {{ item.email }}</small>\r\n              <small style=\"display: block;\">contact: {{ item.contact }}</small>\r\n            </div>\r\n\r\n            <div style=\"text-align: right;\">\r\n              <button nbButton status=\"success\">RESPOND</button>\r\n            </div>\r\n          </div>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>Messages</nb-card-header>\r\n      <nb-list></nb-list>\r\n    </nb-card>\r\n  </div>\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header> New Leads</nb-card-header>\r\n      <nb-list>\r\n        <div\r\n          class=\"mb-3\"\r\n          style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n          *ngFor=\"let msg of messages\"\r\n        ></div>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n";
+    __webpack_exports__["default"] = "<nb-card [hidden]=\"display\">\r\n  <nb-card-body>\r\n    <div class=\"text-center\">\r\n      <img src=\"../../../assets/img/institute.png\" width=\"100px\" height=\"100px\" />\r\n      <h3 class=\"mt-4\">NO INSTITUTE ADDED</h3>\r\n      <small *ngIf=\"showAddInstituteBtn\"\r\n        >Click on add Institute Button to create other branches</small\r\n      >\r\n      <div class=\"mt-4\" *ngIf=\"showAddInstituteBtn\">\r\n        <button nbButton status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\r\n          ADD INSTITUTE\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"basic\" style=\"max-height: 35vh;\">\r\n      <nb-card-header>\r\n        MY INSTITUTES\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item *ngFor=\"let item of institutes; let i = index\">\r\n          <a (click)=\"viewInstitute(item._id)\" style=\"width: 100%; cursor: pointer;\">\r\n            <span\r\n              ><img\r\n                [src]=\"item.basicInfo.logo.secure_url\"\r\n                width=\"30px\"\r\n                height=\"30px\"\r\n                style=\"border-radius: 100%;\"\r\n            /></span>\r\n\r\n            <span class=\"ml-3\">{{ item.basicInfo.name }}</span>\r\n            <span class=\"ml-3\">{{ item.address.city }}</span>\r\n            <span style=\"float: right;\">\r\n              <img src=\"../../../assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n            </span>\r\n          </a>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card *ngIf=\"showAddInstituteBtn\">\r\n      <nb-card-body>\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-2\">\r\n            <img src=\"../../../assets/img/home-yellow.png\" alt=\"Add Institute\" />\r\n          </div>\r\n          <div class=\"col-sm-8\">\r\n            <p class=\"font-weight-bold pt-3\">\r\n              ADD INSTITUTE\r\n            </p>\r\n          </div>\r\n          <div class=\"col-sm-2\">\r\n            <a routerLink=\"/pages/membership\">\r\n              <img src=\"assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n            </a>\r\n          </div>\r\n        </div>\r\n      </nb-card-body>\r\n    </nb-card>\r\n    <nb-card>\r\n      <nb-card-body>\r\n        <p class=\"font-weight-bold\">\r\n          SMS BALANCE\r\n        </p>\r\n        <h2>0 SMS Pending</h2>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header\r\n        >UPCOMING CLASS\r\n        <nb-select elect status=\"control\" placeholder=\"institute\" style=\"float: right;\">\r\n          <nb-option [value]=\"undefined\">Select</nb-option>\r\n          <nb-option *ngFor=\"let item of institutes\" value=\"{{ item.basicInfo.name }}\">{{\r\n            item.basicInfo.name\r\n          }}</nb-option>\r\n        </nb-select>\r\n      </nb-card-header>\r\n      <nb-card-body>\r\n        <p class=\"text-center\">No Upcoming Class Available</p>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>STUDENT REQUESTS </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item>\r\n          <p class=\"text-center\">No Requests Available</p>\r\n          <!-- <div\r\n            class=\"mb-3\"\r\n            style=\"display: grid; grid-template-columns: auto auto auto; width: 100%;\"\r\n          >\r\n            <div>\r\n              <span\r\n                ><img\r\n                  src=\"assets/images/nick.png\"\r\n                  width=\"30px\"\r\n                  height=\"30px\"\r\n                  style=\"border-radius: 100%;\"\r\n              /></span>\r\n            </div>\r\n            <div class=\"pr-3 pl-3\"></div>\r\n\r\n            <div style=\"text-align: right;\">\r\n              <a href=\"#\" class=\"mr-2\">\r\n                <img src=\"assets/img/check.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n              <a href=\"#\">\r\n                <img src=\"assets/img/cross.png\" width=\"30px\" height=\"30px\" />\r\n              </a>\r\n            </div>\r\n          </div> -->\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header style=\"background-color: skyblue; color: black;\">\r\n        PENDING FEES\r\n        <input id=\"date\" placeholder=\"Pick Date\" [nbDatepicker]=\"formpicker\" />\r\n        <nb-datepicker #formpicker></nb-datepicker>\r\n      </nb-card-header>\r\n      <nb-card-body>\r\n        <p class=\"text-center\">No Pending Fees Available</p>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>LEADS </nb-card-header>\r\n      <nb-card-body>\r\n        <p class=\"test-center\">No Leads</p>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n<div class=\"row\" [hidden]=\"!display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>Messages</nb-card-header>\r\n      <nb-card-body>\r\n        <p class=\"test-center\">No Messages</p>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"warning\" style=\"max-height: 35vh;\" [hidden]=\"false\">\r\n      <nb-card-header>New Leads</nb-card-header>\r\n      <nb-card-body>\r\n        <p class=\"test-center\">No New Leads</p>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n";
     /***/
   },
 
@@ -897,14 +154,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _pages_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ../pages-menu */
     "./src/app/pages/pages-menu.ts");
+    /* harmony import */
+
+
+    var _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ../../services/auth-services/auth.service */
+    "./src/app/services/auth-services/auth.service.ts");
+    /* harmony import */
+
+
+    var _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ../../services/role/role-assign.service */
+    "./src/app/services/role/role-assign.service.ts");
 
     var ECommerceComponent = /*#__PURE__*/function () {
-      function ECommerceComponent(api, router, active) {
+      function ECommerceComponent(api, router, active, authService, roleService) {
         _classCallCheck(this, ECommerceComponent);
 
         this.api = api;
         this.router = router;
         this.active = active;
+        this.authService = authService;
+        this.roleService = roleService;
         this.students = [];
         this.studentReq = [];
         this.classes = [];
@@ -929,6 +200,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].children[3].link = '/pages/institute/branch-config/manage-receipt/' + this.instituteId;
           _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].children[4].link = '/pages/institute/branch-config/manage-employee/' + this.instituteId;
           _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][6].children[0].link = '/pages/communication/announcements/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][7].children[0].link = '/pages/institute/test/manage-test/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][7].children[1].link = '/pages/institute/test/manage-test-score/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][8].children[3].link = '/pages/student-reports/mentoring/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][8].children[4].link = '/pages/student-reports/manage-ptms/' + this.instituteId;
+          '/pages/institute/online-classes/manage-class/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][13].children[0].link = '/pages/institute/online-classes/settings/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][13].children[1].link = '/pages/institute/online-classes/create-class/' + this.instituteId;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][13].children[2].link = '/pages/institute/online-classes/manage-class/' + this.instituteId;
           this.getStudents(this.instituteId);
           this.getInstitute(this.instituteId);
         }
@@ -939,18 +218,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this.api.getInstitute(id).subscribe(function (res) {
             _this.myInstitute = res;
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][1].hidden = true;
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][2].hidden = false;
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][3].hidden = false;
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].hidden = false;
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][5].hidden = false;
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][6].hidden = false; // MENU_ITEMS[7].hidden = false;
-            // MENU_ITEMS[8].hidden = false;
-            // MENU_ITEMS[9].hidden = false;
-            // MENU_ITEMS[10].hidden = false;
 
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][11].hidden = false;
-            _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][12].hidden = false;
+            _this.roleService.assignRoles(_this.authService.getUser().role);
+
             _this.display = true;
           });
         }
@@ -977,6 +247,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
       }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
+      }, {
+        type: _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]
+      }, {
+        type: _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_6__["RoleAssignService"]
       }];
     };
 
@@ -988,7 +262,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./e-commerce.component.scss */
       "./src/app/pages/e-commerce/e-commerce.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])], ECommerceComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"], _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_6__["RoleAssignService"]])], ECommerceComponent);
     /***/
   },
 
@@ -1040,43 +314,64 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _services_institute_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./../../services/institute.service */
+    "./src/app/services/institute.service.ts");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ../../services/api.service */
     "./src/app/services/api.service.ts");
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
-    var _pages_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _pages_menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ../pages-menu */
     "./src/app/pages/pages-menu.ts");
     /* harmony import */
 
 
-    var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/platform-browser */
     "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+    /* harmony import */
+
+
+    var _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ../../services/auth-services/auth.service */
+    "./src/app/services/auth-services/auth.service.ts");
+    /* harmony import */
+
+
+    var _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! ../../services/role/role-assign.service */
+    "./src/app/services/role/role-assign.service.ts");
 
     var HomeComponent = /*#__PURE__*/function () {
-      function HomeComponent(api, router, active, domSanitizer) {
+      function HomeComponent(api, router, active, domSanitizer, instituteService, authService, roleService) {
         _classCallCheck(this, HomeComponent);
 
         this.api = api;
         this.router = router;
         this.active = active;
         this.domSanitizer = domSanitizer;
-        this.institute = [];
+        this.instituteService = instituteService;
+        this.authService = authService;
+        this.roleService = roleService;
+        this.institutes = [];
         this.students = [];
         this.studentReq = [];
         this.classes = [];
@@ -1091,32 +386,56 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function ngOnInit() {
           this.display = false;
           this.getInstitutes();
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][1].hidden = false;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][2].hidden = true;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][3].hidden = true;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][4].hidden = true;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][5].hidden = true;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][6].hidden = true;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][7].hidden = true;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][8].hidden = true;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][9].hidden = true;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][10].hidden = true;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][11].hidden = true;
-          _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][12].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][2].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][3].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][4].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][5].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][6].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][7].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][8].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][9].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][10].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][11].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][12].hidden = true;
+          _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][13].hidden = true;
         }
       }, {
         key: "getInstitutes",
         value: function getInstitutes() {
           var _this3 = this;
 
-          this.api.getInstitutes().subscribe(function (data) {
-            _this3.institutes = data;
-            _this3.institute = JSON.parse(JSON.stringify(_this3.institutes));
+          var user = this.authService.getUser();
 
-            if (_this3.institute.length) {
-              _this3.display = true;
-            }
-          });
+          if (user && user.role === 'institute') {
+            _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][1].hidden = false;
+            this.showAddInstituteBtn = true;
+            this.api.getInstitutes().subscribe(function (data) {
+              _this3.institutes = data;
+
+              if (_this3.institutes.length) {
+                _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][1].children[1].hidden = false;
+
+                _this3.instituteService.setInstitutes(_this3.institutes);
+
+                _this3.display = true;
+              } else {
+                _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][1].children[1].hidden = true;
+              }
+            });
+          } else if (user && user.role === 'employee') {
+            this.api.getEmployeeInstitutes({
+              email: user.email
+            }).subscribe(function (data) {
+              _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][1].hidden = true;
+              _this3.institutes = data;
+
+              if (_this3.institutes.length) {
+                _this3.instituteService.setInstitutes(_this3.institutes);
+
+                _this3.display = true;
+              }
+            });
+          }
         }
       }, {
         key: "onClick",
@@ -1126,7 +445,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "viewInstitute",
         value: function viewInstitute(id, name) {
+          var role = this.getEmployeeRole(id);
+          this.roleService.assignRoles(role);
           this.router.navigate(['/pages/dashboard', id]);
+        }
+      }, {
+        key: "getEmployeeRole",
+        value: function getEmployeeRole(instituteId) {
+          var institiute = this.institutes.find(function (institute) {
+            return instituteId === institute._id;
+          });
+
+          if (institiute) {
+            return institiute.role;
+          }
         }
       }, {
         key: "ngOnDestroy",
@@ -1140,18 +472,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     HomeComponent.ctorParameters = function () {
       return [{
-        type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+        type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
       }, {
-        type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__["DomSanitizer"]
+        type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["DomSanitizer"]
+      }, {
+        type: _services_institute_service__WEBPACK_IMPORTED_MODULE_1__["InstituteService"]
+      }, {
+        type: _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"]
+      }, {
+        type: _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_8__["RoleAssignService"]
       }];
     };
 
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('unloaded'), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", []), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)], HomeComponent.prototype, "ngOnDestroy", null);
-    HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["HostListener"])('unloaded'), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", []), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)], HomeComponent.prototype, "ngOnDestroy", null);
+    HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
       selector: 'ngx-home',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./home.component.html */
@@ -1159,7 +497,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./home.component.scss */
       "./src/app/pages/home/home.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__["DomSanitizer"]])], HomeComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["DomSanitizer"], _services_institute_service__WEBPACK_IMPORTED_MODULE_1__["InstituteService"], _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"], _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_8__["RoleAssignService"]])], HomeComponent);
     /***/
   },
 
@@ -1570,144 +908,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   },
 
   /***/
-  "./src/app/pages/pages-menu.ts":
-  /*!*************************************!*\
-    !*** ./src/app/pages/pages-menu.ts ***!
-    \*************************************/
-
-  /*! exports provided: MENU_ITEMS */
-
-  /***/
-  function srcAppPagesPagesMenuTs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "MENU_ITEMS", function () {
-      return MENU_ITEMS;
-    });
-    /* harmony import */
-
-
-    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! tslib */
-    "./node_modules/tslib/tslib.es6.js");
-
-    var MENU_ITEMS = [{
-      title: 'Home',
-      icon: 'home-outline',
-      link: '/pages/home',
-      home: true
-    }, {
-      title: 'Institute',
-      icon: 'home-outline',
-      hidden: true,
-      children: [{
-        title: 'Add Institute',
-        link: '/pages/membership'
-      }, {
-        title: 'Manage Institute',
-        link: '/pages/institute/manage-institute'
-      }]
-    }, {
-      title: 'Dashboard',
-      icon: 'layout-outline',
-      link: '',
-      pathMatch: 'full',
-      hidden: true
-    }, {
-      title: 'Daily Links',
-      hidden: true
-    }, {
-      title: 'Branch Configuration',
-      icon: 'share-outline',
-      link: '/pages/institute/branch-config',
-      hidden: true,
-      children: [{
-        title: 'Courses',
-        link: '/pages/institute/branch-config/manage-course'
-      }, {
-        title: 'Batches',
-        link: '/pages/institute/branch-config/manage-batch'
-      }, {
-        title: 'Discount',
-        link: '/pages/institute/branch-config/manage-discount'
-      }, {
-        title: 'Receipt',
-        link: '/pages/institute/branch-config/manage-receipt'
-      }, {
-        title: 'Manage Employee',
-        link: '/pages/institute/branch-config/manage-employee'
-      }]
-    }, {
-      title: 'Students',
-      icon: 'person-outline',
-      hidden: true,
-      children: [{
-        title: 'Add Students',
-        link: '/pages/institute/add-students'
-      }, {
-        title: 'Active Student',
-        link: '/pages/institute/manage-students'
-      }, {
-        title: 'Pending Student',
-        link: '/pages/institute/pending-students'
-      }]
-    }, {
-      title: 'Communications',
-      hidden: true,
-      children: [{
-        title: 'Announcements',
-        link: ''
-      }]
-    }, {
-      title: 'Tests',
-      hidden: true,
-      children: [{
-        title: 'Define Test'
-      }, {
-        title: 'Upload Scores'
-      }]
-    }, {
-      title: 'Student Reports',
-      hidden: true,
-      children: [{
-        title: 'Attendance Summary'
-      }, {
-        title: 'Performance'
-      }, {
-        title: 'Remarks'
-      }, {
-        title: 'Mentoring'
-      }, {
-        title: 'Schedule PTMs'
-      }]
-    }, {
-      title: 'Reports',
-      hidden: true,
-      children: [{
-        title: 'Finance reports'
-      }, {
-        title: 'ETC'
-      }]
-    }, {
-      title: 'LEAD MANAGER',
-      hidden: true
-    }, {
-      title: 'Schedule',
-      link: '/pages/institute/add-schedule/1',
-      hidden: true
-    }, {
-      title: 'Attendance',
-      link: '',
-      hidden: true
-    }];
-    /***/
-  },
-
-  /***/
   "./src/app/pages/pages-routing.module.ts":
   /*!***********************************************!*\
     !*** ./src/app/pages/pages-routing.module.ts ***!
@@ -1807,6 +1007,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           /*! ./communication/communication/communication.module */
           "./src/app/pages/communication/communication/communication.module.ts")).then(function (m) {
             return m.CommunicationModule;
+          });
+        }
+      }, {
+        path: 'student-reports',
+        loadChildren: function loadChildren() {
+          return __webpack_require__.e(
+          /*! import() | student-reports-student-report-module */
+          "student-reports-student-report-module").then(__webpack_require__.bind(null,
+          /*! ./student-reports/student-report.module */
+          "./src/app/pages/student-reports/student-report.module.ts")).then(function (m) {
+            return m.StudentReportModule;
           });
         }
       }, {
@@ -1999,7 +1210,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _membership_membership_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! ./membership/membership.component */
-    "./src/app/pages/membership/membership.component.ts"); //import { InstAddDialogComponent } from './institute/add-institute/inst-add-dialog/inst-add-dialog.component';
+    "./src/app/pages/membership/membership.component.ts"); // import { InstAddDialogComponent } from './institute/add-institute/inst-add-dialog/inst-add-dialog.component';
 
 
     var PagesModule = function PagesModule() {
@@ -2133,4 +1344,4 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /***/
   }
 }]);
-//# sourceMappingURL=app-pages-pages-module-es5.js.map
+//# sourceMappingURL=pages-pages-module-es5.js.map

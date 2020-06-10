@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"goManage()\" style=\"color: black;\">\r\n    Manage Batches\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Add Batches</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"batch\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Course</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <label for=\"course\">Select Parent Course</label>\r\n          <nb-select\r\n            placeholder=\"Select Parent Course\"\r\n            id=\"course\"\r\n            fullWidth\r\n            formControlName=\"course\"\r\n            [status]=\"f.course.errors && submitted ? 'danger' : 'basic'\"\r\n          >\r\n            <!-- <nb-option value=\"\">Select Parent Course</nb-option> -->\r\n            <nb-option *ngFor=\"let item of courses.course\" [value]=\"item._id\"\r\n              >{{ item.name }}\r\n            </nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.course.errors && submitted\">*course is required</small>\r\n        </div>\r\n        <div class=\"col-sm-6\">\r\n          <label for=\"code\">Unique Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            id=\"code\"\r\n            placeholder=\"Unique Code\"\r\n            formControlName=\"batchCode\"\r\n            required\r\n            [status]=\"f.batchCode.errors && submitted ? 'danger' : 'basic'\"\r\n          />\r\n\r\n          <small *ngIf=\"f.batchCode.errors && submitted\">*Code is required</small>\r\n        </div>\r\n      </div>\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"des\">Description</label>\r\n          <textarea\r\n            name=\"description\"\r\n            id=\"des\"\r\n            cols=\"30\"\r\n            rows=\"6\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            formControlName=\"description\"\r\n            placeholder=\"Description\"\r\n          ></textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: left; margin: 1rem; text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"goManage()\" style=\"color: black;\">\r\n    Manage Batches\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Add Batches</p>\r\n<nb-card *ngIf=\"display\">\r\n  <nb-card-body>\r\n    <form [formGroup]=\"batchForm\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Course</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <label for=\"course\">Select Parent Course</label>\r\n          <nb-select\r\n            placeholder=\"Select Parent Course\"\r\n            id=\"course\"\r\n            fullWidth\r\n            formControlName=\"course\"\r\n            [status]=\"f.course.errors && submitted ? 'danger' : 'basic'\"\r\n          >\r\n            <!-- <nb-option value=\"\">Select Parent Course</nb-option> -->\r\n            <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\"\r\n              >{{ course.name }}\r\n            </nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.course.errors && submitted\">*course is required</small>\r\n        </div>\r\n        <div class=\"col-sm-6\">\r\n          <label for=\"code\">Unique Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            id=\"code\"\r\n            placeholder=\"Unique Code\"\r\n            formControlName=\"batchCode\"\r\n            required\r\n            [status]=\"f.batchCode.errors && submitted ? 'danger' : 'basic'\"\r\n          />\r\n\r\n          <small *ngIf=\"f.batchCode.errors && submitted\">*Code is required</small>\r\n        </div>\r\n      </div>\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"des\">Description</label>\r\n          <textarea\r\n            name=\"description\"\r\n            id=\"des\"\r\n            cols=\"30\"\r\n            rows=\"6\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            formControlName=\"description\"\r\n            placeholder=\"Description\"\r\n          ></textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: left; margin: 1rem; text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Batch</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Batch Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Course</th>\n          <th>Code</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let batch of batches.batch\">\n          <td>{{ batch.course }}</td>\n          <td>{{ batch.batchCode }}</td>\n          <td>{{ batch.description }}</td>\n          <td class=\"text-right\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(batch._id)\">\n              Edit\n            </button>\n            <button nbButton status=\"danger\" (click)=\"delete(batch._id)\">\n              Del\n            </button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Batch</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Batch Here</p>\n<nb-card>\n  <nb-card-body>\n    <table *ngIf=\"batches.length > 0; else noBatches\">\n      <thead>\n        <tr>\n          <th>Course</th>\n          <th>Code</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let batch of batches\">\n          <td>{{ batch.course }}</td>\n          <td>{{ batch.batchCode }}</td>\n          <td>{{ batch.description }}</td>\n          <td class=\"text-right\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(batch._id)\">\n              Edit\n            </button>\n            <button nbButton status=\"danger\" (click)=\"delete(batch._id)\">\n              Del\n            </button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    <ng-template #noBatches>\n      <p class=\"text-center mt-3\">No Batches Found</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\r\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"back()\">\r\n    MANAGE COURSES\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Add Course Here</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"course\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"name\">Course Name</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"name\"\r\n            fullWidth\r\n            [status]=\"f.name.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"name\"\r\n            placeholder=\"Course Name\"\r\n          />\r\n          <small *ngIf=\"f.name.errors && submitted\">*Course name is req.</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"code\">Course Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"code\"\r\n            fullWidth\r\n            [status]=\"f.courseCode.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"courseCode\"\r\n            placeholder=\"Course Code\"\r\n          />\r\n          <small *ngIf=\"f.courseCode.errors && submitted\">*Course code is required</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"fees\">Course Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            #fees\r\n            (keyup)=\"courseFee(fees.value)\"\r\n            id=\"fees\"\r\n            formControlName=\"fees\"\r\n            placeholder=\"Course Fees\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">Course Duration</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"duration\"\r\n            maxlength=\"2\"\r\n            minlength=\"1\"\r\n            placeholder=\"Duration\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">GST</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"gstValue\"\r\n            #ex\r\n            (keyup)=\"exclusive(ex.value)\"\r\n            placeholder=\"Exclusive GST in %\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-1\"><br /><br />Or</div>\r\n        <div class=\"col-sm-2\">\r\n          <br />\r\n          <nb-checkbox\r\n            (checkedChange)=\"inclusiveGst($event)\"\r\n            [(ngModel)]=\"gstCheckBox\"\r\n            [ngModelOptions]=\"{ standalone: true }\"\r\n            fullWidth\r\n            status=\"warning\"\r\n            >Inclusive GST</nb-checkbox\r\n          >\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>Total Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"totalFee\"\r\n            disabled=\"true\"\r\n            placeholder=\"TotalFee\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"des\">Description</label>\r\n          <textarea\r\n            name=\"discription\"\r\n            id=\"des\"\r\n            status=\"basic\"\r\n            nbInput\r\n            fullWidth\r\n            formControlName=\"discription\"\r\n            placeholder=\"Description\"\r\n            cols=\"100\"\r\n            rows=\"4\"\r\n            id=\"dis\"\r\n          ></textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"display: block; margin-top: 1rem; text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ edit === 'true' ? 'Update Course' : 'Add Course' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\r\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"back()\">\r\n    MANAGE COURSES\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Add Course Here</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"course\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"name\">Course Name</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"name\"\r\n            fullWidth\r\n            [status]=\"f.name.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"name\"\r\n            placeholder=\"Course Name\"\r\n          />\r\n          <small *ngIf=\"f.name.errors && submitted\">*Course name is req.</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"code\">Course Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"code\"\r\n            fullWidth\r\n            [status]=\"f.courseCode.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"courseCode\"\r\n            placeholder=\"Course Code\"\r\n          />\r\n          <small *ngIf=\"f.courseCode.errors && submitted\">*Course code is required</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"fees\">Course Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            #fees\r\n            (keyup)=\"courseFee(fees.value)\"\r\n            id=\"fees\"\r\n            formControlName=\"fees\"\r\n            placeholder=\"Course Fees\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">Course Duration (in Months)</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"duration\"\r\n            maxlength=\"2\"\r\n            minlength=\"1\"\r\n            placeholder=\"Duration in Months\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">GST</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"gstValue\"\r\n            #ex\r\n            (keyup)=\"exclusive(ex.value)\"\r\n            placeholder=\"Exclusive GST in %\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-1\"><br /><br />Or</div>\r\n        <div class=\"col-sm-2\">\r\n          <br />\r\n          <nb-checkbox\r\n            (checkedChange)=\"inclusiveGst($event)\"\r\n            [(ngModel)]=\"gstCheckBox\"\r\n            [ngModelOptions]=\"{ standalone: true }\"\r\n            fullWidth\r\n            status=\"warning\"\r\n            >Inclusive GST</nb-checkbox\r\n          >\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>Total Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"totalFee\"\r\n            disabled=\"true\"\r\n            placeholder=\"TotalFee\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"des\">Description</label>\r\n          <textarea\r\n            name=\"discription\"\r\n            id=\"des\"\r\n            status=\"basic\"\r\n            nbInput\r\n            fullWidth\r\n            formControlName=\"discription\"\r\n            placeholder=\"Description\"\r\n            cols=\"100\"\r\n            rows=\"4\"\r\n            id=\"dis\"\r\n          ></textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"display: block; margin-top: 1rem; text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ edit === 'true' ? 'Update Course' : 'Add Course' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\n    ADD COURSES\n  </button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Course Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Course Name</th>\n          <th>Code</th>\n          <th>Duration</th>\n          <th>Fees</th>\n          <th>GST</th>\n          <th>Total Fees (Rs.)</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of courses; let i = index\">\n          <td>{{ item.name }}</td>\n          <td>{{ item.courseCode }}</td>\n          <td>{{ item.duration }}</td>\n          <td>{{ item.fees }}</td>\n          <td>{{ item.gst }}</td>\n          <td>&#x20B9; {{ item.totalFee }}</td>\n          <td style=\"text-align: right;\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\n    ADD COURSES\n  </button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Course Here</p>\n<nb-card>\n  <nb-card-body>\n    <table *ngIf=\"courses.length > 0; else no_courses\">\n      <thead>\n        <tr>\n          <th>Course Name</th>\n          <th>Code</th>\n          <th>Duration</th>\n          <th>Fees</th>\n          <th>GST</th>\n          <th>Total Fees (Rs.)</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of courses; let i = index\">\n          <td>{{ item.name }}</td>\n          <td>{{ item.courseCode }}</td>\n          <td>{{ item.duration }}</td>\n          <td>{{ item.fees }}</td>\n          <td>{{ item.gst }}</td>\n          <td>&#x20B9; {{ item.totalFee }}</td>\n          <td style=\"text-align: right;\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    <ng-template #no_courses>\n      <p class=\"mt-5 mb-5 text-center\">\n        No Courses Found\n      </p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -87,7 +87,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"back()\" style=\"color: black;\">Manage Discount</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Define Discount</p>\n<nb-card>\n  <nb-card-body>\n    <form [formGroup]=\"discount\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <label for=\"code\">Code</label>\n          <input\n            type=\"text\"\n            nbInput\n            fullWidth\n            id=\"code\"\n            status=\"basic\"\n            formControlName=\"discountCode\"\n            [status]=\"f.discountCode.errors && submitted ? 'danger' : 'basic'\"\n            placeholder=\"Code\"\n          />\n          <small *ngIf=\"f.discountCode.errors && submitted\" style=\"display: block;\"\n            >*This field req</small\n          >\n        </div>\n        <div class=\"col-sm-6\">\n          <label for=\"amt\">Amount in %</label>\n          <input\n            type=\"text\"\n            nbInput\n            fullWidth\n            id=\"amt\"\n            status=\"basic\"\n            formControlName=\"amount\"\n            [status]=\"f.amount.errors && submitted ? 'danger' : 'basic'\"\n            placeholder=\"Amount in %\"\n          />\n          <small *ngIf=\"f.amount.errors && submitted\" style=\"display: block;\"\n            >*This field req</small\n          >\n        </div>\n      </div>\n\n      <div class=\"mt-3\">\n        <label for=\"des\">Description</label>\n        <textarea\n          name=\"discription\"\n          nbInput\n          id=\"des\"\n          fullWidth\n          status=\"basic\"\n          cols=\"40\"\n          rows=\"4\"\n          formControlName=\"description\"\n          placeholder=\"Description(Optional)\"\n        ></textarea>\n      </div>\n      <div class=\"mt-4\" style=\"text-align: right;\">\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"back()\" style=\"color: black;\">Manage Discount</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Define Discount</p>\n<nb-card *ngIf=\"display\">\n  <nb-card-body>\n    <form [formGroup]=\"discountForm\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"row\">\n        <div class=\"col-sm-4\">\n          <label for=\"code\">Code</label>\n          <input\n            type=\"text\"\n            nbInput\n            fullWidth\n            id=\"code\"\n            status=\"basic\"\n            formControlName=\"discountCode\"\n            [status]=\"\n              discountForm.get('discountCode').invalid && discountForm.get('discountCode').touched\n                ? 'danger'\n                : 'basic'\n            \"\n            placeholder=\"Code\"\n          />\n          <small\n            *ngIf=\"\n              discountForm.get('discountCode').invalid && discountForm.get('discountCode').touched\n            \"\n            style=\"display: block;\"\n            >*This field Required</small\n          >\n        </div>\n\n        <div class=\"col-sm-4\">\n          <label for=\"discountType\">Discount Type</label>\n          <nb-select\n            placeholder=\"Select Amount Type\"\n            id=\"discountType\"\n            fullWidth\n            [status]=\"\n              discountForm.get('discountType').invalid && discountForm.get('discountType').touched\n                ? 'danger'\n                : 'basic'\n            \"\n            formControlName=\"discountType\"\n          >\n            <!-- <nb-option value=\"\">Select Parent Course</nb-option> -->\n            <nb-option value=\"percentage\">\n              Discount in Percentage\n            </nb-option>\n            <nb-option value=\"amount\">\n              Discount in Amount\n            </nb-option>\n          </nb-select>\n          <small\n            *ngIf=\"\n              discountForm.get('discountType').invalid && discountForm.get('discountType').touched\n            \"\n            style=\"display: block;\"\n            >*This field Required</small\n          >\n        </div>\n\n        <div class=\"col-sm-4\">\n          <label for=\"amt\"\n            >Amount\n            <span *ngIf=\"discountForm.get('discountType').value === 'percentage'\"\n              >(in %)</span\n            ></label\n          >\n          <input\n            type=\"text\"\n            pattern=\"\\d*\"\n            nbInput\n            fullWidth\n            id=\"amt\"\n            status=\"basic\"\n            formControlName=\"amount\"\n            [status]=\"\n              (discountForm.get('amount').invalid || discountForm.hasError('invalidDiscount')) &&\n              discountForm.get('amount').touched\n                ? 'danger'\n                : 'basic'\n            \"\n            placeholder=\"Amount\"\n          />\n          <small\n            *ngIf=\"\n              (discountForm.get('amount').invalid || discountForm.hasError('invalidDiscount')) &&\n              discountForm.get('amount').touched\n            \"\n            style=\"display: block;\"\n            >*Enter Valid Amount</small\n          >\n        </div>\n      </div>\n\n      <div class=\"mt-3\">\n        <label for=\"des\">Description</label>\n        <textarea\n          name=\"description\"\n          nbInput\n          id=\"description\"\n          fullWidth\n          status=\"basic\"\n          cols=\"40\"\n          rows=\"4\"\n          formControlName=\"description\"\n          placeholder=\"Description(Optional)\"\n        ></textarea>\n      </div>\n      <div class=\"mt-4\" style=\"text-align: right;\">\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -100,7 +100,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Discount</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Discount Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Code</th>\n          <th>Amount In %</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of discounts.discount; let i = index\">\n          <td>{{ item.discountCode }}</td>\n          <td>{{ item.amount }}</td>\n          <td>{{ item.description }}</td>\n          <td class=\"text-right\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Discount</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Discount Here</p>\n<nb-card>\n  <nb-card-body>\n    <table *ngIf=\"discounts.length > 0; else noDiscounts\">\n      <thead>\n        <tr>\n          <th>Code</th>\n          <th>Amount</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of discounts; let i = index\">\n          <td>{{ item.discountCode }}</td>\n          <td>{{ item.amount }}<span *ngIf=\"item.discountType === 'percentage'\">%</span></td>\n          <td>{{ item.description }}</td>\n          <td class=\"text-right\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    <ng-template #noDiscounts>\n      <p class=\"text-center mt-3\">No Discounts Found</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -113,7 +113,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p style=\"color: black; font-weight: bold;\">Add employeeForm Here</p>\r\n\r\n<nb-card status=\"warning\">\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit\"\r\n      >Already Registered Employee</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasEmployeeForm\"\r\n      (ngSubmit)=\"onEmployeeFormSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch Employee</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"3\"\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.idInput1.errors &&\r\n              eduAtlasEmployeeFormControl.idInput1.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput1\"\r\n            disabled=\"true\"\r\n            fullWidth\r\n            formControlName=\"idInput1\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"4\"\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.idInput2.errors &&\r\n              eduAtlasEmployeeFormControl.idInput2.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput2\"\r\n            fullWidth\r\n            formControlName=\"idInput2\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"3\"\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.idInput3.errors &&\r\n              eduAtlasEmployeeFormControl.idInput3.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput3\"\r\n            disabled=\"true\"\r\n            fullWidth\r\n            formControlName=\"idInput3\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"6\"\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.idInput4.errors &&\r\n              eduAtlasEmployeeFormControl.idInput4.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput4\"\r\n            fullWidth\r\n            formControlName=\"idInput4\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" nbButton status=\"warning\" [disabled]=\"!eduAtlasEmployeeForm.valid\" style=\"color: black;\" *ngIf=\"!edit\">\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form [formGroup]=\"employeeForm\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Employee Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">*Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Employee name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.employeeEmail.errors && f.employeeEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"employeeEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.employeeEmail.errors && f.employeeEmail.touched\"\r\n              >*Employee email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Employee Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Employee Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Employee Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>*Role</label>\r\n          <nb-select\r\n            placeholder=\"Select Role\"\r\n            [status]=\"f.role.errors && f.role.touched ? 'danger' : 'basic'\"\r\n            status=\"basic\"\r\n            formControlName=\"role\"\r\n          >\r\n            <nb-option [value]=\"null\">Select Role</nb-option>\r\n            <nb-option *ngFor=\"let role of roles\" value=\"{{ role }}\">{{ role }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.role.errors && f.role.touched\">*Employee Role is required.</small>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ employeeEduId ? 'Update Employee' : 'Add Employee' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<p style=\"color: black; font-weight: bold;\">Add employeeForm Here</p>\r\n\r\n<nb-card status=\"warning\">\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit\"\r\n      >Already Registered Employee</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasEmployeeForm\"\r\n      (ngSubmit)=\"onEmployeeFormSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch student</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.eduAtlasId.errors &&\r\n              eduAtlasEmployeeFormControl.eduAtlasId.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"eduAtlasId\"\r\n            fullWidth\r\n            formControlName=\"eduAtlasId\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button\r\n            type=\"submit\"\r\n            nbButton\r\n            status=\"warning\"\r\n            style=\"color: black;\"\r\n            *ngIf=\"!edit && !dataFetched\"\r\n          >\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n\r\n    <form [formGroup]=\"otpForm\" (ngSubmit)=\"verifyOtp()\" *ngIf=\"otpSent && alreadyRegistered\">\r\n      <p>OTP</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"otpForm.get('otp').errors && otpForm.get('otp').touched ? 'danger' : 'basic'\"\r\n            id=\"otp\"\r\n            fullWidth\r\n            formControlName=\"otp\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\" *ngIf=\"!edit\">\r\n            Verify\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form [formGroup]=\"employeeForm\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Employee Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">*Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Employee name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.employeeEmail.errors && f.employeeEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"employeeEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.employeeEmail.errors && f.employeeEmail.touched\"\r\n              >*Employee email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Employee Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Employee Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Employee Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>*Role</label>\r\n          <nb-select\r\n            placeholder=\"Select Role\"\r\n            [status]=\"f.role.errors && f.role.touched ? 'danger' : 'basic'\"\r\n            status=\"basic\"\r\n            formControlName=\"role\"\r\n          >\r\n            <nb-option [value]=\"null\">Select Role</nb-option>\r\n            <nb-option *ngFor=\"let role of roles\" value=\"{{ role }}\">{{ role }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.role.errors && f.role.touched\">*Employee Role is required.</small>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ employeeEduId ? 'Update Employee' : 'Add Employee' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -126,7 +126,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\" [hidden]=\"receipts\">\r\n    Add Employee\r\n  </button>\r\n</div>\r\n\r\n<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Employees</p>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"employees.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Contact</th>\r\n          <th>Role</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let employee of employees; let i = index\">\r\n          <td>{{ employee.basicDetails.name }}</td>\r\n          <td>{{ employee.basicDetails.employeeContact }}</td>\r\n          <td>{{ employee.instituteDetails[0].role }}</td>\r\n          <!-- <td>{{ employee.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"primary\"\r\n              (click)=\"view(employee.eduAtlasId, employee._id)\"\r\n            >\r\n              View\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"warning`\"\r\n              (click)=\"edit(employee.eduAtlasId, employee._id)\"\r\n            >\r\n              Edit\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"danger\" (click)=\"delete(employee._id)\">\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"employees.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">\r\n    Add Employee\r\n  </button>\r\n</div>\r\n\r\n<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Employees</p>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"employees.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Contact</th>\r\n          <th>Role</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let employee of employees; let i = index\">\r\n          <td>{{ employee.basicDetails.name }}</td>\r\n          <td>{{ employee.basicDetails.employeeContact }}</td>\r\n          <td>{{ employee.instituteDetails.role }}</td>\r\n          <!-- <td>{{ employee.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"primary\"\r\n              (click)=\"view(employee.eduAtlasId, employee._id)\"\r\n            >\r\n              View\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"warning`\"\r\n              (click)=\"edit(employee.eduAtlasId, employee._id)\"\r\n            >\r\n              Edit\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"danger\" (click)=\"delete(employee._id)\">\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"employees.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n");
 
 /***/ }),
 
@@ -152,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\" [hidden]=\"receipts\">\r\n    Add Receipt\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Manage Reciept</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Business Name</th>\r\n          <th>Address</th>\r\n          <th>GST Number</th>\r\n          <th>Terms & Conditions</th>\r\n          <th>Fee</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngIf=\"receipts\">\r\n          <td>{{ receipts.businessName }}</td>\r\n          <td>{{ receipts.address }}</td>\r\n          <td>{{ receipts.gstNumber }}</td>\r\n          <td>{{ receipts.termsAndCondition }}</td>\r\n          <td>{{ receipts.fee }}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(routerId)\">Edit</button>\r\n            <button nbButton status=\"danger\" (click)=\"delete(routerId)\">Del</button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\" [hidden]=\"receipts\">\r\n    Add Receipt\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Manage Receipt</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <table *ngIf=\"receipts; else noReceipt\">\r\n      <thead>\r\n        <tr>\r\n          <th>Business Name</th>\r\n          <th>Address</th>\r\n          <th>GST Number</th>\r\n          <th>Terms & Conditions</th>\r\n          <th>Fee</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr>\r\n          <td>{{ receipts.businessName }}</td>\r\n          <td>{{ receipts.address }}</td>\r\n          <td>{{ receipts.gstNumber }}</td>\r\n          <td>{{ receipts.termsAndCondition }}</td>\r\n          <td>{{ receipts.fee }}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(instituteId)\">Edit</button>\r\n            <button nbButton status=\"danger\" (click)=\"delete(instituteId)\">Del</button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ng-template #noReceipt><p class=\"mt-5 mb-5 text-center\">No Record Found</p></ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -229,56 +229,63 @@ let AddBatchesComponent = class AddBatchesComponent {
         this.router = router;
         this.location = location;
         this.toasterService = toasterService;
-        this.courses = { course: [] };
-        this.batchUpdate = { batchCode: '', description: '', course: '' };
         this.linearMode = true;
         this.submitted = false;
     }
     ngOnInit() {
+        this.display = false;
+        this.courses = [];
         this.route.queryParams.subscribe((data) => {
             this.batchId = data.batchId;
             this.edit = data.edit;
         });
         this.instituteId = this.route.snapshot.paramMap.get('id');
-        this.getBatch(this.batchId, this.instituteId);
         this.getCourses(this.instituteId);
-        this.batch = this.fb.group({
+        this.batchForm = this.fb.group({
             course: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             batchCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             description: [''],
         });
+        if (this.edit) {
+            this.getBatch(this.batchId, this.instituteId);
+        }
+        else {
+            this.display = true;
+        }
     }
     getBatch(id, instituteId) {
         let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpParams"]();
         param = param.append('instituteId', instituteId);
         param = param.append('batchId', id);
-        this.api.getBatch(param).subscribe((data) => {
-            this.batchUpdate = JSON.parse(JSON.stringify(data[0]));
-        });
-    }
-    getCourses(id) {
-        this.api.getCourses(id).subscribe((data) => {
-            this.courses = JSON.parse(JSON.stringify(data));
-            this.batch.patchValue({
+        this.api.getBatch(param).subscribe((res) => {
+            this.batchUpdate = res[0];
+            this.batchForm.patchValue({
                 course: this.batchUpdate.course,
                 batchCode: this.batchUpdate.batchCode,
                 description: this.batchUpdate.description,
             });
+            this.display = true;
+        });
+    }
+    getCourses(id) {
+        this.api.getCourses(id).subscribe((res) => {
+            this.courses = res.course;
         });
     }
     get f() {
-        return this.batch.controls;
+        return this.batchForm.controls;
     }
     onSubmit() {
         this.submitted = true;
-        if (this.batch.invalid) {
+        this.batchForm.markAllAsTouched();
+        if (this.batchForm.invalid) {
             return;
         }
         if (this.edit === 'true') {
             let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpParams"]();
             param = param.append('instituteId', this.instituteId);
             param = param.append('batchId', this.batchId);
-            const batch = this.batch.value;
+            const batch = this.batchForm.value;
             batch._id = this.batchId;
             this.api.updateBatch(param, batch).subscribe((res) => {
                 this.showToast('top-right', 'success', 'Successfully Updated');
@@ -288,7 +295,7 @@ let AddBatchesComponent = class AddBatchesComponent {
             });
         }
         if (!this.edit) {
-            this.api.addBatch(this.instituteId, this.batch.value).subscribe(() => {
+            this.api.addBatch(this.instituteId, this.batchForm.value).subscribe(() => {
                 this.showToast('top-right', 'success', 'Successfully Added');
                 setTimeout(() => {
                     this.router.navigate([
@@ -297,7 +304,6 @@ let AddBatchesComponent = class AddBatchesComponent {
                     ]);
                 }, 1000);
             }, (err) => {
-                console.error(err);
                 this.showToast('top-right', 'danger', err.error.message);
             });
         }
@@ -376,17 +382,16 @@ let ManageBatchComponent = class ManageBatchComponent {
         this.router = router;
         this.route = route;
         this.toasterService = toasterService;
-        this.batches = { batch: [{ _id: '', course: '', batchCode: '', description: '' }] };
         this.params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]();
     }
     ngOnInit() {
+        this.batches = [];
         this.instituteId = this.route.snapshot.paramMap.get('id');
         this.getBatches(this.instituteId);
     }
     getBatches(id) {
-        this.api.getBatches(id).subscribe((data) => {
-            this.batches = JSON.parse(JSON.stringify(data));
-            console.dir('my batch' + this.batches);
+        this.api.getBatches(id).subscribe((res) => {
+            this.batches = res.batch;
         });
     }
     edit(id) {
@@ -398,9 +403,9 @@ let ManageBatchComponent = class ManageBatchComponent {
         this.params = this.params.append('instituteId', this.instituteId);
         this.params = this.params.append('batchId', id);
         this.api.deleteBatch(this.params).subscribe((res) => { }, (err) => console.error(err));
-        const i = this.batches.batch.findIndex((e) => e._id === id);
+        const i = this.batches.findIndex((e) => e._id === id);
         if (i !== -1) {
-            this.batches.batch.splice(i, 1);
+            this.batches.splice(i, 1);
         }
     }
     showToast(position, status, message) {
@@ -552,6 +557,7 @@ let AddCourseComponent = class AddCourseComponent {
     }
     onSubmit() {
         this.submitted = true;
+        this.course.markAllAsTouched();
         if (this.course.invalid) {
             return;
         }
@@ -1081,23 +1087,39 @@ let DiscountComponent = class DiscountComponent {
         this.location = location;
         this.active = active;
         this.toasterService = toasterService;
-        this.discountUpdate = { discountCode: '', description: '', amount: '', _id: '' };
-        this.submitted = false;
     }
     ngOnInit() {
+        this.display = false;
         this.instituteId = this.active.snapshot.paramMap.get('id');
         this.active.queryParams.subscribe((data) => {
             this.edit = data.edit;
             this.discountId = data.discountId;
-            if (this.edit) {
-                this.getDiscount(this.discountId);
-            }
         });
-        this.discount = this.fb.group({
+        this.discountForm = this.fb.group({
             discountCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            description: [''],
+            discountType: ['percentage', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             amount: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            description: [''],
+        }, {
+            validator: this.discountValidator.bind(this),
         });
+        if (this.edit) {
+            this.getDiscount(this.discountId);
+        }
+        else {
+            this.display = true;
+        }
+    }
+    discountValidator(group) {
+        const discountType = group.value.discountType;
+        const amount = group.value.amount;
+        if (discountType === 'percentage' && amount > 100) {
+            return { invalidDiscount: true };
+        }
+        else if (amount < 0) {
+            return { invalidDiscount: true };
+        }
+        return null;
     }
     getDiscount(id) {
         let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]();
@@ -1105,26 +1127,27 @@ let DiscountComponent = class DiscountComponent {
         param = param.append('discountId', id);
         this.api.getDiscount(param).subscribe((data) => {
             this.discountUpdate = data[0];
-            this.discount.patchValue({
+            this.discountForm.patchValue({
                 discountCode: this.discountUpdate.discountCode,
                 description: this.discountUpdate.description,
+                discountType: this.discountUpdate.discountType,
                 amount: this.discountUpdate.amount,
             });
+            this.display = true;
+        }, (err) => {
+            this.display = true;
         });
     }
-    get f() {
-        return this.discount.controls;
-    }
     onSubmit() {
-        this.submitted = true;
-        if (this.discount.invalid) {
+        this.discountForm.markAllAsTouched();
+        if (this.discountForm.invalid) {
             return;
         }
         if (this.edit === 'true') {
             let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]();
             param = param.append('instituteId', this.instituteId);
             param = param.append('discountId', this.discountId);
-            this.api.updateDiscount(param, this.discount.value).subscribe((res) => {
+            this.api.updateDiscount(param, this.discountForm.value).subscribe((res) => {
                 this.showToast('top-right', 'success', 'Discount Updated');
                 setTimeout(() => {
                     this.router.navigate([
@@ -1137,7 +1160,7 @@ let DiscountComponent = class DiscountComponent {
             });
         }
         else {
-            this.api.addDiscount(this.instituteId, this.discount.value).subscribe((data) => {
+            this.api.addDiscount(this.instituteId, this.discountForm.value).subscribe((data) => {
                 this.showToast('top-right', 'success', 'Discount Added Successfully');
                 setTimeout(() => {
                     this.router.navigate([
@@ -1225,15 +1248,15 @@ let ManageDiscountComponent = class ManageDiscountComponent {
         this.router = router;
         this.active = active;
         this.toasterService = toasterService;
-        this.discounts = { discount: [{ discountCode: '', description: '', _id: '', amount: '' }] };
     }
     ngOnInit() {
+        this.discounts = [];
         this.instituteId = this.active.snapshot.paramMap.get('id');
         this.getDiscounts(this.instituteId);
     }
     getDiscounts(id) {
         this.api.getDiscounts(id).subscribe((data) => {
-            this.discounts = data;
+            this.discounts = data.discount;
         }, (err) => console.error(err));
     }
     edit(id) {
@@ -1248,9 +1271,9 @@ let ManageDiscountComponent = class ManageDiscountComponent {
             param = param.append('instituteId', this.instituteId);
             param = param.append('discountId', id);
             this.api.deleteDiscount(param).subscribe((err) => console.error(err));
-            const i = this.discounts.discount.findIndex((e) => e._id === id);
+            const i = this.discounts.findIndex((e) => e._id === id);
             if (i !== -1) {
-                this.discounts.discount.splice(i, 1);
+                this.discounts.splice(i, 1);
                 this.showToast('top-right', 'success', 'Discount Deleted Successfully!');
             }
         }
@@ -1326,7 +1349,8 @@ let AddEmployee = class AddEmployee {
         this.router = router;
         this.active = active;
         this.toasterService = toasterService;
-        this.roles = ['Teacher', 'Manager', 'Counselor '];
+        this.dataFetched = false;
+        this.roles = ['Teacher', 'Manager', 'Counselor'];
     }
     ngOnInit() {
         this.alreadyRegistered = false;
@@ -1342,11 +1366,13 @@ let AddEmployee = class AddEmployee {
                 address: [''],
                 role: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             });
+            // Construct Eduatlas Id Form
             this.eduAtlasEmployeeForm = this.fb.group({
-                idInput1: ['EDU', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-                idInput2: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-                idInput3: ['EMP', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-                idInput4: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+                eduAtlasId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            });
+            // Construct OTP Form
+            this.otpForm = this.fb.group({
+                otp: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             });
             if (this.edit === 'true') {
                 this.alreadyRegistered = true;
@@ -1361,33 +1387,75 @@ let AddEmployee = class AddEmployee {
         return this.eduAtlasEmployeeForm.controls;
     }
     onEmployeeFormSearch() {
-        this.employeeForm.reset();
         if (this.eduAtlasEmployeeForm.valid) {
-            const employeeEduId = `${this.eduAtlasEmployeeFormControl['idInput1'].value}-${this.eduAtlasEmployeeFormControl['idInput2'].value}-${this.eduAtlasEmployeeFormControl['idInput3'].value}-${this.eduAtlasEmployeeFormControl['idInput4'].value}`;
-            this.api.getOneEmployee(employeeEduId).subscribe((data) => {
-                if (data) {
-                    this.employeeEduId = employeeEduId;
-                    this.employee = data[0];
-                    console.log(this.employee);
-                    this.employeeForm.patchValue({
-                        name: this.employee.basicDetails.name,
-                        employeeEmail: this.employee.basicDetails.employeeEmail,
-                        contact: this.employee.basicDetails.employeeContact,
-                        address: this.employee.basicDetails.employeeAddress,
-                    });
+            const employeeEduId = `${this.eduAtlasEmployeeFormControl['eduAtlasId'].value}`;
+            this.api.sendOtpForGetUserDetails(employeeEduId).subscribe((res) => {
+                if (res) {
+                    this.otpSent = true;
+                    this.phone = res.phone;
+                    this.showToaster('top-right', 'success', res.message);
                 }
                 else {
                     this.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
                 }
-            }, (error) => {
+            }, (err) => {
                 this.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
             });
         }
     }
+    verifyOtp() {
+        if (this.otpSent && this.otpForm.valid) {
+            const otp = this.otpForm.value.otp;
+            const verificationData = {
+                verifyType: 'verifyUser',
+                otp: this.otpForm.value.otp,
+                phone: this.phone,
+            };
+            this.api.verifyUserOtp(verificationData).subscribe((data) => {
+                this.getOneEmployee(this.eduAtlasEmployeeForm.value.eduAtlasId);
+            }, (error) => {
+                this.showToaster('top-right', 'danger', 'Invalid OTP');
+            });
+        }
+    }
+    getOneEmployee(eduId) {
+        this.api.getOneEmployee(eduId).subscribe((data) => {
+            if (data) {
+                this.employee = data;
+                this.employeeForm.reset();
+                this.employeeForm.patchValue({
+                    name: this.employee.basicDetails.name,
+                    employeeEmail: this.employee.basicDetails.employeeEmail,
+                    contact: this.employee.basicDetails.employeeContact,
+                    address: this.employee.basicDetails.employeeAddress,
+                });
+                this.employeeEduId = this.employee.eduAtlasId;
+                this.eduAtlasEmployeeForm.get('eduAtlasId').disable();
+                this.employeeForm.patchValue({
+                    name: this.employee.basicDetails.name,
+                    employeeEmail: this.employee.basicDetails.employeeEmail,
+                    contact: this.employee.basicDetails.employeeContact,
+                    address: this.employee.basicDetails.employeeAddress,
+                });
+                this.employeeForm.get('name').disable();
+                this.employeeForm.get('employeeEmail').disable();
+                this.employeeForm.get('address').disable();
+                this.employeeForm.get('contact').disable();
+                this.otpSent = false;
+                this.phone = null;
+                this.dataFetched = true;
+            }
+            else {
+                this.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
+            }
+        }, (error) => {
+            this.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
+        });
+    }
     changeAlreadyRegistered(e) {
         this.alreadyRegistered = e;
         if (!e) {
-            this.eduAtlasEmployeeForm.reset({ idInput1: 'EDU', idInput3: 'EMP' });
+            this.eduAtlasEmployeeForm.reset();
         }
     }
     getOneEmployeeByInstitute(employeeObjId, institute) {
@@ -1399,21 +1467,17 @@ let AddEmployee = class AddEmployee {
             .subscribe((data) => {
             this.employee = data[0];
             // console.log(this.employee);
-            const eduAtlId = this.employeeEduId.split('-');
+            const eduAtlId = this.employeeEduId;
             this.eduAtlasEmployeeForm.patchValue({
-                idInput1: eduAtlId[0],
-                idInput2: eduAtlId[1],
-                idInput3: eduAtlId[2],
-                idInput4: eduAtlId[3],
+                eduAtlasId: eduAtlId,
             });
-            this.eduAtlasEmployeeForm.get('idInput2').disable();
-            this.eduAtlasEmployeeForm.get('idInput4').disable();
+            this.eduAtlasEmployeeForm.get('eduAtlasId').disable();
             this.employeeForm.patchValue({
                 name: this.employee.basicDetails.name,
                 employeeEmail: this.employee.basicDetails.employeeEmail,
                 contact: this.employee.basicDetails.employeeContact,
                 address: this.employee.basicDetails.employeeAddress,
-                role: this.employee.instituteDetails[0].role,
+                role: this.employee.instituteDetails.role,
             });
             this.employeeForm.get('name').disable();
             this.employeeForm.get('address').disable();
@@ -1511,7 +1575,7 @@ AddEmployee = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("table {\n  width: 100%;\n  height: 5vh; }\n\n.input-group-text {\n  background-color: #fce062;\n  color: #000; }\n\n.noRecFound {\n  position: fixed;\n  top: 50%;\n  left: 50%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2VtcGxveWVlLW1hbmFnZW1lbnQvbWFuYWdlLWVtcGxveWVlL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxlbXBsb3llZS1tYW5hZ2VtZW50XFxtYW5hZ2UtZW1wbG95ZWVcXG1hbmFnZS1lbXBsb3llZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQVc7RUFDWCxXQUFXLEVBQUE7O0FBR2I7RUFDRSx5QkFBeUI7RUFDekIsV0FBVyxFQUFBOztBQUViO0VBQ0UsZUFBZTtFQUNmLFFBQVE7RUFDUixTQUFTLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvZW1wbG95ZWUtbWFuYWdlbWVudC9tYW5hZ2UtZW1wbG95ZWUvbWFuYWdlLWVtcGxveWVlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBoZWlnaHQ6IDV2aDtcclxuICB9XHJcbiAgXHJcbiAgLmlucHV0LWdyb3VwLXRleHQge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2ZjZTA2MjtcclxuICAgIGNvbG9yOiAjMDAwO1xyXG4gIH1cclxuICAubm9SZWNGb3VuZHtcclxuICAgIHBvc2l0aW9uOiBmaXhlZDtcclxuICAgIHRvcDogNTAlO1xyXG4gICAgbGVmdDogNTAlO1xyXG4gIH0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = ("table {\n  width: 100%;\n  height: 5vh; }\n\n.input-group-text {\n  background-color: #fce062;\n  color: #000; }\n\n.noRecFound {\n  position: fixed;\n  top: 50%;\n  left: 50%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2VtcGxveWVlLW1hbmFnZW1lbnQvbWFuYWdlLWVtcGxveWVlL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxlbXBsb3llZS1tYW5hZ2VtZW50XFxtYW5hZ2UtZW1wbG95ZWVcXG1hbmFnZS1lbXBsb3llZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQVc7RUFDWCxXQUFXLEVBQUE7O0FBR2I7RUFDRSx5QkFBeUI7RUFDekIsV0FBVyxFQUFBOztBQUViO0VBQ0UsZUFBZTtFQUNmLFFBQVE7RUFDUixTQUFTLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvZW1wbG95ZWUtbWFuYWdlbWVudC9tYW5hZ2UtZW1wbG95ZWUvbWFuYWdlLWVtcGxveWVlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGhlaWdodDogNXZoO1xyXG59XHJcblxyXG4uaW5wdXQtZ3JvdXAtdGV4dCB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZjZTA2MjtcclxuICBjb2xvcjogIzAwMDtcclxufVxyXG4ubm9SZWNGb3VuZCB7XHJcbiAgcG9zaXRpb246IGZpeGVkO1xyXG4gIHRvcDogNTAlO1xyXG4gIGxlZnQ6IDUwJTtcclxufVxyXG4iXX0= */");
 
 /***/ }),
 
@@ -1554,7 +1618,6 @@ let ManageEmployee = class ManageEmployee {
     }
     getEmployees(instituteId) {
         this.api.getEmployeesByInstituteId(instituteId).subscribe((data) => {
-            console.log(data);
             this.employees = data;
         });
     }
@@ -1827,9 +1890,9 @@ let ReceiptConfComponent = class ReceiptConfComponent {
         this.receipt = this.fb.group({
             businessName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             address: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            gstNumber: [''],
             termsAndCondition: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             fee: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            gstNumber: [''],
         });
     }
     get f() {
@@ -1849,6 +1912,7 @@ let ReceiptConfComponent = class ReceiptConfComponent {
     }
     onSubmit() {
         this.submitted = true;
+        this.receipt.markAllAsTouched();
         if (this.receipt.invalid) {
             return;
         }
@@ -2023,59 +2087,6 @@ RoleManagementComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"],
         _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbToastrService"]])
 ], RoleManagementComponent);
-
-
-
-/***/ }),
-
-/***/ "./src/app/services/role/role-assign.service.ts":
-/*!******************************************************!*\
-  !*** ./src/app/services/role/role-assign.service.ts ***!
-  \******************************************************/
-/*! exports provided: RoleAssignService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RoleAssignService", function() { return RoleAssignService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
-
-
-
-
-
-
-let RoleAssignService = class RoleAssignService {
-    constructor(http) {
-        this.http = http;
-    }
-    addRole(role) {
-        return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/role`, role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
-    }
-    getOtp(phone, params) {
-        return this.http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/users/sendOTP/${phone}`, { params: params }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
-    }
-    verifyOtp(params) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server + '/users/verifyOTP', { params: params }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])((err) => this.handleError(err)));
-    }
-    handleError(error) {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
-    }
-};
-RoleAssignService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
-];
-RoleAssignService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
-        providedIn: 'root',
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
-], RoleAssignService);
 
 
 
