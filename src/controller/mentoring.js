@@ -45,12 +45,6 @@ exports.getMentoringOfStudentByInstitute = async (req, res) => {
       ],
     });
 
-    // if (studMentoring.length == 0) {
-    //   const error = new Error('Mentoring Details Found');
-    //   error.statusCode = 400;
-    //   throw error;
-    // }
-
     const studentMonitoring = new Array();
 
     for (var i = 0; i < studMentoring.length; i++) {

@@ -48,6 +48,23 @@ exports.getTestByBatch = async (req, res) => {
   }
 };
 
+exports.getTestsForReports = async(req,res)=>{
+  try {
+
+    const batchTest = await Test.find({
+      instituteId: req.body.instituteId,
+      batchId: req.body.batchId,
+      students:{
+        $exists:true
+      }
+    });
+
+    res.status(200).send(batchTest);
+  } catch (error) {
+    res.status(400).send(error)
+  }
+}
+
 exports.getSingleTest = async (req, res) => {
   try {
     console.log(req.body);
