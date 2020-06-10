@@ -13,7 +13,7 @@ const rp = require('request-promise');
 
 const deleteFile = (filePath) => {
   fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
-    console.log("deleteFile")
+    console.log('deleteFile');
     if (error) {
       console.log(error);
       const err = new Error('Error while deleting the File');
@@ -118,36 +118,36 @@ exports.addScoreUsingExcel = async (req, res) => {
             B: '_id',
             C: 'marks',
           },
-
-        }, 
+        },
       ],
     });
 
     console.log(excelData);
 
-    
     const testDetails = await Test.findOne({
-      _id:req.body._id
+      _id: req.body._id,
     });
-    console.log(testDetails)
+    console.log(testDetails);
 
     if (!testDetails) {
       const error = new Error('Test not Found');
       error.statusCode = 400;
       throw error;
     }
-    
+
     for (var i = 0; i < excelData.Sheet1.length; i++) {
       const student = await Student.aggregate([
         {
-         $unwind:"$instituteDetails" 
-        },{
-        $match: {
+          $unwind: '$instituteDetails',
+        },
+        {
+          $match: {
             'instituteDetails.courseId': testDetails.courseId,
             'instituteDetails.batchId': testDetails.batchId,
-            'instituteDetails.rollNumber': excelData.Sheet1[i].rollNo+"",
+            'instituteDetails.rollNumber': excelData.Sheet1[i].rollNo + '',
           },
-      }]);
+        },
+      ]);
       if (student.length == 0) {
         const error = new Error('student not Found');
         error.statusCode = 400;
@@ -155,7 +155,7 @@ exports.addScoreUsingExcel = async (req, res) => {
       }
       excelData.Sheet1[i]._id = student[0]._id;
     }
-    
+
     const updateScore = await Test.updateOne(
       {
         _id: req.body._id,
@@ -166,7 +166,7 @@ exports.addScoreUsingExcel = async (req, res) => {
         },
       }
     );
-      deleteFile(req.file.path)
+    deleteFile(req.file.path);
     res.status(200).send(updateScore);
   } catch (error) {
     console.log(error);
