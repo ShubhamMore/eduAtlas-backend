@@ -383,6 +383,24 @@ exports.getStudentsByBatch = async(req,res)=>{
 //Api for accepting invites
 
 //List of active and pending students APi Creation
+exports.getStudentsByInstitute = async(req,res)=>{
+  try {
+    const students = await Student.find({
+      "instituteDetails.instituteId":req.body.instituteId
+    })
+
+    if(students.length == 0){
+      const error = new Error("No student found")
+      error.statusCode = 400
+      throw error
+    } 
+
+    res.status(200).send(students)
+  } catch (error) {
+    errorHandler(error,res)
+  }
+}
+
 
 exports.pendingStudents = async (req, res) => {
 
