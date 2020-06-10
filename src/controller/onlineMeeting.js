@@ -119,6 +119,20 @@ exports.createMeeting = async (req, res) => {
 
 exports.getAllMeetings = async (req, res) => {
   try {
+
+    var options = {
+      method: 'GET',
+      url: 'https://api.zoom.us/v2/users/me/meetings',
+      qs:{
+        type:"scheduled"
+      },
+      headers: {
+        
+        authorization: 'Bearer ' + req.zoom.access_token,
+      },
+  
+      json: true,
+    };
     const meetings = await OnlineClass.find();
 
     res.status(200).send(meetings);
