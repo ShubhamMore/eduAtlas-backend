@@ -117,48 +117,30 @@ exports.createMeeting = async (req, res) => {
   }
 };
 
-exports.getMeetingsFromZoom = async(req,res)=>{
+exports.getMeetingsFromZoom = async (req, res) => {
   try {
     var options = {
       method: 'GET',
       url: 'https://api.zoom.us/v2/users/me/meetings',
-      qs:{
-        type: req.body.type
+      qs: {
+        type: req.body.type,
       },
       headers: {
         authorization: 'Bearer ' + req.zoom.access_token,
       },
     };
 
-    const listMeetings = await rp(options)
-    
-    for(var i=0;i<listMeetings.meetings.length;i++){
+    const listMeetings = await rp(options);
 
-    }
+    for (var i = 0; i < listMeetings.meetings.length; i++) {}
     const meetings = await OnlineClass.find();
 
     res.status(200).send(meetings);
-  } catch (error) {
-    
-  }
-}
+  } catch (error) {}
+};
 
 exports.getAllMeetings = async (req, res) => {
   try {
-
-    var options = {
-      method: 'GET',
-      url: 'https://api.zoom.us/v2/users/me/meetings',
-      qs:{
-        type:"scheduled"
-      },
-      headers: {
-        
-        authorization: 'Bearer ' + req.zoom.access_token,
-      },
-  
-      json: true,
-    };
     const meetings = await OnlineClass.find();
 
     res.status(200).send(meetings);
@@ -233,8 +215,8 @@ exports.updateMeeting = async (req, res) => {
         registrants_email_notification: false,
       },
     };
-    
-    console.log(req.body)
+
+    console.log(req.body);
     // console.log(req.body.meetingId);
 
     // let tempOptions = {
@@ -242,7 +224,7 @@ exports.updateMeeting = async (req, res) => {
     //     url: 'https://api.zoom.us/v2/meetings/' + req.body.meetingId,
     //     headers: {
     //       'content-type': 'application/json',
-    //       authorization: 'Bearer ' + req.zoom.access_token,  
+    //       authorization: 'Bearer ' + req.zoom.access_token,
     //     }
     // }
 
@@ -267,7 +249,7 @@ exports.updateMeeting = async (req, res) => {
     //   topic: req.body.topic,
     //   duration: req.body.duration,
     //   password: req.body.password,
-    //   agenda: req.body.agenda, 
+    //   agenda: req.body.agenda,
     //   startTime: req.body.startTime,
     //   batchId: req.body.batchId,
     //   courseId: req.body.courseId,
@@ -282,24 +264,23 @@ exports.updateMeeting = async (req, res) => {
         _id: req.body._id,
       },
       {
-          $set:{
-            topic: req.body.topic,
-            duration: req.body.duration,
-            password: req.body.password,
-            agenda: req.body.agenda, 
-            startTime: req.body.startTime,
-            batchId: req.body.batchId,
-            courseId: req.body.courseId,
-            instituteId: req.body.instituteId,
-            hostId: req.body.teacherId,
-            hostEmail: teacher.basicDetails.employeeEmail,
-            hostName: teacher.basicDetails.name,
-          }
+        $set: {
+          topic: req.body.topic,
+          duration: req.body.duration,
+          password: req.body.password,
+          agenda: req.body.agenda,
+          startTime: req.body.startTime,
+          batchId: req.body.batchId,
+          courseId: req.body.courseId,
+          instituteId: req.body.instituteId,
+          hostId: req.body.teacherId,
+          hostEmail: teacher.basicDetails.employeeEmail,
+          hostName: teacher.basicDetails.name,
+        },
       }
     );
     res.status(200).send(updatedMeeting);
-  
-} catch (error) {
+  } catch (error) {
     console.log(error);
     res.status(400).send(error);
   }
@@ -310,7 +291,7 @@ exports.deleteMeeting = async (req, res) => {
     const meeting = await OnlineClass.findOne({
       _id: req.body._id,
     });
-    console.log("meeting found",meeting)
+    console.log('meeting found', meeting);
     if (!meeting) {
       throw new Error('No Meeting Found');
     }
@@ -324,11 +305,11 @@ exports.deleteMeeting = async (req, res) => {
       },
     };
     const info = await rp(options);
-    console.log(info)
+    console.log(info);
 
-    const deletedMeeting  = await OnlineClass.deleteOne({
-        _id:req.body._id
-    })
+    const deletedMeeting = await OnlineClass.deleteOne({
+      _id: req.body._id,
+    });
     res.status(200).send(deletedMeeting);
   } catch (error) {
     res.status(400).send(error);
