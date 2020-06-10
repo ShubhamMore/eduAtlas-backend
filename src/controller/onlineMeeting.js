@@ -140,7 +140,7 @@ exports.getMeetingsFromZoom = async(req,res)=>{
         meetingId:listMeetings.meetings[i].uuid
       })
 
-      getMeetings.push(getMeetings)
+      getMeetings.push(meetings)
     }
 
     res.status(200).send(getMeetings);
