@@ -131,11 +131,17 @@ exports.getMeetingsFromZoom = async(req,res)=>{
     };
 
     const listMeetings = await rp(options)
-    
+    let getMeetings = new Array()
     for(var i=0;i<listMeetings.meetings.length;i++){
+      
+      const meetings = await OnlineClass.findOne({
+        instituteId:req.body.instituteId,
+        batchId:req.body.batchId,
+        meetingId:listMeetings.meetings[i].uuid
+      })
 
+      getMeetings.push(getMeetings)
     }
-    const meetings = await OnlineClass.find();
 
     res.status(200).send(meetings);
   } catch (error) {
@@ -145,20 +151,6 @@ exports.getMeetingsFromZoom = async(req,res)=>{
 
 exports.getAllMeetings = async (req, res) => {
   try {
-
-    var options = {
-      method: 'GET',
-      url: 'https://api.zoom.us/v2/users/me/meetings',
-      qs:{
-        type:"scheduled"
-      },
-      headers: {
-        
-        authorization: 'Bearer ' + req.zoom.access_token,
-      },
-  
-      json: true,
-    };
     const meetings = await OnlineClass.find();
 
     res.status(200).send(meetings);
