@@ -131,9 +131,16 @@ exports.getMeetingsFromZoom = async (req, res) => {
     };
 
     const listMeetings = await rp(options);
+    let getMeetings = new Array();
+    for (var i = 0; i < listMeetings.meetings.length; i++) {
+      const meetings = await OnlineClass.findOne({
+        instituteId: req.body.instituteId,
+        batchId: req.body.batchId,
+        meetingId: listMeetings.meetings[i].uuid,
+      });
 
-    for (var i = 0; i < listMeetings.meetings.length; i++) {}
-    const meetings = await OnlineClass.find();
+      getMeetings.push(getMeetings);
+    }
 
     res.status(200).send(meetings);
   } catch (error) {}
