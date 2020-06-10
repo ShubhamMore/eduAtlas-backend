@@ -137,13 +137,12 @@ exports.getMeetingsFromZoom = async (req, res) => {
       const meetings = await OnlineClass.findOne({
         instituteId: req.body.instituteId,
         batchId: req.body.batchId,
-        meetingId: listMeetings.meetings[i].uuid,
+        meetingId: listMeetings.meetings[i].id,
       });
       if (meetings) {
         getMeetings.push(meetings);
       }
     }
-
     res.status(200).send(getMeetings);
   } catch (error) {
     console.log(error);
