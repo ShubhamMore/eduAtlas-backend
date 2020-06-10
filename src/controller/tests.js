@@ -156,7 +156,7 @@ exports.addScoreUsingExcel = async (req, res) => {
         error.statusCode = 400;
         throw error;
       }
-      excelData.Sheet1[i]._id = student[0]._id;
+      excelData.Sheet1[i].studentId = student[0]._id;
     }
 
     const updateScore = await Test.updateOne(
