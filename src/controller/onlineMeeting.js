@@ -143,9 +143,10 @@ exports.getMeetingsFromZoom = async(req,res)=>{
       getMeetings.push(getMeetings)
     }
 
-    res.status(200).send(meetings);
+    res.status(200).send(getMeetings);
   } catch (error) {
-    
+    console.log(error)
+    res.status(400).send(error)
   }
 }
 
