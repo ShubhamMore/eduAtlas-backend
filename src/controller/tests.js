@@ -250,7 +250,7 @@ exports.getScoresOfStutdentByInstitute = async(req,res)=>{
       },{
         $match:{
           instituteId:req.body.instituteId,
-          "students._id": mongoose.Types.ObjectId(req.body.studentId)
+          "students.studentId": req.body.studentId
         }
       }
     ])
