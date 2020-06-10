@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');   
 const Test = require('../model/test.model');
 const fs = require('fs').promises;
 const path = require('path');
@@ -7,6 +8,8 @@ const Student = require('../model/student.model');
 const excelToJson = require('convert-excel-to-json');
 const errorHandler = require('../service/errorHandler');
 const response = require('../service/response');
+
+
 
 const request = require('request');
 const rp = require('request-promise');
@@ -238,3 +241,22 @@ exports.deleteTest = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
+exports.getScoresOfStutdentByInstitute = async(req,res)=>{
+  try {
+    const studentScore = await Test.aggregate([
+      {
+        $unwind:"$students"
+      },{
+        $match:{
+          instituteId:req.body.instituteId,
+          "students._id": mongoose.Types.ObjectId(req.body.studentId)
+        }
+      }
+    ])
+
+    res.status(200).send(studentScore)
+  } catch (error) {
+    res.status(400).send(error)
+  }
+}
