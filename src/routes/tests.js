@@ -19,6 +19,7 @@ testRouter.post('/deleteTest',checkAuth,testsController.deleteTest)
 testRouter.post('/addScoreUsingExcel',xcelUpload,testsController.addScoreUsingExcel)
 
 testRouter.post('/getTestsForReports',checkAuth,testsController.getTestsForReports)
-// testRouter.post('/addTest',checkAuth,testsController.addTest)
+
+testRouter.post('/getScoresOfStutdentByInstitute',checkAuth,testsController.getScoresOfStutdentByInstitute)
 
 module.exports = testRouter;
