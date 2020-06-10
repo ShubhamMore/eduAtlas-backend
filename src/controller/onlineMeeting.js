@@ -132,18 +132,24 @@ exports.getMeetingsFromZoom = async (req, res) => {
 
     const listMeetings = await rp(options);
     let getMeetings = new Array();
-    for (var i = 0; i < listMeetings.meetings.length; i++) {
+    const mt = JSON.parse(listMeetings);
+
+    for (var i = 0; i < mt.meetings.length; i++) {
       const meetings = await OnlineClass.findOne({
         instituteId: req.body.instituteId,
         batchId: req.body.batchId,
-        meetingId: listMeetings.meetings[i].uuid,
+        meetingId: mt.meetings[i].id,
       });
-
-      getMeetings.push(getMeetings);
+      if (meetings) {
+        getMeetings.push(meetings);
+      }
     }
 
-    res.status(200).send(meetings);
-  } catch (error) {}
+    res.status(200).send(getMeetings);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
 };
 
 exports.getAllMeetings = async (req, res) => {
