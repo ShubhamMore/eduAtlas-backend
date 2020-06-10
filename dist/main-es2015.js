@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"header-container\">\n  <div class=\"logo-container\">\n    <a (click)=\"toggleSidebar()\" href=\"#\" class=\"sidebar-toggle\">\n      <nb-icon icon=\"menu-2-outline\"></nb-icon>\n    </a>\n    <a class=\"logo\" href=\"#\" (click)=\"navigateHome()\">\n      <img src=\"../../../../assets/img/eduatlas.png\" width=\"100%\" />\n    </a>\n  </div>\n\n  <nb-card class=\"mt-4\">\n    <nb-select\n      status=\"primary\"\n      placeholder=\"Select Institute\"\n      fullWidth\n      (selectedChange)=\"onSelect($event)\"\n    >\n      <nb-option value=\"undefined\">Select Institute</nb-option>\n      <nb-option *ngFor=\"let item of institute\" value=\"{{ item._id }}\">{{\n        item.basicInfo.name\n      }}</nb-option>\n    </nb-select>\n  </nb-card>\n</div>\n\n<div class=\"header-container\">\n  <nb-actions size=\"small\">\n    <nb-action class=\"control-item\" icon=\"email-outline\"></nb-action>\n    <nb-action class=\"control-item\" icon=\"bell-outline\"></nb-action>\n    <nb-action class=\"control-item\" icon=\"power\" (click)=\"logout()\"></nb-action>\n    <nb-action class=\"user-action\" *nbIsGranted=\"['view', 'user']\">\n      <nb-user [name]=\"name\" [nbContextMenu]=\"userMenu\"> </nb-user>\n    </nb-action>\n  </nb-actions>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"header-container\">\r\n  <div class=\"logo-container\">\r\n    <a (click)=\"toggleSidebar()\" href=\"#\" class=\"sidebar-toggle\">\r\n      <nb-icon icon=\"menu-2-outline\"></nb-icon>\r\n    </a>\r\n    <a class=\"logo\" href=\"#\" (click)=\"navigateHome()\">\r\n      <img src=\"../../../../assets/img/eduatlas.png\" width=\"100%\" />\r\n    </a>\r\n  </div>\r\n\r\n  <nb-card class=\"mt-4\">\r\n    <nb-select\r\n      status=\"primary\"\r\n      placeholder=\"Select Institute\"\r\n      fullWidth\r\n      (click)=\"setInstitutes()\"\r\n      (selectedChange)=\"onSelect($event)\"\r\n    >\r\n      <nb-option value=\"undefined\">Select Institute</nb-option>\r\n      <nb-option *ngFor=\"let item of institutes\" value=\"{{ item._id }}\">{{\r\n        item.basicInfo.name\r\n      }}</nb-option>\r\n    </nb-select>\r\n  </nb-card>\r\n</div>\r\n\r\n<div class=\"header-container\">\r\n  <nb-actions size=\"small\">\r\n    <nb-action class=\"control-item\" icon=\"email-outline\"></nb-action>\r\n    <nb-action class=\"control-item\" icon=\"bell-outline\"></nb-action>\r\n    <nb-action class=\"control-item\" icon=\"power\" (click)=\"logout()\"></nb-action>\r\n    <nb-action class=\"user-action\" *nbIsGranted=\"['view', 'user']\">\r\n      <nb-user [name]=\"name\" [nbContextMenu]=\"userMenu\"> </nb-user>\r\n    </nb-action>\r\n  </nb-actions>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"wrapper fadeInDown\" style=\"background-color: #fce062;\">\n  <div id=\"formContent\">\n    <nb-layout>\n      <nb-layout-column style=\"background-color: white;\">\n        <nb-card style=\"box-shadow: none;\">\n          <nb-card-body class=\"text-center\">\n            <div class=\"text-left\"></div>\n            <div class=\"fadeIn first\">\n              <img src=\"assets/img/EA FAVI.png\" id=\"icon\" alt=\"User Icon\" style=\"width: 25%;\" />\n            </div>\n            <h3>forgotPasswordForm Password ?</h3>\n\n            <form [formGroup]=\"forgotPasswordForm\" (ngSubmit)=\"resetPassword()\">\n              <input\n                type=\"text\"\n                pattern=\"\\d*\"\n                minlength=\"10\"\n                maxlength=\"10\"\n                formControlName=\"phone\"\n                placeholder=\"Enter Phone Number\"\n              />\n              <div\n                *ngIf=\"\n                  !forgotPasswordForm.get('phone').valid && forgotPasswordForm.get('phone').touched\n                \"\n              >\n                <small>*Enter Valid Phone</small>\n              </div>\n\n              <input\n                type=\"text\"\n                pattern=\"\\d*\"\n                minlength=\"4\"\n                maxlength=\"4\"\n                formControlName=\"otp\"\n                placeholder=\"Enter OTP\"\n                [ngClass]=\"!otpSend ? 'disable-component' : ''\"\n              />\n              <div\n                *ngIf=\"\n                  otpSend &&\n                  !otpVerified &&\n                  !forgotPasswordForm.get('otp').valid &&\n                  forgotPasswordForm.get('otp').touched\n                \"\n              >\n                <small>*Enter Valid 4 digit OTP</small>\n              </div>\n\n              <input\n                type=\"password\"\n                minlength=\"6\"\n                formControlName=\"password\"\n                placeholder=\"Enter New Password\"\n                [ngClass]=\"!otpVerified ? 'disable-component' : ''\"\n              />\n              <div\n                *ngIf=\"\n                  otpVerified &&\n                  !forgotPasswordForm.get('password').valid &&\n                  forgotPasswordForm.get('password').touched\n                \"\n              >\n                <small>*Enter PAssword Minimum Length of 6</small>\n              </div>\n\n              <button type=\"button\" *ngIf=\"!otpSend && !otpVerified\" (click)=\"getOtp()\">\n                Get Otp\n              </button>\n\n              <button type=\"button\" *ngIf=\"otpSend && !otpVerified\" (click)=\"verifyOtp()\">\n                Verify\n              </button>\n\n              <button type=\"submit\" *ngIf=\"otpSend && otpVerified\">Reset Password</button>\n            </form>\n\n            <div class=\"text-center\">\n              <span class=\"btn-link pointer\" *ngIf=\"otpSend && !otpVerified\" (click)=\"resendOtp()\">\n                Resend OTP\n              </span>\n            </div>\n\n            <span\n              >Login from here:\n              <a class=\"btn btn-link d-inline-block\" routerLink=\"/login\">Login</a></span\n            >\n          </nb-card-body>\n        </nb-card>\n      </nb-layout-column>\n    </nb-layout>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"wrapper fadeInDown\" style=\"background-color: #fce062;\">\n  <div id=\"formContent\">\n    <nb-layout>\n      <nb-layout-column style=\"background-color: white;\">\n        <nb-card style=\"box-shadow: none;\">\n          <nb-card-body class=\"text-center\">\n            <div class=\"text-left\"></div>\n            <div class=\"fadeIn first\">\n              <img\n                src=\"../../../assets/img/EA FAVI.png\"\n                id=\"icon\"\n                alt=\"User Icon\"\n                style=\"width: 25%;\"\n              />\n            </div>\n            <h3>Forgot Password Password ?</h3>\n\n            <form [formGroup]=\"forgotPasswordForm\" (ngSubmit)=\"resetPassword()\">\n              <input\n                type=\"text\"\n                pattern=\"\\d*\"\n                minlength=\"10\"\n                maxlength=\"10\"\n                formControlName=\"phone\"\n                placeholder=\"Enter Phone Number\"\n              />\n              <div\n                *ngIf=\"\n                  !forgotPasswordForm.get('phone').valid && forgotPasswordForm.get('phone').touched\n                \"\n              >\n                <small>*Enter Valid Phone</small>\n              </div>\n\n              <input\n                type=\"text\"\n                pattern=\"\\d*\"\n                minlength=\"4\"\n                maxlength=\"4\"\n                formControlName=\"otp\"\n                placeholder=\"Enter OTP\"\n                [ngClass]=\"!otpSend ? 'disable-component' : ''\"\n              />\n              <div\n                *ngIf=\"\n                  otpSend &&\n                  !otpVerified &&\n                  !forgotPasswordForm.get('otp').valid &&\n                  forgotPasswordForm.get('otp').touched\n                \"\n              >\n                <small>*Enter Valid 4 digit OTP</small>\n              </div>\n\n              <input\n                type=\"password\"\n                minlength=\"6\"\n                formControlName=\"password\"\n                placeholder=\"Enter New Password\"\n                [ngClass]=\"!otpVerified ? 'disable-component' : ''\"\n              />\n              <div\n                *ngIf=\"\n                  otpVerified &&\n                  !forgotPasswordForm.get('password').valid &&\n                  forgotPasswordForm.get('password').touched\n                \"\n              >\n                <small>*Enter PAssword Minimum Length of 6</small>\n              </div>\n\n              <button type=\"button\" *ngIf=\"!otpSend && !otpVerified\" (click)=\"getOtp()\">\n                Get Otp\n              </button>\n\n              <button type=\"button\" *ngIf=\"otpSend && !otpVerified\" (click)=\"verifyOtp()\">\n                Verify\n              </button>\n\n              <button type=\"submit\" *ngIf=\"otpSend && otpVerified\">Reset Password</button>\n            </form>\n\n            <div class=\"text-center\">\n              <span class=\"btn-link pointer\" *ngIf=\"otpSend && !otpVerified\" (click)=\"resendOtp()\">\n                Resend OTP\n              </span>\n            </div>\n\n            <span\n              >Login from here:\n              <a class=\"btn btn-link d-inline-block\" routerLink=\"/login\">Login</a></span\n            >\n          </nb-card-body>\n        </nb-card>\n      </nb-layout-column>\n    </nb-layout>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"wrapper fadeInDown\" style=\"background-color: #fce062;\">\r\n  <div id=\"formContent\">\r\n    <!-- Tabs Titles -->\r\n    <nb-layout>\r\n      <nb-layout-column style=\"background-color: white; height: auto;\">\r\n        <nb-card style=\"box-shadow: none;\">\r\n          <nb-card-body\r\n            class=\"text-center\"\r\n            style=\"\r\n              background-image: url('assets/images/loginBack.png');\r\n              background-size: cover;\r\n              background-repeat: no-repeat;\r\n              box-shadow: none;\r\n              background-position: 0 15rem;\r\n            \"\r\n          >\r\n            <!-- <h2 class=\"inactive underlineHover\">Sign Up </h2> -->\r\n\r\n            <!-- Icon -->\r\n            <div class=\"fadeIn first mb-5\" style=\"margin-top: -15px;\">\r\n              <img src=\"assets/img/EA FAVI.png\" id=\"icon\" alt=\"User Icon\" style=\"width: 25%;\" />\r\n            </div>\r\n\r\n            <span\r\n              style=\"color: #fce062; font-size: 70px; letter-spacing: -6px; font-weight: bolder;\"\r\n              >HELLO\r\n            </span>\r\n            <span style=\"font-size: 15px; color: #192038; display: block;\"\r\n              >Sign in to your account</span\r\n            >\r\n            <!-- Login Form -->\r\n            <form class=\"mt-3\" [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\r\n              <input\r\n                type=\"text\"\r\n                maxlength=\"100\"\r\n                class=\"fadeIn second\"\r\n                formControlName=\"userId\"\r\n                placeholder=\"Enter Email or Phone Number\"\r\n              />\r\n              <div\r\n                *ngIf=\"\r\n                  loginForm.get('userId').errors &&\r\n                  loginForm.get('userId').invalid &&\r\n                  loginForm.get('userId').touched\r\n                \"\r\n              >\r\n                <small *ngIf=\"loginForm.get('userId').errors?.required\"\r\n                  >*This field is required</small\r\n                >\r\n                <!-- <small *ngIf=\"loginForm.get('userId').errors?.pattern\"\r\n                  >*Enter Correct Email or Phone Number</small\r\n                > -->\r\n              </div>\r\n              <input\r\n                type=\"password\"\r\n                class=\"fadeIn third\"\r\n                name=\"password\"\r\n                formControlName=\"password\"\r\n                placeholder=\"Password\"\r\n              />\r\n              <div *ngIf=\"loginForm.get('password').invalid && loginForm.get('password').touched\">\r\n                <small>*Enter Password</small>\r\n              </div>\r\n              <br /><br />\r\n              <button type=\"submit\" class=\"fadeIn fourth\">Login</button>\r\n              <a routerLink=\"/forgot-password\" style=\"color: black; margin-top: -1rem;\"\r\n                >Forgot Password ?</a\r\n              >\r\n            </form>\r\n\r\n            <div class=\"text-right\">\r\n              <h1 class=\"pt-1\" style=\"font-weight: bolder; letter-spacing: -2px;\">NEW USER?</h1>\r\n              <p class=\"float-right\" style=\"color: white;\">\r\n                Creat your FREE Eduatlas <br />account today\r\n              </p>\r\n              <button class=\"fadeIn text-right\" routerLink=\"/sign-up\">Sign Up</button><br />\r\n            </div>\r\n          </nb-card-body>\r\n        </nb-card>\r\n      </nb-layout-column>\r\n    </nb-layout>\r\n  </div>\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"wrapper fadeInDown\" style=\"background-color: #fce062;\">\r\n  <div id=\"formContent\">\r\n    <!-- Tabs Titles -->\r\n    <nb-layout>\r\n      <nb-layout-column style=\"background-color: white; height: auto;\">\r\n        <nb-card style=\"box-shadow: none;\">\r\n          <nb-card-body\r\n            class=\"text-center\"\r\n            style=\"\r\n              background-image: url('assets/images/loginBack.png');\r\n              background-size: cover;\r\n              background-repeat: no-repeat;\r\n              box-shadow: none;\r\n              background-position: 0 15rem;\r\n            \"\r\n          >\r\n            <!-- <h2 class=\"inactive underlineHover\">Sign Up </h2> -->\r\n\r\n            <!-- Icon -->\r\n            <div class=\"fadeIn first mb-5\" style=\"margin-top: -15px;\">\r\n              <img\r\n                src=\"../../../assets/img/EA FAVI.png\"\r\n                id=\"icon\"\r\n                alt=\"User Icon\"\r\n                style=\"width: 25%;\"\r\n              />\r\n            </div>\r\n\r\n            <span\r\n              style=\"color: #fce062; font-size: 70px; letter-spacing: -6px; font-weight: bolder;\"\r\n              >HELLO\r\n            </span>\r\n            <span style=\"font-size: 15px; color: #192038; display: block;\"\r\n              >Sign in to your account</span\r\n            >\r\n            <!-- Login Form -->\r\n            <form class=\"mt-3\" [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\r\n              <input\r\n                type=\"text\"\r\n                maxlength=\"100\"\r\n                class=\"fadeIn second\"\r\n                formControlName=\"userId\"\r\n                placeholder=\"Enter Email or Phone Number\"\r\n              />\r\n              <div\r\n                *ngIf=\"\r\n                  loginForm.get('userId').errors &&\r\n                  loginForm.get('userId').invalid &&\r\n                  loginForm.get('userId').touched\r\n                \"\r\n              >\r\n                <small *ngIf=\"loginForm.get('userId').errors?.required\"\r\n                  >*This field is required</small\r\n                >\r\n                <!-- <small *ngIf=\"loginForm.get('userId').errors?.pattern\"\r\n                  >*Enter Correct Email or Phone Number</small\r\n                > -->\r\n              </div>\r\n              <input\r\n                type=\"password\"\r\n                class=\"fadeIn third\"\r\n                name=\"password\"\r\n                formControlName=\"password\"\r\n                placeholder=\"Password\"\r\n              />\r\n              <div *ngIf=\"loginForm.get('password').invalid && loginForm.get('password').touched\">\r\n                <small>*Enter Password</small>\r\n              </div>\r\n              <br /><br />\r\n              <button type=\"submit\" class=\"fadeIn fourth\">Login</button>\r\n              <a routerLink=\"/forgot-password\" style=\"color: black; margin-top: -1rem;\"\r\n                >Forgot Password ?</a\r\n              >\r\n            </form>\r\n\r\n            <div class=\"text-right\">\r\n              <h1 class=\"pt-1\" style=\"font-weight: bolder; letter-spacing: -2px;\">NEW USER?</h1>\r\n              <p class=\"float-right\" style=\"color: white;\">\r\n                Create your FREE Eduatlas <br />account today\r\n              </p>\r\n              <button class=\"fadeIn text-right\" routerLink=\"/sign-up\">Sign Up</button><br />\r\n            </div>\r\n          </nb-card-body>\r\n        </nb-card>\r\n      </nb-layout-column>\r\n    </nb-layout>\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -61,7 +61,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"wrapper fadeInDown\" style=\"background-color: #fce062;\">\n  <div id=\"formContent\">\n    <!-- Tabs Titles -->\n\n    <!-- <h2 class=\"inactive underlineHover\">Sign Up </h2> -->\n\n    <!-- Login Form -->\n    <!-- <form> -->\n\n    <nb-layout style=\"background-color: white;\">\n      <nb-layout-column style=\"background-color: white;\">\n        <nb-card style=\"box-shadow: none;\">\n          <nb-card-body class=\"text-center\">\n            <div class=\"fadeIn first\">\n              <img src=\"assets/img/EA FAVI.png\" id=\"icon\" alt=\"User Icon\" style=\"width: 25%;\" />\n            </div>\n\n            <h2 class=\"font-weight-bolder d-inline-block\" style=\"font-size: 25px; color: black;\">\n              Create Your Account\n            </h2>\n            <form [formGroup]=\"signUpForm\" (ngSubmit)=\"onSignUp()\">\n              <input\n                type=\"text\"\n                id=\"name\"\n                class=\"fadeIn first\"\n                formControlName=\"name\"\n                name=\"name\"\n                placeholder=\"Name *\"\n              />\n\n              <div *ngIf=\"!signUpForm.get('name').valid && signUpForm.get('name').touched\">\n                <small>*This field is required</small>\n              </div>\n\n              <input\n                type=\"email\"\n                id=\"email\"\n                class=\"fadeIn second\"\n                formControlName=\"email\"\n                name=\"email\"\n                placeholder=\"Email *\"\n              />\n              <div *ngIf=\"!signUpForm.get('email').valid && signUpForm.get('email').touched\">\n                <small>*Enter Valid Email</small>\n              </div>\n\n              <input\n                type=\"text\"\n                id=\"phone\"\n                class=\"fadeIn third\"\n                pattern=\"\\d*\"\n                formControlName=\"phone\"\n                name=\"phone\"\n                placeholder=\"Contact Number *\"\n                minlength=\"10\"\n                maxlength=\"10\"\n              />\n\n              <div *ngIf=\"!signUpForm.get('phone').valid && signUpForm.get('phone').touched\">\n                <small>*Enter Correct Phone Number</small>\n              </div>\n\n              <input\n                type=\"password\"\n                id=\"password\"\n                minlength=\"6\"\n                class=\"fadeIn fourth\"\n                formControlName=\"password\"\n                name=\"password\"\n                placeholder=\"Password *\"\n              />\n              <div *ngIf=\"!signUpForm.get('password').valid && signUpForm.get('password').touched\">\n                <small *ngIf=\"signUpForm.get('password').errors?.required\"\n                  >*This field is required</small\n                >\n                <small *ngIf=\"signUpForm.get('password').errors?.minlength\"\n                  >*Minimum length 6 is required</small\n                >\n              </div>\n\n              <input\n                type=\"password\"\n                id=\"confirmPassword\"\n                class=\"fadeIn fifth\"\n                formControlName=\"confirmPassword\"\n                name=\"confirmPassword\"\n                placeholder=\"Confirm Password\"\n              />\n\n              <div\n                *ngIf=\"\n                  !signUpForm.get('confirmPassword').valid &&\n                  signUpForm.get('confirmPassword').touched\n                \"\n              >\n                <small>*This field is required</small>\n              </div>\n\n              <div\n                *ngIf=\"\n                  signUpForm.hasError('invalidPassword') &&\n                  signUpForm.get('confirmPassword').touched\n                \"\n              >\n                <small>*Password must match</small>\n              </div>\n\n              <div>\n                <nb-select\n                  class=\"fadeIn eight\"\n                  formControlName=\"role\"\n                  placeholder=\"Select Role\"\n                  fullWidth\n                >\n                  <nb-option value=\"institute\">Institute</nb-option>\n                  <nb-option value=\"student\">Student</nb-option>\n                </nb-select>\n              </div>\n\n              <div *ngIf=\"!signUpForm.get('role').valid && signUpForm.get('role').touched\">\n                <small>*Select Role</small>\n              </div>\n\n              <div>\n                <nb-checkbox\n                  status=\"warning\"\n                  (change)=\"acceptTermsAndConditions($event.target.checked)\"\n                >\n                  I agree with the\n                  <a href=\"http://eduatlas.in/index.php/terms-of-use/\">TERMS AND CONDITIONS</a>\n                </nb-checkbox>\n              </div>\n\n              <div>\n                <button type=\"Submit\" class=\"fadeIn seventh\">Create Account</button>\n              </div>\n            </form>\n\n            <div>\n              <span>Already Registered ? </span>\n              <a routerLink=\"/login\">Sign In Here</a>\n            </div>\n          </nb-card-body>\n        </nb-card>\n      </nb-layout-column>\n    </nb-layout>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ngx-terms-and-conditions *ngIf=\"tncDisplay\" (close)=\"closeTnC()\"></ngx-terms-and-conditions>\r\n<div class=\"wrapper fadeInDown\" style=\"background-color: #fce062;\">\r\n  <div id=\"formContent\">\r\n    <!-- Tabs Titles -->\r\n\r\n    <!-- <h2 class=\"inactive underlineHover\">Sign Up </h2> -->\r\n\r\n    <!-- Login Form -->\r\n    <!-- <form> -->\r\n\r\n    <nb-layout style=\"background-color: white;\">\r\n      <nb-layout-column style=\"background-color: white;\">\r\n        <nb-card style=\"box-shadow: none;\">\r\n          <nb-card-body class=\"text-center\">\r\n            <div class=\"fadeIn first\">\r\n              <img src=\"assets/img/EA FAVI.png\" id=\"icon\" alt=\"User Icon\" style=\"width: 25%;\" />\r\n            </div>\r\n\r\n            <h2 class=\"font-weight-bolder d-inline-block\" style=\"font-size: 25px; color: black;\">\r\n              Create Your Account\r\n            </h2>\r\n            <form [formGroup]=\"signUpForm\" (ngSubmit)=\"onSignUp()\">\r\n              <input\r\n                type=\"text\"\r\n                id=\"name\"\r\n                class=\"fadeIn first\"\r\n                formControlName=\"name\"\r\n                name=\"name\"\r\n                placeholder=\"Name *\"\r\n              />\r\n\r\n              <div *ngIf=\"!signUpForm.get('name').valid && signUpForm.get('name').touched\">\r\n                <small>*This field is required</small>\r\n              </div>\r\n\r\n              <input\r\n                type=\"email\"\r\n                id=\"email\"\r\n                class=\"fadeIn second\"\r\n                formControlName=\"email\"\r\n                name=\"email\"\r\n                placeholder=\"Email *\"\r\n              />\r\n              <div *ngIf=\"!signUpForm.get('email').valid && signUpForm.get('email').touched\">\r\n                <small>*Enter Valid Email</small>\r\n              </div>\r\n\r\n              <input\r\n                type=\"text\"\r\n                id=\"phone\"\r\n                class=\"fadeIn third\"\r\n                pattern=\"\\d*\"\r\n                formControlName=\"phone\"\r\n                name=\"phone\"\r\n                placeholder=\"Contact Number *\"\r\n                minlength=\"10\"\r\n                maxlength=\"10\"\r\n              />\r\n\r\n              <div *ngIf=\"!signUpForm.get('phone').valid && signUpForm.get('phone').touched\">\r\n                <small>*Enter Correct Phone Number</small>\r\n              </div>\r\n\r\n              <input\r\n                type=\"password\"\r\n                id=\"password\"\r\n                minlength=\"7\"\r\n                class=\"fadeIn fourth\"\r\n                formControlName=\"password\"\r\n                name=\"password\"\r\n                placeholder=\"Password *\"\r\n              />\r\n              <div *ngIf=\"!signUpForm.get('password').valid && signUpForm.get('password').touched\">\r\n                <small *ngIf=\"signUpForm.get('password').errors?.required\"\r\n                  >*This field is required</small\r\n                >\r\n                <small *ngIf=\"signUpForm.get('password').errors?.minlength\"\r\n                  >*Minimum length 7 is required</small\r\n                >\r\n              </div>\r\n\r\n              <input\r\n                type=\"password\"\r\n                id=\"confirmPassword\"\r\n                class=\"fadeIn fifth\"\r\n                formControlName=\"confirmPassword\"\r\n                name=\"confirmPassword\"\r\n                placeholder=\"Confirm Password\"\r\n              />\r\n\r\n              <div\r\n                *ngIf=\"\r\n                  !signUpForm.get('confirmPassword').valid &&\r\n                  signUpForm.get('confirmPassword').touched\r\n                \"\r\n              >\r\n                <small>*This field is required</small>\r\n              </div>\r\n\r\n              <div\r\n                *ngIf=\"\r\n                  signUpForm.hasError('invalidPassword') &&\r\n                  signUpForm.get('confirmPassword').touched\r\n                \"\r\n              >\r\n                <small>*Password must match</small>\r\n              </div>\r\n\r\n              <div>\r\n                <nb-select\r\n                  class=\"fadeIn eight\"\r\n                  formControlName=\"role\"\r\n                  placeholder=\"Select Role\"\r\n                  fullWidth\r\n                >\r\n                  <nb-option value=\"institute\">Institute</nb-option>\r\n                  <nb-option value=\"student\">Student</nb-option>\r\n                </nb-select>\r\n              </div>\r\n\r\n              <div *ngIf=\"!signUpForm.get('role').valid && signUpForm.get('role').touched\">\r\n                <small>*Select Role</small>\r\n              </div>\r\n\r\n              <div>\r\n                <nb-checkbox\r\n                  status=\"warning\"\r\n                  (change)=\"acceptTermsAndConditions($event.target.checked)\"\r\n                >\r\n                  I agree with the\r\n                  <span class=\"btn btn-link pointer\" (click)=\"openTnC()\">TERMS AND CONDITIONS</span>\r\n                </nb-checkbox>\r\n              </div>\r\n\r\n              <div>\r\n                <button type=\"Submit\" class=\"fadeIn seventh\">Create Account</button>\r\n              </div>\r\n            </form>\r\n\r\n            <div>\r\n              <span>Already Registered ? </span>\r\n              <a routerLink=\"/login\">Sign In Here</a>\r\n            </div>\r\n          </nb-card-body>\r\n        </nb-card>\r\n      </nb-layout-column>\r\n    </nb-layout>\r\n  </div>\r\n</div>\r\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/admin/terms-and-conditions/terms-and-conditions.component.html":
+/*!**********************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/admin/terms-and-conditions/terms-and-conditions.component.html ***!
+  \**********************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<!-- <div>\n    <iframe src=\"http://eduatlas.in/index.php/terms-of-use/\"></iframe>\n</div> -->\n<div class=\"backdrop\" (click)=\"onClose()\"></div>\n<div class=\"tnc-box\">\n  <div class=\"tnc-box-actions\">\n    <button class=\"btn btn-sm btn-danger\" (click)=\"onClose()\">X</button>\n  </div>\n  <iframe src=\"http://eduatlas.in/index.php/terms-of-use/\" width=\"100%\" height=\"500\"></iframe>\n</div>\n");
 
 /***/ }),
 
@@ -69,7 +82,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************!*\
   !*** ./node_modules/tslib/tslib.es6.js ***!
   \*****************************************/
-/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __createBinding, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82,12 +95,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__createBinding", function() { return __createBinding; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spread", function() { return __spread; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spreadArrays", function() { return __spreadArrays; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__await", function() { return __await; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncGenerator", function() { return __asyncGenerator; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncDelegator", function() { return __asyncDelegator; });
@@ -95,30 +106,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function() { return __classPrivateFieldGet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function() { return __classPrivateFieldSet; });
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
 
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
 
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
 ***************************************************************************** */
 /* global Reflect, Promise */
 
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
+var extendStatics = Object.setPrototypeOf ||
+    ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+    function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
 
 function __extends(d, b) {
     extendStatics(d, b);
@@ -126,15 +132,12 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
+var __assign = Object.assign || function __assign(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
     }
-    return __assign.apply(this, arguments);
+    return t;
 }
 
 function __rest(s, e) {
@@ -142,10 +145,8 @@ function __rest(s, e) {
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
         t[p] = s[p];
     if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+            t[p[i]] = s[p[i]];
     return t;
 }
 
@@ -165,11 +166,10 @@ function __metadata(metadataKey, metadataValue) {
 }
 
 function __awaiter(thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 }
@@ -181,8 +181,8 @@ function __generator(thisArg, body) {
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
         while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -202,25 +202,19 @@ function __generator(thisArg, body) {
     }
 }
 
-function __createBinding(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}
-
 function __exportStar(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) exports[p] = m[p];
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 
 function __values(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
     if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
+    return {
         next: function () {
             if (o && i >= o.length) o = void 0;
             return { value: o && o[i++], done: !o };
         }
     };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 }
 
 function __read(o, n) {
@@ -246,14 +240,6 @@ function __spread() {
     return ar;
 }
 
-function __spreadArrays() {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-};
-
 function __await(v) {
     return this instanceof __await ? (this.v = v, this) : new __await(v);
 }
@@ -264,7 +250,7 @@ function __asyncGenerator(thisArg, _arguments, generator) {
     return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
     function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
     function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
-    function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);  }
     function fulfill(value) { resume("next", value); }
     function reject(value) { resume("throw", value); }
     function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
@@ -273,15 +259,13 @@ function __asyncGenerator(thisArg, _arguments, generator) {
 function __asyncDelegator(o) {
     var i, p;
     return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
-    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+    function verb(n, f) { if (o[n]) i[n] = function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; }; }
 }
 
 function __asyncValues(o) {
     if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m = o[Symbol.asyncIterator], i;
-    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+    var m = o[Symbol.asyncIterator];
+    return m ? m.call(o) : typeof __values === "function" ? __values(o) : o[Symbol.iterator]();
 }
 
 function __makeTemplateObject(cooked, raw) {
@@ -299,21 +283,6 @@ function __importStar(mod) {
 
 function __importDefault(mod) {
     return (mod && mod.__esModule) ? mod : { default: mod };
-}
-
-function __classPrivateFieldGet(receiver, privateMap) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to get private field on non-instance");
-    }
-    return privateMap.get(receiver);
-}
-
-function __classPrivateFieldSet(receiver, privateMap, value) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to set private field on non-instance");
-    }
-    privateMap.set(receiver, value);
-    return value;
 }
 
 
@@ -3321,14 +3290,18 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderComponent", function() { return HeaderComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../services/auth-services/auth.service */ "./src/app/services/auth-services/auth.service.ts");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
-/* harmony import */ var _core_data_users__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../@core/data/users */ "./src/app/@core/data/users.ts");
-/* harmony import */ var _core_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../@core/utils */ "./src/app/@core/utils/index.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var _services_institute_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../services/institute.service */ "./src/app/services/institute.service.ts");
+/* harmony import */ var _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../services/auth-services/auth.service */ "./src/app/services/auth-services/auth.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+/* harmony import */ var _core_data_users__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../@core/data/users */ "./src/app/@core/data/users.ts");
+/* harmony import */ var _core_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../@core/utils */ "./src/app/@core/utils/index.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../services/role/role-assign.service */ "./src/app/services/role/role-assign.service.ts");
+
+
 
 
 
@@ -3339,7 +3312,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let HeaderComponent = class HeaderComponent {
-    constructor(authService, sidebarService, menuService, themeService, userService, api, layoutService, router, breakpointService) {
+    constructor(authService, sidebarService, menuService, themeService, userService, api, layoutService, router, breakpointService, instituteService, roleService) {
         this.authService = authService;
         this.sidebarService = sidebarService;
         this.menuService = menuService;
@@ -3349,9 +3322,9 @@ let HeaderComponent = class HeaderComponent {
         this.layoutService = layoutService;
         this.router = router;
         this.breakpointService = breakpointService;
-        this.destroy$ = new rxjs__WEBPACK_IMPORTED_MODULE_6__["Subject"]();
-        this.userPictureOnly = false;
-        this.institute = [];
+        this.instituteService = instituteService;
+        this.roleService = roleService;
+        this.destroy$ = new rxjs__WEBPACK_IMPORTED_MODULE_7__["Subject"]();
         this.userMenu = [{ title: 'Edit Profile' }, { title: 'Change Password' }];
         this.themes = [
             {
@@ -3374,20 +3347,50 @@ let HeaderComponent = class HeaderComponent {
         this.currentTheme = 'default';
     }
     ngOnInit() {
+        this.userPictureOnly = false;
+        this.institutes = [];
         this.user = this.authService.getUser();
         this.name = `Welcome ${this.user.name}
       (${this.user.role})`;
         this.getInstitutes();
     }
     getInstitutes() {
-        this.api.getInstitutes().subscribe((data) => {
-            this.institutes = data;
-            this.institute = JSON.parse(JSON.stringify(this.institutes));
-        });
+        if (this.user.role === 'institute') {
+            this.api.getInstitutes().subscribe((data) => {
+                this.institutes = data;
+            });
+        }
+        else if (this.user.role === 'employee') {
+            this.api.getEmployeeInstitutes({ email: this.user.email }).subscribe((inst) => {
+                this.instituteService.setInstitutes(inst);
+            });
+        }
+    }
+    setInstitutes() {
+        this.institutes = [];
+        this.institutes = this.instituteService.getInstitutes();
     }
     onSelect(event) {
         if (event !== 'undefined') {
-            this.router.navigate(['/pages/dashboard/', event]);
+            if (this.user.role === 'institute') {
+                this.router.navigate(['/pages/dashboard/', event]);
+            }
+            else if (this.user.role === 'employee') {
+                const role = this.getEmployeeRole(event);
+                this.roleService.assignRoles(role);
+                this.router.navigate(['/pages/dashboard/', event]);
+            }
+            else if (this.user.role === 'student') {
+                this.router.navigate(['/student/dashboard/', event]);
+            }
+        }
+    }
+    getEmployeeRole(instituteId) {
+        const institiute = this.institutes.find((institute) => {
+            return instituteId === institute._id;
+        });
+        if (institiute) {
+            return institiute.role;
         }
     }
     ngOnDestroy() {
@@ -3411,31 +3414,35 @@ let HeaderComponent = class HeaderComponent {
     }
 };
 HeaderComponent.ctorParameters = () => [
-    { type: _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"] },
-    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbSidebarService"] },
-    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbMenuService"] },
-    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbThemeService"] },
-    { type: _core_data_users__WEBPACK_IMPORTED_MODULE_4__["UserData"] },
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_8__["ApiService"] },
-    { type: _core_utils__WEBPACK_IMPORTED_MODULE_5__["LayoutService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"] },
-    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbMediaBreakpointsService"] }
+    { type: _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbSidebarService"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbMenuService"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbThemeService"] },
+    { type: _core_data_users__WEBPACK_IMPORTED_MODULE_5__["UserData"] },
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_9__["ApiService"] },
+    { type: _core_utils__WEBPACK_IMPORTED_MODULE_6__["LayoutService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbMediaBreakpointsService"] },
+    { type: _services_institute_service__WEBPACK_IMPORTED_MODULE_1__["InstituteService"] },
+    { type: _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_10__["RoleAssignService"] }
 ];
 HeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'ngx-header',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./header.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/@theme/components/header/header.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./header.component.scss */ "./src/app/@theme/components/header/header.component.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
-        _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbSidebarService"],
-        _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbMenuService"],
-        _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbThemeService"],
-        _core_data_users__WEBPACK_IMPORTED_MODULE_4__["UserData"],
-        _services_api_service__WEBPACK_IMPORTED_MODULE_8__["ApiService"],
-        _core_utils__WEBPACK_IMPORTED_MODULE_5__["LayoutService"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"],
-        _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbMediaBreakpointsService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbSidebarService"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbMenuService"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbThemeService"],
+        _core_data_users__WEBPACK_IMPORTED_MODULE_5__["UserData"],
+        _services_api_service__WEBPACK_IMPORTED_MODULE_9__["ApiService"],
+        _core_utils__WEBPACK_IMPORTED_MODULE_6__["LayoutService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbMediaBreakpointsService"],
+        _services_institute_service__WEBPACK_IMPORTED_MODULE_1__["InstituteService"],
+        _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_10__["RoleAssignService"]])
 ], HeaderComponent);
 
 
@@ -5372,14 +5379,15 @@ let LoginComponent = class LoginComponent {
                 });
             }
             else {
-                if (resData.role === 'institute') {
+                if (resData.role === 'student') {
                     this.showToast('top-right', 'success', `Login Success`);
-                    this.router.navigate(['/pages/home'], {
+                    this.router.navigate(['/student/home'], {
                         relativeTo: this.route,
                     });
                 }
                 else {
-                    this.router.navigate(['/login'], {
+                    this.showToast('top-right', 'success', `Login Success`);
+                    this.router.navigate(['/pages/home'], {
                         relativeTo: this.route,
                     });
                 }
@@ -5490,9 +5498,19 @@ let OtpComponent = class OtpComponent {
                     this.authService.loginSuccess(res);
                     this.showToast('top-right', 'success', 'OTP Verification Successful');
                     setTimeout(() => {
-                        this.router.navigate(['/pages/home'], {
-                            relativeTo: this.route,
-                        });
+                        if (res.role === 'institute' || res.role === 'employee') {
+                            this.router.navigate(['/pages/home'], {
+                                relativeTo: this.route,
+                            });
+                        }
+                        else if (res.role === 'student') {
+                            this.router.navigate(['/student/home'], {
+                                relativeTo: this.route,
+                            });
+                        }
+                        else {
+                            this.router.navigate(['/'], { relativeTo: this.route });
+                        }
                     }, 1000);
                 }
             }
@@ -5575,6 +5593,13 @@ let SignUpComponent = class SignUpComponent {
         this.router = router;
         this.toasterService = toasterService;
         this.tnc = false;
+        this.tncDisplay = false;
+    }
+    openTnC() {
+        this.tncDisplay = true;
+    }
+    closeTnC() {
+        this.tncDisplay = false;
     }
     ngOnInit() {
         this.signUpForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
@@ -5585,7 +5610,7 @@ let SignUpComponent = class SignUpComponent {
             }),
             password: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required] }),
             confirmPassword: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required] }),
-            role: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required] }),
+            role: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('institute', { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required] }),
         }, {
             validators: this.passwordValidator.bind(this),
         });
@@ -5600,7 +5625,12 @@ let SignUpComponent = class SignUpComponent {
         this.tnc = tnc;
     }
     onSignUp() {
-        if (this.signUpForm.invalid || !this.tnc) {
+        if (this.signUpForm.invalid) {
+            this.showToast('top-right', 'warning', 'Insufficient Data, Please fill all Fields Correctly');
+            return;
+        }
+        else if (!this.tnc) {
+            this.showToast('top-right', 'warning', 'Accept Terms and Conditions');
             return;
         }
         const user = {
@@ -5646,6 +5676,60 @@ SignUpComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/admin/terms-and-conditions/terms-and-conditions.component.scss":
+/*!********************************************************************************!*\
+  !*** ./src/app/admin/terms-and-conditions/terms-and-conditions.component.scss ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".backdrop {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background: rgba(0, 0, 0, 0.75);\n  z-index: 50; }\n\n.tnc-box {\n  position: fixed;\n  top: 10vh;\n  left: 20vw;\n  width: 60vw;\n  padding: 1px;\n  z-index: 100;\n  background: #fff;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); }\n\n.tnc-box-actions {\n  text-align: right; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYWRtaW4vdGVybXMtYW5kLWNvbmRpdGlvbnMvRTpcXFByb2plY3RzXFxGcmVlbGFuY2UgUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXGNsaWVudC9zcmNcXGFwcFxcYWRtaW5cXHRlcm1zLWFuZC1jb25kaXRpb25zXFx0ZXJtcy1hbmQtY29uZGl0aW9ucy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGVBQWU7RUFDZixNQUFNO0VBQ04sT0FBTztFQUNQLFlBQVk7RUFDWixhQUFhO0VBQ2IsK0JBQStCO0VBQy9CLFdBQVcsRUFBQTs7QUFHYjtFQUNFLGVBQWU7RUFDZixTQUFTO0VBQ1QsVUFBVTtFQUNWLFdBQVc7RUFDWCxZQUFZO0VBQ1osWUFBWTtFQUNaLGdCQUFnQjtFQUNoQix5Q0FBeUMsRUFBQTs7QUFHM0M7RUFDRSxpQkFBaUIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2FkbWluL3Rlcm1zLWFuZC1jb25kaXRpb25zL3Rlcm1zLWFuZC1jb25kaXRpb25zLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJhY2tkcm9wIHtcclxuICBwb3NpdGlvbjogZml4ZWQ7XHJcbiAgdG9wOiAwO1xyXG4gIGxlZnQ6IDA7XHJcbiAgd2lkdGg6IDEwMHZ3O1xyXG4gIGhlaWdodDogMTAwdmg7XHJcbiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjc1KTtcclxuICB6LWluZGV4OiA1MDtcclxufVxyXG5cclxuLnRuYy1ib3gge1xyXG4gIHBvc2l0aW9uOiBmaXhlZDtcclxuICB0b3A6IDEwdmg7XHJcbiAgbGVmdDogMjB2dztcclxuICB3aWR0aDogNjB2dztcclxuICBwYWRkaW5nOiAxcHg7XHJcbiAgei1pbmRleDogMTAwO1xyXG4gIGJhY2tncm91bmQ6ICNmZmY7XHJcbiAgYm94LXNoYWRvdzogMCAycHggOHB4IHJnYmEoMCwgMCwgMCwgMC4yNSk7XHJcbn1cclxuXHJcbi50bmMtYm94LWFjdGlvbnMge1xyXG4gIHRleHQtYWxpZ246IHJpZ2h0O1xyXG59XHJcbiJdfQ== */");
+
+/***/ }),
+
+/***/ "./src/app/admin/terms-and-conditions/terms-and-conditions.component.ts":
+/*!******************************************************************************!*\
+  !*** ./src/app/admin/terms-and-conditions/terms-and-conditions.component.ts ***!
+  \******************************************************************************/
+/*! exports provided: TermsAndConditionsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TermsAndConditionsComponent", function() { return TermsAndConditionsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let TermsAndConditionsComponent = class TermsAndConditionsComponent {
+    constructor() {
+        // tslint:disable-next-line: no-output-native
+        this.close = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+    }
+    ngOnInit() { }
+    onClose() {
+        this.close.emit();
+    }
+};
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+], TermsAndConditionsComponent.prototype, "close", void 0);
+TermsAndConditionsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'ngx-terms-and-conditions',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./terms-and-conditions.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/admin/terms-and-conditions/terms-and-conditions.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./terms-and-conditions.component.scss */ "./src/app/admin/terms-and-conditions/terms-and-conditions.component.scss")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+], TermsAndConditionsComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/app-routing.module.ts":
 /*!***************************************!*\
   !*** ./src/app/app-routing.module.ts ***!
@@ -5678,7 +5762,12 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: 'pages',
-        loadChildren: () => __webpack_require__.e(/*! import() | app-pages-pages-module */ "app-pages-pages-module").then(__webpack_require__.bind(null, /*! ../app/pages/pages.module */ "./src/app/pages/pages.module.ts")).then((m) => m.PagesModule),
+        loadChildren: () => Promise.all(/*! import() | pages-pages-module */[__webpack_require__.e("default~pages-pages-module~student-student-module"), __webpack_require__.e("pages-pages-module")]).then(__webpack_require__.bind(null, /*! ./pages/pages.module */ "./src/app/pages/pages.module.ts")).then((m) => m.PagesModule),
+        canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_4__["AuthGuard"]],
+    },
+    {
+        path: 'student',
+        loadChildren: () => Promise.all(/*! import() | student-student-module */[__webpack_require__.e("default~pages-pages-module~student-student-module"), __webpack_require__.e("student-student-module")]).then(__webpack_require__.bind(null, /*! ./student/student.module */ "./src/app/student/student.module.ts")).then((m) => m.StudentModule),
         canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_4__["AuthGuard"]],
     },
     {
@@ -5843,6 +5932,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./admin/sign-up/sign-up.component */ "./src/app/admin/sign-up/sign-up.component.ts");
 /* harmony import */ var _admin_otp_otp_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./admin/otp/otp.component */ "./src/app/admin/otp/otp.component.ts");
 /* harmony import */ var _admin_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./admin/forgot-password/forgot-password.component */ "./src/app/admin/forgot-password/forgot-password.component.ts");
+/* harmony import */ var _admin_terms_and_conditions_terms_and_conditions_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./admin/terms-and-conditions/terms-and-conditions.component */ "./src/app/admin/terms-and-conditions/terms-and-conditions.component.ts");
+
 
 
 
@@ -5873,6 +5964,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _admin_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_16__["SignUpComponent"],
             _admin_otp_otp_component__WEBPACK_IMPORTED_MODULE_17__["OtpComponent"],
             _admin_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_18__["ForgotPasswordComponent"],
+            _admin_terms_and_conditions_terms_and_conditions_component__WEBPACK_IMPORTED_MODULE_19__["TermsAndConditionsComponent"],
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -5905,6 +5997,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             }),
             _core_core_module__WEBPACK_IMPORTED_MODULE_5__["CoreModule"].forRoot(),
         ],
+        entryComponents: [_admin_terms_and_conditions_terms_and_conditions_component__WEBPACK_IMPORTED_MODULE_19__["TermsAndConditionsComponent"]],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
         providers: [_auth_guard__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"], { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"], useClass: _services_auth_services_auth_interceptor_auth_interceptor__WEBPACK_IMPORTED_MODULE_11__["AuthInterceptor"], multi: true }],
     })
@@ -5960,6 +6053,194 @@ AuthGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
 ], AuthGuard);
 
+
+
+/***/ }),
+
+/***/ "./src/app/pages/pages-menu.ts":
+/*!*************************************!*\
+  !*** ./src/app/pages/pages-menu.ts ***!
+  \*************************************/
+/*! exports provided: MENU_ITEMS */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MENU_ITEMS", function() { return MENU_ITEMS; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+
+const MENU_ITEMS = [
+    {
+        title: 'Home',
+        icon: 'home-outline',
+        link: '/pages/home',
+        home: true,
+    },
+    {
+        title: 'Institute',
+        icon: 'home-outline',
+        hidden: true,
+        children: [
+            {
+                title: 'Add Institute',
+                link: '/pages/membership',
+            },
+            {
+                title: 'Manage Institute',
+                link: '/pages/institute/manage-institute',
+            },
+        ],
+    },
+    {
+        title: 'Dashboard',
+        icon: 'layout-outline',
+        link: '',
+        pathMatch: 'full',
+        hidden: true,
+    },
+    {
+        title: 'Daily Links',
+        hidden: true,
+    },
+    {
+        title: 'Branch Configuration',
+        icon: 'share-outline',
+        link: '/pages/institute/branch-config',
+        hidden: true,
+        children: [
+            {
+                title: 'Courses',
+                link: '/pages/institute/branch-config/manage-course',
+            },
+            {
+                title: 'Batches',
+                link: '/pages/institute/branch-config/manage-batch',
+            },
+            {
+                title: 'Discount',
+                link: '/pages/institute/branch-config/manage-discount',
+            },
+            {
+                title: 'Receipt',
+                link: '/pages/institute/branch-config/manage-receipt',
+            },
+            {
+                title: 'Manage Employee',
+                link: '/pages/institute/branch-config/manage-employee',
+            },
+        ],
+    },
+    {
+        title: 'Students',
+        icon: 'person-outline',
+        hidden: true,
+        children: [
+            {
+                title: 'Add Students',
+                link: '/pages/institute/add-students',
+            },
+            {
+                title: 'Active Student',
+                link: '/pages/institute/manage-students',
+            },
+            {
+                title: 'Pending Student',
+                link: '/pages/institute/pending-students',
+            },
+        ],
+    },
+    {
+        title: 'Communications',
+        hidden: true,
+        children: [
+            {
+                title: 'Announcements',
+                link: '',
+            },
+        ],
+    },
+    {
+        title: 'Tests',
+        hidden: true,
+        children: [
+            {
+                title: 'Define Test',
+            },
+            {
+                title: 'Upload Scores',
+            },
+        ],
+    },
+    {
+        title: 'Student Reports',
+        hidden: true,
+        children: [
+            {
+                title: 'Attendance Summary',
+                hidden: true,
+            },
+            {
+                title: 'Performance',
+                hidden: true,
+            },
+            {
+                title: 'Remarks',
+                hidden: true,
+            },
+            {
+                title: 'Mentoring',
+            },
+            {
+                title: 'Schedule PTMs',
+            },
+        ],
+    },
+    {
+        title: 'Reports',
+        hidden: true,
+        children: [
+            {
+                title: 'Finance reports',
+            },
+            {
+                title: 'ETC',
+            },
+        ],
+    },
+    {
+        title: 'LEAD MANAGER',
+        hidden: true,
+    },
+    {
+        title: 'Schedule',
+        link: '/pages/institute/add-schedule/1',
+        hidden: true,
+    },
+    {
+        title: 'Attendance',
+        link: '',
+        hidden: true,
+    },
+    {
+        title: 'Online Classes',
+        link: '',
+        hidden: true,
+        children: [
+            {
+                title: 'Settings',
+                hidden: true,
+            },
+            {
+                title: 'Create Class',
+                hidden: true,
+            },
+            {
+                title: 'Manage Class',
+                hidden: true,
+            },
+        ],
+    },
+];
 
 
 /***/ }),
@@ -6100,6 +6381,21 @@ let ApiService = class ApiService {
             .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getOneStudent', { eduatlasId: data })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
+    //  SEND OTP FOR GET STUDENT DETAILS
+    sendOtpForGetUserDetails(eduId) {
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/users/sendOtpForGetUserDetails', {
+            eduAtlasId: eduId,
+        })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    // VERIFY OTP FOR GET USER DETAILS
+    verifyUserOtp(data) {
+        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/users/verifyOTP', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => {
+            // console.log(res);
+            return res;
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
     //  GET ONE STUDENT FOR EDITING AND VIEWING
     getOneStudentByInstitute(data) {
         return this.http
@@ -6180,6 +6476,22 @@ let ApiService = class ApiService {
         return this.http
             .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/updateStudentPersonalDetails', data)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(() => student), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    // STUDENT COURSE
+    getStudentsByBatch(instituteId, courseId, batchId) {
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getStudentsByBatch', {
+            instituteId: instituteId,
+            courseId: courseId,
+            batchId: batchId,
+        })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    // STUDENT COURSE
+    getStudentsByInstitute(data) {
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getStudentsByInstitute', data)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     //  DELETE STUDENT COURSE
     deleteStudentCourse(instituteId, eduAtlasId) {
@@ -6298,6 +6610,20 @@ let ApiService = class ApiService {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => {
             // console.log(dres);
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    //  GET EMPLOYEE INSTITUTES
+    getEmployeeInstitutes(data) {
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/getEmployeeInstitutes', data)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => {
+            // console.log(dres);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    //  GET ONE EMPLOYEE BY EMAIL
+    getEmployeesByEmail(data) {
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/employee/getEmployeesByEmail', data)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     //  GET INSTITUTE EMPLOYEES
     getEmployeesByInstituteId(id) {
@@ -6490,6 +6816,116 @@ let ApiService = class ApiService {
         const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/attendance/addAttendance`;
         return this.http.post(url, attendanceRequest).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
+    // =====================Online Classes API===================
+    addCredentials(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/zoom/addCredentials`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getCredentials() {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/zoom/getCredentials`;
+        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getZoomAuth(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/zoom/getZoomAuth`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getAllMeetings() {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/zoom/getAllMeetings`;
+        return this.http.post(url, {}).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    deleteMeeting(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/zoom/deleteMeeting`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    updateMeeting(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/zoom/updateMeeting`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    createMeeting(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/zoom/createMeeting`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getOneMeeting(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/zoom/getOneMeeting`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getMeetingByBatch(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/zoom/getMeetingsFromZoom`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    /****************   TESTS   ****************** */
+    getTestByBatch(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/tests/getTestByBatch`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    addTest(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/tests/addTest`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getSingleTest(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/tests/getSingleTest`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    updateTest(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/tests/updateTest`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    addScoreUsingExcel(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/tests/addScoreUsingExcel
+    `;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    addTestScore(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/tests/addTestScore`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getTestByStudent(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/tests/getTestByStudent`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    deleteTest(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/tests/deleteTest`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    /****************   Schedule PTMs   ****************** */
+    addPtm(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/ptm/addPtm`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getPtmByInstitute(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/ptm/getPtmOfInstitutes`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getSinglePtm(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/ptm/getSinglePtm`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    updatePtm(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/ptm/updatePtm`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    deletePtm(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/ptm/deletePtm`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    /**************** MENTORING **************** */
+    addMentoring(data) {
+        console.log('sda');
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/mentoring/addMentoring`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    updateMentoring(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/mentoring/updateMentoring`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    deleteMentoring(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/mentoring/deleteMentoring`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getMentorings(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/mentoring/getMentoringOfStudentByInstitute`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
 };
 ApiService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -6643,16 +7079,11 @@ let AuthService = class AuthService {
             this.user.next(loadedUser);
             const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
             this.autoLogout(expirationDuration);
-            if (loadedUser.role === '4') {
+            if (loadedUser.role === 'institute' || loadedUser.role === 'employee') {
                 this.router.navigate(['/pages/home'], { relativeTo: this.route });
             }
             else if (loadedUser.role === 'student') {
-                this.router.navigate(['/student', loadedUser._id], {
-                    relativeTo: this.route,
-                });
-            }
-            else if (loadedUser.role === 'faculty') {
-                this.router.navigate(['/faculty', loadedUser._id], {
+                this.router.navigate(['/student/home'], {
                     relativeTo: this.route,
                 });
             }
@@ -6873,6 +7304,151 @@ class User {
         return this._token;
     }
 }
+
+
+/***/ }),
+
+/***/ "./src/app/services/institute.service.ts":
+/*!***********************************************!*\
+  !*** ./src/app/services/institute.service.ts ***!
+  \***********************************************/
+/*! exports provided: InstituteService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InstituteService", function() { return InstituteService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let InstituteService = class InstituteService {
+    constructor() {
+        this.institutes = [];
+    }
+    setInstitutes(institutes) {
+        this.institutes = institutes;
+    }
+    getInstitutes() {
+        return this.institutes;
+    }
+};
+InstituteService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root',
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+], InstituteService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/role/role-assign.service.ts":
+/*!******************************************************!*\
+  !*** ./src/app/services/role/role-assign.service.ts ***!
+  \******************************************************/
+/*! exports provided: RoleAssignService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RoleAssignService", function() { return RoleAssignService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../pages/pages-menu */ "./src/app/pages/pages-menu.ts");
+
+
+
+
+
+
+
+let RoleAssignService = class RoleAssignService {
+    constructor(http) {
+        this.http = http;
+    }
+    addRole(role) {
+        return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/role`, role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+    }
+    getOtp(phone, params) {
+        return this.http.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/users/sendOTP/${phone}`, { params: params }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+    }
+    verifyOtp(params) {
+        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server + '/users/verifyOTP', { params: params }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])((err) => this.handleError(err)));
+    }
+    handleError(error) {
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
+    }
+    assignRoles(role) {
+        if ((role && role === 'Teacher') || role === 'Counselor') {
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][4].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][5].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][7].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][11].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][12].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[0].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[1].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[2].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
+        }
+        if (role && role === 'institute') {
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][4].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][5].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][7].hidden = false;
+            // MENU_ITEMS[8].hidden = false;
+            // MENU_ITEMS[9].hidden = false;
+            // MENU_ITEMS[10].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][11].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][12].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[0].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[1].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[2].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
+        }
+        else if (role && role === 'Manager') {
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][4].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][5].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][7].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][11].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][12].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[0].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[1].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[2].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
+        }
+    }
+};
+RoleAssignService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
+];
+RoleAssignService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+        providedIn: 'root',
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
+], RoleAssignService);
+
 
 
 /***/ }),

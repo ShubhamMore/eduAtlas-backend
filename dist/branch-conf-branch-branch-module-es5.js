@@ -21,7 +21,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"goManage()\" style=\"color: black;\">\r\n    Manage Batches\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Add Batches</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"batch\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Course</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <label for=\"course\">Select Parent Course</label>\r\n          <nb-select\r\n            placeholder=\"Select Parent Course\"\r\n            id=\"course\"\r\n            fullWidth\r\n            formControlName=\"course\"\r\n            [status]=\"f.course.errors && submitted ? 'danger' : 'basic'\"\r\n          >\r\n            <!-- <nb-option value=\"\">Select Parent Course</nb-option> -->\r\n            <nb-option *ngFor=\"let item of courses.course\" [value]=\"item._id\"\r\n              >{{ item.name }}\r\n            </nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.course.errors && submitted\">*course is required</small>\r\n        </div>\r\n        <div class=\"col-sm-6\">\r\n          <label for=\"code\">Unique Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            id=\"code\"\r\n            placeholder=\"Unique Code\"\r\n            formControlName=\"batchCode\"\r\n            required\r\n            [status]=\"f.batchCode.errors && submitted ? 'danger' : 'basic'\"\r\n          />\r\n\r\n          <small *ngIf=\"f.batchCode.errors && submitted\">*Code is required</small>\r\n        </div>\r\n      </div>\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"des\">Description</label>\r\n          <textarea\r\n            name=\"description\"\r\n            id=\"des\"\r\n            cols=\"30\"\r\n            rows=\"6\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            formControlName=\"description\"\r\n            placeholder=\"Description\"\r\n          ></textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: left; margin: 1rem; text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"goManage()\" style=\"color: black;\">\r\n    Manage Batches\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Add Batches</p>\r\n<nb-card *ngIf=\"display\">\r\n  <nb-card-body>\r\n    <form [formGroup]=\"batchForm\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Course</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <label for=\"course\">Select Parent Course</label>\r\n          <nb-select\r\n            placeholder=\"Select Parent Course\"\r\n            id=\"course\"\r\n            fullWidth\r\n            formControlName=\"course\"\r\n            [status]=\"f.course.errors && submitted ? 'danger' : 'basic'\"\r\n          >\r\n            <!-- <nb-option value=\"\">Select Parent Course</nb-option> -->\r\n            <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\"\r\n              >{{ course.name }}\r\n            </nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.course.errors && submitted\">*course is required</small>\r\n        </div>\r\n        <div class=\"col-sm-6\">\r\n          <label for=\"code\">Unique Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            id=\"code\"\r\n            placeholder=\"Unique Code\"\r\n            formControlName=\"batchCode\"\r\n            required\r\n            [status]=\"f.batchCode.errors && submitted ? 'danger' : 'basic'\"\r\n          />\r\n\r\n          <small *ngIf=\"f.batchCode.errors && submitted\">*Code is required</small>\r\n        </div>\r\n      </div>\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"des\">Description</label>\r\n          <textarea\r\n            name=\"description\"\r\n            id=\"des\"\r\n            cols=\"30\"\r\n            rows=\"6\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            formControlName=\"description\"\r\n            placeholder=\"Description\"\r\n          ></textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: left; margin: 1rem; text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -41,7 +41,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Batch</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Batch Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Course</th>\n          <th>Code</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let batch of batches.batch\">\n          <td>{{ batch.course }}</td>\n          <td>{{ batch.batchCode }}</td>\n          <td>{{ batch.description }}</td>\n          <td class=\"text-right\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(batch._id)\">\n              Edit\n            </button>\n            <button nbButton status=\"danger\" (click)=\"delete(batch._id)\">\n              Del\n            </button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Batch</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Batch Here</p>\n<nb-card>\n  <nb-card-body>\n    <table *ngIf=\"batches.length > 0; else noBatches\">\n      <thead>\n        <tr>\n          <th>Course</th>\n          <th>Code</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let batch of batches\">\n          <td>{{ batch.course }}</td>\n          <td>{{ batch.batchCode }}</td>\n          <td>{{ batch.description }}</td>\n          <td class=\"text-right\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(batch._id)\">\n              Edit\n            </button>\n            <button nbButton status=\"danger\" (click)=\"delete(batch._id)\">\n              Del\n            </button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    <ng-template #noBatches>\n      <p class=\"text-center mt-3\">No Batches Found</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -61,7 +61,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"back()\">\r\n    MANAGE COURSES\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Add Course Here</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"course\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"name\">Course Name</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"name\"\r\n            fullWidth\r\n            [status]=\"f.name.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"name\"\r\n            placeholder=\"Course Name\"\r\n          />\r\n          <small *ngIf=\"f.name.errors && submitted\">*Course name is req.</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"code\">Course Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"code\"\r\n            fullWidth\r\n            [status]=\"f.courseCode.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"courseCode\"\r\n            placeholder=\"Course Code\"\r\n          />\r\n          <small *ngIf=\"f.courseCode.errors && submitted\">*Course code is required</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"fees\">Course Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            #fees\r\n            (keyup)=\"courseFee(fees.value)\"\r\n            id=\"fees\"\r\n            formControlName=\"fees\"\r\n            placeholder=\"Course Fees\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">Course Duration</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"duration\"\r\n            maxlength=\"2\"\r\n            minlength=\"1\"\r\n            placeholder=\"Duration\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">GST</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"gstValue\"\r\n            #ex\r\n            (keyup)=\"exclusive(ex.value)\"\r\n            placeholder=\"Exclusive GST in %\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-1\"><br /><br />Or</div>\r\n        <div class=\"col-sm-2\">\r\n          <br />\r\n          <nb-checkbox\r\n            (checkedChange)=\"inclusiveGst($event)\"\r\n            [(ngModel)]=\"gstCheckBox\"\r\n            [ngModelOptions]=\"{ standalone: true }\"\r\n            fullWidth\r\n            status=\"warning\"\r\n            >Inclusive GST</nb-checkbox\r\n          >\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>Total Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"totalFee\"\r\n            disabled=\"true\"\r\n            placeholder=\"TotalFee\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"des\">Description</label>\r\n          <textarea\r\n            name=\"discription\"\r\n            id=\"des\"\r\n            status=\"basic\"\r\n            nbInput\r\n            fullWidth\r\n            formControlName=\"discription\"\r\n            placeholder=\"Description\"\r\n            cols=\"100\"\r\n            rows=\"4\"\r\n            id=\"dis\"\r\n          ></textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"display: block; margin-top: 1rem; text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ edit === 'true' ? 'Update Course' : 'Add Course' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"back()\">\r\n    MANAGE COURSES\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Add Course Here</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"course\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"name\">Course Name</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"name\"\r\n            fullWidth\r\n            [status]=\"f.name.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"name\"\r\n            placeholder=\"Course Name\"\r\n          />\r\n          <small *ngIf=\"f.name.errors && submitted\">*Course name is req.</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"code\">Course Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"code\"\r\n            fullWidth\r\n            [status]=\"f.courseCode.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"courseCode\"\r\n            placeholder=\"Course Code\"\r\n          />\r\n          <small *ngIf=\"f.courseCode.errors && submitted\">*Course code is required</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"fees\">Course Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            #fees\r\n            (keyup)=\"courseFee(fees.value)\"\r\n            id=\"fees\"\r\n            formControlName=\"fees\"\r\n            placeholder=\"Course Fees\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">Course Duration (in Months)</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"duration\"\r\n            maxlength=\"2\"\r\n            minlength=\"1\"\r\n            placeholder=\"Duration in Months\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">GST</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"gstValue\"\r\n            #ex\r\n            (keyup)=\"exclusive(ex.value)\"\r\n            placeholder=\"Exclusive GST in %\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-1\"><br /><br />Or</div>\r\n        <div class=\"col-sm-2\">\r\n          <br />\r\n          <nb-checkbox\r\n            (checkedChange)=\"inclusiveGst($event)\"\r\n            [(ngModel)]=\"gstCheckBox\"\r\n            [ngModelOptions]=\"{ standalone: true }\"\r\n            fullWidth\r\n            status=\"warning\"\r\n            >Inclusive GST</nb-checkbox\r\n          >\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>Total Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"totalFee\"\r\n            disabled=\"true\"\r\n            placeholder=\"TotalFee\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"des\">Description</label>\r\n          <textarea\r\n            name=\"discription\"\r\n            id=\"des\"\r\n            status=\"basic\"\r\n            nbInput\r\n            fullWidth\r\n            formControlName=\"discription\"\r\n            placeholder=\"Description\"\r\n            cols=\"100\"\r\n            rows=\"4\"\r\n            id=\"dis\"\r\n          ></textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"display: block; margin-top: 1rem; text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ edit === 'true' ? 'Update Course' : 'Add Course' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -81,7 +81,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\n    ADD COURSES\n  </button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Course Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Course Name</th>\n          <th>Code</th>\n          <th>Duration</th>\n          <th>Fees</th>\n          <th>GST</th>\n          <th>Total Fees (Rs.)</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of courses; let i = index\">\n          <td>{{ item.name }}</td>\n          <td>{{ item.courseCode }}</td>\n          <td>{{ item.duration }}</td>\n          <td>{{ item.fees }}</td>\n          <td>{{ item.gst }}</td>\n          <td>&#x20B9; {{ item.totalFee }}</td>\n          <td style=\"text-align: right;\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton class=\"pull right\" status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\n    ADD COURSES\n  </button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Course Here</p>\n<nb-card>\n  <nb-card-body>\n    <table *ngIf=\"courses.length > 0; else no_courses\">\n      <thead>\n        <tr>\n          <th>Course Name</th>\n          <th>Code</th>\n          <th>Duration</th>\n          <th>Fees</th>\n          <th>GST</th>\n          <th>Total Fees (Rs.)</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of courses; let i = index\">\n          <td>{{ item.name }}</td>\n          <td>{{ item.courseCode }}</td>\n          <td>{{ item.duration }}</td>\n          <td>{{ item.fees }}</td>\n          <td>{{ item.gst }}</td>\n          <td>&#x20B9; {{ item.totalFee }}</td>\n          <td style=\"text-align: right;\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    <ng-template #no_courses>\n      <p class=\"mt-5 mb-5 text-center\">\n        No Courses Found\n      </p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -141,7 +141,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"back()\" style=\"color: black;\">Manage Discount</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Define Discount</p>\n<nb-card>\n  <nb-card-body>\n    <form [formGroup]=\"discount\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <label for=\"code\">Code</label>\n          <input\n            type=\"text\"\n            nbInput\n            fullWidth\n            id=\"code\"\n            status=\"basic\"\n            formControlName=\"discountCode\"\n            [status]=\"f.discountCode.errors && submitted ? 'danger' : 'basic'\"\n            placeholder=\"Code\"\n          />\n          <small *ngIf=\"f.discountCode.errors && submitted\" style=\"display: block;\"\n            >*This field req</small\n          >\n        </div>\n        <div class=\"col-sm-6\">\n          <label for=\"amt\">Amount in %</label>\n          <input\n            type=\"text\"\n            nbInput\n            fullWidth\n            id=\"amt\"\n            status=\"basic\"\n            formControlName=\"amount\"\n            [status]=\"f.amount.errors && submitted ? 'danger' : 'basic'\"\n            placeholder=\"Amount in %\"\n          />\n          <small *ngIf=\"f.amount.errors && submitted\" style=\"display: block;\"\n            >*This field req</small\n          >\n        </div>\n      </div>\n\n      <div class=\"mt-3\">\n        <label for=\"des\">Description</label>\n        <textarea\n          name=\"discription\"\n          nbInput\n          id=\"des\"\n          fullWidth\n          status=\"basic\"\n          cols=\"40\"\n          rows=\"4\"\n          formControlName=\"description\"\n          placeholder=\"Description(Optional)\"\n        ></textarea>\n      </div>\n      <div class=\"mt-4\" style=\"text-align: right;\">\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"back()\" style=\"color: black;\">Manage Discount</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Define Discount</p>\n<nb-card *ngIf=\"display\">\n  <nb-card-body>\n    <form [formGroup]=\"discountForm\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"row\">\n        <div class=\"col-sm-4\">\n          <label for=\"code\">Code</label>\n          <input\n            type=\"text\"\n            nbInput\n            fullWidth\n            id=\"code\"\n            status=\"basic\"\n            formControlName=\"discountCode\"\n            [status]=\"\n              discountForm.get('discountCode').invalid && discountForm.get('discountCode').touched\n                ? 'danger'\n                : 'basic'\n            \"\n            placeholder=\"Code\"\n          />\n          <small\n            *ngIf=\"\n              discountForm.get('discountCode').invalid && discountForm.get('discountCode').touched\n            \"\n            style=\"display: block;\"\n            >*This field Required</small\n          >\n        </div>\n\n        <div class=\"col-sm-4\">\n          <label for=\"discountType\">Discount Type</label>\n          <nb-select\n            placeholder=\"Select Amount Type\"\n            id=\"discountType\"\n            fullWidth\n            [status]=\"\n              discountForm.get('discountType').invalid && discountForm.get('discountType').touched\n                ? 'danger'\n                : 'basic'\n            \"\n            formControlName=\"discountType\"\n          >\n            <!-- <nb-option value=\"\">Select Parent Course</nb-option> -->\n            <nb-option value=\"percentage\">\n              Discount in Percentage\n            </nb-option>\n            <nb-option value=\"amount\">\n              Discount in Amount\n            </nb-option>\n          </nb-select>\n          <small\n            *ngIf=\"\n              discountForm.get('discountType').invalid && discountForm.get('discountType').touched\n            \"\n            style=\"display: block;\"\n            >*This field Required</small\n          >\n        </div>\n\n        <div class=\"col-sm-4\">\n          <label for=\"amt\"\n            >Amount\n            <span *ngIf=\"discountForm.get('discountType').value === 'percentage'\"\n              >(in %)</span\n            ></label\n          >\n          <input\n            type=\"text\"\n            pattern=\"\\d*\"\n            nbInput\n            fullWidth\n            id=\"amt\"\n            status=\"basic\"\n            formControlName=\"amount\"\n            [status]=\"\n              (discountForm.get('amount').invalid || discountForm.hasError('invalidDiscount')) &&\n              discountForm.get('amount').touched\n                ? 'danger'\n                : 'basic'\n            \"\n            placeholder=\"Amount\"\n          />\n          <small\n            *ngIf=\"\n              (discountForm.get('amount').invalid || discountForm.hasError('invalidDiscount')) &&\n              discountForm.get('amount').touched\n            \"\n            style=\"display: block;\"\n            >*Enter Valid Amount</small\n          >\n        </div>\n      </div>\n\n      <div class=\"mt-3\">\n        <label for=\"des\">Description</label>\n        <textarea\n          name=\"description\"\n          nbInput\n          id=\"description\"\n          fullWidth\n          status=\"basic\"\n          cols=\"40\"\n          rows=\"4\"\n          formControlName=\"description\"\n          placeholder=\"Description(Optional)\"\n        ></textarea>\n      </div>\n      <div class=\"mt-4\" style=\"text-align: right;\">\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -161,7 +161,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Discount</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Discount Here</p>\n<nb-card>\n  <nb-card-body>\n    <table>\n      <thead>\n        <tr>\n          <th>Code</th>\n          <th>Amount In %</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of discounts.discount; let i = index\">\n          <td>{{ item.discountCode }}</td>\n          <td>{{ item.amount }}</td>\n          <td>{{ item.description }}</td>\n          <td class=\"text-right\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">Add Discount</button>\n</div>\n<p style=\"color: black; font-weight: bold;\">Manage Discount Here</p>\n<nb-card>\n  <nb-card-body>\n    <table *ngIf=\"discounts.length > 0; else noDiscounts\">\n      <thead>\n        <tr>\n          <th>Code</th>\n          <th>Amount</th>\n          <th>Description</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let item of discounts; let i = index\">\n          <td>{{ item.discountCode }}</td>\n          <td>{{ item.amount }}<span *ngIf=\"item.discountType === 'percentage'\">%</span></td>\n          <td>{{ item.description }}</td>\n          <td class=\"text-right\">\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(item._id)\">Edit</button>\n            <button nbButton status=\"danger\" (click)=\"delete(item._id)\">Del</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    <ng-template #noDiscounts>\n      <p class=\"text-center mt-3\">No Discounts Found</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -181,7 +181,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<p style=\"color: black; font-weight: bold;\">Add employeeForm Here</p>\r\n\r\n<nb-card status=\"warning\">\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit\"\r\n      >Already Registered Employee</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasEmployeeForm\"\r\n      (ngSubmit)=\"onEmployeeFormSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch Employee</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"3\"\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.idInput1.errors &&\r\n              eduAtlasEmployeeFormControl.idInput1.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput1\"\r\n            disabled=\"true\"\r\n            fullWidth\r\n            formControlName=\"idInput1\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"4\"\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.idInput2.errors &&\r\n              eduAtlasEmployeeFormControl.idInput2.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput2\"\r\n            fullWidth\r\n            formControlName=\"idInput2\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"3\"\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.idInput3.errors &&\r\n              eduAtlasEmployeeFormControl.idInput3.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput3\"\r\n            disabled=\"true\"\r\n            fullWidth\r\n            formControlName=\"idInput3\"\r\n          />\r\n        </div>\r\n        <span>-</span>\r\n        <div class=\"col-sm-2\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            maxlength=\"6\"\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.idInput4.errors &&\r\n              eduAtlasEmployeeFormControl.idInput4.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"idInput4\"\r\n            fullWidth\r\n            formControlName=\"idInput4\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" nbButton status=\"warning\" [disabled]=\"!eduAtlasEmployeeForm.valid\" style=\"color: black;\" *ngIf=\"!edit\">\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form [formGroup]=\"employeeForm\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Employee Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">*Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Employee name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.employeeEmail.errors && f.employeeEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"employeeEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.employeeEmail.errors && f.employeeEmail.touched\"\r\n              >*Employee email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Employee Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Employee Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Employee Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>*Role</label>\r\n          <nb-select\r\n            placeholder=\"Select Role\"\r\n            [status]=\"f.role.errors && f.role.touched ? 'danger' : 'basic'\"\r\n            status=\"basic\"\r\n            formControlName=\"role\"\r\n          >\r\n            <nb-option [value]=\"null\">Select Role</nb-option>\r\n            <nb-option *ngFor=\"let role of roles\" value=\"{{ role }}\">{{ role }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.role.errors && f.role.touched\">*Employee Role is required.</small>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ employeeEduId ? 'Update Employee' : 'Add Employee' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<p style=\"color: black; font-weight: bold;\">Add employeeForm Here</p>\r\n\r\n<nb-card status=\"warning\">\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit\"\r\n      >Already Registered Employee</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasEmployeeForm\"\r\n      (ngSubmit)=\"onEmployeeFormSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch student</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.eduAtlasId.errors &&\r\n              eduAtlasEmployeeFormControl.eduAtlasId.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"eduAtlasId\"\r\n            fullWidth\r\n            formControlName=\"eduAtlasId\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button\r\n            type=\"submit\"\r\n            nbButton\r\n            status=\"warning\"\r\n            style=\"color: black;\"\r\n            *ngIf=\"!edit && !dataFetched\"\r\n          >\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n\r\n    <form [formGroup]=\"otpForm\" (ngSubmit)=\"verifyOtp()\" *ngIf=\"otpSent && alreadyRegistered\">\r\n      <p>OTP</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"otpForm.get('otp').errors && otpForm.get('otp').touched ? 'danger' : 'basic'\"\r\n            id=\"otp\"\r\n            fullWidth\r\n            formControlName=\"otp\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\" *ngIf=\"!edit\">\r\n            Verify\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form [formGroup]=\"employeeForm\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Employee Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">*Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Employee name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.employeeEmail.errors && f.employeeEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"employeeEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.employeeEmail.errors && f.employeeEmail.touched\"\r\n              >*Employee email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Employee Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Employee Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Employee Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>*Role</label>\r\n          <nb-select\r\n            placeholder=\"Select Role\"\r\n            [status]=\"f.role.errors && f.role.touched ? 'danger' : 'basic'\"\r\n            status=\"basic\"\r\n            formControlName=\"role\"\r\n          >\r\n            <nb-option [value]=\"null\">Select Role</nb-option>\r\n            <nb-option *ngFor=\"let role of roles\" value=\"{{ role }}\">{{ role }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.role.errors && f.role.touched\">*Employee Role is required.</small>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ employeeEduId ? 'Update Employee' : 'Add Employee' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -201,7 +201,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\" [hidden]=\"receipts\">\r\n    Add Employee\r\n  </button>\r\n</div>\r\n\r\n<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Employees</p>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"employees.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Contact</th>\r\n          <th>Role</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let employee of employees; let i = index\">\r\n          <td>{{ employee.basicDetails.name }}</td>\r\n          <td>{{ employee.basicDetails.employeeContact }}</td>\r\n          <td>{{ employee.instituteDetails[0].role }}</td>\r\n          <!-- <td>{{ employee.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"primary\"\r\n              (click)=\"view(employee.eduAtlasId, employee._id)\"\r\n            >\r\n              View\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"warning`\"\r\n              (click)=\"edit(employee.eduAtlasId, employee._id)\"\r\n            >\r\n              Edit\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"danger\" (click)=\"delete(employee._id)\">\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"employees.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\">\r\n    Add Employee\r\n  </button>\r\n</div>\r\n\r\n<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Employees</p>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"employees.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Contact</th>\r\n          <th>Role</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let employee of employees; let i = index\">\r\n          <td>{{ employee.basicDetails.name }}</td>\r\n          <td>{{ employee.basicDetails.employeeContact }}</td>\r\n          <td>{{ employee.instituteDetails.role }}</td>\r\n          <!-- <td>{{ employee.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"primary\"\r\n              (click)=\"view(employee.eduAtlasId, employee._id)\"\r\n            >\r\n              View\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"warning`\"\r\n              (click)=\"edit(employee.eduAtlasId, employee._id)\"\r\n            >\r\n              Edit\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"danger\" (click)=\"delete(employee._id)\">\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"employees.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n";
     /***/
   },
 
@@ -241,7 +241,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\" [hidden]=\"receipts\">\r\n    Add Receipt\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Manage Reciept</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Business Name</th>\r\n          <th>Address</th>\r\n          <th>GST Number</th>\r\n          <th>Terms & Conditions</th>\r\n          <th>Fee</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngIf=\"receipts\">\r\n          <td>{{ receipts.businessName }}</td>\r\n          <td>{{ receipts.address }}</td>\r\n          <td>{{ receipts.gstNumber }}</td>\r\n          <td>{{ receipts.termsAndCondition }}</td>\r\n          <td>{{ receipts.fee }}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(routerId)\">Edit</button>\r\n            <button nbButton status=\"danger\" (click)=\"delete(routerId)\">Del</button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<div class=\"text-right\">\r\n  <button nbButton status=\"warning\" (click)=\"onClick()\" style=\"color: black;\" [hidden]=\"receipts\">\r\n    Add Receipt\r\n  </button>\r\n</div>\r\n<p style=\"color: black; font-weight: bold;\">Manage Receipt</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <table *ngIf=\"receipts; else noReceipt\">\r\n      <thead>\r\n        <tr>\r\n          <th>Business Name</th>\r\n          <th>Address</th>\r\n          <th>GST Number</th>\r\n          <th>Terms & Conditions</th>\r\n          <th>Fee</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr>\r\n          <td>{{ receipts.businessName }}</td>\r\n          <td>{{ receipts.address }}</td>\r\n          <td>{{ receipts.gstNumber }}</td>\r\n          <td>{{ receipts.termsAndCondition }}</td>\r\n          <td>{{ receipts.fee }}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"edit(instituteId)\">Edit</button>\r\n            <button nbButton status=\"danger\" (click)=\"delete(instituteId)\">Del</button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ng-template #noReceipt><p class=\"mt-5 mb-5 text-center\">No Record Found</p></ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -383,14 +383,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.router = router;
         this.location = location;
         this.toasterService = toasterService;
-        this.courses = {
-          course: []
-        };
-        this.batchUpdate = {
-          batchCode: '',
-          description: '',
-          course: ''
-        };
         this.linearMode = true;
         this.submitted = false;
       }
@@ -400,18 +392,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function ngOnInit() {
           var _this = this;
 
+          this.display = false;
+          this.courses = [];
           this.route.queryParams.subscribe(function (data) {
             _this.batchId = data.batchId;
             _this.edit = data.edit;
           });
           this.instituteId = this.route.snapshot.paramMap.get('id');
-          this.getBatch(this.batchId, this.instituteId);
           this.getCourses(this.instituteId);
-          this.batch = this.fb.group({
+          this.batchForm = this.fb.group({
             course: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             batchCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             description: ['']
           });
+
+          if (this.edit) {
+            this.getBatch(this.batchId, this.instituteId);
+          } else {
+            this.display = true;
+          }
         }
       }, {
         key: "getBatch",
@@ -421,8 +420,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpParams"]();
           param = param.append('instituteId', instituteId);
           param = param.append('batchId', id);
-          this.api.getBatch(param).subscribe(function (data) {
-            _this2.batchUpdate = JSON.parse(JSON.stringify(data[0]));
+          this.api.getBatch(param).subscribe(function (res) {
+            _this2.batchUpdate = res[0];
+
+            _this2.batchForm.patchValue({
+              course: _this2.batchUpdate.course,
+              batchCode: _this2.batchUpdate.batchCode,
+              description: _this2.batchUpdate.description
+            });
+
+            _this2.display = true;
           });
         }
       }, {
@@ -430,14 +437,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function getCourses(id) {
           var _this3 = this;
 
-          this.api.getCourses(id).subscribe(function (data) {
-            _this3.courses = JSON.parse(JSON.stringify(data));
-
-            _this3.batch.patchValue({
-              course: _this3.batchUpdate.course,
-              batchCode: _this3.batchUpdate.batchCode,
-              description: _this3.batchUpdate.description
-            });
+          this.api.getCourses(id).subscribe(function (res) {
+            _this3.courses = res.course;
           });
         }
       }, {
@@ -446,8 +447,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this4 = this;
 
           this.submitted = true;
+          this.batchForm.markAllAsTouched();
 
-          if (this.batch.invalid) {
+          if (this.batchForm.invalid) {
             return;
           }
 
@@ -455,7 +457,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpParams"]();
             param = param.append('instituteId', this.instituteId);
             param = param.append('batchId', this.batchId);
-            var batch = this.batch.value;
+            var batch = this.batchForm.value;
             batch._id = this.batchId;
             this.api.updateBatch(param, batch).subscribe(function (res) {
               _this4.showToast('top-right', 'success', 'Successfully Updated');
@@ -467,15 +469,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           if (!this.edit) {
-            this.api.addBatch(this.instituteId, this.batch.value).subscribe(function () {
+            this.api.addBatch(this.instituteId, this.batchForm.value).subscribe(function () {
               _this4.showToast('top-right', 'success', 'Successfully Added');
 
               setTimeout(function () {
                 _this4.router.navigate(['/pages/institute/branch-config/manage-batch/', _this4.instituteId]);
               }, 1000);
             }, function (err) {
-              console.error(err);
-
               _this4.showToast('top-right', 'danger', err.error.message);
             });
           }
@@ -496,7 +496,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "f",
         get: function get() {
-          return this.batch.controls;
+          return this.batchForm.controls;
         }
       }]);
 
@@ -615,20 +615,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.router = router;
         this.route = route;
         this.toasterService = toasterService;
-        this.batches = {
-          batch: [{
-            _id: '',
-            course: '',
-            batchCode: '',
-            description: ''
-          }]
-        };
         this.params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]();
       }
 
       _createClass(ManageBatchComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          this.batches = [];
           this.instituteId = this.route.snapshot.paramMap.get('id');
           this.getBatches(this.instituteId);
         }
@@ -637,9 +630,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function getBatches(id) {
           var _this5 = this;
 
-          this.api.getBatches(id).subscribe(function (data) {
-            _this5.batches = JSON.parse(JSON.stringify(data));
-            console.dir('my batch' + _this5.batches);
+          this.api.getBatches(id).subscribe(function (res) {
+            _this5.batches = res.batch;
           });
         }
       }, {
@@ -660,12 +652,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.api.deleteBatch(this.params).subscribe(function (res) {}, function (err) {
             return console.error(err);
           });
-          var i = this.batches.batch.findIndex(function (e) {
+          var i = this.batches.findIndex(function (e) {
             return e._id === id;
           });
 
           if (i !== -1) {
-            this.batches.batch.splice(i, 1);
+            this.batches.splice(i, 1);
           }
         }
       }, {
@@ -903,6 +895,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this9 = this;
 
           this.submitted = true;
+          this.course.markAllAsTouched();
 
           if (this.course.invalid) {
             return;
@@ -1824,13 +1817,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.location = location;
         this.active = active;
         this.toasterService = toasterService;
-        this.discountUpdate = {
-          discountCode: '',
-          description: '',
-          amount: '',
-          _id: ''
-        };
-        this.submitted = false;
       }
 
       _createClass(DiscountComponent, [{
@@ -1838,20 +1824,44 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function ngOnInit() {
           var _this13 = this;
 
+          this.display = false;
           this.instituteId = this.active.snapshot.paramMap.get('id');
           this.active.queryParams.subscribe(function (data) {
             _this13.edit = data.edit;
             _this13.discountId = data.discountId;
-
-            if (_this13.edit) {
-              _this13.getDiscount(_this13.discountId);
-            }
           });
-          this.discount = this.fb.group({
+          this.discountForm = this.fb.group({
             discountCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            description: [''],
-            amount: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
+            discountType: ['percentage', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            amount: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            description: ['']
+          }, {
+            validator: this.discountValidator.bind(this)
           });
+
+          if (this.edit) {
+            this.getDiscount(this.discountId);
+          } else {
+            this.display = true;
+          }
+        }
+      }, {
+        key: "discountValidator",
+        value: function discountValidator(group) {
+          var discountType = group.value.discountType;
+          var amount = group.value.amount;
+
+          if (discountType === 'percentage' && amount > 100) {
+            return {
+              invalidDiscount: true
+            };
+          } else if (amount < 0) {
+            return {
+              invalidDiscount: true
+            };
+          }
+
+          return null;
         }
       }, {
         key: "getDiscount",
@@ -1864,11 +1874,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.api.getDiscount(param).subscribe(function (data) {
             _this14.discountUpdate = data[0];
 
-            _this14.discount.patchValue({
+            _this14.discountForm.patchValue({
               discountCode: _this14.discountUpdate.discountCode,
               description: _this14.discountUpdate.description,
+              discountType: _this14.discountUpdate.discountType,
               amount: _this14.discountUpdate.amount
             });
+
+            _this14.display = true;
+          }, function (err) {
+            _this14.display = true;
           });
         }
       }, {
@@ -1876,9 +1891,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function onSubmit() {
           var _this15 = this;
 
-          this.submitted = true;
+          this.discountForm.markAllAsTouched();
 
-          if (this.discount.invalid) {
+          if (this.discountForm.invalid) {
             return;
           }
 
@@ -1886,7 +1901,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]();
             param = param.append('instituteId', this.instituteId);
             param = param.append('discountId', this.discountId);
-            this.api.updateDiscount(param, this.discount.value).subscribe(function (res) {
+            this.api.updateDiscount(param, this.discountForm.value).subscribe(function (res) {
               _this15.showToast('top-right', 'success', 'Discount Updated');
 
               setTimeout(function () {
@@ -1896,7 +1911,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               _this15.showToast('top-right', 'danger', 'Discount Updation Failed');
             });
           } else {
-            this.api.addDiscount(this.instituteId, this.discount.value).subscribe(function (data) {
+            this.api.addDiscount(this.instituteId, this.discountForm.value).subscribe(function (data) {
               _this15.showToast('top-right', 'success', 'Discount Added Successfully');
 
               setTimeout(function () {
@@ -1921,11 +1936,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             position: position,
             status: status
           });
-        }
-      }, {
-        key: "f",
-        get: function get() {
-          return this.discount.controls;
         }
       }]);
 
@@ -2044,19 +2054,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.router = router;
         this.active = active;
         this.toasterService = toasterService;
-        this.discounts = {
-          discount: [{
-            discountCode: '',
-            description: '',
-            _id: '',
-            amount: ''
-          }]
-        };
       }
 
       _createClass(ManageDiscountComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          this.discounts = [];
           this.instituteId = this.active.snapshot.paramMap.get('id');
           this.getDiscounts(this.instituteId);
         }
@@ -2066,7 +2069,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this16 = this;
 
           this.api.getDiscounts(id).subscribe(function (data) {
-            _this16.discounts = data;
+            _this16.discounts = data.discount;
           }, function (err) {
             return console.error(err);
           });
@@ -2093,12 +2096,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.api.deleteDiscount(param).subscribe(function (err) {
               return console.error(err);
             });
-            var i = this.discounts.discount.findIndex(function (e) {
+            var i = this.discounts.findIndex(function (e) {
               return e._id === id;
             });
 
             if (i !== -1) {
-              this.discounts.discount.splice(i, 1);
+              this.discounts.splice(i, 1);
               this.showToast('top-right', 'success', 'Discount Deleted Successfully!');
             }
           }
@@ -2230,7 +2233,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.router = router;
         this.active = active;
         this.toasterService = toasterService;
-        this.roles = ['Teacher', 'Manager', 'Counselor '];
+        this.dataFetched = false;
+        this.roles = ['Teacher', 'Manager', 'Counselor'];
       }
 
       _createClass(AddEmployee, [{
@@ -2250,12 +2254,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               contact: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])],
               address: [''],
               role: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
-            });
+            }); // Construct Eduatlas Id Form
+
             _this17.eduAtlasEmployeeForm = _this17.fb.group({
-              idInput1: ['EDU', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-              idInput2: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-              idInput3: ['EMP', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-              idInput4: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
+              eduAtlasId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
+            }); // Construct OTP Form
+
+            _this17.otpForm = _this17.fb.group({
+              otp: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
             });
 
             if (_this17.edit === 'true') {
@@ -2270,29 +2276,87 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function onEmployeeFormSearch() {
           var _this18 = this;
 
-          this.employeeForm.reset();
-
           if (this.eduAtlasEmployeeForm.valid) {
-            var employeeEduId = "".concat(this.eduAtlasEmployeeFormControl['idInput1'].value, "-").concat(this.eduAtlasEmployeeFormControl['idInput2'].value, "-").concat(this.eduAtlasEmployeeFormControl['idInput3'].value, "-").concat(this.eduAtlasEmployeeFormControl['idInput4'].value);
-            this.api.getOneEmployee(employeeEduId).subscribe(function (data) {
-              if (data) {
-                _this18.employeeEduId = employeeEduId;
-                _this18.employee = data[0];
-                console.log(_this18.employee);
+            var employeeEduId = "".concat(this.eduAtlasEmployeeFormControl['eduAtlasId'].value);
+            this.api.sendOtpForGetUserDetails(employeeEduId).subscribe(function (res) {
+              if (res) {
+                _this18.otpSent = true;
+                _this18.phone = res.phone;
 
-                _this18.employeeForm.patchValue({
-                  name: _this18.employee.basicDetails.name,
-                  employeeEmail: _this18.employee.basicDetails.employeeEmail,
-                  contact: _this18.employee.basicDetails.employeeContact,
-                  address: _this18.employee.basicDetails.employeeAddress
-                });
+                _this18.showToaster('top-right', 'success', res.message);
               } else {
                 _this18.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
               }
-            }, function (error) {
+            }, function (err) {
               _this18.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
             });
           }
+        }
+      }, {
+        key: "verifyOtp",
+        value: function verifyOtp() {
+          var _this19 = this;
+
+          if (this.otpSent && this.otpForm.valid) {
+            var otp = this.otpForm.value.otp;
+            var verificationData = {
+              verifyType: 'verifyUser',
+              otp: this.otpForm.value.otp,
+              phone: this.phone
+            };
+            this.api.verifyUserOtp(verificationData).subscribe(function (data) {
+              _this19.getOneEmployee(_this19.eduAtlasEmployeeForm.value.eduAtlasId);
+            }, function (error) {
+              _this19.showToaster('top-right', 'danger', 'Invalid OTP');
+            });
+          }
+        }
+      }, {
+        key: "getOneEmployee",
+        value: function getOneEmployee(eduId) {
+          var _this20 = this;
+
+          this.api.getOneEmployee(eduId).subscribe(function (data) {
+            if (data) {
+              _this20.employee = data;
+
+              _this20.employeeForm.reset();
+
+              _this20.employeeForm.patchValue({
+                name: _this20.employee.basicDetails.name,
+                employeeEmail: _this20.employee.basicDetails.employeeEmail,
+                contact: _this20.employee.basicDetails.employeeContact,
+                address: _this20.employee.basicDetails.employeeAddress
+              });
+
+              _this20.employeeEduId = _this20.employee.eduAtlasId;
+
+              _this20.eduAtlasEmployeeForm.get('eduAtlasId').disable();
+
+              _this20.employeeForm.patchValue({
+                name: _this20.employee.basicDetails.name,
+                employeeEmail: _this20.employee.basicDetails.employeeEmail,
+                contact: _this20.employee.basicDetails.employeeContact,
+                address: _this20.employee.basicDetails.employeeAddress
+              });
+
+              _this20.employeeForm.get('name').disable();
+
+              _this20.employeeForm.get('employeeEmail').disable();
+
+              _this20.employeeForm.get('address').disable();
+
+              _this20.employeeForm.get('contact').disable();
+
+              _this20.otpSent = false;
+              _this20.phone = null;
+              _this20.dataFetched = true;
+            } else {
+              _this20.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
+            }
+          }, function (error) {
+            _this20.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
+          });
         }
       }, {
         key: "changeAlreadyRegistered",
@@ -2300,57 +2364,49 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.alreadyRegistered = e;
 
           if (!e) {
-            this.eduAtlasEmployeeForm.reset({
-              idInput1: 'EDU',
-              idInput3: 'EMP'
-            });
+            this.eduAtlasEmployeeForm.reset();
           }
         }
       }, {
         key: "getOneEmployeeByInstitute",
         value: function getOneEmployeeByInstitute(employeeObjId, institute) {
-          var _this19 = this;
+          var _this21 = this;
 
           this.api.getOneEmployeeByInstitute({
             empId: employeeObjId,
             instituteId: institute
           }).subscribe(function (data) {
-            _this19.employee = data[0]; // console.log(this.employee);
+            _this21.employee = data[0]; // console.log(this.employee);
 
-            var eduAtlId = _this19.employeeEduId.split('-');
+            var eduAtlId = _this21.employeeEduId;
 
-            _this19.eduAtlasEmployeeForm.patchValue({
-              idInput1: eduAtlId[0],
-              idInput2: eduAtlId[1],
-              idInput3: eduAtlId[2],
-              idInput4: eduAtlId[3]
+            _this21.eduAtlasEmployeeForm.patchValue({
+              eduAtlasId: eduAtlId
             });
 
-            _this19.eduAtlasEmployeeForm.get('idInput2').disable();
+            _this21.eduAtlasEmployeeForm.get('eduAtlasId').disable();
 
-            _this19.eduAtlasEmployeeForm.get('idInput4').disable();
-
-            _this19.employeeForm.patchValue({
-              name: _this19.employee.basicDetails.name,
-              employeeEmail: _this19.employee.basicDetails.employeeEmail,
-              contact: _this19.employee.basicDetails.employeeContact,
-              address: _this19.employee.basicDetails.employeeAddress,
-              role: _this19.employee.instituteDetails[0].role
+            _this21.employeeForm.patchValue({
+              name: _this21.employee.basicDetails.name,
+              employeeEmail: _this21.employee.basicDetails.employeeEmail,
+              contact: _this21.employee.basicDetails.employeeContact,
+              address: _this21.employee.basicDetails.employeeAddress,
+              role: _this21.employee.instituteDetails.role
             });
 
-            _this19.employeeForm.get('name').disable();
+            _this21.employeeForm.get('name').disable();
 
-            _this19.employeeForm.get('address').disable();
+            _this21.employeeForm.get('address').disable();
 
-            _this19.employeeForm.get('employeeEmail').disable();
+            _this21.employeeForm.get('employeeEmail').disable();
 
-            _this19.employeeForm.get('contact').disable();
+            _this21.employeeForm.get('contact').disable();
           });
         }
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this20 = this;
+          var _this22 = this;
 
           if (this.employeeForm.invalid) {
             return;
@@ -2358,42 +2414,42 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.edit === 'true') {
             this.api.updateEmployeeInstituteDetails(this.employee._id, this.instituteId, this.f['role'].value).subscribe(function (res) {
-              _this20.showToaster('top-right', 'success', 'Employee Updated Successfully!');
+              _this22.showToaster('top-right', 'success', 'Employee Updated Successfully!');
 
-              _this20.router.navigate(["/pages/institute/branch-config/manage-employee/".concat(_this20.instituteId)]);
+              _this22.router.navigate(["/pages/institute/branch-config/manage-employee/".concat(_this22.instituteId)]);
             }, function (err) {
-              return _this20.showToaster('top-right', 'danger', err.error.message);
+              return _this22.showToaster('top-right', 'danger', err.error.message);
             });
           }
 
           if (!this.edit) {
             if (!this.alreadyRegistered) {
               this.api.addEmployee(this.employeeForm.value, this.instituteId).subscribe(function (data) {
-                _this20.showToaster('top-right', 'success', 'New Employee Added Successfully!');
+                _this22.showToaster('top-right', 'success', 'New Employee Added Successfully!');
 
                 setTimeout(function () {
-                  _this20.router.navigate(["/pages/institute/branch-config/manage-employee/".concat(_this20.instituteId)]);
+                  _this22.router.navigate(["/pages/institute/branch-config/manage-employee/".concat(_this22.instituteId)]);
                 }, 1000);
               }, function (err) {
                 if (err.error.message.includes('E11000 duplicate key error collection')) {
-                  _this20.showToaster('top-right', 'danger', 'This Employee Already Exist, Please Search Employee By EDU-Atlas ID');
+                  _this22.showToaster('top-right', 'danger', 'This Employee Already Exist, Please Search Employee By EDU-Atlas ID');
 
-                  _this20.alreadyRegistered = true;
+                  _this22.alreadyRegistered = true;
                   return;
                 }
 
-                _this20.alreadyRegistered = true;
+                _this22.alreadyRegistered = true;
 
-                _this20.showToaster('top-right', 'danger', err.error.message);
+                _this22.showToaster('top-right', 'danger', err.error.message);
               });
             } else {
               if (this.employeeEduId) {
                 this.api.addEmployeeInstitute(this.employeeEduId, this.instituteId, this.employeeForm.value).subscribe(function (res) {
-                  _this20.showToaster('top-right', 'success', 'Employee Added to Institute Successfully!');
+                  _this22.showToaster('top-right', 'success', 'Employee Added to Institute Successfully!');
 
-                  _this20.router.navigate(["/pages/institute/branch-config/manage-employee/".concat(_this20.instituteId)]);
+                  _this22.router.navigate(["/pages/institute/branch-config/manage-employee/".concat(_this22.instituteId)]);
                 }, function (err) {
-                  return _this20.showToaster('top-right', 'danger', err.error.message);
+                  return _this22.showToaster('top-right', 'danger', err.error.message);
                 });
               } else {
                 this.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
@@ -2466,7 +2522,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "table {\n  width: 100%;\n  height: 5vh; }\n\n.input-group-text {\n  background-color: #fce062;\n  color: #000; }\n\n.noRecFound {\n  position: fixed;\n  top: 50%;\n  left: 50%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2VtcGxveWVlLW1hbmFnZW1lbnQvbWFuYWdlLWVtcGxveWVlL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxlbXBsb3llZS1tYW5hZ2VtZW50XFxtYW5hZ2UtZW1wbG95ZWVcXG1hbmFnZS1lbXBsb3llZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQVc7RUFDWCxXQUFXLEVBQUE7O0FBR2I7RUFDRSx5QkFBeUI7RUFDekIsV0FBVyxFQUFBOztBQUViO0VBQ0UsZUFBZTtFQUNmLFFBQVE7RUFDUixTQUFTLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvZW1wbG95ZWUtbWFuYWdlbWVudC9tYW5hZ2UtZW1wbG95ZWUvbWFuYWdlLWVtcGxveWVlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBoZWlnaHQ6IDV2aDtcclxuICB9XHJcbiAgXHJcbiAgLmlucHV0LWdyb3VwLXRleHQge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2ZjZTA2MjtcclxuICAgIGNvbG9yOiAjMDAwO1xyXG4gIH1cclxuICAubm9SZWNGb3VuZHtcclxuICAgIHBvc2l0aW9uOiBmaXhlZDtcclxuICAgIHRvcDogNTAlO1xyXG4gICAgbGVmdDogNTAlO1xyXG4gIH0iXX0= */";
+    __webpack_exports__["default"] = "table {\n  width: 100%;\n  height: 5vh; }\n\n.input-group-text {\n  background-color: #fce062;\n  color: #000; }\n\n.noRecFound {\n  position: fixed;\n  top: 50%;\n  left: 50%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL2JyYW5jaC1jb25mL2VtcGxveWVlLW1hbmFnZW1lbnQvbWFuYWdlLWVtcGxveWVlL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxpbnN0aXR1dGVcXGJyYW5jaC1jb25mXFxlbXBsb3llZS1tYW5hZ2VtZW50XFxtYW5hZ2UtZW1wbG95ZWVcXG1hbmFnZS1lbXBsb3llZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQVc7RUFDWCxXQUFXLEVBQUE7O0FBR2I7RUFDRSx5QkFBeUI7RUFDekIsV0FBVyxFQUFBOztBQUViO0VBQ0UsZUFBZTtFQUNmLFFBQVE7RUFDUixTQUFTLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvYnJhbmNoLWNvbmYvZW1wbG95ZWUtbWFuYWdlbWVudC9tYW5hZ2UtZW1wbG95ZWUvbWFuYWdlLWVtcGxveWVlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGhlaWdodDogNXZoO1xyXG59XHJcblxyXG4uaW5wdXQtZ3JvdXAtdGV4dCB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZjZTA2MjtcclxuICBjb2xvcjogIzAwMDtcclxufVxyXG4ubm9SZWNGb3VuZCB7XHJcbiAgcG9zaXRpb246IGZpeGVkO1xyXG4gIHRvcDogNTAlO1xyXG4gIGxlZnQ6IDUwJTtcclxufVxyXG4iXX0= */";
     /***/
   },
 
@@ -2549,11 +2605,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getEmployees",
         value: function getEmployees(instituteId) {
-          var _this21 = this;
+          var _this23 = this;
 
           this.api.getEmployeesByInstituteId(instituteId).subscribe(function (data) {
-            console.log(data);
-            _this21.employees = data;
+            _this23.employees = data;
           });
         }
       }, {
@@ -2580,18 +2635,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "delete",
         value: function _delete(employeeObjId) {
-          var _this22 = this;
+          var _this24 = this;
 
           var confirm = window.confirm('Are u sure, You want to Delete this Employee?');
 
           if (confirm) {
             this.api.deleteEmployeeInstitute(this.instituteId, employeeObjId).subscribe(function () {
-              var i = _this22.employees.findIndex(function (employee) {
+              var i = _this24.employees.findIndex(function (employee) {
                 return employee._id === employeeObjId;
               });
 
               if (i !== -1) {
-                _this22.employees.splice(i, 1);
+                _this24.employees.splice(i, 1);
               }
             });
           }
@@ -2703,25 +2758,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ViewEmployee, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this23 = this;
+          var _this25 = this;
 
           this.instituteId = this.route.snapshot.paramMap.get('id');
           this.route.queryParams.subscribe(function (data) {
-            _this23.employeeEduId = data.eduAtlasId;
-            _this23.employeeObjId = data.employeeObjId;
+            _this25.employeeEduId = data.eduAtlasId;
+            _this25.employeeObjId = data.employeeObjId;
           });
           this.getEmployee(this.employeeObjId);
         }
       }, {
         key: "getEmployee",
         value: function getEmployee(employeeObjId) {
-          var _this24 = this;
+          var _this26 = this;
 
           this.api.getOneEmployeeByInstitute({
             empId: employeeObjId,
             instituteId: this.instituteId
           }).subscribe(function (data) {
-            _this24.employee = data[0];
+            _this26.employee = data[0];
           });
         }
       }]);
@@ -2845,10 +2900,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getReceipts",
         value: function getReceipts(id) {
-          var _this25 = this;
+          var _this27 = this;
 
           this.api.getReceipt(id).subscribe(function (data) {
-            _this25.receipts = JSON.parse(JSON.stringify(data));
+            _this27.receipts = JSON.parse(JSON.stringify(data));
           });
         }
       }, {
@@ -2864,15 +2919,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "delete",
         value: function _delete(id) {
-          var _this26 = this;
+          var _this28 = this;
 
           var confirm = window.prompt('Are u sure, You want to delete this Receipt?');
 
           if (confirm) {
             this.api.deleteReceipt(id).subscribe(function () {
-              _this26.receipts = null;
+              _this28.receipts = null;
 
-              _this26.showToast('top-right', 'success', 'Receipt Deleted Successfully');
+              _this28.showToast('top-right', 'success', 'Receipt Deleted Successfully');
             }, function (err) {
               return console.error(err);
             });
@@ -3026,39 +3081,39 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ReceiptConfComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this27 = this;
+          var _this29 = this;
 
           this.instituteId = this.active.snapshot.paramMap.get('id');
           this.active.queryParams.subscribe(function (data) {
-            _this27.receiptId = data.receiptId;
-            _this27.edit = data.edit;
+            _this29.receiptId = data.receiptId;
+            _this29.edit = data.edit;
 
-            if (_this27.edit === 'true') {
-              _this27.getReceipt(_this27.instituteId);
+            if (_this29.edit === 'true') {
+              _this29.getReceipt(_this29.instituteId);
             }
           });
           this.receipt = this.fb.group({
             businessName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             address: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            gstNumber: [''],
             termsAndCondition: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            fee: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
+            fee: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            gstNumber: ['']
           });
         }
       }, {
         key: "getReceipt",
         value: function getReceipt(id) {
-          var _this28 = this;
+          var _this30 = this;
 
           this.api.getReceipt(id).subscribe(function (data) {
-            _this28.updateReceipt = data;
+            _this30.updateReceipt = data;
 
-            _this28.receipt.patchValue({
-              businessName: _this28.updateReceipt.businessName,
-              address: _this28.updateReceipt.address,
-              gstNumber: _this28.updateReceipt.gstNumber,
-              termsAndCondition: _this28.updateReceipt.termsAndCondition,
-              fee: _this28.updateReceipt.fee
+            _this30.receipt.patchValue({
+              businessName: _this30.updateReceipt.businessName,
+              address: _this30.updateReceipt.address,
+              gstNumber: _this30.updateReceipt.gstNumber,
+              termsAndCondition: _this30.updateReceipt.termsAndCondition,
+              fee: _this30.updateReceipt.fee
             });
           }, function (err) {
             return console.error(err);
@@ -3067,9 +3122,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this29 = this;
+          var _this31 = this;
 
           this.submitted = true;
+          this.receipt.markAllAsTouched();
 
           if (this.receipt.invalid) {
             return;
@@ -3077,21 +3133,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.edit === 'true') {
             this.api.updateReceipt(this.instituteId, this.receipt.value).subscribe(function (data) {
-              _this29.showToast('top-right', 'success', 'receipt Updated Successfully');
+              _this31.showToast('top-right', 'success', 'receipt Updated Successfully');
 
-              _this29.router.navigate(['/pages/institute/branch-config/manage-receipt/', _this29.instituteId]);
+              _this31.router.navigate(['/pages/institute/branch-config/manage-receipt/', _this31.instituteId]);
             }, function (err) {
-              _this29.showToast('top-right', 'danger', err.error.message);
+              _this31.showToast('top-right', 'danger', err.error.message);
             });
           }
 
           if (!this.edit) {
             this.api.addReceipt(this.instituteId, this.receipt.value).subscribe(function () {
-              _this29.showToast('top-right', 'success', 'Receipt Added Successfully');
+              _this31.showToast('top-right', 'success', 'Receipt Added Successfully');
 
-              _this29.router.navigate(['/pages/institute/branch-config/manage-receipt/', _this29.instituteId]);
+              _this31.router.navigate(['/pages/institute/branch-config/manage-receipt/', _this31.instituteId]);
             }, function (err) {
-              _this29.showToast('top-right', 'danger', err.error.message);
+              _this31.showToast('top-right', 'danger', err.error.message);
             });
           }
         }
@@ -3254,7 +3310,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this30 = this;
+          var _this32 = this;
 
           this.submitted = true;
 
@@ -3265,9 +3321,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this.roleService.addRole(this.roleManage.value).subscribe(function (data) {
             // console.log(data);
-            _this30.display = true;
+            _this32.display = true;
 
-            _this30.getOtp(_this30.roleManage.value.phone);
+            _this32.getOtp(_this32.roleManage.value.phone);
           });
         }
       }, {
@@ -3281,7 +3337,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "varifyOtp",
         value: function varifyOtp() {
-          var _this31 = this;
+          var _this33 = this;
 
           // console.log('otp====>', this.otp);
           var param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpParams"]();
@@ -3290,10 +3346,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           param = param.append('otp', this.otp);
           this.roleService.verifyOtp(param).subscribe(function (res) {
             // console.log(res);
-            _this31.valid('top-right', 'success');
+            _this33.valid('top-right', 'success');
           }, function (error) {
             // console.log(error);
-            _this31.invalid('top-right', 'danger');
+            _this33.invalid('top-right', 'danger');
           });
         }
       }, {
@@ -3343,114 +3399,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       /*! ./role-management.component.scss */
       "./src/app/pages/institute/branch-conf/role-management/role-management.component.scss"))["default"]]
     }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_4__["RoleAssignService"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbToastrService"]])], RoleManagementComponent);
-    /***/
-  },
-
-  /***/
-  "./src/app/services/role/role-assign.service.ts":
-  /*!******************************************************!*\
-    !*** ./src/app/services/role/role-assign.service.ts ***!
-    \******************************************************/
-
-  /*! exports provided: RoleAssignService */
-
-  /***/
-  function srcAppServicesRoleRoleAssignServiceTs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "RoleAssignService", function () {
-      return RoleAssignService;
-    });
-    /* harmony import */
-
-
-    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! tslib */
-    "./node_modules/tslib/tslib.es6.js");
-    /* harmony import */
-
-
-    var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! ./../../../environments/environment */
-    "./src/environments/environment.ts");
-    /* harmony import */
-
-
-    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/fesm2015/core.js");
-    /* harmony import */
-
-
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! @angular/common/http */
-    "./node_modules/@angular/common/fesm2015/http.js");
-    /* harmony import */
-
-
-    var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-    /*! rxjs */
-    "./node_modules/rxjs/_esm2015/index.js");
-    /* harmony import */
-
-
-    var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-    /*! rxjs/operators */
-    "./node_modules/rxjs/_esm2015/operators/index.js");
-
-    var RoleAssignService = /*#__PURE__*/function () {
-      function RoleAssignService(http) {
-        _classCallCheck(this, RoleAssignService);
-
-        this.http = http;
-      }
-
-      _createClass(RoleAssignService, [{
-        key: "addRole",
-        value: function addRole(role) {
-          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/role"), role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
-        }
-      }, {
-        key: "getOtp",
-        value: function getOtp(phone, params) {
-          return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/users/sendOTP/").concat(phone), {
-            params: params
-          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
-        }
-      }, {
-        key: "verifyOtp",
-        value: function verifyOtp(params) {
-          var _this32 = this;
-
-          return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server + '/users/verifyOTP', {
-            params: params
-          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (err) {
-            return _this32.handleError(err);
-          }));
-        }
-      }, {
-        key: "handleError",
-        value: function handleError(error) {
-          return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
-        }
-      }]);
-
-      return RoleAssignService;
-    }();
-
-    RoleAssignService.ctorParameters = function () {
-      return [{
-        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]
-      }];
-    };
-
-    RoleAssignService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
-      providedIn: 'root'
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])], RoleAssignService);
     /***/
   }
 }]);

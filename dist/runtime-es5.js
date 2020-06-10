@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app-pages-pages-module":"app-pages-pages-module","communication-communication-communication-module":"communication-communication-communication-module","institute-institute-institute-module":"institute-institute-institute-module","branch-conf-branch-branch-module":"branch-conf-branch-branch-module"}[chunkId]||chunkId) +    "-es5.js"
+/******/ 		return __webpack_require__.p + "" + ({"default~pages-pages-module~student-student-module":"default~pages-pages-module~student-student-module","pages-pages-module":"pages-pages-module","student-student-module":"student-student-module","communication-communication-communication-module":"communication-communication-communication-module","institute-institute-institute-module":"institute-institute-institute-module","student-reports-student-report-module":"student-reports-student-report-module","branch-conf-branch-branch-module":"branch-conf-branch-branch-module","online-classes-online-classes-module":"online-classes-online-classes-module","tests-tests-module":"tests-tests-module"}[chunkId]||chunkId) +    "-es5.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
