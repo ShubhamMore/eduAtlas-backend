@@ -22,7 +22,7 @@ const leadsSchema = new mongoose.Schema({
     addedDate:{
         type:String
     },
-    note:{
+    comment:{
         type:String
     }
 })
