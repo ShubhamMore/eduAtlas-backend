@@ -24,7 +24,7 @@ exports.addForum = async(req,res)=>{
     }
 }
 
-exports.getForumByInstitute = async(req,res)=>{
+exports.getForumsByInstitute = async(req,res)=>{
     try {
         let query = {}
         
@@ -44,4 +44,16 @@ exports.getForumByInstitute = async(req,res)=>{
     } catch (error) {
         res.status(400).send(error)       
     }
+}
+
+exports.addComment = async(req,res)=>{
+    try {
+        const 
+    } catch (error) {
+        
+    }
+}
+
+exports.getSingleForum = async(req,res)=>{
+    
 }
