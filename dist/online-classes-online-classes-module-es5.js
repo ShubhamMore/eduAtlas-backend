@@ -276,7 +276,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this5 = this;
 
           if (this.onlineClassForm.valid) {
-            var date = this.onlineClassForm.value.startDate + 'T' + this.onlineClassForm.value.startTime + ':00Z';
+            var date = this.onlineClassForm.value.startDate + 'T' + this.onlineClassForm.value.startTime + ':00';
 
             if (!this.edit) {
               var onlineClass = {

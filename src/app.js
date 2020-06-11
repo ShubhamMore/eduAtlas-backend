@@ -16,6 +16,7 @@ app.use(express.json({ limit: '100mb' }));
 app.use(cors());
 
 app.use('/images', express.static(path.join('images')));
+app.use('/sample', express.static(path.join('sample')));
 app.use(express.static(path.join(__dirname, '../dist')));
 
 app.use(express.urlencoded({ extended: true, limit: '100mb' }));
