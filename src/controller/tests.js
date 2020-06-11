@@ -38,10 +38,12 @@ exports.addTest = async (req, res) => {
   }
 };
 
-exports.getTestByBatch = async (req, res) => {
+exports.getTestByInstitute = async (req, res) => {
   try {
     console.log(req.body);
+    
     let query = {}
+    
     if(!req.body.batchId){
       query = {
         instituteId: req.body.instituteId,
