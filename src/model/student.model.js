@@ -10,8 +10,8 @@ const studentSchema = new Schema(
     //   required:true,
     //   unique:true
     // },
-    eduAtlasId:{
-      type:String,
+    eduAtlasId: {
+      type: String,
     },
 
     basicDetails: new Schema(
@@ -56,19 +56,17 @@ const studentSchema = new Schema(
       },
       { _id: false, toJSON: { getters: true }, toObject: { getters: true } }
     ),
-    instituteDetails:[
+    instituteDetails: [
       {
-        instituteId:{
-          type:String,
-          
+        instituteId: {
+          type: String,
         },
-        courseId:{
-          type:String,
-          
+        courseId: {
+          type: String,
         },
-        batchId:{
-          type:String,
-          default:''
+        batchId: {
+          type: String,
+          default: '',
         },
         rollNumber: {
           type: String,
@@ -77,11 +75,15 @@ const studentSchema = new Schema(
           type: String,
           required: false,
         },
+        additionalDiscountType: {
+          type: String,
+          required: false,
+        },
         additionalDiscount: {
           type: String,
           required: false,
         },
-        nextPayble: {
+        netPayable: {
           type: String,
           default: '',
         },
@@ -93,12 +95,12 @@ const studentSchema = new Schema(
           type: String,
           default: '',
         },
-        invite:{
-          type:Boolean,
-          default:false
-        }  
-      }
-    ],     
+        invite: {
+          type: Boolean,
+          default: false,
+        },
+      },
+    ],
   },
   { toJSON: { getters: true }, toObject: { getters: true } }
 );
