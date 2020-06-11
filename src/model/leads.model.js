@@ -22,6 +22,9 @@ const leadsSchema = new mongoose.Schema({
     addedDate:{
         type:String
     },
+    source:{
+        type:String
+    },
     comment:{
         type:String
     }
