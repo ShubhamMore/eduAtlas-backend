@@ -47,6 +47,18 @@ const feeSchema = new Schema({
       amount: {
         type: String,
       },
+      paymentDate: {
+        type: String,
+        default: '',
+      },
+      bankDetails: {
+        type: String,
+        default: '',
+      },
+      transDetails: {
+        type: String,
+        default: '',
+      },
       paymentMode: {
         type: String,
       },

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');   
+const mongoose = require('mongoose');
 const Test = require('../model/test.model');
 const fs = require('fs').promises;
 const path = require('path');
@@ -8,8 +8,6 @@ const Student = require('../model/student.model');
 const excelToJson = require('convert-excel-to-json');
 const errorHandler = require('../service/errorHandler');
 const response = require('../service/response');
-
-
 
 const request = require('request');
 const rp = require('request-promise');
@@ -51,22 +49,21 @@ exports.getTestByBatch = async (req, res) => {
   }
 };
 
-exports.getTestsForReports = async(req,res)=>{
+exports.getTestsForReports = async (req, res) => {
   try {
-
     const batchTest = await Test.find({
       instituteId: req.body.instituteId,
       batchId: req.body.batchId,
-      students:{
-        $exists:true
-      }
+      students: {
+        $exists: true,
+      },
     });
 
     res.status(200).send(batchTest);
   } catch (error) {
-    res.status(400).send(error)
+    res.status(400).send(error);
   }
-}
+};
 
 exports.getSingleTest = async (req, res) => {
   try {
@@ -118,8 +115,8 @@ exports.addScoreUsingExcel = async (req, res) => {
 
           columnToKey: {
             A: 'rollNo',
-            B: '_id',
-            C: 'marks',
+            // B: 'name',
+            B: 'marks',
           },
         },
       ],
@@ -156,9 +153,10 @@ exports.addScoreUsingExcel = async (req, res) => {
         error.statusCode = 400;
         throw error;
       }
+      console.log(student);
       excelData.Sheet1[i].studentId = student[0]._id;
     }
-
+    console.log(excelData);
     const updateScore = await Test.updateOne(
       {
         _id: req.body._id,
@@ -172,7 +170,7 @@ exports.addScoreUsingExcel = async (req, res) => {
     deleteFile(req.file.path);
     res.status(200).send(updateScore);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     errorHandler(error, res);
   }
 };
@@ -242,21 +240,22 @@ exports.deleteTest = async (req, res) => {
   }
 };
 
-exports.getScoresOfStutdentByInstitute = async(req,res)=>{
+exports.getScoresOfStutdentByInstitute = async (req, res) => {
   try {
     const studentScore = await Test.aggregate([
       {
-        $unwind:"$students"
-      },{
-        $match:{
-          instituteId:req.body.instituteId,
-          "students.studentId": req.body.studentId
-        }
-      }
-    ])
+        $unwind: '$students',
+      },
+      {
+        $match: {
+          instituteId: req.body.instituteId,
+          'students.studentId': req.body.studentId,
+        },
+      },
+    ]);
 
-    res.status(200).send(studentScore)
+    res.status(200).send(studentScore);
   } catch (error) {
-    res.status(400).send(error)
+    res.status(400).send(error);
   }
-}
+};
