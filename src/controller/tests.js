@@ -112,8 +112,8 @@ exports.addTestScore = async (req, res) => {
   }
 };
 exports.addScoreUsingExcel = async (req, res) => {
-  try {
-    console.log('in here', path.join(__dirname + '../../../' + req.file.path));
+  console.log('in here', path.join(__dirname + '../../../' + req.file.path));
+    try {
 
     const file = path.join(__dirname + '../../../' + req.file.path);
     const excelData = excelToJson({

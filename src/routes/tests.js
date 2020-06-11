@@ -4,7 +4,7 @@ const checkAuth = require('../middleware/checkAuth');
 const xcelUpload = require('../middleware/xcelFile')
 testRouter.post('/addTest', checkAuth, testsController.addTest);
 
-testRouter.post('/getTestByBatch', checkAuth, testsController.getTestByBatch);
+testRouter.post('/getTestByInstitute', checkAuth, testsController.getTestByInstitute);
 
 testRouter.post('/getSingleTest', checkAuth, testsController.getSingleTest);
 
