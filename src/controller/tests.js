@@ -13,6 +13,7 @@ const response = require('../service/response');
 
 const request = require('request');
 const rp = require('request-promise');
+const { SSL_OP_NO_QUERY_MTU } = require('constants');
 
 const deleteFile = (filePath) => {
   fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
@@ -40,10 +41,18 @@ exports.addTest = async (req, res) => {
 exports.getTestByBatch = async (req, res) => {
   try {
     console.log(req.body);
-    const batchTest = await Test.find({
-      instituteId: req.body.instituteId,
-      batchId: req.body.batchId,
-    });
+    let query = {}
+    if(!req.body.batchId){
+      query = {
+        instituteId: req.body.instituteId,
+      }
+    } else {
+      query={
+        instituteId: req.body.instituteId,
+        batchId: req.body.batchId,
+      }
+    }
+    const batchTest = await Test.find(query);
 
     res.status(200).send(batchTest);
   } catch (error) {
