@@ -7477,8 +7477,7 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     razorpayKeyId: 'rzp_test_uyyXNzgLBF3hTU',
-    // server: 'http://localhost:5000',
-    server: '',
+    server: 'http://localhost:5000',
 };
 
 
