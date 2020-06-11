@@ -21,7 +21,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"row\">\n  <div class=\"col-12\">\n    <table class=\"table table-borderless\">\n      <thead>\n        <tr>\n          <th>Id</th>\n          <th>Topic</th>\n          <th>Join</th>\n        </tr>\n      </thead>\n\n      <tbody>\n        <tr *ngFor=\"let meeting of meetings; let i = index\">\n          <td>{{ i + 1 }}</td>\n          <td>{{ meeting.topic }}</td>\n          <td>\n            <button\n              type=\"button\"\n              class=\"btn btn-warning\"\n              (click)=\"joinMeeting(meeting.joinUrl, meeting.meetingId, meeting.password)\"\n            >\n              Join\n            </button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n\n<!-- <div class=\"zoom-box\">\n  <div id=\"zmmtg-root\"></div>\n</div> -->\n";
+    __webpack_exports__["default"] = "<div class=\"row\">\n  <div class=\"col-sm-6\">\n    <nb-card>\n      <nb-card-header>\n        <h5>Meetings</h5>\n      </nb-card-header>\n      <nb-card-body>\n        <table class=\"table table-borderless\">\n          <thead>\n            <tr>\n              <th>Id</th>\n              <th>Topic</th>\n              <th>Join</th>\n            </tr>\n          </thead>\n\n          <tbody>\n            <tr *ngFor=\"let meeting of meetings; let i = index\">\n              <td>{{ i + 1 }}</td>\n              <td>{{ meeting.topic }}</td>\n              <td>\n                <button\n                  type=\"button\"\n                  class=\"btn btn-warning\"\n                  (click)=\"joinMeeting(meeting.joinUrl, meeting.meetingId, meeting.password)\"\n                >\n                  Join\n                </button>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </nb-card-body>\n    </nb-card>\n  </div>\n  <!-- <div class=\"col-sm-6\" *ngIf=\"meetingNumber\">\n    {{ meetingNumber }}\n    <button class=\"btn btn-sm btn-danger float-right\" (click)=\"close()\">X</button>\n    <iframe\n      class=\"zoom\"\n      src=\"https://zoom.us/wc/{{ meetingNumber }}/join?prefer=1&un=dG9tbXk=\"\n      sandbox=\"allow-same-origin allow-forms allow-scripts\"\n      allow=\"microphone; camera\"\n      *ngIf=\"meetingNumber\"\n    ></iframe>\n  </div> -->\n</div>\n\n<!-- <div class=\"zoom-box\">\n  <div id=\"zmmtg-root\"></div>\n</div> -->\n";
     /***/
   },
 
@@ -61,7 +61,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3N0dWRlbnQvc3R1ZGVudC1ob21lL3N0dWRlbnQtaG9tZS5jb21wb25lbnQuc2NzcyJ9 */";
+    __webpack_exports__["default"] = ".zoom {\n  border: none;\n  width: 100%;\n  height: 200px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc3R1ZGVudC9zdHVkZW50LWhvbWUvRTpcXFByb2plY3RzXFxGcmVlbGFuY2UgUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXGNsaWVudC9zcmNcXGFwcFxcc3R1ZGVudFxcc3R1ZGVudC1ob21lXFxzdHVkZW50LWhvbWUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBZ0JBO0VBQ0UsWUFBWTtFQUNaLFdBQVc7RUFDWCxhQUFhLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9zdHVkZW50L3N0dWRlbnQtaG9tZS9zdHVkZW50LWhvbWUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvLyAjem1tdGctcm9vdCB7XHJcbi8vICAgdmlzaWJpbGl0eTogaGlkZGVuO1xyXG4vLyAgIHdpZHRoOiA1MCU7XHJcbi8vICAgaGVpZ2h0OiA1MCU7XHJcbi8vICAgcG9zaXRpb246IGZpeGVkO1xyXG4vLyAgIHRvcDogMDtcclxuLy8gICBsZWZ0OiAwO1xyXG4vLyAgIGJhY2tncm91bmQtY29sb3I6IGJsYWNrO1xyXG4vLyAgIHotaW5kZXg6IDA7XHJcbi8vIH1cclxuXHJcbi8vIC56b29tLWJveCB7XHJcbi8vICAgbWF4LXdpZHRoOiA1MCU7XHJcbi8vICAgbWF4LWhlaWdodDogNTAlO1xyXG4vLyB9XHJcblxyXG4uem9vbSB7XHJcbiAgYm9yZGVyOiBub25lO1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGhlaWdodDogMjAwcHg7XHJcbn1cclxuIl19 */";
     /***/
   },
 
@@ -143,11 +143,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           });
         }
       }, {
+        key: "close",
+        value: function close() {
+          this.meetingNumber = null;
+        }
+      }, {
         key: "joinMeeting",
         value: function joinMeeting(url, meetingNumber, passWord) {
-          console.log(url); // this.meetingNumber = meetingNumber;
-          // this.passWord = passWord;
-          // this.meeting = true;
+          console.log(url);
+          this.meetingNumber = meetingNumber;
+          this.passWord = passWord; // this.meeting = true;
 
           window.open(url, 'Zoom', 'scrollbars=yes,resizable=yes,status=no,location=no,toolbar=no,menubar=no');
         }

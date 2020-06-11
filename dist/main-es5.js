@@ -9405,7 +9405,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
       children: [{
         title: 'Define Test'
       }, {
-        title: 'Upload Scores'
+        title: 'Test Reports'
       }]
     }, {
       title: 'Student Reports',
@@ -10262,6 +10262,20 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
         key: "deleteTest",
         value: function deleteTest(data) {
           var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/tests/deleteTest");
+          return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        }
+        /****************   Test Reports   ****************** */
+
+      }, {
+        key: "getTestsForReports",
+        value: function getTestsForReports(data) {
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/tests/getTestsForReports");
+          return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        }
+      }, {
+        key: "getScoresOfStutdentByInstitute",
+        value: function getScoresOfStutdentByInstitute(data) {
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/tests/getScoresOfStutdentByInstitute");
           return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
         /****************   Schedule PTMs   ****************** */

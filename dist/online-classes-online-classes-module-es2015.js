@@ -164,7 +164,7 @@ let AddOnlineClassComponent = class AddOnlineClassComponent {
     }
     saveOnlineClass() {
         if (this.onlineClassForm.valid) {
-            const date = this.onlineClassForm.value.startDate + 'T' + this.onlineClassForm.value.startTime + ':00Z';
+            const date = this.onlineClassForm.value.startDate + 'T' + this.onlineClassForm.value.startTime + ':00';
             if (!this.edit) {
                 const onlineClass = {
                     teacherId: this.onlineClassForm.value.teacherId,

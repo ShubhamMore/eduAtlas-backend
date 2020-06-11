@@ -6167,7 +6167,7 @@ const MENU_ITEMS = [
                 title: 'Define Test',
             },
             {
-                title: 'Upload Scores',
+                title: 'Test Reports',
             },
         ],
     },
@@ -6885,6 +6885,15 @@ let ApiService = class ApiService {
     }
     deleteTest(data) {
         const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/tests/deleteTest`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    /****************   Test Reports   ****************** */
+    getTestsForReports(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/tests/getTestsForReports`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getScoresOfStutdentByInstitute(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/tests/getScoresOfStutdentByInstitute`;
         return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     /****************   Schedule PTMs   ****************** */
