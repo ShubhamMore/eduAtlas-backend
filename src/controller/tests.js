@@ -265,7 +265,10 @@ exports.getScoresOfStutdentByInstitute = async(req,res)=>{
         }
       }
     ])
-
+    for(var i = 0;i<studentScore.length;i++){
+        studentScore[i].students.percentage = (studentScore[i].students.marks/studentScore[i].totalMarks) * 100
+    }
+      
     res.status(200).send(studentScore)
   } catch (error) {
     res.status(400).send(error)
