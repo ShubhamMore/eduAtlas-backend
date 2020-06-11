@@ -11,7 +11,6 @@ const response = require('../service/response');
 
 const request = require('request');
 const rp = require('request-promise');
-const { SSL_OP_NO_QUERY_MTU } = require('constants');
 
 const deleteFile = (filePath) => {
   fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
@@ -67,6 +66,7 @@ exports.getTestsForReports = async (req, res) => {
       batchId: req.body.batchId,
       students: {
         $exists: true,
+        $ne:[]
       },
     });
 
