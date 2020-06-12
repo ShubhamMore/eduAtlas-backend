@@ -1,4 +1,6 @@
+
 const mongoose = require('mongoose')
+const { date } = require('@hapi/joi')
 
 const forumSchema = new mongoose.Schema({
     
@@ -22,10 +24,8 @@ const forumSchema = new mongoose.Schema({
         type:String
     },
     date:{
-        type:String
-    },
-    uploadTime:{
-        type:String
+        type:Date,
+        default:Date.now()
     },
     comments:[{
         userId:{
@@ -36,12 +36,10 @@ const forumSchema = new mongoose.Schema({
         },
         comment:{
             type:String
-        },
-        commentTime:{
-            type:String
-        },
+        }, 
         commentDate:{
-            type:String
+            type:Date,
+            default:Date.now()
         }
     }]
 })

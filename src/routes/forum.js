@@ -9,5 +9,6 @@ forumRouter.post('/addComment',forumController.addComment)
 forumRouter.post('/updateForum',forumController.updateForum)
 forumRouter.post('/deleteForum',forumController.deleteForum)
 forumRouter.post('/deleteComment',forumController.deleteComment)
+forumRouter.post('/getMyForum',forumController.getMyForum)
 
 module.exports = forumRouter

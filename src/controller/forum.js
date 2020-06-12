@@ -18,7 +18,7 @@ exports.addForum = async(req,res)=>{
 
         const newForum = new Forum(req.body)
         await newForum.save()
-        res.status(200).res(newForum)
+        res.status(200).send(newForum)
     } catch (error) {
         errorHandler(error,res)
     }
@@ -28,21 +28,31 @@ exports.getForumsByInstitute = async(req,res)=>{
     try {
         let query = {}
         
-        if(!req.body.courseId || !req.body.batchId){
+        if(!req.body.courseId){
             query = {
                 instituteId:req.body.instituteId
             }
         } else {
-            query = {
-            
+            query = {    
                 instituteId:req.body.instituteId,
                 courseId:req.body.courseId,
-                batchId:req.body.batchId
             }
         }
-        const listForum = await Forum.find(query)           
+        const listForum = await Forum.find(query)     
+        res.status(200).send(listForum)      
     } catch (error) {
         res.status(400).send(error)       
+    }
+}
+exports.getMyForum = async(req,res)=>{
+    try {
+        const myForums = await Forum.find({
+            createdBy: req.body.createdBy
+        })
+
+        res.status(200).send(myForums)
+    } catch (error) {
+        errorHandler(error,res)
     }
 }
 
