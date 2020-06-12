@@ -8,17 +8,19 @@ const Leads = require('../model/leads.model');
 const errorHandler = require('../service/errorHandler');
 exports.getDashboardInfo = async (req,res)=>{
     try {
-        
+        let data = { }
+
+        let query = { }    
         query.instituteId = req.body.instituteId 
-        if(req.body.task == "upcomingClass") {
+        
             const currentTime = new Date().getTime() / 1000;
             const year = new Date().getFullYear() + "" ;
             const month = new Date().getMonth() + "";
             const day = new Date().getDate() + ""
             const date = new RegExp('.*' + year + '-' + month + '.*' +day+ '.*');
             query.date = date 
-            data = await OnlineClass.find(query)
-        }else if(req.body.task == "pendingFees"){
+            data.upcomingClass = await OnlineClass.find(query)
+
             
             const pendingFees = await Fee.find({
                 instituteId:req.body.instituteId,
@@ -50,15 +52,15 @@ exports.getDashboardInfo = async (req,res)=>{
                     ])
                     pendingFees[i].courseName = course[0].course.name
             }
-            data = pendingFees
-        }else if(req.body.task == "follow-up") {
+            data.pendingFees = pendingFees
+
             const leads = await Leads.find({
                 status: {
                     $in:["Contacted","Pending"]
                 }
             })
-            data = leads
-        }
+            data.leads = leads
+        
 
         res.status(200).send(data)
     } catch (error) {
