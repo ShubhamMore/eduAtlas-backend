@@ -24,6 +24,9 @@ const announcementSchema = new Schema({
   text: {
     type: String,
   },
+  file:{
+    type:String,
+  }
 });
 
 module.exports = mongoose.model('Announcement', announcementSchema);

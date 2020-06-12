@@ -90,30 +90,33 @@ exports.getPendingFeeByInstitute = async(req,res)=>{
 
     const feeDetails2 = await Fee.aggregate([
       {
-         $lookup:{
-           from:"students",
-           localField:"studentId",
-           foreignField:"_id",
-           as:"PendingFee"
-         }     
-      },{
         $match:{
           instituteId:req.body.instituteId,
           pendingAmount:{
             $ne:"0"
           }
         }
-      },{
-        $unwind:"$PendingFee"
-      },{
-        $lookup:{
-          "from":"institute",
-          "localField":"PendingFee.courseId",
-          "foreignField":"institute.course._id"
-        }
-      } 
+      },
+      {
+         $lookup:{
+           from:Student.collection.name,
+           localField:"studentId",
+           foreignField:"_id",
+           as:"PendingFee"
+         }     
+      },
+      // {
+      //   $unwind:"$PendingFee"
+      // },{
+      //   $lookup:{
+      //     "from":"institutes",
+      //     "localField":"PendingFee.courseId",
+      //     "foreignField":"institute.course._id",
+      //     "as":"FeeOfInstitute"
+      //   }
+      // },
     ])
-    
+    console.log(feeDetails2)   
     res.status(200).send(feeDetails)
 
   } catch (error) {

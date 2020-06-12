@@ -218,21 +218,3 @@ exports.resetPassword = async (req, res, next) => {
   }
 };
 
-exports.getAnnouncement = async (req, res, next) => {
-  const instituteId = req.params.instituteId;
-      const announcements = await Announcement.find({ instituteId });
-    res.status(200).json(announcements);
-  
-};
-
-exports.deleteAnnouncement = async (req, res, next) => {
-  const instituteId = req.params.instituteId;
-
-  if (!instituteId) {
-    res.status(400).json({ message: 'institute id not provided' });
-    next(new Error('institute id not provided'));
-  }
-
-  await Announcement.deleteOne({ instituteId });
-  res.status(200).json({ message: 'Deleted successfully' });
-};

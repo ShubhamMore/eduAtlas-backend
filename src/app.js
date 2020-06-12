@@ -17,6 +17,7 @@ app.use(cors());
 
 app.use('/images', express.static(path.join('images')));
 app.use('/sample', express.static(path.join('sample')));
+app.use('/announcement', express.static(path.join('announcement')))
 app.use(express.static(path.join(__dirname, '../dist')));
 
 app.use(express.urlencoded({ extended: true, limit: '100mb' }));
@@ -56,6 +57,7 @@ app.use('/institute/schedule', require('./routes/schedule'));
 app.use('/institute/attendance', require('./routes/attendance'));
 app.use('/institute/zoom', require('./routes/zoom'));
 app.use('/institute/tests', require('./routes/tests'));
+app.use('/institute/announcement',require('./routes/annoucement'))
 app.use('/institute/ptm', require('./routes/ptm'));
 app.use('/institute/mentoring', require('./routes/mentoring'))
 app.use('/institute/leads', require('./routes/leads'))
