@@ -139,6 +139,7 @@ exports.getMeetingsFromZoom = async (req, res) => {
         batchId: req.body.batchId,
         meetingId: listMeetings.meetings[i].id,
       });
+      console.log(listMeetings.meetings[i].id);
       if (meetings) {
         getMeetings.push(meetings);
       }
