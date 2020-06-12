@@ -102,8 +102,20 @@ exports.updateForum = async(req,res)=>{
 
 exports.deleteForum = async(req,res)=>{
     try {
+        const deleteForum = await Forum.deleteOne({
+            _id:req.body._id
+        })
+        res.status(200).send(deleteForum)
+    } catch (error) {
+        errorHandler(error,res)
+    }
+    
+}
+
+exports.deleteComment = async(req,res)=>{
+    try {
         let query={}
-        if(!req.body.bodycomment_id){
+        if(!req.body.comment_id){
            query = {
                 _id:req.body._id
             } 

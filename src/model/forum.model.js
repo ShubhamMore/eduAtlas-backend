@@ -36,6 +36,12 @@ const forumSchema = new mongoose.Schema({
         },
         comment:{
             type:String
+        },
+        commentTime:{
+            type:String
+        },
+        commentDate:{
+            type:String
         }
     }]
 })

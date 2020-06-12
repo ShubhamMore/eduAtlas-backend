@@ -8,8 +8,6 @@ forumRouter.post('/getSingleForum',forumController.getSingleForum)
 forumRouter.post('/addComment',forumController.addComment)
 forumRouter.post('/updateForum',forumController.updateForum)
 forumRouter.post('/deleteForum',forumController.deleteForum)
-
-
-//forumRouter.post('/',forumController.)
+forumRouter.post('/deleteComment',forumController.deleteComment)
 
 module.exports = forumRouter
