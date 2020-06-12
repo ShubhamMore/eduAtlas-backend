@@ -36,11 +36,19 @@ exports.getDashboardInfo = async (req,res)=>{
                 const student = await Student.findOne({
                     _id:pendingFees[i].studentId    
                 })
+                
                 pendingFees[i].studentName = student.basicDetails.name
-                const course = await Institute.findOne({
-                    _id:pendingFees.instituteId
-                })
-
+                
+                const course = await Institute.aggregate([{
+                        $unwind:"$course"
+                    },{
+                        $match:{
+                            _id:pendingFees[i].instituteId,
+                            "course._id":pendingFees[i].courseId
+                        }
+                    }
+                ])
+                    
             }
 
         }else if(req.body.task == "follow-up") {
