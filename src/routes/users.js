@@ -18,9 +18,6 @@ authRouter.post('/verifyOTP', otpController.verifyOTP);
 
 authRouter.post('/findUser', userController.findUser);
 
-authRouter.get('/announcement/:instituteId', checkAuth, userController.getAnnouncement);
-authRouter.delete('/announcement/:instituteId', checkAuth, userController.deleteAnnouncement);
-
 authRouter.patch('/resetPassword', userController.resetPassword);
 
 // authRouter.delete('', userController.deleteAllUsers);

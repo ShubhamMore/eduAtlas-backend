@@ -2,12 +2,20 @@ const Institute = require('../model/institute.model');
 const Student = require('../model/student.model');
 const Fee = require('../model/fee.model');
 const Lead = require('../model/leads.model')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const OnlineClass = require('../model/onlineClass.model');
 exports.getDashboardInfo = async (req,res)=>{
     try {
-        if(req.body.task == "upcomingClass"){
+        let query = {}
+        query.instituteId = req.body.instituteId 
+        if(req.body.task == "upcomingClass") {
             const currentTime = new Date().getTime() / 1000;
-            const date = new RegExp('.*' + req.body.year + '-' + req.body.month + '.*' +day+ '.*');
+            const year = new Date().getFullYear() + "" ;
+            const month = new Date().getMonth() + "";
+            const day = new Date().getDate() + ""
+            const date = new RegExp('.*' + year + '-' + month + '.*' +day+ '.*');
+            query.date = date 
+            const upcomingClasses = await OnlineClass.find(query)
         }else if(req.body.task == "pendingFees"){
 
         }else if(req.body.task == "follow-up") {
