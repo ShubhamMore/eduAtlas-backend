@@ -87,6 +87,32 @@ exports.getPendingFeeByInstitute = async(req,res)=>{
         $ne:"0"
       }
     })
+
+    const feeDetails2 = await Fee.aggregate([
+      {
+         $lookup:{
+           from:"students",
+           localField:"studentId",
+           foreignField:"_id",
+           as:"PendingFee"
+         }     
+      },{
+        $match:{
+          instituteId:req.body.instituteId,
+          pendingAmount:{
+            $ne:"0"
+          }
+        }
+      },{
+        $unwind:"$PendingFee"
+      },{
+        $lookup:{
+          "from":"institute",
+          "localField":"PendingFee.courseId",
+          "foreignField":"institute.course._id"
+        }
+      } 
+    ])
     
     res.status(200).send(feeDetails)
 
