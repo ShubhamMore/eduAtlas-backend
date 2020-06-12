@@ -4,10 +4,11 @@ const Fee = require('../model/fee.model');
 const Lead = require('../model/leads.model')
 const mongoose = require('mongoose');
 const OnlineClass = require('../model/onlineClass.model');
+const Leads = require('../model/leads.model');
+const errorHandler = require('../service/errorHandler');
 exports.getDashboardInfo = async (req,res)=>{
     try {
-        let data={}
-        let query = {}
+        
         query.instituteId = req.body.instituteId 
         if(req.body.task == "upcomingClass") {
             const currentTime = new Date().getTime() / 1000;
@@ -31,31 +32,36 @@ exports.getDashboardInfo = async (req,res)=>{
                 error.statusCode = 202
                 throw error
             }
-
-            for(var i = 0 ; i < pendingFees.length ; i++ ){
-                const student = await Student.findOne({
-                    _id:pendingFees[i].studentId    
-                })
+                for(var i = 0 ; i < pendingFees.length ; i++ ){
+                    const student = await Student.findOne({
+                        _id:pendingFees[i].studentId    
+                    })
                 
-                pendingFees[i].studentName = student.basicDetails.name
+                    pendingFees[i].studentName = student.basicDetails.name
                 
-                const course = await Institute.aggregate([{
-                        $unwind:"$course"
-                    },{
-                        $match:{
-                            _id:pendingFees[i].instituteId,
-                            "course._id":pendingFees[i].courseId
+                    const course = await Institute.aggregate([{
+                            $unwind:"$course"
+                        },{
+                            $match:{
+                                _id:pendingFees[i].instituteId,
+                                "course._id":pendingFees[i].courseId
+                            }
                         }
-                    }
-                ])
-                    
+                    ])
+                    pendingFees[i].courseName = course[0].course.name
             }
-
+            data = pendingFees
         }else if(req.body.task == "follow-up") {
-
+            const leads = await Leads.find({
+                status: {
+                    $in:["Contacted","Pending"]
+                }
+            })
+            data = leads
         }
 
+        res.status(200).send(data)
     } catch (error) {
-        
+        errorHandler(error,res)
     }
 }
