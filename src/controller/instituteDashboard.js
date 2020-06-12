@@ -29,6 +29,8 @@ exports.getDashboardInfo = async (req,res)=>{
                   }
             })
 
+            let fee = [{}] 
+
             if(pendingFees.length == 0){
                 const error = new Error("No Pending Fees")
                 error.statusCode = 202
@@ -38,7 +40,7 @@ exports.getDashboardInfo = async (req,res)=>{
                     const student = await Student.findOne({
                         _id:pendingFees[i].studentId    
                     })
-                
+                    let obj = {}
                     pendingFees[i].studentName = student.basicDetails.name
                 
                     const course = await Institute.aggregate([{
@@ -51,14 +53,24 @@ exports.getDashboardInfo = async (req,res)=>{
                         }
                     ])
                     pendingFees[i].courseName = course[0].course.name
-            }
-            data.pendingFees = pendingFees
+                    obj = {
+                        studentId:pendingFees[i].studentId,
+                        studentName:student.basicDetails.name,
+                        courseId:pendingFees[i].courseId,
+                        courseName:course[0].course.name,
+                        pendingAmount:pendingFees[0].pendingAmount
+                    }
+                    fee.push(obj)
+
+                }
+            data.pendingFees = fee
 
             const leads = await Leads.find({
                 status: {
                     $in:["Contacted","Pending"]
                 }
             })
+
             data.leads = leads
         
 
