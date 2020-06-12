@@ -46,14 +46,83 @@ exports.getForumsByInstitute = async(req,res)=>{
     }
 }
 
-exports.addComment = async(req,res)=>{
+exports.getSingleForum = async(req,res)=>{
     try {
-        const 
+        const singleForum = await Forum.findOne({
+            _id:req.body._id
+        })
+
+        res.status(200).send(singleForum)
     } catch (error) {
-        
+        errorHandler(error,res)
     }
 }
 
-exports.getSingleForum = async(req,res)=>{
-    
+exports.addComment = async(req,res)=>{
+    try {
+        const comment = await Forum.updateOne({
+            _id:req.body._id
+        },{
+            $push:{
+                comments: req.body.comment
+            }
+        })
+        if(comment.ok == 0){
+            const error = new Error("Comment was not added")
+            error.statusCode = 202
+            throw error
+        }
+
+        res.status(200).send(comment)
+
+    } catch (error) {
+        errorHandler(error,res)
+    }
+}
+
+exports.updateForum = async(req,res)=>{
+    try {
+        const updateForum = await Forum.updateOne({
+            _id:req.body._id
+        },req.body)
+
+        if(updateForum.ok == 0){
+            const error = new Error("Forum was not added")
+            error.statusCode = 202
+            throw error
+        }
+
+        res.status(200).send(updateForum)
+
+    } catch (error) {
+        errorHandler(error,res)
+
+    }
+}
+
+exports.deleteForum = async(req,res)=>{
+    try {
+        let query={}
+        if(!req.body.bodycomment_id){
+           query = {
+                _id:req.body._id
+            } 
+        } else{
+            query = [{
+                    id:req.body._id
+                },{
+                    $pull:{
+                        comments:{
+                            _id:req.body.commentId
+                        }
+                        
+                    }
+                }
+            ]
+        }
+
+        const deleteQuery = await Forum.updateOne(query)
+    } catch (error) {
+        errorHandler(error,res)   
+    }
 }

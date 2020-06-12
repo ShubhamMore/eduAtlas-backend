@@ -59,7 +59,7 @@ app.use('/institute/tests', require('./routes/tests'));
 app.use('/institute/ptm', require('./routes/ptm'));
 app.use('/institute/mentoring', require('./routes/mentoring'))
 app.use('/institute/leads', require('./routes/leads'))
-
+app.use('/institute/forum',require('./routes/forum'))
 app.use((req, res, next) => {
   const error = new Error('NOT FOUND');
   error.status = 404;
