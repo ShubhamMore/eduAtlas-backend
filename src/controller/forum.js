@@ -18,7 +18,7 @@ exports.addForum = async(req,res)=>{
 
         const newForum = new Forum(req.body)
         await newForum.save()
-        res.status(200).res(newForum)
+        res.status(200).send(newForum)
     } catch (error) {
         errorHandler(error,res)
     }

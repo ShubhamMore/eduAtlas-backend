@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const OnlineClass = require('../model/onlineClass.model');
 exports.getDashboardInfo = async (req,res)=>{
     try {
+        let data={}
         let query = {}
         query.instituteId = req.body.instituteId 
         if(req.body.task == "upcomingClass") {
@@ -15,19 +16,30 @@ exports.getDashboardInfo = async (req,res)=>{
             const day = new Date().getDate() + ""
             const date = new RegExp('.*' + year + '-' + month + '.*' +day+ '.*');
             query.date = date 
-            const upcomingClasses = await OnlineClass.find(query)
+            data = await OnlineClass.find(query)
         }else if(req.body.task == "pendingFees"){
+            
+            const pendingFees = await Fee.find({
+                instituteId:req.body.instituteId,
+                pendingAmount:{
+                    $ne:"0"
+                  }
+            })
+
+            if(pendingFees.length == 0){
+                const error = new Error("No Pending Fees")
+                error.statusCode = 202
+                throw error
+            }
+
+            for(var i = 0 ; i < pendingFees.length ; i++ ){
+                
+            }
 
         }else if(req.body.task == "follow-up") {
 
         }
-        const dashboardInfo = await Institute.aggregate([
-            {
-                $match:{
-                    _id:mongoose.Types.ObjectId(req.body.instituteId)
-                }
-            }
-        ])
+
     } catch (error) {
         
     }

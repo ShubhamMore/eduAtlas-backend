@@ -35,8 +35,7 @@ const forumSchema = new mongoose.Schema({
         },
         comment:{
             type:String
-        },
-        
+        }, 
         commentDate:{
             type:Date,
             default:Date.now()
