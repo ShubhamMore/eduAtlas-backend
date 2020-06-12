@@ -8,6 +8,7 @@ const announcementSchema = new Schema({
   },
   title: {
     type: String,
+    required: true,
   },
   selectAll: {
     type: Boolean,
@@ -25,17 +26,14 @@ const announcementSchema = new Schema({
     type: String,
   },
   attachment: {
-    image_name: {
+    file_name: {
       type: String,
-      required: true,
     },
     secure_url: {
       type: String,
-      required: true,
     },
     public_id: {
       type: String,
-      required: true,
     },
     created_at: {
       type: Date,

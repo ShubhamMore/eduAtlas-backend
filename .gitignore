@@ -3,5 +3,5 @@ images/*
 !images/.gitkeep
 scorefiles/*
 !scorefiles/.gitkeep
-announcement/*
-!announcement/.gitkeep
+announcements/*
+!announcements/.gitkeep

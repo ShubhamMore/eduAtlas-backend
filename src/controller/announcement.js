@@ -15,7 +15,7 @@ exports.makeAnnouncement = async (req, res) => {
         )}.${req.file.filename.substring(req.file.filename.lastIndexOf('.') + 1)}`,
       };
       attachment = {
-        image_name: fileURL.fileName,
+        file_name: fileURL.fileName,
         secure_url: process.env.SERVER + fileURL.filePath,
         public_id: fileURL.filePath,
         created_at: Date.now(),
