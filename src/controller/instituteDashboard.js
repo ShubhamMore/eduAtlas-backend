@@ -17,7 +17,7 @@ exports.getDashboardInfo = async (req,res)=>{
             const year = new Date().getFullYear() + "" ;
             const month = new Date().getMonth() + "";
             const day = new Date().getDate() + ""
-            const date = new RegExp('.*' + year + '-' + month + '.*' +day+ '.*');
+            const date = new RegExp('.*' + year + '-' + month + '-' +day+ '.*');
             query.date = date 
             data.upcomingClass = await OnlineClass.find(query)
 

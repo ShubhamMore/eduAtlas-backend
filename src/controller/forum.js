@@ -3,6 +3,7 @@ const Institute = require('../model/institute.model')
 
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
+const mongoose = require('mongoose');
 
 exports.addForum = async(req,res)=>{
     try {
@@ -37,18 +38,70 @@ exports.getForumsByInstitute = async(req,res)=>{
                 instituteId:req.body.instituteId,
                 courseId:req.body.courseId,
             }
-        }
-        const listForum = await Forum.find(query)     
-        res.status(200).send(listForum)      
+        }         
+             
+        const myForums = await Forum.find(query)
+        for(var i =0;i< myForums.length ;i++){
+            let obj = {}
+            if(myForums[i].courseId){
+                const courseName = await Institute.aggregate([{
+                    $match:{
+                        _id: mongoose.Types.ObjectId(myForums[i].instituteId)
+                    }
+                  },{
+                        $unwind:"$course"
+                    },{
+                        $match:{
+                            "course._id":mongoose.Types.ObjectId(myForums[i].courseId)
+                        }
+                    }
+                ])
+                myForums[i].courseId = courseName[0].course.name
+                
+            }
+        }    
+        res.status(200).send(myForums)      
     } catch (error) {
         res.status(400).send(error)       
     }
 }
 exports.getMyForum = async(req,res)=>{
     try {
-        const myForums = await Forum.find({
-            createdBy: req.body.createdBy
-        })
+
+        let query = {}
+        
+        if(!req.body.courseId){
+            query = {
+                createdBy:req.body.createdBy
+            }
+        } else {
+            query = {    
+                createdBy:req.body.createdBy,
+                courseId:req.body.courseId,
+            }
+        }
+
+        const myForums = await Forum.find(query)
+        let forum = [{}]
+        for(var i =0;i< myForums.length ;i++){
+            let obj = {}
+            if(myForums[i].courseId){
+                const courseName = await Institute.aggregate([{
+                    $match:{
+                        _id: mongoose.Types.ObjectId(myForums[i].instituteId)
+                    }
+                  },{
+                        $unwind:"$course"
+                    },{
+                        $match:{
+                            "course._id":mongoose.Types.ObjectId(myForums[i].courseId)
+                        }
+                    }
+                ])
+                myForums[i].courseId = courseName[0].course.name
+                
+            }
+        }
 
         res.status(200).send(myForums)
     } catch (error) {
@@ -58,10 +111,25 @@ exports.getMyForum = async(req,res)=>{
 
 exports.getSingleForum = async(req,res)=>{
     try {
+        
         const singleForum = await Forum.findOne({
             _id:req.body._id
         })
-
+        
+        if(singleForum.courseId){
+            const institute = await Institute.aggregate([
+                {
+                    $unwind:"$course"
+                },{
+                    $match:{
+                        _id:mongoose.Types.ObjectId(singleForum.instituteId),
+                        "course._id":mongoose.Types.ObjectId(singleForum.courseId)
+                    }
+                }
+            ])
+            singleForum.courseId = institute[0].course.name
+        }
+         
         res.status(200).send(singleForum)
     } catch (error) {
         errorHandler(error,res)
