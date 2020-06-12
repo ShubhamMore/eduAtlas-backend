@@ -33,7 +33,14 @@ exports.getDashboardInfo = async (req,res)=>{
             }
 
             for(var i = 0 ; i < pendingFees.length ; i++ ){
-                
+                const student = await Student.findOne({
+                    _id:pendingFees[i].studentId    
+                })
+                pendingFees[i].studentName = student.basicDetails.name
+                const course = await Institute.findOne({
+                    _id:pendingFees.instituteId
+                })
+
             }
 
         }else if(req.body.task == "follow-up") {

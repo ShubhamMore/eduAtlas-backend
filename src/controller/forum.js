@@ -38,7 +38,8 @@ exports.getForumsByInstitute = async(req,res)=>{
                 courseId:req.body.courseId,
             }
         }
-        const listForum = await Forum.find(query)           
+        const listForum = await Forum.find(query)     
+        res.status(200).send(listForum)      
     } catch (error) {
         res.status(400).send(error)       
     }
