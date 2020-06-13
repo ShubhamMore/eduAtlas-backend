@@ -66,7 +66,7 @@ exports.getDashboardInfo = async (req, res) => {
     //For Number of batches in Institute
     const batchCount = await Institute.aggregate([
       {
-        _id: mongoose.Types.ObjectId(req.body.instituteId),
+        $match: { _id: mongoose.Types.ObjectId(req.body.instituteId) },
       },
       {
         $unwind: '$batch',
@@ -91,7 +91,16 @@ exports.getDashboardInfo = async (req, res) => {
           instituteId: req.body.instituteId,
         },
       },
+      {
+        $project: {
+          studentCount: {
+            $size: '$institute',
+          },
+        },
+      },
     ]);
+
+    data.studentCount = studentCount;
 
     const leads = await Leads.find({
       status: {
