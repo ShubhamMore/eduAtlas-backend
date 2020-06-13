@@ -209,6 +209,7 @@ exports.deleteComment = async(req,res)=>{
                 
             }
         })
+        res.status(200).send(deleteQuery)
     } catch (error) {
         errorHandler(error,res)   
     }
