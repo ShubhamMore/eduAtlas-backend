@@ -115,7 +115,7 @@ exports.getSingleForum = async(req,res)=>{
         const singleForum = await Forum.findOne({
             _id:req.body._id
         })
-        
+        singleForum = JSON.parse(singleForum)
         if(singleForum.courseId){
             const institute = await Institute.aggregate([
                 {
@@ -170,7 +170,6 @@ exports.updateForum = async(req,res)=>{
             error.statusCode = 202
             throw error
         }
-
         res.status(200).send(updateForum)
 
     } catch (error) {
@@ -194,14 +193,14 @@ exports.deleteForum = async(req,res)=>{
 exports.deleteComment = async(req,res)=>{
     try {
         let query={}
-        if(req.body.userId!=req.user._id){
+        if(req.body.userId != req.user._id){
             const error = new Error("You cant Delete this comment")
             error.statusCode = 400
             throw error
         }
 
         query = [{
-                    id:req.body._id
+                    _id:req.body._id
                 },{
                     $pull:{
                         comments:{
