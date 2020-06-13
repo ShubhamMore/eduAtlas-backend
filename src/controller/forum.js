@@ -193,12 +193,13 @@ exports.deleteForum = async(req,res)=>{
 exports.deleteComment = async(req,res)=>{
     try {
         let query={}
-        if(!req.body.comment_id){
-           query = {
-                _id:req.body._id
-            } 
-        } else{
-            query = [{
+        if(req.body.userId!=req.user._id){
+            const error = new Error("You cant Delete this comment")
+            error.statusCode = 400
+            throw error
+        }
+
+        query = [{
                     id:req.body._id
                 },{
                     $pull:{
@@ -209,7 +210,7 @@ exports.deleteComment = async(req,res)=>{
                     }
                 }
             ]
-        }
+        
 
         const deleteQuery = await Forum.updateOne(query)
     } catch (error) {
