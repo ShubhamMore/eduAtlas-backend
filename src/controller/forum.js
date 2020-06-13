@@ -115,7 +115,7 @@ exports.getSingleForum = async(req,res)=>{
         const singleForum = await Forum.findOne({
             _id:req.body._id
         })
-        singleForum = JSON.parse(singleForum)
+        let newforum = JSON.parse(singleForum)
         if(singleForum.courseId){
             const institute = await Institute.aggregate([
                 {
@@ -128,10 +128,10 @@ exports.getSingleForum = async(req,res)=>{
                 }
             ])
 
-            singleForum.courseName = institute[0].course.name
+            newforum.courseName = institute[0].course.name
         }
          
-        res.status(200).send(singleForum)
+        res.status(200).send(newForum)
     } catch (error) {
         errorHandler(error,res)
     }
