@@ -63,6 +63,36 @@ exports.getDashboardInfo = async (req, res) => {
     }
     data.pendingFees = fee;
 
+    //For Number of batches in Institute
+    const batchCount = await Institute.aggregate([
+      {
+        _id: mongoose.Types.ObjectId(req.body.instituteId),
+      },
+      {
+        $unwind: '$batch',
+      },
+      {
+        $project: {
+          batchCount: {
+            $size: '$batch',
+          },
+        },
+      },
+    ]);
+    data.batchCount = batchCount;
+
+    //Number of Students in Institute
+    const studentCount = await Student.aggregate([
+      {
+        $unwind: '$institute',
+      },
+      {
+        $match: {
+          instituteId: req.body.instituteId,
+        },
+      },
+    ]);
+
     const leads = await Leads.find({
       status: {
         $in: ['Contacted', 'Pending'],
