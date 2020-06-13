@@ -115,7 +115,7 @@ exports.getSingleForum = async(req,res)=>{
         const singleForum = await Forum.findOne({
             _id:req.body._id
         })
-        let newforum = JSON.parse(singleForum)
+        let newforum = JSON.parse(JSON.stringify(singleForum))
         if(singleForum.courseId){
             const institute = await Institute.aggregate([
                 {
@@ -131,7 +131,7 @@ exports.getSingleForum = async(req,res)=>{
             newforum.courseName = institute[0].course.name
         }
          
-        res.status(200).send(newForum)
+        res.status(200).send(newforum)
     } catch (error) {
         errorHandler(error,res)
     }
@@ -199,20 +199,16 @@ exports.deleteComment = async(req,res)=>{
             throw error
         }
 
-        query = [{
-                    _id:req.body._id
-                },{
-                    $pull:{
-                        comments:{
-                            _id:req.body.commentId
-                        }
-                        
-                    }
+        const deleteQuery = await Forum.updateOne({
+            _id:req.body._id
+        },{
+            $pull:{
+                comments:{
+                    _id:req.body.commentId
                 }
-            ]
-        
-
-        const deleteQuery = await Forum.updateOne(query)
+                
+            }
+        })
     } catch (error) {
         errorHandler(error,res)   
     }
