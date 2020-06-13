@@ -81,7 +81,7 @@ exports.getDashboardInfo = async (req, res) => {
       },
       {
         $match: {
-          instituteId: req.body.instituteId,
+          'instituteDetails.instituteId': req.body.instituteId,
         },
       },
     ]);
