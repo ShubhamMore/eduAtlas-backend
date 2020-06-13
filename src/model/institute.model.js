@@ -12,7 +12,7 @@ const courseSchema = new Schema(
     courseCode: {
       type: String,
       required: true,
-      unique:true
+      // unique: true,
     },
     fees: {
       type: String,
@@ -52,7 +52,7 @@ const batchSchema = new Schema({
   batchCode: {
     type: String,
     required: true,
-    unique:true
+    // unique: true,
   },
   description: {
     type: String,
@@ -153,9 +153,9 @@ const paymentDetailsSchema = new Schema(
 // institute schema
 const instituteSchema = new Schema(
   {
-    parentUser:{
-      type:String,
-      required:true
+    parentUser: {
+      type: String,
+      required: true,
     },
     basicInfo: new Schema(
       {
@@ -184,7 +184,7 @@ const instituteSchema = new Schema(
         instituteContact: {
           type: Number,
           required: [true, 'Phone is required'],
-        },  
+        },
       },
       { _id: false }
     ),
@@ -258,17 +258,22 @@ const instituteSchema = new Schema(
 
     paymentDetails: {
       type: [paymentDetailsSchema],
-      required: true,
+      default: [],
     },
 
     currentPlan: {
       type: String,
-      required: true,
+      // required: true,
     },
 
     expiryDate: {
       type: Date,
-      required: true,
+      // required: true,
+    },
+
+    active: {
+      type: Boolean,
+      default: false,
     },
   },
   { toJSON: { getters: true }, toObject: { getters: true } }

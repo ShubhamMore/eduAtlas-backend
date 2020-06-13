@@ -6,6 +6,7 @@ const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
 const fs = require('fs');
 const path = require('path');
+const mongoose = require('mongoose');
 
 const deleteImage = (filePath) => {
   fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
@@ -21,14 +22,13 @@ const deleteImage = (filePath) => {
 
 exports.addInstitute = async (req, res, next) => {
   try {
-    
     req.body.basicInfo = JSON.parse(req.body.basicInfo);
     req.body.address = JSON.parse(req.body.address);
     req.body.category = JSON.parse(req.body.category);
     req.body.metaTag = JSON.parse(req.body.metaTag);
-    req.body.paymentDetails = JSON.parse(req.body.paymentDetails);
-    req.body.parentUser = req.user._id
-    
+    // req.body.paymentDetails = JSON.parse(req.body.paymentDetails);
+    req.body.parentUser = req.user._id;
+
     if (!req.file) {
       throw new Error('Institute Logo is Required');
     }
@@ -67,27 +67,63 @@ exports.addInstitute = async (req, res, next) => {
     institute.metaTag = req.body.metaTag;
 
     institute.userPhone = req.user.phone;
-    institute.parentUser = req.body.parentUser
-    institute.paymentDetails.push(Object.assign({}, req.body.paymentDetails));
-    console.log(institute.paymentDetails);
+    institute.parentUser = req.body.parentUser;
+    // institute.paymentDetails.push(Object.assign({}, req.body.paymentDetails));
+    // console.log(institute.paymentDetails);
 
-    institute.currentPlan = req.body.paymentDetails.planType;
-    console.log(institute.currentPlan);
+    // institute.currentPlan = req.body.paymentDetails.planType;
+    // console.log(institute.currentPlan);
+
+    // const date = new Date();
+    // const year = date.getFullYear() + 1;
+    // date.setFullYear(year);
+    // console.log(date);
+
+    // institute.expiryDate = date;
+    // console.log(institute.expiryDate);
+
+    await institute.save();
+    res.status(200).send({ instituteId: institute._id });
+  } catch (error) {
+    console.log(error);
+    response(res, error.statusCode || 500, error.message);
+  }
+};
+
+exports.activateInstitute = async (req, res, next) => {
+  try {
+    const id = req.body._id;
+    req.body = JSON.parse(JSON.stringify(req.body));
+    console.log(req.body);
+    if (!id) {
+      return response(res, 400, 'Institute Id not provided');
+    }
+
+    const currentPlan = req.body.paymentDetails.planType;
+    console.log(currentPlan);
 
     const date = new Date();
     const year = date.getFullYear() + 1;
     date.setFullYear(year);
-    console.log(date);
 
-    institute.expiryDate = date;
-    console.log(institute.expiryDate);
+    const expiryDate = date;
+    console.log(expiryDate);
 
-    await institute.save();
-
-    response(res, 201, 'Institute added successfully');
+    const inst = await Institute.updateOne(
+      {
+        _id: req.body._id,
+      },
+      {
+        active: true,
+        $push: { paymentDetails: req.body.paymentDetails },
+        currentPlan,
+        expiryDate,
+      }
+    );
+    res.status(200).send(inst);
   } catch (error) {
     console.log(error);
-    // response(res, error.statusCode || 500, error.message);
+    response(res, error.statusCode || 500, error.message);
   }
 };
 

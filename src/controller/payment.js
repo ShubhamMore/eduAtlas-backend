@@ -31,6 +31,7 @@ exports.orderGenerate = async (req, res) => {
 
     instance.orders.create(options, async (err, order) => {
       if (err) {
+        console.log(err);
         throw new Error(err);
       }
 
@@ -81,8 +82,9 @@ exports.verifyPayment = async (req, res) => {
       order.amount_paid = order.amount;
       order.amount_due = '0';
       await order.save();
+    } else {
+      throw new Error('Payment Verification Failed');
     }
-    throw new Error('Payment Verification Failed');
   } catch (e) {
     res.status(400).send(e + '');
   }

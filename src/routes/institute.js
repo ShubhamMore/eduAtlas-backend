@@ -2,7 +2,7 @@ const instituteRouter = require('express').Router();
 const instituteController = require('../controller/institute');
 const couseConroller = require('../controller/course');
 const scheduleController = require('../controller/schedule');
-const dashboardController = require('../controller/instituteDashboard')
+const dashboardController = require('../controller/instituteDashboard');
 const checkAuth = require('../middleware/checkAuth');
 const checkPayment = require('../middleware/checkPayment');
 const extractFile = require('../middleware/file');
@@ -16,6 +16,7 @@ instituteRouter.post(
   extractFile,
   instituteController.addInstitute
 );
+instituteRouter.post('/activateInstitute', checkAuth, instituteController.activateInstitute);
 instituteRouter.get('/all', checkAuth, checkPayment, instituteController.getAllInstitutes);
 instituteRouter.delete('/:id', checkAuth, instituteController.deleteInstitute);
 instituteRouter.get('/oneInstitute/:id', checkAuth, instituteController.getOneInstitute);
@@ -56,7 +57,6 @@ instituteRouter.delete('/course/reciept/:instituteId', checkAuth, couseConroller
 //@make_anounce
 instituteRouter.post('/announcement', checkAuth, instituteController.makeAnouncement);
 
-
 //@Attendence_Routes
 instituteRouter.post('/attendence/:instituteId', checkAuth, instituteController.addAttendence);
 instituteRouter.patch('/attendence', checkAuth, instituteController.updateAttendence);
@@ -65,7 +65,6 @@ instituteRouter.get('/attendence', checkAuth, instituteController.getAttendece);
 //@Role_assigne
 instituteRouter.post('/role', checkAuth, roleController.assignRole);
 
-
 //@Dashboard
-instituteRouter.post('/getDashboardInfo',checkAuth,dashboardController.getDashboardInfo)
+instituteRouter.post('/getDashboardInfo', checkAuth, dashboardController.getDashboardInfo);
 module.exports = instituteRouter;
