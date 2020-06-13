@@ -24,8 +24,8 @@ const scheduleSchema = new Schema({
     required: true,
   },
   recurrence: {
-    type: String,
-    default: 'false',
+    type: Boolean,
+    default: false,
   },
   days: [
     {

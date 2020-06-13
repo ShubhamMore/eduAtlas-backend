@@ -57,10 +57,6 @@ exports.getScheduleByInstitute = async (req, res) => {
   try {
     details = {};
 
-    if (!req.body.instituteId) {
-      throw new Error('Invalid Institute Id');
-    }
-
     if (!req.body.batchId && !req.body.courseId) {
       details = {
         instituteId: req.body.instituteId,
@@ -70,12 +66,15 @@ exports.getScheduleByInstitute = async (req, res) => {
         instituteId: req.body.instituteId,
         courseId: req.body.courseId,
       };
-    } else {
+    } else if (req.body.batchId) {
       details = {
         instituteId: req.body.instituteId,
         courseId: req.body.courseId,
-        batchId: req.body.batchId,
       };
+    } else {
+      const error = new Error('No Institute available');
+      error.statusCode = 400;
+      throw error;
     }
 
     const instituteSchedule = await Schedule.find(details);
@@ -117,6 +116,9 @@ exports.getScheduleByBatch = async (req, res) => {
         },
         {
           batchId: req.body.batchId,
+        },
+        {
+          recurrence: true,
         },
       ],
     });
