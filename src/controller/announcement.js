@@ -1,4 +1,4 @@
-const Annoucement = require('../model/announcement.model');
+const Announcement = require('../model/announcement.model');
 const errorHandler = require('../service/errorHandler');
 
 exports.makeAnnouncement = async (req, res) => {
