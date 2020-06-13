@@ -71,15 +71,8 @@ exports.getDashboardInfo = async (req, res) => {
       {
         $unwind: '$batch',
       },
-      {
-        $project: {
-          batchCount: {
-            $size: '$batch',
-          },
-        },
-      },
     ]);
-    data.batchCount = batchCount;
+    data.batchCount = batchCount.length;
 
     //Number of Students in Institute
     const studentCount = await Student.aggregate([
@@ -91,16 +84,9 @@ exports.getDashboardInfo = async (req, res) => {
           instituteId: req.body.instituteId,
         },
       },
-      {
-        $project: {
-          studentCount: {
-            $size: '$institute',
-          },
-        },
-      },
     ]);
 
-    data.studentCount = studentCount;
+    data.studentCount = studentCount.length;
 
     const leads = await Leads.find({
       status: {
