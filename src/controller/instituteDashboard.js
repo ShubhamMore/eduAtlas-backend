@@ -77,7 +77,7 @@ exports.getDashboardInfo = async (req, res) => {
     //Number of Students in Institute
     const studentCount = await Student.aggregate([
       {
-        $unwind: '$institute',
+        $unwind: '$instituteDetails',
       },
       {
         $match: {
