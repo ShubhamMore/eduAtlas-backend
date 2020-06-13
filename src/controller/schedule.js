@@ -5,6 +5,7 @@ const schema = require('../service/joi');
 const response = require('../service/response');
 const Institute = require('../model/institute.model');
 const Employee = require('../model/employee.model');
+const { query } = require('express');
 
 exports.addSchedule = async (req, res, next) => {
   try {
@@ -51,6 +52,51 @@ exports.updateSchedule = async (req, res, next) => {
     errorHandler(error, res);
   }
 };
+
+exports.getScheduleByInstitute = async(req,res)=>{
+  try {
+    details = {}
+    
+    if(!req.body.batchId && !req.body.courseId){
+      details = {
+        instituteId:req.body.instituteId,
+      }
+    } else if(!req.body.batchId && req.body.courseId){
+      details = {
+        instituteId:req.body.instituteId,
+        courseId:req.body.courseId
+      }
+    } else{
+      const error = new Error("No Institute available")
+      error.statusCode = 400
+      throw error
+    }
+    
+    const instituteSchedule = await Schedule.find(details)
+    
+    for(var i =0;i<instituteSchedule.length;i++){
+      const institute = await Institute.aggregate([
+        {
+          $unwind:"$course"
+        },{
+          $unwind:"$batch"
+        },{
+          $match:{
+            _id:mongoose.Types.ObjectId(req.body.instituteId),
+            "course._id":mongoose.Types.ObjectId(instituteSchedule[i].courseId),
+            "batch._id":mongoose.Types.ObjectId(instituteSchedule[i].batchId)
+          },
+        }])
+
+        instituteSchedule[i].courseId = institute[0].course.name
+        instituteSchedule[i].batchId = institute[0].batch.batchCode
+    }
+    res.status(200).send(instituteSchedule)
+
+  } catch (error) {
+    errorHandler(error,res)
+  }
+}
 exports.getScheduleByBatch = async (req, res) => {
   try {
     const batchSchedule = await Schedule.find({

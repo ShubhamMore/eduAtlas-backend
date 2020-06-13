@@ -264,7 +264,7 @@ exports.getScoresOfStutdentByInstitute = async (req, res) => {
       }
     ])
     for(var i = 0;i<studentScore.length;i++){
-        const student = await Student.findOne({_id:req.body.studentId})
+      const student = await Student.findOne({_id:req.body.studentId})
         studentScore[i].students.studentName = student.basicDetails.name
         studentScore[i].students.percentage = (studentScore[i].students.marks/studentScore[i].totalMarks) * 100
     }
