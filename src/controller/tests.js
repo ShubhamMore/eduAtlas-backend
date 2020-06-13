@@ -38,18 +38,18 @@ exports.addTest = async (req, res) => {
 exports.getTestByInstitute = async (req, res) => {
   try {
     console.log(req.body);
-    
-    let query = {}
-    
-    if(!req.body.batchId){
+
+    let query = {};
+
+    if (!req.body.batchId) {
       query = {
         instituteId: req.body.instituteId,
-      }
+      };
     } else {
-      query={
+      query = {
         instituteId: req.body.instituteId,
         batchId: req.body.batchId,
-      }
+      };
     }
     const batchTest = await Test.find(query);
 
@@ -66,7 +66,7 @@ exports.getTestsForReports = async (req, res) => {
       batchId: req.body.batchId,
       students: {
         $exists: true,
-        $ne:[]
+        $ne: [],
       },
     });
 
@@ -110,8 +110,7 @@ exports.addTestScore = async (req, res) => {
 };
 exports.addScoreUsingExcel = async (req, res) => {
   console.log('in here', path.join(__dirname + '../../../' + req.file.path));
-    try {
-
+  try {
     const file = path.join(__dirname + '../../../' + req.file.path);
     const excelData = excelToJson({
       sourceFile: file,
@@ -255,19 +254,23 @@ exports.getScoresOfStutdentByInstitute = async (req, res) => {
   try {
     const studentScore = await Test.aggregate([
       {
-        $unwind:"$students"
-      },{
-        $match:{
-          instituteId:req.body.instituteId,
-          "students.studentId": req.body.studentId
-        }
-      }
-    ])
-    for(var i = 0;i<studentScore.length;i++){
-        studentScore[i].students.percentage = (studentScore[i].students.marks/studentScore[i].totalMarks) * 100
+        $unwind: '$students',
+      },
+      {
+        $match: {
+          instituteId: req.body.instituteId,
+          'students.studentId': req.body.studentId,
+        },
+      },
+    ]);
+    for (var i = 0; i < studentScore.length; i++) {
+      const student = await Student.findOne({ _id: req.body.studentId });
+      studentScore[i].students.studentName = student.basicDetails.name;
+      studentScore[i].students.percentage =
+        (studentScore[i].students.marks / studentScore[i].totalMarks) * 100;
     }
-      
-    res.status(200).send(studentScore)
+
+    res.status(200).send(studentScore);
   } catch (error) {
     res.status(400).send(error);
   }
