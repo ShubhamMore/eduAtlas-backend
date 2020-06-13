@@ -127,7 +127,8 @@ exports.getSingleForum = async(req,res)=>{
                     }
                 }
             ])
-            singleForum.courseId = institute[0].course.name
+
+            singleForum.courseName = institute[0].course.name
         }
          
         res.status(200).send(singleForum)
