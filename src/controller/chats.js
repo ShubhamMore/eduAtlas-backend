@@ -247,8 +247,8 @@ exports.getChats = async (req, res) => {
     console.log(messages);
 
     messages.sort((msg1, msg2) => {
-      const msg1Date = new Date(msg1.date);
-      const msg2Date = new Date(msg2.date);
+      const msg1Date = msg1._id;
+      const msg2Date = msg2._id;
       if (msg1Date > msg2Date) {
         return 1;
       } else {
