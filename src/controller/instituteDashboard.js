@@ -6,6 +6,14 @@ const mongoose = require('mongoose');
 const OnlineClass = require('../model/onlineClass.model');
 const Leads = require('../model/leads.model');
 const errorHandler = require('../service/errorHandler');
+
+const appendZero = (n) => {
+  if (n < 10) {
+    return '0' + n;
+  }
+  return '' + n;
+};
+
 exports.getDashboardInfo = async (req, res) => {
   try {
     let data = {};
@@ -14,14 +22,17 @@ exports.getDashboardInfo = async (req, res) => {
     query.instituteId = req.body.instituteId;
 
     const currentTime = new Date().getTime() / 1000;
-    const year = new Date().getFullYear() + '';
-    const month = new Date().getMonth() + '';
-    const day = new Date().getDate() + '';
-    const date = new RegExp('.*' + year + '-' + month + '-' + day + '.*');
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth() + 1;
+    const day = new Date().getDate();
+    const date = new RegExp('.*' + year + '-' + appendZero(month) + '-' + appendZero(day) + '.*');
+    console.log(date);
+    query.startTime = date;
 
-    query.date = date;
+    console.log(query);
 
     data.upcomingClass = await OnlineClass.find(query);
+    console.log(data.upcomingClass);
 
     const pendingFees = await Fee.find({
       instituteId: req.body.instituteId,

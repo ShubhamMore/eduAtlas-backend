@@ -245,12 +245,6 @@ exports.getEmployeesByInstituteId = async (req, res) => {
 
     console.log(getEmployees);
 
-    if (getEmployees.length == 0) {
-      const error = new Error('Employees not Found');
-      error.statusCode = 400;
-      throw error;
-    }
-
     res.status(200).send(getEmployees);
   } catch (error) {
     errorHandler(error, res);
