@@ -10,7 +10,7 @@ const Chat = require('../model/chats.model');
 exports.getMembers = async (req, res) => {
   try {
     let data = {};
-    //console.log('user ', req.user);
+    console.log('user ', req.user);
     if (req.user.role == 'institute') {
       //req.user.role == 'institute'
       data = await Institute.aggregate([
@@ -93,7 +93,7 @@ exports.getMembers = async (req, res) => {
           },
         },
       ]);
-      console.log(data);
+      //console.log(data);
       // data = data[0];
       let studentsDetails = [];
       let employeeDetails = [];
@@ -132,8 +132,8 @@ exports.getMembers = async (req, res) => {
             employeeDetails.push(employees[j]);
           }
         }
-        data.studentsDetails = studentsDetails;
-        data.employeeDetails = employeeDetails;
+        data[0].studentsDetails = studentsDetails;
+        data[0].employeeDetails = employeeDetails;
       }
 
       // data = await Employee.aggregate([
@@ -193,7 +193,7 @@ exports.getMembers = async (req, res) => {
       //   },
       // ]);
     }
-    console.log(data);
+    console.log('data ', data);
 
     res.status(200).send(data);
   } catch (error) {
