@@ -10,8 +10,8 @@ const Chat = require('../model/chats.model');
 exports.getMembers = async (req, res) => {
   try {
     let data = {};
-
-    if (req.user.role == 'institute') {
+    //console.log('user ', req.user);
+    if (false) {
       //req.user.role == 'institute'
       data = await Institute.aggregate([
         {
@@ -53,9 +53,9 @@ exports.getMembers = async (req, res) => {
           },
         },
       ]);
-    } else if (req.user.role == 'employee') {
-      //
-
+    } else if (true) {
+      //req.user.role == 'employee'
+      //console.log(typeof req.user.eduAtlasId, ' ', req.user.eduAtlasId);
       data = await Employee.aggregate([
         {
           $unwind: '$instituteDetails',
@@ -66,6 +66,7 @@ exports.getMembers = async (req, res) => {
               $toObjectId: '$instituteDetails.instituteId',
             },
             basicDetails: 1,
+            eduAtlasId: 1,
           },
         },
         {
@@ -77,20 +78,26 @@ exports.getMembers = async (req, res) => {
           },
         },
         {
+          $match: {
+            eduAtlasId: 'EDU2020EMP100009', //req.user._id,
+          },
+        },
+        // {
+        //   $unwind: '$instDetails',
+        // },
+        {
           $project: {
             'instDetails._id': 1,
             'instDetails.basicInfo': 1,
-          },
-        },
-        {
-          $match: {
-            _id: mongoose.Types.ObjectId('5ede041ac8583535785748a3'),
+            'instDetails.eduAtlasId': 1,
           },
         },
       ]);
+      console.log(data);
       data = data[0];
       let studentDetails = [];
       let employeeDetails = [];
+
       for (var i = 0; i < data.instDetails.length; i++) {
         const students = await Student.find(
           {
@@ -127,9 +134,9 @@ exports.getMembers = async (req, res) => {
             employeeDetails.push(employees[j]);
           }
         }
+        data.studentDetails = studentDetails;
+        data.employeeDetails = employeeDetails;
       }
-      data.studentDetails = studentDetails;
-      data.employeeDetails = employeeDetails;
 
       // data = await Employee.aggregate([
       //   {
