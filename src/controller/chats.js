@@ -3,13 +3,13 @@ const Student = require('../model/student.model');
 const Employee = require('../model/employee.model');
 const errorHandler = require('../service/errorHandler');
 const User = require('../model/user.model');
-const { string } = require('@hapi/joi');
+const mongoose = require('mongoose');
 
 exports.getMembers = async (req, res) => {
   try {
     let data = {};
 
-    if ((req.user.role = 'institute')) {
+    if (req.user.role == 'institute') {
       data = await Institute.aggregate([
         {
           $project: {
@@ -37,7 +37,7 @@ exports.getMembers = async (req, res) => {
         },
         {
           $match: {
-            parentUser: req.user._id,
+            parentUser: req.user._id.toString(),
           },
         },
         {
@@ -51,6 +51,16 @@ exports.getMembers = async (req, res) => {
         },
       ]);
     }
+    // } else if ((req.user.role = 'employee')) {
+    //   data = await Employee.aggregate([{
+    //     $lookup:{
+    //       from:'institutes',
+    //       localField:"instituteDetails.instituteId",
+    //       forgeinField:'_id'
+    //       as
+    //     }
+    //   }]);
+    // }
     res.status(200).send(data);
   } catch (error) {
     errorHandler(error, res);
