@@ -40,11 +40,11 @@ exports.getChats = async (req, res) => {
 
     messages.forEach((message) => {
       const msg = {
-        text: msg.message,
-        date: new Date(msg.date),
-        reply: msg.senderId !== userId,
+        text: message.message,
+        date: new Date(message.date),
+        reply: message.senderId !== userId,
         user: {
-          name: msg.senderName,
+          name: message.senderName,
         },
       };
 

@@ -36,7 +36,11 @@ const chatting = async (server) => {
           senderName: socket.user.name,
           message: message.message,
         };
-        await Chat.updateOne({ eduatlasId: message.receiverId }, { $push: { chats: chatMessage } });
+        await Chat.updateOne(
+          { eduatlasId: message.receiverId },
+          { $push: { chats: chatMessage } },
+          { upsert: true }
+        );
         ChatSockets.getSocket(message.receiverId).emit('message', message);
         socket.emit('message', message);
       });
