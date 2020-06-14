@@ -62,7 +62,7 @@ exports.getChats = async (req, res) => {
       const msg = {
         text: message.message,
         date: new Date(message.date),
-        reply: message.senderId !== userId,
+        reply: message.senderId === userId,
         user: {
           name: message.senderName,
         },

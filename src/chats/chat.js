@@ -41,11 +41,20 @@ const chatting = async (server) => {
           { $push: { chats: chatMessage } },
           { upsert: true }
         );
+        const msg = {
+          text: message.message,
+          date: new Date(),
+          reply: false,
+          user: {
+            name: socket.user.name,
+          },
+        };
         const receiver = ChatSockets.getSocket(message.receiverId);
         if (receiver) {
-          receiver.emit('message', message);
+          receiver.emit('message', msg);
         }
-        socket.emit('message', message);
+        msg.reply = true;
+        socket.emit('message', msg);
       });
 
       socket.on('disconnect', () => {
