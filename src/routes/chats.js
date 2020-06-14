@@ -1,6 +1,6 @@
 const chatRouter = require('express').Router();
 const chatController = require('../controller/chats');
 const checkAuth = require('../middleware/checkAuth');
-chatRouter.post('/getMembers', chatController.getMembers);
+chatRouter.post('/getMembers', checkAuth, chatController.getMembers);
 
 module.exports = chatRouter;
