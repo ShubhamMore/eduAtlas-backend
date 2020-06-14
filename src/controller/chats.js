@@ -79,7 +79,7 @@ exports.getMembers = async (req, res) => {
         },
         {
           $match: {
-            eduAtlasId: 'EDU2020EMP100009', //req.user._id,
+            eduAtlasId: req.user.eduAtlasId, //req.user._id,
           },
         },
         // {
