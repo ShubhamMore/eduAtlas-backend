@@ -5,6 +5,7 @@ const errorHandler = require('../service/errorHandler');
 const User = require('../model/user.model');
 const mongoose = require('mongoose');
 const EduAtlasId = require('../model/eduatlasId.model');
+const Chat = require('../model/chats.model');
 
 exports.getMembers = async (req, res) => {
   try {
