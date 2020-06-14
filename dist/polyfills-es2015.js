@@ -10001,7 +10001,7 @@ if (typeof SVGElement.prototype.contains === 'undefined') {
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!***************************************************************************************************************************!*\
   !*** multi ./src/polyfills.ts ./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js ***!
   \***************************************************************************************************************************/
@@ -10014,5 +10014,5 @@ module.exports = __webpack_require__(/*! E:\Projects\Freelance Projects\EduAtlas
 
 /***/ })
 
-},[[2,"runtime"]]]);
+},[[3,"runtime"]]]);
 //# sourceMappingURL=polyfills-es2015.js.map

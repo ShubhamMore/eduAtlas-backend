@@ -21,7 +21,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<p style=\"color: black; font-weight: bold;\">{{ !edit ? 'Create New Branch' : 'Edit Branch' }}</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <nb-stepper #stepper [linear]=\"true\">\r\n      <nb-step [stepControl]=\"firstForm\" label=\"Basic Details\">\r\n        <form [formGroup]=\"firstForm\" (ngSubmit)=\"firstFormSubmit()\" #myForm1=\"ngForm\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Add Institute/Branch*</label>\r\n                <input\r\n                  type=\"text\"\r\n                  nbInput\r\n                  fullWidth\r\n                  formControlName=\"name\"\r\n                  id=\"name\"\r\n                  [status]=\"first.name.errors && myForm1.submitted ? 'danger' : 'basic'\"\r\n                  placeholder=\"Add Institute/Branch *\"\r\n                />\r\n\r\n                <small *ngIf=\"first.name.errors && myForm1.submitted\"\r\n                  >*Institute name is required</small\r\n                >\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"logo\">*Add Logo</label>\r\n\r\n                <input\r\n                  type=\"file\"\r\n                  nbInput\r\n                  status=\"basic\"\r\n                  fullWidth\r\n                  id=\"logo\"\r\n                  (change)=\"onImagePicked($event)\"\r\n                />\r\n              </div>\r\n\r\n              <div div *ngIf=\"imagePreview\">\r\n                <img [src]=\"imagePreview\" alt=\"logo\" width=\"100px\" height=\"100px\" />\r\n              </div>\r\n              <div *ngIf=\"imageRequired\">\r\n                <small>*Logo Required</small>\r\n              </div>\r\n              <div *ngIf=\"invalidImage\">\r\n                <small>Logo Format should be *.png, *.jpg, *.jpeg</small>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <button class=\"float-right mt-3\" type=\"submit\" nbButton status=\"warning\">Next</button>\r\n        </form>\r\n      </nb-step>\r\n\r\n      <nb-step [stepControl]=\"secondForm\" label=\"Contact Details\">\r\n        <form [formGroup]=\"secondForm\" (ngSubmit)=\"secondFormSubmit()\" #myForm2=\"ngForm\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"contact\">*Institute Contact Number</label>\r\n                <input\r\n                  type=\"text\"\r\n                  nbInput\r\n                  fullWidth\r\n                  id=\"contact\"\r\n                  maxlength=\"10\"\r\n                  pattern=\"\\d*\"\r\n                  minlength=\"10\"\r\n                  formControlName=\"instituteContact\"\r\n                  [status]=\"\r\n                    second.instituteContact.errors && myForm2.submitted ? 'danger' : 'basic'\r\n                  \"\r\n                  placeholder=\"Institute Contact Number\"\r\n                />\r\n                <small *ngIf=\"second.instituteContact.errors && myForm2.submitted\"\r\n                  >*Enter Correct Phone no.</small\r\n                >\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-12\">\r\n              <div formGroupName=\"address\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-4\">\r\n                    <label>State</label>\r\n                    <nb-select\r\n                      formControlName=\"state\"\r\n                      status=\"basic\"\r\n                      (selectedChange)=\"onChangeState($event)\"\r\n                      [selected]=\"1\"\r\n                      placeholder=\"State\"\r\n                    >\r\n                      <nb-option [value]=\"\">--Select State--</nb-option>\r\n                      <nb-option *ngFor=\"let state of stateInfo; let j = index\" value=\"{{ j }}\">{{\r\n                        state.StateName\r\n                      }}</nb-option>\r\n                    </nb-select>\r\n                  </div>\r\n                  <div class=\"col-sm-4\">\r\n                    <label>City</label>\r\n                    <nb-select formControlName=\"city\" fullWidth status=\"basic\" placeholder=\"City\">\r\n                      <nb-option [value]=\"undefined\">--Select City--</nb-option>\r\n                      <nb-option *ngFor=\"let city of cityInfo; let i = index\" value=\"{{ city }}\">{{\r\n                        city\r\n                      }}</nb-option>\r\n                    </nb-select>\r\n                  </div>\r\n                  <div class=\"col-sm-4\">\r\n                    <label>Pin Code</label>\r\n                    <input\r\n                      type=\"text\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"pin\"\r\n                      formControlName=\"pincode\"\r\n                      placeholder=\"Pin Code\"\r\n                    />\r\n                  </div>\r\n                </div>\r\n                <br />\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                    <label for=\"address\">Address Line</label>\r\n\r\n                    <input\r\n                      type=\"text\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"address\"\r\n                      formControlName=\"addressLine\"\r\n                      placeholder=\"Address line\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"col-sm-6\">\r\n                    <label for=\"locality\">Locality</label>\r\n                    <input\r\n                      type=\"tex\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"locality\"\r\n                      formControlName=\"locality\"\r\n                      placeholder=\"Locality\"\r\n                    />\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button class=\"float-right mt-3\" type=\"submit\" nbButton status=\"warning\">Next</button>\r\n        </form>\r\n      </nb-step>\r\n\r\n      <nb-step [stepControl]=\"thirdForm\" label=\"Other Details\">\r\n        <form [formGroup]=\"thirdForm\" (ngSubmit)=\"thirdFormSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <label>Institute Category (Multi Select)</label>\r\n              <br />\r\n              <nb-select\r\n                formControlName=\"category\"\r\n                class=\"mt-2\"\r\n                multiple\r\n                status=\"basic\"\r\n                fullWidth\r\n                placeholder=\"Select Institute Category\"\r\n              >\r\n                <nb-option *ngFor=\"let item of category\" [value]=\"item.name\">{{\r\n                  item.name\r\n                }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n            <div class=\"col-sm-6\" formArrayName=\"instituteMetaTag\">\r\n              <label>Institute Meta Tag </label>\r\n\r\n              <div *ngFor=\"let tag of instituteMetaTag.controls; let i = index\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"mt-2\"\r\n                      [formControlName]=\"i\"\r\n                      nbInput\r\n                      status=\"basic\"\r\n                      fullWidth\r\n                    />\r\n                  </div>\r\n                  <div class=\"col-sm-4\" [hidden]=\"i > 0\">\r\n                    <button\r\n                      type=\"button\"\r\n                      class=\"btn btn-light mr-3\"\r\n                      (click)=\"addMetaTag()\"\r\n                      status=\"basic\"\r\n                    >\r\n                      <span>+</span>\r\n                    </button>\r\n                    <button\r\n                      type=\"button\"\r\n                      class=\"btn btn-light mr-3\"\r\n                      (click)=\"removeMetaTag()\"\r\n                      [hidden]=\"instituteMetaTag.length == 1\"\r\n                      status=\"basic\"\r\n                    >\r\n                      <span>-</span>\r\n                    </button>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button class=\"float-right mt-3\" type=\"submit\" nbButton>Submit</button>\r\n        </form>\r\n      </nb-step>\r\n    </nb-stepper>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<nb-card>\r\n  <nb-card-header>\r\n    <p style=\"color: black; font-weight: bold;\">\r\n      {{ !edit ? 'Create New Branch' : 'Edit Branch' }}\r\n    </p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <nb-stepper #stepper [linear]=\"true\">\r\n      <nb-step [stepControl]=\"firstForm\" label=\"Basic Details\">\r\n        <form [formGroup]=\"firstForm\" (ngSubmit)=\"firstFormSubmit()\" #myForm1=\"ngForm\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Add Institute/Branch*</label>\r\n                <input\r\n                  type=\"text\"\r\n                  nbInput\r\n                  fieldSize=\"large\"\r\n                  fullWidth\r\n                  formControlName=\"name\"\r\n                  id=\"name\"\r\n                  [status]=\"first.name.errors && myForm1.submitted ? 'danger' : 'basic'\"\r\n                  placeholder=\"Add Institute/Branch *\"\r\n                />\r\n\r\n                <small *ngIf=\"first.name.errors && myForm1.submitted\"\r\n                  >*Institute name is required</small\r\n                >\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"logo\">*Add Logo</label>\r\n\r\n                <input\r\n                  type=\"file\"\r\n                  nbInput\r\n                  status=\"basic\"\r\n                  fullWidth\r\n                  id=\"logo\"\r\n                  (change)=\"onImagePicked($event)\"\r\n                />\r\n              </div>\r\n\r\n              <div div *ngIf=\"imagePreview\">\r\n                <img [src]=\"imagePreview\" alt=\"logo\" width=\"100px\" height=\"100px\" />\r\n              </div>\r\n              <div *ngIf=\"imageRequired\">\r\n                <small>*Logo Required</small>\r\n              </div>\r\n              <div *ngIf=\"invalidImage\">\r\n                <small>Logo Format should be *.png, *.jpg, *.jpeg</small>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <button class=\"float-right mt-3 btn btn-yellow\" type=\"submit\">\r\n            Next\r\n          </button>\r\n        </form>\r\n      </nb-step>\r\n\r\n      <nb-step [stepControl]=\"secondForm\" label=\"Contact Details\">\r\n        <form [formGroup]=\"secondForm\" (ngSubmit)=\"secondFormSubmit()\" #myForm2=\"ngForm\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"contact\">*Institute Contact Number</label>\r\n                <input\r\n                  type=\"text\"\r\n                  nbInput\r\n                  fullWidth\r\n                  id=\"contact\"\r\n                  maxlength=\"10\"\r\n                  pattern=\"\\d*\"\r\n                  minlength=\"10\"\r\n                  formControlName=\"instituteContact\"\r\n                  [status]=\"\r\n                    second.instituteContact.errors && myForm2.submitted ? 'danger' : 'basic'\r\n                  \"\r\n                  placeholder=\"Institute Contact Number\"\r\n                />\r\n                <small *ngIf=\"second.instituteContact.errors && myForm2.submitted\"\r\n                  >*Enter Correct Phone no.</small\r\n                >\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-12\">\r\n              <div formGroupName=\"address\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-4\">\r\n                    <label>State</label>\r\n                    <nb-select\r\n                      formControlName=\"state\"\r\n                      status=\"basic\"\r\n                      fullWidth=\"true\"\r\n                      (selectedChange)=\"onChangeState($event)\"\r\n                      [selected]=\"1\"\r\n                      placeholder=\"State\"\r\n                    >\r\n                      <nb-option [value]=\"\">--Select State--</nb-option>\r\n                      <nb-option *ngFor=\"let state of stateInfo; let j = index\" value=\"{{ j }}\">{{\r\n                        state.StateName\r\n                      }}</nb-option>\r\n                    </nb-select>\r\n                  </div>\r\n                  <div class=\"col-sm-4\">\r\n                    <label>City</label>\r\n                    <nb-select formControlName=\"city\" fullWidth status=\"basic\" placeholder=\"City\">\r\n                      <nb-option [value]=\"undefined\">--Select City--</nb-option>\r\n                      <nb-option *ngFor=\"let city of cityInfo; let i = index\" value=\"{{ city }}\">{{\r\n                        city\r\n                      }}</nb-option>\r\n                    </nb-select>\r\n                  </div>\r\n                  <div class=\"col-sm-4\">\r\n                    <label>Pin Code</label>\r\n                    <input\r\n                      type=\"text\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"pin\"\r\n                      formControlName=\"pincode\"\r\n                      placeholder=\"Pin Code\"\r\n                    />\r\n                  </div>\r\n                </div>\r\n                <br />\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                    <label for=\"address\">Address Line</label>\r\n\r\n                    <input\r\n                      type=\"text\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"address\"\r\n                      formControlName=\"addressLine\"\r\n                      placeholder=\"Address line\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"col-sm-6\">\r\n                    <label for=\"locality\">Locality</label>\r\n                    <input\r\n                      type=\"tex\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"locality\"\r\n                      formControlName=\"locality\"\r\n                      placeholder=\"Locality\"\r\n                    />\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button class=\"float-right mt-3 btn btn-yellow\" type=\"submit\">\r\n            Next\r\n          </button>\r\n        </form>\r\n      </nb-step>\r\n\r\n      <nb-step [stepControl]=\"thirdForm\" label=\"Other Details\">\r\n        <form [formGroup]=\"thirdForm\" (ngSubmit)=\"thirdFormSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <label>Institute Category (Multi Select)</label>\r\n              <br />\r\n              <nb-select\r\n                formControlName=\"category\"\r\n                class=\"mt-2\"\r\n                multiple\r\n                status=\"basic\"\r\n                fullWidth\r\n                placeholder=\"Select Institute Category\"\r\n              >\r\n                <nb-option *ngFor=\"let item of category\" [value]=\"item.name\">{{\r\n                  item.name\r\n                }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n            <div class=\"col-sm-6\" formArrayName=\"instituteMetaTag\">\r\n              <label>Institute Meta Tag </label>\r\n\r\n              <div *ngFor=\"let tag of instituteMetaTag.controls; let i = index\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"mt-2\"\r\n                      [formControlName]=\"i\"\r\n                      nbInput\r\n                      status=\"basic\"\r\n                      fullWidth\r\n                    />\r\n                  </div>\r\n                  <div class=\"col-sm-4\" [hidden]=\"i > 0\">\r\n                    <button\r\n                      type=\"button\"\r\n                      class=\"btn btn-light mr-3\"\r\n                      (click)=\"addMetaTag()\"\r\n                      status=\"basic\"\r\n                    >\r\n                      <span>+</span>\r\n                    </button>\r\n                    <button\r\n                      type=\"button\"\r\n                      class=\"btn btn-light mr-3\"\r\n                      (click)=\"removeMetaTag()\"\r\n                      [hidden]=\"instituteMetaTag.length == 1\"\r\n                      status=\"basic\"\r\n                    >\r\n                      <span>-</span>\r\n                    </button>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button class=\"float-right mt-3 btn btn-yellow\" type=\"submit\">\r\n            Submit\r\n          </button>\r\n        </form>\r\n      </nb-step>\r\n    </nb-stepper>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -41,7 +41,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card *ngIf=\"institutes.length > 0; else no_institute\">\r\n  <nb-card-body>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-2 text-center\"><b>Institute/Branch Name</b></div>\r\n      <div class=\"col-sm-3 text-center\"><b>Institute Address</b></div>\r\n      <div class=\"col-sm-2 text-center\"><b>Institute Contact</b></div>\r\n    </div>\r\n\r\n    <div class=\"row mt-3\" *ngFor=\"let i of institutes\">\r\n      <div class=\"col-sm-2 text-center\">\r\n        {{ i.basicInfo.name }}\r\n      </div>\r\n      <div class=\"col-sm-3 text-center\">\r\n        {{ i.address.addressLine }} {{ i.address.locality }} {{ i.address.state }}\r\n        {{ i.address.city }}\r\n      </div>\r\n      <div class=\"col-sm-2 text-center\">\r\n        {{ i.basicInfo.instituteContact }}\r\n      </div>\r\n\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-4\">\r\n        <button class=\"mr-3\" nbButton status=\"primary\" (click)=\"getInstitute(i._id)\">View</button>\r\n        <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"updateInstitute(i._id)\">\r\n          Edit\r\n        </button>\r\n        <!-- <button class=\"mr-3\" nbButton status=\"danger\" (click)=\"delete(i._id)\">Del</button> -->\r\n      </div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n<ng-template #no_institute>\r\n  <nb-card>\r\n    <nb-card-body>\r\n      <div class=\"text-center\">\r\n        <img src=\"../../../assets/img/institute.png\" width=\"100px\" height=\"100px\" />\r\n        <h3 class=\"mt-4\">NO INSTITUTE ADDED</h3>\r\n        <small *ngIf=\"showAddInstituteBtn\">Click on add Institute Button to create other branches</small>\r\n        <div class=\"mt-4\" *ngIf=\"showAddInstituteBtn\">\r\n          <button nbButton status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\r\n            ADD INSTITUTE\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </nb-card-body>\r\n  </nb-card>\r\n</ng-template>\r\n";
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"institutes.length > 0; else no_institute\">\r\n  <nb-card-body>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-2 text-center\"><b>Institute/Branch Name</b></div>\r\n      <div class=\"col-sm-3 text-center\"><b>Institute Address</b></div>\r\n      <div class=\"col-sm-2 text-center\"><b>Institute Contact</b></div>\r\n    </div>\r\n\r\n    <div class=\"row mt-3\" *ngFor=\"let i of institutes\">\r\n      <div class=\"col-sm-2 text-center\">\r\n        {{ i.basicInfo.name }}\r\n      </div>\r\n      <div class=\"col-sm-3 text-center\">\r\n        {{ i.address.addressLine }} {{ i.address.locality }} {{ i.address.state }}\r\n        {{ i.address.city }}\r\n      </div>\r\n      <div class=\"col-sm-2 text-center\">\r\n        {{ i.basicInfo.instituteContact }}\r\n      </div>\r\n\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-4\">\r\n        <button class=\"mr-3\" nbButton status=\"primary\" (click)=\"getInstitute(i._id)\">Manage</button>\r\n        <button class=\"mr-3 btn btn-yellow\" (click)=\"updateInstitute(i._id)\">\r\n          Edit\r\n        </button>\r\n        <button class=\"mr-3\" nbButton status=\"danger\" (click)=\"delete(i._id)\">Delete</button>\r\n      </div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n<ng-template #no_institute>\r\n  <nb-card>\r\n    <nb-card-body>\r\n      <div class=\"text-center\">\r\n        <img src=\"../../../assets/img/institute.png\" width=\"100px\" height=\"100px\" />\r\n        <h3 class=\"mt-4\">NO INSTITUTE ADDED</h3>\r\n        <small *ngIf=\"showAddInstituteBtn\"\r\n          >Click on add Institute Button to create other branches</small\r\n        >\r\n        <div class=\"mt-4\" *ngIf=\"showAddInstituteBtn\">\r\n          <button class=\"btn btn-yellow\" (click)=\"onClick()\">\r\n            ADD INSTITUTE\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </nb-card-body>\r\n  </nb-card>\r\n</ng-template>\r\n";
     /***/
   },
 
@@ -61,7 +61,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Institute Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ institute.institute.basicInfo.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Contact Number</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ institute.institute.basicInfo.contactNumber }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Address</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>\n          {{ institute.institute.address.addressLine }} {{ institute.institute.address.locality }}\n          {{ institute.institute.address.city }} {{ institute.institute.address.city }}\n        </p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <!-- <div class=\"row\">\n\t\t\t<div class=\"col-sm-1\"></div>\n\t\t\t<div class=\"col-sm-5\">\n\t\t\t\t<p class=\"font-weight-bold\">Google Map</p>\n\t\t\t</div>\n\t\t\t<div class=\"col-sm-5\"><p>{{user.googleMap}}</p></div>\n\t\t\t<div class=\"col-sm-1\"></div>\n\t\t</div>\n\t\t<hr>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-sm-1\"></div>\n\t\t\t<div class=\"col-sm-5\">\n\t\t\t\t<p class=\"font-weight-bold\">Contact</p>\n\t\t\t</div>\n\t\t\t<div class=\"col-sm-5\"><p>{{user.contact}}</p></div>\n\t\t\t<div class=\"col-sm-1\"></div>\n\t\t</div> -->\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Category</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p *ngFor=\"let i of institute.institute.category\">{{ i }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">MetaTag</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p *ngFor=\"let i of institute.institute.metaTag\">{{ i }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<nb-card>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Institute Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ institute.institute.basicInfo.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Contact Number</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ institute.institute.basicInfo.contactNumber }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Address</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>\n          {{ institute.institute.address.addressLine }} {{ institute.institute.address.locality }}\n          {{ institute.institute.address.city }} {{ institute.institute.address.city }}\n        </p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Category</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p *ngFor=\"let i of institute.institute.category\">{{ i }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">MetaTag</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p *ngFor=\"let i of institute.institute.metaTag\">{{ i }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -81,7 +81,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<p style=\"color: black; font-weight: bold;\">Add Students Here</p>\r\n\r\n<nb-card status=\"warning\">\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit\"\r\n      >Already Registered Student</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasStudentIdForm\"\r\n      (ngSubmit)=\"onStudentSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch student</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"\r\n              eduAtlasStudentIdControl.eduAtlasId.errors &&\r\n              eduAtlasStudentIdControl.eduAtlasId.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"eduAtlasId\"\r\n            fullWidth\r\n            formControlName=\"eduAtlasId\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button\r\n            type=\"submit\"\r\n            nbButton\r\n            status=\"warning\"\r\n            style=\"color: black;\"\r\n            *ngIf=\"!edit && !dataFetched\"\r\n          >\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n\r\n    <form [formGroup]=\"otpForm\" (ngSubmit)=\"verifyOtp()\" *ngIf=\"otpSent && alreadyRegistered\">\r\n      <p>OTP</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"otpForm.get('otp').errors && otpForm.get('otp').touched ? 'danger' : 'basic'\"\r\n            id=\"otp\"\r\n            fullWidth\r\n            formControlName=\"otp\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\" *ngIf=\"!edit\">\r\n            Verify\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form [formGroup]=\"studentForm\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Student Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">*Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Student name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.studentEmail.errors && f.studentEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"studentEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.studentEmail.errors && f.studentEmail.touched\"\r\n              >*Student email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Student Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Student Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Student Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Parents Details</p>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"pname\">Parent Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              status=\"basic\"\r\n              id=\"pname\"\r\n              formControlName=\"parentName\"\r\n              fullWidth\r\n              placeholder=\"Parent Name\"\r\n            />\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"p-contact\">Parent Contact</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              status=\"basic\"\r\n              maxlength=\"10\"\r\n              id=\"p-contact\"\r\n              formControlName=\"parentContact\"\r\n              fullWidth\r\n              placeholder=\"Parent Contact\"\r\n            />\r\n            <small *ngIf=\"f.parentContact.errors\">*Enter Correct Phone no.</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"p-email\">Parent Email Id</label>\r\n          <input\r\n            type=\"email\"\r\n            nbInput\r\n            status=\"basic\"\r\n            id=\"p-email\"\r\n            formControlName=\"parentEmail\"\r\n            fullWidth\r\n            placeholder=\"Parent Email Id\"\r\n          />\r\n          <small *ngIf=\"f.parentEmail.errors\">*Enter Correct Email</small>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Course Details</p>\r\n\r\n      <div formGroupName=\"courseDetails\" class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"course\">*Select Course</label>\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            id=\"course\"\r\n            status=\"basic\"\r\n            formControlName=\"course\"\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"batch\">Batch</label>\r\n          <nb-select placeholder=\"Select Batch\" formControlName=\"batch\" status=\"basic\">\r\n            <nb-option value=\"\">No Batch Assign</nb-option>\r\n            <nb-option *ngFor=\"let item of batches\" [value]=\"item._id\">{{\r\n              item.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"roll\">*Roll Number</label>\r\n            <input\r\n              type=\"text\"\r\n              pattern=\"\\d*\"\r\n              nbInput\r\n              [status]=\"'basic'\"\r\n              id=\"roll\"\r\n              formControlName=\"rollNo\"\r\n              fullWidth\r\n              placeholder=\"Roll Number\"\r\n            />\r\n            <!-- <small *ngIf=\"f.rollNo.errors && f.rollNo.touched\">*Student Roll no. is required</small> -->\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"dis\">Discount</label>\r\n          <nb-select\r\n            placeholder=\"Discount\"\r\n            formControlName=\"discount\"\r\n            status=\"basic\"\r\n            (selectedChange)=\"onSelectDiscount($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Discount</nb-option>\r\n            <nb-option *ngFor=\"let i of discounts\" [value]=\"i._id\">{{\r\n              i.discountCode + ' (' + i.amount + (i.discountType === 'percentage' ? '%' : '') + ')'\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"additionalDiscount\">Additional Discount</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"additionalDiscount\"\r\n            fullWidth\r\n            placeholder=\"Additional Discount\"\r\n            (input)=\"calculateNetPayableAmount()\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"net\">Net Payable</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"net\"\r\n            status=\"basic\"\r\n            formControlName=\"netPayable\"\r\n            fullWidth\r\n            placeholder=\"Net Payable\"\r\n            disabled=\"true\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"net\">Course Duration</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"net\"\r\n            status=\"basic\"\r\n            value=\"{{ duration + ' Months' }}\"\r\n            fullWidth\r\n            placeholder=\"Course Duration\"\r\n            disabled=\"true\"\r\n          />\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Fees</p>\r\n\r\n      <div class=\"row\" [formGroup]=\"feeDetailsForm\">\r\n        <div class=\"col-12\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"installmentType\">Installment Type</label>\r\n              <nb-select\r\n                placeholder=\"Select Installment Type\"\r\n                formControlName=\"installmentType\"\r\n                status=\"basic\"\r\n                (selectedChange)=\"onSelectInstallmentType($event)\"\r\n              >\r\n                <nb-option value=\"0\">Paid Once</nb-option>\r\n                <nb-option value=\"2\">Half Yearly</nb-option>\r\n                <nb-option value=\"3\">Quarterly</nb-option>\r\n                <nb-option value=\"4\">Monthly</nb-option>\r\n                <nb-option value=\"1\">Custom</nb-option>\r\n              </nb-select>\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"noOfInstallments\">No. of Installments</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                maxlength=\"2\"\r\n                id=\"noOfInstallments\"\r\n                nbInput\r\n                status=\"basic\"\r\n                formControlName=\"noOfInstallments\"\r\n                fullWidth\r\n                placeholder=\"No. of Installments\"\r\n                (input)=\"generateNoOfInstallments($event.target.value)\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"totalAmount\">Total Amount</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"totalAmount\"\r\n                status=\"basic\"\r\n                formControlName=\"totalAmount\"\r\n                fullWidth\r\n                placeholder=\"Total Amount\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"pendingAmount\">Pending Amount</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"pendingAmount\"\r\n                status=\"basic\"\r\n                formControlName=\"pendingAmount\"\r\n                fullWidth\r\n                placeholder=\"Pending Amount\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"amountCollected\">Amount Collected</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"amountCollected\"\r\n                status=\"basic\"\r\n                formControlName=\"amountCollected\"\r\n                fullWidth\r\n                placeholder=\"Amount Collected\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"date\">Date</label>\r\n              <input\r\n                type=\"date\"\r\n                nbInput\r\n                status=\"basic\"\r\n                formControlName=\"date\"\r\n                fullWidth\r\n                placeholder=\"Installment Date\"\r\n                (input)=\"dateChanged($event.target.value)\"\r\n              />\r\n              <!-- [nbDatepicker]=\"datePicker\"\r\n              <nb-datepicker #datePicker></nb-datepicker> -->\r\n            </div>\r\n          </div>\r\n\r\n          <hr />\r\n\r\n          <div class=\"row\">\r\n            <div class=\"col-12\">\r\n              <div class=\"table-responsive\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>Installment No.</th>\r\n                      <th>Paid</th>\r\n                      <th>Installment Date</th>\r\n                      <th>Amount</th>\r\n                      <th>payment Mode</th>\r\n                      <th>Amount Pending</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody formArrayName=\"installments\">\r\n                    <ng-container\r\n                      *ngFor=\"\r\n                        let installment of feeDetailsForm.get('installments')['controls'];\r\n                        let i = index\r\n                      \"\r\n                    >\r\n                      <tr [formGroupName]=\"i\">\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"installmentNo\"\r\n                            fullWidth\r\n                            placeholder=\"Installment No\"\r\n                            disabled=\"true\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <nb-checkbox\r\n                            formControlName=\"paidStatus\"\r\n                            status=\"basic\"\r\n                            (checkedChange)=\"onPaidAmount($event, i)\"\r\n                          ></nb-checkbox>\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"date\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"paidOn\"\r\n                            fullWidth\r\n                            placeholder=\"Installment Date\"\r\n                          />\r\n                          <!-- [nbDatepicker]=\"datePicker\"\r\n                          <nb-datepicker #datePicker></nb-datepicker> -->\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            fullWidth\r\n                            formControlName=\"amount\"\r\n                            placeholder=\"Amount\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <nb-select\r\n                            placeholder=\"Select Mode\"\r\n                            status=\"basic\"\r\n                            formControlName=\"paymentMode\"\r\n                            placeholder=\"Payment Mode\"\r\n                            (selectedChange)=\"onSelectPaymentMode($event, i)\"\r\n                          >\r\n                            <nb-option *ngFor=\"let mode of modes\" [value]=\"mode\">{{\r\n                              mode\r\n                            }}</nb-option>\r\n                          </nb-select>\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"amountPending\"\r\n                            fullWidth\r\n                            placeholder=\"Amount Pending\"\r\n                          />\r\n                        </td>\r\n                      </tr>\r\n                    </ng-container>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Material Record</p>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <div class=\"form-group\">\r\n            <textarea\r\n              type=\"text\"\r\n              nbInput\r\n              id=\"material\"\r\n              status=\"basic\"\r\n              fullWidth\r\n              formControlName=\"materialRecord\"\r\n              placeholder=\"Material Record\"\r\n            >\r\n            </textarea>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ studentEduId ? 'Update Student' : 'Add Student' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<nb-card>\r\n  <nb-card-header>\r\n    <p style=\"color: black; font-weight: bold;\">Add Student Here</p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit && !dataFetched\"\r\n      >Already Registered Student</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasStudentIdForm\"\r\n      (ngSubmit)=\"onStudentSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch student</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"\r\n              eduAtlasStudentIdControl.eduAtlasId.errors &&\r\n              eduAtlasStudentIdControl.eduAtlasId.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"eduAtlasId\"\r\n            fullWidth\r\n            formControlName=\"eduAtlasId\"\r\n            placeholder=\"Enter EduId or Email\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" class=\"btn btn-yellow-black\" *ngIf=\"!edit && !dataFetched\">\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n\r\n    <form [formGroup]=\"otpForm\" (ngSubmit)=\"verifyOtp()\" *ngIf=\"otpSent && alreadyRegistered\">\r\n      <p>OTP</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"otpForm.get('otp').errors && otpForm.get('otp').touched ? 'danger' : 'basic'\"\r\n            id=\"otp\"\r\n            fullWidth\r\n            formControlName=\"otp\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" class=\"btn btn-yellow-black\" *ngIf=\"!edit\">\r\n            Verify\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form\r\n      [formGroup]=\"studentForm\"\r\n      (ngSubmit)=\"onSubmit()\"\r\n      *ngIf=\"!alreadyRegistered || (alreadyRegistered && dataFetched) || (student && edit)\"\r\n    >\r\n      <p>Student Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">*Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Student name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.studentEmail.errors && f.studentEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"studentEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.studentEmail.errors && f.studentEmail.touched\"\r\n              >*Student email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Student Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Student Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Student Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Parents Details</p>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"pname\">Parent Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              status=\"basic\"\r\n              id=\"pname\"\r\n              formControlName=\"parentName\"\r\n              fullWidth\r\n              placeholder=\"Parent Name\"\r\n            />\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"p-contact\">Parent Contact</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              status=\"basic\"\r\n              maxlength=\"10\"\r\n              id=\"p-contact\"\r\n              formControlName=\"parentContact\"\r\n              fullWidth\r\n              placeholder=\"Parent Contact\"\r\n            />\r\n            <small *ngIf=\"f.parentContact.errors\">*Enter Correct Phone no.</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"p-email\">Parent Email Id</label>\r\n          <input\r\n            type=\"email\"\r\n            nbInput\r\n            status=\"basic\"\r\n            id=\"p-email\"\r\n            formControlName=\"parentEmail\"\r\n            fullWidth\r\n            placeholder=\"Parent Email Id\"\r\n          />\r\n          <small *ngIf=\"f.parentEmail.errors\">*Enter Correct Email</small>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Course Details</p>\r\n\r\n      <div formGroupName=\"courseDetails\" class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"course\">*Select Course</label>\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            id=\"course\"\r\n            [status]=\"\r\n              studentForm.get('courseDetails').get('course').invalid &&\r\n              studentForm.get('courseDetails').get('course').touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            formControlName=\"course\"\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"batch\">Batch</label>\r\n          <nb-select placeholder=\"Select Batch\" formControlName=\"batch\" status=\"basic\">\r\n            <nb-option value=\"\">No Batch Assign</nb-option>\r\n            <nb-option *ngFor=\"let item of batches\" [value]=\"item._id\">{{\r\n              item.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"roll\">*Roll Number</label>\r\n            <input\r\n              type=\"text\"\r\n              pattern=\"\\d*\"\r\n              nbInput\r\n              [status]=\"\r\n                studentForm.get('courseDetails').get('rollNo').invalid &&\r\n                studentForm.get('courseDetails').get('rollNo').touched\r\n                  ? 'danger'\r\n                  : 'basic'\r\n              \"\r\n              id=\"roll\"\r\n              formControlName=\"rollNo\"\r\n              fullWidth\r\n              placeholder=\"Roll Number\"\r\n            />\r\n            <!-- <small *ngIf=\"f.rollNo.errors && f.rollNo.touched\">*Student Roll no. is required</small> -->\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"dis\">Discount</label>\r\n          <nb-select\r\n            placeholder=\"Discount\"\r\n            formControlName=\"discount\"\r\n            status=\"basic\"\r\n            (selectedChange)=\"onSelectDiscount($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Discount</nb-option>\r\n            <nb-option *ngFor=\"let i of discounts\" [value]=\"i._id\">{{\r\n              i.discountCode + ' (' + i.amount + (i.discountType === 'percentage' ? '%' : '') + ')'\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"additionalDiscountType\">Additional Discount Type</label>\r\n          <nb-select\r\n            placeholder=\"Select Discount Type\"\r\n            id=\"additionalDiscountType\"\r\n            fullWidth\r\n            formControlName=\"additionalDiscountType\"\r\n            (selectedChange)=\"calculateNetPayableAmount()\"\r\n          >\r\n            <!-- <nb-option value=\"\">Select Parent Course</nb-option> -->\r\n            <nb-option value=\"percentage\">\r\n              Discount in Percentage\r\n            </nb-option>\r\n            <nb-option value=\"amount\">\r\n              Discount in Amount\r\n            </nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"additionalDiscount\">Additional Discount</label>\r\n          <input\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            nbInput\r\n            [status]=\"\r\n              (studentForm.get('courseDetails').get('additionalDiscount').invalid ||\r\n                studentForm.get('courseDetails').hasError('invalidDiscount')) &&\r\n              studentForm.get('courseDetails').get('additionalDiscount').touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            formControlName=\"additionalDiscount\"\r\n            fullWidth\r\n            placeholder=\"Additional Discount\"\r\n            (input)=\"calculateNetPayableAmount()\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"net\">Net Payable</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"net\"\r\n            status=\"basic\"\r\n            formControlName=\"netPayable\"\r\n            fullWidth\r\n            placeholder=\"Net Payable\"\r\n            disabled=\"true\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"net\">Course Duration</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"net\"\r\n            status=\"basic\"\r\n            value=\"{{ duration + ' Months' }}\"\r\n            fullWidth\r\n            placeholder=\"Course Duration\"\r\n            disabled=\"true\"\r\n          />\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Fees</p>\r\n\r\n      <div class=\"row\" [formGroup]=\"feeDetailsForm\">\r\n        <div class=\"col-12\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"installmentType\">Installment Type</label>\r\n              <nb-select\r\n                placeholder=\"Select Installment Type\"\r\n                formControlName=\"installmentType\"\r\n                status=\"basic\"\r\n                (selectedChange)=\"onSelectInstallmentType($event)\"\r\n              >\r\n                <nb-option value=\"0\">Paid Once</nb-option>\r\n                <nb-option value=\"2\">Half Yearly</nb-option>\r\n                <nb-option value=\"3\">Quarterly</nb-option>\r\n                <nb-option value=\"4\">Monthly</nb-option>\r\n                <nb-option value=\"1\">Custom</nb-option>\r\n              </nb-select>\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"noOfInstallments\">No. of Installments</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                maxlength=\"2\"\r\n                id=\"noOfInstallments\"\r\n                nbInput\r\n                status=\"basic\"\r\n                formControlName=\"noOfInstallments\"\r\n                fullWidth\r\n                placeholder=\"No. of Installments\"\r\n                (input)=\"generateNoOfInstallments($event.target.value)\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"totalAmount\">Total Amount</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"totalAmount\"\r\n                status=\"basic\"\r\n                formControlName=\"totalAmount\"\r\n                fullWidth\r\n                placeholder=\"Total Amount\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"pendingAmount\">Pending Amount</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"pendingAmount\"\r\n                status=\"basic\"\r\n                formControlName=\"pendingAmount\"\r\n                fullWidth\r\n                placeholder=\"Pending Amount\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"amountCollected\">Amount Collected</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"amountCollected\"\r\n                status=\"basic\"\r\n                formControlName=\"amountCollected\"\r\n                fullWidth\r\n                placeholder=\"Amount Collected\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"date\">Date</label>\r\n              <input\r\n                type=\"date\"\r\n                nbInput\r\n                status=\"basic\"\r\n                formControlName=\"date\"\r\n                fullWidth\r\n                placeholder=\"Installment Date\"\r\n                (input)=\"dateChanged($event.target.value)\"\r\n              />\r\n              <!-- [nbDatepicker]=\"datePicker\"\r\n              <nb-datepicker #datePicker></nb-datepicker> -->\r\n            </div>\r\n          </div>\r\n\r\n          <hr />\r\n\r\n          <div class=\"row\">\r\n            <div class=\"col-12\" formArrayName=\"installments\">\r\n              <ng-container\r\n                *ngFor=\"\r\n                  let installment of feeDetailsForm.get('installments')['controls'];\r\n                  let i = index\r\n                \"\r\n              >\r\n                <nb-card [formGroupName]=\"i\">\r\n                  <nb-card-header class=\"bg-light text-dark\">\r\n                    <div class=\"row\">\r\n                      <div class=\"col-md-8\">\r\n                        <nb-checkbox\r\n                          formControlName=\"paidStatus\"\r\n                          status=\"basic\"\r\n                          (checkedChange)=\"onPaidAmount($event, i)\"\r\n                        ></nb-checkbox>\r\n                        &nbsp;&nbsp;\r\n                        <span>Installment {{ i + 1 }}</span>\r\n                      </div>\r\n                      <div class=\"col-md-4\">\r\n                        <input\r\n                          class=\"form-control\"\r\n                          nbInput\r\n                          type=\"date\"\r\n                          status=\"basic\"\r\n                          formControlName=\"paidOn\"\r\n                          fullWidth\r\n                          placeholder=\"Installment Date\"\r\n                        />\r\n                      </div>\r\n                    </div>\r\n                  </nb-card-header>\r\n                  <nb-card-body>\r\n                    <div class=\"row\">\r\n                      <div class=\"col-sm-4\">\r\n                        <label>Amount</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          pattern=\"\\d*\"\r\n                          nbInput\r\n                          status=\"basic\"\r\n                          fullWidth\r\n                          formControlName=\"amount\"\r\n                          placeholder=\"Amount\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"col-sm-4\">\r\n                        <label>Pending Amount</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          pattern=\"\\d*\"\r\n                          nbInput\r\n                          status=\"basic\"\r\n                          formControlName=\"amountPending\"\r\n                          fullWidth\r\n                          placeholder=\"Amount Pending\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"col-sm-4\">\r\n                        <label>Payment Mode</label>\r\n                        <nb-select\r\n                          placeholder=\"Select Mode\"\r\n                          status=\"basic\"\r\n                          formControlName=\"paymentMode\"\r\n                          placeholder=\"Payment Mode\"\r\n                          (selectedChange)=\"onSelectPaymentMode($event, i)\"\r\n                        >\r\n                          <nb-option *ngFor=\"let mode of modes\" [value]=\"mode\">{{\r\n                            mode\r\n                          }}</nb-option>\r\n                        </nb-select>\r\n                      </div>\r\n                      <div class=\"col-sm-4\">\r\n                        <label>Bank/Mode</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          nbInput\r\n                          status=\"basic\"\r\n                          formControlName=\"bankDetails\"\r\n                          fullWidth\r\n                          placeholder=\"Bank/Mode\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"col-sm-4\">\r\n                        <label>Transaction Id / Instrument No.</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          nbInput\r\n                          status=\"basic\"\r\n                          formControlName=\"transDetails\"\r\n                          fullWidth\r\n                          placeholder=\"Transaction/Instrument No\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"col-sm-4\">\r\n                        <label>Payment Date</label>\r\n                        <input\r\n                          type=\"date\"\r\n                          nbInput\r\n                          status=\"basic\"\r\n                          formControlName=\"paymentDate\"\r\n                          fullWidth\r\n                          placeholder=\"Date\"\r\n                        />\r\n                      </div>\r\n                    </div>\r\n                  </nb-card-body>\r\n                </nb-card>\r\n              </ng-container>\r\n\r\n              <!-- <div class=\"table-responsive\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>Installment No.</th>\r\n                      <th>Paid</th>\r\n                      <th>Installment Date</th>\r\n                      <th>Amount</th>\r\n                      <th>payment Mode</th>\r\n                      <th>payment Date</th>\r\n                      <th>Bank/Mode</th>\r\n                      <th>Transaction Id / Instrument No.</th>\r\n                      <th>Amount Pending</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody formArrayName=\"installments\">\r\n                    <ng-container\r\n                      *ngFor=\"\r\n                        let installment of feeDetailsForm.get('installments')['controls'];\r\n                        let i = index\r\n                      \"\r\n                    >\r\n                      <tr [formGroupName]=\"i\">\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"installmentNo\"\r\n                            fullWidth\r\n                            placeholder=\"Installment No\"\r\n                            disabled=\"true\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <nb-checkbox\r\n                            formControlName=\"paidStatus\"\r\n                            status=\"basic\"\r\n                            (checkedChange)=\"onPaidAmount($event, i)\"\r\n                          ></nb-checkbox>\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"date\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"paidOn\"\r\n                            fullWidth\r\n                            placeholder=\"Installment Date\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            fullWidth\r\n                            formControlName=\"amount\"\r\n                            placeholder=\"Amount\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <nb-select\r\n                            placeholder=\"Select Mode\"\r\n                            status=\"basic\"\r\n                            formControlName=\"paymentMode\"\r\n                            placeholder=\"Payment Mode\"\r\n                            (selectedChange)=\"onSelectPaymentMode($event, i)\"\r\n                          >\r\n                            <nb-option *ngFor=\"let mode of modes\" [value]=\"mode\">{{\r\n                              mode\r\n                            }}</nb-option>\r\n                          </nb-select>\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"bankDetails\"\r\n                            fullWidth\r\n                            placeholder=\"Bank/Mode\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"transDetails\"\r\n                            fullWidth\r\n                            placeholder=\"Transaction/Instrument No\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"date\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"PaymentDate\"\r\n                            fullWidth\r\n                            placeholder=\"Date\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"amountPending\"\r\n                            fullWidth\r\n                            placeholder=\"Amount Pending\"\r\n                          />\r\n                        </td>\r\n                      </tr>\r\n                    </ng-container>\r\n                  </tbody>\r\n                </table>\r\n              </div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Material Record</p>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <div class=\"form-group\">\r\n            <textarea\r\n              type=\"text\"\r\n              nbInput\r\n              id=\"material\"\r\n              status=\"basic\"\r\n              fullWidth\r\n              formControlName=\"materialRecord\"\r\n              placeholder=\"Material Record\"\r\n            >\r\n            </textarea>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" class=\"btn btn-yellow-black\">\r\n          {{ studentEduId ? 'Update Student' : 'Add Student' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -101,7 +101,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Active Students</p>\r\n  </div>\r\n\r\n  <div class=\"col-sm-3\"></div>\r\n\r\n  <div class=\"col-sm-3\">\r\n    <div class=\"form-group\">\r\n      <nb-select\r\n        placeholder=\"Select Course\"\r\n        status=\"basic\"\r\n        fullWidth\r\n        (selectedChange)=\"onSelectCourse($event)\"\r\n      >\r\n        <nb-option value=\"\">Select Course</nb-option>\r\n        <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n      </nb-select>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"students.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Roll No.</th>\r\n          <th>Contact</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let student of students; let i = index\">\r\n          <td>{{ student.basicDetails.name }}</td>\r\n          <td>{{ student.instituteDetails.rollNumber }}</td>\r\n          <td>{{ student.basicDetails.studentContact }}</td>\r\n          <!-- <td>{{ student.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button class=\"mr-2\" nbButton status=\"primary\" (click)=\"view(student.eduAtlasId)\">\r\n              View\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"warning`\" (click)=\"edit(student.eduAtlasId)\">\r\n              Edit\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"danger\"\r\n              (click)=\"delete(student.eduAtlasId, student.instituteDetails._id)\"\r\n            >\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"students.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n";
+    __webpack_exports__["default"] = "<nb-card>\r\n  <nb-card-header>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-6\">\r\n        <p class=\"font-weight-bolder\">Active Students</p>\r\n      </div>\r\n\r\n      <div class=\"col-sm-3\"></div>\r\n\r\n      <div class=\"col-sm-3\">\r\n        <div class=\"form-group\">\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            status=\"basic\"\r\n            fullWidth\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <table *ngIf=\"students.length > 0; else noStudents\">\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Roll No.</th>\r\n          <th>Contact</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let student of students; let i = index\">\r\n          <td>{{ student.basicDetails.name }}</td>\r\n          <td>{{ student.instituteDetails.rollNumber }}</td>\r\n          <td>{{ student.basicDetails.studentContact }}</td>\r\n          <!-- <td>{{ student.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button class=\"mr-2\" nbButton status=\"primary\" (click)=\"view(student.eduAtlasId)\">\r\n              View\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-yellow mr-2\" (click)=\"edit(student.eduAtlasId)\">\r\n              Edit\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"danger\"\r\n              (click)=\"delete(student.eduAtlasId, student.instituteDetails._id)\"\r\n            >\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ng-template #noStudents>\r\n      <p class=\"text-center pt-5\">{{ noStudent }}</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -121,7 +121,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card *ngIf=\"student\">\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Roll Number</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.instituteDetails.rollNumber }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Email</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.studentEmail }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.studentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent Email</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentEmail }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Address</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.address }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"student\">\n  <nb-card-header>\n    <button nbButton status=\"danger\" class=\"btn float-right mr-3\" (click)=\"deleteStudent()\">\n      Delete\n    </button>\n    <button class=\"btn float-right mr-3 btn btn-yellow\" (click)=\"edit()\">Edit</button>\n  </nb-card-header>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Roll Number</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.instituteDetails.rollNumber }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Email</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.studentEmail }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.studentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent Email</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentEmail }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Address</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.address }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -141,7 +141,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Pending Students</p>\r\n  </div>\r\n\r\n  <div class=\"col-sm-3\"></div>\r\n\r\n  <div class=\"col-sm-3\">\r\n    <div class=\"form-group\">\r\n      <nb-select\r\n        placeholder=\"Select Course\"\r\n        status=\"basic\"\r\n        fullWidth\r\n        (selectedChange)=\"onSelectCourse($event)\"\r\n      >\r\n        <nb-option value=\"\">Select Course</nb-option>\r\n        <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n      </nb-select>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"students.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Roll No.</th>\r\n          <th>Contact</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let student of students; let i = index\">\r\n          <td>{{ student.basicDetails.name }}</td>\r\n          <td>{{ student.instituteDetails.rollNumber }}</td>\r\n          <td>{{ student.basicDetails.studentContact }}</td>\r\n          <!-- <td>{{ student.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button class=\"mr-2\" nbButton status=\"primary\" (click)=\"view(student.eduAtlasId)\">\r\n              View\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"warning`\" (click)=\"edit(student.eduAtlasId)\">\r\n              Edit\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"danger\"\r\n              (click)=\"delete(student.eduAtlasId, student.instituteDetails._id)\"\r\n            >\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"students.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n";
+    __webpack_exports__["default"] = "<nb-card>\r\n  <nb-card-header>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-6\">\r\n        <p class=\"font-weight-bolder\">Pending Students</p>\r\n      </div>\r\n\r\n      <div class=\"col-sm-3\"></div>\r\n\r\n      <div class=\"col-sm-3\">\r\n        <div class=\"form-group\">\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            status=\"basic\"\r\n            fullWidth\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <table *ngIf=\"students.length > 0; else noStudents\">\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Roll No.</th>\r\n          <th>Contact</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let student of students; let i = index\">\r\n          <td>{{ student.basicDetails.name }}</td>\r\n          <td>{{ student.instituteDetails.rollNumber }}</td>\r\n          <td>{{ student.basicDetails.studentContact }}</td>\r\n          <!-- <td>{{ student.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button class=\"mr-2\" nbButton status=\"primary\" (click)=\"view(student.eduAtlasId)\">\r\n              View\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-yellow mr-2\" (click)=\"edit(student.eduAtlasId)\">\r\n              Edit\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"danger\"\r\n              (click)=\"delete(student.eduAtlasId, student.instituteDetails._id)\"\r\n            >\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ng-template #noStudents>\r\n      <p class=\"text-center pt-5\">{{ noStudent }}</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -161,7 +161,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<p style=\"font-weight: bold;\">Add Attandance</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"attandanceform\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            formControlName=\"courseId\"\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n            state=\"basic\"\r\n            fullWidth\r\n          >\r\n            <nb-option *ngFor=\"let course of courses\" value=\"{{ course.id }}\">{{\r\n              course.name\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n        <div class=\"col-sm-6\">\r\n          <nb-select\r\n            formControlName=\"batchId\"\r\n            placeholder=\"Select Batch\"\r\n            (selectedChange)=\"onSelectBatch()\"\r\n            state=\"basic\"\r\n            fullWidth\r\n          >\r\n            <nb-option *ngFor=\"let batch of availableBatches\" value=\"{{ batch._id }}\">{{\r\n              batch.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n      </div>\r\n      <div class=\"row mt-3\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"date\"\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"date\"\r\n            fullWidth\r\n            placeholder=\"Pick Date\"\r\n            (input)=\"getStudents()\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-6 text-right\" *ngIf=\"students.length > 0\">\r\n          <button\r\n            nbButton\r\n            type=\"submit\"\r\n            status=\"warning\"\r\n            [disabled]=\"!attandanceform.valid\"\r\n            style=\"color: black;\"\r\n          >\r\n            Submit\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n    <hr />\r\n    <div class=\"row attendanceList\" *ngIf=\"students.length > 0; else empty_students\">\r\n      <div class=\"table-responsive\">\r\n        <table>\r\n          <thead>\r\n            <tr>\r\n              <th class=\"text-center\">Roll No</th>\r\n              <th class=\"text-center\">Student</th>\r\n              <th class=\"text-center\">Mark Attendance</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr  *ngFor=\"let student of students; let i = index\">\r\n              <td>{{student.studentRollNo}}</td>\r\n              <td>\r\n                {{student.studentName}}\r\n              </td>\r\n              <td>\r\n                <div class=\"attendance-selector text-center\">\r\n                  <input\r\n                    type=\"checkbox\"\r\n                    [id]=\"student.studentId\"\r\n                    class=\"attendance\"\r\n                    [checked]=\"student.attendanceStatus\"\r\n                    (change)=\"markAttendance($event, student.studentId, i)\"\r\n                  />\r\n                </div>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n    <ng-template #empty_students>\r\n      <p class=\"pl-3 text-center\">No Students Found</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<nb-card>\r\n  <nb-card-header>\r\n    <p style=\"font-weight: bold;\">Add Attendance</p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"attandanceform\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            formControlName=\"courseId\"\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n            state=\"basic\"\r\n            fullWidth\r\n          >\r\n            <nb-option *ngFor=\"let course of courses\" value=\"{{ course.id }}\">{{\r\n              course.name\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n        <div class=\"col-sm-6\">\r\n          <nb-select\r\n            formControlName=\"batchId\"\r\n            placeholder=\"Select Batch\"\r\n            (selectedChange)=\"onSelectBatch()\"\r\n            state=\"basic\"\r\n            fullWidth\r\n          >\r\n            <nb-option *ngFor=\"let batch of availableBatches\" value=\"{{ batch._id }}\">{{\r\n              batch.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n      </div>\r\n      <div class=\"row mt-3\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"date\"\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"date\"\r\n            fullWidth\r\n            placeholder=\"Pick Date\"\r\n            (input)=\"getStudents()\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-6 text-right\" *ngIf=\"students.length > 0\">\r\n          <button\r\n            class=\"btn btn-yellow\"\r\n            type=\"submit\"\r\n            [disabled]=\"!attandanceform.valid\"\r\n            style=\"color: black;\"\r\n          >\r\n            Submit\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n    <hr />\r\n    <div class=\"row attendanceList\" *ngIf=\"students.length > 0; else empty_students\">\r\n      <div class=\"table-responsive\">\r\n        <table>\r\n          <thead>\r\n            <tr>\r\n              <th class=\"text-center\">Roll No</th>\r\n              <th class=\"text-center\">Student</th>\r\n              <th class=\"text-center\">Mark Attendance</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let student of students; let i = index\">\r\n              <td>{{ student.studentRollNo }}</td>\r\n              <td>\r\n                {{ student.studentName }}\r\n              </td>\r\n              <td>\r\n                <div class=\"attendance-selector text-center\">\r\n                  <input\r\n                    type=\"checkbox\"\r\n                    [id]=\"student.studentId\"\r\n                    class=\"attendance\"\r\n                    [checked]=\"student.attendanceStatus\"\r\n                    (change)=\"markAttendance($event, student.studentId, i)\"\r\n                  />\r\n                </div>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n    <ng-template #empty_students>\r\n      <p class=\"pl-3 text-center\">No Students Found</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -181,7 +181,47 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-layout>\n  <nb-layout-column>\n    <router-outlet></router-outlet>\n  </nb-layout-column>\n</nb-layout>\n";
+    __webpack_exports__["default"] = "<router-outlet></router-outlet>\r\n";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/leads/add-leads/add-lead.component.html":
+  /*!*****************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/leads/add-leads/add-lead.component.html ***!
+    \*****************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppPagesLeadsAddLeadsAddLeadComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<nb-card>\r\n  <nb-card-header>\r\n    <div>\r\n      <button (click)=\"back()\" class=\"btn btn-yellow-black float-right\">Manage Leads</button>\r\n      <p style=\"font-weight: bold;\">Add Lead</p>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"leadForm\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"name\">Lead Name</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"name\"\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"leadName\"\r\n            [status]=\"f.leadName.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Lead Name\"\r\n          />\r\n          <small *ngIf=\"f.leadName.errors && submitted\">*Lead Name is Required</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"leadContact\">Lead Contact</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"leadContact\"\r\n            maxlength=\"10\"\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"leadContact\"\r\n            placeholder=\"Lead Contact\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"leadEmail\">Lead Email</label>\r\n          <input\r\n            type=\"email\"\r\n            nbInput\r\n            fullWidth\r\n            id=\"leadEmail\"\r\n            status=\"basic\"\r\n            formControlName=\"leadEmail\"\r\n            [status]=\"f.leadEmail.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Lead Email\"\r\n          />\r\n          <small *ngIf=\"f.leadEmail.errors && submitted\">*Lead Email is Invalid</small>\r\n        </div>\r\n      </div>\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"date\">Date</label>\r\n          <input\r\n            type=\"date\"\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"date\"\r\n            fullWidth\r\n            placeholder=\"Pick Date\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"course\">Course</label>\r\n          <nb-select placeholder=\"Course\" id=\"course\" status=\"basic\" formControlName=\"course\">\r\n            <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{\r\n              course.name\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"source\">Lead Source</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            id=\"source\"\r\n            status=\"basic\"\r\n            formControlName=\"source\"\r\n            placeholder=\"Lead Source\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"status\">Status</label>\r\n          <nb-select\r\n            placeholder=\"Status\"\r\n            id=\"status\"\r\n            status=\"basic\"\r\n            [status]=\"f.status.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"status\"\r\n          >\r\n            <nb-option *ngFor=\"let item of status\" [value]=\"item\">{{ item }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.status.errors && submitted\">*Status is Required</small>\r\n        </div>\r\n      </div>\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"comment\">Comment</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"comment\"\r\n            status=\"basic\"\r\n            fullWidth\r\n            formControlName=\"comment\"\r\n            placeholder=\"Comment\"\r\n            cols=\"15\"\r\n            rows=\"7\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: right; margin: 1rem;\">\r\n        <button type=\"submit\" class=\"btn btn-yellow-black\">\r\n          {{ edit ? 'Update' : 'Add' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/leads/manage-leads/manage-lead.component.html":
+  /*!***********************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/leads/manage-leads/manage-lead.component.html ***!
+    \***********************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppPagesLeadsManageLeadsManageLeadComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<nb-card>\r\n  <nb-card-header>\r\n    <button class=\"btn btn-yellow float-right\" (click)=\"addLead()\">\r\n      Add Lead\r\n    </button>\r\n    <p style=\"font-weight: bold;\">Manage Leads</p>\r\n  </nb-card-header>\r\n</nb-card>\r\n<nb-card status=\"info\">\r\n  <nb-card-header>\r\n    <div class=\"row mb-2\" *ngIf=\"courses\">\r\n      <div class=\"col-sm-6\">\r\n        <h3 class=\"text-white\">Leads</h3>\r\n      </div>\r\n      <div class=\"col-sm-3\">\r\n        <nb-select\r\n          placeholder=\"Select Course\"\r\n          status=\"basic\"\r\n          fullWidth\r\n          (selectedChange)=\"onSelectCourse($event)\"\r\n        >\r\n          <nb-option value=\"\">Select Course</nb-option>\r\n          <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{\r\n            course.name\r\n          }}</nb-option>\r\n        </nb-select>\r\n      </div>\r\n\r\n      <div class=\"col-sm-3\">\r\n        <nb-select\r\n          placeholder=\"Select Status\"\r\n          fullWidth\r\n          status=\"basic\"\r\n          (selectedChange)=\"onSelectStatus($event)\"\r\n        >\r\n          <nb-option value=\"\">Select Status</nb-option>\r\n          <nb-option *ngFor=\"let item of status\" [value]=\"item\">{{ item }}</nb-option>\r\n        </nb-select>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <table\r\n      class=\"table table-borderless text-center\"\r\n      *ngIf=\"leads && leads.length > 0; else noLeads\"\r\n    >\r\n      <thead>\r\n        <tr>\r\n          <th>Lead Name</th>\r\n          <th>Lead Email</th>\r\n          <th>Lead Contact</th>\r\n          <th>Status</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let lead of leads; let i = index\">\r\n          <td>{{ lead.leadName }}</td>\r\n          <td>{{ lead.leadEmail }}</td>\r\n          <td>{{ lead.leadContact }}</td>\r\n          <td>{{ lead.status }}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3 mb-2 btn btn-yellow\" (click)=\"edit(lead._id)\">Edit</button>\r\n            <button class=\"mb-2\" nbButton status=\"danger\" (click)=\"delete(lead._id, i)\">\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ng-template #noLeads>\r\n      <p class=\"mt-5 mb-5 text-center\">No Record Found</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -201,7 +241,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"back()\" style=\"color: black;\">Manage Schedule</button>\n</div>\n<p style=\"font-weight: bold;\">Add Schedule</p>\n<nb-card *ngIf=\"display\">\n  <nb-card-body>\n    <form [formGroup]=\"scheduleForm\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"row\">\n        <div class=\"col-sm-3\">\n          <label for=\"course\">*Select Course</label>\n          <nb-select\n            placeholder=\"Select Course\"\n            status=\"basic\"\n            fullWidth\n            formControlName=\"courseId\"\n            (selectedChange)=\"onSelectCourse($event)\"\n          >\n            <nb-option value=\"\">Select Course</nb-option>\n            <nb-option *ngFor=\"let course of institute.course\" [value]=\"course._id\">{{\n              course.name\n            }}</nb-option>\n          </nb-select>\n          <div *ngIf=\"scheduleForm.get('courseId').invalid && scheduleForm.get('courseId').touched\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"batch\">Batch</label>\n          <nb-select placeholder=\"Select Batch\" formControlName=\"batchId\" fullWidth status=\"basic\">\n            <nb-option value=\"\">Select Batch</nb-option>\n            <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n              batch.batchCode\n            }}</nb-option>\n          </nb-select>\n          <div *ngIf=\"scheduleForm.get('batchId').invalid && scheduleForm.get('batchId').touched\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleStart\">From</label>\n          <input\n            type=\"date\"\n            nbInput\n            id=\"scheduleStart\"\n            status=\"basic\"\n            formControlName=\"scheduleStart\"\n            fullWidth\n            placeholder=\"Schedule From\"\n            (input)=\"fromDatePicked($event.target.value)\"\n          />\n\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleStart').invalid && scheduleForm.get('scheduleStart').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleEnd\">To</label>\n          <input\n            type=\"date\"\n            nbInput\n            id=\"scheduleEnd\"\n            status=\"basic\"\n            formControlName=\"scheduleEnd\"\n            fullWidth\n            placeholder=\"Schedule To\"\n            (input)=\"toDatePicked($event.target.value)\"\n          />\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleEnd').invalid && scheduleForm.get('scheduleEnd').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n          <div\n            *ngIf=\"scheduleForm.hasError('invalidDate') && scheduleForm.get('scheduleEnd').touched\"\n          >\n            <small>*Select Valid End Date</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleStartTime\">Schedule Start Time</label>\n          <input\n            type=\"time\"\n            nbInput\n            id=\"scheduleStartTime\"\n            status=\"basic\"\n            [value]=\"scheduleStartTime\"\n            fullWidth\n            placeholder=\"scheduleStartTime\"\n            (input)=\"startTimePicked($event.target.value)\"\n          />\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleEndTime\">Schedule End Time</label>\n          <input\n            type=\"time\"\n            nbInput\n            id=\"scheduleEndTime\"\n            status=\"basic\"\n            [value]=\"scheduleEndTime\"\n            fullWidth\n            placeholder=\"End Time\"\n            (input)=\"endTimePicked($event.target.value)\"\n          />\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleEnd').invalid && scheduleForm.get('scheduleEnd').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n        </div>\n      </div>\n\n      <hr />\n\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>Select</th>\n                  <th>Day</th>\n                  <th>Date</th>\n                  <th>Start Time</th>\n                  <th>End Time</th>\n                  <th>Topic</th>\n                  <th>Teacher</th>\n                </tr>\n              </thead>\n              <tbody formArrayName=\"days\">\n                <ng-container\n                  *ngFor=\"let scheduleDay of scheduleForm.get('days')['controls']; let i = index\"\n                >\n                  <tr [formGroupName]=\"i\">\n                    <td>\n                      <nb-checkbox formControlName=\"select\"> </nb-checkbox>\n                    </td>\n                    <td>\n                      <input\n                        type=\"text\"\n                        nbInput\n                        formControlName=\"day\"\n                        status=\"basic\"\n                        fullWidth\n                        placeholder=\"Day\"\n                        disabled=\"true\"\n                      />\n                    </td>\n                    <td>\n                      <input\n                        type=\"date\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"date\"\n                        fullWidth\n                        placeholder=\"Date\"\n                        disabled=\"true\"\n                      />\n                      <!-- [nbDatepicker]=\"datePicker\"\n                      <nb-datepicker #datePicker></nb-datepicker> -->\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"time\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"startTime\"\n                        fullWidth\n                        placeholder=\"Start Time\"\n                      />\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"time\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"endTime\"\n                        fullWidth\n                        placeholder=\"End Time\"\n                      />\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"text\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"topic\"\n                        fullWidth\n                        placeholder=\"Topic\"\n                      />\n                    </td>\n\n                    <td>\n                      <nb-select\n                        placeholder=\"Select Teacher\"\n                        status=\"basic\"\n                        formControlName=\"teacher\"\n                        fullWidth\n                      >\n                        <nb-option value=\"\">Select Teacher</nb-option>\n                        <nb-option *ngFor=\"let teacher of teachers\" [value]=\"teacher._id\">{{\n                          teacher.basicDetails.name\n                        }}</nb-option>\n                      </nb-select>\n                    </td>\n                  </tr>\n                </ng-container>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"mt-4\">\n        <nb-checkbox formControlName=\"recurrence\" (checkedChange)=\"recurrence($event)\">\n          Ask for recurrence at the time of definition\n        </nb-checkbox>\n      </div>\n\n      <div class=\"text-right mt-4\">\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    <button class=\"btn btn-yellow-black float-right\" (click)=\"back()\">Manage Schedule</button>\n    <p style=\"font-weight: bold;\">Add Schedule</p>\n  </nb-card-header>\n  <nb-card-body>\n    <div class=\"table-responsive\" *ngIf=\"schedules.length > 0\">\n      <table class=\"table table-borderless\">\n        <thead>\n          <tr>\n            <th>#</th>\n            <th>Start Time</th>\n            <th>End Time</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let schedule of schedules; let i = index\">\n            <td>{{ i + 1 }}</td>\n            <td>{{ schedule.scheduleStart }}</td>\n            <td>{{ schedule.scheduleEnd }}</td>\n            <td>\n              <button class=\"btn btn-sm btn-yellow-black\" (click)=\"useRecurrenceSchedule(i)\">\n                Use\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n      <hr />\n    </div>\n\n    <form [formGroup]=\"scheduleForm\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"row\">\n        <div class=\"col-sm-3\">\n          <label for=\"course\">*Select Course</label>\n          <nb-select\n            placeholder=\"Select Course\"\n            [status]=\"\n              scheduleForm.get('courseId').invalid && scheduleForm.get('courseId').touched\n                ? 'danger'\n                : 'basic'\n            \"\n            fullWidth\n            formControlName=\"courseId\"\n            (selectedChange)=\"onSelectCourse($event)\"\n          >\n            <nb-option value=\"\">Select Course</nb-option>\n            <nb-option *ngFor=\"let course of institute.course\" [value]=\"course._id\">{{\n              course.name\n            }}</nb-option>\n          </nb-select>\n          <div *ngIf=\"scheduleForm.get('courseId').invalid && scheduleForm.get('courseId').touched\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"batch\">Batch</label>\n          <nb-select\n            placeholder=\"Select Batch\"\n            formControlName=\"batchId\"\n            fullWidth\n            [status]=\"\n              scheduleForm.get('batchId').invalid && scheduleForm.get('batchId').touched\n                ? 'danger'\n                : 'basic'\n            \"\n            (selectedChange)=\"onSelectBatch($event)\"\n          >\n            <nb-option value=\"\">Select Batch</nb-option>\n            <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n              batch.batchCode\n            }}</nb-option>\n          </nb-select>\n          <div *ngIf=\"scheduleForm.get('batchId').invalid && scheduleForm.get('batchId').touched\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleStart\">From</label>\n          <input\n            type=\"date\"\n            nbInput\n            id=\"scheduleStart\"\n            status=\"basic\"\n            formControlName=\"scheduleStart\"\n            fullWidth\n            placeholder=\"Schedule From\"\n            (input)=\"fromDatePicked($event.target.value)\"\n          />\n\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleStart').invalid && scheduleForm.get('scheduleStart').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleEnd\">To</label>\n          <input\n            type=\"date\"\n            nbInput\n            id=\"scheduleEnd\"\n            status=\"basic\"\n            formControlName=\"scheduleEnd\"\n            fullWidth\n            placeholder=\"Schedule To\"\n            (input)=\"toDatePicked($event.target.value)\"\n          />\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleEnd').invalid && scheduleForm.get('scheduleEnd').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n          <div\n            *ngIf=\"scheduleForm.hasError('invalidDate') && scheduleForm.get('scheduleEnd').touched\"\n          >\n            <small>*Select Valid End Date</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleStartTime\">Schedule Start Time</label>\n          <input\n            type=\"time\"\n            nbInput\n            id=\"scheduleStartTime\"\n            status=\"basic\"\n            [value]=\"scheduleStartTime\"\n            fullWidth\n            placeholder=\"scheduleStartTime\"\n            (input)=\"startTimePicked($event.target.value)\"\n          />\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleEndTime\">Schedule End Time</label>\n          <input\n            type=\"time\"\n            nbInput\n            id=\"scheduleEndTime\"\n            status=\"basic\"\n            [value]=\"scheduleEndTime\"\n            fullWidth\n            placeholder=\"End Time\"\n            (input)=\"endTimePicked($event.target.value)\"\n          />\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleEnd').invalid && scheduleForm.get('scheduleEnd').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n        </div>\n      </div>\n\n      <hr />\n\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>Select</th>\n                  <th>Day</th>\n                  <th>Date</th>\n                  <th>Start Time</th>\n                  <th>End Time</th>\n                  <th>Topic</th>\n                  <th>Teacher</th>\n                </tr>\n              </thead>\n              <tbody formArrayName=\"days\">\n                <ng-container\n                  *ngFor=\"let scheduleDay of scheduleForm.get('days')['controls']; let i = index\"\n                >\n                  <tr [formGroupName]=\"i\">\n                    <td>\n                      <nb-checkbox formControlName=\"select\"> </nb-checkbox>\n                    </td>\n                    <td>\n                      <input\n                        type=\"text\"\n                        nbInput\n                        formControlName=\"day\"\n                        status=\"basic\"\n                        fullWidth\n                        placeholder=\"Day\"\n                        disabled=\"true\"\n                      />\n                    </td>\n                    <td>\n                      <input\n                        type=\"date\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"date\"\n                        fullWidth\n                        placeholder=\"Date\"\n                        disabled=\"true\"\n                      />\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"time\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"startTime\"\n                        fullWidth\n                        placeholder=\"Start Time\"\n                      />\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"time\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"endTime\"\n                        fullWidth\n                        placeholder=\"End Time\"\n                      />\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"text\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"topic\"\n                        fullWidth\n                        placeholder=\"Topic\"\n                      />\n                    </td>\n\n                    <td>\n                      <nb-select\n                        placeholder=\"Select Teacher\"\n                        status=\"basic\"\n                        formControlName=\"teacher\"\n                        fullWidth\n                      >\n                        <nb-option value=\"\">Select Teacher</nb-option>\n                        <nb-option *ngFor=\"let teacher of teachers\" [value]=\"teacher._id\">{{\n                          teacher.basicDetails.name\n                        }}</nb-option>\n                      </nb-select>\n                    </td>\n                  </tr>\n                </ng-container>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"mt-4\">\n        <nb-checkbox formControlName=\"recurrence\" (checkedChange)=\"recurrence($event)\">\n          Ask for recurrence at the time of definition\n        </nb-checkbox>\n      </div>\n\n      <div class=\"text-right mt-4\">\n        <button class=\"btn btn-yellow-black\" type=\"submit\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -221,7 +261,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"addSchedule()\" style=\"color: black;\">\n    Add Schedule\n  </button>\n</div>\n<p style=\"font-weight: bold;\">Manage Schedule</p>\n<nb-card>\n  <nb-card-body *ngIf=\"display\">\n    <div class=\"row\">\n      <div class=\"col-sm-6\"></div>\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Course\"\n          status=\"basic\"\n          fullWidth\n          (selectedChange)=\"onSelectCourse($event)\"\n        >\n          <nb-option value=\"\">Select Course</nb-option>\n          <nb-option *ngFor=\"let course of institute.course\" [value]=\"course._id\">{{\n            course.name\n          }}</nb-option>\n        </nb-select>\n      </div>\n\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Batch\"\n          fullWidth\n          status=\"basic\"\n          (selectedChange)=\"onSelectBatch($event)\"\n        >\n          <nb-option value=\"\">Select Batch</nb-option>\n          <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n            batch.batchCode\n          }}</nb-option>\n        </nb-select>\n      </div>\n    </div>\n\n    <br />\n\n    <div *ngIf=\"schedules.length > 0; else no_schedule\">\n      <div class=\"row\">\n        <div class=\"col-sm-2\">\n          <h6>#</h6>\n        </div>\n        <div class=\"col-sm-2\">\n          <h6>Start</h6>\n        </div>\n        <div class=\"col-sm-2\">\n          <h6>End</h6>\n        </div>\n      </div>\n\n      <br />\n\n      <div>\n        <div class=\"row\" *ngFor=\"let schedule of schedules; let i = index\">\n          <div class=\"col-sm-2\">\n            <p>{{ i + 1 }}</p>\n          </div>\n          <div class=\"col-sm-2\">\n            <p>{{ schedule.scheduleStart }}</p>\n          </div>\n          <div class=\"col-sm-2\">\n            <p>{{ schedule.scheduleEnd }}</p>\n          </div>\n          <div class=\"col-sm-4 text-right\">\n            <button class=\"mr-3\" nbButton status=\"primary\" (click)=\"viewSchedule(schedule._id)\">\n              View\n            </button>\n            <button class=\"mr-3\" nbButton status=\"\" (click)=\"editSchedule(schedule._id)\">\n              Edit\n            </button>\n            <button nbButton status=\"danger\" (click)=\"deleteSchedule(schedule._id)\">Del</button>\n          </div>\n        </div>\n      </div>\n    </div>\n    <ng-template #no_schedule>\n      <h6 class=\"text-center mt-5\">No Schedule</h6>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<nb-card>\n  <nb-card-header>\n    <button class=\"btn btn-yellow-black float-right\" (click)=\"addSchedule()\">\n      Add Schedule\n    </button>\n    <p style=\"font-weight: bold;\">Manage Schedule</p>\n  </nb-card-header>\n  <nb-card-body *ngIf=\"display\">\n    <div class=\"row\">\n      <div class=\"col-sm-6\"></div>\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Course\"\n          status=\"basic\"\n          fullWidth\n          (selectedChange)=\"onSelectCourse($event)\"\n        >\n          <nb-option value=\"all\">All</nb-option>\n          <nb-option *ngFor=\"let course of institute.course\" [value]=\"course._id\">{{\n            course.name\n          }}</nb-option>\n        </nb-select>\n      </div>\n\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Batch\"\n          fullWidth\n          status=\"basic\"\n          (selectedChange)=\"onSelectBatch($event)\"\n        >\n          <nb-option value=\"all\">All</nb-option>\n          <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n            batch.batchCode\n          }}</nb-option>\n        </nb-select>\n      </div>\n    </div>\n\n    <br />\n\n    <div class=\"table-responsive\" *ngIf=\"schedules.length > 0; else no_schedule\">\n      <table class=\"table table-borderless\">\n        <thead>\n          <tr>\n            <th>#</th>\n            <th>Course</th>\n            <th>Batch</th>\n            <th>Start</th>\n            <th>End</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let schedule of schedules; let i = index\">\n            <td>{{ i + 1 }}</td>\n            <td>{{ schedule.courseId }}</td>\n            <td>{{ schedule.batchId }}</td>\n            <td>{{ schedule.scheduleStart }}</td>\n            <td>{{ schedule.scheduleEnd }}</td>\n            <td>\n              <button class=\"mr-3\" nbButton status=\"primary\" (click)=\"viewSchedule(schedule._id)\">\n                View\n              </button>\n              <button class=\"mr-3\" nbButton status=\"\" (click)=\"editSchedule(schedule._id)\">\n                Edit\n              </button>\n              <button nbButton status=\"danger\" (click)=\"deleteSchedule(schedule._id)\">\n                Delete\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    <ng-template #no_schedule>\n      <h6 class=\"text-center mt-5\">No Schedule</h6>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -241,7 +281,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<button nbButton (click)=\"back()\" status=\"warning\" style=\"color: black;\">Manage Schedule</button>\n<nb-card *ngIf=\"display\">\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Course</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.courseId }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Batch</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.batchId }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Schedule Start</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.scheduleStart }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Schedule End</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.scheduleEnd }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Recurrence at the time of definition</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        {{ schedule.recurrence === 'true' ? 'Yes' : 'No' }}\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-12\">\n        <div class=\"table-responsive\">\n          <table class=\"table table-borderless\">\n            <thead>\n              <tr>\n                <th>#</th>\n                <th>Day</th>\n                <th>Date</th>\n                <th>Start Time</th>\n                <th>End Time</th>\n                <th>Topic</th>\n                <th>Teacher</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let day of schedule.days; let i = index\">\n                <td>\n                  {{ i + 1 }}\n                </td>\n                <td>\n                  {{ day.day }}\n                </td>\n                <td>\n                  {{ day.date }}\n                </td>\n                <td>\n                  {{ day.startTime ? day.startTime : '--' }}\n                </td>\n                <td>\n                  {{ day.endTime ? day.endTime : '--' }}\n                </td>\n                <td>\n                  {{ day.topic ? day.topic : '--' }}\n                </td>\n                <td>\n                  {{ day.teacher ? day.teacher : '--' }}\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n    </div>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    <button class=\"btn btn-yellow-black float-right\" (click)=\"back()\">\n      Manage Schedule\n    </button>\n  </nb-card-header>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Course</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.courseId }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Batch</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.batchId }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Schedule Start</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.scheduleStart }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Schedule End</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.scheduleEnd }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Recurrence at the time of definition</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        {{ schedule.recurrence === 'true' ? 'Yes' : 'No' }}\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-12\">\n        <div class=\"table-responsive\">\n          <table class=\"table table-borderless\">\n            <thead>\n              <tr>\n                <th>#</th>\n                <th>Day</th>\n                <th>Date</th>\n                <th>Start Time</th>\n                <th>End Time</th>\n                <th>Topic</th>\n                <th>Teacher</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let day of schedule.days; let i = index\">\n                <td>\n                  {{ i + 1 }}\n                </td>\n                <td>\n                  {{ day.day }}\n                </td>\n                <td>\n                  {{ day.date }}\n                </td>\n                <td>\n                  {{ day.startTime ? day.startTime : '--' }}\n                </td>\n                <td>\n                  {{ day.endTime ? day.endTime : '--' }}\n                </td>\n                <td>\n                  {{ day.topic ? day.topic : '--' }}\n                </td>\n                <td>\n                  {{ day.teacher ? day.teacher : '--' }}\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n    </div>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -598,7 +638,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               currency: 'INR',
               name: 'eduatlas',
               description: 'Test Transaction',
-              image: 'https://example.com/your_logo',
+              image: '../../../../assets/images/logo.png',
               // tslint:disable-next-line: max-line-length
               order_id: '',
               handler: function handler(response) {
@@ -698,7 +738,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             _this4.showToast('top-right', 'success', 'Payment Verified Successfully');
 
             setTimeout(function () {
-              _this4.addInstituteAfterPayment(_this4.institute, res.orderId, res.receiptId);
+              // this.addInstituteAfterPayment(this.institute, res.orderId, res.receiptId);
+              _this4.activateInstitute(_this4.instituteId, res.orderId, res.receiptId);
             }, 1000);
           }, function (err) {
             // console.log(err);
@@ -706,8 +747,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           });
         }
       }, {
-        key: "addInstituteAfterPayment",
-        value: function addInstituteAfterPayment(institute, orderId, ReceiptId) {
+        key: "activateInstitute",
+        value: function activateInstitute(id, orderId, ReceiptId) {
           var _this5 = this;
 
           var paymentDetails = {
@@ -716,10 +757,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             orderId: orderId,
             receiptId: ReceiptId
           };
-          this.api.addInstitute(institute, paymentDetails).subscribe(function (data) {
-            _this5.user = data;
-
-            _this5.showToast('top-right', 'success', 'Institute Added Successfully');
+          this.api.activateInstitute(id, paymentDetails).subscribe(function (data) {
+            // this.user = data;
+            _this5.showToast('top-right', 'success', 'Institute Activated Successfully');
 
             setTimeout(function () {
               _this5.router.navigate(['/pages/home']);
@@ -729,9 +769,41 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           });
         }
       }, {
+        key: "addInstitute",
+        value: function addInstitute(institute) {
+          var _this6 = this;
+
+          this.api.addInstitute(institute).subscribe(function (data) {
+            if (data.instituteId) {
+              _this6.instituteId = data.instituteId;
+
+              _this6.showToast('top-right', 'success', 'Institute Added Successfully, Make Your Payment');
+
+              _this6.paymentDetails = _this6.paymentService.getPaymentDetails();
+              var orderDetails = {
+                userId: _this6.user._id,
+                userPhone: _this6.user.phone,
+                userName: _this6.user.name,
+                userEmail: _this6.user.email,
+                amount: _this6.paymentDetails.amount,
+                planType: _this6.paymentDetails.planType
+              };
+
+              _this6.generateOrder(orderDetails); // setTimeout(() => {
+              //   this.router.navigate(['/pages/home']);
+              // }, 1000);
+
+            } else {
+              _this6.showToast('top-right', 'danger', 'Something bad happened');
+            }
+          }, function (error) {
+            _this6.showToast('top-right', 'danger', error.message || 'Something bad happened');
+          });
+        }
+      }, {
         key: "onImagePicked",
         value: function onImagePicked(event) {
-          var _this6 = this;
+          var _this7 = this;
 
           var file = event.target.files[0];
           var imgExt = ['jpg', 'png'];
@@ -748,7 +820,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var reader = new FileReader();
 
           reader.onload = function () {
-            _this6.imagePreview = reader.result;
+            _this7.imagePreview = reader.result;
           };
 
           reader.readAsDataURL(file);
@@ -756,48 +828,48 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getInstitute",
         value: function getInstitute(id) {
-          var _this7 = this;
+          var _this8 = this;
 
           this.api.getInstitute(id).subscribe(function (data) {
-            _this7.myInstitute = data;
+            _this8.myInstitute = data;
 
-            _this7.firstForm.patchValue({
-              name: _this7.myInstitute.institute.basicInfo.name
+            _this8.firstForm.patchValue({
+              name: _this8.myInstitute.institute.basicInfo.name
             });
 
-            _this7.imagePreview = _this7.myInstitute.institute.basicInfo.logo.secure_url;
+            _this8.imagePreview = _this8.myInstitute.institute.basicInfo.logo.secure_url;
 
-            _this7.secondForm.patchValue({
-              instituteContact: _this7.myInstitute.institute.basicInfo.instituteContact,
+            _this8.secondForm.patchValue({
+              instituteContact: _this8.myInstitute.institute.basicInfo.instituteContact,
               address: {
-                addressLine: _this7.myInstitute.institute.address.addressLine,
-                locality: _this7.myInstitute.institute.address.locality,
-                state: _this7.myInstitute.institute.address.state,
-                pincode: _this7.myInstitute.institute.address.pincode
+                addressLine: _this8.myInstitute.institute.address.addressLine,
+                locality: _this8.myInstitute.institute.address.locality,
+                state: _this8.myInstitute.institute.address.state,
+                pincode: _this8.myInstitute.institute.address.pincode
               }
             });
 
-            if (_this7.myInstitute.institute.address.state) {
-              _this7.onChangeState(_this7.myInstitute.institute.address.state);
+            if (_this8.myInstitute.institute.address.state) {
+              _this8.onChangeState(_this8.myInstitute.institute.address.state);
             }
 
             setTimeout(function () {
-              _this7.secondForm.patchValue({
+              _this8.secondForm.patchValue({
                 address: {
-                  city: _this7.myInstitute.institute.address.city
+                  city: _this8.myInstitute.institute.address.city
                 }
               });
             }, 2000);
 
-            _this7.thirdForm.patchValue({
-              category: _this7.myInstitute.institute.category
+            _this8.thirdForm.patchValue({
+              category: _this8.myInstitute.institute.category
             });
 
-            _this7.thirdForm.get('instituteMetaTag').setValue([_this7.myInstitute.institute.metaTag[0]]);
+            _this8.thirdForm.get('instituteMetaTag').setValue([_this8.myInstitute.institute.metaTag[0]]);
 
-            _this7.myInstitute.institute.metaTag.forEach(function (tag, i) {
+            _this8.myInstitute.institute.metaTag.forEach(function (tag, i) {
               if (i !== 0) {
-                _this7.instituteMetaTag.push(_this7.fb.control(_this7.myInstitute.institute.metaTag[i]));
+                _this8.instituteMetaTag.push(_this8.fb.control(_this8.myInstitute.institute.metaTag[i]));
               }
             });
           });
@@ -806,22 +878,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCountries",
         value: function getCountries() {
-          var _this8 = this;
+          var _this9 = this;
 
           this.country.allCountries().subscribe(function (data) {
-            _this8.countryInfo = data.Countries;
-            _this8.stateInfo = _this8.countryInfo[100].States;
-            _this8.cityInfo = _this8.stateInfo[0].Cities;
+            _this9.countryInfo = data.Countries;
+            _this9.stateInfo = _this9.countryInfo[100].States;
+            _this9.cityInfo = _this9.stateInfo[0].Cities;
 
-            if (_this8.edit) {
-              _this8.getInstitute(_this8.instituteId);
+            if (_this9.edit) {
+              _this9.getInstitute(_this9.instituteId);
             } else {
-              _this8.display = false;
+              _this9.display = false;
             }
           }, function (err) {
-            _this8.showToast('top-right', 'danger', err.error.message || 'Cant fetch Countries');
+            _this9.showToast('top-right', 'danger', err.error.message || 'Cant fetch Countries');
 
-            _this8.display = false;
+            _this9.display = false;
           });
         }
       }, {
@@ -868,7 +940,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "thirdFormSubmit",
         value: function thirdFormSubmit() {
-          var _this9 = this;
+          var _this10 = this;
 
           this.thirdForm.markAsDirty();
           this.institute.category = this.thirdForm.value.category;
@@ -876,28 +948,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.edit === 'true') {
             this.api.updateInstitute(this.instituteId, this.institute).subscribe(function (res) {
-              _this9.showToast('top-right', 'success', 'Institute Updated Successfully');
+              _this10.showToast('top-right', 'success', 'Institute Updated Successfully');
 
               setTimeout(function () {
-                _this9.router.navigate(['/pages/home']);
+                _this10.router.navigate(['/pages/home']);
               }, 1000);
             }, function (error) {
-              _this9.showToast('top-right', 'danger', error.message || 'Something bad happened');
+              _this10.showToast('top-right', 'danger', error.message || 'Something bad happened');
             });
           }
 
           if (!this.edit) {
             // this.addInstituteAfterPayment(this.institute, '1233', '1234');
-            this.paymentDetails = this.paymentService.getPaymentDetails();
-            var orderDetails = {
-              userId: this.user._id,
-              userPhone: this.user._phone,
-              userName: this.user.name,
-              userEmail: this.user.email,
-              amount: this.paymentDetails.amount,
-              planType: this.paymentDetails.planType
-            };
-            this.generateOrder(orderDetails);
+            this.addInstitute(this.institute);
           }
         }
       }, {
@@ -1075,13 +1138,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getInstitutes",
         value: function getInstitutes() {
-          var _this10 = this;
+          var _this11 = this;
 
           var user = this.authService.getUser();
 
           if (user && user.role === 'institute') {
             this.api.getInstitutes().subscribe(function (institutes) {
-              _this10.institutes = institutes;
+              _this11.institutes = institutes;
 
               if (institutes.length > 0) {
                 _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][2].hidden = true;
@@ -1109,29 +1172,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "delete",
         value: function _delete(id) {
-          var _this11 = this;
+          var _this12 = this;
 
           var confirm = window.confirm('Are u sure, You want to delete this Institute/Branch?');
 
           if (confirm) {
             this.api.deleteInstitute(id).subscribe(function (res) {
-              var i = _this11.institutes.findIndex(function (inst) {
+              var i = _this12.institutes.findIndex(function (inst) {
                 return inst._id === id;
               });
 
               if (i !== -1) {
-                _this11.institutes.splice(i, 1);
+                _this12.institutes.splice(i, 1);
 
-                _this11.showToast('top-right', 'success', 'Institute Successfully deleted.');
+                _this12.showToast('top-right', 'success', 'Institute Successfully deleted.');
               }
 
-              if (_this11.institutes.length < 2) {
+              if (_this12.institutes.length < 2) {
                 _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][2].hidden = true;
                 _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][3].hidden = true;
                 _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][4].hidden = true;
               }
             }, function (err) {
-              _this11.showToast('top-right', 'danger', 'Institute deletion Failed.');
+              _this12.showToast('top-right', 'danger', 'Institute deletion Failed.');
             });
           }
         }
@@ -1267,10 +1330,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getInstitute",
         value: function getInstitute(id) {
-          var _this12 = this;
+          var _this13 = this;
 
           this.api.getInstitute(id).subscribe(function (data) {
-            _this12.institute = JSON.parse(JSON.stringify(data));
+            _this13.institute = JSON.parse(JSON.stringify(data));
             _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][3].children[0].link = '/pages/institute/add-students/' + id;
             _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][2].link = '/pages/dashboard/' + id;
           });
@@ -1375,16 +1438,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _nebular_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @nebular/theme */
     "./node_modules/@nebular/theme/fesm2015/index.js");
+    /* harmony import */
+
+
+    var _services_chat_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ../../../services/chat.service */
+    "./src/app/services/chat.service.ts");
 
     var AddStudentsComponent = /*#__PURE__*/function () {
-      function AddStudentsComponent(fb, api, router, route, toasterService) {
+      function AddStudentsComponent(fb, api, router, route, toasterService, chatService) {
         _classCallCheck(this, AddStudentsComponent);
 
         this.fb = fb;
         this.api = api;
         this.router = router;
         this.route = route;
-        this.toasterService = toasterService; // Mode of Payments
+        this.toasterService = toasterService;
+        this.chatService = chatService; // Mode of Payments
 
         this.modes = ['Cash', 'Cheque/DD', 'Card', 'Others'];
         this.dataFetched = false;
@@ -1393,7 +1463,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(AddStudentsComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this13 = this;
+          var _this14 = this;
 
           this.alreadyRegistered = false;
           this.otpSent = false;
@@ -1411,19 +1481,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.instituteId = this.route.snapshot.paramMap.get('id'); // Get and set query parameters
 
           this.route.queryParams.subscribe(function (data) {
-            _this13.studentEduId = data.student;
-            _this13.courseId = data.course;
-            _this13.edit = data.edit; // Construct Eduatlas Id Form
+            _this14.studentEduId = data.student;
+            _this14.courseId = data.course;
+            _this14.edit = data.edit; // Construct Eduatlas Id Form
 
-            _this13.eduAtlasStudentIdForm = _this13.fb.group({
+            _this14.eduAtlasStudentIdForm = _this14.fb.group({
               eduAtlasId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
             }); // Construct OTP Form
 
-            _this13.otpForm = _this13.fb.group({
+            _this14.otpForm = _this14.fb.group({
               otp: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
             }); // Construct Student Form
 
-            _this13.studentForm = _this13.fb.group({
+            _this14.studentForm = _this14.fb.group({
               // Student Basic Details
               name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
               studentEmail: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email])],
@@ -1434,74 +1504,91 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               parentEmail: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email],
               address: [''],
               // Student Course Details
-              courseDetails: _this13.fb.group({
+              courseDetails: _this14.fb.group({
                 course: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
                 batch: [''],
                 rollNo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
                 discount: [''],
+                additionalDiscountType: ['percentage'],
                 additionalDiscount: [''],
                 netPayable: ['']
+              }, {
+                validator: _this14.discountValidator.bind(_this14)
               }),
               // Course Material Records
               materialRecord: ['']
             }); // Fee Details Form
 
-            _this13.feeDetailsForm = _this13.fb.group({
-              installmentType: [_this13.installmentType],
-              date: [_this13.constructDate(_this13.date)],
+            _this14.feeDetailsForm = _this14.fb.group({
+              installmentType: [_this14.installmentType],
+              date: [_this14.constructDate(_this14.date)],
               noOfInstallments: ['1'],
               amountCollected: ['0'],
               totalAmount: ['0'],
               pendingAmount: ['0'],
               // Installments Form Array
-              installments: _this13.fb.array([])
+              installments: _this14.fb.array([])
             }); // Initially Installment Type is Disabled
 
-            _this13.feeDetailsForm.get('installmentType').disable(); // Call onSelectInstallmentType() with initial Value i.e. 0
+            _this14.feeDetailsForm.get('installmentType').disable(); // Call onSelectInstallmentType() with initial Value i.e. 0
 
 
-            _this13.onSelectInstallmentType(_this13.installmentType); // Call GetCourseTd() to get all courses related to Institute
+            _this14.onSelectInstallmentType(_this14.installmentType); // Call GetCourseTd() to get all courses related to Institute
 
 
-            _this13.getCourseTd(_this13.instituteId); // Check Editing Mode
+            _this14.getCourseTd(_this14.instituteId); // Check Editing Mode
 
 
-            if (_this13.edit === 'true') {
+            if (_this14.edit === 'true') {
               // Already Registered is set to true
-              _this13.alreadyRegistered = true; // get Student for Editing using studentEduId, instituteId and CourseId
+              _this14.alreadyRegistered = true; // get Student for Editing using studentEduId, instituteId and CourseId
 
-              _this13.getStudent(_this13.studentEduId, _this13.instituteId, _this13.courseId);
+              _this14.getStudent(_this14.studentEduId, _this14.instituteId, _this14.courseId);
             }
           });
+        }
+      }, {
+        key: "discountValidator",
+        value: function discountValidator(group) {
+          var discountType = group.value.additionalDiscountType;
+          var amount = group.value.additionalDiscount;
+
+          if (discountType === 'percentage' && amount > 100) {
+            return {
+              invalidDiscount: true
+            };
+          }
+
+          return null;
         } // get Student Form
 
       }, {
         key: "onStudentSearch",
         // Search Student By Eduatlas Id
         value: function onStudentSearch() {
-          var _this14 = this;
+          var _this15 = this;
 
           if (this.eduAtlasStudentIdForm.valid) {
             // Construct Eduatlas Id to search student
             var studentEduId = "".concat(this.eduAtlasStudentIdControl['eduAtlasId'].value);
             this.api.sendOtpForGetUserDetails(studentEduId).subscribe(function (res) {
               if (res) {
-                _this14.otpSent = true;
-                _this14.phone = res.phone;
+                _this15.otpSent = true;
+                _this15.phone = res.phone;
 
-                _this14.showToaster('top-right', 'success', res.message);
+                _this15.showToaster('top-right', 'success', res.message);
               } else {
-                _this14.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
+                _this15.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
               }
             }, function (err) {
-              _this14.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
+              _this15.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
             });
           }
         }
       }, {
         key: "verifyOtp",
         value: function verifyOtp() {
-          var _this15 = this;
+          var _this16 = this;
 
           if (this.otpSent && this.otpForm.valid) {
             var otp = this.otpForm.value.otp;
@@ -1511,20 +1598,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               phone: this.phone
             };
             this.api.verifyUserOtp(verificationData).subscribe(function (data) {
-              _this15.getOneStudent(_this15.eduAtlasStudentIdForm.value.eduAtlasId);
+              _this16.getOneStudent(_this16.eduAtlasStudentIdForm.value.eduAtlasId);
             }, function (error) {
-              _this15.showToaster('top-right', 'danger', 'Invalid OTP');
+              _this16.showToaster('top-right', 'danger', 'Invalid OTP');
             });
           }
         }
       }, {
         key: "getOneStudent",
         value: function getOneStudent(eduId) {
-          var _this16 = this;
+          var _this17 = this;
 
           this.api.getOneStudent(eduId).subscribe(function (data) {
             if (data) {
-              _this16.studentForm.patchValue({
+              _this17.fetchedStudent = data;
+
+              _this17.studentForm.patchValue({
                 name: data.basicDetails.name,
                 studentEmail: data.basicDetails.studentEmail,
                 contact: data.basicDetails.studentContact,
@@ -1536,21 +1625,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               // (Enable Only in Add New Student Mode)
 
 
-              _this16.studentForm.get('studentEmail').disable(); // IN editing Mode or Already Registered mode Student Contact field is Disabled
+              _this17.studentForm.get('studentEmail').disable(); // IN editing Mode or Already Registered mode Student Contact field is Disabled
               // (Enable Only in Add New Student Mode)
 
 
-              _this16.studentForm.get('contact').disable(); // Set Class Level Eduatlas Id
+              _this17.studentForm.get('contact').disable(); // Set Class Level Eduatlas Id
 
 
-              _this16.studentEduId = data.eduAtlasId;
-              _this16.otpSent = false;
-              _this16.phone = null;
-              _this16.dataFetched = true;
+              _this17.studentEduId = data.eduAtlasId;
+              _this17.otpSent = false;
+              _this17.phone = null;
+              _this17.dataFetched = true;
 
-              _this16.eduAtlasStudentIdForm.get('eduAtlasId').disable();
+              _this17.eduAtlasStudentIdForm.get('eduAtlasId').disable();
             } else {
-              _this16.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
+              _this17.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
             }
           });
         } // Change if Student is Already Registered
@@ -1569,18 +1658,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             // set to null if previously set
 
             this.studentEduId = null;
+            this.fetchedStudent = null;
           }
         } // Get All Courses of Institute / Get one Institute
 
       }, {
         key: "getCourseTd",
         value: function getCourseTd(id) {
-          var _this17 = this;
+          var _this18 = this;
 
           this.api.getCourseTD(id).subscribe(function (data) {
-            _this17.institute = data;
-            _this17.courses = data.course;
-            _this17.discounts = data.discount;
+            _this18.institute = data;
+            _this18.courses = data.course;
+            _this18.discounts = data.discount;
           });
         } // Fee Details Form Date is Changed
 
@@ -1663,24 +1753,41 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function calculateNetPayableAmount() {
           // Set Class Level netPayable to 0
           this.netPayable = 0;
-          var calculatedAmount = 0; // Get Additional Discount
+          var totalDiscountPercentage = 0;
+          var totalDiscountAmount = 0;
+          var calculatedAmount = 0; // Get Total Fees of Course
 
-          var additionalDiscount = this.studentForm.get(['courseDetails', 'additionalDiscount']).value;
+          var totalFee = this.selectedCourse ? +this.selectedCourse.totalFee : 0; // Get Additional Discount
 
-          if (this.selectedCourse && this.selectedCourse.fees) {
-            calculatedAmount = this.selectedCourse.fees;
+          var discountType = this.selectedDiscount ? this.selectedDiscount.discountType : ''; // Get Additional Discount Type
 
-            if (this.selectedDiscount && this.selectedDiscount.amount) {
-              if (this.selectedDiscount.discountType === 'percentage') {
-                calculatedAmount = this.selectedCourse.fees - this.selectedDiscount.amount / 100 * this.selectedCourse.fees;
+          var additionalDiscountType = this.studentForm.get(['courseDetails', 'additionalDiscountType']).value; // Get Discount
+
+          var discount = this.selectedDiscount ? +this.selectedDiscount.amount : 0; // Get Discount Type
+
+          var additionalDiscount = +this.studentForm.get(['courseDetails', 'additionalDiscount']).value;
+
+          if (this.selectedCourse && totalFee) {
+            calculatedAmount = totalFee;
+
+            if (this.selectedDiscount && discountType) {
+              if (discountType === 'percentage') {
+                totalDiscountPercentage += discount;
               } else {
-                calculatedAmount = this.selectedCourse.fees - this.selectedDiscount.amount;
+                totalDiscountAmount += discount;
               }
             }
 
             if (additionalDiscount) {
-              calculatedAmount = calculatedAmount - additionalDiscount / 100 * calculatedAmount;
+              if (additionalDiscountType === 'percentage') {
+                totalDiscountPercentage += additionalDiscount;
+              } else {
+                totalDiscountAmount += additionalDiscount;
+              }
             }
+
+            var percentageAmount = totalDiscountPercentage / 100 * totalFee;
+            calculatedAmount = totalFee - totalDiscountAmount - percentageAmount;
           } // Set Class Level netPayable to Calculated Net PAyable
 
 
@@ -1781,7 +1888,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             // on payment Quarterly installment Type noOfInstallments id disabled
             this.feeDetailsForm.get('noOfInstallments').disable(); // call generateNoOfInstallments for only one installment
 
-            this.generateNoOfInstallments('3');
+            this.generateNoOfInstallments('4');
           } else if (installmentType === '4') {
             // on payment Monthly installment Type noOfInstallments id disabled
             this.feeDetailsForm.get('noOfInstallments').disable(); // call generateNoOfInstallments for only one installment
@@ -1814,6 +1921,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               paidOn: '',
               amount: '',
               paymentMode: '',
+              bankDetails: '',
+              transDetails: '',
+              paymentDate: '',
               amountPending: ''
             };
             this.addInstallment(installmentData);
@@ -1834,12 +1944,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setFees",
         value: function setFees() {
-          var _this18 = this;
+          var _this19 = this;
 
           var amount = this.netPayable / +this.noOfInstallments;
           var installments = this.feeDetailsForm.get('installments');
           installments.controls.forEach(function (installment, i) {
-            var amountPending = _this18.pendingAmount - +(amount * (i + 1));
+            var amountPending = _this19.pendingAmount - +(amount * (i + 1));
             amountPending = amountPending < 0 ? 0 : amountPending;
             installment.patchValue({
               amount: amount.toFixed(2),
@@ -1851,7 +1961,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setDates",
         value: function setDates() {
-          var _this19 = this;
+          var _this20 = this;
 
           var interval = 2592000000; // 30 Days Interval in milliseconds
           // calculate next installment duration
@@ -1860,7 +1970,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var installments = this.feeDetailsForm.get('installments');
           installments.controls.forEach(function (installment, i) {
             // Construct next Installment Date (first installment date is current date)
-            var date = _this19.constructDate(_this19.date + interval * (installmentDuration * i)); // set next installment Date
+            var date = _this20.constructDate(_this20.date + interval * (installmentDuration * i)); // set next installment Date
 
 
             installment.patchValue({
@@ -1901,6 +2011,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             paidOn: [installmentData.paidOn ? installmentData.paidOn : ''],
             amount: [installmentData.amount ? installmentData.amount : ''],
             paymentMode: [installmentData.paymentMode ? installmentData.paymentMode : ''],
+            bankDetails: [installmentData.bankDetails ? installmentData.bankDetails : ''],
+            transDetails: [installmentData.transDetails ? installmentData.transDetails : ''],
+            paymentDate: [installmentData.paymentDate ? installmentData.paymentDate : ''],
             amountPending: [installmentData.amountPending ? installmentData.amountPending : '']
           });
         } // Add INstallment FormGroup to INstallment FormArray in fee details form
@@ -1922,121 +2035,126 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getStudent",
         value: function getStudent(studentEduId, institute, course) {
-          var _this20 = this;
+          var _this21 = this;
 
           this.api.getOneStudentByInstitute({
             eduatlasId: studentEduId,
             instituteId: institute,
             courseId: course
           }).subscribe(function (data) {
-            _this20.student = data[0]; // Assign student fees (Later change)
+            _this21.student = data[0]; // Assign student fees (Later change)
 
-            _this20.studentFees = _this20.student.fees; // Set Student EduAtlas Id
+            _this21.studentFees = _this21.student.fees; // Set Student EduAtlas Id
 
-            _this20.eduAtlasStudentIdForm.patchValue({
-              eduAtlasId: _this20.studentEduId
+            _this21.eduAtlasStudentIdForm.patchValue({
+              eduAtlasId: _this21.studentEduId
             });
 
-            _this20.eduAtlasStudentIdForm.get('eduAtlasId').disable(); // Set Student Form Values
+            _this21.eduAtlasStudentIdForm.get('eduAtlasId').disable(); // Set Student Form Values
 
 
-            _this20.studentForm.patchValue({
+            _this21.studentForm.patchValue({
               // Set Student Basic Details
-              name: _this20.student.basicDetails.name,
-              studentEmail: _this20.student.basicDetails.studentEmail,
-              contact: _this20.student.basicDetails.studentContact,
+              name: _this21.student.basicDetails.name,
+              studentEmail: _this21.student.basicDetails.studentEmail,
+              contact: _this21.student.basicDetails.studentContact,
               // Set Student Parent Details
-              parentName: _this20.student.parentDetails.name,
-              parentContact: _this20.student.parentDetails.parentContact,
-              parentEmail: _this20.student.parentDetails.parentEmail,
+              parentName: _this21.student.parentDetails.name,
+              parentContact: _this21.student.parentDetails.parentContact,
+              parentEmail: _this21.student.parentDetails.parentEmail,
               // Set Student address
-              address: _this20.student.parentDetails.address,
+              address: _this21.student.parentDetails.address,
               // Set Student Course Details
               courseDetails: {
-                course: _this20.student.instituteDetails.courseId,
-                discount: _this20.student.instituteDetails.discount,
-                rollNo: _this20.student.instituteDetails.rollNumber,
-                additionalDiscount: _this20.student.instituteDetails.additionalDiscount,
-                netPayable: _this20.student.instituteDetails.netPayble
+                course: _this21.student.instituteDetails.courseId,
+                discount: _this21.student.instituteDetails.discount,
+                rollNo: _this21.student.instituteDetails.rollNumber,
+                additionalDiscount: _this21.student.instituteDetails.additionalDiscount,
+                netPayable: _this21.student.instituteDetails.netPayable
               },
-              materialRecord: _this20.student.instituteDetails.materialRecord
+              materialRecord: _this21.student.instituteDetails.materialRecord
             });
 
-            _this20.dataFetched = true; // Disable Student email in editing mode
+            _this21.dataFetched = true; // Disable Student email in editing mode
 
-            _this20.studentForm.get('studentEmail').disable(); // Disable Student contact in editing mode
-
-
-            _this20.studentForm.get('contact').disable(); // Select and set Student Course
+            _this21.studentForm.get('studentEmail').disable(); // Disable Student contact in editing mode
 
 
-            _this20.onSelectCourse(_this20.student.instituteDetails.courseId); // Select Student batch if assigned
+            _this21.studentForm.get('contact').disable(); // Select and set Student Course
+
+
+            _this21.onSelectCourse(_this21.student.instituteDetails.courseId); // Select Student batch if assigned
 
 
             setTimeout(function () {
-              _this20.studentForm.get('courseDetails').patchValue({
-                batch: _this20.student.instituteDetails.batchId
+              _this21.studentForm.get('courseDetails').patchValue({
+                batch: _this21.student.instituteDetails.batchId
               });
             }, 200); // Set Fee Details Form
 
-            _this20.feeDetailsForm.patchValue({
-              installmentType: _this20.studentFees.installmentType,
-              noOfInstallments: _this20.studentFees.noOfInstallments,
-              date: _this20.studentFees.date,
-              totalAmount: _this20.studentFees.totalAmount,
-              pendingAmount: _this20.studentFees.pendingAmount,
-              amountCollected: _this20.studentFees.amountCollected
+            _this21.feeDetailsForm.patchValue({
+              installmentType: _this21.studentFees.installmentType,
+              noOfInstallments: _this21.studentFees.noOfInstallments,
+              date: _this21.studentFees.date,
+              totalAmount: _this21.studentFees.totalAmount,
+              pendingAmount: _this21.studentFees.pendingAmount,
+              amountCollected: _this21.studentFees.amountCollected
             });
 
-            _this20.feeDetailsForm.get('installmentType').disable();
+            _this21.feeDetailsForm.get('installmentType').disable();
 
-            _this20.feeDetailsForm.get('noOfInstallments').disable();
+            _this21.feeDetailsForm.get('noOfInstallments').disable();
 
-            _this20.feeDetailsForm.get('date').disable();
+            _this21.feeDetailsForm.get('date').disable();
 
-            _this20.netPayable = _this20.studentFees.totalAmount;
-            _this20.pendingAmount = _this20.studentFees.pendingAmount;
-            _this20.amountCollected = _this20.studentFees.amountCollected;
+            _this21.netPayable = _this21.studentFees.totalAmount;
+            _this21.pendingAmount = _this21.studentFees.pendingAmount;
+            _this21.amountCollected = _this21.studentFees.amountCollected;
 
-            var installment = _this20.feeDetailsForm.get('installments');
+            var installment = _this21.feeDetailsForm.get('installments');
 
             installment.controls = [];
 
-            _this20.studentFees.installments.forEach(function (curInstallment, i) {
+            _this21.studentFees.installments.forEach(function (curInstallment, i) {
               var installmentData = {
                 installmentNo: curInstallment.installmentNo,
                 paidStatus: curInstallment.paidStatus,
                 paidOn: curInstallment.paidOn,
                 amount: curInstallment.amount,
                 paymentMode: curInstallment.paymentMode,
+                paymentDate: curInstallment.paymentDate,
+                bankDetails: curInstallment.bankDetails,
+                transDetails: curInstallment.transDetails,
                 amountPending: curInstallment.amountPending
               };
 
-              _this20.addInstallment(installmentData); // if (curInstallment.paidStatus === 'true') {
+              _this21.addInstallment(installmentData); // if (curInstallment.paidStatus === 'true') {
               //   installment.controls[i].get('paidStatus').disable();
               //   installment.controls[i].get('paymentMode').disable();
               // }
 
             });
 
-            _this20.disableFeeFormFields();
+            _this21.disableFeeFormFields();
           });
         }
       }, {
         key: "addFees",
         value: function addFees(studentId, studentEduatlasId) {
-          var _this21 = this;
+          var _this22 = this;
 
           this.enableFeeFormFields();
           this.feeDetailsForm.value.noOfInstallments = this.noOfInstallments;
           var feeFormValue = this.feeDetailsForm.value;
           this.disableFeeFormFields();
           this.api.addStudentFees(studentId, this.instituteId, studentEduatlasId, this.studentForm.get('courseDetails').value.course, feeFormValue).subscribe(function (res) {
-            _this21.showToaster('top-right', 'success', 'New Student Course Added Successfully!');
+            _this22.chatService.getChatMembers();
 
-            _this21.router.navigate(["/pages/institute/manage-students/".concat(_this21.instituteId)]);
+            _this22.showToaster('top-right', 'success', 'New Student Course Added Successfully!');
+
+            _this22.router.navigate(["/pages/institute/manage-students/".concat(_this22.instituteId)]);
           }, function (err) {
-            _this21.showToaster('top-right', 'danger', err.error.message);
+            _this22.showToaster('top-right', 'danger', err.error.message);
           });
         }
       }, {
@@ -2049,25 +2167,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateFees",
         value: function updateFees(studentId, feeId) {
-          var _this22 = this;
+          var _this23 = this;
 
           this.enableFeeFormFields();
           this.feeDetailsForm.value.noOfInstallments = this.noOfInstallments;
           var feeFormValue = this.feeDetailsForm.value;
           this.disableFeeFormFields();
           this.api.updateStudentFees(this.studentFees._id, feeFormValue).subscribe(function (res) {
-            _this22.showToaster('top-right', 'success', 'Student Fees Successfully!');
+            _this23.showToaster('top-right', 'success', 'Student Fees Successfully!');
 
-            _this22.router.navigate(["/pages/institute/manage-students/".concat(_this22.instituteId)]);
+            _this23.router.navigate(["/pages/institute/manage-students/".concat(_this23.instituteId)]);
           }, function (err) {
-            _this22.showToaster('top-right', 'danger', err.error.message);
+            _this23.showToaster('top-right', 'danger', err.error.message);
           });
         } // Submit form From DOM
 
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this23 = this;
+          var _this24 = this;
 
           this.studentForm.markAllAsTouched();
 
@@ -2096,22 +2214,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               // If Course Changed add course to student course
               this.api.addStudentCourse(this.studentForm.value, this.instituteId, this.studentEduId).subscribe(function (res) {
                 // Call Student Add Fees Api
-                _this23.addFees(_this23.student._id, _this23.studentEduId);
+                _this24.addFees(_this24.student._id, _this24.studentEduId);
               }, function (err) {
-                return _this23.showToaster('top-right', 'danger', err.error.message);
+                return _this24.showToaster('top-right', 'danger', err.error.message);
               });
             } else if (this.student.instituteDetails.batchId !== this.studentForm.value.courseDetails.batch || this.student.instituteDetails.rollNumber !== this.studentForm.value.courseDetails.rollNo) {
               // If Batch changed then update student batch in student Course
               this.api.updateStudentCourse(this.studentForm.value, this.student._id, this.student.instituteDetails._id, this.instituteId, this.studentEduId).subscribe(function (res) {
-                if (_this23.feesUpdated) {
-                  _this23.updateFees(_this23.student._id, _this23.studentFees._id);
+                if (_this24.feesUpdated) {
+                  _this24.updateFees(_this24.student._id, _this24.studentFees._id);
                 } else {
-                  _this23.showToaster('top-right', 'success', 'Student Course Updated Successfully!');
+                  _this24.showToaster('top-right', 'success', 'Student Course Updated Successfully!');
 
-                  _this23.router.navigate(["/pages/institute/manage-students/".concat(_this23.instituteId)]);
+                  _this24.router.navigate(["/pages/institute/manage-students/".concat(_this24.instituteId)]);
                 }
               }, function (err) {
-                return _this23.showToaster('top-right', 'danger', err.error.message);
+                return _this24.showToaster('top-right', 'danger', err.error.message);
               });
             } else if (this.feesUpdated) {
               this.updateFees(this.student._id, this.studentFees._id);
@@ -2141,27 +2259,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (!this.alreadyRegistered) {
               // If student is not already registered then Add new Student in DB
               this.api.addStudent(this.studentForm.value, this.instituteId).subscribe(function (res) {
-                _this23.addFees(res._id, res.eduAtlasId);
+                _this24.addFees(res._id, res.eduAtlasId);
               }, function (err) {
                 if (err.error.message.includes('E11000 duplicate key error collection')) {
-                  _this23.showToaster('top-right', 'danger', 'This Student Already Exist, Please Search Student By EDU-Atlas ID');
+                  _this24.showToaster('top-right', 'danger', 'This Student Already Exist, Please Search Student By EDU-Atlas ID');
 
-                  _this23.alreadyRegistered = true;
+                  _this24.alreadyRegistered = true;
                   return;
                 }
 
-                _this23.alreadyRegistered = true;
+                _this24.alreadyRegistered = true;
 
-                _this23.showToaster('top-right', 'danger', err.error.message);
+                _this24.showToaster('top-right', 'danger', err.error.message);
               });
             } else {
               if (this.studentEduId) {
                 // If Student is Already registered then add new course to Student Course
                 this.api.addStudentCourse(this.studentForm.value, this.instituteId, this.studentEduId).subscribe(function (res) {
                   // Call Student Add Fees Api
-                  _this23.addFees(_this23.student._id, _this23.studentEduId);
+                  _this24.addFees(_this24.student._id, _this24.studentEduId);
                 }, function (err) {
-                  return _this23.showToaster('top-right', 'danger', err.error.message);
+                  return _this24.showToaster('top-right', 'danger', err.error.message);
                 });
               } else {
                 this.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
@@ -2205,6 +2323,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
       }, {
         type: _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"]
+      }, {
+        type: _services_chat_service__WEBPACK_IMPORTED_MODULE_6__["SocketioService"]
       }];
     };
 
@@ -2216,7 +2336,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./add-students.component.scss */
       "./src/app/pages/institute/add-students/add-students.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"]])], AddStudentsComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"], _services_chat_service__WEBPACK_IMPORTED_MODULE_6__["SocketioService"]])], AddStudentsComponent);
     /***/
   },
 
@@ -2322,24 +2442,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           });
           this.instituteId = this.route.snapshot.paramMap.get('id');
           this.getCourseTd(this.instituteId);
+          this.noStudent = 'Select Course';
         }
       }, {
         key: "getStudents",
         value: function getStudents(id, courseId, batchId) {
-          var _this24 = this;
+          var _this25 = this;
 
           this.api.getActiveStudents(id, courseId, batchId).subscribe(function (data) {
-            _this24.students = data;
+            _this25.students = data;
+
+            if (data.length === 0) {
+              _this25.noStudent = 'No Record';
+            }
           });
         }
       }, {
         key: "getCourseTd",
         value: function getCourseTd(id) {
-          var _this25 = this;
+          var _this26 = this;
 
           this.api.getCourseTD(id).subscribe(function (data) {
-            _this25.institute = data;
-            _this25.courses = data.course;
+            _this26.institute = data;
+            _this26.courses = data.course;
           });
         }
       }, {
@@ -2374,20 +2499,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "delete",
         value: function _delete(eduAtlId, courseObjId) {
-          var _this26 = this;
+          var _this27 = this;
 
           var confirm = window.confirm('Are u sure, You want to delete this Student?');
 
           if (confirm) {
             this.api.deleteStudentCourse(courseObjId, eduAtlId).subscribe(function () {
-              var i = _this26.students.findIndex(function (student) {
+              var i = _this27.students.findIndex(function (student) {
                 return student.instituteDetails._id === courseObjId;
               });
 
               if (i !== -1) {
-                _this26.students.splice(i, 1);
+                _this27.students.splice(i, 1);
 
-                _this26.showToaster('top-right', 'success', 'New Student Deleted Successfully!');
+                _this27.showToaster('top-right', 'success', 'New Student Deleted Successfully!');
               }
             });
           }
@@ -2477,53 +2602,103 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @nebular/theme */
+    "./node_modules/@nebular/theme/fesm2015/index.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ../../../../../services/api.service */
     "./src/app/services/api.service.ts");
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @angular/common */
+    "./node_modules/@angular/common/fesm2015/common.js");
 
     var ViewStudentComponent = /*#__PURE__*/function () {
-      function ViewStudentComponent(api, route) {
+      function ViewStudentComponent(api, toasterService, route, router, location) {
         _classCallCheck(this, ViewStudentComponent);
 
         this.api = api;
+        this.toasterService = toasterService;
         this.route = route;
+        this.router = router;
+        this.location = location;
       }
 
       _createClass(ViewStudentComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this27 = this;
+          var _this28 = this;
 
           this.instituteId = this.route.snapshot.paramMap.get('id');
           this.route.queryParams.subscribe(function (data) {
-            _this27.studentEduId = data.student;
-            _this27.courseId = data.course;
+            _this28.studentEduId = data.student;
+            _this28.courseId = data.course;
           });
           this.getStudent(this.studentEduId, this.instituteId, this.courseId);
         }
       }, {
         key: "getStudent",
         value: function getStudent(student, institute, course) {
-          var _this28 = this;
+          var _this29 = this;
 
           this.api.getOneStudentByInstitute({
             eduatlasId: student,
             instituteId: institute,
             courseId: course
           }).subscribe(function (data) {
-            _this28.student = data[0];
+            _this29.student = data[0];
+          });
+        }
+      }, {
+        key: "edit",
+        value: function edit() {
+          this.router.navigate(["/pages/institute/add-students/".concat(this.instituteId, "/edit")], {
+            queryParams: {
+              student: this.studentEduId,
+              course: this.courseId,
+              edit: 'true'
+            }
+          });
+        }
+      }, {
+        key: "deleteStudent",
+        value: function deleteStudent() {
+          var _this30 = this;
+
+          var confirm = window.confirm('Are u sure, You want to delete this Student?');
+
+          if (confirm) {
+            this.api.deleteStudentCourse(this.courseId, this.studentEduId).subscribe(function () {
+              _this30.location.back();
+
+              _this30.showToaster('top-right', 'success', 'New Student Deleted Successfully!');
+            });
+          }
+        } // Show Toaster
+
+      }, {
+        key: "showToaster",
+        value: function showToaster(position, status, message) {
+          this.toasterService.show(status, message, {
+            position: position,
+            status: status
           });
         }
       }]);
@@ -2533,13 +2708,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     ViewStudentComponent.ctorParameters = function () {
       return [{
-        type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+        type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]
       }, {
-        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
+        type: _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+      }, {
+        type: _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"]
       }];
     };
 
-    ViewStudentComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    ViewStudentComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
       selector: 'ngx-view-student',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./view-student.component.html */
@@ -2547,7 +2728,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./view-student.component.scss */
       "./src/app/pages/institute/add-students/manage-students/view-student/view-student.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])], ViewStudentComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"]])], ViewStudentComponent);
     /***/
   },
 
@@ -2653,24 +2834,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           });
           this.instituteId = this.route.snapshot.paramMap.get('id');
           this.getCourseTd(this.instituteId);
+          this.noStudent = 'Select Course';
         }
       }, {
         key: "getStudents",
         value: function getStudents(id, courseId, batchId) {
-          var _this29 = this;
+          var _this31 = this;
 
           this.api.getPendingStudents(id, courseId).subscribe(function (data) {
-            _this29.students = data;
+            _this31.students = data;
+
+            if (data.length === 0) {
+              _this31.noStudent = 'No Record';
+            }
           });
         }
       }, {
         key: "getCourseTd",
         value: function getCourseTd(id) {
-          var _this30 = this;
+          var _this32 = this;
 
           this.api.getCourseTD(id).subscribe(function (data) {
-            _this30.institute = data;
-            _this30.courses = data.course;
+            _this32.institute = data;
+            _this32.courses = data.course;
           });
         }
       }, {
@@ -2705,20 +2891,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "delete",
         value: function _delete(eduAtlId, courseObjId) {
-          var _this31 = this;
+          var _this33 = this;
 
           var confirm = window.confirm('Are u sure, You want to delete this Student?');
 
           if (confirm) {
             this.api.deleteStudentCourse(courseObjId, eduAtlId).subscribe(function () {
-              var i = _this31.students.findIndex(function (student) {
+              var i = _this33.students.findIndex(function (student) {
                 return student.instituteDetails._id === courseObjId;
               });
 
               if (i !== -1) {
-                _this31.students.splice(i, 1);
+                _this33.students.splice(i, 1);
 
-                _this31.showToaster('top-right', 'success', 'New Student Deleted Successfully!');
+                _this33.showToaster('top-right', 'success', 'New Student Deleted Successfully!');
               }
             });
           }
@@ -2883,7 +3069,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getStudents",
         value: function getStudents() {
-          var _this32 = this;
+          var _this34 = this;
 
           this.students = [];
           this.attendance = [];
@@ -2896,9 +3082,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               batchId: this.attandanceform.get('batchId').value
             };
             this.api.getStudentsAttendance(studentsRequest).subscribe(function (data) {
-              _this32.students = data;
+              _this34.students = data;
 
-              _this32.students.sort(function (student1, student2) {
+              _this34.students.sort(function (student1, student2) {
                 if (parseInt(student1.studentRollNo) >= parseInt(student2.studentRollNo)) {
                   return 1;
                 } else {
@@ -2906,18 +3092,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 }
               });
 
-              _this32.students.map(function (student) {
+              _this34.students.map(function (student) {
                 student.attendanceStatus = student.attendanceStatus ? true : false;
                 return student;
               });
 
-              _this32.students.forEach(function (student) {
+              _this34.students.forEach(function (student) {
                 var attendance = {
                   studentId: student.studentId,
                   attendanceStatus: student.attendanceStatus ? true : false
                 };
 
-                _this32.attendance.push(attendance);
+                _this34.attendance.push(attendance);
               });
             });
           }
@@ -2925,11 +3111,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCourseTd",
         value: function getCourseTd(id) {
-          var _this33 = this;
+          var _this35 = this;
 
           this.api.getCourseTD(id).subscribe(function (data) {
-            _this33.batches = data.batch;
-            _this33.courses = data.course;
+            _this35.batches = data.batch;
+            _this35.courses = data.course;
           });
         }
       }, {
@@ -2967,7 +3153,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this34 = this;
+          var _this36 = this;
 
           var attendanceRequest = {
             date: this.attandanceform.get('date').value,
@@ -2977,16 +3163,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             attendance: this.attendance
           };
           this.api.addAttendance(attendanceRequest).subscribe(function (res) {
-            _this34.attandanceform.reset();
+            _this36.attandanceform.reset();
 
-            _this34.attandanceform.get('date').setValue(_this34.constructDate(_this34.date));
+            _this36.attandanceform.get('date').setValue(_this36.constructDate(_this36.date));
 
-            _this34.students = [];
-            _this34.attendance = [];
+            _this36.students = [];
+            _this36.attendance = [];
 
-            _this34.showToaster('top-right', 'success', 'Attendance Updated Succesfully');
+            _this36.showToaster('top-right', 'success', 'Attendance Updated Succesfully');
           }, function (err) {
-            return _this34.showToaster('top-right', 'danger', err.error.message);
+            return _this36.showToaster('top-right', 'danger', err.error.message);
           });
         }
       }]);
@@ -3216,6 +3402,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _onlineClasses_guard__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
     /*! ../../../onlineClasses.guard */
     "./src/app/onlineClasses.guard.ts");
+    /* harmony import */
+
+
+    var _leads_manage_leads_manage_lead_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
+    /*! ../../leads/manage-leads/manage-lead.component */
+    "./src/app/pages/leads/manage-leads/manage-lead.component.ts");
+    /* harmony import */
+
+
+    var _leads_add_leads_add_lead_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
+    /*! ../../leads/add-leads/add-lead.component */
+    "./src/app/pages/leads/add-leads/add-lead.component.ts");
 
     var routes = [{
       path: '',
@@ -3263,6 +3461,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         path: 'edit-schedule/:id',
         component: _schedule_add_schedule_add_schedule_component__WEBPACK_IMPORTED_MODULE_10__["AddScheduleComponent"]
+      }, {
+        path: 'manage-leads/:id',
+        component: _leads_manage_leads_manage_lead_component__WEBPACK_IMPORTED_MODULE_17__["ManageLeadComponent"]
+      }, {
+        path: 'add-leads/:id',
+        component: _leads_add_leads_add_lead_component__WEBPACK_IMPORTED_MODULE_18__["AddLeadComponent"]
       }, {
         path: 'branch-config',
         loadChildren: function loadChildren() {
@@ -3452,16 +3656,478 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _bManager_guard__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
     /*! ../../../bManager.guard */
     "./src/app/bManager.guard.ts");
+    /* harmony import */
+
+
+    var _leads_add_leads_add_lead_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(
+    /*! ../../leads/add-leads/add-lead.component */
+    "./src/app/pages/leads/add-leads/add-lead.component.ts");
+    /* harmony import */
+
+
+    var _leads_manage_leads_manage_lead_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(
+    /*! ../../leads/manage-leads/manage-lead.component */
+    "./src/app/pages/leads/manage-leads/manage-lead.component.ts");
 
     var InstituteModule = function InstituteModule() {
       _classCallCheck(this, InstituteModule);
     };
 
     InstituteModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      declarations: [_add_institute_add_institute_component__WEBPACK_IMPORTED_MODULE_6__["AddInstituteComponent"], _institute_component__WEBPACK_IMPORTED_MODULE_7__["InstituteComponent"], _add_students_add_students_component__WEBPACK_IMPORTED_MODULE_8__["AddStudentsComponent"], _add_students_manage_students_manage_students_component__WEBPACK_IMPORTED_MODULE_9__["ManageStudentsComponent"], _add_institute_manage_institute_manage_institute_component__WEBPACK_IMPORTED_MODULE_10__["ManageInstituteComponent"], _add_institute_manage_institute_view_institute_view_institute_component__WEBPACK_IMPORTED_MODULE_11__["ViewInstituteComponent"], _add_students_manage_students_view_student_view_student_component__WEBPACK_IMPORTED_MODULE_12__["ViewStudentComponent"], _add_students_pending_student_pending_student_component__WEBPACK_IMPORTED_MODULE_14__["PendingStudentComponent"], _schedule_add_schedule_add_schedule_component__WEBPACK_IMPORTED_MODULE_13__["AddScheduleComponent"], _attandance_attandance_component__WEBPACK_IMPORTED_MODULE_15__["AttandanceComponent"], _schedule_manage_schedule_manage_schedule_component__WEBPACK_IMPORTED_MODULE_16__["ManageScheduleComponent"], _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_17__["ViewScheduleComponent"]],
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _institute_routing_module__WEBPACK_IMPORTED_MODULE_3__["InstRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbCardModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbLayoutModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbCheckboxModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbInputModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbSelectModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbDatepickerModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbButtonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbAccordionModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbStepperModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrModule"].forRoot()],
+      declarations: [_add_institute_add_institute_component__WEBPACK_IMPORTED_MODULE_6__["AddInstituteComponent"], _institute_component__WEBPACK_IMPORTED_MODULE_7__["InstituteComponent"], _add_students_add_students_component__WEBPACK_IMPORTED_MODULE_8__["AddStudentsComponent"], _add_students_manage_students_manage_students_component__WEBPACK_IMPORTED_MODULE_9__["ManageStudentsComponent"], _add_institute_manage_institute_manage_institute_component__WEBPACK_IMPORTED_MODULE_10__["ManageInstituteComponent"], _add_institute_manage_institute_view_institute_view_institute_component__WEBPACK_IMPORTED_MODULE_11__["ViewInstituteComponent"], _add_students_manage_students_view_student_view_student_component__WEBPACK_IMPORTED_MODULE_12__["ViewStudentComponent"], _add_students_pending_student_pending_student_component__WEBPACK_IMPORTED_MODULE_14__["PendingStudentComponent"], _schedule_add_schedule_add_schedule_component__WEBPACK_IMPORTED_MODULE_13__["AddScheduleComponent"], _attandance_attandance_component__WEBPACK_IMPORTED_MODULE_15__["AttandanceComponent"], _schedule_manage_schedule_manage_schedule_component__WEBPACK_IMPORTED_MODULE_16__["ManageScheduleComponent"], _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_17__["ViewScheduleComponent"], _leads_add_leads_add_lead_component__WEBPACK_IMPORTED_MODULE_20__["AddLeadComponent"], _leads_manage_leads_manage_lead_component__WEBPACK_IMPORTED_MODULE_21__["ManageLeadComponent"]],
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _institute_routing_module__WEBPACK_IMPORTED_MODULE_3__["InstRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbCardModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbListModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbTabsetModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbLayoutModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbCheckboxModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbInputModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbSelectModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbDatepickerModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbButtonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbAccordionModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbStepperModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrModule"].forRoot()],
       providers: [_teacher_guard__WEBPACK_IMPORTED_MODULE_18__["TeacherGuard"], _bManager_guard__WEBPACK_IMPORTED_MODULE_19__["BranchManagerGuard"]]
     })], InstituteModule);
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/leads/add-leads/add-lead.component.scss":
+  /*!***************************************************************!*\
+    !*** ./src/app/pages/leads/add-leads/add-lead.component.scss ***!
+    \***************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppPagesLeadsAddLeadsAddLeadComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "nb-select {\n  display: block; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvbGVhZHMvYWRkLWxlYWRzL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxsZWFkc1xcYWRkLWxlYWRzXFxhZGQtbGVhZC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUFVLGNBQWEsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2xlYWRzL2FkZC1sZWFkcy9hZGQtbGVhZC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIm5iLXNlbGVjdHtkaXNwbGF5OmJsb2NrfSJdfQ== */";
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/leads/add-leads/add-lead.component.ts":
+  /*!*************************************************************!*\
+    !*** ./src/app/pages/leads/add-leads/add-lead.component.ts ***!
+    \*************************************************************/
+
+  /*! exports provided: AddLeadComponent */
+
+  /***/
+  function srcAppPagesLeadsAddLeadsAddLeadComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "AddLeadComponent", function () {
+      return AddLeadComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../../../services/api.service */
+    "./src/app/services/api.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @nebular/theme */
+    "./node_modules/@nebular/theme/fesm2015/index.js");
+    /* harmony import */
+
+
+    var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! @angular/common */
+    "./node_modules/@angular/common/fesm2015/common.js");
+
+    var AddLeadComponent = /*#__PURE__*/function () {
+      function AddLeadComponent(fb, api, active, router, toasterService, location) {
+        _classCallCheck(this, AddLeadComponent);
+
+        this.fb = fb;
+        this.api = api;
+        this.active = active;
+        this.router = router;
+        this.toasterService = toasterService;
+        this.location = location;
+        this.submitted = false;
+        this.status = ['Pending', 'Contacted', 'Lead Won', 'Lead Lost'];
+      }
+
+      _createClass(AddLeadComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          var _this37 = this;
+
+          this.instituteId = this.active.snapshot.paramMap.get('id');
+          this.active.queryParams.subscribe(function (data) {
+            _this37.leadId = data.leadId;
+            _this37.edit = data.edit;
+
+            if (_this37.edit === 'true') {
+              _this37.getLead(_this37.leadId);
+            }
+          });
+          this.leadForm = this.fb.group({
+            leadName: [''],
+            leadContact: [''],
+            leadEmail: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email],
+            date: [''],
+            course: [''],
+            status: [''],
+            comment: [''],
+            source: ['']
+          });
+          this.getCourses();
+        }
+      }, {
+        key: "getCourses",
+        value: function getCourses() {
+          var _this38 = this;
+
+          this.api.getCourseTD(this.instituteId).subscribe(function (data) {
+            _this38.courses = data.course;
+          }, function (err) {
+            return console.error(err);
+          });
+        }
+      }, {
+        key: "getLead",
+        value: function getLead(id) {
+          var _this39 = this;
+
+          this.api.getSingleLead({
+            '_id': id
+          }).subscribe(function (data) {
+            _this39.leadForm.patchValue({
+              leadName: data.leadName,
+              leadContact: data.leadContact,
+              leadEmail: data.leadEmail,
+              date: data.addedDate,
+              course: data.courseId,
+              status: data.status,
+              comment: data.comment,
+              source: data.source
+            });
+          }, function (err) {
+            return console.error(err);
+          });
+        }
+      }, {
+        key: "onSubmit",
+        value: function onSubmit() {
+          var _this40 = this;
+
+          this.submitted = true;
+          this.leadForm.markAllAsTouched();
+
+          if (this.leadForm.invalid) {
+            return;
+          }
+
+          var data = {
+            'leadName': this.leadForm.get('leadName').value,
+            'leadContact': this.leadForm.get('leadContact').value,
+            'leadEmail': this.leadForm.get('leadEmail').value,
+            'addedDate': this.leadForm.get('date').value,
+            'courseId': this.leadForm.get('course').value,
+            'status': this.leadForm.get('status').value,
+            'comment': this.leadForm.get('comment').value,
+            'source': this.leadForm.get('source').value,
+            'instituteId': this.instituteId,
+            '_id': this.leadId
+          };
+
+          if (this.edit === 'true') {
+            this.api.updateLead(data).subscribe(function (data) {
+              _this40.showToast('top-right', 'success', 'Lead Updated Successfully');
+
+              _this40.router.navigate(['/pages/institute/manage-leads/', _this40.instituteId]);
+            }, function (err) {
+              _this40.showToast('top-right', 'danger', err.error.message);
+            });
+          }
+
+          if (!this.edit) {
+            this.api.addLead(data).subscribe(function () {
+              _this40.showToast('top-right', 'success', 'Lead Added Successfully');
+
+              _this40.router.navigate(['/pages/institute/manage-leads/', _this40.instituteId]);
+            }, function (err) {
+              _this40.showToast('top-right', 'danger', err.error.message);
+            });
+          }
+        }
+      }, {
+        key: "back",
+        value: function back() {
+          var confirm = true;
+
+          if (this.leadForm.touched) {
+            confirm = window.confirm('If you go back the data will be lost.');
+          }
+
+          if (confirm) {
+            this.location.back();
+          }
+        }
+      }, {
+        key: "showToast",
+        value: function showToast(position, status, message) {
+          this.toasterService.show(status, message, {
+            position: position,
+            status: status
+          });
+        }
+      }, {
+        key: "f",
+        get: function get() {
+          return this.leadForm.controls;
+        }
+      }]);
+
+      return AddLeadComponent;
+    }();
+
+    AddLeadComponent.ctorParameters = function () {
+      return [{
+        type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]
+      }, {
+        type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+      }, {
+        type: _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"]
+      }, {
+        type: _angular_common__WEBPACK_IMPORTED_MODULE_6__["Location"]
+      }];
+    };
+
+    AddLeadComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'ngx-add-lead',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./add-lead.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/leads/add-leads/add-lead.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./add-lead.component.scss */
+      "./src/app/pages/leads/add-leads/add-lead.component.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["Location"]])], AddLeadComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/leads/manage-leads/manage-lead.component.scss":
+  /*!*********************************************************************!*\
+    !*** ./src/app/pages/leads/manage-leads/manage-lead.component.scss ***!
+    \*********************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppPagesLeadsManageLeadsManageLeadComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2xlYWRzL21hbmFnZS1sZWFkcy9tYW5hZ2UtbGVhZC5jb21wb25lbnQuc2NzcyJ9 */";
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/leads/manage-leads/manage-lead.component.ts":
+  /*!*******************************************************************!*\
+    !*** ./src/app/pages/leads/manage-leads/manage-lead.component.ts ***!
+    \*******************************************************************/
+
+  /*! exports provided: ManageLeadComponent */
+
+  /***/
+  function srcAppPagesLeadsManageLeadsManageLeadComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ManageLeadComponent", function () {
+      return ManageLeadComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../../../services/api.service */
+    "./src/app/services/api.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @nebular/theme */
+    "./node_modules/@nebular/theme/fesm2015/index.js");
+
+    var ManageLeadComponent = /*#__PURE__*/function () {
+      function ManageLeadComponent(api, router, route, toasterService) {
+        _classCallCheck(this, ManageLeadComponent);
+
+        this.api = api;
+        this.router = router;
+        this.route = route;
+        this.toasterService = toasterService;
+        this.status = ['Pending', 'Contacted', 'Lead Won', 'Lead Lost'];
+      }
+
+      _createClass(ManageLeadComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          this.instituteId = this.route.snapshot.paramMap.get('id');
+          this.getLeads();
+          this.getCourses();
+        }
+      }, {
+        key: "getCourses",
+        value: function getCourses() {
+          var _this41 = this;
+
+          this.api.getCourseTD(this.instituteId).subscribe(function (data) {
+            _this41.courses = data.course;
+          }, function (err) {
+            return console.error(err);
+          });
+        }
+      }, {
+        key: "onSelectCourse",
+        value: function onSelectCourse(courseId) {
+          this.selectedCourseId = courseId;
+          this.getLeads();
+        }
+      }, {
+        key: "onSelectStatus",
+        value: function onSelectStatus(status) {
+          this.selectedStatus = status;
+          this.getLeads();
+        }
+      }, {
+        key: "getLeads",
+        value: function getLeads() {
+          var _this42 = this;
+
+          this.api.getLeadsByOfInstitute({
+            'instituteId': this.instituteId,
+            'status': this.selectedStatus,
+            'courseId': this.selectedCourseId
+          }).subscribe(function (data) {
+            _this42.leads = data;
+          });
+        }
+      }, {
+        key: "edit",
+        value: function edit(id) {
+          this.router.navigate(["/pages/institute/add-leads/".concat(this.instituteId)], {
+            queryParams: {
+              leadId: id,
+              edit: true
+            }
+          });
+        }
+      }, {
+        key: "delete",
+        value: function _delete(id, index) {
+          var _this43 = this;
+
+          this.api.deleteLead({
+            '_id': id
+          }).subscribe(function () {
+            _this43.leads.splice(index, 1);
+
+            _this43.showToast('top-right', 'success', 'Lead Deleted Successfully');
+          }, function (err) {
+            return console.error(err);
+          });
+        }
+      }, {
+        key: "addLead",
+        value: function addLead() {
+          this.router.navigate(["/pages/institute/add-leads/".concat(this.instituteId)]);
+        }
+      }, {
+        key: "showToast",
+        value: function showToast(position, status, message) {
+          this.toasterService.show(status, message, {
+            position: position,
+            status: status
+          });
+        }
+      }]);
+
+      return ManageLeadComponent;
+    }();
+
+    ManageLeadComponent.ctorParameters = function () {
+      return [{
+        type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
+      }, {
+        type: _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbToastrService"]
+      }];
+    };
+
+    ManageLeadComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'ngx-manage-lead',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./manage-lead.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/leads/manage-leads/manage-lead.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./manage-lead.component.scss */
+      "./src/app/pages/leads/manage-leads/manage-lead.component.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbToastrService"]])], ManageLeadComponent);
     /***/
   },
 
@@ -3572,14 +4238,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(AddScheduleComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this35 = this;
+          var _this44 = this;
 
           this.display = false;
           this.date = Date.now();
+          this.schedules = [];
           this.instituteId = this.route.snapshot.paramMap.get('id');
           this.route.queryParams.subscribe(function (param) {
-            _this35.edit = param.edit;
-            _this35.scheduleId = param.schedule;
+            _this44.edit = param.edit;
+            _this44.scheduleId = param.schedule;
           });
           this.scheduleForm = this.fb.group({
             instituteId: [this.instituteId],
@@ -3631,51 +4298,51 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getEmployees",
         value: function getEmployees(instituteId) {
-          var _this36 = this;
+          var _this45 = this;
 
           this.api.getEmployeesByInstituteId(instituteId).subscribe(function (data) {
-            _this36.teachers = data;
+            _this45.teachers = data;
 
-            if (_this36.edit) {
-              _this36.getSchedule(_this36.scheduleId);
+            if (_this45.edit) {
+              _this45.getSchedule(_this45.scheduleId);
             } else {
-              _this36.display = true;
+              _this45.display = true;
             }
           });
         }
       }, {
         key: "getSchedule",
         value: function getSchedule(id) {
-          var _this37 = this;
+          var _this46 = this;
 
           this.scheduleService.getSchedule(id).subscribe(function (res) {
-            _this37.schedule = res;
+            _this46.schedule = res;
 
-            _this37.scheduleForm.patchValue({
-              courseId: _this37.schedule.courseId,
-              scheduleStart: _this37.schedule.scheduleStart,
-              scheduleEnd: _this37.schedule.scheduleEnd,
-              recurrence: _this37.schedule.recurrence === 'true' ? true : false
+            _this46.scheduleForm.patchValue({
+              courseId: _this46.schedule.courseId,
+              scheduleStart: _this46.schedule.scheduleStart,
+              scheduleEnd: _this46.schedule.scheduleEnd,
+              recurrence: _this46.schedule.recurrence
             });
 
-            _this37.onSelectCourse(_this37.schedule.courseId);
+            _this46.onSelectCourse(_this46.schedule.courseId);
 
-            _this37.scheduleForm.patchValue({
-              batchId: _this37.schedule.batchId
+            _this46.scheduleForm.patchValue({
+              batchId: _this46.schedule.batchId
             });
 
-            _this37.scheduleForm.get('scheduleStart').disable();
+            _this46.scheduleForm.get('scheduleStart').disable();
 
-            _this37.scheduleForm.get('scheduleEnd').disable();
+            _this46.scheduleForm.get('scheduleEnd').disable();
 
-            _this37.scheduleStartTime = _this37.schedule.days[0].startTime;
-            _this37.scheduleEndTime = _this37.schedule.days[0].endTime;
+            _this46.scheduleStartTime = _this46.schedule.days[0].startTime;
+            _this46.scheduleEndTime = _this46.schedule.days[0].endTime;
 
-            var scheduleDays = _this37.scheduleForm.get('days');
+            var scheduleDays = _this46.scheduleForm.get('days');
 
             scheduleDays.controls = [];
 
-            _this37.schedule.days.forEach(function (day) {
+            _this46.schedule.days.forEach(function (day) {
               var scheduleData = {
                 day: day.day,
                 date: day.date,
@@ -3686,12 +4353,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 select: true
               };
 
-              _this37.addScheduleDay(scheduleData);
+              _this46.addScheduleDay(scheduleData);
             });
 
-            _this37.display = true;
+            _this46.display = true;
           }, function (error) {
-            _this37.showToast('top-right', 'danger', error.error.message);
+            _this46.showToast('top-right', 'danger', error.error.message);
 
             console.error(error);
           });
@@ -3745,19 +4412,56 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "fromDatePicked",
         value: function fromDatePicked(date) {
           this.date = new Date(date).getTime();
-          var noOfDays = 7 - this.getDate(this.date).getDay();
-          var nextSunday = this.constructDate(this.date + noOfDays * (24 * 60 * 60 * 1000));
-          this.scheduleForm.patchValue({
-            scheduleEnd: nextSunday
+
+          if (!this.schedule) {
+            var noOfDays = 7 - this.getDate(this.date).getDay();
+            var nextSunday = this.constructDate(this.date + noOfDays * (24 * 60 * 60 * 1000));
+            this.scheduleForm.patchValue({
+              scheduleEnd: nextSunday
+            });
+            this.noOfDays = noOfDays + 1;
+            this.generateSchedule();
+          } else {
+            var scheduleStart = this.schedule.scheduleStart;
+            var scheduleEnd = this.schedule.scheduleEnd;
+            var endDate = new Date(scheduleEnd).getTime() - new Date(scheduleStart).getTime();
+
+            var _noOfDays = endDate / (24 * 60 * 60 * 1000);
+
+            var _nextSunday = this.constructDate(this.date + _noOfDays * (24 * 60 * 60 * 1000));
+
+            this.scheduleForm.patchValue({
+              scheduleEnd: _nextSunday
+            });
+            this.noOfDays = _noOfDays + 1;
+            this.setRecurrenceDates(scheduleStart);
+          }
+        }
+      }, {
+        key: "setRecurrenceDates",
+        value: function setRecurrenceDates(scheduleStart) {
+          var _this47 = this;
+
+          var scheduleDays = this.scheduleForm.get('days');
+          this.schedule.days.forEach(function (day, i) {
+            var nextDate = new Date(day.date).getTime() - new Date(scheduleStart).getTime();
+            var noOfDays = nextDate / (24 * 60 * 60 * 1000);
+
+            var date = _this47.constructDate(_this47.date + noOfDays * (24 * 60 * 60 * 1000));
+
+            var weekDay = new Date(date).getDay();
+            scheduleDays.controls[i].patchValue({
+              day: _this47.days[weekDay],
+              date: date
+            });
           });
-          this.noOfDays = noOfDays + 1;
-          this.generateSchedule();
         }
       }, {
         key: "toDatePicked",
         value: function toDatePicked(date) {
           date = new Date(date).getTime();
           this.noOfDays = (date - this.date) / (24 * 60 * 60 * 1000) + 1;
+          this.schedule = null;
           this.generateSchedule();
         } // Construct date in yyyy-MM-dd format to set in DOM form field
 
@@ -3780,19 +4484,38 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCourses",
         value: function getCourses(id) {
-          var _this38 = this;
+          var _this48 = this;
 
           this.api.getCourseTD(id).subscribe(function (data) {
-            _this38.institute = data;
+            _this48.institute = data;
 
-            _this38.getEmployees(_this38.instituteId);
+            _this48.getEmployees(_this48.instituteId);
           });
         }
       }, {
         key: "onSelectCourse",
         value: function onSelectCourse(id) {
+          this.courseId = id;
           this.batches = this.institute.batch.filter(function (b) {
             return b.course === id;
+          });
+        }
+      }, {
+        key: "onSelectBatch",
+        value: function onSelectBatch(id) {
+          this.batchId = id;
+
+          if (!this.edit) {
+            this.searchRecurrenceSchedules();
+          }
+        }
+      }, {
+        key: "searchRecurrenceSchedules",
+        value: function searchRecurrenceSchedules() {
+          var _this49 = this;
+
+          this.scheduleService.getScheduleByBatch(this.instituteId, this.courseId, this.batchId).subscribe(function (res) {
+            _this49.schedules = res;
           });
         }
       }, {
@@ -3803,9 +4526,43 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           });
         }
       }, {
+        key: "useRecurrenceSchedule",
+        value: function useRecurrenceSchedule(index) {
+          var _this50 = this;
+
+          this.schedule = this.schedules[index];
+          this.scheduleForm.patchValue({
+            courseId: this.schedule.courseId,
+            scheduleStart: this.schedule.scheduleStart,
+            scheduleEnd: this.schedule.scheduleEnd,
+            recurrence: this.schedule.recurrence
+          });
+          this.onSelectCourse(this.schedule.courseId);
+          this.scheduleForm.patchValue({
+            batchId: this.schedule.batchId
+          });
+          this.scheduleStartTime = this.schedule.days[0].startTime;
+          this.scheduleEndTime = this.schedule.days[0].endTime;
+          var scheduleDays = this.scheduleForm.get('days');
+          scheduleDays.controls = [];
+          this.schedule.days.forEach(function (day) {
+            var scheduleData = {
+              day: day.day,
+              date: day.date,
+              startTime: day.startTime,
+              endTime: day.endTime,
+              teacher: day.teacher,
+              topic: day.topic,
+              select: true
+            };
+
+            _this50.addScheduleDay(scheduleData);
+          });
+        }
+      }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this39 = this;
+          var _this51 = this;
 
           if (this.scheduleForm.invalid) {
             return;
@@ -3821,13 +4578,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             });
             schedule.days = days;
             this.scheduleService.addSchedule(schedule).subscribe(function (res) {
-              _this39.showToast('top-right', 'success', 'Schedule Added Successfully');
+              _this51.showToast('top-right', 'success', 'Schedule Added Successfully');
 
               setTimeout(function () {
-                _this39.back();
+                _this51.back();
               }, 1000);
             }, function (error) {
-              _this39.showToast('top-right', 'danger', error.error.message);
+              _this51.showToast('top-right', 'danger', error.error.message);
 
               console.error(error);
             });
@@ -3843,13 +4600,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             });
             _schedule.days = _days;
             this.scheduleService.updateSchedule(_schedule, this.schedule._id).subscribe(function (res) {
-              _this39.showToast('top-right', 'success', 'Schedule Updated Successfully');
+              _this51.showToast('top-right', 'success', 'Schedule Updated Successfully');
 
               setTimeout(function () {
-                _this39.back();
+                _this51.back();
               }, 1000);
             }, function (error) {
-              _this39.showToast('top-right', 'danger', error.error.message);
+              _this51.showToast('top-right', 'danger', error.error.message);
 
               console.error(error);
             });
@@ -3996,31 +4753,52 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "ngOnInit",
         value: function ngOnInit() {
           this.display = false;
+          this.courseId = 'all';
           this.instituteId = this.active.snapshot.paramMap.get('id');
           this.getCourses(this.instituteId);
+          this.onSelectCourse('all');
         }
       }, {
         key: "getCourses",
         value: function getCourses(id) {
-          var _this40 = this;
+          var _this52 = this;
 
           this.api.getCourseTD(id).subscribe(function (data) {
-            _this40.institute = data;
-            _this40.display = true;
+            _this52.institute = data;
+            _this52.display = true;
           });
         }
       }, {
         key: "onSelectCourse",
         value: function onSelectCourse(id) {
           this.courseId = id;
-          this.batches = this.institute.batch.filter(function (b) {
-            return b.course === id;
-          });
+
+          if (id === 'all') {
+            this.getSchedules({
+              instituteId: this.instituteId
+            });
+          } else {
+            this.batchId = 'all';
+            this.batches = this.institute.batch.filter(function (b) {
+              return b.course === id;
+            });
+          }
         }
       }, {
         key: "onSelectBatch",
         value: function onSelectBatch(id) {
-          this.getSchedules(this.instituteId, this.courseId, id);
+          if (id === 'all') {
+            this.getSchedules({
+              instituteId: this.instituteId,
+              courseId: this.courseId
+            });
+          } else {
+            this.getSchedules({
+              instituteId: this.instituteId,
+              courseId: this.courseId,
+              batchId: id
+            });
+          }
         }
       }, {
         key: "addSchedule",
@@ -4029,11 +4807,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
       }, {
         key: "getSchedules",
-        value: function getSchedules(instituteId, courseId, batchId) {
-          var _this41 = this;
+        value: function getSchedules(data) {
+          var _this53 = this;
 
-          this.scheduleService.getScheduleByBatch(instituteId, courseId, batchId).subscribe(function (res) {
-            _this41.schedules = res;
+          this.scheduleService.getScheduleByInstitute(data).subscribe(function (res) {
+            _this53.schedules = res;
           });
         }
       }, {
@@ -4058,21 +4836,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deleteSchedule",
         value: function deleteSchedule(code) {
-          var _this42 = this;
+          var _this54 = this;
 
           var confirm = window.confirm('Are u sure, You want to Delete this Schedule?');
 
           if (confirm) {
             this.scheduleService.deleteSchedule(code).subscribe(function (res) {
-              var i = _this42.schedules.findIndex(function (s) {
+              var i = _this54.schedules.findIndex(function (s) {
                 return s._id === code;
               });
 
-              _this42.schedules.splice(i, 1);
+              _this54.schedules.splice(i, 1);
 
-              _this42.showToast('top-right', 'success', 'Schedule Deleted Successfully!');
+              _this54.showToast('top-right', 'success', 'Schedule Deleted Successfully!');
             }, function (err) {
-              _this42.showToast('top-right', 'danger', err.error.message);
+              _this54.showToast('top-right', 'danger', err.error.message);
             });
           }
         }
@@ -4197,25 +4975,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ViewScheduleComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this43 = this;
+          var _this55 = this;
 
           this.display = false;
           this.instituteId = this.active.snapshot.paramMap.get('id');
           this.active.queryParams.subscribe(function (param) {
             var schedule = param.schedule;
 
-            _this43.getSchedule(schedule);
+            _this55.getSchedule(schedule);
           });
         }
       }, {
         key: "getSchedule",
         value: function getSchedule(id) {
-          var _this44 = this;
+          var _this56 = this;
 
           console.log(id);
           this.scheduleService.getScheduleDetails(id).subscribe(function (res) {
-            _this44.schedule = res;
-            _this44.display = true;
+            _this56.schedule = res;
+            _this56.display = true;
           }, function (error) {
             return console.error(error);
           });
@@ -4392,6 +5170,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function updateSchedule(schedule, scheduleId) {
           schedule._id = scheduleId;
           return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/schedule/updateSchedule"), schedule).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+        }
+      }, {
+        key: "getScheduleByInstitute",
+        value: function getScheduleByInstitute(data) {
+          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/schedule/getScheduleByInstitute"), data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
         }
       }, {
         key: "getScheduleByBatch",

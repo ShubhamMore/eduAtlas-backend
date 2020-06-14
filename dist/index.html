@@ -18,20 +18,7 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
     <link rel="icon" type="image/png" href="./favicon.png" />
     <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-    <script src="../node_modules/chart.js/src/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    ''
-    <script>
-      var socket = io('http://localhost:5000/eduatlas-chat', {
-        query: {
-          token:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWRkZGRmNDM1YTc4ZTI4Y2NhYWQ5YzEiLCJwaG9uZSI6Ijk5OTk5OTk5OTkiLCJyb2xlIjoiaW5zdGl0dXRlIiwiaWF0IjoxNTkyMDU3OTA1fQ.B42EetrDhbA7fW4iW98EU3Ky1bW0y_NbmQWMqSxAtlg',
-        },
-      });
-      socket.on('connect', function () {});
-      socket.on('event', function (data) {});
-      socket.on('disconnect', function () {});
-    </script>
+    <!-- <script src="node_modules/chart.js/src/chart.js"></script> -->
   </head>
   <body>
     <ngx-app>Loading...</ngx-app>
@@ -80,7 +67,7 @@
         height: 150px;
         margin: -75px 0 0 -75px;
         border-radius: 50%;
-        box-shadow: 0 3px 3px 0 rgba(255, 56, 106, 1);
+        box-shadow: 0 3px 3px 0 #ff3d71;
         transform: translate3d(0, 0, 0);
         animation: spin 2s linear infinite;
       }
@@ -95,7 +82,7 @@
         left: 5px;
         right: 5px;
         bottom: 5px;
-        box-shadow: 0 3px 3px 0 rgb(255, 228, 32);
+        box-shadow: 0 3px 3px 0 #ffd500;
         -webkit-animation: spin 3s linear infinite;
         animation: spin 3s linear infinite;
       }
@@ -104,7 +91,7 @@
         left: 15px;
         right: 15px;
         bottom: 15px;
-        box-shadow: 0 3px 3px 0 rgba(61, 175, 255, 1);
+        box-shadow: 0 3px 3px 0 #0095ff;
         animation: spin 1.5s linear infinite;
       }
     </style>
@@ -125,16 +112,5 @@
     <div class="blob blob-5"></div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script src="runtime-es2015.js" type="module"></script>
-    <script src="runtime-es5.js" nomodule defer></script>
-    <script src="polyfills-es5.js" nomodule defer></script>
-    <script src="polyfills-es2015.js" type="module"></script>
-    <script src="styles-es2015.js" type="module"></script>
-    <script src="styles-es5.js" nomodule defer></script>
-    <script src="scripts.js" defer></script>
-    <script src="vendor-es2015.js" type="module"></script>
-    <script src="vendor-es5.js" nomodule defer></script>
-    <script src="main-es2015.js" type="module"></script>
-    <script src="main-es5.js" nomodule defer></script>
-  </body>
+  <script src="runtime-es2015.js" type="module"></script><script src="runtime-es5.js" nomodule defer></script><script src="polyfills-es5.js" nomodule defer></script><script src="polyfills-es2015.js" type="module"></script><script src="styles-es2015.js" type="module"></script><script src="styles-es5.js" nomodule defer></script><script src="scripts.js" defer></script><script src="vendor-es2015.js" type="module"></script><script src="vendor-es5.js" nomodule defer></script><script src="main-es2015.js" type="module"></script><script src="main-es5.js" nomodule defer></script></body>
 </html>

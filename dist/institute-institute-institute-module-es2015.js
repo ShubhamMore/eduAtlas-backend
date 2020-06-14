@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p style=\"color: black; font-weight: bold;\">{{ !edit ? 'Create New Branch' : 'Edit Branch' }}</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <nb-stepper #stepper [linear]=\"true\">\r\n      <nb-step [stepControl]=\"firstForm\" label=\"Basic Details\">\r\n        <form [formGroup]=\"firstForm\" (ngSubmit)=\"firstFormSubmit()\" #myForm1=\"ngForm\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Add Institute/Branch*</label>\r\n                <input\r\n                  type=\"text\"\r\n                  nbInput\r\n                  fullWidth\r\n                  formControlName=\"name\"\r\n                  id=\"name\"\r\n                  [status]=\"first.name.errors && myForm1.submitted ? 'danger' : 'basic'\"\r\n                  placeholder=\"Add Institute/Branch *\"\r\n                />\r\n\r\n                <small *ngIf=\"first.name.errors && myForm1.submitted\"\r\n                  >*Institute name is required</small\r\n                >\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"logo\">*Add Logo</label>\r\n\r\n                <input\r\n                  type=\"file\"\r\n                  nbInput\r\n                  status=\"basic\"\r\n                  fullWidth\r\n                  id=\"logo\"\r\n                  (change)=\"onImagePicked($event)\"\r\n                />\r\n              </div>\r\n\r\n              <div div *ngIf=\"imagePreview\">\r\n                <img [src]=\"imagePreview\" alt=\"logo\" width=\"100px\" height=\"100px\" />\r\n              </div>\r\n              <div *ngIf=\"imageRequired\">\r\n                <small>*Logo Required</small>\r\n              </div>\r\n              <div *ngIf=\"invalidImage\">\r\n                <small>Logo Format should be *.png, *.jpg, *.jpeg</small>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <button class=\"float-right mt-3\" type=\"submit\" nbButton status=\"warning\">Next</button>\r\n        </form>\r\n      </nb-step>\r\n\r\n      <nb-step [stepControl]=\"secondForm\" label=\"Contact Details\">\r\n        <form [formGroup]=\"secondForm\" (ngSubmit)=\"secondFormSubmit()\" #myForm2=\"ngForm\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"contact\">*Institute Contact Number</label>\r\n                <input\r\n                  type=\"text\"\r\n                  nbInput\r\n                  fullWidth\r\n                  id=\"contact\"\r\n                  maxlength=\"10\"\r\n                  pattern=\"\\d*\"\r\n                  minlength=\"10\"\r\n                  formControlName=\"instituteContact\"\r\n                  [status]=\"\r\n                    second.instituteContact.errors && myForm2.submitted ? 'danger' : 'basic'\r\n                  \"\r\n                  placeholder=\"Institute Contact Number\"\r\n                />\r\n                <small *ngIf=\"second.instituteContact.errors && myForm2.submitted\"\r\n                  >*Enter Correct Phone no.</small\r\n                >\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-12\">\r\n              <div formGroupName=\"address\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-4\">\r\n                    <label>State</label>\r\n                    <nb-select\r\n                      formControlName=\"state\"\r\n                      status=\"basic\"\r\n                      (selectedChange)=\"onChangeState($event)\"\r\n                      [selected]=\"1\"\r\n                      placeholder=\"State\"\r\n                    >\r\n                      <nb-option [value]=\"\">--Select State--</nb-option>\r\n                      <nb-option *ngFor=\"let state of stateInfo; let j = index\" value=\"{{ j }}\">{{\r\n                        state.StateName\r\n                      }}</nb-option>\r\n                    </nb-select>\r\n                  </div>\r\n                  <div class=\"col-sm-4\">\r\n                    <label>City</label>\r\n                    <nb-select formControlName=\"city\" fullWidth status=\"basic\" placeholder=\"City\">\r\n                      <nb-option [value]=\"undefined\">--Select City--</nb-option>\r\n                      <nb-option *ngFor=\"let city of cityInfo; let i = index\" value=\"{{ city }}\">{{\r\n                        city\r\n                      }}</nb-option>\r\n                    </nb-select>\r\n                  </div>\r\n                  <div class=\"col-sm-4\">\r\n                    <label>Pin Code</label>\r\n                    <input\r\n                      type=\"text\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"pin\"\r\n                      formControlName=\"pincode\"\r\n                      placeholder=\"Pin Code\"\r\n                    />\r\n                  </div>\r\n                </div>\r\n                <br />\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                    <label for=\"address\">Address Line</label>\r\n\r\n                    <input\r\n                      type=\"text\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"address\"\r\n                      formControlName=\"addressLine\"\r\n                      placeholder=\"Address line\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"col-sm-6\">\r\n                    <label for=\"locality\">Locality</label>\r\n                    <input\r\n                      type=\"tex\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"locality\"\r\n                      formControlName=\"locality\"\r\n                      placeholder=\"Locality\"\r\n                    />\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button class=\"float-right mt-3\" type=\"submit\" nbButton status=\"warning\">Next</button>\r\n        </form>\r\n      </nb-step>\r\n\r\n      <nb-step [stepControl]=\"thirdForm\" label=\"Other Details\">\r\n        <form [formGroup]=\"thirdForm\" (ngSubmit)=\"thirdFormSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <label>Institute Category (Multi Select)</label>\r\n              <br />\r\n              <nb-select\r\n                formControlName=\"category\"\r\n                class=\"mt-2\"\r\n                multiple\r\n                status=\"basic\"\r\n                fullWidth\r\n                placeholder=\"Select Institute Category\"\r\n              >\r\n                <nb-option *ngFor=\"let item of category\" [value]=\"item.name\">{{\r\n                  item.name\r\n                }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n            <div class=\"col-sm-6\" formArrayName=\"instituteMetaTag\">\r\n              <label>Institute Meta Tag </label>\r\n\r\n              <div *ngFor=\"let tag of instituteMetaTag.controls; let i = index\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"mt-2\"\r\n                      [formControlName]=\"i\"\r\n                      nbInput\r\n                      status=\"basic\"\r\n                      fullWidth\r\n                    />\r\n                  </div>\r\n                  <div class=\"col-sm-4\" [hidden]=\"i > 0\">\r\n                    <button\r\n                      type=\"button\"\r\n                      class=\"btn btn-light mr-3\"\r\n                      (click)=\"addMetaTag()\"\r\n                      status=\"basic\"\r\n                    >\r\n                      <span>+</span>\r\n                    </button>\r\n                    <button\r\n                      type=\"button\"\r\n                      class=\"btn btn-light mr-3\"\r\n                      (click)=\"removeMetaTag()\"\r\n                      [hidden]=\"instituteMetaTag.length == 1\"\r\n                      status=\"basic\"\r\n                    >\r\n                      <span>-</span>\r\n                    </button>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button class=\"float-right mt-3\" type=\"submit\" nbButton>Submit</button>\r\n        </form>\r\n      </nb-step>\r\n    </nb-stepper>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\r\n  <nb-card-header>\r\n    <p style=\"color: black; font-weight: bold;\">\r\n      {{ !edit ? 'Create New Branch' : 'Edit Branch' }}\r\n    </p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <nb-stepper #stepper [linear]=\"true\">\r\n      <nb-step [stepControl]=\"firstForm\" label=\"Basic Details\">\r\n        <form [formGroup]=\"firstForm\" (ngSubmit)=\"firstFormSubmit()\" #myForm1=\"ngForm\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">Add Institute/Branch*</label>\r\n                <input\r\n                  type=\"text\"\r\n                  nbInput\r\n                  fieldSize=\"large\"\r\n                  fullWidth\r\n                  formControlName=\"name\"\r\n                  id=\"name\"\r\n                  [status]=\"first.name.errors && myForm1.submitted ? 'danger' : 'basic'\"\r\n                  placeholder=\"Add Institute/Branch *\"\r\n                />\r\n\r\n                <small *ngIf=\"first.name.errors && myForm1.submitted\"\r\n                  >*Institute name is required</small\r\n                >\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"logo\">*Add Logo</label>\r\n\r\n                <input\r\n                  type=\"file\"\r\n                  nbInput\r\n                  status=\"basic\"\r\n                  fullWidth\r\n                  id=\"logo\"\r\n                  (change)=\"onImagePicked($event)\"\r\n                />\r\n              </div>\r\n\r\n              <div div *ngIf=\"imagePreview\">\r\n                <img [src]=\"imagePreview\" alt=\"logo\" width=\"100px\" height=\"100px\" />\r\n              </div>\r\n              <div *ngIf=\"imageRequired\">\r\n                <small>*Logo Required</small>\r\n              </div>\r\n              <div *ngIf=\"invalidImage\">\r\n                <small>Logo Format should be *.png, *.jpg, *.jpeg</small>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <button class=\"float-right mt-3 btn btn-yellow\" type=\"submit\">\r\n            Next\r\n          </button>\r\n        </form>\r\n      </nb-step>\r\n\r\n      <nb-step [stepControl]=\"secondForm\" label=\"Contact Details\">\r\n        <form [formGroup]=\"secondForm\" (ngSubmit)=\"secondFormSubmit()\" #myForm2=\"ngForm\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"form-group\">\r\n                <label for=\"contact\">*Institute Contact Number</label>\r\n                <input\r\n                  type=\"text\"\r\n                  nbInput\r\n                  fullWidth\r\n                  id=\"contact\"\r\n                  maxlength=\"10\"\r\n                  pattern=\"\\d*\"\r\n                  minlength=\"10\"\r\n                  formControlName=\"instituteContact\"\r\n                  [status]=\"\r\n                    second.instituteContact.errors && myForm2.submitted ? 'danger' : 'basic'\r\n                  \"\r\n                  placeholder=\"Institute Contact Number\"\r\n                />\r\n                <small *ngIf=\"second.instituteContact.errors && myForm2.submitted\"\r\n                  >*Enter Correct Phone no.</small\r\n                >\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-12\">\r\n              <div formGroupName=\"address\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-4\">\r\n                    <label>State</label>\r\n                    <nb-select\r\n                      formControlName=\"state\"\r\n                      status=\"basic\"\r\n                      fullWidth=\"true\"\r\n                      (selectedChange)=\"onChangeState($event)\"\r\n                      [selected]=\"1\"\r\n                      placeholder=\"State\"\r\n                    >\r\n                      <nb-option [value]=\"\">--Select State--</nb-option>\r\n                      <nb-option *ngFor=\"let state of stateInfo; let j = index\" value=\"{{ j }}\">{{\r\n                        state.StateName\r\n                      }}</nb-option>\r\n                    </nb-select>\r\n                  </div>\r\n                  <div class=\"col-sm-4\">\r\n                    <label>City</label>\r\n                    <nb-select formControlName=\"city\" fullWidth status=\"basic\" placeholder=\"City\">\r\n                      <nb-option [value]=\"undefined\">--Select City--</nb-option>\r\n                      <nb-option *ngFor=\"let city of cityInfo; let i = index\" value=\"{{ city }}\">{{\r\n                        city\r\n                      }}</nb-option>\r\n                    </nb-select>\r\n                  </div>\r\n                  <div class=\"col-sm-4\">\r\n                    <label>Pin Code</label>\r\n                    <input\r\n                      type=\"text\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"pin\"\r\n                      formControlName=\"pincode\"\r\n                      placeholder=\"Pin Code\"\r\n                    />\r\n                  </div>\r\n                </div>\r\n                <br />\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                    <label for=\"address\">Address Line</label>\r\n\r\n                    <input\r\n                      type=\"text\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"address\"\r\n                      formControlName=\"addressLine\"\r\n                      placeholder=\"Address line\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"col-sm-6\">\r\n                    <label for=\"locality\">Locality</label>\r\n                    <input\r\n                      type=\"tex\"\r\n                      nbInput\r\n                      fullWidth\r\n                      status=\"basic\"\r\n                      id=\"locality\"\r\n                      formControlName=\"locality\"\r\n                      placeholder=\"Locality\"\r\n                    />\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button class=\"float-right mt-3 btn btn-yellow\" type=\"submit\">\r\n            Next\r\n          </button>\r\n        </form>\r\n      </nb-step>\r\n\r\n      <nb-step [stepControl]=\"thirdForm\" label=\"Other Details\">\r\n        <form [formGroup]=\"thirdForm\" (ngSubmit)=\"thirdFormSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <label>Institute Category (Multi Select)</label>\r\n              <br />\r\n              <nb-select\r\n                formControlName=\"category\"\r\n                class=\"mt-2\"\r\n                multiple\r\n                status=\"basic\"\r\n                fullWidth\r\n                placeholder=\"Select Institute Category\"\r\n              >\r\n                <nb-option *ngFor=\"let item of category\" [value]=\"item.name\">{{\r\n                  item.name\r\n                }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n            <div class=\"col-sm-6\" formArrayName=\"instituteMetaTag\">\r\n              <label>Institute Meta Tag </label>\r\n\r\n              <div *ngFor=\"let tag of instituteMetaTag.controls; let i = index\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-sm-6\">\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"mt-2\"\r\n                      [formControlName]=\"i\"\r\n                      nbInput\r\n                      status=\"basic\"\r\n                      fullWidth\r\n                    />\r\n                  </div>\r\n                  <div class=\"col-sm-4\" [hidden]=\"i > 0\">\r\n                    <button\r\n                      type=\"button\"\r\n                      class=\"btn btn-light mr-3\"\r\n                      (click)=\"addMetaTag()\"\r\n                      status=\"basic\"\r\n                    >\r\n                      <span>+</span>\r\n                    </button>\r\n                    <button\r\n                      type=\"button\"\r\n                      class=\"btn btn-light mr-3\"\r\n                      (click)=\"removeMetaTag()\"\r\n                      [hidden]=\"instituteMetaTag.length == 1\"\r\n                      status=\"basic\"\r\n                    >\r\n                      <span>-</span>\r\n                    </button>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button class=\"float-right mt-3 btn btn-yellow\" type=\"submit\">\r\n            Submit\r\n          </button>\r\n        </form>\r\n      </nb-step>\r\n    </nb-stepper>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"institutes.length > 0; else no_institute\">\r\n  <nb-card-body>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-2 text-center\"><b>Institute/Branch Name</b></div>\r\n      <div class=\"col-sm-3 text-center\"><b>Institute Address</b></div>\r\n      <div class=\"col-sm-2 text-center\"><b>Institute Contact</b></div>\r\n    </div>\r\n\r\n    <div class=\"row mt-3\" *ngFor=\"let i of institutes\">\r\n      <div class=\"col-sm-2 text-center\">\r\n        {{ i.basicInfo.name }}\r\n      </div>\r\n      <div class=\"col-sm-3 text-center\">\r\n        {{ i.address.addressLine }} {{ i.address.locality }} {{ i.address.state }}\r\n        {{ i.address.city }}\r\n      </div>\r\n      <div class=\"col-sm-2 text-center\">\r\n        {{ i.basicInfo.instituteContact }}\r\n      </div>\r\n\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-4\">\r\n        <button class=\"mr-3\" nbButton status=\"primary\" (click)=\"getInstitute(i._id)\">View</button>\r\n        <button class=\"mr-3\" nbButton status=\"warning\" (click)=\"updateInstitute(i._id)\">\r\n          Edit\r\n        </button>\r\n        <!-- <button class=\"mr-3\" nbButton status=\"danger\" (click)=\"delete(i._id)\">Del</button> -->\r\n      </div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n<ng-template #no_institute>\r\n  <nb-card>\r\n    <nb-card-body>\r\n      <div class=\"text-center\">\r\n        <img src=\"../../../assets/img/institute.png\" width=\"100px\" height=\"100px\" />\r\n        <h3 class=\"mt-4\">NO INSTITUTE ADDED</h3>\r\n        <small *ngIf=\"showAddInstituteBtn\">Click on add Institute Button to create other branches</small>\r\n        <div class=\"mt-4\" *ngIf=\"showAddInstituteBtn\">\r\n          <button nbButton status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\r\n            ADD INSTITUTE\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </nb-card-body>\r\n  </nb-card>\r\n</ng-template>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"institutes.length > 0; else no_institute\">\r\n  <nb-card-body>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-2 text-center\"><b>Institute/Branch Name</b></div>\r\n      <div class=\"col-sm-3 text-center\"><b>Institute Address</b></div>\r\n      <div class=\"col-sm-2 text-center\"><b>Institute Contact</b></div>\r\n    </div>\r\n\r\n    <div class=\"row mt-3\" *ngFor=\"let i of institutes\">\r\n      <div class=\"col-sm-2 text-center\">\r\n        {{ i.basicInfo.name }}\r\n      </div>\r\n      <div class=\"col-sm-3 text-center\">\r\n        {{ i.address.addressLine }} {{ i.address.locality }} {{ i.address.state }}\r\n        {{ i.address.city }}\r\n      </div>\r\n      <div class=\"col-sm-2 text-center\">\r\n        {{ i.basicInfo.instituteContact }}\r\n      </div>\r\n\r\n      <div class=\"col-sm-1\"></div>\r\n      <div class=\"col-sm-4\">\r\n        <button class=\"mr-3\" nbButton status=\"primary\" (click)=\"getInstitute(i._id)\">Manage</button>\r\n        <button class=\"mr-3 btn btn-yellow\" (click)=\"updateInstitute(i._id)\">\r\n          Edit\r\n        </button>\r\n        <button class=\"mr-3\" nbButton status=\"danger\" (click)=\"delete(i._id)\">Delete</button>\r\n      </div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n<ng-template #no_institute>\r\n  <nb-card>\r\n    <nb-card-body>\r\n      <div class=\"text-center\">\r\n        <img src=\"../../../assets/img/institute.png\" width=\"100px\" height=\"100px\" />\r\n        <h3 class=\"mt-4\">NO INSTITUTE ADDED</h3>\r\n        <small *ngIf=\"showAddInstituteBtn\"\r\n          >Click on add Institute Button to create other branches</small\r\n        >\r\n        <div class=\"mt-4\" *ngIf=\"showAddInstituteBtn\">\r\n          <button class=\"btn btn-yellow\" (click)=\"onClick()\">\r\n            ADD INSTITUTE\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </nb-card-body>\r\n  </nb-card>\r\n</ng-template>\r\n");
 
 /***/ }),
 
@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Institute Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ institute.institute.basicInfo.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Contact Number</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ institute.institute.basicInfo.contactNumber }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Address</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>\n          {{ institute.institute.address.addressLine }} {{ institute.institute.address.locality }}\n          {{ institute.institute.address.city }} {{ institute.institute.address.city }}\n        </p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <!-- <div class=\"row\">\n\t\t\t<div class=\"col-sm-1\"></div>\n\t\t\t<div class=\"col-sm-5\">\n\t\t\t\t<p class=\"font-weight-bold\">Google Map</p>\n\t\t\t</div>\n\t\t\t<div class=\"col-sm-5\"><p>{{user.googleMap}}</p></div>\n\t\t\t<div class=\"col-sm-1\"></div>\n\t\t</div>\n\t\t<hr>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-sm-1\"></div>\n\t\t\t<div class=\"col-sm-5\">\n\t\t\t\t<p class=\"font-weight-bold\">Contact</p>\n\t\t\t</div>\n\t\t\t<div class=\"col-sm-5\"><p>{{user.contact}}</p></div>\n\t\t\t<div class=\"col-sm-1\"></div>\n\t\t</div> -->\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Category</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p *ngFor=\"let i of institute.institute.category\">{{ i }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">MetaTag</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p *ngFor=\"let i of institute.institute.metaTag\">{{ i }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Institute Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ institute.institute.basicInfo.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Contact Number</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ institute.institute.basicInfo.contactNumber }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Address</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>\n          {{ institute.institute.address.addressLine }} {{ institute.institute.address.locality }}\n          {{ institute.institute.address.city }} {{ institute.institute.address.city }}\n        </p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Category</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p *ngFor=\"let i of institute.institute.category\">{{ i }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">MetaTag</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p *ngFor=\"let i of institute.institute.metaTag\">{{ i }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p style=\"color: black; font-weight: bold;\">Add Students Here</p>\r\n\r\n<nb-card status=\"warning\">\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit\"\r\n      >Already Registered Student</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasStudentIdForm\"\r\n      (ngSubmit)=\"onStudentSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch student</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"\r\n              eduAtlasStudentIdControl.eduAtlasId.errors &&\r\n              eduAtlasStudentIdControl.eduAtlasId.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"eduAtlasId\"\r\n            fullWidth\r\n            formControlName=\"eduAtlasId\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button\r\n            type=\"submit\"\r\n            nbButton\r\n            status=\"warning\"\r\n            style=\"color: black;\"\r\n            *ngIf=\"!edit && !dataFetched\"\r\n          >\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n\r\n    <form [formGroup]=\"otpForm\" (ngSubmit)=\"verifyOtp()\" *ngIf=\"otpSent && alreadyRegistered\">\r\n      <p>OTP</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"otpForm.get('otp').errors && otpForm.get('otp').touched ? 'danger' : 'basic'\"\r\n            id=\"otp\"\r\n            fullWidth\r\n            formControlName=\"otp\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\" *ngIf=\"!edit\">\r\n            Verify\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form [formGroup]=\"studentForm\" (ngSubmit)=\"onSubmit()\">\r\n      <p>Student Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">*Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Student name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.studentEmail.errors && f.studentEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"studentEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.studentEmail.errors && f.studentEmail.touched\"\r\n              >*Student email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Student Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Student Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Student Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Parents Details</p>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"pname\">Parent Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              status=\"basic\"\r\n              id=\"pname\"\r\n              formControlName=\"parentName\"\r\n              fullWidth\r\n              placeholder=\"Parent Name\"\r\n            />\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"p-contact\">Parent Contact</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              status=\"basic\"\r\n              maxlength=\"10\"\r\n              id=\"p-contact\"\r\n              formControlName=\"parentContact\"\r\n              fullWidth\r\n              placeholder=\"Parent Contact\"\r\n            />\r\n            <small *ngIf=\"f.parentContact.errors\">*Enter Correct Phone no.</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"p-email\">Parent Email Id</label>\r\n          <input\r\n            type=\"email\"\r\n            nbInput\r\n            status=\"basic\"\r\n            id=\"p-email\"\r\n            formControlName=\"parentEmail\"\r\n            fullWidth\r\n            placeholder=\"Parent Email Id\"\r\n          />\r\n          <small *ngIf=\"f.parentEmail.errors\">*Enter Correct Email</small>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Course Details</p>\r\n\r\n      <div formGroupName=\"courseDetails\" class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"course\">*Select Course</label>\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            id=\"course\"\r\n            status=\"basic\"\r\n            formControlName=\"course\"\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"batch\">Batch</label>\r\n          <nb-select placeholder=\"Select Batch\" formControlName=\"batch\" status=\"basic\">\r\n            <nb-option value=\"\">No Batch Assign</nb-option>\r\n            <nb-option *ngFor=\"let item of batches\" [value]=\"item._id\">{{\r\n              item.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"roll\">*Roll Number</label>\r\n            <input\r\n              type=\"text\"\r\n              pattern=\"\\d*\"\r\n              nbInput\r\n              [status]=\"'basic'\"\r\n              id=\"roll\"\r\n              formControlName=\"rollNo\"\r\n              fullWidth\r\n              placeholder=\"Roll Number\"\r\n            />\r\n            <!-- <small *ngIf=\"f.rollNo.errors && f.rollNo.touched\">*Student Roll no. is required</small> -->\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"dis\">Discount</label>\r\n          <nb-select\r\n            placeholder=\"Discount\"\r\n            formControlName=\"discount\"\r\n            status=\"basic\"\r\n            (selectedChange)=\"onSelectDiscount($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Discount</nb-option>\r\n            <nb-option *ngFor=\"let i of discounts\" [value]=\"i._id\">{{\r\n              i.discountCode + ' (' + i.amount + (i.discountType === 'percentage' ? '%' : '') + ')'\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"additionalDiscount\">Additional Discount</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"additionalDiscount\"\r\n            fullWidth\r\n            placeholder=\"Additional Discount\"\r\n            (input)=\"calculateNetPayableAmount()\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"net\">Net Payable</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"net\"\r\n            status=\"basic\"\r\n            formControlName=\"netPayable\"\r\n            fullWidth\r\n            placeholder=\"Net Payable\"\r\n            disabled=\"true\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"net\">Course Duration</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"net\"\r\n            status=\"basic\"\r\n            value=\"{{ duration + ' Months' }}\"\r\n            fullWidth\r\n            placeholder=\"Course Duration\"\r\n            disabled=\"true\"\r\n          />\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Fees</p>\r\n\r\n      <div class=\"row\" [formGroup]=\"feeDetailsForm\">\r\n        <div class=\"col-12\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"installmentType\">Installment Type</label>\r\n              <nb-select\r\n                placeholder=\"Select Installment Type\"\r\n                formControlName=\"installmentType\"\r\n                status=\"basic\"\r\n                (selectedChange)=\"onSelectInstallmentType($event)\"\r\n              >\r\n                <nb-option value=\"0\">Paid Once</nb-option>\r\n                <nb-option value=\"2\">Half Yearly</nb-option>\r\n                <nb-option value=\"3\">Quarterly</nb-option>\r\n                <nb-option value=\"4\">Monthly</nb-option>\r\n                <nb-option value=\"1\">Custom</nb-option>\r\n              </nb-select>\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"noOfInstallments\">No. of Installments</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                maxlength=\"2\"\r\n                id=\"noOfInstallments\"\r\n                nbInput\r\n                status=\"basic\"\r\n                formControlName=\"noOfInstallments\"\r\n                fullWidth\r\n                placeholder=\"No. of Installments\"\r\n                (input)=\"generateNoOfInstallments($event.target.value)\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"totalAmount\">Total Amount</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"totalAmount\"\r\n                status=\"basic\"\r\n                formControlName=\"totalAmount\"\r\n                fullWidth\r\n                placeholder=\"Total Amount\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"pendingAmount\">Pending Amount</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"pendingAmount\"\r\n                status=\"basic\"\r\n                formControlName=\"pendingAmount\"\r\n                fullWidth\r\n                placeholder=\"Pending Amount\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"amountCollected\">Amount Collected</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"amountCollected\"\r\n                status=\"basic\"\r\n                formControlName=\"amountCollected\"\r\n                fullWidth\r\n                placeholder=\"Amount Collected\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"date\">Date</label>\r\n              <input\r\n                type=\"date\"\r\n                nbInput\r\n                status=\"basic\"\r\n                formControlName=\"date\"\r\n                fullWidth\r\n                placeholder=\"Installment Date\"\r\n                (input)=\"dateChanged($event.target.value)\"\r\n              />\r\n              <!-- [nbDatepicker]=\"datePicker\"\r\n              <nb-datepicker #datePicker></nb-datepicker> -->\r\n            </div>\r\n          </div>\r\n\r\n          <hr />\r\n\r\n          <div class=\"row\">\r\n            <div class=\"col-12\">\r\n              <div class=\"table-responsive\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>Installment No.</th>\r\n                      <th>Paid</th>\r\n                      <th>Installment Date</th>\r\n                      <th>Amount</th>\r\n                      <th>payment Mode</th>\r\n                      <th>Amount Pending</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody formArrayName=\"installments\">\r\n                    <ng-container\r\n                      *ngFor=\"\r\n                        let installment of feeDetailsForm.get('installments')['controls'];\r\n                        let i = index\r\n                      \"\r\n                    >\r\n                      <tr [formGroupName]=\"i\">\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"installmentNo\"\r\n                            fullWidth\r\n                            placeholder=\"Installment No\"\r\n                            disabled=\"true\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <nb-checkbox\r\n                            formControlName=\"paidStatus\"\r\n                            status=\"basic\"\r\n                            (checkedChange)=\"onPaidAmount($event, i)\"\r\n                          ></nb-checkbox>\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"date\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"paidOn\"\r\n                            fullWidth\r\n                            placeholder=\"Installment Date\"\r\n                          />\r\n                          <!-- [nbDatepicker]=\"datePicker\"\r\n                          <nb-datepicker #datePicker></nb-datepicker> -->\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            fullWidth\r\n                            formControlName=\"amount\"\r\n                            placeholder=\"Amount\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <nb-select\r\n                            placeholder=\"Select Mode\"\r\n                            status=\"basic\"\r\n                            formControlName=\"paymentMode\"\r\n                            placeholder=\"Payment Mode\"\r\n                            (selectedChange)=\"onSelectPaymentMode($event, i)\"\r\n                          >\r\n                            <nb-option *ngFor=\"let mode of modes\" [value]=\"mode\">{{\r\n                              mode\r\n                            }}</nb-option>\r\n                          </nb-select>\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"amountPending\"\r\n                            fullWidth\r\n                            placeholder=\"Amount Pending\"\r\n                          />\r\n                        </td>\r\n                      </tr>\r\n                    </ng-container>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Material Record</p>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <div class=\"form-group\">\r\n            <textarea\r\n              type=\"text\"\r\n              nbInput\r\n              id=\"material\"\r\n              status=\"basic\"\r\n              fullWidth\r\n              formControlName=\"materialRecord\"\r\n              placeholder=\"Material Record\"\r\n            >\r\n            </textarea>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">\r\n          {{ studentEduId ? 'Update Student' : 'Add Student' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\r\n  <nb-card-header>\r\n    <p style=\"color: black; font-weight: bold;\">Add Student Here</p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit && !dataFetched\"\r\n      >Already Registered Student</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasStudentIdForm\"\r\n      (ngSubmit)=\"onStudentSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch student</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"\r\n              eduAtlasStudentIdControl.eduAtlasId.errors &&\r\n              eduAtlasStudentIdControl.eduAtlasId.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"eduAtlasId\"\r\n            fullWidth\r\n            formControlName=\"eduAtlasId\"\r\n            placeholder=\"Enter EduId or Email\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" class=\"btn btn-yellow-black\" *ngIf=\"!edit && !dataFetched\">\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n\r\n    <form [formGroup]=\"otpForm\" (ngSubmit)=\"verifyOtp()\" *ngIf=\"otpSent && alreadyRegistered\">\r\n      <p>OTP</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"otpForm.get('otp').errors && otpForm.get('otp').touched ? 'danger' : 'basic'\"\r\n            id=\"otp\"\r\n            fullWidth\r\n            formControlName=\"otp\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" class=\"btn btn-yellow-black\" *ngIf=\"!edit\">\r\n            Verify\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form\r\n      [formGroup]=\"studentForm\"\r\n      (ngSubmit)=\"onSubmit()\"\r\n      *ngIf=\"!alreadyRegistered || (alreadyRegistered && dataFetched) || (student && edit)\"\r\n    >\r\n      <p>Student Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">*Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Student name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.studentEmail.errors && f.studentEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"studentEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.studentEmail.errors && f.studentEmail.touched\"\r\n              >*Student email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Student Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Student Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Student Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Parents Details</p>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"pname\">Parent Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              status=\"basic\"\r\n              id=\"pname\"\r\n              formControlName=\"parentName\"\r\n              fullWidth\r\n              placeholder=\"Parent Name\"\r\n            />\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"p-contact\">Parent Contact</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              status=\"basic\"\r\n              maxlength=\"10\"\r\n              id=\"p-contact\"\r\n              formControlName=\"parentContact\"\r\n              fullWidth\r\n              placeholder=\"Parent Contact\"\r\n            />\r\n            <small *ngIf=\"f.parentContact.errors\">*Enter Correct Phone no.</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"p-email\">Parent Email Id</label>\r\n          <input\r\n            type=\"email\"\r\n            nbInput\r\n            status=\"basic\"\r\n            id=\"p-email\"\r\n            formControlName=\"parentEmail\"\r\n            fullWidth\r\n            placeholder=\"Parent Email Id\"\r\n          />\r\n          <small *ngIf=\"f.parentEmail.errors\">*Enter Correct Email</small>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Course Details</p>\r\n\r\n      <div formGroupName=\"courseDetails\" class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"course\">*Select Course</label>\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            id=\"course\"\r\n            [status]=\"\r\n              studentForm.get('courseDetails').get('course').invalid &&\r\n              studentForm.get('courseDetails').get('course').touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            formControlName=\"course\"\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"batch\">Batch</label>\r\n          <nb-select placeholder=\"Select Batch\" formControlName=\"batch\" status=\"basic\">\r\n            <nb-option value=\"\">No Batch Assign</nb-option>\r\n            <nb-option *ngFor=\"let item of batches\" [value]=\"item._id\">{{\r\n              item.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"roll\">*Roll Number</label>\r\n            <input\r\n              type=\"text\"\r\n              pattern=\"\\d*\"\r\n              nbInput\r\n              [status]=\"\r\n                studentForm.get('courseDetails').get('rollNo').invalid &&\r\n                studentForm.get('courseDetails').get('rollNo').touched\r\n                  ? 'danger'\r\n                  : 'basic'\r\n              \"\r\n              id=\"roll\"\r\n              formControlName=\"rollNo\"\r\n              fullWidth\r\n              placeholder=\"Roll Number\"\r\n            />\r\n            <!-- <small *ngIf=\"f.rollNo.errors && f.rollNo.touched\">*Student Roll no. is required</small> -->\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"dis\">Discount</label>\r\n          <nb-select\r\n            placeholder=\"Discount\"\r\n            formControlName=\"discount\"\r\n            status=\"basic\"\r\n            (selectedChange)=\"onSelectDiscount($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Discount</nb-option>\r\n            <nb-option *ngFor=\"let i of discounts\" [value]=\"i._id\">{{\r\n              i.discountCode + ' (' + i.amount + (i.discountType === 'percentage' ? '%' : '') + ')'\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"additionalDiscountType\">Additional Discount Type</label>\r\n          <nb-select\r\n            placeholder=\"Select Discount Type\"\r\n            id=\"additionalDiscountType\"\r\n            fullWidth\r\n            formControlName=\"additionalDiscountType\"\r\n            (selectedChange)=\"calculateNetPayableAmount()\"\r\n          >\r\n            <!-- <nb-option value=\"\">Select Parent Course</nb-option> -->\r\n            <nb-option value=\"percentage\">\r\n              Discount in Percentage\r\n            </nb-option>\r\n            <nb-option value=\"amount\">\r\n              Discount in Amount\r\n            </nb-option>\r\n          </nb-select>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"additionalDiscount\">Additional Discount</label>\r\n          <input\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            nbInput\r\n            [status]=\"\r\n              (studentForm.get('courseDetails').get('additionalDiscount').invalid ||\r\n                studentForm.get('courseDetails').hasError('invalidDiscount')) &&\r\n              studentForm.get('courseDetails').get('additionalDiscount').touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            formControlName=\"additionalDiscount\"\r\n            fullWidth\r\n            placeholder=\"Additional Discount\"\r\n            (input)=\"calculateNetPayableAmount()\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"net\">Net Payable</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"net\"\r\n            status=\"basic\"\r\n            formControlName=\"netPayable\"\r\n            fullWidth\r\n            placeholder=\"Net Payable\"\r\n            disabled=\"true\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"net\">Course Duration</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"net\"\r\n            status=\"basic\"\r\n            value=\"{{ duration + ' Months' }}\"\r\n            fullWidth\r\n            placeholder=\"Course Duration\"\r\n            disabled=\"true\"\r\n          />\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Fees</p>\r\n\r\n      <div class=\"row\" [formGroup]=\"feeDetailsForm\">\r\n        <div class=\"col-12\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"installmentType\">Installment Type</label>\r\n              <nb-select\r\n                placeholder=\"Select Installment Type\"\r\n                formControlName=\"installmentType\"\r\n                status=\"basic\"\r\n                (selectedChange)=\"onSelectInstallmentType($event)\"\r\n              >\r\n                <nb-option value=\"0\">Paid Once</nb-option>\r\n                <nb-option value=\"2\">Half Yearly</nb-option>\r\n                <nb-option value=\"3\">Quarterly</nb-option>\r\n                <nb-option value=\"4\">Monthly</nb-option>\r\n                <nb-option value=\"1\">Custom</nb-option>\r\n              </nb-select>\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"noOfInstallments\">No. of Installments</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                maxlength=\"2\"\r\n                id=\"noOfInstallments\"\r\n                nbInput\r\n                status=\"basic\"\r\n                formControlName=\"noOfInstallments\"\r\n                fullWidth\r\n                placeholder=\"No. of Installments\"\r\n                (input)=\"generateNoOfInstallments($event.target.value)\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"totalAmount\">Total Amount</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"totalAmount\"\r\n                status=\"basic\"\r\n                formControlName=\"totalAmount\"\r\n                fullWidth\r\n                placeholder=\"Total Amount\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"pendingAmount\">Pending Amount</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"pendingAmount\"\r\n                status=\"basic\"\r\n                formControlName=\"pendingAmount\"\r\n                fullWidth\r\n                placeholder=\"Pending Amount\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"amountCollected\">Amount Collected</label>\r\n              <input\r\n                type=\"text\"\r\n                pattern=\"\\d*\"\r\n                nbInput\r\n                id=\"amountCollected\"\r\n                status=\"basic\"\r\n                formControlName=\"amountCollected\"\r\n                fullWidth\r\n                placeholder=\"Amount Collected\"\r\n                disabled=\"true\"\r\n              />\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <label for=\"date\">Date</label>\r\n              <input\r\n                type=\"date\"\r\n                nbInput\r\n                status=\"basic\"\r\n                formControlName=\"date\"\r\n                fullWidth\r\n                placeholder=\"Installment Date\"\r\n                (input)=\"dateChanged($event.target.value)\"\r\n              />\r\n              <!-- [nbDatepicker]=\"datePicker\"\r\n              <nb-datepicker #datePicker></nb-datepicker> -->\r\n            </div>\r\n          </div>\r\n\r\n          <hr />\r\n\r\n          <div class=\"row\">\r\n            <div class=\"col-12\" formArrayName=\"installments\">\r\n              <ng-container\r\n                *ngFor=\"\r\n                  let installment of feeDetailsForm.get('installments')['controls'];\r\n                  let i = index\r\n                \"\r\n              >\r\n                <nb-card [formGroupName]=\"i\">\r\n                  <nb-card-header class=\"bg-light text-dark\">\r\n                    <div class=\"row\">\r\n                      <div class=\"col-md-8\">\r\n                        <nb-checkbox\r\n                          formControlName=\"paidStatus\"\r\n                          status=\"basic\"\r\n                          (checkedChange)=\"onPaidAmount($event, i)\"\r\n                        ></nb-checkbox>\r\n                        &nbsp;&nbsp;\r\n                        <span>Installment {{ i + 1 }}</span>\r\n                      </div>\r\n                      <div class=\"col-md-4\">\r\n                        <input\r\n                          class=\"form-control\"\r\n                          nbInput\r\n                          type=\"date\"\r\n                          status=\"basic\"\r\n                          formControlName=\"paidOn\"\r\n                          fullWidth\r\n                          placeholder=\"Installment Date\"\r\n                        />\r\n                      </div>\r\n                    </div>\r\n                  </nb-card-header>\r\n                  <nb-card-body>\r\n                    <div class=\"row\">\r\n                      <div class=\"col-sm-4\">\r\n                        <label>Amount</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          pattern=\"\\d*\"\r\n                          nbInput\r\n                          status=\"basic\"\r\n                          fullWidth\r\n                          formControlName=\"amount\"\r\n                          placeholder=\"Amount\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"col-sm-4\">\r\n                        <label>Pending Amount</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          pattern=\"\\d*\"\r\n                          nbInput\r\n                          status=\"basic\"\r\n                          formControlName=\"amountPending\"\r\n                          fullWidth\r\n                          placeholder=\"Amount Pending\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"col-sm-4\">\r\n                        <label>Payment Mode</label>\r\n                        <nb-select\r\n                          placeholder=\"Select Mode\"\r\n                          status=\"basic\"\r\n                          formControlName=\"paymentMode\"\r\n                          placeholder=\"Payment Mode\"\r\n                          (selectedChange)=\"onSelectPaymentMode($event, i)\"\r\n                        >\r\n                          <nb-option *ngFor=\"let mode of modes\" [value]=\"mode\">{{\r\n                            mode\r\n                          }}</nb-option>\r\n                        </nb-select>\r\n                      </div>\r\n                      <div class=\"col-sm-4\">\r\n                        <label>Bank/Mode</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          nbInput\r\n                          status=\"basic\"\r\n                          formControlName=\"bankDetails\"\r\n                          fullWidth\r\n                          placeholder=\"Bank/Mode\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"col-sm-4\">\r\n                        <label>Transaction Id / Instrument No.</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          nbInput\r\n                          status=\"basic\"\r\n                          formControlName=\"transDetails\"\r\n                          fullWidth\r\n                          placeholder=\"Transaction/Instrument No\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"col-sm-4\">\r\n                        <label>Payment Date</label>\r\n                        <input\r\n                          type=\"date\"\r\n                          nbInput\r\n                          status=\"basic\"\r\n                          formControlName=\"paymentDate\"\r\n                          fullWidth\r\n                          placeholder=\"Date\"\r\n                        />\r\n                      </div>\r\n                    </div>\r\n                  </nb-card-body>\r\n                </nb-card>\r\n              </ng-container>\r\n\r\n              <!-- <div class=\"table-responsive\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>Installment No.</th>\r\n                      <th>Paid</th>\r\n                      <th>Installment Date</th>\r\n                      <th>Amount</th>\r\n                      <th>payment Mode</th>\r\n                      <th>payment Date</th>\r\n                      <th>Bank/Mode</th>\r\n                      <th>Transaction Id / Instrument No.</th>\r\n                      <th>Amount Pending</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody formArrayName=\"installments\">\r\n                    <ng-container\r\n                      *ngFor=\"\r\n                        let installment of feeDetailsForm.get('installments')['controls'];\r\n                        let i = index\r\n                      \"\r\n                    >\r\n                      <tr [formGroupName]=\"i\">\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"installmentNo\"\r\n                            fullWidth\r\n                            placeholder=\"Installment No\"\r\n                            disabled=\"true\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <nb-checkbox\r\n                            formControlName=\"paidStatus\"\r\n                            status=\"basic\"\r\n                            (checkedChange)=\"onPaidAmount($event, i)\"\r\n                          ></nb-checkbox>\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"date\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"paidOn\"\r\n                            fullWidth\r\n                            placeholder=\"Installment Date\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            fullWidth\r\n                            formControlName=\"amount\"\r\n                            placeholder=\"Amount\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <nb-select\r\n                            placeholder=\"Select Mode\"\r\n                            status=\"basic\"\r\n                            formControlName=\"paymentMode\"\r\n                            placeholder=\"Payment Mode\"\r\n                            (selectedChange)=\"onSelectPaymentMode($event, i)\"\r\n                          >\r\n                            <nb-option *ngFor=\"let mode of modes\" [value]=\"mode\">{{\r\n                              mode\r\n                            }}</nb-option>\r\n                          </nb-select>\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"bankDetails\"\r\n                            fullWidth\r\n                            placeholder=\"Bank/Mode\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"transDetails\"\r\n                            fullWidth\r\n                            placeholder=\"Transaction/Instrument No\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"date\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"PaymentDate\"\r\n                            fullWidth\r\n                            placeholder=\"Date\"\r\n                          />\r\n                        </td>\r\n\r\n                        <td>\r\n                          <input\r\n                            type=\"text\"\r\n                            pattern=\"\\d*\"\r\n                            nbInput\r\n                            status=\"basic\"\r\n                            formControlName=\"amountPending\"\r\n                            fullWidth\r\n                            placeholder=\"Amount Pending\"\r\n                          />\r\n                        </td>\r\n                      </tr>\r\n                    </ng-container>\r\n                  </tbody>\r\n                </table>\r\n              </div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <hr />\r\n\r\n      <p>Material Record</p>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <div class=\"form-group\">\r\n            <textarea\r\n              type=\"text\"\r\n              nbInput\r\n              id=\"material\"\r\n              status=\"basic\"\r\n              fullWidth\r\n              formControlName=\"materialRecord\"\r\n              placeholder=\"Material Record\"\r\n            >\r\n            </textarea>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" class=\"btn btn-yellow-black\">\r\n          {{ studentEduId ? 'Update Student' : 'Add Student' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -61,7 +61,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Active Students</p>\r\n  </div>\r\n\r\n  <div class=\"col-sm-3\"></div>\r\n\r\n  <div class=\"col-sm-3\">\r\n    <div class=\"form-group\">\r\n      <nb-select\r\n        placeholder=\"Select Course\"\r\n        status=\"basic\"\r\n        fullWidth\r\n        (selectedChange)=\"onSelectCourse($event)\"\r\n      >\r\n        <nb-option value=\"\">Select Course</nb-option>\r\n        <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n      </nb-select>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"students.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Roll No.</th>\r\n          <th>Contact</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let student of students; let i = index\">\r\n          <td>{{ student.basicDetails.name }}</td>\r\n          <td>{{ student.instituteDetails.rollNumber }}</td>\r\n          <td>{{ student.basicDetails.studentContact }}</td>\r\n          <!-- <td>{{ student.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button class=\"mr-2\" nbButton status=\"primary\" (click)=\"view(student.eduAtlasId)\">\r\n              View\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"warning`\" (click)=\"edit(student.eduAtlasId)\">\r\n              Edit\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"danger\"\r\n              (click)=\"delete(student.eduAtlasId, student.instituteDetails._id)\"\r\n            >\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"students.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\r\n  <nb-card-header>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-6\">\r\n        <p class=\"font-weight-bolder\">Active Students</p>\r\n      </div>\r\n\r\n      <div class=\"col-sm-3\"></div>\r\n\r\n      <div class=\"col-sm-3\">\r\n        <div class=\"form-group\">\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            status=\"basic\"\r\n            fullWidth\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <table *ngIf=\"students.length > 0; else noStudents\">\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Roll No.</th>\r\n          <th>Contact</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let student of students; let i = index\">\r\n          <td>{{ student.basicDetails.name }}</td>\r\n          <td>{{ student.instituteDetails.rollNumber }}</td>\r\n          <td>{{ student.basicDetails.studentContact }}</td>\r\n          <!-- <td>{{ student.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button class=\"mr-2\" nbButton status=\"primary\" (click)=\"view(student.eduAtlasId)\">\r\n              View\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-yellow mr-2\" (click)=\"edit(student.eduAtlasId)\">\r\n              Edit\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"danger\"\r\n              (click)=\"delete(student.eduAtlasId, student.instituteDetails._id)\"\r\n            >\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ng-template #noStudents>\r\n      <p class=\"text-center pt-5\">{{ noStudent }}</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -74,7 +74,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"student\">\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Roll Number</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.instituteDetails.rollNumber }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Email</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.studentEmail }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.studentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent Email</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentEmail }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Address</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.address }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"student\">\n  <nb-card-header>\n    <button nbButton status=\"danger\" class=\"btn float-right mr-3\" (click)=\"deleteStudent()\">\n      Delete\n    </button>\n    <button class=\"btn float-right mr-3 btn btn-yellow\" (click)=\"edit()\">Edit</button>\n  </nb-card-header>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Roll Number</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.instituteDetails.rollNumber }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Email</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.studentEmail }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.basicDetails.studentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent Name</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.name }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent Email</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentEmail }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Address</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.address }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n    <hr />\n    <div class=\"row\">\n      <div class=\"col-sm-1\"></div>\n      <div class=\"col-sm-5\">\n        <p class=\"font-weight-bold\">Parent contact</p>\n      </div>\n      <div class=\"col-sm-5\">\n        <p>{{ student.parentDetails.parentContact }}</p>\n      </div>\n      <div class=\"col-sm-1\"></div>\n    </div>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -87,7 +87,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row mb-4\">\r\n  <div class=\"col-sm-6\">\r\n    <p class=\"font-weight-bolder\">Pending Students</p>\r\n  </div>\r\n\r\n  <div class=\"col-sm-3\"></div>\r\n\r\n  <div class=\"col-sm-3\">\r\n    <div class=\"form-group\">\r\n      <nb-select\r\n        placeholder=\"Select Course\"\r\n        status=\"basic\"\r\n        fullWidth\r\n        (selectedChange)=\"onSelectCourse($event)\"\r\n      >\r\n        <nb-option value=\"\">Select Course</nb-option>\r\n        <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n      </nb-select>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<nb-card *ngIf=\"students.length > 0\">\r\n  <nb-card-body>\r\n    <table>\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Roll No.</th>\r\n          <th>Contact</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let student of students; let i = index\">\r\n          <td>{{ student.basicDetails.name }}</td>\r\n          <td>{{ student.instituteDetails.rollNumber }}</td>\r\n          <td>{{ student.basicDetails.studentContact }}</td>\r\n          <!-- <td>{{ student.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button class=\"mr-2\" nbButton status=\"primary\" (click)=\"view(student.eduAtlasId)\">\r\n              View\r\n            </button>\r\n            <button class=\"mr-2\" nbButton status=\"warning`\" (click)=\"edit(student.eduAtlasId)\">\r\n              Edit\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"danger\"\r\n              (click)=\"delete(student.eduAtlasId, student.instituteDetails._id)\"\r\n            >\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </nb-card-body>\r\n</nb-card>\r\n<div *ngIf=\"students.length == 0\" class=\"noRecFound\">\r\n  No Records Found\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\r\n  <nb-card-header>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-6\">\r\n        <p class=\"font-weight-bolder\">Pending Students</p>\r\n      </div>\r\n\r\n      <div class=\"col-sm-3\"></div>\r\n\r\n      <div class=\"col-sm-3\">\r\n        <div class=\"form-group\">\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            status=\"basic\"\r\n            fullWidth\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let i of courses\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <table *ngIf=\"students.length > 0; else noStudents\">\r\n      <thead>\r\n        <tr>\r\n          <th>Name</th>\r\n          <th>Roll No.</th>\r\n          <th>Contact</th>\r\n          <!-- <th>Course Name</th> -->\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let student of students; let i = index\">\r\n          <td>{{ student.basicDetails.name }}</td>\r\n          <td>{{ student.instituteDetails.rollNumber }}</td>\r\n          <td>{{ student.basicDetails.studentContact }}</td>\r\n          <!-- <td>{{ student.courseDetails.course }}</td> -->\r\n          <td>\r\n            <button class=\"mr-2\" nbButton status=\"primary\" (click)=\"view(student.eduAtlasId)\">\r\n              View\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-yellow mr-2\" (click)=\"edit(student.eduAtlasId)\">\r\n              Edit\r\n            </button>\r\n            <button\r\n              class=\"mr-2\"\r\n              nbButton\r\n              status=\"danger\"\r\n              (click)=\"delete(student.eduAtlasId, student.instituteDetails._id)\"\r\n            >\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ng-template #noStudents>\r\n      <p class=\"text-center pt-5\">{{ noStudent }}</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -100,7 +100,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p style=\"font-weight: bold;\">Add Attandance</p>\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"attandanceform\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            formControlName=\"courseId\"\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n            state=\"basic\"\r\n            fullWidth\r\n          >\r\n            <nb-option *ngFor=\"let course of courses\" value=\"{{ course.id }}\">{{\r\n              course.name\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n        <div class=\"col-sm-6\">\r\n          <nb-select\r\n            formControlName=\"batchId\"\r\n            placeholder=\"Select Batch\"\r\n            (selectedChange)=\"onSelectBatch()\"\r\n            state=\"basic\"\r\n            fullWidth\r\n          >\r\n            <nb-option *ngFor=\"let batch of availableBatches\" value=\"{{ batch._id }}\">{{\r\n              batch.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n      </div>\r\n      <div class=\"row mt-3\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"date\"\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"date\"\r\n            fullWidth\r\n            placeholder=\"Pick Date\"\r\n            (input)=\"getStudents()\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-6 text-right\" *ngIf=\"students.length > 0\">\r\n          <button\r\n            nbButton\r\n            type=\"submit\"\r\n            status=\"warning\"\r\n            [disabled]=\"!attandanceform.valid\"\r\n            style=\"color: black;\"\r\n          >\r\n            Submit\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n    <hr />\r\n    <div class=\"row attendanceList\" *ngIf=\"students.length > 0; else empty_students\">\r\n      <div class=\"table-responsive\">\r\n        <table>\r\n          <thead>\r\n            <tr>\r\n              <th class=\"text-center\">Roll No</th>\r\n              <th class=\"text-center\">Student</th>\r\n              <th class=\"text-center\">Mark Attendance</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr  *ngFor=\"let student of students; let i = index\">\r\n              <td>{{student.studentRollNo}}</td>\r\n              <td>\r\n                {{student.studentName}}\r\n              </td>\r\n              <td>\r\n                <div class=\"attendance-selector text-center\">\r\n                  <input\r\n                    type=\"checkbox\"\r\n                    [id]=\"student.studentId\"\r\n                    class=\"attendance\"\r\n                    [checked]=\"student.attendanceStatus\"\r\n                    (change)=\"markAttendance($event, student.studentId, i)\"\r\n                  />\r\n                </div>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n    <ng-template #empty_students>\r\n      <p class=\"pl-3 text-center\">No Students Found</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\r\n  <nb-card-header>\r\n    <p style=\"font-weight: bold;\">Add Attendance</p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"attandanceform\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            formControlName=\"courseId\"\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n            state=\"basic\"\r\n            fullWidth\r\n          >\r\n            <nb-option *ngFor=\"let course of courses\" value=\"{{ course.id }}\">{{\r\n              course.name\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n        <div class=\"col-sm-6\">\r\n          <nb-select\r\n            formControlName=\"batchId\"\r\n            placeholder=\"Select Batch\"\r\n            (selectedChange)=\"onSelectBatch()\"\r\n            state=\"basic\"\r\n            fullWidth\r\n          >\r\n            <nb-option *ngFor=\"let batch of availableBatches\" value=\"{{ batch._id }}\">{{\r\n              batch.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n      </div>\r\n      <div class=\"row mt-3\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"date\"\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"date\"\r\n            fullWidth\r\n            placeholder=\"Pick Date\"\r\n            (input)=\"getStudents()\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-6 text-right\" *ngIf=\"students.length > 0\">\r\n          <button\r\n            class=\"btn btn-yellow\"\r\n            type=\"submit\"\r\n            [disabled]=\"!attandanceform.valid\"\r\n            style=\"color: black;\"\r\n          >\r\n            Submit\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n    <hr />\r\n    <div class=\"row attendanceList\" *ngIf=\"students.length > 0; else empty_students\">\r\n      <div class=\"table-responsive\">\r\n        <table>\r\n          <thead>\r\n            <tr>\r\n              <th class=\"text-center\">Roll No</th>\r\n              <th class=\"text-center\">Student</th>\r\n              <th class=\"text-center\">Mark Attendance</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let student of students; let i = index\">\r\n              <td>{{ student.studentRollNo }}</td>\r\n              <td>\r\n                {{ student.studentName }}\r\n              </td>\r\n              <td>\r\n                <div class=\"attendance-selector text-center\">\r\n                  <input\r\n                    type=\"checkbox\"\r\n                    [id]=\"student.studentId\"\r\n                    class=\"attendance\"\r\n                    [checked]=\"student.attendanceStatus\"\r\n                    (change)=\"markAttendance($event, student.studentId, i)\"\r\n                  />\r\n                </div>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n    <ng-template #empty_students>\r\n      <p class=\"pl-3 text-center\">No Students Found</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -113,7 +113,33 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-layout>\n  <nb-layout-column>\n    <router-outlet></router-outlet>\n  </nb-layout-column>\n</nb-layout>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<router-outlet></router-outlet>\r\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/leads/add-leads/add-lead.component.html":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/leads/add-leads/add-lead.component.html ***!
+  \*****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\r\n  <nb-card-header>\r\n    <div>\r\n      <button (click)=\"back()\" class=\"btn btn-yellow-black float-right\">Manage Leads</button>\r\n      <p style=\"font-weight: bold;\">Add Lead</p>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"leadForm\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"name\">Lead Name</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"name\"\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"leadName\"\r\n            [status]=\"f.leadName.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Lead Name\"\r\n          />\r\n          <small *ngIf=\"f.leadName.errors && submitted\">*Lead Name is Required</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"leadContact\">Lead Contact</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"leadContact\"\r\n            maxlength=\"10\"\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"leadContact\"\r\n            placeholder=\"Lead Contact\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"leadEmail\">Lead Email</label>\r\n          <input\r\n            type=\"email\"\r\n            nbInput\r\n            fullWidth\r\n            id=\"leadEmail\"\r\n            status=\"basic\"\r\n            formControlName=\"leadEmail\"\r\n            [status]=\"f.leadEmail.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Lead Email\"\r\n          />\r\n          <small *ngIf=\"f.leadEmail.errors && submitted\">*Lead Email is Invalid</small>\r\n        </div>\r\n      </div>\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"date\">Date</label>\r\n          <input\r\n            type=\"date\"\r\n            nbInput\r\n            status=\"basic\"\r\n            formControlName=\"date\"\r\n            fullWidth\r\n            placeholder=\"Pick Date\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"course\">Course</label>\r\n          <nb-select placeholder=\"Course\" id=\"course\" status=\"basic\" formControlName=\"course\">\r\n            <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{\r\n              course.name\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"source\">Lead Source</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            id=\"source\"\r\n            status=\"basic\"\r\n            formControlName=\"source\"\r\n            placeholder=\"Lead Source\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"status\">Status</label>\r\n          <nb-select\r\n            placeholder=\"Status\"\r\n            id=\"status\"\r\n            status=\"basic\"\r\n            [status]=\"f.status.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"status\"\r\n          >\r\n            <nb-option *ngFor=\"let item of status\" [value]=\"item\">{{ item }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.status.errors && submitted\">*Status is Required</small>\r\n        </div>\r\n      </div>\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"comment\">Comment</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"comment\"\r\n            status=\"basic\"\r\n            fullWidth\r\n            formControlName=\"comment\"\r\n            placeholder=\"Comment\"\r\n            cols=\"15\"\r\n            rows=\"7\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: right; margin: 1rem;\">\r\n        <button type=\"submit\" class=\"btn btn-yellow-black\">\r\n          {{ edit ? 'Update' : 'Add' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/leads/manage-leads/manage-lead.component.html":
+/*!***********************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/leads/manage-leads/manage-lead.component.html ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\r\n  <nb-card-header>\r\n    <button class=\"btn btn-yellow float-right\" (click)=\"addLead()\">\r\n      Add Lead\r\n    </button>\r\n    <p style=\"font-weight: bold;\">Manage Leads</p>\r\n  </nb-card-header>\r\n</nb-card>\r\n<nb-card status=\"info\">\r\n  <nb-card-header>\r\n    <div class=\"row mb-2\" *ngIf=\"courses\">\r\n      <div class=\"col-sm-6\">\r\n        <h3 class=\"text-white\">Leads</h3>\r\n      </div>\r\n      <div class=\"col-sm-3\">\r\n        <nb-select\r\n          placeholder=\"Select Course\"\r\n          status=\"basic\"\r\n          fullWidth\r\n          (selectedChange)=\"onSelectCourse($event)\"\r\n        >\r\n          <nb-option value=\"\">Select Course</nb-option>\r\n          <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{\r\n            course.name\r\n          }}</nb-option>\r\n        </nb-select>\r\n      </div>\r\n\r\n      <div class=\"col-sm-3\">\r\n        <nb-select\r\n          placeholder=\"Select Status\"\r\n          fullWidth\r\n          status=\"basic\"\r\n          (selectedChange)=\"onSelectStatus($event)\"\r\n        >\r\n          <nb-option value=\"\">Select Status</nb-option>\r\n          <nb-option *ngFor=\"let item of status\" [value]=\"item\">{{ item }}</nb-option>\r\n        </nb-select>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <table\r\n      class=\"table table-borderless text-center\"\r\n      *ngIf=\"leads && leads.length > 0; else noLeads\"\r\n    >\r\n      <thead>\r\n        <tr>\r\n          <th>Lead Name</th>\r\n          <th>Lead Email</th>\r\n          <th>Lead Contact</th>\r\n          <th>Status</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let lead of leads; let i = index\">\r\n          <td>{{ lead.leadName }}</td>\r\n          <td>{{ lead.leadEmail }}</td>\r\n          <td>{{ lead.leadContact }}</td>\r\n          <td>{{ lead.status }}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3 mb-2 btn btn-yellow\" (click)=\"edit(lead._id)\">Edit</button>\r\n            <button class=\"mb-2\" nbButton status=\"danger\" (click)=\"delete(lead._id, i)\">\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ng-template #noLeads>\r\n      <p class=\"mt-5 mb-5 text-center\">No Record Found</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -126,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"back()\" style=\"color: black;\">Manage Schedule</button>\n</div>\n<p style=\"font-weight: bold;\">Add Schedule</p>\n<nb-card *ngIf=\"display\">\n  <nb-card-body>\n    <form [formGroup]=\"scheduleForm\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"row\">\n        <div class=\"col-sm-3\">\n          <label for=\"course\">*Select Course</label>\n          <nb-select\n            placeholder=\"Select Course\"\n            status=\"basic\"\n            fullWidth\n            formControlName=\"courseId\"\n            (selectedChange)=\"onSelectCourse($event)\"\n          >\n            <nb-option value=\"\">Select Course</nb-option>\n            <nb-option *ngFor=\"let course of institute.course\" [value]=\"course._id\">{{\n              course.name\n            }}</nb-option>\n          </nb-select>\n          <div *ngIf=\"scheduleForm.get('courseId').invalid && scheduleForm.get('courseId').touched\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"batch\">Batch</label>\n          <nb-select placeholder=\"Select Batch\" formControlName=\"batchId\" fullWidth status=\"basic\">\n            <nb-option value=\"\">Select Batch</nb-option>\n            <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n              batch.batchCode\n            }}</nb-option>\n          </nb-select>\n          <div *ngIf=\"scheduleForm.get('batchId').invalid && scheduleForm.get('batchId').touched\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleStart\">From</label>\n          <input\n            type=\"date\"\n            nbInput\n            id=\"scheduleStart\"\n            status=\"basic\"\n            formControlName=\"scheduleStart\"\n            fullWidth\n            placeholder=\"Schedule From\"\n            (input)=\"fromDatePicked($event.target.value)\"\n          />\n\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleStart').invalid && scheduleForm.get('scheduleStart').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleEnd\">To</label>\n          <input\n            type=\"date\"\n            nbInput\n            id=\"scheduleEnd\"\n            status=\"basic\"\n            formControlName=\"scheduleEnd\"\n            fullWidth\n            placeholder=\"Schedule To\"\n            (input)=\"toDatePicked($event.target.value)\"\n          />\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleEnd').invalid && scheduleForm.get('scheduleEnd').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n          <div\n            *ngIf=\"scheduleForm.hasError('invalidDate') && scheduleForm.get('scheduleEnd').touched\"\n          >\n            <small>*Select Valid End Date</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleStartTime\">Schedule Start Time</label>\n          <input\n            type=\"time\"\n            nbInput\n            id=\"scheduleStartTime\"\n            status=\"basic\"\n            [value]=\"scheduleStartTime\"\n            fullWidth\n            placeholder=\"scheduleStartTime\"\n            (input)=\"startTimePicked($event.target.value)\"\n          />\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleEndTime\">Schedule End Time</label>\n          <input\n            type=\"time\"\n            nbInput\n            id=\"scheduleEndTime\"\n            status=\"basic\"\n            [value]=\"scheduleEndTime\"\n            fullWidth\n            placeholder=\"End Time\"\n            (input)=\"endTimePicked($event.target.value)\"\n          />\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleEnd').invalid && scheduleForm.get('scheduleEnd').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n        </div>\n      </div>\n\n      <hr />\n\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>Select</th>\n                  <th>Day</th>\n                  <th>Date</th>\n                  <th>Start Time</th>\n                  <th>End Time</th>\n                  <th>Topic</th>\n                  <th>Teacher</th>\n                </tr>\n              </thead>\n              <tbody formArrayName=\"days\">\n                <ng-container\n                  *ngFor=\"let scheduleDay of scheduleForm.get('days')['controls']; let i = index\"\n                >\n                  <tr [formGroupName]=\"i\">\n                    <td>\n                      <nb-checkbox formControlName=\"select\"> </nb-checkbox>\n                    </td>\n                    <td>\n                      <input\n                        type=\"text\"\n                        nbInput\n                        formControlName=\"day\"\n                        status=\"basic\"\n                        fullWidth\n                        placeholder=\"Day\"\n                        disabled=\"true\"\n                      />\n                    </td>\n                    <td>\n                      <input\n                        type=\"date\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"date\"\n                        fullWidth\n                        placeholder=\"Date\"\n                        disabled=\"true\"\n                      />\n                      <!-- [nbDatepicker]=\"datePicker\"\n                      <nb-datepicker #datePicker></nb-datepicker> -->\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"time\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"startTime\"\n                        fullWidth\n                        placeholder=\"Start Time\"\n                      />\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"time\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"endTime\"\n                        fullWidth\n                        placeholder=\"End Time\"\n                      />\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"text\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"topic\"\n                        fullWidth\n                        placeholder=\"Topic\"\n                      />\n                    </td>\n\n                    <td>\n                      <nb-select\n                        placeholder=\"Select Teacher\"\n                        status=\"basic\"\n                        formControlName=\"teacher\"\n                        fullWidth\n                      >\n                        <nb-option value=\"\">Select Teacher</nb-option>\n                        <nb-option *ngFor=\"let teacher of teachers\" [value]=\"teacher._id\">{{\n                          teacher.basicDetails.name\n                        }}</nb-option>\n                      </nb-select>\n                    </td>\n                  </tr>\n                </ng-container>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"mt-4\">\n        <nb-checkbox formControlName=\"recurrence\" (checkedChange)=\"recurrence($event)\">\n          Ask for recurrence at the time of definition\n        </nb-checkbox>\n      </div>\n\n      <div class=\"text-right mt-4\">\n        <button type=\"submit\" nbButton status=\"warning\" style=\"color: black;\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    <button class=\"btn btn-yellow-black float-right\" (click)=\"back()\">Manage Schedule</button>\n    <p style=\"font-weight: bold;\">Add Schedule</p>\n  </nb-card-header>\n  <nb-card-body>\n    <div class=\"table-responsive\" *ngIf=\"schedules.length > 0\">\n      <table class=\"table table-borderless\">\n        <thead>\n          <tr>\n            <th>#</th>\n            <th>Start Time</th>\n            <th>End Time</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let schedule of schedules; let i = index\">\n            <td>{{ i + 1 }}</td>\n            <td>{{ schedule.scheduleStart }}</td>\n            <td>{{ schedule.scheduleEnd }}</td>\n            <td>\n              <button class=\"btn btn-sm btn-yellow-black\" (click)=\"useRecurrenceSchedule(i)\">\n                Use\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n      <hr />\n    </div>\n\n    <form [formGroup]=\"scheduleForm\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"row\">\n        <div class=\"col-sm-3\">\n          <label for=\"course\">*Select Course</label>\n          <nb-select\n            placeholder=\"Select Course\"\n            [status]=\"\n              scheduleForm.get('courseId').invalid && scheduleForm.get('courseId').touched\n                ? 'danger'\n                : 'basic'\n            \"\n            fullWidth\n            formControlName=\"courseId\"\n            (selectedChange)=\"onSelectCourse($event)\"\n          >\n            <nb-option value=\"\">Select Course</nb-option>\n            <nb-option *ngFor=\"let course of institute.course\" [value]=\"course._id\">{{\n              course.name\n            }}</nb-option>\n          </nb-select>\n          <div *ngIf=\"scheduleForm.get('courseId').invalid && scheduleForm.get('courseId').touched\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"batch\">Batch</label>\n          <nb-select\n            placeholder=\"Select Batch\"\n            formControlName=\"batchId\"\n            fullWidth\n            [status]=\"\n              scheduleForm.get('batchId').invalid && scheduleForm.get('batchId').touched\n                ? 'danger'\n                : 'basic'\n            \"\n            (selectedChange)=\"onSelectBatch($event)\"\n          >\n            <nb-option value=\"\">Select Batch</nb-option>\n            <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n              batch.batchCode\n            }}</nb-option>\n          </nb-select>\n          <div *ngIf=\"scheduleForm.get('batchId').invalid && scheduleForm.get('batchId').touched\">\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleStart\">From</label>\n          <input\n            type=\"date\"\n            nbInput\n            id=\"scheduleStart\"\n            status=\"basic\"\n            formControlName=\"scheduleStart\"\n            fullWidth\n            placeholder=\"Schedule From\"\n            (input)=\"fromDatePicked($event.target.value)\"\n          />\n\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleStart').invalid && scheduleForm.get('scheduleStart').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleEnd\">To</label>\n          <input\n            type=\"date\"\n            nbInput\n            id=\"scheduleEnd\"\n            status=\"basic\"\n            formControlName=\"scheduleEnd\"\n            fullWidth\n            placeholder=\"Schedule To\"\n            (input)=\"toDatePicked($event.target.value)\"\n          />\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleEnd').invalid && scheduleForm.get('scheduleEnd').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n          <div\n            *ngIf=\"scheduleForm.hasError('invalidDate') && scheduleForm.get('scheduleEnd').touched\"\n          >\n            <small>*Select Valid End Date</small>\n          </div>\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleStartTime\">Schedule Start Time</label>\n          <input\n            type=\"time\"\n            nbInput\n            id=\"scheduleStartTime\"\n            status=\"basic\"\n            [value]=\"scheduleStartTime\"\n            fullWidth\n            placeholder=\"scheduleStartTime\"\n            (input)=\"startTimePicked($event.target.value)\"\n          />\n        </div>\n\n        <div class=\"col-sm-3\">\n          <label for=\"scheduleEndTime\">Schedule End Time</label>\n          <input\n            type=\"time\"\n            nbInput\n            id=\"scheduleEndTime\"\n            status=\"basic\"\n            [value]=\"scheduleEndTime\"\n            fullWidth\n            placeholder=\"End Time\"\n            (input)=\"endTimePicked($event.target.value)\"\n          />\n          <div\n            *ngIf=\"\n              scheduleForm.get('scheduleEnd').invalid && scheduleForm.get('scheduleEnd').touched\n            \"\n          >\n            <small>*This field is required</small>\n          </div>\n        </div>\n      </div>\n\n      <hr />\n\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>Select</th>\n                  <th>Day</th>\n                  <th>Date</th>\n                  <th>Start Time</th>\n                  <th>End Time</th>\n                  <th>Topic</th>\n                  <th>Teacher</th>\n                </tr>\n              </thead>\n              <tbody formArrayName=\"days\">\n                <ng-container\n                  *ngFor=\"let scheduleDay of scheduleForm.get('days')['controls']; let i = index\"\n                >\n                  <tr [formGroupName]=\"i\">\n                    <td>\n                      <nb-checkbox formControlName=\"select\"> </nb-checkbox>\n                    </td>\n                    <td>\n                      <input\n                        type=\"text\"\n                        nbInput\n                        formControlName=\"day\"\n                        status=\"basic\"\n                        fullWidth\n                        placeholder=\"Day\"\n                        disabled=\"true\"\n                      />\n                    </td>\n                    <td>\n                      <input\n                        type=\"date\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"date\"\n                        fullWidth\n                        placeholder=\"Date\"\n                        disabled=\"true\"\n                      />\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"time\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"startTime\"\n                        fullWidth\n                        placeholder=\"Start Time\"\n                      />\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"time\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"endTime\"\n                        fullWidth\n                        placeholder=\"End Time\"\n                      />\n                    </td>\n\n                    <td>\n                      <input\n                        type=\"text\"\n                        nbInput\n                        status=\"basic\"\n                        formControlName=\"topic\"\n                        fullWidth\n                        placeholder=\"Topic\"\n                      />\n                    </td>\n\n                    <td>\n                      <nb-select\n                        placeholder=\"Select Teacher\"\n                        status=\"basic\"\n                        formControlName=\"teacher\"\n                        fullWidth\n                      >\n                        <nb-option value=\"\">Select Teacher</nb-option>\n                        <nb-option *ngFor=\"let teacher of teachers\" [value]=\"teacher._id\">{{\n                          teacher.basicDetails.name\n                        }}</nb-option>\n                      </nb-select>\n                    </td>\n                  </tr>\n                </ng-container>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"mt-4\">\n        <nb-checkbox formControlName=\"recurrence\" (checkedChange)=\"recurrence($event)\">\n          Ask for recurrence at the time of definition\n        </nb-checkbox>\n      </div>\n\n      <div class=\"text-right mt-4\">\n        <button class=\"btn btn-yellow-black\" type=\"submit\">Submit</button>\n      </div>\n    </form>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -139,7 +165,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"text-right\">\n  <button nbButton status=\"warning\" (click)=\"addSchedule()\" style=\"color: black;\">\n    Add Schedule\n  </button>\n</div>\n<p style=\"font-weight: bold;\">Manage Schedule</p>\n<nb-card>\n  <nb-card-body *ngIf=\"display\">\n    <div class=\"row\">\n      <div class=\"col-sm-6\"></div>\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Course\"\n          status=\"basic\"\n          fullWidth\n          (selectedChange)=\"onSelectCourse($event)\"\n        >\n          <nb-option value=\"\">Select Course</nb-option>\n          <nb-option *ngFor=\"let course of institute.course\" [value]=\"course._id\">{{\n            course.name\n          }}</nb-option>\n        </nb-select>\n      </div>\n\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Batch\"\n          fullWidth\n          status=\"basic\"\n          (selectedChange)=\"onSelectBatch($event)\"\n        >\n          <nb-option value=\"\">Select Batch</nb-option>\n          <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n            batch.batchCode\n          }}</nb-option>\n        </nb-select>\n      </div>\n    </div>\n\n    <br />\n\n    <div *ngIf=\"schedules.length > 0; else no_schedule\">\n      <div class=\"row\">\n        <div class=\"col-sm-2\">\n          <h6>#</h6>\n        </div>\n        <div class=\"col-sm-2\">\n          <h6>Start</h6>\n        </div>\n        <div class=\"col-sm-2\">\n          <h6>End</h6>\n        </div>\n      </div>\n\n      <br />\n\n      <div>\n        <div class=\"row\" *ngFor=\"let schedule of schedules; let i = index\">\n          <div class=\"col-sm-2\">\n            <p>{{ i + 1 }}</p>\n          </div>\n          <div class=\"col-sm-2\">\n            <p>{{ schedule.scheduleStart }}</p>\n          </div>\n          <div class=\"col-sm-2\">\n            <p>{{ schedule.scheduleEnd }}</p>\n          </div>\n          <div class=\"col-sm-4 text-right\">\n            <button class=\"mr-3\" nbButton status=\"primary\" (click)=\"viewSchedule(schedule._id)\">\n              View\n            </button>\n            <button class=\"mr-3\" nbButton status=\"\" (click)=\"editSchedule(schedule._id)\">\n              Edit\n            </button>\n            <button nbButton status=\"danger\" (click)=\"deleteSchedule(schedule._id)\">Del</button>\n          </div>\n        </div>\n      </div>\n    </div>\n    <ng-template #no_schedule>\n      <h6 class=\"text-center mt-5\">No Schedule</h6>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\n  <nb-card-header>\n    <button class=\"btn btn-yellow-black float-right\" (click)=\"addSchedule()\">\n      Add Schedule\n    </button>\n    <p style=\"font-weight: bold;\">Manage Schedule</p>\n  </nb-card-header>\n  <nb-card-body *ngIf=\"display\">\n    <div class=\"row\">\n      <div class=\"col-sm-6\"></div>\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Course\"\n          status=\"basic\"\n          fullWidth\n          (selectedChange)=\"onSelectCourse($event)\"\n        >\n          <nb-option value=\"all\">All</nb-option>\n          <nb-option *ngFor=\"let course of institute.course\" [value]=\"course._id\">{{\n            course.name\n          }}</nb-option>\n        </nb-select>\n      </div>\n\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Batch\"\n          fullWidth\n          status=\"basic\"\n          (selectedChange)=\"onSelectBatch($event)\"\n        >\n          <nb-option value=\"all\">All</nb-option>\n          <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n            batch.batchCode\n          }}</nb-option>\n        </nb-select>\n      </div>\n    </div>\n\n    <br />\n\n    <div class=\"table-responsive\" *ngIf=\"schedules.length > 0; else no_schedule\">\n      <table class=\"table table-borderless\">\n        <thead>\n          <tr>\n            <th>#</th>\n            <th>Course</th>\n            <th>Batch</th>\n            <th>Start</th>\n            <th>End</th>\n            <th></th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let schedule of schedules; let i = index\">\n            <td>{{ i + 1 }}</td>\n            <td>{{ schedule.courseId }}</td>\n            <td>{{ schedule.batchId }}</td>\n            <td>{{ schedule.scheduleStart }}</td>\n            <td>{{ schedule.scheduleEnd }}</td>\n            <td>\n              <button class=\"mr-3\" nbButton status=\"primary\" (click)=\"viewSchedule(schedule._id)\">\n                View\n              </button>\n              <button class=\"mr-3\" nbButton status=\"\" (click)=\"editSchedule(schedule._id)\">\n                Edit\n              </button>\n              <button nbButton status=\"danger\" (click)=\"deleteSchedule(schedule._id)\">\n                Delete\n              </button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    <ng-template #no_schedule>\n      <h6 class=\"text-center mt-5\">No Schedule</h6>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -152,7 +178,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<button nbButton (click)=\"back()\" status=\"warning\" style=\"color: black;\">Manage Schedule</button>\n<nb-card *ngIf=\"display\">\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Course</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.courseId }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Batch</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.batchId }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Schedule Start</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.scheduleStart }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Schedule End</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.scheduleEnd }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Recurrence at the time of definition</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        {{ schedule.recurrence === 'true' ? 'Yes' : 'No' }}\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-12\">\n        <div class=\"table-responsive\">\n          <table class=\"table table-borderless\">\n            <thead>\n              <tr>\n                <th>#</th>\n                <th>Day</th>\n                <th>Date</th>\n                <th>Start Time</th>\n                <th>End Time</th>\n                <th>Topic</th>\n                <th>Teacher</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let day of schedule.days; let i = index\">\n                <td>\n                  {{ i + 1 }}\n                </td>\n                <td>\n                  {{ day.day }}\n                </td>\n                <td>\n                  {{ day.date }}\n                </td>\n                <td>\n                  {{ day.startTime ? day.startTime : '--' }}\n                </td>\n                <td>\n                  {{ day.endTime ? day.endTime : '--' }}\n                </td>\n                <td>\n                  {{ day.topic ? day.topic : '--' }}\n                </td>\n                <td>\n                  {{ day.teacher ? day.teacher : '--' }}\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n    </div>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    <button class=\"btn btn-yellow-black float-right\" (click)=\"back()\">\n      Manage Schedule\n    </button>\n  </nb-card-header>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Course</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.courseId }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Batch</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.batchId }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Schedule Start</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.scheduleStart }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Schedule End</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        <p>{{ schedule.scheduleEnd }}</p>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <h6>Recurrence at the time of definition</h6>\n      </div>\n      <div class=\"col-sm-6\">\n        {{ schedule.recurrence === 'true' ? 'Yes' : 'No' }}\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-12\">\n        <div class=\"table-responsive\">\n          <table class=\"table table-borderless\">\n            <thead>\n              <tr>\n                <th>#</th>\n                <th>Day</th>\n                <th>Date</th>\n                <th>Start Time</th>\n                <th>End Time</th>\n                <th>Topic</th>\n                <th>Teacher</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let day of schedule.days; let i = index\">\n                <td>\n                  {{ i + 1 }}\n                </td>\n                <td>\n                  {{ day.day }}\n                </td>\n                <td>\n                  {{ day.date }}\n                </td>\n                <td>\n                  {{ day.startTime ? day.startTime : '--' }}\n                </td>\n                <td>\n                  {{ day.endTime ? day.endTime : '--' }}\n                </td>\n                <td>\n                  {{ day.topic ? day.topic : '--' }}\n                </td>\n                <td>\n                  {{ day.teacher ? day.teacher : '--' }}\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n    </div>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -350,7 +376,7 @@ let AddInstituteComponent = class AddInstituteComponent {
                 currency: 'INR',
                 name: 'eduatlas',
                 description: 'Test Transaction',
-                image: 'https://example.com/your_logo',
+                image: '../../../../assets/images/logo.png',
                 // tslint:disable-next-line: max-line-length
                 order_id: '',
                 handler: (response) => {
@@ -433,26 +459,53 @@ let AddInstituteComponent = class AddInstituteComponent {
             // console.log(res);
             this.showToast('top-right', 'success', 'Payment Verified Successfully');
             setTimeout(() => {
-                this.addInstituteAfterPayment(this.institute, res.orderId, res.receiptId);
+                // this.addInstituteAfterPayment(this.institute, res.orderId, res.receiptId);
+                this.activateInstitute(this.instituteId, res.orderId, res.receiptId);
             }, 1000);
         }, (err) => {
             // console.log(err);
             this.showToast('top-right', 'danger', err.error.message || 'Payment Verification Failed');
         });
     }
-    addInstituteAfterPayment(institute, orderId, ReceiptId) {
+    activateInstitute(id, orderId, ReceiptId) {
         const paymentDetails = {
             amount: this.paymentDetails.amount,
             planType: this.paymentDetails.planType,
             orderId: orderId,
             receiptId: ReceiptId,
         };
-        this.api.addInstitute(institute, paymentDetails).subscribe((data) => {
-            this.user = data;
-            this.showToast('top-right', 'success', 'Institute Added Successfully');
+        this.api.activateInstitute(id, paymentDetails).subscribe((data) => {
+            // this.user = data;
+            this.showToast('top-right', 'success', 'Institute Activated Successfully');
             setTimeout(() => {
                 this.router.navigate(['/pages/home']);
             }, 1000);
+        }, (error) => {
+            this.showToast('top-right', 'danger', error.message || 'Something bad happened');
+        });
+    }
+    addInstitute(institute) {
+        this.api.addInstitute(institute).subscribe((data) => {
+            if (data.instituteId) {
+                this.instituteId = data.instituteId;
+                this.showToast('top-right', 'success', 'Institute Added Successfully, Make Your Payment');
+                this.paymentDetails = this.paymentService.getPaymentDetails();
+                const orderDetails = {
+                    userId: this.user._id,
+                    userPhone: this.user.phone,
+                    userName: this.user.name,
+                    userEmail: this.user.email,
+                    amount: this.paymentDetails.amount,
+                    planType: this.paymentDetails.planType,
+                };
+                this.generateOrder(orderDetails);
+                // setTimeout(() => {
+                //   this.router.navigate(['/pages/home']);
+                // }, 1000);
+            }
+            else {
+                this.showToast('top-right', 'danger', 'Something bad happened');
+            }
         }, (error) => {
             this.showToast('top-right', 'danger', error.message || 'Something bad happened');
         });
@@ -584,16 +637,7 @@ let AddInstituteComponent = class AddInstituteComponent {
         }
         if (!this.edit) {
             // this.addInstituteAfterPayment(this.institute, '1233', '1234');
-            this.paymentDetails = this.paymentService.getPaymentDetails();
-            const orderDetails = {
-                userId: this.user._id,
-                userPhone: this.user._phone,
-                userName: this.user.name,
-                userEmail: this.user.email,
-                amount: this.paymentDetails.amount,
-                planType: this.paymentDetails.planType,
-            };
-            this.generateOrder(orderDetails);
+            this.addInstitute(this.institute);
         }
     }
     showToast(position, status, message) {
@@ -861,6 +905,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/api.service */ "./src/app/services/api.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+/* harmony import */ var _services_chat_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../services/chat.service */ "./src/app/services/chat.service.ts");
+
 
 
 
@@ -868,12 +914,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AddStudentsComponent = class AddStudentsComponent {
-    constructor(fb, api, router, route, toasterService) {
+    constructor(fb, api, router, route, toasterService, chatService) {
         this.fb = fb;
         this.api = api;
         this.router = router;
         this.route = route;
         this.toasterService = toasterService;
+        this.chatService = chatService;
         // Mode of Payments
         this.modes = ['Cash', 'Cheque/DD', 'Card', 'Others'];
         this.dataFetched = false;
@@ -923,8 +970,11 @@ let AddStudentsComponent = class AddStudentsComponent {
                     batch: [''],
                     rollNo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
                     discount: [''],
+                    additionalDiscountType: ['percentage'],
                     additionalDiscount: [''],
                     netPayable: [''],
+                }, {
+                    validator: this.discountValidator.bind(this),
                 }),
                 // Course Material Records
                 materialRecord: [''],
@@ -954,6 +1004,14 @@ let AddStudentsComponent = class AddStudentsComponent {
                 this.getStudent(this.studentEduId, this.instituteId, this.courseId);
             }
         });
+    }
+    discountValidator(group) {
+        const discountType = group.value.additionalDiscountType;
+        const amount = group.value.additionalDiscount;
+        if (discountType === 'percentage' && amount > 100) {
+            return { invalidDiscount: true };
+        }
+        return null;
     }
     // get Student Form
     get f() {
@@ -1000,6 +1058,7 @@ let AddStudentsComponent = class AddStudentsComponent {
     getOneStudent(eduId) {
         this.api.getOneStudent(eduId).subscribe((data) => {
             if (data) {
+                this.fetchedStudent = data;
                 this.studentForm.patchValue({
                     name: data.basicDetails.name,
                     studentEmail: data.basicDetails.studentEmail,
@@ -1039,6 +1098,7 @@ let AddStudentsComponent = class AddStudentsComponent {
             // this.studentForm.reset
             // set to null if previously set
             this.studentEduId = null;
+            this.fetchedStudent = null;
         }
     }
     // Get All Courses of Institute / Get one Institute
@@ -1102,24 +1162,40 @@ let AddStudentsComponent = class AddStudentsComponent {
     calculateNetPayableAmount() {
         // Set Class Level netPayable to 0
         this.netPayable = 0;
+        let totalDiscountPercentage = 0;
+        let totalDiscountAmount = 0;
         let calculatedAmount = 0;
+        // Get Total Fees of Course
+        const totalFee = this.selectedCourse ? +this.selectedCourse.totalFee : 0;
         // Get Additional Discount
-        const additionalDiscount = this.studentForm.get(['courseDetails', 'additionalDiscount']).value;
-        if (this.selectedCourse && this.selectedCourse.fees) {
-            calculatedAmount = this.selectedCourse.fees;
-            if (this.selectedDiscount && this.selectedDiscount.amount) {
-                if (this.selectedDiscount.discountType === 'percentage') {
-                    calculatedAmount =
-                        this.selectedCourse.fees -
-                            (this.selectedDiscount.amount / 100) * this.selectedCourse.fees;
+        const discountType = this.selectedDiscount ? this.selectedDiscount.discountType : '';
+        // Get Additional Discount Type
+        const additionalDiscountType = this.studentForm.get(['courseDetails', 'additionalDiscountType'])
+            .value;
+        // Get Discount
+        const discount = this.selectedDiscount ? +this.selectedDiscount.amount : 0;
+        // Get Discount Type
+        const additionalDiscount = +this.studentForm.get(['courseDetails', 'additionalDiscount']).value;
+        if (this.selectedCourse && totalFee) {
+            calculatedAmount = totalFee;
+            if (this.selectedDiscount && discountType) {
+                if (discountType === 'percentage') {
+                    totalDiscountPercentage += discount;
                 }
                 else {
-                    calculatedAmount = this.selectedCourse.fees - this.selectedDiscount.amount;
+                    totalDiscountAmount += discount;
                 }
             }
             if (additionalDiscount) {
-                calculatedAmount = calculatedAmount - (additionalDiscount / 100) * calculatedAmount;
+                if (additionalDiscountType === 'percentage') {
+                    totalDiscountPercentage += additionalDiscount;
+                }
+                else {
+                    totalDiscountAmount += additionalDiscount;
+                }
             }
+            const percentageAmount = (totalDiscountPercentage / 100) * totalFee;
+            calculatedAmount = totalFee - totalDiscountAmount - percentageAmount;
         }
         // Set Class Level netPayable to Calculated Net PAyable
         this.netPayable = calculatedAmount;
@@ -1197,7 +1273,7 @@ let AddStudentsComponent = class AddStudentsComponent {
             // on payment Quarterly installment Type noOfInstallments id disabled
             this.feeDetailsForm.get('noOfInstallments').disable();
             // call generateNoOfInstallments for only one installment
-            this.generateNoOfInstallments('3');
+            this.generateNoOfInstallments('4');
         }
         else if (installmentType === '4') {
             // on payment Monthly installment Type noOfInstallments id disabled
@@ -1228,6 +1304,9 @@ let AddStudentsComponent = class AddStudentsComponent {
                 paidOn: '',
                 amount: '',
                 paymentMode: '',
+                bankDetails: '',
+                transDetails: '',
+                paymentDate: '',
                 amountPending: '',
             };
             this.addInstallment(installmentData);
@@ -1298,6 +1377,9 @@ let AddStudentsComponent = class AddStudentsComponent {
             paidOn: [installmentData.paidOn ? installmentData.paidOn : ''],
             amount: [installmentData.amount ? installmentData.amount : ''],
             paymentMode: [installmentData.paymentMode ? installmentData.paymentMode : ''],
+            bankDetails: [installmentData.bankDetails ? installmentData.bankDetails : ''],
+            transDetails: [installmentData.transDetails ? installmentData.transDetails : ''],
+            paymentDate: [installmentData.paymentDate ? installmentData.paymentDate : ''],
             amountPending: [installmentData.amountPending ? installmentData.amountPending : ''],
         });
     }
@@ -1346,7 +1428,7 @@ let AddStudentsComponent = class AddStudentsComponent {
                     discount: this.student.instituteDetails.discount,
                     rollNo: this.student.instituteDetails.rollNumber,
                     additionalDiscount: this.student.instituteDetails.additionalDiscount,
-                    netPayable: this.student.instituteDetails.netPayble,
+                    netPayable: this.student.instituteDetails.netPayable,
                 },
                 materialRecord: this.student.instituteDetails.materialRecord,
             });
@@ -1387,6 +1469,9 @@ let AddStudentsComponent = class AddStudentsComponent {
                     paidOn: curInstallment.paidOn,
                     amount: curInstallment.amount,
                     paymentMode: curInstallment.paymentMode,
+                    paymentDate: curInstallment.paymentDate,
+                    bankDetails: curInstallment.bankDetails,
+                    transDetails: curInstallment.transDetails,
                     amountPending: curInstallment.amountPending,
                 };
                 this.addInstallment(installmentData);
@@ -1406,6 +1491,7 @@ let AddStudentsComponent = class AddStudentsComponent {
         this.api
             .addStudentFees(studentId, this.instituteId, studentEduatlasId, this.studentForm.get('courseDetails').value.course, feeFormValue)
             .subscribe((res) => {
+            this.chatService.getChatMembers();
             this.showToaster('top-right', 'success', 'New Student Course Added Successfully!');
             this.router.navigate([`/pages/institute/manage-students/${this.instituteId}`]);
         }, (err) => {
@@ -1541,7 +1627,8 @@ AddStudentsComponent.ctorParameters = () => [
     { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
-    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"] }
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"] },
+    { type: _services_chat_service__WEBPACK_IMPORTED_MODULE_6__["SocketioService"] }
 ];
 AddStudentsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1553,7 +1640,8 @@ AddStudentsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"],
         _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
         _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
-        _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"]])
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"],
+        _services_chat_service__WEBPACK_IMPORTED_MODULE_6__["SocketioService"]])
 ], AddStudentsComponent);
 
 
@@ -1612,10 +1700,14 @@ let ManageStudentsComponent = class ManageStudentsComponent {
         });
         this.instituteId = this.route.snapshot.paramMap.get('id');
         this.getCourseTd(this.instituteId);
+        this.noStudent = 'Select Course';
     }
     getStudents(id, courseId, batchId) {
         this.api.getActiveStudents(id, courseId, batchId).subscribe((data) => {
             this.students = data;
+            if (data.length === 0) {
+                this.noStudent = 'No Record';
+            }
         });
     }
     getCourseTd(id) {
@@ -1705,17 +1797,24 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewStudentComponent", function() { return ViewStudentComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../services/api.service */ "./src/app/services/api.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+
+
 
 
 
 
 let ViewStudentComponent = class ViewStudentComponent {
-    constructor(api, route) {
+    constructor(api, toasterService, route, router, location) {
         this.api = api;
+        this.toasterService = toasterService;
         this.route = route;
+        this.router = router;
+        this.location = location;
     }
     ngOnInit() {
         this.instituteId = this.route.snapshot.paramMap.get('id');
@@ -1732,18 +1831,46 @@ let ViewStudentComponent = class ViewStudentComponent {
             this.student = data[0];
         });
     }
+    edit() {
+        this.router.navigate([`/pages/institute/add-students/${this.instituteId}/edit`], {
+            queryParams: { student: this.studentEduId, course: this.courseId, edit: 'true' },
+        });
+    }
+    deleteStudent() {
+        const confirm = window.confirm('Are u sure, You want to delete this Student?');
+        if (confirm) {
+            this.api.deleteStudentCourse(this.courseId, this.studentEduId).subscribe(() => {
+                this.location.back();
+                this.showToaster('top-right', 'success', 'New Student Deleted Successfully!');
+            });
+        }
+    }
+    // Show Toaster
+    showToaster(position, status, message) {
+        this.toasterService.show(status, message, {
+            position,
+            status,
+        });
+    }
 };
 ViewStudentComponent.ctorParameters = () => [
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"] }
 ];
 ViewStudentComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         selector: 'ngx-view-student',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./view-student.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/add-students/manage-students/view-student/view-student.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./view-student.component.scss */ "./src/app/pages/institute/add-students/manage-students/view-student/view-student.component.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+        _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"]])
 ], ViewStudentComponent);
 
 
@@ -1802,10 +1929,14 @@ let PendingStudentComponent = class PendingStudentComponent {
         });
         this.instituteId = this.route.snapshot.paramMap.get('id');
         this.getCourseTd(this.instituteId);
+        this.noStudent = 'Select Course';
     }
     getStudents(id, courseId, batchId) {
         this.api.getPendingStudents(id, courseId).subscribe((data) => {
             this.students = data;
+            if (data.length === 0) {
+                this.noStudent = 'No Record';
+            }
         });
     }
     getCourseTd(id) {
@@ -2115,6 +2246,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../schedule/view-schedule/view-schedule.component */ "./src/app/pages/schedule/view-schedule/view-schedule.component.ts");
 /* harmony import */ var _bManager_guard__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../bManager.guard */ "./src/app/bManager.guard.ts");
 /* harmony import */ var _onlineClasses_guard__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../onlineClasses.guard */ "./src/app/onlineClasses.guard.ts");
+/* harmony import */ var _leads_manage_leads_manage_lead_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../leads/manage-leads/manage-lead.component */ "./src/app/pages/leads/manage-leads/manage-lead.component.ts");
+/* harmony import */ var _leads_add_leads_add_lead_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../leads/add-leads/add-lead.component */ "./src/app/pages/leads/add-leads/add-lead.component.ts");
+
+
 
 
 
@@ -2151,6 +2286,8 @@ const routes = [
             { path: 'manage-schedule/:id', component: _schedule_manage_schedule_manage_schedule_component__WEBPACK_IMPORTED_MODULE_13__["ManageScheduleComponent"] },
             { path: 'view-schedule/:id', component: _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_14__["ViewScheduleComponent"] },
             { path: 'edit-schedule/:id', component: _schedule_add_schedule_add_schedule_component__WEBPACK_IMPORTED_MODULE_10__["AddScheduleComponent"] },
+            { path: 'manage-leads/:id', component: _leads_manage_leads_manage_lead_component__WEBPACK_IMPORTED_MODULE_17__["ManageLeadComponent"] },
+            { path: 'add-leads/:id', component: _leads_add_leads_add_lead_component__WEBPACK_IMPORTED_MODULE_18__["AddLeadComponent"] },
             {
                 path: 'branch-config',
                 loadChildren: () => __webpack_require__.e(/*! import() | branch-conf-branch-branch-module */ "branch-conf-branch-branch-module").then(__webpack_require__.bind(null, /*! ../branch-conf/branch/branch.module */ "./src/app/pages/institute/branch-conf/branch/branch.module.ts")).then((m) => m.BranchModule),
@@ -2212,6 +2349,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../schedule/view-schedule/view-schedule.component */ "./src/app/pages/schedule/view-schedule/view-schedule.component.ts");
 /* harmony import */ var _teacher_guard__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../teacher.guard */ "./src/app/teacher.guard.ts");
 /* harmony import */ var _bManager_guard__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../bManager.guard */ "./src/app/bManager.guard.ts");
+/* harmony import */ var _leads_add_leads_add_lead_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../leads/add-leads/add-lead.component */ "./src/app/pages/leads/add-leads/add-lead.component.ts");
+/* harmony import */ var _leads_manage_leads_manage_lead_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../leads/manage-leads/manage-lead.component */ "./src/app/pages/leads/manage-leads/manage-lead.component.ts");
+
+
 
 
 
@@ -2249,12 +2390,16 @@ InstituteModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _attandance_attandance_component__WEBPACK_IMPORTED_MODULE_15__["AttandanceComponent"],
             _schedule_manage_schedule_manage_schedule_component__WEBPACK_IMPORTED_MODULE_16__["ManageScheduleComponent"],
             _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_17__["ViewScheduleComponent"],
+            _leads_add_leads_add_lead_component__WEBPACK_IMPORTED_MODULE_20__["AddLeadComponent"],
+            _leads_manage_leads_manage_lead_component__WEBPACK_IMPORTED_MODULE_21__["ManageLeadComponent"]
         ],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _institute_routing_module__WEBPACK_IMPORTED_MODULE_3__["InstRoutingModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"],
             _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbCardModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbListModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbTabsetModule"],
             _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbLayoutModule"],
             _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbCheckboxModule"],
             _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbInputModule"],
@@ -2268,6 +2413,281 @@ InstituteModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         providers: [_teacher_guard__WEBPACK_IMPORTED_MODULE_18__["TeacherGuard"], _bManager_guard__WEBPACK_IMPORTED_MODULE_19__["BranchManagerGuard"]],
     })
 ], InstituteModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/leads/add-leads/add-lead.component.scss":
+/*!***************************************************************!*\
+  !*** ./src/app/pages/leads/add-leads/add-lead.component.scss ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("nb-select {\n  display: block; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvbGVhZHMvYWRkLWxlYWRzL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxsZWFkc1xcYWRkLWxlYWRzXFxhZGQtbGVhZC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUFVLGNBQWEsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2xlYWRzL2FkZC1sZWFkcy9hZGQtbGVhZC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIm5iLXNlbGVjdHtkaXNwbGF5OmJsb2NrfSJdfQ== */");
+
+/***/ }),
+
+/***/ "./src/app/pages/leads/add-leads/add-lead.component.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/pages/leads/add-leads/add-lead.component.ts ***!
+  \*************************************************************/
+/*! exports provided: AddLeadComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddLeadComponent", function() { return AddLeadComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+
+
+
+
+
+
+
+let AddLeadComponent = class AddLeadComponent {
+    constructor(fb, api, active, router, toasterService, location) {
+        this.fb = fb;
+        this.api = api;
+        this.active = active;
+        this.router = router;
+        this.toasterService = toasterService;
+        this.location = location;
+        this.submitted = false;
+        this.status = ['Pending', 'Contacted', 'Lead Won', 'Lead Lost'];
+    }
+    ngOnInit() {
+        this.instituteId = this.active.snapshot.paramMap.get('id');
+        this.active.queryParams.subscribe((data) => {
+            this.leadId = data.leadId;
+            this.edit = data.edit;
+            if (this.edit === 'true') {
+                this.getLead(this.leadId);
+            }
+        });
+        this.leadForm = this.fb.group({
+            leadName: [''],
+            leadContact: [''],
+            leadEmail: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email],
+            date: [''],
+            course: [''],
+            status: [''],
+            comment: [''],
+            source: ['']
+        });
+        this.getCourses();
+    }
+    getCourses() {
+        this.api.getCourseTD(this.instituteId).subscribe((data) => {
+            this.courses = data.course;
+        }, (err) => console.error(err));
+    }
+    get f() {
+        return this.leadForm.controls;
+    }
+    getLead(id) {
+        this.api.getSingleLead({ '_id': id }).subscribe((data) => {
+            this.leadForm.patchValue({
+                leadName: data.leadName,
+                leadContact: data.leadContact,
+                leadEmail: data.leadEmail,
+                date: data.addedDate,
+                course: data.courseId,
+                status: data.status,
+                comment: data.comment,
+                source: data.source,
+            });
+        }, (err) => console.error(err));
+    }
+    onSubmit() {
+        this.submitted = true;
+        this.leadForm.markAllAsTouched();
+        if (this.leadForm.invalid) {
+            return;
+        }
+        var data = {
+            'leadName': this.leadForm.get('leadName').value,
+            'leadContact': this.leadForm.get('leadContact').value,
+            'leadEmail': this.leadForm.get('leadEmail').value,
+            'addedDate': this.leadForm.get('date').value,
+            'courseId': this.leadForm.get('course').value,
+            'status': this.leadForm.get('status').value,
+            'comment': this.leadForm.get('comment').value,
+            'source': this.leadForm.get('source').value,
+            'instituteId': this.instituteId,
+            '_id': this.leadId
+        };
+        if (this.edit === 'true') {
+            this.api.updateLead(data).subscribe((data) => {
+                this.showToast('top-right', 'success', 'Lead Updated Successfully');
+                this.router.navigate([
+                    '/pages/institute/manage-leads/',
+                    this.instituteId,
+                ]);
+            }, (err) => {
+                this.showToast('top-right', 'danger', err.error.message);
+            });
+        }
+        if (!this.edit) {
+            this.api.addLead(data).subscribe(() => {
+                this.showToast('top-right', 'success', 'Lead Added Successfully');
+                this.router.navigate([
+                    '/pages/institute/manage-leads/',
+                    this.instituteId,
+                ]);
+            }, (err) => {
+                this.showToast('top-right', 'danger', err.error.message);
+            });
+        }
+    }
+    back() {
+        let confirm = true;
+        if (this.leadForm.touched) {
+            confirm = window.confirm('If you go back the data will be lost.');
+        }
+        if (confirm) {
+            this.location.back();
+        }
+    }
+    showToast(position, status, message) {
+        this.toasterService.show(status, message, { position, status });
+    }
+};
+AddLeadComponent.ctorParameters = () => [
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_6__["Location"] }
+];
+AddLeadComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'ngx-add-lead',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./add-lead.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/leads/add-leads/add-lead.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./add-lead.component.scss */ "./src/app/pages/leads/add-leads/add-lead.component.scss")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
+        _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_5__["NbToastrService"],
+        _angular_common__WEBPACK_IMPORTED_MODULE_6__["Location"]])
+], AddLeadComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/leads/manage-leads/manage-lead.component.scss":
+/*!*********************************************************************!*\
+  !*** ./src/app/pages/leads/manage-leads/manage-lead.component.scss ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2xlYWRzL21hbmFnZS1sZWFkcy9tYW5hZ2UtbGVhZC5jb21wb25lbnQuc2NzcyJ9 */");
+
+/***/ }),
+
+/***/ "./src/app/pages/leads/manage-leads/manage-lead.component.ts":
+/*!*******************************************************************!*\
+  !*** ./src/app/pages/leads/manage-leads/manage-lead.component.ts ***!
+  \*******************************************************************/
+/*! exports provided: ManageLeadComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ManageLeadComponent", function() { return ManageLeadComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+
+
+
+
+
+let ManageLeadComponent = class ManageLeadComponent {
+    constructor(api, router, route, toasterService) {
+        this.api = api;
+        this.router = router;
+        this.route = route;
+        this.toasterService = toasterService;
+        this.status = ['Pending', 'Contacted', 'Lead Won', 'Lead Lost'];
+    }
+    ngOnInit() {
+        this.instituteId = this.route.snapshot.paramMap.get('id');
+        this.getLeads();
+        this.getCourses();
+    }
+    getCourses() {
+        this.api.getCourseTD(this.instituteId).subscribe((data) => {
+            this.courses = data.course;
+        }, (err) => console.error(err));
+    }
+    onSelectCourse(courseId) {
+        this.selectedCourseId = courseId;
+        this.getLeads();
+    }
+    onSelectStatus(status) {
+        this.selectedStatus = status;
+        this.getLeads();
+    }
+    getLeads() {
+        this.api.getLeadsByOfInstitute({ 'instituteId': this.instituteId, 'status': this.selectedStatus, 'courseId': this.selectedCourseId }).subscribe((data) => {
+            this.leads = data;
+        });
+    }
+    edit(id) {
+        this.router.navigate([`/pages/institute/add-leads/${this.instituteId}`], {
+            queryParams: { leadId: id, edit: true },
+        });
+    }
+    delete(id, index) {
+        this.api.deleteLead({ '_id': id }).subscribe(() => {
+            this.leads.splice(index, 1);
+            this.showToast('top-right', 'success', 'Lead Deleted Successfully');
+        }, (err) => console.error(err));
+    }
+    addLead() {
+        this.router.navigate([`/pages/institute/add-leads/${this.instituteId}`]);
+    }
+    showToast(position, status, message) {
+        this.toasterService.show(status, message, { position, status });
+    }
+};
+ManageLeadComponent.ctorParameters = () => [
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbToastrService"] }
+];
+ManageLeadComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'ngx-manage-lead',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./manage-lead.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/leads/manage-leads/manage-lead.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./manage-lead.component.scss */ "./src/app/pages/leads/manage-leads/manage-lead.component.scss")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+        _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbToastrService"]])
+], ManageLeadComponent);
 
 
 
@@ -2328,6 +2748,7 @@ let AddScheduleComponent = class AddScheduleComponent {
     ngOnInit() {
         this.display = false;
         this.date = Date.now();
+        this.schedules = [];
         this.instituteId = this.route.snapshot.paramMap.get('id');
         this.route.queryParams.subscribe((param) => {
             this.edit = param.edit;
@@ -2386,7 +2807,7 @@ let AddScheduleComponent = class AddScheduleComponent {
                 courseId: this.schedule.courseId,
                 scheduleStart: this.schedule.scheduleStart,
                 scheduleEnd: this.schedule.scheduleEnd,
-                recurrence: this.schedule.recurrence === 'true' ? true : false,
+                recurrence: this.schedule.recurrence,
             });
             this.onSelectCourse(this.schedule.courseId);
             this.scheduleForm.patchValue({ batchId: this.schedule.batchId });
@@ -2453,15 +2874,38 @@ let AddScheduleComponent = class AddScheduleComponent {
     }
     fromDatePicked(date) {
         this.date = new Date(date).getTime();
-        const noOfDays = 7 - this.getDate(this.date).getDay();
-        const nextSunday = this.constructDate(this.date + noOfDays * (24 * 60 * 60 * 1000));
-        this.scheduleForm.patchValue({ scheduleEnd: nextSunday });
-        this.noOfDays = noOfDays + 1;
-        this.generateSchedule();
+        if (!this.schedule) {
+            const noOfDays = 7 - this.getDate(this.date).getDay();
+            const nextSunday = this.constructDate(this.date + noOfDays * (24 * 60 * 60 * 1000));
+            this.scheduleForm.patchValue({ scheduleEnd: nextSunday });
+            this.noOfDays = noOfDays + 1;
+            this.generateSchedule();
+        }
+        else {
+            const scheduleStart = this.schedule.scheduleStart;
+            const scheduleEnd = this.schedule.scheduleEnd;
+            const endDate = new Date(scheduleEnd).getTime() - new Date(scheduleStart).getTime();
+            const noOfDays = endDate / (24 * 60 * 60 * 1000);
+            const nextSunday = this.constructDate(this.date + noOfDays * (24 * 60 * 60 * 1000));
+            this.scheduleForm.patchValue({ scheduleEnd: nextSunday });
+            this.noOfDays = noOfDays + 1;
+            this.setRecurrenceDates(scheduleStart);
+        }
+    }
+    setRecurrenceDates(scheduleStart) {
+        const scheduleDays = this.scheduleForm.get('days');
+        this.schedule.days.forEach((day, i) => {
+            const nextDate = new Date(day.date).getTime() - new Date(scheduleStart).getTime();
+            const noOfDays = nextDate / (24 * 60 * 60 * 1000);
+            const date = this.constructDate(this.date + noOfDays * (24 * 60 * 60 * 1000));
+            const weekDay = new Date(date).getDay();
+            scheduleDays.controls[i].patchValue({ day: this.days[weekDay], date });
+        });
     }
     toDatePicked(date) {
         date = new Date(date).getTime();
         this.noOfDays = (date - this.date) / (24 * 60 * 60 * 1000) + 1;
+        this.schedule = null;
         this.generateSchedule();
     }
     // Construct date in yyyy-MM-dd format to set in DOM form field
@@ -2483,11 +2927,52 @@ let AddScheduleComponent = class AddScheduleComponent {
         });
     }
     onSelectCourse(id) {
+        this.courseId = id;
         this.batches = this.institute.batch.filter((b) => b.course === id);
+    }
+    onSelectBatch(id) {
+        this.batchId = id;
+        if (!this.edit) {
+            this.searchRecurrenceSchedules();
+        }
+    }
+    searchRecurrenceSchedules() {
+        this.scheduleService
+            .getScheduleByBatch(this.instituteId, this.courseId, this.batchId)
+            .subscribe((res) => {
+            this.schedules = res;
+        });
     }
     recurrence(check) {
         this.scheduleForm.patchValue({
             recurrence: check,
+        });
+    }
+    useRecurrenceSchedule(index) {
+        this.schedule = this.schedules[index];
+        this.scheduleForm.patchValue({
+            courseId: this.schedule.courseId,
+            scheduleStart: this.schedule.scheduleStart,
+            scheduleEnd: this.schedule.scheduleEnd,
+            recurrence: this.schedule.recurrence,
+        });
+        this.onSelectCourse(this.schedule.courseId);
+        this.scheduleForm.patchValue({ batchId: this.schedule.batchId });
+        this.scheduleStartTime = this.schedule.days[0].startTime;
+        this.scheduleEndTime = this.schedule.days[0].endTime;
+        const scheduleDays = this.scheduleForm.get('days');
+        scheduleDays.controls = [];
+        this.schedule.days.forEach((day) => {
+            const scheduleData = {
+                day: day.day,
+                date: day.date,
+                startTime: day.startTime,
+                endTime: day.endTime,
+                teacher: day.teacher,
+                topic: day.topic,
+                select: true,
+            };
+            this.addScheduleDay(scheduleData);
         });
     }
     onSubmit() {
@@ -2620,8 +3105,10 @@ let ManageScheduleComponent = class ManageScheduleComponent {
     }
     ngOnInit() {
         this.display = false;
+        this.courseId = 'all';
         this.instituteId = this.active.snapshot.paramMap.get('id');
         this.getCourses(this.instituteId);
+        this.onSelectCourse('all');
     }
     getCourses(id) {
         this.api.getCourseTD(id).subscribe((data) => {
@@ -2631,18 +3118,27 @@ let ManageScheduleComponent = class ManageScheduleComponent {
     }
     onSelectCourse(id) {
         this.courseId = id;
-        this.batches = this.institute.batch.filter((b) => b.course === id);
+        if (id === 'all') {
+            this.getSchedules({ instituteId: this.instituteId });
+        }
+        else {
+            this.batchId = 'all';
+            this.batches = this.institute.batch.filter((b) => b.course === id);
+        }
     }
     onSelectBatch(id) {
-        this.getSchedules(this.instituteId, this.courseId, id);
+        if (id === 'all') {
+            this.getSchedules({ instituteId: this.instituteId, courseId: this.courseId });
+        }
+        else {
+            this.getSchedules({ instituteId: this.instituteId, courseId: this.courseId, batchId: id });
+        }
     }
     addSchedule() {
         this.router.navigate(['/pages/institute/add-schedule', this.instituteId]);
     }
-    getSchedules(instituteId, courseId, batchId) {
-        this.scheduleService
-            .getScheduleByBatch(instituteId, courseId, batchId)
-            .subscribe((res) => {
+    getSchedules(data) {
+        this.scheduleService.getScheduleByInstitute(data).subscribe((res) => {
             this.schedules = res;
         });
     }
@@ -2847,6 +3343,11 @@ let ScheduleService = class ScheduleService {
     updateSchedule(schedule, scheduleId) {
         schedule._id = scheduleId;
         return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/schedule/updateSchedule`, schedule).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+    }
+    getScheduleByInstitute(data) {
+        return this.http
+            .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/schedule/getScheduleByInstitute`, data)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
     }
     getScheduleByBatch(instituteId, courseId, batchId) {
         return this.http
