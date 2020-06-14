@@ -44,6 +44,8 @@ exports.getChats = async (req, res) => {
       messages.push(...senderMessages[0].chats);
     }
 
+    console.log(messages);
+
     messages.sort((msg1, msg2) => {
       const msg1Date = new Date(msg1.date);
       const msg2Date = new Date(msg2.date);
