@@ -18,7 +18,20 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
     <link rel="icon" type="image/png" href="./favicon.png" />
     <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-    <script src="node_modules/chart.js/src/chart.js"></script>
+    <script src="../node_modules/chart.js/src/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    ''
+    <script>
+      var socket = io('http://localhost:5000/eduatlas-chat', {
+        query: {
+          token:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWRkZGRmNDM1YTc4ZTI4Y2NhYWQ5YzEiLCJwaG9uZSI6Ijk5OTk5OTk5OTkiLCJyb2xlIjoiaW5zdGl0dXRlIiwiaWF0IjoxNTkyMDU3OTA1fQ.B42EetrDhbA7fW4iW98EU3Ky1bW0y_NbmQWMqSxAtlg',
+        },
+      });
+      socket.on('connect', function () {});
+      socket.on('event', function (data) {});
+      socket.on('disconnect', function () {});
+    </script>
   </head>
   <body>
     <ngx-app>Loading...</ngx-app>
@@ -112,5 +125,16 @@
     <div class="blob blob-5"></div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script src="runtime-es2015.js" type="module"></script><script src="runtime-es5.js" nomodule defer></script><script src="polyfills-es5.js" nomodule defer></script><script src="polyfills-es2015.js" type="module"></script><script src="styles-es2015.js" type="module"></script><script src="styles-es5.js" nomodule defer></script><script src="scripts.js" defer></script><script src="vendor-es2015.js" type="module"></script><script src="vendor-es5.js" nomodule defer></script><script src="main-es2015.js" type="module"></script><script src="main-es5.js" nomodule defer></script></body>
+    <script src="runtime-es2015.js" type="module"></script>
+    <script src="runtime-es5.js" nomodule defer></script>
+    <script src="polyfills-es5.js" nomodule defer></script>
+    <script src="polyfills-es2015.js" type="module"></script>
+    <script src="styles-es2015.js" type="module"></script>
+    <script src="styles-es5.js" nomodule defer></script>
+    <script src="scripts.js" defer></script>
+    <script src="vendor-es2015.js" type="module"></script>
+    <script src="vendor-es5.js" nomodule defer></script>
+    <script src="main-es2015.js" type="module"></script>
+    <script src="main-es5.js" nomodule defer></script>
+  </body>
 </html>

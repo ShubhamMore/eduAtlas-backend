@@ -61,6 +61,7 @@ app.use('/institute/announcement', require('./routes/annoucement'));
 app.use('/institute/ptm', require('./routes/ptm'));
 app.use('/institute/mentoring', require('./routes/mentoring'));
 app.use('/institute/leads', require('./routes/leads'));
+app.use('/institute/chat', require('./routes/chat'));
 app.use('/institute/forum', require('./routes/forum'));
 app.use('/institute/chats', require('./routes/chats'));
 app.use((req, res, next) => {
