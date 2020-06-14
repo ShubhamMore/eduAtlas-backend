@@ -37,11 +37,11 @@ exports.getChats = async (req, res) => {
     const messages = new Array();
 
     if (myMessages.length > 0) {
-      messages.push(...myMessages);
+      messages.push(...myMessages[0].chats);
     }
 
     if (senderMessages.length > 0) {
-      messages.push(...senderMessages);
+      messages.push(...senderMessages[0].chats);
     }
 
     messages.sort((msg1, msg2) => {
