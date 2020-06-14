@@ -94,14 +94,14 @@ exports.getMembers = async (req, res) => {
         },
       ]);
       console.log(data);
-      data = data[0];
-      let studentDetails = [];
+      // data = data[0];
+      let studentsDetails = [];
       let employeeDetails = [];
 
-      for (var i = 0; i < data.instDetails.length; i++) {
+      for (var i = 0; i < data[0].instDetails.length; i++) {
         const students = await Student.find(
           {
-            'instituteDetails.instituteId': data.instDetails[0]._id,
+            'instituteDetails.instituteId': data[0].instDetails[0]._id,
           },
           {
             _id: 1,
@@ -110,13 +110,13 @@ exports.getMembers = async (req, res) => {
           }
         );
         for (var j = 0; j < students.length; j++) {
-          if (!studentDetails.includes((st) => st._id == students[j]._id)) {
-            studentDetails.push(students[j]);
+          if (!studentsDetails.includes((st) => st._id == students[j]._id)) {
+            studentsDetails.push(students[j]);
           }
         }
         const employees = await Employee.find(
           {
-            'instituteDetails.instituteId': data.instDetails[0]._id,
+            'instituteDetails.instituteId': data[0].instDetails[0]._id,
           },
           {
             _id: 1,
@@ -125,16 +125,14 @@ exports.getMembers = async (req, res) => {
           }
         );
         for (var j = 0; j < employees.length; j++) {
-          console.log(typeof data._id);
-          console.log(employees[j]._id);
           if (
             !employeeDetails.includes((st) => st._id == employees[j]._id) &&
-            employees[j]._id != data._id.toString()
+            employees[j]._id != data[0]._id.toString()
           ) {
             employeeDetails.push(employees[j]);
           }
         }
-        data.studentDetails = studentDetails;
+        data.studentsDetails = studentsDetails;
         data.employeeDetails = employeeDetails;
       }
 
@@ -195,6 +193,8 @@ exports.getMembers = async (req, res) => {
       //   },
       // ]);
     }
+    console.log(data);
+
     res.status(200).send(data);
   } catch (error) {
     errorHandler(error, res);
