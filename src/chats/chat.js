@@ -41,7 +41,10 @@ const chatting = async (server) => {
           { $push: { chats: chatMessage } },
           { upsert: true }
         );
-        ChatSockets.getSocket(message.receiverId).emit('message', message);
+        const receiver = ChatSockets.getSocket(message.receiverId);
+        if (receiver) {
+          receiver.emit('message', message);
+        }
         socket.emit('message', message);
       });
 

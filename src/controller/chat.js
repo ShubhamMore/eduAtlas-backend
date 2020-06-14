@@ -6,25 +6,43 @@ exports.getChats = async (req, res) => {
     const receiverId = req.body.receiverId;
     const userId = req.user.eduAtlasId;
 
-    const myMessages = await Chat.aggregate([
-      {
-        $match: {
-          eduatlasId: userId,
-          'chats.senderId': receiverId,
-        },
-      },
-    ]);
+    // const myMessages = await Chat.aggregate([
+    //   {
+    //     $match: {
+    //       eduatlasId: userId,
+    //       'chats.senderId': receiverId,
+    //     },
+    //   },
+    // ]);
 
-    const senderMessages = await Chat.aggregate([
-      {
-        $match: {
-          eduatlasId: receiverId,
-          'chats.senderId': userId,
-        },
-      },
-    ]);
+    // const senderMessages = await Chat.aggregate([
+    //   {
+    //     $match: {
+    //       eduatlasId: receiverId,
+    //       'chats.senderId': userId,
+    //     },
+    //   },
+    // ]);
 
-    const messages = [...myMessages, ...senderMessages];
+    const myMessages = await Chat.find({
+      eduatlasId: userId,
+      'chats.senderId': receiverId,
+    });
+
+    const senderMessages = await Chat.find({
+      eduatlasId: receiverId,
+      'chats.senderId': userId,
+    });
+
+    const messages = new Array();
+
+    if (myMessages.length > 0) {
+      messages.push(...myMessages);
+    }
+
+    if (senderMessages.length > 0) {
+      messages.push(...senderMessages);
+    }
 
     messages.sort((msg1, msg2) => {
       const msg1Date = new Date(msg1.date);
