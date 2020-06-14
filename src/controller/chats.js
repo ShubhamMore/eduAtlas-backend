@@ -4,12 +4,14 @@ const Employee = require('../model/employee.model');
 const errorHandler = require('../service/errorHandler');
 const User = require('../model/user.model');
 const mongoose = require('mongoose');
+const EduAtlasId = require('../model/eduatlasId.model');
 
 exports.getMembers = async (req, res) => {
   try {
     let data = {};
 
     if (req.user.role == 'institute') {
+      //req.user.role == 'institute'
       data = await Institute.aggregate([
         {
           $project: {
@@ -50,17 +52,141 @@ exports.getMembers = async (req, res) => {
           },
         },
       ]);
+    } else if (req.user.role == 'employee') {
+      //
+
+      data = await Employee.aggregate([
+        {
+          $unwind: '$instituteDetails',
+        },
+        {
+          $project: {
+            'instituteDetails.instituteId': {
+              $toObjectId: '$instituteDetails.instituteId',
+            },
+            basicDetails: 1,
+          },
+        },
+        {
+          $lookup: {
+            from: 'institutes',
+            localField: 'instituteDetails.instituteId',
+            foreignField: '_id',
+            as: 'instDetails',
+          },
+        },
+        {
+          $project: {
+            'instDetails._id': 1,
+            'instDetails.basicInfo': 1,
+          },
+        },
+        {
+          $match: {
+            _id: mongoose.Types.ObjectId('5ede041ac8583535785748a3'),
+          },
+        },
+      ]);
+      data = data[0];
+      let studentDetails = [];
+      let employeeDetails = [];
+      for (var i = 0; i < data.instDetails.length; i++) {
+        const students = await Student.find(
+          {
+            'instituteDetails.instituteId': data.instDetails[0]._id,
+          },
+          {
+            _id: 1,
+            basicDetails: 1,
+            eduAtlasId: 1,
+          }
+        );
+        for (var j = 0; j < students.length; j++) {
+          if (!studentDetails.includes((st) => st._id == students[j]._id)) {
+            studentDetails.push(students[j]);
+          }
+        }
+        const employees = await Employee.find(
+          {
+            'instituteDetails.instituteId': data.instDetails[0]._id,
+          },
+          {
+            _id: 1,
+            basicDetails: 1,
+            eduAtlasId: 1,
+          }
+        );
+        for (var j = 0; j < employees.length; j++) {
+          console.log(typeof data._id);
+          console.log(employees[j]._id);
+          if (
+            !employeeDetails.includes((st) => st._id == employees[j]._id) &&
+            employees[j]._id != data._id.toString()
+          ) {
+            employeeDetails.push(employees[j]);
+          }
+        }
+      }
+      data.studentDetails = studentDetails;
+      data.employeeDetails = employeeDetails;
+
+      // data = await Employee.aggregate([
+      //   {
+      //     $unwind: '$instituteDetails',
+      //   },
+      //   {
+      //     $project: {
+      //       'instituteDetails.instituteId': {
+      //         $toObjectId: '$instituteDetails.instituteId',
+      //       },
+      //       basicDetails: 1,
+      //     },
+      //   },
+      //   {
+      //     $lookup: {
+      //       from: 'institutes',
+      //       localField: 'instituteDetails.instituteId',
+      //       foreignField: '_id',
+      //       as: 'instDetails',
+      //     },
+      //   },
+      //   { $unwind: '$instDetails' },
+      //   {
+      //     $addFields: {
+      //       instID: '$instDetails._id',
+      //     },
+      //   },
+      //   {
+      //     $project: {
+      //       instID: 1,
+
+      //       'instDetails.basicInfo': 1,
+      //       'instDetails._id': 1,
+      //       basicDetails: 1,
+      //     },
+      //   },
+      //   {
+      //     $lookup: {
+      //       from: 'students',
+      //       let: {
+      //         instId: '$$instID',
+      //       },
+      //       pipeline: [
+      //         {
+      //           $match: {
+      //             $expr: {
+      //               $eq: ['$$instID', '$instituteDetails.instituteId'],
+      //             },
+      //           },
+      //         },
+      //       ],
+      //       // localField: 'instID'.toString(),
+      //       // foreignField: 'instituteDetails.instituteId',
+      //       as: 'instDetails.studentsDetails',
+      //     },
+      //   },
+      // ]);
     }
-    // } else if ((req.user.role = 'employee')) {
-    //   data = await Employee.aggregate([{
-    //     $lookup:{
-    //       from:'institutes',
-    //       localField:"instituteDetails.instituteId",
-    //       forgeinField:'_id'
-    //       as
-    //     }
-    //   }]);
-    // }
     res.status(200).send(data);
   } catch (error) {
     errorHandler(error, res);
