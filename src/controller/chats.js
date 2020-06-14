@@ -11,7 +11,7 @@ exports.getMembers = async (req, res) => {
   try {
     let data = {};
     //console.log('user ', req.user);
-    if (false) {
+    if (req.user.role == 'institute') {
       //req.user.role == 'institute'
       data = await Institute.aggregate([
         {
@@ -53,7 +53,7 @@ exports.getMembers = async (req, res) => {
           },
         },
       ]);
-    } else if (true) {
+    } else if (req.user.role == 'employee') {
       //req.user.role == 'employee'
       //console.log(typeof req.user.eduAtlasId, ' ', req.user.eduAtlasId);
       data = await Employee.aggregate([
