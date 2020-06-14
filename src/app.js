@@ -63,6 +63,7 @@ app.use('/institute/mentoring', require('./routes/mentoring'));
 app.use('/institute/leads', require('./routes/leads'));
 app.use('/institute/chat', require('./routes/chat'));
 app.use('/institute/forum', require('./routes/forum'));
+app.use('/institute/chats', require('./routes/chats'));
 app.use((req, res, next) => {
   const error = new Error('NOT FOUND');
   error.status = 404;
