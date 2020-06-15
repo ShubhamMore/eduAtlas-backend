@@ -80,7 +80,7 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
 
     console.log(req.body);
     if (!id) {
-      response(res, 400, 'Edu Atlas Id or Email Not Provided');
+      response(res, 400, 'EduAtlas Id or Email Not Provided');
       return;
     }
 
@@ -93,6 +93,7 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
           eduAtlasId: id,
         },
       ],
+      role: req.body.role,
     });
 
     if (!user) {

@@ -203,15 +203,13 @@ exports.getOneStudent = async (req, res, next) => {
         eduAtlasId: 1,
       }
     );
+
     if (!student) {
       throw new Error('Student Not Found');
     }
     res.status(200).json(student);
   } catch (error) {
-    console.log(error);
     res.status(400).json(error);
-
-    response(res, error.statusCode || 500, error.message);
   }
 };
 
@@ -361,47 +359,47 @@ exports.deleteStudent = async (req, res, next) => {
     response(res, error.prototype.statusCode || 500, error.message);
   }
 };
-exports.getStudentsByBatch = async(req,res)=>{
+exports.getStudentsByBatch = async (req, res) => {
   try {
     const studentsArray = new Array();
 
-    const students = await Student.aggregate([{
-      $unwind:"$instituteDetails"
-    },{
-      $match:{
-        "instituteDetails.instituteId":req.body.instituteId,
-        "instituteDetails.courseId":req.body.courseId,
-        "instituteDetails.batchId":req.body.batchId
-      }
-    }])
+    const students = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.courseId': req.body.courseId,
+          'instituteDetails.batchId': req.body.batchId,
+        },
+      },
+    ]);
 
-    res.status(200).send(students)
+    res.status(200).send(students);
   } catch (error) {
-    res.status(400).send(error)
+    res.status(400).send(error);
   }
-}
+};
 //Api for accepting invites
 
 //List of active and pending students APi Creation
-exports.getStudentsByInstitute = async(req,res)=>{
+exports.getStudentsByInstitute = async (req, res) => {
   try {
     const students = await Student.find({
-      "instituteDetails.instituteId":req.body.instituteId
-    })
+      'instituteDetails.instituteId': req.body.instituteId,
+    });
 
-    if(students.length == 0){
-      const error = new Error("No student found")
-      error.statusCode = 400
-      throw error
-    } 
+    if (students.length == 0) {
+      const error = new Error('No student found');
+      error.statusCode = 400;
+      throw error;
+    }
 
-    res.status(200).send(students)
+    res.status(200).send(students);
   } catch (error) {
-    errorHandler(error,res)
+    errorHandler(error, res);
   }
-}
-
-
-exports.pendingStudents = async (req, res) => {
-
 };
+
+exports.pendingStudents = async (req, res) => {};
