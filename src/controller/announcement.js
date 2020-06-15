@@ -50,6 +50,19 @@ exports.getAnnouncement = async (req, res, next) => {
   }
 };
 
+exports.getSingleAnnouncement = async (req, res, next) => {
+  try {
+    const _id = req.body.id;
+    const announcement = await Announcement.findById(_id);
+    if (!announcement) {
+      throw new Error('Announcement Not Found');
+    }
+    res.status(200).json(announcement);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
+
 exports.deleteAnnouncement = async (req, res, next) => {
   try {
     await Announcement.deleteOne({
