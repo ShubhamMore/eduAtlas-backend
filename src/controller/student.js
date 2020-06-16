@@ -388,19 +388,15 @@ exports.getStudentsByBatch = async (req, res) => {
 
 exports.getStudentsByInstitute = async (req, res) => {
   try {
-    const searchData = { 'instituteDetails.instituteId': req.body.instituteId };
+    const students = await Student.find({
+      'instituteDetails.instituteId': req.body.instituteId,
+    });
 
-    if (req.body.courseId) {
-      searchData['instituteDetails.courseId'] = req.body.courseId;
+    if (students.length == 0) {
+      const error = new Error('No student found');
+      error.statusCode = 400;
+      throw error;
     }
-
-    if (req.body.batchId) {
-      searchData['instituteDetails.batchId'] = req.body.batchId;
-    }
-
-    console.log(searchData);
-
-    const students = await Student.find(searchData);
 
     res.status(200).send(students);
   } catch (error) {
@@ -428,26 +424,44 @@ exports.getCoursesOfStudentByInstitute = async (req, res) => {
       {
         $project: {
           _id: {
-            $toObjectId: '$_id',
+            $toObjectId: '$instituteDetails.courseId',
           },
         },
       },
       {
         $lookup: {
           from: 'institutes',
-          localField: 'instituteDetails.instituteId',
-          foreignField: '_id.str',
+          localField: '_id',
+          foreignField: 'course._id',
           as: 'courses',
         },
       },
       {
-        $group: {
-          _id: '$courses.course',
+        $unwind: '$courses',
+      },
+      {
+        $project: {
+          'courses.course': 1,
         },
       },
       {
-        $unwind: '$_id',
+        $unwind: '$courses.course',
       },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$_id', '$courses.course._id'],
+          },
+        },
+      },
+      // {
+      //   $group: {
+      //     _id: '$courses.course',
+      //   },
+      // },
+      // {
+      //   $unwind: '$_id',
+      // },
       // {
       //   $project: {
       //     'courses.course': 1,
@@ -456,7 +470,7 @@ exports.getCoursesOfStudentByInstitute = async (req, res) => {
     ]);
 
     console.log(student);
-    res.status(200).send(student[0]);
+    res.status(200).send(student);
   } catch (error) {
     errorHandler(error, res);
   }
