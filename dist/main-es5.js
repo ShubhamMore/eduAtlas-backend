@@ -5585,7 +5585,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
     "./src/app/services/chat.service.ts");
 
     var HeaderComponent = /*#__PURE__*/function () {
-      function HeaderComponent(authService, sidebarService, menuService, themeService, userService, api, layoutService, router, breakpointService, instituteService, roleService, windowService, chatService) {
+      function HeaderComponent(authService, sidebarService, menuService, themeService, userService, api, layoutService, router, route, breakpointService, instituteService, roleService, windowService, chatService) {
         _classCallCheck(this, HeaderComponent);
 
         this.authService = authService;
@@ -5596,6 +5596,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
         this.api = api;
         this.layoutService = layoutService;
         this.router = router;
+        this.route = route;
         this.breakpointService = breakpointService;
         this.instituteService = instituteService;
         this.roleService = roleService;
@@ -5673,9 +5674,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
         key: "openChatBoxForNewIncomingMessage",
         value: function openChatBoxForNewIncomingMessage(message) {
           var user = {
-            'eduAtlasId': message.receiverId,
-            'basicDetails': {
-              'name': message.msg.user.name
+            eduAtlasId: message.receiverId,
+            basicDetails: {
+              name: message.msg.user.name
             }
           };
           this.openChatBox(user);
@@ -5711,17 +5712,23 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
       }, {
         key: "onSelect",
         value: function onSelect(event) {
-          if (event !== 'undefined') {
+          if (event !== '') {
             this.institute = event;
 
             if (this.user.role === 'institute') {
-              this.router.navigate(['/pages/dashboard/', event]);
+              this.router.navigate(['/pages/dashboard/', event], {
+                relativeTo: this.route.parent
+              });
             } else if (this.user.role === 'employee') {
               var role = this.getEmployeeRole(event);
               this.roleService.assignRoles(role);
-              this.router.navigate(['/pages/dashboard/', event]);
+              this.router.navigate(['/pages/dashboard/', event], {
+                relativeTo: this.route.parent
+              });
             } else if (this.user.role === 'student') {
-              this.router.navigate(['/student/dashboard/', event]);
+              this.router.navigate(['/student/dashboard/', event], {
+                relativeTo: this.route.parent
+              });
             }
           }
         }
@@ -5837,6 +5844,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
       }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"]
       }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_8__["ActivatedRoute"]
+      }, {
         type: _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbMediaBreakpointsService"]
       }, {
         type: _services_institute_service__WEBPACK_IMPORTED_MODULE_1__["InstituteService"]
@@ -5863,7 +5872,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./header.component.scss */
       "./src/app/@theme/components/header/header.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbSidebarService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbMenuService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbThemeService"], _core_data_users__WEBPACK_IMPORTED_MODULE_5__["UserData"], _services_api_service__WEBPACK_IMPORTED_MODULE_9__["ApiService"], _core_utils__WEBPACK_IMPORTED_MODULE_6__["LayoutService"], _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"], _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbMediaBreakpointsService"], _services_institute_service__WEBPACK_IMPORTED_MODULE_1__["InstituteService"], _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_10__["RoleAssignService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbWindowService"], _services_chat_service__WEBPACK_IMPORTED_MODULE_11__["SocketioService"]])], HeaderComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbSidebarService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbMenuService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbThemeService"], _core_data_users__WEBPACK_IMPORTED_MODULE_5__["UserData"], _services_api_service__WEBPACK_IMPORTED_MODULE_9__["ApiService"], _core_utils__WEBPACK_IMPORTED_MODULE_6__["LayoutService"], _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_8__["ActivatedRoute"], _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbMediaBreakpointsService"], _services_institute_service__WEBPACK_IMPORTED_MODULE_1__["InstituteService"], _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_10__["RoleAssignService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbWindowService"], _services_chat_service__WEBPACK_IMPORTED_MODULE_11__["SocketioService"]])], HeaderComponent);
     /***/
   },
 
@@ -9662,10 +9671,20 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
         _classCallCheck(this, ApiService);
 
         this.http = http;
-      } // =====================INSTITUTE API==============================
+      } // ======================= FIND USER ==============================
+      //
 
 
       _createClass(ApiService, [{
+        key: "findEduatlasUser",
+        value: function findEduatlasUser(id) {
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/findEduatlasUser");
+          return this.http.post(url, {
+            id: id
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        } // =====================INSTITUTE API==============================
+
+      }, {
         key: "getInstitutes",
         value: function getInstitutes() {
           return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/all').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
@@ -9765,6 +9784,12 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
         value: function getCourseTD(id) {
           var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/getCourseTD/").concat(id);
           return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        }
+      }, {
+        key: "getCoursesOfStudentByInstitute",
+        value: function getCoursesOfStudentByInstitute(data) {
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/student/getCoursesOfStudentByInstitute");
+          return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         } //  ADD NEW STUDENT
 
       }, {
@@ -9812,9 +9837,10 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
       }, {
         key: "sendOtpForGetUserDetails",
-        value: function sendOtpForGetUserDetails(eduId) {
+        value: function sendOtpForGetUserDetails(eduId, role) {
           return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/users/sendOtpForGetUserDetails', {
-            eduAtlasId: eduId
+            eduAtlasId: eduId,
+            role: role
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
             return res;
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
@@ -9833,6 +9859,14 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
         key: "getOneStudentByInstitute",
         value: function getOneStudentByInstitute(data) {
           return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getOneStudentByInstitute', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        } //  GET STUDENT BY INSTITUTE
+
+      }, {
+        key: "getStudentByInstitute",
+        value: function getStudentByInstitute(data) {
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getStudentByInstitute', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+            return res;
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         } //  GET ACTIVE STUDENTs
 
       }, {
@@ -9991,8 +10025,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
             date: studentFees.date,
             noOfInstallments: studentFees.noOfInstallments,
             amountCollected: studentFees.amountCollected,
-            totalAmount: studentFees.totalFees,
-            pendingAmount: studentFees.pendingFees,
+            totalAmount: studentFees.totalAmount,
+            pendingAmount: studentFees.pendingAmount,
             installments: []
           };
           studentFees.installments.forEach(function (curInstallment) {
@@ -10312,13 +10346,25 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
         value: function handleError(error) {
           return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
         } // =====================Attendance API===================
-        //  ADD NEW EMPLOYEE
+        // GET STUDENTS FOR ATTENDANCE
 
       }, {
         key: "getStudentsAttendance",
         value: function getStudentsAttendance(attendanceRequest) {
           var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/attendance/getAttendanceByDate");
           return this.http.post(url, attendanceRequest).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        }
+      }, {
+        key: "getAttendanceForStudent",
+        value: function getAttendanceForStudent(data) {
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/attendance/getAttendanceForStudent");
+          return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        }
+      }, {
+        key: "getStudentAttendanceByCourse",
+        value: function getStudentAttendanceByCourse(data) {
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/attendance/getAttendanceForStudentByCourse");
+          return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
         key: "addAttendance",
@@ -10527,6 +10573,12 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
         key: "getSingleLead",
         value: function getSingleLead(data) {
           var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/leads/getSingleLead");
+          return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        }
+      }, {
+        key: "getSingleLeadToView",
+        value: function getSingleLeadToView(data) {
+          var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server, "/institute/leads/getSingleLeadToView");
           return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (data) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
         }
       }, {
@@ -10828,6 +10880,13 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["throwError"])(msg);
           }));
+        }
+      }, {
+        key: "changePassword",
+        value: function changePassword(data) {
+          return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].server + '/users/changePassword', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (res) {
+            return res;
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
         }
       }, {
         key: "login",
@@ -11487,7 +11546,26 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
       }, {
         key: "assignRoles",
         value: function assignRoles(role) {
-          if (role && role === 'Teacher' || role === 'Counselor') {
+          if (role && role === 'Counselor') {
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][4].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][5].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][7].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][11].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][12].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[0].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[1].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[2].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].children[1].hidden = false;
+          }
+
+          if (role && role === 'Teacher') {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
@@ -11502,7 +11580,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].children[1].hidden = false;
           }
 

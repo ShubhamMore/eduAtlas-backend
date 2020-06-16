@@ -1391,7 +1391,7 @@ let AddEmployee = class AddEmployee {
     onEmployeeFormSearch() {
         if (this.eduAtlasEmployeeForm.valid) {
             const employeeEduId = `${this.eduAtlasEmployeeFormControl['eduAtlasId'].value}`;
-            this.api.sendOtpForGetUserDetails(employeeEduId).subscribe((res) => {
+            this.api.sendOtpForGetUserDetails(employeeEduId, 'employee').subscribe((res) => {
                 if (res) {
                     this.otpSent = true;
                     this.phone = res.phone;
@@ -1414,6 +1414,7 @@ let AddEmployee = class AddEmployee {
                 phone: this.phone,
             };
             this.api.verifyUserOtp(verificationData).subscribe((data) => {
+                this.showToaster('top-right', 'success', 'OTP Verified');
                 this.getOneEmployee(this.eduAtlasEmployeeForm.value.eduAtlasId);
             }, (error) => {
                 this.showToaster('top-right', 'danger', 'Invalid OTP');
@@ -1451,7 +1452,7 @@ let AddEmployee = class AddEmployee {
                 this.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
             }
         }, (error) => {
-            this.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
+            this.showToaster('top-right', 'danger', 'Invalid Employee EduAtlas ID');
         });
     }
     changeAlreadyRegistered(e) {

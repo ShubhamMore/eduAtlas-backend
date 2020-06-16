@@ -6,6 +6,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["pages-pages-module"], {
   /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/change-password/change-password.component.html":
+  /*!************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/change-password/change-password.component.html ***!
+    \************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppPagesChangePasswordChangePasswordComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<div class=\"row\">\n  <div class=\"col-md-6 col-12 mx-auto\">\n    <nb-card>\n      <nb-card-header>\n        <h2 class=\"page-heading\">Change Password</h2>\n      </nb-card-header>\n      <nb-card-body>\n        <form [formGroup]=\"form\" (submit)=\"changePassword()\">\n          <div class=\"form-group\">\n            <label class=\"input-label\" for=\"oldPassword\">Old Password</label>\n            <input\n              class=\"input-password\"\n              type=\"password\"\n              id=\"oldPassword\"\n              class=\"form-control\"\n              name=\"oldPassword\"\n              formControlName=\"oldPassword\"\n            />\n            <span\n              class=\"input-error\"\n              *ngIf=\"!form.get('oldPassword').valid && form.get('oldPassword').touched\"\n              >*Please enter Your Old Password</span\n            >\n          </div>\n\n          <div class=\"form-group\">\n            <label class=\"input-label\" for=\"password\">New Password</label>\n            <input\n              class=\"input-password\"\n              type=\"password\"\n              id=\"password\"\n              class=\"form-control\"\n              name=\"password\"\n              formControlName=\"password\"\n            />\n            <span\n              class=\"input-error\"\n              *ngIf=\"!form.get('password').valid && form.get('password').touched\"\n              >*Please enter New Password</span\n            >\n          </div>\n\n          <div class=\"form-group\">\n            <label class=\"input-label\" for=\"confirm_password\">Confirm New Password</label>\n            <input\n              class=\"input-password\"\n              type=\"password\"\n              id=\"confirm_password\"\n              class=\"form-control\"\n              name=\"confirm_password\"\n              formControlName=\"confirm_password\"\n            />\n            <span\n              class=\"input-error\"\n              *ngIf=\"!form.get('confirm_password').valid && form.get('confirm_password').touched\"\n              >*Please enter Confirm Password</span\n            >\n          </div>\n\n          <div>\n            <span\n              class=\"input-error\"\n              *ngIf=\"form.hasError('invalidPassword') && form.get('password').touched\"\n              >*Password & Confirm Password Does Not Match</span\n            >\n          </div>\n\n          <hr />\n\n          <div>\n            <button class=\"btn btn-primary btn-change-password\" type=\"submit\">\n              Change\n            </button>\n          </div>\n        </form>\n      </nb-card-body>\n    </nb-card>\n  </div>\n</div>\n";
+    /***/
+  },
+
+  /***/
   "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/e-commerce/e-commerce.component.html":
   /*!**************************************************************************************************!*\
     !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/e-commerce/e-commerce.component.html ***!
@@ -21,7 +41,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ng-container *ngIf=\"display\">\r\n  <div class=\"row\">\r\n    <div class=\"col-12\">\r\n      <nb-card>\r\n        <nb-card-header>\r\n          <span\r\n            ><img\r\n              class=\"my-auto float-left\"\r\n              [src]=\"myInstitute.institute.basicInfo.logo.secure_url\"\r\n              width=\"40px\"\r\n              height=\"40px\"\r\n              style=\"border-radius: 100%; border: 1px solid #000;\"\r\n          /></span>\r\n          <span\r\n            class=\"ml-3 my-auto\"\r\n            style=\"color: #ffd500; font-size: 30px; padding-top: 10px; font-weight: bold;\"\r\n          >\r\n            {{ myInstitute.institute.basicInfo.name | uppercase }}\r\n          </span>\r\n          <span\r\n            style=\"\r\n              font-size: 10px;\r\n              font-weight: normal;\r\n              background-color: #009acd;\r\n              color: #fff;\r\n              padding: 2px 8px;\r\n              border-radius: 10px;\r\n            \"\r\n            >{{ myInstitute.institute.currentPlan | uppercase }}</span\r\n          >\r\n\r\n          <span class=\"float-right mr-3\">\r\n            <span>Total Students: {{ totalStudents }}</span\r\n            ><br />\r\n            <span>Total Batches: {{ totalBatches }}</span>\r\n          </span>\r\n        </nb-card-header>\r\n      </nb-card>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-6\">\r\n      <nb-card class=\"card-height-1\">\r\n        <nb-card-body>\r\n          <nb-tabset fullWidth>\r\n            <nb-tab tabTitle=\"UPCOMING CLASSES\">\r\n              <div class=\"table-responsive\" *ngIf=\"classes.length > 0; else noClasses\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>#</th>\r\n                      <th>Topic</th>\r\n                      <th>Start Time</th>\r\n                      <th>Host</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let course of classes; let i = index\">\r\n                      <td>{{ i + 1 }}</td>\r\n                      <td>{{ course.topic }}</td>\r\n                      <td>{{ createTime(course.startTime) }}</td>\r\n                      <td>{{ course.hostName }}</td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n              <ng-template #noClasses>\r\n                <p class=\"text-center pt-5\">No Classes</p>\r\n              </ng-template>\r\n            </nb-tab>\r\n            <nb-tab tabTitle=\"PENDING FEES\">\r\n              <div class=\"table-responsive\" *ngIf=\"pendingFees.length > 0; else noFees\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>#</th>\r\n                      <th>Student</th>\r\n                      <th>Course</th>\r\n                      <th>Fees</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let fees of pendingFees; let i = index\">\r\n                      <td>{{ i + 1 }}</td>\r\n                      <td>{{ fees.studentName }}</td>\r\n                      <td>{{ fees.courseName }}</td>\r\n                      <td>{{ fees.pendingAmount }}</td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n              <ng-template #noFees>\r\n                <p class=\"text-center pt-5\">No Fees</p>\r\n              </ng-template>\r\n            </nb-tab>\r\n            <nb-tab tabTitle=\"STUDENT REQUESTS\">\r\n              <div class=\"table-responsive\" *ngIf=\"studentRequest.length > 0; else noStudents\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>#</th>\r\n                      <th>Name</th>\r\n                      <th>Contact</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let req of studentRequest; let i = index\">\r\n                      <td>{{ i + 1 }}</td>\r\n                      <td>{{ req.studentName }}</td>\r\n                      <td>{{ req.contact }}</td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n              <ng-template #noStudents>\r\n                <p class=\"text-center pt-5\">No Student Requests</p>\r\n              </ng-template>\r\n            </nb-tab>\r\n            <nb-tab tabTitle=\"FOLLOW UPS\">\r\n              <div class=\"table-responsive\" *ngIf=\"newLeads.length > 0; else noLeads\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>#</th>\r\n                      <th>Name</th>\r\n                      <th>Contact</th>\r\n                      <th>Status</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let lead of newLeads; let i = index\">\r\n                      <td>{{ i + 1 }}</td>\r\n                      <td>{{ lead.leadName }}</td>\r\n                      <td>{{ lead.leadContact }}</td>\r\n                      <td>{{ lead.status }}</td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n              <ng-template #noLeads>\r\n                <p class=\"text-center pt-5\">No New Leads</p>\r\n              </ng-template>\r\n            </nb-tab>\r\n          </nb-tabset>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n\r\n    <div class=\"col-md-6\">\r\n      <div class=\"row\">\r\n        <div class=\"col-md-6\">\r\n          <nb-card class=\"card-height-2\">\r\n            <nb-card-body>\r\n              <div class=\"image-container\">\r\n                <img class=\"inst-logo\" src=\"../../../assets/img/home-yellow.png\" alt=\"Institute\" />\r\n              </div>\r\n              <br />\r\n              <button\r\n                class=\"btn btn-yellow\"\r\n                [routerLink]=\"'/pages/institute/add-students/' + this.instituteId\"\r\n              >\r\n                ADD STUDENT\r\n              </button>\r\n            </nb-card-body>\r\n          </nb-card>\r\n        </div>\r\n\r\n        <div class=\"col-md-6\">\r\n          <nb-card class=\"card-height-2\">\r\n            <nb-card-body>\r\n              <div class=\"image-container\">\r\n                <img class=\"inst-logo\" src=\"../../../assets/img/home-yellow.png\" alt=\"Institute\" />\r\n              </div>\r\n              <br />\r\n              <button class=\"btn btn-yellow\">COLLECT INSTALLMENT</button>\r\n            </nb-card-body>\r\n          </nb-card>\r\n        </div>\r\n\r\n        <div class=\"col-md-6\">\r\n          <nb-card class=\"card-height-2\">\r\n            <nb-card-body>\r\n              <div class=\"image-container\">\r\n                <img class=\"inst-logo\" src=\"../../../assets/img/home-yellow.png\" alt=\"Institute\" />\r\n              </div>\r\n              <br />\r\n              <button\r\n                class=\"btn btn-yellow\"\r\n                [routerLink]=\"'/pages/institute/add-schedule/' + this.instituteId\"\r\n              >\r\n                ADD CLASS\r\n              </button>\r\n            </nb-card-body>\r\n          </nb-card>\r\n        </div>\r\n\r\n        <div class=\"col-md-6\">\r\n          <nb-card class=\"card-height-2\">\r\n            <nb-card-body>\r\n              <div class=\"image-container\">\r\n                <img class=\"inst-logo\" src=\"../../../assets/img/home-yellow.png\" alt=\"Institute\" />\r\n              </div>\r\n              <br />\r\n              <button\r\n                class=\"btn btn-yellow\"\r\n                [routerLink]=\"'/pages/institute/attandance/' + this.instituteId\"\r\n              >\r\n                ADD ATTENDANCE\r\n              </button>\r\n            </nb-card-body>\r\n          </nb-card>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"col-md-6\">\r\n      <nb-card>\r\n        <nb-card-header style=\"background-color: #31bc9b;\">\r\n          <span style=\"font-size: 16px; color: #fff;\">MESSAGE BOARD</span>\r\n        </nb-card-header>\r\n        <nb-card-body class=\"body-height-1\"></nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n\r\n    <div class=\"col-md-6\">\r\n      <nb-card>\r\n        <nb-card-header>\r\n          REVENUE AND STUDENT GRAPH\r\n        </nb-card-header>\r\n        <nb-card-body class=\"body-height-1\"></nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n  </div>\r\n  <!-- \r\n  <div class=\"row\" [hidden]=\"!display\">\r\n    <div class=\"col-sm-6\">\r\n      <nb-card [hidden]=\"false\">\r\n        <nb-card-header style=\"background-color: #ffd500;\">\r\n          <span>UPCOMING CLASS</span>\r\n          <input type=\"date\" id=\"date\" placeholder=\"Pick Date\" />\r\n        </nb-card-header>\r\n        <nb-card-body style=\"max-height: 35vh;\">\r\n          <p class=\"text-center\">No Upcoming Class Available</p>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n\r\n    <div class=\"col-sm-6\">\r\n      <nb-card>\r\n        <nb-card-header style=\"background-color: #ffd500;\">STUDENT REQUESTS </nb-card-header>\r\n        <nb-card-body style=\"max-height: 35vh;\">\r\n          <p class=\"text-center\">No Requests Available</p>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\" [hidden]=\"!display\">\r\n    <div class=\"col-sm-6\">\r\n      <nb-card [hidden]=\"false\">\r\n        <nb-card-header style=\"background-color: #ffd500;\">\r\n          PENDING FEES\r\n          <input type=\"date\" id=\"date\" placeholder=\"Pick Date\" />\r\n        </nb-card-header>\r\n        <nb-card-body style=\"max-height: 35vh;\">\r\n          <p class=\"text-center\">No Pending Fees Available</p>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n\r\n    <div class=\"col-sm-6\">\r\n      <nb-card [hidden]=\"false\">\r\n        <nb-card-header style=\"background-color: #ffd500;\">LEADS </nb-card-header>\r\n        <nb-card-body style=\"max-height: 35vh;\">\r\n          <p class=\"test-center\">No Leads</p>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" [hidden]=\"!display\">\r\n    <div class=\"col-sm-6\">\r\n      <nb-card [hidden]=\"false\">\r\n        <nb-card-header style=\"background-color: #ffd500;\">Messages</nb-card-header>\r\n        <nb-card-body style=\"max-height: 35vh;\">\r\n          <p class=\"test-center\">No Messages</p>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n\r\n    <div class=\"col-sm-6\">\r\n      <nb-card [hidden]=\"false\">\r\n        <nb-card-header style=\"background-color: #ffd500;\">New Leads</nb-card-header>\r\n        <nb-card-body style=\"max-height: 35vh;\">\r\n          <p class=\"test-center\">No New Leads</p>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n  </div> -->\r\n</ng-container>\r\n";
+    __webpack_exports__["default"] = "<ng-container *ngIf=\"display\">\r\n  <div class=\"row\">\r\n    <div class=\"col-12\">\r\n      <nb-card>\r\n        <nb-card-header>\r\n          <span\r\n            ><img\r\n              class=\"my-auto float-left\"\r\n              [src]=\"myInstitute.institute.basicInfo.logo.secure_url\"\r\n              width=\"40px\"\r\n              height=\"40px\"\r\n              style=\"border-radius: 100%; border: 1px solid #000;\"\r\n          /></span>\r\n          <span\r\n            class=\"ml-3 my-auto\"\r\n            style=\"color: #ffd500; font-size: 30px; padding-top: 10px; font-weight: bold;\"\r\n          >\r\n            {{ myInstitute.institute.basicInfo.name | uppercase }}\r\n          </span>\r\n          <span\r\n            style=\"\r\n              font-size: 10px;\r\n              font-weight: normal;\r\n              background-color: #009acd;\r\n              color: #fff;\r\n              padding: 2px 8px;\r\n              border-radius: 10px;\r\n            \"\r\n            >{{ myInstitute.institute.currentPlan | uppercase }}</span\r\n          >\r\n\r\n          <span class=\"float-right mr-3\">\r\n            <span>Total Students: {{ totalStudents }}</span\r\n            ><br />\r\n            <span>Total Batches: {{ totalBatches }}</span>\r\n          </span>\r\n        </nb-card-header>\r\n      </nb-card>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-6\">\r\n      <nb-card class=\"card-height-1\">\r\n        <nb-card-body>\r\n          <nb-tabset fullWidth>\r\n            <nb-tab tabTitle=\"UPCOMING CLASSES\">\r\n              <div class=\"table-responsive\" *ngIf=\"classes.length > 0; else noClasses\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>#</th>\r\n                      <th>Topic</th>\r\n                      <th>Start Time</th>\r\n                      <th>Host</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let course of classes; let i = index\">\r\n                      <td>{{ i + 1 }}</td>\r\n                      <td>{{ course.topic }}</td>\r\n                      <td>{{ createTime(course.startTime) }}</td>\r\n                      <td>{{ course.hostName }}</td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n              <ng-template #noClasses>\r\n                <p class=\"text-center pt-5\">No Classes Today</p>\r\n              </ng-template>\r\n            </nb-tab>\r\n            <nb-tab tabTitle=\"PENDING FEES\">\r\n              <div class=\"table-responsive\" *ngIf=\"pendingFees.length > 0; else noFees\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>#</th>\r\n                      <th>Student</th>\r\n                      <th>Course</th>\r\n                      <th>Fees</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let fees of pendingFees; let i = index\">\r\n                      <td>{{ i + 1 }}</td>\r\n                      <td>{{ fees.studentName }}</td>\r\n                      <td>{{ fees.courseName }}</td>\r\n                      <td>{{ fees.pendingAmount }}</td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n              <ng-template #noFees>\r\n                <p class=\"text-center pt-5\">No Pending Fees</p>\r\n              </ng-template>\r\n            </nb-tab>\r\n            <nb-tab tabTitle=\"STUDENT REQUESTS\">\r\n              <div class=\"table-responsive\" *ngIf=\"studentRequest.length > 0; else noStudents\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>#</th>\r\n                      <th>Name</th>\r\n                      <th>Contact</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let req of studentRequest; let i = index\">\r\n                      <td>{{ i + 1 }}</td>\r\n                      <td>{{ req.studentName }}</td>\r\n                      <td>{{ req.contact }}</td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n              <ng-template #noStudents>\r\n                <p class=\"text-center pt-5\">No Student Requests</p>\r\n              </ng-template>\r\n            </nb-tab>\r\n            <nb-tab tabTitle=\"FOLLOW UPS\">\r\n              <div class=\"table-responsive\" *ngIf=\"newLeads.length > 0; else noLeads\">\r\n                <table class=\"table table-borderless\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th>#</th>\r\n                      <th>Name</th>\r\n                      <th>Contact</th>\r\n                      <th>Status</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let lead of newLeads; let i = index\">\r\n                      <td>{{ i + 1 }}</td>\r\n                      <td>{{ lead.leadName }}</td>\r\n                      <td>{{ lead.leadContact }}</td>\r\n                      <td>{{ lead.status }}</td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n              <ng-template #noLeads>\r\n                <p class=\"text-center pt-5\">No New Leads</p>\r\n              </ng-template>\r\n            </nb-tab>\r\n          </nb-tabset>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n\r\n    <div class=\"col-md-6\">\r\n      <div class=\"row\">\r\n        <div class=\"col-md-6\">\r\n          <nb-card class=\"card-height-2\">\r\n            <nb-card-body>\r\n              <div class=\"image-container\">\r\n                <img class=\"inst-logo\" src=\"../../../assets/img/home-yellow.png\" alt=\"Institute\" />\r\n              </div>\r\n              <br />\r\n              <button\r\n                class=\"btn btn-yellow\"\r\n                [routerLink]=\"'/pages/institute/add-students/' + this.instituteId\"\r\n              >\r\n                ADD STUDENT\r\n              </button>\r\n            </nb-card-body>\r\n          </nb-card>\r\n        </div>\r\n\r\n        <div class=\"col-md-6\">\r\n          <nb-card class=\"card-height-2\">\r\n            <nb-card-body>\r\n              <div class=\"image-container\">\r\n                <img class=\"inst-logo\" src=\"../../../assets/img/home-yellow.png\" alt=\"Institute\" />\r\n              </div>\r\n              <br />\r\n              <button class=\"btn btn-yellow\">COLLECT INSTALLMENT</button>\r\n            </nb-card-body>\r\n          </nb-card>\r\n        </div>\r\n\r\n        <div class=\"col-md-6\">\r\n          <nb-card class=\"card-height-2\">\r\n            <nb-card-body>\r\n              <div class=\"image-container\">\r\n                <img class=\"inst-logo\" src=\"../../../assets/img/home-yellow.png\" alt=\"Institute\" />\r\n              </div>\r\n              <br />\r\n              <button\r\n                class=\"btn btn-yellow\"\r\n                [routerLink]=\"'/pages/institute/add-schedule/' + this.instituteId\"\r\n              >\r\n                ADD CLASS\r\n              </button>\r\n            </nb-card-body>\r\n          </nb-card>\r\n        </div>\r\n\r\n        <div class=\"col-md-6\">\r\n          <nb-card class=\"card-height-2\">\r\n            <nb-card-body>\r\n              <div class=\"image-container\">\r\n                <img class=\"inst-logo\" src=\"../../../assets/img/home-yellow.png\" alt=\"Institute\" />\r\n              </div>\r\n              <br />\r\n              <button\r\n                class=\"btn btn-yellow\"\r\n                [routerLink]=\"'/pages/institute/attandance/' + this.instituteId\"\r\n              >\r\n                ADD ATTENDANCE\r\n              </button>\r\n            </nb-card-body>\r\n          </nb-card>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"col-md-6\">\r\n      <nb-card>\r\n        <nb-card-header style=\"background-color: #31bc9b;\">\r\n          <span style=\"font-size: 16px; color: #fff;\">MESSAGE BOARD</span>\r\n        </nb-card-header>\r\n        <nb-card-body class=\"body-height-1\"></nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n\r\n    <div class=\"col-md-6\">\r\n      <nb-card>\r\n        <nb-card-header>\r\n          REVENUE AND STUDENT GRAPH\r\n        </nb-card-header>\r\n        <nb-card-body class=\"body-height-1\"></nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n  </div>\r\n  <!-- \r\n  <div class=\"row\" [hidden]=\"!display\">\r\n    <div class=\"col-sm-6\">\r\n      <nb-card [hidden]=\"false\">\r\n        <nb-card-header style=\"background-color: #ffd500;\">\r\n          <span>UPCOMING CLASS</span>\r\n          <input type=\"date\" id=\"date\" placeholder=\"Pick Date\" />\r\n        </nb-card-header>\r\n        <nb-card-body style=\"max-height: 35vh;\">\r\n          <p class=\"text-center\">No Upcoming Class Available</p>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n\r\n    <div class=\"col-sm-6\">\r\n      <nb-card>\r\n        <nb-card-header style=\"background-color: #ffd500;\">STUDENT REQUESTS </nb-card-header>\r\n        <nb-card-body style=\"max-height: 35vh;\">\r\n          <p class=\"text-center\">No Requests Available</p>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\" [hidden]=\"!display\">\r\n    <div class=\"col-sm-6\">\r\n      <nb-card [hidden]=\"false\">\r\n        <nb-card-header style=\"background-color: #ffd500;\">\r\n          PENDING FEES\r\n          <input type=\"date\" id=\"date\" placeholder=\"Pick Date\" />\r\n        </nb-card-header>\r\n        <nb-card-body style=\"max-height: 35vh;\">\r\n          <p class=\"text-center\">No Pending Fees Available</p>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n\r\n    <div class=\"col-sm-6\">\r\n      <nb-card [hidden]=\"false\">\r\n        <nb-card-header style=\"background-color: #ffd500;\">LEADS </nb-card-header>\r\n        <nb-card-body style=\"max-height: 35vh;\">\r\n          <p class=\"test-center\">No Leads</p>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" [hidden]=\"!display\">\r\n    <div class=\"col-sm-6\">\r\n      <nb-card [hidden]=\"false\">\r\n        <nb-card-header style=\"background-color: #ffd500;\">Messages</nb-card-header>\r\n        <nb-card-body style=\"max-height: 35vh;\">\r\n          <p class=\"test-center\">No Messages</p>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n\r\n    <div class=\"col-sm-6\">\r\n      <nb-card [hidden]=\"false\">\r\n        <nb-card-header style=\"background-color: #ffd500;\">New Leads</nb-card-header>\r\n        <nb-card-body style=\"max-height: 35vh;\">\r\n          <p class=\"test-center\">No New Leads</p>\r\n        </nb-card-body>\r\n      </nb-card>\r\n    </div>\r\n  </div> -->\r\n</ng-container>\r\n";
     /***/
   },
 
@@ -41,7 +61,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card *ngIf=\"!display\">\r\n  <nb-card-body>\r\n    <div class=\"text-center\">\r\n      <img src=\"../../../assets/img/institute.png\" width=\"100px\" height=\"100px\" />\r\n      <h3 class=\"mt-4\">NO INSTITUTE ADDED</h3>\r\n      <small *ngIf=\"showAddInstituteBtn\"\r\n        >Click on add Institute Button to create other branches</small\r\n      >\r\n      <div class=\"mt-4\" *ngIf=\"showAddInstituteBtn\">\r\n        <button nbButton status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\r\n          ADD INSTITUTE\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<div class=\"row\" *ngIf=\"display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"basic\" style=\"max-height: 35vh;\">\r\n      <nb-card-header style=\"background-color: #ffd500;\">\r\n        MY INSTITUTES\r\n      </nb-card-header>\r\n      <nb-list>\r\n        <nb-list-item *ngFor=\"let item of institutes; let i = index\">\r\n          <a (click)=\"viewInstitute(item._id)\" style=\"width: 100%; cursor: pointer;\">\r\n            <span\r\n              ><img\r\n                [src]=\"item.basicInfo.logo.secure_url\"\r\n                width=\"30px\"\r\n                height=\"30px\"\r\n                style=\"border-radius: 100%;\"\r\n            /></span>\r\n\r\n            <span class=\"ml-3\">{{ item.basicInfo.name }}</span>\r\n            <span class=\"ml-3\">{{ item.address.city }}</span>\r\n            <span style=\"float: right;\">\r\n              <img src=\"../../../assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n            </span>\r\n          </a>\r\n        </nb-list-item>\r\n      </nb-list>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card *ngIf=\"showAddInstituteBtn\">\r\n      <nb-card-body>\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-2\">\r\n            <img src=\"../../../assets/img/home-yellow.png\" alt=\"Add Institute\" />\r\n          </div>\r\n          <div class=\"col-sm-8\">\r\n            <p class=\"font-weight-bold pt-3\">\r\n              ADD INSTITUTE\r\n            </p>\r\n          </div>\r\n          <div class=\"col-sm-2\">\r\n            <a routerLink=\"/pages/membership\" class=\"mt-3\">\r\n              <img src=\"assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n            </a>\r\n          </div>\r\n        </div>\r\n      </nb-card-body>\r\n    </nb-card>\r\n    <nb-card>\r\n      <nb-card-body>\r\n        <p class=\"font-weight-bold\">\r\n          SMS BALANCE\r\n        </p>\r\n        <h2>0 SMS Pending</h2>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n";
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"!display\">\r\n  <nb-card-body>\r\n    <div class=\"text-center\">\r\n      <img src=\"../../../assets/img/institute.png\" width=\"100px\" height=\"100px\" />\r\n      <h3 class=\"mt-4\">NO INSTITUTE ADDED</h3>\r\n      <small *ngIf=\"showAddInstituteBtn\"\r\n        >Click on add Institute Button to create other branches</small\r\n      >\r\n      <div class=\"mt-4\" *ngIf=\"showAddInstituteBtn\">\r\n        <button nbButton status=\"warning\" style=\"color: black;\" (click)=\"onClick()\">\r\n          ADD INSTITUTE\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<div class=\"row\" *ngIf=\"display\">\r\n  <div class=\"col-sm-6\">\r\n    <nb-card status=\"basic\" style=\"max-height: 35vh;\">\r\n      <nb-card-header style=\"background-color: #ffd500;\">\r\n        MY INSTITUTES\r\n      </nb-card-header>\r\n      <nb-card-body>\r\n        <!-- <nb-list>\r\n          <nb-list-item> -->\r\n        <ng-container>\r\n          <div class=\"table-responsive\">\r\n            <table class=\"table\">\r\n              <tbody>\r\n                <ng-container *ngFor=\"let item of institutes; let i = index\">\r\n                  <tr class=\"border-bottom\" *ngIf=\"item.active\">\r\n                    <td class=\"td-img\">\r\n                      <span\r\n                        ><img\r\n                          [src]=\"item.basicInfo.logo.secure_url\"\r\n                          width=\"35px\"\r\n                          height=\"35px\"\r\n                          style=\"border: 1px solid #ffd500; border-radius: 100%;\"\r\n                      /></span>\r\n                    </td>\r\n                    <td>\r\n                      <span class=\"\"\r\n                        ><strong>{{ item.basicInfo.name }}</strong></span\r\n                      >\r\n                    </td>\r\n                    <td>\r\n                      <span class=\"\">{{ item.address.city }}</span>\r\n                    </td>\r\n                    <td class=\"td-img\">\r\n                      <span class=\"pointer float-right\" (click)=\"viewInstitute(item._id)\">\r\n                        <img src=\"../../../assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n                      </span>\r\n                    </td>\r\n                  </tr>\r\n                </ng-container>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n          <!-- <a (click)=\"viewInstitute(item._id)\" style=\"width: 100%; cursor: pointer;\">\r\n            <span\r\n              ><img\r\n                [src]=\"item.basicInfo.logo.secure_url\"\r\n                width=\"30px\"\r\n                height=\"30px\"\r\n                style=\"border-radius: 100%;\"\r\n            /></span>\r\n\r\n            <span class=\"ml-3\">{{ item.basicInfo.name }}</span>\r\n            <span class=\"ml-3\">{{ item.address.city }}</span>\r\n            <span style=\"float: right;\">\r\n              <img src=\"../../../assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n            </span>\r\n          </a> -->\r\n        </ng-container>\r\n        <!-- </nb-list-item>\r\n        </nb-list> -->\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n\r\n  <div class=\"col-sm-6\">\r\n    <nb-card *ngIf=\"showAddInstituteBtn\">\r\n      <nb-card-body>\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-2\">\r\n            <img src=\"../../../assets/img/home-yellow.png\" alt=\"Add Institute\" />\r\n          </div>\r\n          <div class=\"col-sm-8\">\r\n            <p class=\"font-weight-bold pt-3\">\r\n              ADD INSTITUTE\r\n            </p>\r\n          </div>\r\n          <div class=\"col-sm-2\">\r\n            <a routerLink=\"/pages/membership\" class=\"mt-3\">\r\n              <img src=\"assets/img/rarrow.png\" width=\"30px\" height=\"30px\" />\r\n            </a>\r\n          </div>\r\n        </div>\r\n      </nb-card-body>\r\n    </nb-card>\r\n    <nb-card>\r\n      <nb-card-body>\r\n        <p class=\"font-weight-bold\">\r\n          SMS BALANCE\r\n        </p>\r\n        <h2>0 SMS Pending</h2>\r\n      </nb-card-body>\r\n    </nb-card>\r\n  </div>\r\n</div>\r\n";
     /***/
   },
 
@@ -82,6 +102,195 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     __webpack_exports__["default"] = "<div class=\"row\">\n  <div class=\"col-md-12\">\n    <nb-card>\n      <nb-card-body>\n        <div class=\"flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12\">\n          <h2 class=\"title\">404 Page Not Found</h2>\n          <small class=\"sub-title\">The page you were looking for doesn't exist</small>\n          <button nbButton fullWidth (click)=\"goToHome()\" type=\"button\" class=\"home-button\">\n            Take me home\n          </button>\n        </div>\n      </nb-card-body>\n    </nb-card>\n  </div>\n</div>\n";
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/change-password/change-password.component.scss":
+  /*!**********************************************************************!*\
+    !*** ./src/app/pages/change-password/change-password.component.scss ***!
+    \**********************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppPagesChangePasswordChangePasswordComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2NoYW5nZS1wYXNzd29yZC9jaGFuZ2UtcGFzc3dvcmQuY29tcG9uZW50LnNjc3MifQ== */";
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/change-password/change-password.component.ts":
+  /*!********************************************************************!*\
+    !*** ./src/app/pages/change-password/change-password.component.ts ***!
+    \********************************************************************/
+
+  /*! exports provided: ChangePasswordComponent */
+
+  /***/
+  function srcAppPagesChangePasswordChangePasswordComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ChangePasswordComponent", function () {
+      return ChangePasswordComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @nebular/theme */
+    "./node_modules/@nebular/theme/fesm2015/index.js");
+    /* harmony import */
+
+
+    var _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ./../../services/auth-services/auth.service */
+    "./src/app/services/auth-services/auth.service.ts");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! @angular/common */
+    "./node_modules/@angular/common/fesm2015/common.js");
+
+    var ChangePasswordComponent = /*#__PURE__*/function () {
+      function ChangePasswordComponent(authService, router, route, toasterService, location) {
+        _classCallCheck(this, ChangePasswordComponent);
+
+        this.authService = authService;
+        this.router = router;
+        this.route = route;
+        this.toasterService = toasterService;
+        this.location = location;
+      }
+
+      _createClass(ChangePasswordComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormGroup"]({
+            oldPassword: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, {
+              validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(6)]
+            }),
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, {
+              validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(6)]
+            }),
+            confirm_password: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, {
+              validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(6)]
+            })
+          }, {
+            validators: this.passwordValidator.bind(this)
+          });
+        }
+      }, {
+        key: "passwordValidator",
+        value: function passwordValidator(group) {
+          if (group.value.password !== group.value.confirm_password) {
+            return {
+              invalidPassword: true
+            };
+          }
+
+          return null;
+        }
+      }, {
+        key: "changePassword",
+        value: function changePassword() {
+          var _this = this;
+
+          if (this.form.valid && !this.form.hasError('invalidPassword')) {
+            var data = {
+              api: 'changePassword',
+              data: {
+                email: JSON.parse(localStorage.getItem('userData')).email,
+                oldPassword: this.form.value.oldPassword,
+                newPassword: this.form.value.password
+              }
+            };
+            this.authService.changePassword(data).subscribe(function (resData) {
+              _this.showToast('top-right', 'success', 'Password Changed Successfully!');
+
+              _this.router.navigate(['/pages/home'], {
+                relativeTo: _this.route
+              });
+            }, function (errorMessage) {
+              console.log(errorMessage);
+
+              _this.showToast('top-right', 'danger', 'Password Changed Failed!');
+            });
+          } else {
+            this.showToast('top-right', 'danger', 'Please Fill all The Fields Correctly');
+          }
+        }
+      }, {
+        key: "showToast",
+        value: function showToast(position, status, message) {
+          this.toasterService.show(status, message, {
+            position: position,
+            status: status
+          });
+        }
+      }]);
+
+      return ChangePasswordComponent;
+    }();
+
+    ChangePasswordComponent.ctorParameters = function () {
+      return [{
+        type: _services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]
+      }, {
+        type: _nebular_theme__WEBPACK_IMPORTED_MODULE_2__["NbToastrService"]
+      }, {
+        type: _angular_common__WEBPACK_IMPORTED_MODULE_6__["Location"]
+      }];
+    };
+
+    ChangePasswordComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
+      selector: 'ngx-change-password',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./change-password.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/change-password/change-password.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./change-password.component.scss */
+      "./src/app/pages/change-password/change-password.component.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _nebular_theme__WEBPACK_IMPORTED_MODULE_2__["NbToastrService"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["Location"]])], ChangePasswordComponent);
     /***/
   },
 
@@ -175,6 +384,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var ECommerceComponent = /*#__PURE__*/function () {
       function ECommerceComponent(api, router, active, authService, instituteService, roleService) {
+        var _this2 = this;
+
         _classCallCheck(this, ECommerceComponent);
 
         this.api = api;
@@ -194,6 +405,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.totalStudents = 0;
         this.totalBatches = 0;
         this.study = [];
+        active.params.subscribe(function (val) {
+          // put the code from `ngOnInit` here
+          _this2.ngOnInit();
+        });
       }
 
       _createClass(ECommerceComponent, [{
@@ -230,15 +445,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getDashboardInfo",
         value: function getDashboardInfo(id) {
-          var _this = this;
+          var _this3 = this;
 
           this.api.getDashboardInfo(id).subscribe(function (res) {
-            _this.classes = res.upcomingClass;
-            _this.pendingFees = res.pendingFees;
-            _this.newLeads = res.leads; // this.studentReq = res.studentRequests;
+            _this3.classes = res.upcomingClass;
+            _this3.pendingFees = res.pendingFees;
+            _this3.newLeads = res.leads; // this.studentReq = res.studentRequests;
 
-            _this.totalStudents = res.studentCount;
-            _this.totalBatches = res.batchCount;
+            _this3.totalStudents = res.studentCount;
+            _this3.totalBatches = res.batchCount;
           });
         }
       }, {
@@ -250,23 +465,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getInstitute",
         value: function getInstitute(id) {
-          var _this2 = this;
+          var _this4 = this;
 
           this.api.getInstitute(id).subscribe(function (res) {
-            _this2.myInstitute = res;
+            _this4.myInstitute = res;
 
-            _this2.roleService.assignRoles(_this2.authService.getUser().role);
+            _this4.roleService.assignRoles(_this4.authService.getUser().role);
 
-            _this2.display = true;
+            _this4.display = true;
           });
         }
       }, {
         key: "getStudents",
         value: function getStudents(id) {
-          var _this3 = this;
+          var _this5 = this;
 
           this.api.getStudents(id).subscribe(function (res) {
-            _this3.studentRequest = res;
+            _this5.studentRequest = res;
           }, function (err) {
             return console.error(err);
           });
@@ -274,21 +489,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getInstitutes",
         value: function getInstitutes() {
-          var _this4 = this;
+          var _this6 = this;
 
           var user = this.authService.getUser();
 
           if (user && user.role === 'institute') {
             _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][1].hidden = false;
             this.api.getInstitutes().subscribe(function (data) {
-              _this4.institutes = data;
+              _this6.institutes = data;
 
-              if (_this4.institutes.length) {
+              if (_this6.institutes.length) {
                 _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][1].children[1].hidden = false;
 
-                _this4.instituteService.setInstitutes(_this4.institutes);
+                _this6.instituteService.setInstitutes(_this6.institutes);
 
-                _this4.display = true;
+                _this6.display = true;
               } else {
                 _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][1].children[1].hidden = true;
               }
@@ -298,12 +513,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               email: user.email
             }).subscribe(function (data) {
               _pages_menu__WEBPACK_IMPORTED_MODULE_4__["MENU_ITEMS"][1].hidden = true;
-              _this4.institutes = data;
+              _this6.institutes = data;
 
-              if (_this4.institutes.length) {
-                _this4.instituteService.setInstitutes(_this4.institutes);
+              if (_this6.institutes.length) {
+                _this6.instituteService.setInstitutes(_this6.institutes);
 
-                _this4.display = true;
+                _this6.display = true;
               }
             });
           }
@@ -357,7 +572,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "td {\n  padding-right: 50px; }\n\nnb-card-header {\n  color: #ffd500; }\n\n.small {\n  display: block; }\n\n#date {\n  width: 26%;\n  float: right;\n  padding: 11px;\n  border-radius: 6px;\n  border: none;\n  font-size: 11px;\n  text-align: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaG9tZS9FOlxcUHJvamVjdHNcXEZyZWVsYW5jZSBQcm9qZWN0c1xcRWR1QXRsYXNcXGVkdWF0bGFzMVxcY2xpZW50L3NyY1xcYXBwXFxwYWdlc1xcaG9tZVxcaG9tZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLG1CQUFtQixFQUFBOztBQUVyQjtFQUNFLGNBQWMsRUFBQTs7QUFFaEI7RUFDRSxjQUFjLEVBQUE7O0FBRWhCO0VBQ0UsVUFBVTtFQUNWLFlBQVk7RUFDWixhQUFhO0VBQ2Isa0JBQWtCO0VBQ2xCLFlBQVk7RUFDWixlQUFlO0VBQ2Ysa0JBQWtCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9ob21lL2hvbWUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0ZCB7XHJcbiAgcGFkZGluZy1yaWdodDogNTBweDtcclxufVxyXG5uYi1jYXJkLWhlYWRlciB7XHJcbiAgY29sb3I6ICNmZmQ1MDA7XHJcbn1cclxuLnNtYWxsIHtcclxuICBkaXNwbGF5OiBibG9jaztcclxufVxyXG4jZGF0ZSB7XHJcbiAgd2lkdGg6IDI2JTtcclxuICBmbG9hdDogcmlnaHQ7XHJcbiAgcGFkZGluZzogMTFweDtcclxuICBib3JkZXItcmFkaXVzOiA2cHg7XHJcbiAgYm9yZGVyOiBub25lO1xyXG4gIGZvbnQtc2l6ZTogMTFweDtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuIl19 */";
+    __webpack_exports__["default"] = "td {\n  padding-right: 50px; }\n\n.border-bottom {\n  border-bottom: 1px solid #dee2e6; }\n\n.td-img {\n  padding: 10px 8px; }\n\nnb-card-header {\n  color: #ffd500; }\n\n.small {\n  display: block; }\n\n#date {\n  width: 26%;\n  float: right;\n  padding: 11px;\n  border-radius: 6px;\n  border: none;\n  font-size: 11px;\n  text-align: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaG9tZS9FOlxcUHJvamVjdHNcXEZyZWVsYW5jZSBQcm9qZWN0c1xcRWR1QXRsYXNcXGVkdWF0bGFzMVxcY2xpZW50L3NyY1xcYXBwXFxwYWdlc1xcaG9tZVxcaG9tZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLG1CQUFtQixFQUFBOztBQUdyQjtFQUNFLGdDQUFnQyxFQUFBOztBQUdsQztFQUNFLGlCQUFpQixFQUFBOztBQUduQjtFQUNFLGNBQWMsRUFBQTs7QUFFaEI7RUFDRSxjQUFjLEVBQUE7O0FBRWhCO0VBQ0UsVUFBVTtFQUNWLFlBQVk7RUFDWixhQUFhO0VBQ2Isa0JBQWtCO0VBQ2xCLFlBQVk7RUFDWixlQUFlO0VBQ2Ysa0JBQWtCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9ob21lL2hvbWUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0ZCB7XHJcbiAgcGFkZGluZy1yaWdodDogNTBweDtcclxufVxyXG5cclxuLmJvcmRlci1ib3R0b20ge1xyXG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjZGVlMmU2O1xyXG59XHJcblxyXG4udGQtaW1nIHtcclxuICBwYWRkaW5nOiAxMHB4IDhweDtcclxufVxyXG5cclxubmItY2FyZC1oZWFkZXIge1xyXG4gIGNvbG9yOiAjZmZkNTAwO1xyXG59XHJcbi5zbWFsbCB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbn1cclxuI2RhdGUge1xyXG4gIHdpZHRoOiAyNiU7XHJcbiAgZmxvYXQ6IHJpZ2h0O1xyXG4gIHBhZGRpbmc6IDExcHg7XHJcbiAgYm9yZGVyLXJhZGl1czogNnB4O1xyXG4gIGJvcmRlcjogbm9uZTtcclxuICBmb250LXNpemU6IDExcHg7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59XHJcbiJdfQ== */";
     /***/
   },
 
@@ -478,7 +693,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getInstitutes",
         value: function getInstitutes() {
-          var _this5 = this;
+          var _this7 = this;
 
           var user = this.authService.getUser();
 
@@ -486,14 +701,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][1].hidden = false;
             this.showAddInstituteBtn = true;
             this.api.getInstitutes().subscribe(function (data) {
-              _this5.institutes = data;
+              _this7.institutes = data;
+              console.log(_this7.institutes);
 
-              if (_this5.institutes.length > 0) {
+              if (_this7.institutes.length > 0) {
                 _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][1].children[1].hidden = false;
 
-                _this5.instituteService.setInstitutes(_this5.institutes);
+                _this7.instituteService.setInstitutes(_this7.institutes);
 
-                _this5.display = true;
+                _this7.display = true;
               } else {
                 _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][1].children[1].hidden = true;
               }
@@ -503,12 +719,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               email: user.email
             }).subscribe(function (data) {
               _pages_menu__WEBPACK_IMPORTED_MODULE_5__["MENU_ITEMS"][1].hidden = true;
-              _this5.institutes = data;
+              _this7.institutes = data;
+              console.log(data);
 
-              if (_this5.institutes.length > 0) {
-                _this5.instituteService.setInstitutes(_this5.institutes);
+              if (_this7.institutes.length > 0) {
+                _this7.instituteService.setInstitutes(_this7.institutes);
 
-                _this5.display = true;
+                _this7.display = true;
               }
             });
           }
@@ -1011,58 +1228,67 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _change_password_change_password_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./change-password/change-password.component */
+    "./src/app/pages/change-password/change-password.component.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var _pages_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _pages_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ./pages.component */
     "./src/app/pages/pages.component.ts");
     /* harmony import */
 
 
-    var _e_commerce_e_commerce_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _e_commerce_e_commerce_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ./e-commerce/e-commerce.component */
     "./src/app/pages/e-commerce/e-commerce.component.ts");
     /* harmony import */
 
 
-    var _miscellaneous_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _miscellaneous_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./miscellaneous/not-found/not-found.component */
     "./src/app/pages/miscellaneous/not-found/not-found.component.ts");
     /* harmony import */
 
 
-    var _home_home_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _home_home_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ./home/home.component */
     "./src/app/pages/home/home.component.ts");
     /* harmony import */
 
 
-    var _membership_membership_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _membership_membership_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ./membership/membership.component */
     "./src/app/pages/membership/membership.component.ts");
 
     var routes = [{
       path: '',
-      component: _pages_component__WEBPACK_IMPORTED_MODULE_3__["PagesComponent"],
+      component: _pages_component__WEBPACK_IMPORTED_MODULE_4__["PagesComponent"],
       children: [{
         path: 'home',
-        component: _home_home_component__WEBPACK_IMPORTED_MODULE_6__["HomeComponent"]
+        component: _home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"]
       }, {
         path: 'membership',
-        component: _membership_membership_component__WEBPACK_IMPORTED_MODULE_7__["MembershipComponent"]
+        component: _membership_membership_component__WEBPACK_IMPORTED_MODULE_8__["MembershipComponent"]
       }, {
         path: 'dashboard/:id',
-        component: _e_commerce_e_commerce_component__WEBPACK_IMPORTED_MODULE_4__["ECommerceComponent"]
+        component: _e_commerce_e_commerce_component__WEBPACK_IMPORTED_MODULE_5__["ECommerceComponent"]
+      }, {
+        path: 'change-password',
+        component: _change_password_change_password_component__WEBPACK_IMPORTED_MODULE_1__["ChangePasswordComponent"]
       }, {
         path: 'institute',
         loadChildren: function loadChildren() {
@@ -1102,7 +1328,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         pathMatch: 'full'
       }, {
         path: '**',
-        component: _miscellaneous_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_5__["NotFoundComponent"]
+        component: _miscellaneous_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_6__["NotFoundComponent"]
       }]
     }];
 
@@ -1110,9 +1336,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _classCallCheck(this, PagesRoutingModule);
     };
 
-    PagesRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-      imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forChild(routes)],
-      exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
+    PagesRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
+      imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
+      exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
     })], PagesRoutingModule);
     /***/
   },
@@ -1220,82 +1446,94 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var _nebular_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @nebular/theme */
     "./node_modules/@nebular/theme/fesm2015/index.js");
     /* harmony import */
 
 
-    var _nebular_eva_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _nebular_eva_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @nebular/eva-icons */
     "./node_modules/@nebular/eva-icons/fesm2015/index.js");
     /* harmony import */
 
 
-    var _theme_theme_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _theme_theme_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ../@theme/theme.module */
     "./src/app/@theme/theme.module.ts");
     /* harmony import */
 
 
-    var _pages_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _pages_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./pages.component */
     "./src/app/pages/pages.component.ts");
     /* harmony import */
 
 
-    var _pages_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _pages_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ./pages-routing.module */
     "./src/app/pages/pages-routing.module.ts");
     /* harmony import */
 
 
-    var _miscellaneous_miscellaneous_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _miscellaneous_miscellaneous_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ./miscellaneous/miscellaneous.module */
     "./src/app/pages/miscellaneous/miscellaneous.module.ts");
     /* harmony import */
 
 
-    var primeng_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var primeng_button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! primeng/button */
     "./node_modules/primeng/button.js");
     /* harmony import */
 
 
-    var primeng_button__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(primeng_button__WEBPACK_IMPORTED_MODULE_8__);
+    var primeng_button__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(primeng_button__WEBPACK_IMPORTED_MODULE_9__);
     /* harmony import */
 
 
-    var _home_home_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _home_home_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! ./home/home.component */
     "./src/app/pages/home/home.component.ts");
     /* harmony import */
 
 
-    var _e_commerce_e_commerce_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _e_commerce_e_commerce_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! ./e-commerce/e-commerce.component */
     "./src/app/pages/e-commerce/e-commerce.component.ts");
     /* harmony import */
 
 
-    var _membership_membership_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    var _membership_membership_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! ./membership/membership.component */
-    "./src/app/pages/membership/membership.component.ts"); // import { InstAddDialogComponent } from './institute/add-institute/inst-add-dialog/inst-add-dialog.component';
+    "./src/app/pages/membership/membership.component.ts");
+    /* harmony import */
+
+
+    var _change_password_change_password_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    /*! ./change-password/change-password.component */
+    "./src/app/pages/change-password/change-password.component.ts"); // import { InstAddDialogComponent } from './institute/add-institute/inst-add-dialog/inst-add-dialog.component';
 
 
     var PagesModule = function PagesModule() {
       _classCallCheck(this, PagesModule);
     };
 
-    PagesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      imports: [_pages_routing_module__WEBPACK_IMPORTED_MODULE_6__["PagesRoutingModule"], _theme_theme_module__WEBPACK_IMPORTED_MODULE_4__["ThemeModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_2__["NbMenuModule"], _miscellaneous_miscellaneous_module__WEBPACK_IMPORTED_MODULE_7__["MiscellaneousModule"], primeng_button__WEBPACK_IMPORTED_MODULE_8__["ButtonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_2__["NbLayoutModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_2__["NbTabsetModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_2__["NbCardModule"], _nebular_eva_icons__WEBPACK_IMPORTED_MODULE_3__["NbEvaIconsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_2__["NbIconModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_2__["NbListModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_2__["NbSelectModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_2__["NbDatepickerModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_2__["NbButtonModule"]],
-      declarations: [_pages_component__WEBPACK_IMPORTED_MODULE_5__["PagesComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_9__["HomeComponent"], _e_commerce_e_commerce_component__WEBPACK_IMPORTED_MODULE_10__["ECommerceComponent"], _membership_membership_component__WEBPACK_IMPORTED_MODULE_11__["MembershipComponent"]]
+    PagesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+      imports: [_pages_routing_module__WEBPACK_IMPORTED_MODULE_7__["PagesRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ReactiveFormsModule"], _theme_theme_module__WEBPACK_IMPORTED_MODULE_5__["ThemeModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbMenuModule"], _miscellaneous_miscellaneous_module__WEBPACK_IMPORTED_MODULE_8__["MiscellaneousModule"], primeng_button__WEBPACK_IMPORTED_MODULE_9__["ButtonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbLayoutModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbTabsetModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbCardModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbUserModule"], _nebular_eva_icons__WEBPACK_IMPORTED_MODULE_4__["NbEvaIconsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbIconModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbListModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbSelectModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbDatepickerModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbButtonModule"]],
+      declarations: [_pages_component__WEBPACK_IMPORTED_MODULE_6__["PagesComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"], _e_commerce_e_commerce_component__WEBPACK_IMPORTED_MODULE_11__["ECommerceComponent"], _membership_membership_component__WEBPACK_IMPORTED_MODULE_12__["MembershipComponent"], _change_password_change_password_component__WEBPACK_IMPORTED_MODULE_13__["ChangePasswordComponent"]]
     })], PagesModule);
     /***/
   },

@@ -2399,7 +2399,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    Announcements\n    <button\n      class=\"btn btn-yellow-black float-right\"\n      [routerLink]=\"'/pages/communication/add-announcements/' + this.instituteId\"\n    >\n      ADD ANNOUNCEMENT\n    </button>\n  </nb-card-header>\n  <nb-card-body>\n    <ng-container *ngIf=\"announcements.length > 0; else noAnnouncements\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>ID</th>\n                  <th>Title</th>\n                  <th>Text</th>\n                  <th>Attachment</th>\n                  <th>Delete</th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let item of announcements; let i = index\">\n                  <td>\n                    <span> {{ i + 1 }}</span>\n                  </td>\n                  <td>\n                    <span> {{ item.title }}</span>\n                  </td>\n                  <td>\n                    <div [innerHTML]=\"item.text | safeHtml\"></div>\n                  </td>\n                  <td>\n                    <a [href]=\"item.attachment.secure_url\" *ngIf=\"item.attachment\">{{\n                      item.attachment.file_name\n                    }}</a>\n                  </td>\n                  <div>\n                    <button nbButton status=\"danger\" (click)=\"onDelete(item._id)\">Delete</button>\n                  </div>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n    <ng-template #noAnnouncements>\n      <p class=\"text-center pt-5\">No Announcements</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    Announcements\n    <button\n      class=\"btn btn-yellow-black float-right\"\n      [routerLink]=\"'/pages/communication/add-announcements/' + this.instituteId\"\n    >\n      ADD ANNOUNCEMENT\n    </button>\n  </nb-card-header>\n  <nb-card-body>\n    <ng-container *ngIf=\"announcements.length > 0; else noAnnouncements\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>ID</th>\n                  <th>Title</th>\n                  <th>Attachment</th>\n                  <th></th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let item of announcements; let i = index\">\n                  <td>\n                    <span> {{ i + 1 }}</span>\n                  </td>\n                  <td>\n                    <span> {{ item.title }}</span>\n                  </td>\n                  <td>\n                    <a [href]=\"item.attachment.secure_url\" *ngIf=\"item.attachment\">{{\n                      item.attachment.file_name\n                    }}</a\n                    ><span *ngIf=\"!item.attachment\">--</span>\n                  </td>\n                  <div>\n                    <button class=\"mr-3 mb-2\" nbButton (click)=\"onView(item._id)\">View</button>\n                    <button class=\"mb-2\" nbButton status=\"danger\" (click)=\"onDelete(item._id)\">\n                      Delete\n                    </button>\n                  </div>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n    <ng-template #noAnnouncements>\n      <p class=\"text-center pt-5\">No Announcements</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/communication/announcements/view-announcements/view-announcements.component.html":
+  /*!**********************************************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/communication/announcements/view-announcements/view-announcements.component.html ***!
+    \**********************************************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppPagesCommunicationAnnouncementsViewAnnouncementsViewAnnouncementsComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    <button class=\"btn btn-yellow float-right\" (click)=\"manageAnnouncement()\">\n      Back\n    </button>\n    <h3>{{ announcement.title }}</h3>\n  </nb-card-header>\n  <nb-card-body>\n    <div *ngIf=\"announcement.attachment\">\n      <a [href]=\"announcement.attachment.secure_url\">{{ announcement.attachment.file_name }}</a>\n    </div>\n    <div [innerHTML]=\"announcement.text | safeHtml\"></div>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -2829,12 +2849,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     "./node_modules/@angular/core/fesm2015/core.js");
 
     var ManageAnnouncementsComponent = /*#__PURE__*/function () {
-      function ManageAnnouncementsComponent(api, toastrService, active, announceService) {
+      function ManageAnnouncementsComponent(api, toastrService, router, route, announceService) {
         _classCallCheck(this, ManageAnnouncementsComponent);
 
         this.api = api;
         this.toastrService = toastrService;
-        this.active = active;
+        this.router = router;
+        this.route = route;
         this.announceService = announceService;
         this.announcements = [];
         this.display = false;
@@ -2843,8 +2864,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ManageAnnouncementsComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.instituteId = this.active.snapshot.paramMap.get('id');
+          this.instituteId = this.route.snapshot.paramMap.get('id');
           this.getAnnouncement(this.instituteId);
+        }
+      }, {
+        key: "onView",
+        value: function onView(id) {
+          this.router.navigate(['/pages/communication/view-announcements/', this.instituteId], {
+            queryParams: {
+              announcement: id
+            }
+          });
         }
       }, {
         key: "getAnnouncement",
@@ -2894,6 +2924,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         type: _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"]
       }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      }, {
         type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
       }, {
         type: _services_communication_announcement_service__WEBPACK_IMPORTED_MODULE_2__["AnnouncementService"]
@@ -2908,7 +2940,169 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./manage-announcements.component.scss */
       "./src/app/pages/communication/announcements/manage-announcements/manage-announcements.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _services_communication_announcement_service__WEBPACK_IMPORTED_MODULE_2__["AnnouncementService"]])], ManageAnnouncementsComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _services_communication_announcement_service__WEBPACK_IMPORTED_MODULE_2__["AnnouncementService"]])], ManageAnnouncementsComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/communication/announcements/view-announcements/view-announcements.component.scss":
+  /*!********************************************************************************************************!*\
+    !*** ./src/app/pages/communication/announcements/view-announcements/view-announcements.component.scss ***!
+    \********************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppPagesCommunicationAnnouncementsViewAnnouncementsViewAnnouncementsComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2NvbW11bmljYXRpb24vYW5ub3VuY2VtZW50cy92aWV3LWFubm91bmNlbWVudHMvdmlldy1hbm5vdW5jZW1lbnRzLmNvbXBvbmVudC5zY3NzIn0= */";
+    /***/
+  },
+
+  /***/
+  "./src/app/pages/communication/announcements/view-announcements/view-announcements.component.ts":
+  /*!******************************************************************************************************!*\
+    !*** ./src/app/pages/communication/announcements/view-announcements/view-announcements.component.ts ***!
+    \******************************************************************************************************/
+
+  /*! exports provided: ViewAnnouncementsComponent */
+
+  /***/
+  function srcAppPagesCommunicationAnnouncementsViewAnnouncementsViewAnnouncementsComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ViewAnnouncementsComponent", function () {
+      return ViewAnnouncementsComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _services_communication_announcement_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./../../../../services/communication/announcement.service */
+    "./src/app/services/communication/announcement.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @nebular/theme */
+    "./node_modules/@nebular/theme/fesm2015/index.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @angular/common */
+    "./node_modules/@angular/common/fesm2015/common.js");
+
+    var ViewAnnouncementsComponent = /*#__PURE__*/function () {
+      function ViewAnnouncementsComponent(toastrService, router, route, location, announceService) {
+        _classCallCheck(this, ViewAnnouncementsComponent);
+
+        this.toastrService = toastrService;
+        this.router = router;
+        this.route = route;
+        this.location = location;
+        this.announceService = announceService;
+      }
+
+      _createClass(ViewAnnouncementsComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          var _this16 = this;
+
+          this.display = false;
+          this.instituteId = this.route.snapshot.paramMap.get('id');
+          this.route.queryParams.subscribe(function (data) {
+            _this16.announcementId = data.announcement;
+          });
+
+          if (this.announcementId) {
+            this.getAnnouncement(this.announcementId);
+          } else {
+            this.location.back();
+          }
+        }
+      }, {
+        key: "getAnnouncement",
+        value: function getAnnouncement(id) {
+          var _this17 = this;
+
+          this.announceService.getSingleAnnouncement(this.announcementId).subscribe(function (res) {
+            _this17.announcement = res;
+            _this17.display = true;
+          }, function (err) {
+            _this17.showToast('top-right', 'danger', 'Announcement Not Found');
+
+            _this17.location.back();
+          });
+        }
+      }, {
+        key: "manageAnnouncement",
+        value: function manageAnnouncement() {
+          this.location.back();
+        }
+      }, {
+        key: "showToast",
+        value: function showToast(position, status, message) {
+          this.toastrService.show(status, message, {
+            position: position,
+            status: status
+          });
+        }
+      }]);
+
+      return ViewAnnouncementsComponent;
+    }();
+
+    ViewAnnouncementsComponent.ctorParameters = function () {
+      return [{
+        type: _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbToastrService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
+      }, {
+        type: _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"]
+      }, {
+        type: _services_communication_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"]
+      }];
+    };
+
+    ViewAnnouncementsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
+      selector: 'ngx-view-announcements',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./view-announcements.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/communication/announcements/view-announcements/view-announcements.component.html"))["default"],
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./view-announcements.component.scss */
+      "./src/app/pages/communication/announcements/view-announcements/view-announcements.component.scss"))["default"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbToastrService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"], _services_communication_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"]])], ViewAnnouncementsComponent);
     /***/
   },
 
@@ -2992,79 +3186,88 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _announcements_view_announcements_view_announcements_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./../announcements/view-announcements/view-announcements.component */
+    "./src/app/pages/communication/announcements/view-announcements/view-announcements.component.ts");
+    /* harmony import */
+
+
+    var _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! ./../announcements/manage-announcements/manage-announcements.component */
     "./src/app/pages/communication/announcements/manage-announcements/manage-announcements.component.ts");
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var _communication_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _communication_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ../communication.component */
     "./src/app/pages/communication/communication.component.ts");
     /* harmony import */
 
 
-    var _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ../announcements/announcements.component */
     "./src/app/pages/communication/announcements/announcements.component.ts");
     /* harmony import */
 
 
-    var _forum_forum_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _forum_forum_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ../forum/forum.component */
     "./src/app/pages/communication/forum/forum.component.ts");
     /* harmony import */
 
 
-    var _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ../forum/add-forum/add-forum.component */
     "./src/app/pages/communication/forum/add-forum/add-forum.component.ts");
     /* harmony import */
 
 
-    var _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! ../forum/my-forum/my-forum.component */
     "./src/app/pages/communication/forum/my-forum/my-forum.component.ts");
     /* harmony import */
 
 
-    var _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! ../forum/forum-details/forum-details.component */
     "./src/app/pages/communication/forum/forum-details/forum-details.component.ts");
 
     var routes = [{
       path: '',
-      component: _communication_component__WEBPACK_IMPORTED_MODULE_4__["CommunicationComponent"],
+      component: _communication_component__WEBPACK_IMPORTED_MODULE_5__["CommunicationComponent"],
       children: [{
         path: 'announcements/:id',
-        component: _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_1__["ManageAnnouncementsComponent"]
+        component: _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_2__["ManageAnnouncementsComponent"]
+      }, {
+        path: 'view-announcements/:id',
+        component: _announcements_view_announcements_view_announcements_component__WEBPACK_IMPORTED_MODULE_1__["ViewAnnouncementsComponent"]
       }, {
         path: 'add-announcements/:id',
-        component: _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_5__["AnnouncementsComponent"]
+        component: _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_6__["AnnouncementsComponent"]
       }, {
         path: 'forum/:id',
-        component: _forum_forum_component__WEBPACK_IMPORTED_MODULE_6__["ForumComponent"]
+        component: _forum_forum_component__WEBPACK_IMPORTED_MODULE_7__["ForumComponent"]
       }, {
         path: 'add-forum/:id',
-        component: _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_7__["AddForumComponent"]
+        component: _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_8__["AddForumComponent"]
       }, {
         path: 'my-forum/:id',
-        component: _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_8__["MyForumComponent"]
+        component: _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_9__["MyForumComponent"]
       }, {
         path: 'forum-detail/:id',
-        component: _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_9__["ForumDetailsComponent"]
+        component: _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_10__["ForumDetailsComponent"]
       }]
     }];
 
@@ -3072,9 +3275,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _classCallCheck(this, CommRoutingModule);
     };
 
-    CommRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
-      imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
-      exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
+    CommRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["NgModule"])({
+      imports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(routes)],
+      exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"]]
     })], CommRoutingModule);
     /***/
   },
@@ -3107,85 +3310,91 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _announcements_view_announcements_view_announcements_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ./../announcements/view-announcements/view-announcements.component */
+    "./src/app/pages/communication/announcements/view-announcements/view-announcements.component.ts");
+    /* harmony import */
+
+
+    var _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! ../announcements/manage-announcements/manage-announcements.component */
     "./src/app/pages/communication/announcements/manage-announcements/manage-announcements.component.ts");
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/common */
     "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
-    var _communication_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _communication_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ../communication.component */
     "./src/app/pages/communication/communication.component.ts");
     /* harmony import */
 
 
-    var _comm_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _comm_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./comm-routing.module */
     "./src/app/pages/communication/communication/comm-routing.module.ts");
     /* harmony import */
 
 
-    var _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ../announcements/announcements.component */
     "./src/app/pages/communication/announcements/announcements.component.ts");
     /* harmony import */
 
 
-    var _nebular_theme__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @nebular/theme */
     "./node_modules/@nebular/theme/fesm2015/index.js");
     /* harmony import */
 
 
-    var _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @kolkov/angular-editor */
     "./node_modules/@kolkov/angular-editor/fesm2015/kolkov-angular-editor.js");
     /* harmony import */
 
 
-    var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/forms */
     "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
-    var _pipe_safe_html_pipe__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _pipe_safe_html_pipe__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! ../../../pipe/safe-html.pipe */
     "./src/app/pipe/safe-html.pipe.ts");
     /* harmony import */
 
 
-    var _forum_forum_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    var _forum_forum_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! ../forum/forum.component */
     "./src/app/pages/communication/forum/forum.component.ts");
     /* harmony import */
 
 
-    var _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    var _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! ../forum/add-forum/add-forum.component */
     "./src/app/pages/communication/forum/add-forum/add-forum.component.ts");
     /* harmony import */
 
 
-    var _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    var _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! ../forum/my-forum/my-forum.component */
     "./src/app/pages/communication/forum/my-forum/my-forum.component.ts");
     /* harmony import */
 
 
-    var _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+    var _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
     /*! ../forum/forum-details/forum-details.component */
     "./src/app/pages/communication/forum/forum-details/forum-details.component.ts");
 
@@ -3193,9 +3402,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _classCallCheck(this, CommunicationModule);
     };
 
-    CommunicationModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-      declarations: [_communication_component__WEBPACK_IMPORTED_MODULE_4__["CommunicationComponent"], _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_6__["AnnouncementsComponent"], _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_1__["ManageAnnouncementsComponent"], _pipe_safe_html_pipe__WEBPACK_IMPORTED_MODULE_10__["SafeHtmlPipe"], _forum_forum_component__WEBPACK_IMPORTED_MODULE_11__["ForumComponent"], _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_12__["AddForumComponent"], _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_13__["MyForumComponent"], _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_14__["ForumDetailsComponent"]],
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"], _comm_routing_module__WEBPACK_IMPORTED_MODULE_5__["CommRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbCardModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbInputModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbSelectModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbCheckboxModule"], _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_8__["AngularEditorModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbLayoutModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbButtonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbCardModule"]]
+    CommunicationModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
+      declarations: [_communication_component__WEBPACK_IMPORTED_MODULE_5__["CommunicationComponent"], _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_7__["AnnouncementsComponent"], _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_2__["ManageAnnouncementsComponent"], _announcements_view_announcements_view_announcements_component__WEBPACK_IMPORTED_MODULE_1__["ViewAnnouncementsComponent"], _pipe_safe_html_pipe__WEBPACK_IMPORTED_MODULE_11__["SafeHtmlPipe"], _forum_forum_component__WEBPACK_IMPORTED_MODULE_12__["ForumComponent"], _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_13__["AddForumComponent"], _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_14__["MyForumComponent"], _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_15__["ForumDetailsComponent"]],
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["CommonModule"], _comm_routing_module__WEBPACK_IMPORTED_MODULE_6__["CommRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["ReactiveFormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbCardModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbInputModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbSelectModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbCheckboxModule"], _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_9__["AngularEditorModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbLayoutModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["ReactiveFormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbButtonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbCardModule"]]
     })], CommunicationModule);
     /***/
   },
@@ -3305,15 +3514,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(AddForumComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this16 = this;
+          var _this18 = this;
 
           this.instituteId = this.active.snapshot.paramMap.get('id');
           this.active.queryParams.subscribe(function (data) {
-            _this16.forumId = data.forumId;
-            _this16.edit = data.edit;
+            _this18.forumId = data.forumId;
+            _this18.edit = data.edit;
 
-            if (_this16.edit === 'true') {
-              _this16.getForum();
+            if (_this18.edit === 'true') {
+              _this18.getForum();
             }
           });
           this.forumForm = this.fb.group({
@@ -3326,10 +3535,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCourses",
         value: function getCourses() {
-          var _this17 = this;
+          var _this19 = this;
 
           this.api.getCourseTD(this.instituteId).subscribe(function (data) {
-            _this17.courses = data.course;
+            _this19.courses = data.course;
           }, function (err) {
             return console.error(err);
           });
@@ -3337,12 +3546,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getForum",
         value: function getForum() {
-          var _this18 = this;
+          var _this20 = this;
 
           this.api.getSingleForum({
             '_id': this.forumId
           }).subscribe(function (data) {
-            _this18.forumForm.patchValue({
+            _this20.forumForm.patchValue({
               topic: data.title,
               description: data.description,
               courseId: data.courseId
@@ -3354,7 +3563,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this19 = this;
+          var _this21 = this;
 
           this.submitted = true;
           this.forumForm.markAllAsTouched();
@@ -3375,21 +3584,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.edit === 'true') {
             this.api.updateForum(forumReq).subscribe(function (data) {
-              _this19.showToast('top-right', 'success', 'Forum Updated Successfully');
+              _this21.showToast('top-right', 'success', 'Forum Updated Successfully');
 
-              _this19.router.navigate(['/pages/communication/forum/', _this19.instituteId]);
+              _this21.router.navigate(['/pages/communication/forum/', _this21.instituteId]);
             }, function (err) {
-              _this19.showToast('top-right', 'danger', err.error.message);
+              _this21.showToast('top-right', 'danger', err.error.message);
             });
           }
 
           if (!this.edit) {
             this.api.addForum(forumReq).subscribe(function () {
-              _this19.showToast('top-right', 'success', 'Forum Added Successfully');
+              _this21.showToast('top-right', 'success', 'Forum Added Successfully');
 
-              _this19.router.navigate(['/pages/communication/forum/', _this19.instituteId]);
+              _this21.router.navigate(['/pages/communication/forum/', _this21.instituteId]);
             }, function (err) {
-              _this19.showToast('top-right', 'danger', err.error.message);
+              _this21.showToast('top-right', 'danger', err.error.message);
             });
           }
         }
@@ -3545,24 +3754,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ForumDetailsComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this20 = this;
+          var _this22 = this;
 
           this.instituteId = this.route.snapshot.paramMap.get('id');
           this.route.queryParams.subscribe(function (data) {
-            _this20.forumId = data.forumId;
+            _this22.forumId = data.forumId;
 
-            _this20.getForum();
+            _this22.getForum();
           });
         }
       }, {
         key: "getForum",
         value: function getForum() {
-          var _this21 = this;
+          var _this23 = this;
 
           this.api.getSingleForum({
             _id: this.forumId
           }).subscribe(function (data) {
-            _this21.forumCommentData = data;
+            _this23.forumCommentData = data;
           }, function (err) {
             return console.error(err);
           });
@@ -3570,7 +3779,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "submitComment",
         value: function submitComment() {
-          var _this22 = this;
+          var _this24 = this;
 
           if (!this.userComment) {
             return;
@@ -3585,11 +3794,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             _id: this.forumId,
             comment: comment
           }).subscribe(function (data) {
-            _this22.userComment = null;
+            _this24.userComment = null;
 
-            _this22.showToast('top-right', 'success', 'Comment Added Succesfully');
+            _this24.showToast('top-right', 'success', 'Comment Added Succesfully');
 
-            _this22.getForum();
+            _this24.getForum();
           }, function (err) {
             return console.error(err);
           });
@@ -3613,7 +3822,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deleteComment",
         value: function deleteComment(commentId) {
-          var _this23 = this;
+          var _this25 = this;
 
           if (window.confirm('Do you want to delete your comment ?')) {
             this.api.deleteComment({
@@ -3621,11 +3830,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               commentId: commentId,
               userId: this.authService.getUser()._id
             }).subscribe(function (data) {
-              _this23.showToast('top-right', 'success', 'Comment Deleted Succesfully');
+              _this25.showToast('top-right', 'success', 'Comment Deleted Succesfully');
 
-              _this23.getForum();
+              _this25.getForum();
             }, function (err) {
-              return _this23.showToast('top-right', 'danger', err.error.message);
+              return _this25.showToast('top-right', 'danger', err.error.message);
             });
           }
         }
@@ -3759,10 +3968,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCourses",
         value: function getCourses() {
-          var _this24 = this;
+          var _this26 = this;
 
           this.api.getCourseTD(this.instituteId).subscribe(function (data) {
-            _this24.courses = data.course;
+            _this26.courses = data.course;
           }, function (err) {
             return console.error(err);
           });
@@ -3776,15 +3985,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getForums",
         value: function getForums() {
-          var _this25 = this;
+          var _this27 = this;
 
           this.api.getForumsByInstitute({
             instituteId: this.instituteId,
             courseId: this.selectedCourseId
           }).subscribe(function (res) {
-            _this25.allForums = res;
+            _this27.allForums = res;
 
-            _this25.allForums.map(function (myForum) {
+            _this27.allForums.map(function (myForum) {
               var date = new Date(myForum.date);
               myForum.date = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
               return myForum;
@@ -3944,10 +4153,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCourses",
         value: function getCourses() {
-          var _this26 = this;
+          var _this28 = this;
 
           this.api.getCourseTD(this.instituteId).subscribe(function (data) {
-            _this26.courses = data.course;
+            _this28.courses = data.course;
           }, function (err) {
             return console.error(err);
           });
@@ -3961,15 +4170,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getMyForums",
         value: function getMyForums() {
-          var _this27 = this;
+          var _this29 = this;
 
           this.api.getMyForum({
             'createdBy': this.authService.getUser()._id,
             'courseId': this.selectedCourseId
           }).subscribe(function (res) {
-            _this27.myForums = res;
+            _this29.myForums = res;
 
-            _this27.myForums.map(function (myForum) {
+            _this29.myForums.map(function (myForum) {
               var date = new Date(myForum.date);
               myForum.date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
               return myForum;
@@ -3989,14 +4198,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "delete",
         value: function _delete(id, index) {
-          var _this28 = this;
+          var _this30 = this;
 
           this.api.deleteForum({
             '_id': id
           }).subscribe(function () {
-            _this28.myForums.splice(index, 1);
+            _this30.myForums.splice(index, 1);
 
-            _this28.showToast('top-right', 'success', 'Forum Deleted Successfully');
+            _this30.showToast('top-right', 'success', 'Forum Deleted Successfully');
           }, function (err) {
             return console.error(err);
           });
@@ -4186,32 +4395,43 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(AnnouncementService, [{
         key: "postAnnouncement",
         value: function postAnnouncement(announcement) {
-          var _this29 = this;
+          var _this31 = this;
 
           return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/announcement/makeAnnouncement"), announcement).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (response) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (err) {
-            return _this29.handleError(err);
+            return _this31.handleError(err);
           }));
         }
       }, {
         key: "getAnnouncements",
         value: function getAnnouncements(id) {
-          var _this30 = this;
+          var _this32 = this;
 
           return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/announcement/getAnnouncement"), {
             instituteId: id
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (err) {
-            return _this30.handleError(err);
+            return _this32.handleError(err);
+          }));
+        }
+      }, {
+        key: "getSingleAnnouncement",
+        value: function getSingleAnnouncement(id) {
+          var _this33 = this;
+
+          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/announcement/getSingleAnnouncement"), {
+            id: id
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (err) {
+            return _this33.handleError(err);
           }));
         }
       }, {
         key: "deleteAnnouncement",
         value: function deleteAnnouncement(id) {
-          var _this31 = this;
+          var _this34 = this;
 
           return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/announcement/deleteAnnouncement"), {
             _id: id
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (err) {
-            return _this31.handleError(err);
+            return _this34.handleError(err);
           }));
         }
       }, {
