@@ -388,15 +388,19 @@ exports.getStudentsByBatch = async (req, res) => {
 
 exports.getStudentsByInstitute = async (req, res) => {
   try {
-    const students = await Student.find({
-      'instituteDetails.instituteId': req.body.instituteId,
-    });
+    const searchData = { 'instituteDetails.instituteId': req.body.instituteId };
 
-    if (students.length == 0) {
-      const error = new Error('No student found');
-      error.statusCode = 400;
-      throw error;
+    if (req.body.courseId) {
+      searchData['instituteDetails.courseId'] = req.body.courseId;
     }
+
+    if (req.body.batchId) {
+      searchData['instituteDetails.batchId'] = req.body.batchId;
+    }
+
+    console.log(searchData);
+
+    const students = await Student.find(searchData);
 
     res.status(200).send(students);
   } catch (error) {
