@@ -130,3 +130,18 @@ exports.getAttendanceByDate = async (req, res) => {
     errorHandler(error, res);
   }
 };
+exports.getAttendanceForStudentByCourse = async (req, res) => {
+  try {
+    const student = await Attendance.aggregate([
+      {
+        $unwind: '$attendance',
+      },
+      {
+        $match: {
+          instituteId: req.body.instituteId,
+          'attendance.studentId': req.body.studentId,
+        },
+      },
+    ]);
+  } catch (error) {}
+};

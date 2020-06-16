@@ -357,3 +357,19 @@ exports.getAttendece = async (req, res, next) => {
     errorHandler(error, res);
   }
 };
+
+exports.getStudentByInstitute = async (req, res) => {
+  let body = {};
+  try {
+    if (!req.body.batchId && !req.body.courseId) {
+      body = [
+        {
+          $unwind: '$instituteDetails',
+        },
+      ];
+    }
+    const student = await Student.aggregate([]);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};

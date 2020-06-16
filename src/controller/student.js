@@ -1,5 +1,6 @@
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
+const mongoose = require('mongoose');
 const schema = require('../service/joi');
 const Student = require('../model/student.model');
 const Fees = require('../model/fee.model');
@@ -384,6 +385,7 @@ exports.getStudentsByBatch = async (req, res) => {
 //Api for accepting invites
 
 //List of active and pending students APi Creation
+
 exports.getStudentsByInstitute = async (req, res) => {
   try {
     const students = await Student.find({
@@ -397,6 +399,60 @@ exports.getStudentsByInstitute = async (req, res) => {
     }
 
     res.status(200).send(students);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
+
+exports.getCoursesOfStudentByInstitute = async (req, res) => {
+  try {
+    const student = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body._id),
+          'instituteDetails.instituteId': req.body.instituteId,
+        },
+      },
+      // {
+      //   $group: {
+      //     _id: '$instituteDetails.courseId',
+      //   },
+      // },
+      {
+        $project: {
+          _id: {
+            $toObjectId: '$_id',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'instituteDetails.instituteId',
+          foreignField: '_id.str',
+          as: 'courses',
+        },
+      },
+      {
+        $group: {
+          _id: '$courses.course',
+        },
+      },
+      {
+        $unwind: '$_id',
+      },
+      // {
+      //   $project: {
+      //     'courses.course': 1,
+      //   },
+      // },
+    ]);
+
+    console.log(student);
+    res.status(200).send(student[0]);
   } catch (error) {
     errorHandler(error, res);
   }

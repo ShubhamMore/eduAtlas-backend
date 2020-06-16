@@ -27,10 +27,9 @@ studentRouter.post('/updateStudentCourse', studentController.updateStudentCourse
 studentRouter.post('/updateStudentCourseFee', studentController.updateStudentCourseFee);
 
 //Update student personal Details
-studentRouter.post('/updateStudentPersonalDetails', studentController.updateStudentPersonalDetails)
+studentRouter.post('/updateStudentPersonalDetails', studentController.updateStudentPersonalDetails);
 
-studentRouter.post('/getStudentsByBatch',checkAuth,studentController.getStudentsByBatch)
-
+studentRouter.post('/getStudentsByBatch', checkAuth, studentController.getStudentsByBatch);
 
 studentRouter.post('', checkAuth, studentController.getOneStudent);
 
@@ -40,6 +39,11 @@ studentRouter.delete('', checkAuth, studentController.deleteStudent);
 
 studentRouter.get('/all/:instituteId', checkAuth, studentController.getAllStudents);
 
-studentRouter.post('/getStudentsByInstitute',checkAuth, studentController.getStudentsByInstitute)
+studentRouter.post('/getStudentsByInstitute', checkAuth, studentController.getStudentsByInstitute);
+
+studentRouter.post(
+  '/getCoursesOfStudentByInstitute',
+  studentController.getCoursesOfStudentByInstitute
+);
 
 module.exports = studentRouter;
