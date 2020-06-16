@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\n  <nb-card-header>\n    <p style=\"color: black; font-weight: bold;\">Scheduled Mentoring</p>\n  </nb-card-header>\n  <nb-card-body>\n    <table class=\"table table-borderless\" *ngIf=\"students.length > 0; else noStudents\">\n      <thead>\n        <tr>\n          <th>#</th>\n          <th>Student</th>\n          <th>Schedule</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let student of students; let i = index\">\n          <td>{{ i + 1 }}</td>\n          <td>{{ student.basicDetails.name }}</td>\n          <td>\n            <button class=\"btn btn-yellow\" (click)=\"schedule(student._id)\">Schedule</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    <ng-template #noStudents>\n      <p class=\"text-center mt-3\">No Students Found</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\n  <nb-card-header>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <p style=\"color: black; font-weight: bold;\">Scheduled Mentoring</p>\n      </div>\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Course\"\n          status=\"basic\"\n          fullWidth\n          (selectedChange)=\"onSelectCourse($event)\"\n        >\n          <nb-option value=\"all\">All</nb-option>\n          <nb-option *ngFor=\"let course of institute.course\" [value]=\"course._id\">{{\n            course.name\n          }}</nb-option>\n        </nb-select>\n      </div>\n\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Batch\"\n          fullWidth\n          status=\"basic\"\n          (selectedChange)=\"onSelectBatch($event)\"\n        >\n          <nb-option value=\"all\">All</nb-option>\n          <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n            batch.batchCode\n          }}</nb-option>\n        </nb-select>\n      </div>\n    </div>\n  </nb-card-header>\n  <nb-card-body>\n    <table class=\"table table-borderless\" *ngIf=\"students.length > 0; else noStudents\">\n      <thead>\n        <tr>\n          <th>#</th>\n          <th>Student</th>\n          <th>Schedule</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let student of students; let i = index\">\n          <td>{{ i + 1 }}</td>\n          <td>{{ student.basicDetails.name }}</td>\n          <td>\n            <button class=\"btn btn-yellow\" (click)=\"schedule(student._id)\">Schedule</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    <ng-template #noStudents>\n      <p class=\"text-center mt-3\">No Students Found</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -345,13 +345,41 @@ let MentoringComponent = class MentoringComponent {
     }
     ngOnInit() {
         this.display = false;
+        this.courseId = 'all';
+        this.batches = [];
         this.students = [];
         this.instituteId = this.active.snapshot.paramMap.get('id');
-        this.api.getStudentsByInstitute({ instituteId: this.instituteId }).subscribe((res) => {
-            this.students = res;
-            console.log(res);
+        this.getCourses(this.instituteId);
+        this.onSelectCourse('all');
+    }
+    getCourses(id) {
+        this.api.getCourseTD(id).subscribe((data) => {
+            this.institute = data;
             this.display = true;
-        }, (err) => { });
+        });
+    }
+    onSelectCourse(id) {
+        this.courseId = id;
+        if (id === 'all') {
+            this.getStudents({ instituteId: this.instituteId });
+        }
+        else {
+            this.batchId = 'all';
+            this.batches = this.institute.batch.filter((b) => b.course === id);
+        }
+    }
+    onSelectBatch(id) {
+        if (id === 'all') {
+            this.getStudents({ instituteId: this.instituteId, courseId: this.courseId });
+        }
+        else {
+            this.getStudents({ instituteId: this.instituteId, courseId: this.courseId, batchId: id });
+        }
+    }
+    getStudents(data) {
+        this.api.getStudentsByInstitute(data).subscribe((res) => {
+            this.students = res;
+        });
     }
     schedule(student) {
         this.router.navigate(['/pages/student-reports/schedule-mentoring/', this.instituteId], {

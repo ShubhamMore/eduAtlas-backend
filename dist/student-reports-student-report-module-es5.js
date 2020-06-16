@@ -61,7 +61,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card>\n  <nb-card-header>\n    <p style=\"color: black; font-weight: bold;\">Scheduled Mentoring</p>\n  </nb-card-header>\n  <nb-card-body>\n    <table class=\"table table-borderless\" *ngIf=\"students.length > 0; else noStudents\">\n      <thead>\n        <tr>\n          <th>#</th>\n          <th>Student</th>\n          <th>Schedule</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let student of students; let i = index\">\n          <td>{{ i + 1 }}</td>\n          <td>{{ student.basicDetails.name }}</td>\n          <td>\n            <button class=\"btn btn-yellow\" (click)=\"schedule(student._id)\">Schedule</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    <ng-template #noStudents>\n      <p class=\"text-center mt-3\">No Students Found</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<nb-card>\n  <nb-card-header>\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n        <p style=\"color: black; font-weight: bold;\">Scheduled Mentoring</p>\n      </div>\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Course\"\n          status=\"basic\"\n          fullWidth\n          (selectedChange)=\"onSelectCourse($event)\"\n        >\n          <nb-option value=\"all\">All</nb-option>\n          <nb-option *ngFor=\"let course of institute.course\" [value]=\"course._id\">{{\n            course.name\n          }}</nb-option>\n        </nb-select>\n      </div>\n\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Batch\"\n          fullWidth\n          status=\"basic\"\n          (selectedChange)=\"onSelectBatch($event)\"\n        >\n          <nb-option value=\"all\">All</nb-option>\n          <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n            batch.batchCode\n          }}</nb-option>\n        </nb-select>\n      </div>\n    </div>\n  </nb-card-header>\n  <nb-card-body>\n    <table class=\"table table-borderless\" *ngIf=\"students.length > 0; else noStudents\">\n      <thead>\n        <tr>\n          <th>#</th>\n          <th>Student</th>\n          <th>Schedule</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let student of students; let i = index\">\n          <td>{{ i + 1 }}</td>\n          <td>{{ student.basicDetails.name }}</td>\n          <td>\n            <button class=\"btn btn-yellow\" (click)=\"schedule(student._id)\">Schedule</button>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n    <ng-template #noStudents>\n      <p class=\"text-center mt-3\">No Students Found</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -574,18 +574,64 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(MentoringComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this7 = this;
-
           this.display = false;
+          this.courseId = 'all';
+          this.batches = [];
           this.students = [];
           this.instituteId = this.active.snapshot.paramMap.get('id');
-          this.api.getStudentsByInstitute({
-            instituteId: this.instituteId
-          }).subscribe(function (res) {
-            _this7.students = res;
-            console.log(res);
+          this.getCourses(this.instituteId);
+          this.onSelectCourse('all');
+        }
+      }, {
+        key: "getCourses",
+        value: function getCourses(id) {
+          var _this7 = this;
+
+          this.api.getCourseTD(id).subscribe(function (data) {
+            _this7.institute = data;
             _this7.display = true;
-          }, function (err) {});
+          });
+        }
+      }, {
+        key: "onSelectCourse",
+        value: function onSelectCourse(id) {
+          this.courseId = id;
+
+          if (id === 'all') {
+            this.getStudents({
+              instituteId: this.instituteId
+            });
+          } else {
+            this.batchId = 'all';
+            this.batches = this.institute.batch.filter(function (b) {
+              return b.course === id;
+            });
+          }
+        }
+      }, {
+        key: "onSelectBatch",
+        value: function onSelectBatch(id) {
+          if (id === 'all') {
+            this.getStudents({
+              instituteId: this.instituteId,
+              courseId: this.courseId
+            });
+          } else {
+            this.getStudents({
+              instituteId: this.instituteId,
+              courseId: this.courseId,
+              batchId: id
+            });
+          }
+        }
+      }, {
+        key: "getStudents",
+        value: function getStudents(data) {
+          var _this8 = this;
+
+          this.api.getStudentsByInstitute(data).subscribe(function (res) {
+            _this8.students = res;
+          });
         }
       }, {
         key: "schedule",
@@ -729,14 +775,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(SheduleMentoringComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this8 = this;
+          var _this9 = this;
 
           this.display = false;
           this.mentorings = [];
           this.teachers = [];
           this.instituteId = this.route.snapshot.paramMap.get('id');
           this.route.queryParams.subscribe(function (data) {
-            _this8.studentId = data.student;
+            _this9.studentId = data.student;
           });
           this.mentoringForm = this.fb.group({
             instituteId: [this.instituteId, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
@@ -758,25 +804,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getMentoring",
         value: function getMentoring() {
-          var _this9 = this;
+          var _this10 = this;
 
           this.api.getMentorings({
             instituteId: this.instituteId,
             studentId: this.studentId
           }).subscribe(function (res) {
-            _this9.mentorings = res;
+            _this10.mentorings = res;
           }, function (err) {
-            _this9.showToast('top right', 'danger', err.err.message);
+            _this10.showToast('top right', 'danger', err.err.message);
           });
         }
       }, {
         key: "getEmployees",
         value: function getEmployees(instituteId) {
-          var _this10 = this;
+          var _this11 = this;
 
           this.api.getEmployeesByInstituteId(instituteId).subscribe(function (data) {
-            _this10.teachers = data;
-            _this10.display = true;
+            _this11.teachers = data;
+            _this11.display = true;
           });
         }
       }, {
@@ -801,16 +847,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deleteMentoring",
         value: function deleteMentoring(id, i) {
-          var _this11 = this;
+          var _this12 = this;
 
           this.api.deleteMentoring({
             _id: id
           }).subscribe(function (res) {
-            _this11.mentorings.splice(i, 1);
+            _this12.mentorings.splice(i, 1);
 
-            _this11.showToast('top right', 'success', 'Mentoring Session Deleted Successfully');
+            _this12.showToast('top right', 'success', 'Mentoring Session Deleted Successfully');
           }, function (err) {
-            _this11.showToast('top right', 'danger', err.error.message);
+            _this12.showToast('top right', 'danger', err.error.message);
           });
         }
       }, {
@@ -822,32 +868,32 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "save",
         value: function save() {
-          var _this12 = this;
+          var _this13 = this;
 
           this.mentoringForm.markAllAsTouched();
 
           if (this.mentoringForm.valid) {
             if (!this.editMentoringId) {
               this.api.addMentoring(this.mentoringForm.value).subscribe(function (res) {
-                _this12.getMentoring();
+                _this13.getMentoring();
 
-                _this12.showToast('top right', 'success', 'Mentoring Session Added Successfully');
+                _this13.showToast('top right', 'success', 'Mentoring Session Added Successfully');
 
-                _this12.mentoringForm.reset();
+                _this13.mentoringForm.reset();
               }, function (err) {
-                _this12.showToast('top right', 'danger', err.error.message);
+                _this13.showToast('top right', 'danger', err.error.message);
               });
             } else {
               var mentoring = this.mentoringForm.value;
               mentoring._id = this.editMentoringId;
               this.api.updateMentoring(mentoring).subscribe(function (res) {
-                _this12.showToast('top right', 'success', 'Mentoring Session Updated Successfully');
+                _this13.showToast('top right', 'success', 'Mentoring Session Updated Successfully');
 
-                _this12.getMentoring();
+                _this13.getMentoring();
 
-                _this12.cancelEdit();
+                _this13.cancelEdit();
               }, function (err) {
-                _this12.showToast('top right', 'danger', err.error.message);
+                _this13.showToast('top right', 'danger', err.error.message);
               });
             }
           }

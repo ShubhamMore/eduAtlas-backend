@@ -3315,7 +3315,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let HeaderComponent = class HeaderComponent {
-    constructor(authService, sidebarService, menuService, themeService, userService, api, layoutService, router, breakpointService, instituteService, roleService, windowService, chatService) {
+    constructor(authService, sidebarService, menuService, themeService, userService, api, layoutService, router, route, breakpointService, instituteService, roleService, windowService, chatService) {
         this.authService = authService;
         this.sidebarService = sidebarService;
         this.menuService = menuService;
@@ -3324,6 +3324,7 @@ let HeaderComponent = class HeaderComponent {
         this.api = api;
         this.layoutService = layoutService;
         this.router = router;
+        this.route = route;
         this.breakpointService = breakpointService;
         this.instituteService = instituteService;
         this.roleService = roleService;
@@ -3339,7 +3340,10 @@ let HeaderComponent = class HeaderComponent {
         this.chatmessage = {};
         this.destroy$ = new rxjs__WEBPACK_IMPORTED_MODULE_7__["Subject"]();
         this.openedChatWindows = [];
-        this.userMenu = [{ title: 'Edit Profile' }, { title: 'Change Password' }];
+        this.userMenu = [
+            { title: 'Edit Profile' },
+            { title: 'Change Password' },
+        ];
         this.themes = [
             {
                 value: 'default',
@@ -3384,10 +3388,10 @@ let HeaderComponent = class HeaderComponent {
     }
     openChatBoxForNewIncomingMessage(message) {
         var user = {
-            'eduAtlasId': message.receiverId,
-            'basicDetails': {
-                'name': message.msg.user.name
-            }
+            eduAtlasId: message.receiverId,
+            basicDetails: {
+                name: message.msg.user.name,
+            },
         };
         this.openChatBox(user);
     }
@@ -3411,18 +3415,18 @@ let HeaderComponent = class HeaderComponent {
         this.chatMembers = this.chatService.getMembers();
     }
     onSelect(event) {
-        if (event !== 'undefined') {
+        if (event !== '') {
             this.institute = event;
             if (this.user.role === 'institute') {
-                this.router.navigate(['/pages/dashboard/', event]);
+                this.router.navigate(['/pages/dashboard/', event], { relativeTo: this.route.parent });
             }
             else if (this.user.role === 'employee') {
                 const role = this.getEmployeeRole(event);
                 this.roleService.assignRoles(role);
-                this.router.navigate(['/pages/dashboard/', event]);
+                this.router.navigate(['/pages/dashboard/', event], { relativeTo: this.route.parent });
             }
             else if (this.user.role === 'student') {
-                this.router.navigate(['/student/dashboard/', event]);
+                this.router.navigate(['/student/dashboard/', event], { relativeTo: this.route.parent });
             }
         }
     }
@@ -3472,8 +3476,7 @@ let HeaderComponent = class HeaderComponent {
             receiverName: receiverData.userName,
         });
     }
-    openNotificationBox() {
-    }
+    openNotificationBox() { }
     changeTheme(themeName) {
         this.themeService.changeTheme(themeName);
     }
@@ -3499,6 +3502,7 @@ HeaderComponent.ctorParameters = () => [
     { type: _services_api_service__WEBPACK_IMPORTED_MODULE_9__["ApiService"] },
     { type: _core_utils__WEBPACK_IMPORTED_MODULE_6__["LayoutService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__["ActivatedRoute"] },
     { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbMediaBreakpointsService"] },
     { type: _services_institute_service__WEBPACK_IMPORTED_MODULE_1__["InstituteService"] },
     { type: _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_10__["RoleAssignService"] },
@@ -3527,6 +3531,7 @@ HeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _services_api_service__WEBPACK_IMPORTED_MODULE_9__["ApiService"],
         _core_utils__WEBPACK_IMPORTED_MODULE_6__["LayoutService"],
         _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_8__["ActivatedRoute"],
         _nebular_theme__WEBPACK_IMPORTED_MODULE_4__["NbMediaBreakpointsService"],
         _services_institute_service__WEBPACK_IMPORTED_MODULE_1__["InstituteService"],
         _services_role_role_assign_service__WEBPACK_IMPORTED_MODULE_10__["RoleAssignService"],
@@ -6384,6 +6389,12 @@ let ApiService = class ApiService {
     constructor(http) {
         this.http = http;
     }
+    // ======================= FIND USER ==============================
+    //
+    findEduatlasUser(id) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/findEduatlasUser`;
+        return this.http.post(url, { id }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
     // =====================INSTITUTE API==============================
     getInstitutes() {
         return this.http
@@ -6464,6 +6475,10 @@ let ApiService = class ApiService {
         const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/getCourseTD/${id}`;
         return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
+    getCoursesOfStudentByInstitute(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/student/getCoursesOfStudentByInstitute`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
     //  ADD NEW STUDENT
     addStudent(student, instituteId) {
         const data = {
@@ -6503,10 +6518,11 @@ let ApiService = class ApiService {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     //  SEND OTP FOR GET STUDENT DETAILS
-    sendOtpForGetUserDetails(eduId) {
+    sendOtpForGetUserDetails(eduId, role) {
         return this.http
             .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/users/sendOtpForGetUserDetails', {
             eduAtlasId: eduId,
+            role,
         })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
@@ -6522,6 +6538,12 @@ let ApiService = class ApiService {
         return this.http
             .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getOneStudentByInstitute', data)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    //  GET STUDENT BY INSTITUTE
+    getStudentByInstitute(data) {
+        return this.http
+            .post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server + '/institute/student/getStudentByInstitute', data)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     //  GET ACTIVE STUDENTs
     getActiveStudents(id, courseId, batchId) {
@@ -6662,8 +6684,8 @@ let ApiService = class ApiService {
             date: studentFees.date,
             noOfInstallments: studentFees.noOfInstallments,
             amountCollected: studentFees.amountCollected,
-            totalAmount: studentFees.totalFees,
-            pendingAmount: studentFees.pendingFees,
+            totalAmount: studentFees.totalAmount,
+            pendingAmount: studentFees.pendingAmount,
             installments: [],
         };
         studentFees.installments.forEach((curInstallment) => {
@@ -6934,10 +6956,18 @@ let ApiService = class ApiService {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
     }
     // =====================Attendance API===================
-    //  ADD NEW EMPLOYEE
+    // GET STUDENTS FOR ATTENDANCE
     getStudentsAttendance(attendanceRequest) {
         const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/attendance/getAttendanceByDate`;
         return this.http.post(url, attendanceRequest).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getAttendanceForStudent(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/attendance/getAttendanceForStudent`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getStudentAttendanceByCourse(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/attendance/getAttendanceForStudentByCourse`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     addAttendance(attendanceRequest) {
         const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/attendance/addAttendance`;
@@ -7077,6 +7107,10 @@ let ApiService = class ApiService {
     }
     getSingleLead(data) {
         const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/leads/getSingleLead`;
+        return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    }
+    getSingleLeadToView(data) {
+        const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].server}/institute/leads/getSingleLeadToView`;
         return this.http.post(url, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((data) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     }
     getLeadsByOfInstitute(data) {
@@ -7255,6 +7289,9 @@ let AuthService = class AuthService {
             }
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["throwError"])(msg);
         }));
+    }
+    changePassword(data) {
+        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].server + '/users/changePassword', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((res) => res), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
     }
     login(userId, password) {
         const data = {
@@ -7652,7 +7689,25 @@ let RoleAssignService = class RoleAssignService {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
     }
     assignRoles(role) {
-        if ((role && role === 'Teacher') || role === 'Counselor') {
+        if (role && role === 'Counselor') {
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][4].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][5].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][7].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][11].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][12].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[0].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[1].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[2].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].children[1].hidden = false;
+        }
+        if (role && role === 'Teacher') {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
@@ -7667,7 +7722,7 @@ let RoleAssignService = class RoleAssignService {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].children[1].hidden = false;
         }
         if (role && role === 'institute') {

@@ -255,7 +255,9 @@ exports.addCourseStudent = async (req, res, next) => {
       }
     );
 
-    res.status(200).json(updatedStudent);
+    const studentId = await Student.findOne({ eduAtlasId: req.body.eduAtlasId }, { _id: 1 });
+
+    res.status(200).json(studentId);
   } catch (error) {
     console.log(error);
     errorHandler(error, res);

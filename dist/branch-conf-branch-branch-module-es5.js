@@ -2274,7 +2274,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.eduAtlasEmployeeForm.valid) {
             var employeeEduId = "".concat(this.eduAtlasEmployeeFormControl['eduAtlasId'].value);
-            this.api.sendOtpForGetUserDetails(employeeEduId).subscribe(function (res) {
+            this.api.sendOtpForGetUserDetails(employeeEduId, 'employee').subscribe(function (res) {
               if (res) {
                 _this18.otpSent = true;
                 _this18.phone = res.phone;
@@ -2301,6 +2301,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               phone: this.phone
             };
             this.api.verifyUserOtp(verificationData).subscribe(function (data) {
+              _this19.showToaster('top-right', 'success', 'OTP Verified');
+
               _this19.getOneEmployee(_this19.eduAtlasEmployeeForm.value.eduAtlasId);
             }, function (error) {
               _this19.showToaster('top-right', 'danger', 'Invalid OTP');
@@ -2351,7 +2353,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               _this20.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
             }
           }, function (error) {
-            _this20.showToaster('top-right', 'danger', 'Invalid Eduatlas ID');
+            _this20.showToaster('top-right', 'danger', 'Invalid Employee EduAtlas ID');
           });
         }
       }, {

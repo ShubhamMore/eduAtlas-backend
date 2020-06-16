@@ -1728,7 +1728,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    Announcements\n    <button\n      class=\"btn btn-yellow-black float-right\"\n      [routerLink]=\"'/pages/communication/add-announcements/' + this.instituteId\"\n    >\n      ADD ANNOUNCEMENT\n    </button>\n  </nb-card-header>\n  <nb-card-body>\n    <ng-container *ngIf=\"announcements.length > 0; else noAnnouncements\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>ID</th>\n                  <th>Title</th>\n                  <th>Text</th>\n                  <th>Attachment</th>\n                  <th>Delete</th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let item of announcements; let i = index\">\n                  <td>\n                    <span> {{ i + 1 }}</span>\n                  </td>\n                  <td>\n                    <span> {{ item.title }}</span>\n                  </td>\n                  <td>\n                    <div [innerHTML]=\"item.text | safeHtml\"></div>\n                  </td>\n                  <td>\n                    <a [href]=\"item.attachment.secure_url\" *ngIf=\"item.attachment\">{{\n                      item.attachment.file_name\n                    }}</a>\n                  </td>\n                  <div>\n                    <button nbButton status=\"danger\" (click)=\"onDelete(item._id)\">Delete</button>\n                  </div>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n    <ng-template #noAnnouncements>\n      <p class=\"text-center pt-5\">No Announcements</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    Announcements\n    <button\n      class=\"btn btn-yellow-black float-right\"\n      [routerLink]=\"'/pages/communication/add-announcements/' + this.instituteId\"\n    >\n      ADD ANNOUNCEMENT\n    </button>\n  </nb-card-header>\n  <nb-card-body>\n    <ng-container *ngIf=\"announcements.length > 0; else noAnnouncements\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>ID</th>\n                  <th>Title</th>\n                  <th>Attachment</th>\n                  <th></th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let item of announcements; let i = index\">\n                  <td>\n                    <span> {{ i + 1 }}</span>\n                  </td>\n                  <td>\n                    <span> {{ item.title }}</span>\n                  </td>\n                  <td>\n                    <a [href]=\"item.attachment.secure_url\" *ngIf=\"item.attachment\">{{\n                      item.attachment.file_name\n                    }}</a\n                    ><span *ngIf=\"!item.attachment\">--</span>\n                  </td>\n                  <div>\n                    <button class=\"mr-3 mb-2\" nbButton (click)=\"onView(item._id)\">View</button>\n                    <button class=\"mb-2\" nbButton status=\"danger\" (click)=\"onDelete(item._id)\">\n                      Delete\n                    </button>\n                  </div>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n    <ng-template #noAnnouncements>\n      <p class=\"text-center pt-5\">No Announcements</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/communication/announcements/view-announcements/view-announcements.component.html":
+/*!**********************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/communication/announcements/view-announcements/view-announcements.component.html ***!
+  \**********************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    <button class=\"btn btn-yellow float-right\" (click)=\"manageAnnouncement()\">\n      Back\n    </button>\n    <h3>{{ announcement.title }}</h3>\n  </nb-card-header>\n  <nb-card-body>\n    <div *ngIf=\"announcement.attachment\">\n      <a [href]=\"announcement.attachment.secure_url\">{{ announcement.attachment.file_name }}</a>\n    </div>\n    <div [innerHTML]=\"announcement.text | safeHtml\"></div>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -1990,17 +2003,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ManageAnnouncementsComponent = class ManageAnnouncementsComponent {
-    constructor(api, toastrService, active, announceService) {
+    constructor(api, toastrService, router, route, announceService) {
         this.api = api;
         this.toastrService = toastrService;
-        this.active = active;
+        this.router = router;
+        this.route = route;
         this.announceService = announceService;
         this.announcements = [];
         this.display = false;
     }
     ngOnInit() {
-        this.instituteId = this.active.snapshot.paramMap.get('id');
+        this.instituteId = this.route.snapshot.paramMap.get('id');
         this.getAnnouncement(this.instituteId);
+    }
+    onView(id) {
+        this.router.navigate(['/pages/communication/view-announcements/', this.instituteId], {
+            queryParams: { announcement: id },
+        });
     }
     getAnnouncement(id) {
         this.announceService.getAnnouncements(id).subscribe((data) => {
@@ -2030,6 +2049,7 @@ let ManageAnnouncementsComponent = class ManageAnnouncementsComponent {
 ManageAnnouncementsComponent.ctorParameters = () => [
     { type: _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] },
     { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _services_communication_announcement_service__WEBPACK_IMPORTED_MODULE_2__["AnnouncementService"] }
 ];
@@ -2041,9 +2061,109 @@ ManageAnnouncementsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"](
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"],
         _nebular_theme__WEBPACK_IMPORTED_MODULE_1__["NbToastrService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
         _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
         _services_communication_announcement_service__WEBPACK_IMPORTED_MODULE_2__["AnnouncementService"]])
 ], ManageAnnouncementsComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/communication/announcements/view-announcements/view-announcements.component.scss":
+/*!********************************************************************************************************!*\
+  !*** ./src/app/pages/communication/announcements/view-announcements/view-announcements.component.scss ***!
+  \********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2NvbW11bmljYXRpb24vYW5ub3VuY2VtZW50cy92aWV3LWFubm91bmNlbWVudHMvdmlldy1hbm5vdW5jZW1lbnRzLmNvbXBvbmVudC5zY3NzIn0= */");
+
+/***/ }),
+
+/***/ "./src/app/pages/communication/announcements/view-announcements/view-announcements.component.ts":
+/*!******************************************************************************************************!*\
+  !*** ./src/app/pages/communication/announcements/view-announcements/view-announcements.component.ts ***!
+  \******************************************************************************************************/
+/*! exports provided: ViewAnnouncementsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewAnnouncementsComponent", function() { return ViewAnnouncementsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _services_communication_announcement_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../../services/communication/announcement.service */ "./src/app/services/communication/announcement.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+
+
+
+
+
+
+let ViewAnnouncementsComponent = class ViewAnnouncementsComponent {
+    constructor(toastrService, router, route, location, announceService) {
+        this.toastrService = toastrService;
+        this.router = router;
+        this.route = route;
+        this.location = location;
+        this.announceService = announceService;
+    }
+    ngOnInit() {
+        this.display = false;
+        this.instituteId = this.route.snapshot.paramMap.get('id');
+        this.route.queryParams.subscribe((data) => {
+            this.announcementId = data.announcement;
+        });
+        if (this.announcementId) {
+            this.getAnnouncement(this.announcementId);
+        }
+        else {
+            this.location.back();
+        }
+    }
+    getAnnouncement(id) {
+        this.announceService.getSingleAnnouncement(this.announcementId).subscribe((res) => {
+            this.announcement = res;
+            this.display = true;
+        }, (err) => {
+            this.showToast('top-right', 'danger', 'Announcement Not Found');
+            this.location.back();
+        });
+    }
+    manageAnnouncement() {
+        this.location.back();
+    }
+    showToast(position, status, message) {
+        this.toastrService.show(status, message, {
+            position,
+            status,
+        });
+    }
+};
+ViewAnnouncementsComponent.ctorParameters = () => [
+    { type: _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbToastrService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"] },
+    { type: _services_communication_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"] }
+];
+ViewAnnouncementsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
+        selector: 'ngx-view-announcements',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./view-announcements.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/communication/announcements/view-announcements/view-announcements.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./view-announcements.component.scss */ "./src/app/pages/communication/announcements/view-announcements/view-announcements.component.scss")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbToastrService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+        _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"],
+        _services_communication_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"]])
+], ViewAnnouncementsComponent);
 
 
 
@@ -2090,15 +2210,17 @@ CommunicationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CommRoutingModule", function() { return CommRoutingModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../announcements/manage-announcements/manage-announcements.component */ "./src/app/pages/communication/announcements/manage-announcements/manage-announcements.component.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _communication_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../communication.component */ "./src/app/pages/communication/communication.component.ts");
-/* harmony import */ var _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../announcements/announcements.component */ "./src/app/pages/communication/announcements/announcements.component.ts");
-/* harmony import */ var _forum_forum_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../forum/forum.component */ "./src/app/pages/communication/forum/forum.component.ts");
-/* harmony import */ var _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../forum/add-forum/add-forum.component */ "./src/app/pages/communication/forum/add-forum/add-forum.component.ts");
-/* harmony import */ var _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../forum/my-forum/my-forum.component */ "./src/app/pages/communication/forum/my-forum/my-forum.component.ts");
-/* harmony import */ var _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../forum/forum-details/forum-details.component */ "./src/app/pages/communication/forum/forum-details/forum-details.component.ts");
+/* harmony import */ var _announcements_view_announcements_view_announcements_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../announcements/view-announcements/view-announcements.component */ "./src/app/pages/communication/announcements/view-announcements/view-announcements.component.ts");
+/* harmony import */ var _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../announcements/manage-announcements/manage-announcements.component */ "./src/app/pages/communication/announcements/manage-announcements/manage-announcements.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _communication_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../communication.component */ "./src/app/pages/communication/communication.component.ts");
+/* harmony import */ var _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../announcements/announcements.component */ "./src/app/pages/communication/announcements/announcements.component.ts");
+/* harmony import */ var _forum_forum_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../forum/forum.component */ "./src/app/pages/communication/forum/forum.component.ts");
+/* harmony import */ var _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../forum/add-forum/add-forum.component */ "./src/app/pages/communication/forum/add-forum/add-forum.component.ts");
+/* harmony import */ var _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../forum/my-forum/my-forum.component */ "./src/app/pages/communication/forum/my-forum/my-forum.component.ts");
+/* harmony import */ var _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../forum/forum-details/forum-details.component */ "./src/app/pages/communication/forum/forum-details/forum-details.component.ts");
+
 
 
 
@@ -2112,23 +2234,24 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: '',
-        component: _communication_component__WEBPACK_IMPORTED_MODULE_4__["CommunicationComponent"],
+        component: _communication_component__WEBPACK_IMPORTED_MODULE_5__["CommunicationComponent"],
         children: [
-            { path: 'announcements/:id', component: _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_1__["ManageAnnouncementsComponent"] },
-            { path: 'add-announcements/:id', component: _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_5__["AnnouncementsComponent"] },
-            { path: 'forum/:id', component: _forum_forum_component__WEBPACK_IMPORTED_MODULE_6__["ForumComponent"] },
-            { path: 'add-forum/:id', component: _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_7__["AddForumComponent"] },
-            { path: 'my-forum/:id', component: _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_8__["MyForumComponent"] },
-            { path: 'forum-detail/:id', component: _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_9__["ForumDetailsComponent"] },
+            { path: 'announcements/:id', component: _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_2__["ManageAnnouncementsComponent"] },
+            { path: 'view-announcements/:id', component: _announcements_view_announcements_view_announcements_component__WEBPACK_IMPORTED_MODULE_1__["ViewAnnouncementsComponent"] },
+            { path: 'add-announcements/:id', component: _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_6__["AnnouncementsComponent"] },
+            { path: 'forum/:id', component: _forum_forum_component__WEBPACK_IMPORTED_MODULE_7__["ForumComponent"] },
+            { path: 'add-forum/:id', component: _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_8__["AddForumComponent"] },
+            { path: 'my-forum/:id', component: _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_9__["MyForumComponent"] },
+            { path: 'forum-detail/:id', component: _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_10__["ForumDetailsComponent"] },
         ],
     },
 ];
 let CommRoutingModule = class CommRoutingModule {
 };
 CommRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
-        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
-        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["NgModule"])({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"]],
     })
 ], CommRoutingModule);
 
@@ -2147,20 +2270,22 @@ CommRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CommunicationModule", function() { return CommunicationModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../announcements/manage-announcements/manage-announcements.component */ "./src/app/pages/communication/announcements/manage-announcements/manage-announcements.component.ts");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
-/* harmony import */ var _communication_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../communication.component */ "./src/app/pages/communication/communication.component.ts");
-/* harmony import */ var _comm_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./comm-routing.module */ "./src/app/pages/communication/communication/comm-routing.module.ts");
-/* harmony import */ var _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../announcements/announcements.component */ "./src/app/pages/communication/announcements/announcements.component.ts");
-/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
-/* harmony import */ var _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @kolkov/angular-editor */ "./node_modules/@kolkov/angular-editor/fesm2015/kolkov-angular-editor.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _pipe_safe_html_pipe__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../pipe/safe-html.pipe */ "./src/app/pipe/safe-html.pipe.ts");
-/* harmony import */ var _forum_forum_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../forum/forum.component */ "./src/app/pages/communication/forum/forum.component.ts");
-/* harmony import */ var _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../forum/add-forum/add-forum.component */ "./src/app/pages/communication/forum/add-forum/add-forum.component.ts");
-/* harmony import */ var _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../forum/my-forum/my-forum.component */ "./src/app/pages/communication/forum/my-forum/my-forum.component.ts");
-/* harmony import */ var _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../forum/forum-details/forum-details.component */ "./src/app/pages/communication/forum/forum-details/forum-details.component.ts");
+/* harmony import */ var _announcements_view_announcements_view_announcements_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../announcements/view-announcements/view-announcements.component */ "./src/app/pages/communication/announcements/view-announcements/view-announcements.component.ts");
+/* harmony import */ var _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../announcements/manage-announcements/manage-announcements.component */ "./src/app/pages/communication/announcements/manage-announcements/manage-announcements.component.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _communication_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../communication.component */ "./src/app/pages/communication/communication.component.ts");
+/* harmony import */ var _comm_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./comm-routing.module */ "./src/app/pages/communication/communication/comm-routing.module.ts");
+/* harmony import */ var _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../announcements/announcements.component */ "./src/app/pages/communication/announcements/announcements.component.ts");
+/* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
+/* harmony import */ var _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @kolkov/angular-editor */ "./node_modules/@kolkov/angular-editor/fesm2015/kolkov-angular-editor.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _pipe_safe_html_pipe__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../pipe/safe-html.pipe */ "./src/app/pipe/safe-html.pipe.ts");
+/* harmony import */ var _forum_forum_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../forum/forum.component */ "./src/app/pages/communication/forum/forum.component.ts");
+/* harmony import */ var _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../forum/add-forum/add-forum.component */ "./src/app/pages/communication/forum/add-forum/add-forum.component.ts");
+/* harmony import */ var _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../forum/my-forum/my-forum.component */ "./src/app/pages/communication/forum/my-forum/my-forum.component.ts");
+/* harmony import */ var _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../forum/forum-details/forum-details.component */ "./src/app/pages/communication/forum/forum-details/forum-details.component.ts");
+
 
 
 
@@ -2179,31 +2304,32 @@ __webpack_require__.r(__webpack_exports__);
 let CommunicationModule = class CommunicationModule {
 };
 CommunicationModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
         declarations: [
-            _communication_component__WEBPACK_IMPORTED_MODULE_4__["CommunicationComponent"],
-            _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_6__["AnnouncementsComponent"],
-            _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_1__["ManageAnnouncementsComponent"],
-            _pipe_safe_html_pipe__WEBPACK_IMPORTED_MODULE_10__["SafeHtmlPipe"],
-            _forum_forum_component__WEBPACK_IMPORTED_MODULE_11__["ForumComponent"],
-            _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_12__["AddForumComponent"],
-            _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_13__["MyForumComponent"],
-            _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_14__["ForumDetailsComponent"],
+            _communication_component__WEBPACK_IMPORTED_MODULE_5__["CommunicationComponent"],
+            _announcements_announcements_component__WEBPACK_IMPORTED_MODULE_7__["AnnouncementsComponent"],
+            _announcements_manage_announcements_manage_announcements_component__WEBPACK_IMPORTED_MODULE_2__["ManageAnnouncementsComponent"],
+            _announcements_view_announcements_view_announcements_component__WEBPACK_IMPORTED_MODULE_1__["ViewAnnouncementsComponent"],
+            _pipe_safe_html_pipe__WEBPACK_IMPORTED_MODULE_11__["SafeHtmlPipe"],
+            _forum_forum_component__WEBPACK_IMPORTED_MODULE_12__["ForumComponent"],
+            _forum_add_forum_add_forum_component__WEBPACK_IMPORTED_MODULE_13__["AddForumComponent"],
+            _forum_my_forum_my_forum_component__WEBPACK_IMPORTED_MODULE_14__["MyForumComponent"],
+            _forum_forum_details_forum_details_component__WEBPACK_IMPORTED_MODULE_15__["ForumDetailsComponent"],
         ],
         imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"],
-            _comm_routing_module__WEBPACK_IMPORTED_MODULE_5__["CommRoutingModule"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"],
-            _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbCardModule"],
-            _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbInputModule"],
-            _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbSelectModule"],
-            _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbCheckboxModule"],
-            _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_8__["AngularEditorModule"],
-            _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbLayoutModule"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"],
-            _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbButtonModule"],
-            _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbCardModule"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_4__["CommonModule"],
+            _comm_routing_module__WEBPACK_IMPORTED_MODULE_6__["CommRoutingModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_10__["ReactiveFormsModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbCardModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbInputModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbSelectModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbCheckboxModule"],
+            _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_9__["AngularEditorModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbLayoutModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_10__["ReactiveFormsModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbButtonModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_8__["NbCardModule"],
         ],
     })
 ], CommunicationModule);
@@ -2792,6 +2918,13 @@ let AnnouncementService = class AnnouncementService {
     getAnnouncements(id) {
         return this.http
             .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/announcement/getAnnouncement`, { instituteId: id })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
+    }
+    getSingleAnnouncement(id) {
+        return this.http
+            .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/announcement/getSingleAnnouncement`, {
+            id,
+        })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
     }
     deleteAnnouncement(id) {
