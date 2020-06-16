@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/user.model');
 const EduAtlasId = require('../model/eduatlasId.model');
 const Announcement = require('../model/announcement.model');
-const Student = require('../model/student.model')
+const Student = require('../model/student.model');
 const smsService = require('../service/sms');
 
 const schema = require('../service/joi');
@@ -42,16 +42,15 @@ exports.creatUser = async (req, res, next) => {
         }
       );
       let newStudent = {
-        eduatlasId:newEduAtlasId,
-        basicDetails:{
-          name:req.body.name,
-          studentEmail:req.body.email,
-          studentContact:req.body.contact
-
-        }
-      }
-      const addStudent = new Student(newStudent)
-      await addStudent.save()
+        eduatlasId: newEduAtlasId,
+        basicDetails: {
+          name: req.body.name,
+          studentEmail: req.body.email,
+          studentContact: req.body.contact,
+        },
+      };
+      const addStudent = new Student(newStudent);
+      await addStudent.save();
     } else if (user.role === 'institute') {
       const instId = eduatlasId[0].instEduId.split('-');
       newEduAtlasId = 'EDU-' + d.getFullYear() + '-INST-' + (parseInt(instId[3]) + 1);
@@ -218,3 +217,23 @@ exports.resetPassword = async (req, res, next) => {
   }
 };
 
+exports.changePassword = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      email: req.user.email,
+    });
+
+    const isMatch = await bcrypt.compare(req.body.oldPassword, req.user.password);
+    if (!isMatch) {
+      const error = new Error('OLD PASSWORD IS INCORRECT, TRY AGAIN');
+      error.statusCode = 404;
+      throw error;
+    }
+
+    user.password = req.body.newPassword;
+
+    await user.save();
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};

@@ -3,6 +3,7 @@ const authRouter = express.Router();
 const checkAuth = require('../middleware/checkAuth');
 const userController = require('../controller/users');
 const otpController = require('../controller/sms/otp');
+const auth = require('../middleware/checkAuth');
 
 authRouter.post('/signup', userController.creatUser);
 
@@ -19,6 +20,8 @@ authRouter.post('/verifyOTP', otpController.verifyOTP);
 authRouter.post('/findUser', userController.findUser);
 
 authRouter.patch('/resetPassword', userController.resetPassword);
+
+authRouter.post('/changePassword', checkAuth, userController.changePassword);
 
 // authRouter.delete('', userController.deleteAllUsers);
 
