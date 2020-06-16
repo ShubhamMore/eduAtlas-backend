@@ -140,8 +140,14 @@ exports.getAttendanceForStudentByCourse = async (req, res) => {
         $match: {
           instituteId: req.body.instituteId,
           'attendance.studentId': req.body.studentId,
+          courseId: req.body.courseId,
         },
       },
     ]);
-  } catch (error) {}
+
+    console.log(student);
+    res.status(200).send(student);
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
