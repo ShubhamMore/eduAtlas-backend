@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\n  <div class=\"col-md-6 col-12 mx-auto\">\n    <nb-card>\n      <nb-card-header>\n        <h2 class=\"page-heading\">Change Password</h2>\n      </nb-card-header>\n      <nb-card-body>\n        <form [formGroup]=\"form\" (submit)=\"changePassword()\">\n          <div class=\"form-group\">\n            <label class=\"input-label\" for=\"oldPassword\">Old Password</label>\n            <input\n              class=\"input-password\"\n              type=\"password\"\n              id=\"oldPassword\"\n              class=\"form-control\"\n              name=\"oldPassword\"\n              formControlName=\"oldPassword\"\n            />\n            <span\n              class=\"input-error\"\n              *ngIf=\"!form.get('oldPassword').valid && form.get('oldPassword').touched\"\n              >*Please enter Your Old Password</span\n            >\n          </div>\n\n          <div class=\"form-group\">\n            <label class=\"input-label\" for=\"password\">New Password</label>\n            <input\n              class=\"input-password\"\n              type=\"password\"\n              id=\"password\"\n              class=\"form-control\"\n              name=\"password\"\n              formControlName=\"password\"\n            />\n            <span\n              class=\"input-error\"\n              *ngIf=\"!form.get('password').valid && form.get('password').touched\"\n              >*Please enter New Password</span\n            >\n          </div>\n\n          <div class=\"form-group\">\n            <label class=\"input-label\" for=\"confirm_password\">Confirm New Password</label>\n            <input\n              class=\"input-password\"\n              type=\"password\"\n              id=\"confirm_password\"\n              class=\"form-control\"\n              name=\"confirm_password\"\n              formControlName=\"confirm_password\"\n            />\n            <span\n              class=\"input-error\"\n              *ngIf=\"!form.get('confirm_password').valid && form.get('confirm_password').touched\"\n              >*Please enter Confirm Password</span\n            >\n          </div>\n\n          <div>\n            <span\n              class=\"input-error\"\n              *ngIf=\"form.hasError('invalidPassword') && form.get('password').touched\"\n              >*Password & Confirm Password Does Not Match</span\n            >\n          </div>\n\n          <hr />\n\n          <div>\n            <button class=\"btn btn-primary btn-change-password\" type=\"submit\">\n              Change\n            </button>\n          </div>\n        </form>\n      </nb-card-body>\n    </nb-card>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\n  <div class=\"col-md-6 col-12 mx-auto\">\n    <nb-card>\n      <nb-card-header>\n        <h2 class=\"page-heading\">Change Password</h2>\n      </nb-card-header>\n      <nb-card-body>\n        <form [formGroup]=\"form\" (submit)=\"changePassword()\">\n          <div class=\"form-group\">\n            <label class=\"input-label\" for=\"oldPassword\">Old Password</label>\n            <input\n              class=\"input-password\"\n              type=\"password\"\n              id=\"oldPassword\"\n              nbInput\n              fullWidth\n              [status]=\"\n                !form.get('oldPassword').valid && form.get('oldPassword').touched\n                  ? 'danger'\n                  : 'basic'\n              \"\n              name=\"oldPassword\"\n              formControlName=\"oldPassword\"\n            />\n            <span\n              class=\"input-error\"\n              *ngIf=\"!form.get('oldPassword').valid && form.get('oldPassword').touched\"\n              >*Please enter Your Old Password</span\n            >\n          </div>\n\n          <div class=\"form-group\">\n            <label class=\"input-label\" for=\"password\">New Password</label>\n            <input\n              class=\"input-password\"\n              type=\"password\"\n              id=\"password\"\n              nbInput\n              fullWidth\n              [status]=\"\n                !form.get('password').valid && form.get('password').touched ? 'danger' : 'basic'\n              \"\n              name=\"password\"\n              formControlName=\"password\"\n            />\n            <span\n              class=\"input-error\"\n              *ngIf=\"!form.get('password').valid && form.get('password').touched\"\n              >*Please enter New Password</span\n            >\n          </div>\n\n          <div class=\"form-group\">\n            <label class=\"input-label\" for=\"confirm_password\">Confirm New Password</label>\n            <input\n              class=\"input-password\"\n              type=\"password\"\n              id=\"confirm_password\"\n              nbInput\n              fullWidth\n              [status]=\"\n                !form.get('confirm_password').valid && form.get('confirm_password').touched\n                  ? 'danger'\n                  : 'basic'\n              \"\n              name=\"confirm_password\"\n              formControlName=\"confirm_password\"\n            />\n            <span\n              class=\"input-error\"\n              *ngIf=\"!form.get('confirm_password').valid && form.get('confirm_password').touched\"\n              >*Please enter Confirm Password</span\n            >\n          </div>\n\n          <div>\n            <span\n              class=\"input-error\"\n              *ngIf=\"form.hasError('invalidPassword') && form.get('password').touched\"\n              >*Password & Confirm Password Does Not Match</span\n            >\n          </div>\n\n          <hr />\n\n          <div>\n            <button class=\"btn btn-primary btn-change-password\" type=\"submit\">\n              Change\n            </button>\n          </div>\n        </form>\n      </nb-card-body>\n    </nb-card>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -74,7 +74,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2NoYW5nZS1wYXNzd29yZC9jaGFuZ2UtcGFzc3dvcmQuY29tcG9uZW50LnNjc3MifQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".input-error {\n  color: #f00;\n  font-size: 80%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvY2hhbmdlLXBhc3N3b3JkL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxjaGFuZ2UtcGFzc3dvcmRcXGNoYW5nZS1wYXNzd29yZC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQVc7RUFDWCxjQUFjLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9jaGFuZ2UtcGFzc3dvcmQvY2hhbmdlLXBhc3N3b3JkLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmlucHV0LWVycm9yIHtcclxuICBjb2xvcjogI2YwMDtcclxuICBmb250LXNpemU6IDgwJTtcclxufVxyXG4iXX0= */");
 
 /***/ }),
 
@@ -113,13 +113,13 @@ let ChangePasswordComponent = class ChangePasswordComponent {
     ngOnInit() {
         this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormGroup"]({
             oldPassword: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, {
-                validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(6)],
+                validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(7)],
             }),
             password: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, {
-                validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(6)],
+                validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(7)],
             }),
             confirm_password: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, {
-                validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(6)],
+                validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(7)],
             }),
         }, {
             validators: this.passwordValidator.bind(this),
@@ -132,21 +132,18 @@ let ChangePasswordComponent = class ChangePasswordComponent {
         return null;
     }
     changePassword() {
+        this.form.markAllAsTouched();
         if (this.form.valid && !this.form.hasError('invalidPassword')) {
             const data = {
-                api: 'changePassword',
-                data: {
-                    email: JSON.parse(localStorage.getItem('userData')).email,
-                    oldPassword: this.form.value.oldPassword,
-                    newPassword: this.form.value.password,
-                },
+                email: JSON.parse(localStorage.getItem('userData')).email,
+                password: this.form.value.oldPassword,
+                newPassword: this.form.value.password,
             };
-            this.authService.changePassword(data).subscribe((resData) => {
+            this.authService.changePassword(data).subscribe((res) => {
                 this.showToast('top-right', 'success', 'Password Changed Successfully!');
                 this.router.navigate(['/pages/home'], { relativeTo: this.route });
-            }, (errorMessage) => {
-                console.log(errorMessage);
-                this.showToast('top-right', 'danger', 'Password Changed Failed!');
+            }, (err) => {
+                this.showToast('top-right', 'danger', 'Invalid Old Password!');
             });
         }
         else {
@@ -961,6 +958,7 @@ PagesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbListModule"],
             _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbSelectModule"],
             _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbDatepickerModule"],
+            _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbInputModule"],
             _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbButtonModule"],
         ],
         declarations: [

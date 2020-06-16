@@ -3342,7 +3342,7 @@ let HeaderComponent = class HeaderComponent {
         this.openedChatWindows = [];
         this.userMenu = [
             { title: 'Edit Profile' },
-            { title: 'Change Password' },
+            { title: 'Change Password', link: 'pages/change-password' },
         ];
         this.themes = [
             {
@@ -7694,36 +7694,38 @@ let RoleAssignService = class RoleAssignService {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][4].hidden = true;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][5].hidden = true;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][5].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].children[1].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][7].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][11].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][12].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[0].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[1].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[2].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].children[1].hidden = false;
         }
         if (role && role === 'Teacher') {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][4].hidden = true;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][5].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][5].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].children[1].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][7].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][11].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][12].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[0].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[1].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[2].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = true;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].children[1].hidden = false;
         }
         if (role && role === 'institute') {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
@@ -7732,7 +7734,10 @@ let RoleAssignService = class RoleAssignService {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][4].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][5].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].children[1].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][7].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
             // MENU_ITEMS[8].hidden = false;
             // MENU_ITEMS[9].hidden = false;
             // MENU_ITEMS[10].hidden = false;
@@ -7742,10 +7747,7 @@ let RoleAssignService = class RoleAssignService {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[0].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[1].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[2].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].children[1].hidden = false;
         }
         else if (role && role === 'Manager') {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
@@ -7754,16 +7756,17 @@ let RoleAssignService = class RoleAssignService {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][4].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][5].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].children[1].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][7].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][11].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][12].hidden = false;
+            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[0].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[1].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[2].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][8].children[4].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = false;
-            _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][6].children[1].hidden = false;
         }
     }
 };

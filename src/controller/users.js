@@ -219,21 +219,19 @@ exports.resetPassword = async (req, res, next) => {
 
 exports.changePassword = async (req, res) => {
   try {
-    const user = await User.findOne({
-      email: req.user.email,
-    });
-
-    const isMatch = await bcrypt.compare(req.body.oldPassword, req.user.password);
-    if (!isMatch) {
-      const error = new Error('OLD PASSWORD IS INCORRECT, TRY AGAIN');
-      error.statusCode = 404;
-      throw error;
+    console.log(req.body);
+    const user = await User.findByCredentials(req.body.email, req.body.password);
+    console.log(user);
+    if (!user) {
+      throw new Error('Old Password Does not Match, Please Try Again');
     }
 
     user.password = req.body.newPassword;
 
     await user.save();
-  } catch (error) {
-    errorHandler(error, res);
+
+    res.send({ success: true });
+  } catch (e) {
+    res.status(400).send(e);
   }
 };

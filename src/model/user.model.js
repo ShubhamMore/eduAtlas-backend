@@ -103,6 +103,8 @@ userSchema.methods.generateAuthToken = async function () {
 };
 
 userSchema.statics.findByCredentials = async (userId, password) => {
+  console.log(userId, password);
+
   const user = await User.findOne({
     $or: [
       {
