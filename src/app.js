@@ -5,7 +5,7 @@ const logger = require('morgan');
 const cors = require('cors');
 
 require('./database/mongoose');
-
+const mailController = require('./controller/sendmail');
 const indexRouter = require('./routes/index');
 const bodyParser = require('body-parser');
 
@@ -64,6 +64,7 @@ app.use('/institute/leads', require('./routes/leads'));
 //app.use('/institute/chat', require('./routes/chat'));
 app.use('/institute/forum', require('./routes/forum'));
 app.use('/institute/chats', require('./routes/chats'));
+app.use('/mail', require('./controller/sendmail'));
 app.use((req, res, next) => {
   const error = new Error('NOT FOUND');
   error.status = 404;

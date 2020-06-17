@@ -2,16 +2,27 @@ const Zoomuser = require('../model/zoomCredentials.model');
 const errorHandler = require('../service/errorHandler');
 const request = require('request');
 const rp = require('request-promise');
-
+const Employee = require('../model/employee.model');
+const Institute = require('../model/institute.model');
+const User = require('../model/user.model');
+const mongoose = require('mongoose');
+const ZoomUser = require('../model/zoomCredentials.model');
 const checkTokenAuth = async (req, res, next) => {
   try {
-    const user = await Zoomuser.findOne({
-      userId: req.user._id,
-    });
+    const userId = '';
+    if (req.user.role == 'institute') {
+      userId = req.user._id;
+    } else if (req.user.role == 'employee') {
+      const inst = await Institute.findOne({
+        _id: req.body._id,
+      });
 
-    if (!user) {
-      throw new Error();
+      userId = inst.parentUser;
     }
+
+    const user = await ZoomUser.findOne({
+      _id: userId,
+    });
 
     const currentTimeStamp = new Date().getTime() / 1000;
     console.log(currentTimeStamp > user.expires_in);
@@ -44,7 +55,7 @@ const checkTokenAuth = async (req, res, next) => {
       const expires_in = body.expires_in + currentTime;
       const update = await Zoomuser.updateOne(
         {
-          userName: req.query.userName,
+          userId: userId,
         },
         {
           $set: {

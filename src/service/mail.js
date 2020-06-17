@@ -1,31 +1,29 @@
 const nodemailer = require('nodemailer');
-const { google } = require('googleapis');
-const OAuth2 = google.auth.OAuth2;
+//const { google } = require('googleapis');
+//const OAuth2 = google.auth.OAuth2;
 
-const oauth2Client = new OAuth2(
-  process.env.GMAIL_CLIENT_ID, // ClientID
-  process.env.GMAIL_CLIENT_SECRET, // Client Secret
-  'https://developers.google.com/oauthplayground' // Redirect URL
-);
+// const oauth2Client = new OAuth2(
+//   process.env.GMAIL_CLIENT_ID, // ClientID
+//   process.env.GMAIL_CLIENT_SECRET, // Client Secret
+//   'https://developers.google.com/oauthplayground' // Redirect URL
+// );
 
-oauth2Client.setCredentials({
-  refresh_token: process.env.GMAIL_REFRESH_TOKEN,
-});
+// oauth2Client.setCredentials({
+//   refresh_token: process.env.GMAIL_REFRESH_TOKEN,
+// });
 
-const accessToken = oauth2Client.getAccessToken();
+//const accessToken = oauth2Client.getAccessToken();
 
 const sendMail = async (mail) => {
+  console.log('inhere');
   // create reusable transporter object using the default SMTP transport
   const smtpTransport = nodemailer.createTransport({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
+    host: 'smtp.zoho.com',
+    port: 465,
+    secure: true, //ssl
     auth: {
-      type: 'OAuth2',
-      user: process.env.GMAIL_USER,
-      clientId: process.env.GMAIL_CLIENT_ID,
-      clientSecret: process.env.GMAIL_CLIENT_SECRET,
-      refreshToken: process.env.GMAIL_REFRESH_TOKEN,
-      accessToken: accessToken,
+      user: 'admin@eduatlas.in',
+      pass: 'Something@123',
     },
   });
 
@@ -48,6 +46,7 @@ const sendMail = async (mail) => {
   // Preview only available when sending through an Ethereal account
   console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  //return info;
 };
 
 module.exports = sendMail;
