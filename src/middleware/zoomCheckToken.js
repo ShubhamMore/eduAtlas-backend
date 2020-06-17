@@ -14,7 +14,7 @@ const checkTokenAuth = async (req, res, next) => {
       userId = req.user._id;
     } else if (req.user.role == 'employee') {
       const inst = await Institute.findOne({
-        _id: req.body._id,
+        _id: req.body.instituteId,
       });
 
       userId = inst.parentUser;
