@@ -5,3 +5,5 @@ scorefiles/*
 !scorefiles/.gitkeep
 announcements/*
 !announcements/.gitkeep
+studyMaterial/*
+!studyMaterial/.gitkeep

@@ -198,9 +198,7 @@ exports.getScheduleByBatch = async (req, res) => {
         },
       ],
     });
-    for (var i = 0; i < instituteSchedule.length; i++) {
-      con;
-    }
+    for (var i = 0; i < instituteSchedule.length; i++) {}
     //teacher ID and teacher both needed
 
     res.status(200).send(batchSchedule);
