@@ -129,32 +129,32 @@ exports.getScheduleByInstitute = async (req, res) => {
 
       instituteSchedule[i].courseId = institute[0].course.name;
       instituteSchedule[i].batchId = institute[0].batch.batchCode;
-    //   const data = await Schedule.aggregate([
-    //     {
-    //       $unwind: '$days',
-    //     },
-    //     {
-    //       $match: {
-    //         _id: mongoose.Types.ObjectId(instituteSchedule[i]._id),
-    //       },
-    //     },
-    //     {
-    //       $project: {
-    //         teacherId: {
-    //           $toObjectId: 'days.teacherId',
-    //         },
-    //       },
-    //     },
-    //     {
-    //       $lookup: {
-    //         from: 'employees',
-    //         localField: '$teacherId',
-    //         foreignField: '_id',
-    //         as: 'days.teacher',
-    //       },
-    //     },
-    //   ]);
-    // }
+      //   const data = await Schedule.aggregate([
+      //     {
+      //       $unwind: '$days',
+      //     },
+      //     {
+      //       $match: {
+      //         _id: mongoose.Types.ObjectId(instituteSchedule[i]._id),
+      //       },
+      //     },
+      //     {
+      //       $project: {
+      //         teacherId: {
+      //           $toObjectId: 'days.teacherId',
+      //         },
+      //       },
+      //     },
+      //     {
+      //       $lookup: {
+      //         from: 'employees',
+      //         localField: '$teacherId',
+      //         foreignField: '_id',
+      //         as: 'days.teacher',
+      //       },
+      //     },
+      //   ]);
+    }
 
     //teachername course name and batch nae
     res.status(200).send(instituteSchedule);

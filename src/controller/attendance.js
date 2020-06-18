@@ -95,6 +95,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
     const currentDate = date.getFullYear() + date.getMonth + date.getDate() + 'T00:00:00';
 
     //yyyy-mm-ddT00:00:00
+
     const marked = await Schedule.aggregate([
       {
         $unwind: '$days',
@@ -122,6 +123,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
         },
       },
     ]);
+
     const unmarked = await Schedule.aggregate([
       {
         $unwind: '$days',
