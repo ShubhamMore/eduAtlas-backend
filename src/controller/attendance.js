@@ -3,6 +3,8 @@ const Institute = require('../model/institute.model');
 const errorHandler = require('../service/errorHandler');
 const Student = require('../model/student.model');
 const Schedule = require('../model/schedule.model');
+const Employee = require('../model/employee.model');
+
 const mongoose = require('mongoose');
 exports.addAttendance = async (req, res) => {
   try {
@@ -92,10 +94,11 @@ exports.getAttendanceByInstitute = async (req, res) => {
     }
 
     const date = new Date();
-    const currentDate = date.getFullYear() + date.getMonth + date.getDate() + 'T00:00:00';
-
+    const currentDate =
+      date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + 'T00:00:00';
+    console.log(currentDate);
     //yyyy-mm-ddT00:00:00
-
+    const markedData = [];
     const marked = await Schedule.aggregate([
       {
         $unwind: '$days',
@@ -115,15 +118,46 @@ exports.getAttendanceByInstitute = async (req, res) => {
       },
       {
         $match: {
-          details,
           'days.attendanceMark': true,
-          'days.date': {
-            $lt: currentDate,
+          date: {
+            $lt: new Date('2020-08-22T00:00:00'),
           },
         },
       },
     ]);
+    console.log(marked.length);
+    const mlength = marked.length;
+    for (var i = 0; i < mlength; i++) {
+      const course = await Institute.findOne({
+        $and: [
+          {
+            _id: req.body.instituteId,
+          },
+          {
+            'course._id': marked[i].courseId,
+          },
+          {
+            'batch._id': marked[i].batchId,
+          },
+        ],
+      });
+      let data = {};
+      data = marked[i];
+      console.log(data);
+      data.days.courseName = course.course.name;
+      data.days.batchName = course.batch.name;
 
+      const teacher = await Employee.findOne({
+        _id: marked[i].days.teacher,
+      });
+      if (teacher) {
+        data.days.teacherName = teacher.basicDetails.name;
+      }
+
+      markedData.push(data);
+    }
+
+    let unmarkedData = [];
     const unmarked = await Schedule.aggregate([
       {
         $unwind: '$days',
@@ -143,15 +177,44 @@ exports.getAttendanceByInstitute = async (req, res) => {
       },
       {
         $match: {
-          details,
           'days.attendanceMark': false,
-          'days.date': {
-            $lt: currentDate,
+          date: {
+            $lt: new Date('2020-08-22T00:00:00'),
           },
         },
       },
     ]);
-    res.status(200).send(marked, unmarked);
+    console.log(unmarked);
+    const ulength = unmarked.length;
+    for (var i = 0; i < ulength; i++) {
+      const course = await Institute.findOne({
+        $and: [
+          {
+            _id: req.body.instituteId,
+          },
+          {
+            'course._id': unmarked[i].courseId,
+          },
+          {
+            'batch._id': unmarked[i].batchId,
+          },
+        ],
+      });
+      let data = {};
+      data = unmarked[i];
+      data.days.courseName = course.course.name;
+      data.days.batchName = course.batch.name;
+
+      const teacher = await Employee.findOne({
+        _id: unmarked[i].days.teacher,
+      });
+      if (teacher) {
+        data.days.teacherName = teacher.basicDetails.name;
+      }
+
+      unmarkedData.push(data);
+    }
+    res.status(200).send({ markedData, unmarkedData });
   } catch (error) {
     errorHandler(error, res);
   }
