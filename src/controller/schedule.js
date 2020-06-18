@@ -109,8 +109,10 @@ exports.getScheduleByInstitute = async (req, res) => {
 
     const instituteSchedule = await Schedule.find(details);
     let instSchedule = [];
-    instSchedule = instSchedule;
-    for (var i = 0; i < instituteSchedule.length; i++) {
+
+    let teacherData = [];
+    const length = instituteSchedule.length;
+    for (var i = 0; i < length; i++) {
       const institute = await Institute.aggregate([
         {
           $unwind: '$course',
@@ -129,7 +131,7 @@ exports.getScheduleByInstitute = async (req, res) => {
 
       instituteSchedule[i].courseId = institute[0].course.name;
       instituteSchedule[i].batchId = institute[0].batch.batchCode;
-      const teacherData = await Schedule.aggregate([
+      teacherData = await Schedule.aggregate([
         {
           $unwind: '$days',
         },
@@ -141,14 +143,14 @@ exports.getScheduleByInstitute = async (req, res) => {
         {
           $project: {
             teacherId: {
-              $toObjectId: 'days.teacherId',
+              $toObjectId: '$days.teacher',
             },
           },
         },
         {
           $lookup: {
             from: 'employees',
-            localField: '$teacherId',
+            localField: 'teacherId',
             foreignField: '_id',
             as: 'teacher',
           },
@@ -165,10 +167,14 @@ exports.getScheduleByInstitute = async (req, res) => {
           },
         },
       ]);
+      let data = {};
+      data = instituteSchedule[i];
+      data.teacherData = teacherData;
+      instSchedule.push(data);
     }
 
     //teachername course name and batch nae
-    res.status(200).send({ instituteSchedule, teacherData });
+    res.status(200).send(instSchedule);
   } catch (error) {
     errorHandler(error, res);
   }
@@ -191,9 +197,9 @@ exports.getScheduleByBatch = async (req, res) => {
         },
       ],
     });
-    // for (var i = 0; i < batchSchedule.length; i++) {
-    //   con;
-    // }
+    for (var i = 0; i < batchSchedule.length; i++) {
+      con;
+    }
     //teacher ID and teacher both needed
 
     res.status(200).send(batchSchedule);
