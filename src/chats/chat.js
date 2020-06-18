@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/user.model');
 const ChatSockets = require('./chat-sockets');
 const Chat = require('../model/chats.model');
+const sendNotification = require('../notifications/notification');
 
 const chatting = async (server) => {
   const io = require('socket.io')(server);
@@ -29,7 +30,7 @@ const chatting = async (server) => {
     })
     .on('connection', (socket) => {
       new ChatSockets(socket.user.eduAtlasId, socket);
-
+      console.log(socket.user.eduAtlasId);
       socket.on('message', async (message) => {
         const chatMessage = {
           senderId: socket.user.eduAtlasId,

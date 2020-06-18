@@ -1,20 +1,18 @@
 const mongoose = require('mongoose');
 
-const chatSchema = new mongoose.Schema({
+const notificationSchema = new mongoose.Schema({
   eduatlasId: {
     type: String,
   },
-  chats: [
+  notifications: [
     {
-      senderId: {
+      title: {
         type: String,
-      },
-
-      senderName: {
-        type: String,
+        default: '',
       },
       message: {
         type: String,
+        default: '',
       },
       date: {
         type: Number,
@@ -28,6 +26,6 @@ const chatSchema = new mongoose.Schema({
   ],
 });
 
-const Chat = mongoose.model('Chat', chatSchema);
+const Notification = mongoose.model('Notification', notificationSchema);
 
-module.exports = Chat;
+module.exports = Notification;
