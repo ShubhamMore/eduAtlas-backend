@@ -205,7 +205,79 @@ exports.getScheduleByBatch = async (req, res) => {
         },
       ],
     });
-    for (var i = 0; i < instituteSchedule.length; i++) {}
+    let instSchedule = [];
+
+    let teacherData = [];
+    const length = instituteSchedule.length;
+    for (var i = 0; i < length; i++) {
+      const institute = await Institute.aggregate([
+        {
+          $unwind: '$course',
+        },
+        {
+          $unwind: '$batch',
+        },
+        {
+          $match: {
+            _id: mongoose.Types.ObjectId(req.body.instituteId),
+            'course._id': mongoose.Types.ObjectId(instituteSchedule[i].courseId),
+            'batch._id': mongoose.Types.ObjectId(instituteSchedule[i].batchId),
+          },
+        },
+      ]);
+
+      instituteSchedule[i].courseId = institute[0].course.name;
+      instituteSchedule[i].batchId = institute[0].batch.batchCode;
+      teacherData = await Schedule.aggregate([
+        {
+          $unwind: '$days',
+        },
+        {
+          $match: {
+            _id: mongoose.Types.ObjectId(instituteSchedule[i]._id),
+          },
+        },
+        {
+          $project: {
+            teacherId: {
+              $toObjectId: '$days.teacher',
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: 'employees',
+            localField: 'teacherId',
+            foreignField: '_id',
+            as: 'teacher',
+          },
+        },
+        {
+          $unwind: {
+            path: '$teacher',
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+        {
+          $project: {
+            teacherName: '$teacher.basicDetails.name',
+          },
+        },
+      ]);
+      let data = {
+        recurrence: instituteSchedule[i].recurrence,
+        _id: instituteSchedule[i]._id,
+        instituteId: instituteSchedule[i].instituteId,
+        courseId: instituteSchedule[i].courseId,
+        batchId: instituteSchedule[i].batchId,
+        scheduleStart: instituteSchedule[i].scheduleStart,
+        scheduleEnd: instituteSchedule[i].scheduleEnd,
+        days: instituteSchedule[i].days,
+        teacherData: teacherData,
+      };
+      instSchedule.push(data);
+    }
+
     //teacher ID and teacher both needed
 
     res.status(200).send(batchSchedule);
