@@ -18,6 +18,7 @@ app.use(cors());
 app.use('/images', express.static(path.join('images')));
 app.use('/sample', express.static(path.join('sample')));
 app.use('/announcements', express.static(path.join('announcements')));
+app.use('/studyMaterial', express.static(path.join('studyMaterial')));
 app.use(express.static(path.join(__dirname, '../dist')));
 
 app.use(express.urlencoded({ extended: true, limit: '100mb' }));
@@ -61,7 +62,8 @@ app.use('/institute/announcement', require('./routes/annoucement'));
 app.use('/institute/ptm', require('./routes/ptm'));
 app.use('/institute/mentoring', require('./routes/mentoring'));
 app.use('/institute/leads', require('./routes/leads'));
-//app.use('/institute/chat', require('./routes/chat'));
+app.use('/institute/studyMaterial', require('./routes/studyMaterial'));
+app.use('/institute/notification', require('./routes/notification'));
 app.use('/institute/forum', require('./routes/forum'));
 app.use('/institute/chats', require('./routes/chats'));
 app.use('/mail', require('./controller/sendmail'));

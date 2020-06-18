@@ -167,13 +167,22 @@ exports.getScheduleByInstitute = async (req, res) => {
           },
         },
       ]);
-      let data = {};
-      data = instituteSchedule[i];
-      data.teacherData = teacherData;
+      let data = {
+        recurrence: instituteSchedule[i].recurrence,
+        _id: instituteSchedule[i]._id,
+        instituteId: instituteSchedule[i].instituteId,
+        courseId: instituteSchedule[i].courseId,
+        batchId: instituteSchedule[i].batchId,
+        scheduleStart: instituteSchedule[i].scheduleStart,
+        scheduleEnd: instituteSchedule[i].scheduleEnd,
+        days: instituteSchedule[i].days,
+        teacherData: teacherData,
+      };
       instSchedule.push(data);
     }
 
     //teachername course name and batch nae
+    console.log();
     res.status(200).send(instSchedule);
   } catch (error) {
     errorHandler(error, res);

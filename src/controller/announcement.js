@@ -122,23 +122,12 @@ exports.getSingleAnnouncement = async (req, res, next) => {
 
 exports.deleteAnnouncement = async (req, res, next) => {
   try {
-    await Announcement.deleteOne({
-      _id: req.body._id,
-    });
-    res.status(200).json({ message: 'Deleted successfully' });
-  } catch (error) {
-    errorHandler(error, res);
-  }
-};
+    const announcement = await Announcement.findByIdAndDelete(req.body._id);
+    if (announcement.attachment.public_id) {
+      deleteFile(announcement.attachment.public_id);
+    }
 
-exports.updateAnnouncement = async (req, res) => {
-  try {
-    const update = await Announcement.updateOne(
-      {
-        _id: req.body._id,
-      },
-      req.body
-    );
+    res.status(200).json({ message: 'Deleted successfully' });
   } catch (error) {
     errorHandler(error, res);
   }

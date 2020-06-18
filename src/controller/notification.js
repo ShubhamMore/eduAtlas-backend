@@ -4,8 +4,20 @@ const Notification = require('../model/notification.model');
 
 exports.getNotifications = async (req, res) => {
   try {
-    const notification = await Notification.find({ eduatlasId: req.body.eduAtlasId });
-    res.status(200).send(notification.notifications);
+    const notifications = await Notification.find({ eduatlasId: req.body.eduAtlasId })
+      .notifications;
+
+    notifications.sort((msg1, msg2) => {
+      const msg1Id = msg1._id;
+      const msg2Id = msg2._id;
+      if (msg1Id > msg2Id) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    res.status(200).send(notifications);
   } catch (error) {
     error.statusCode = 400;
     errorHandler(error, res);
