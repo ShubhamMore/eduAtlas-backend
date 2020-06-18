@@ -236,7 +236,7 @@ exports.addCourseStudent = async (req, res, next) => {
 
     if (courseAvailable.length != 0) {
       console.log('length ', courseAvailable.length);
-      const error = new Error('Course Already Exists');
+      const error = new Error('Student Already enrolled to this Course');
       error.statusCode = 400;
       throw error;
     }
