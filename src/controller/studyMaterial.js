@@ -62,7 +62,8 @@ exports.editStudyMaterial = async (req, res) => {
   try {
     let oldStudyMaterial = await StudyMaterial.findById(req.body._id);
 
-    let materialFile = oldStudyMaterial.materialFile;
+    let materialFile = oldStudyMaterial.file;
+
     if (req.file !== undefined) {
       const fileURL = {
         filePath: req.file.path,
@@ -71,8 +72,8 @@ exports.editStudyMaterial = async (req, res) => {
           req.file.filename.lastIndexOf('-')
         )}.${req.file.filename.substring(req.file.filename.lastIndexOf('.') + 1)}`,
       };
-
-      if (materialFile.public_id) {
+      console.log('11');
+      if (materialFile.public_id && oldStudyMaterial.category !== 'LEARNING VIDEO') {
         deleteFile(materialFile.public_id);
       }
 
@@ -84,7 +85,7 @@ exports.editStudyMaterial = async (req, res) => {
       };
     } else {
       if (req.body.category === 'LEARNING VIDEO') {
-        if (oldStudyMaterial.category === 'LEARNING VIDEO' && materialFile.public_id) {
+        if (oldStudyMaterial.category !== 'LEARNING VIDEO' && materialFile.public_id) {
           deleteFile(materialFile.public_id);
         }
 
@@ -148,6 +149,7 @@ exports.deleteStudyMaterial = async (req, res, next) => {
   try {
     const material = await StudyMaterial.findByIdAndDelete(req.body._id);
     if (material.category !== 'LEARNING VIDEO') {
+      console.log('cc');
       deleteFile(material.file.public_url);
     }
     res.status(200).json({ message: 'Deleted successfully' });
