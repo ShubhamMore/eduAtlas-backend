@@ -168,8 +168,9 @@ exports.getScheduleByInstitute = async (req, res) => {
         },
       ]);
       let data = {};
+      instituteSchedule[i].teacherData = teacherData;
       data = instituteSchedule[i];
-      data.teacherData = teacherData;
+      //data.teacherData = teacherData;
       instSchedule.push(data);
     }
 
@@ -181,7 +182,7 @@ exports.getScheduleByInstitute = async (req, res) => {
 };
 exports.getScheduleByBatch = async (req, res) => {
   try {
-    const batchSchedule = await Schedule.find({
+    const instituteSchedule = await Schedule.find({
       $and: [
         {
           instituteId: req.body.instituteId,
@@ -197,7 +198,7 @@ exports.getScheduleByBatch = async (req, res) => {
         },
       ],
     });
-    for (var i = 0; i < batchSchedule.length; i++) {
+    for (var i = 0; i < instituteSchedule.length; i++) {
       con;
     }
     //teacher ID and teacher both needed
