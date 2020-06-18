@@ -74,36 +74,35 @@ exports.updateFeeOfStudent = async (req, res) => {
 
     res.status(200).send(updateFee);
   } catch (error) {
-    res.status(400).send(error)
+    res.status(400).send(error);
   }
 };
 
-exports.getPendingFeeByInstitute = async(req,res)=>{
+exports.getPendingFeeByInstitute = async (req, res) => {
   try {
-
     const feeDetails = await Fee.find({
-      instituteId:req.body.instituteId,
-      pendingAmount:{
-        $ne:"0"
-      }
-    })
+      instituteId: req.body.instituteId,
+      pendingAmount: {
+        $ne: '0',
+      },
+    });
 
     const feeDetails2 = await Fee.aggregate([
       {
-        $match:{
-          instituteId:req.body.instituteId,
-          pendingAmount:{
-            $ne:"0"
-          }
-        }
+        $match: {
+          instituteId: req.body.instituteId,
+          pendingAmount: {
+            $ne: '0',
+          },
+        },
       },
       {
-         $lookup:{
-           from:Student.collection.name,
-           localField:"studentId",
-           foreignField:"_id",
-           as:"PendingFee"
-         }     
+        $lookup: {
+          from: Student.collection.name,
+          localField: 'studentId',
+          foreignField: '_id',
+          as: 'PendingFee',
+        },
       },
       // {
       //   $unwind:"$PendingFee"
@@ -115,11 +114,10 @@ exports.getPendingFeeByInstitute = async(req,res)=>{
       //     "as":"FeeOfInstitute"
       //   }
       // },
-    ])
-    console.log(feeDetails2)   
-    res.status(200).send(feeDetails)
-
+    ]);
+    console.log(feeDetails2);
+    res.status(200).send(feeDetails);
   } catch (error) {
-    res.status(400).send(error)    
+    res.status(400).send(error);
   }
-}
+};

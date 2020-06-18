@@ -2,9 +2,8 @@ const multer = require('multer');
 
 const MIME_TYPE_MAP = {
   'application/vnd.ms-excel': 'xlsx',
-  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':'xls',
-  'text/csv':'csv'
-  
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xls',
+  'text/csv': 'csv',
 };
 
 const storage = multer.diskStorage({

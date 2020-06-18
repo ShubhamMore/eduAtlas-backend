@@ -1,7 +1,7 @@
 const testRouter = require('express').Router();
 const testsController = require('../controller/tests');
 const checkAuth = require('../middleware/checkAuth');
-const xcelUpload = require('../middleware/xcelFile')
+const xcelUpload = require('../middleware/xcelFile');
 testRouter.post('/addTest', checkAuth, testsController.addTest);
 
 testRouter.post('/getTestByInstitute', checkAuth, testsController.getTestByInstitute);
@@ -14,12 +14,16 @@ testRouter.post('/addTestScore', checkAuth, testsController.addTestScore);
 
 testRouter.post('/getTestByStudent', checkAuth, testsController.getScoreOfStudentByBatch);
 
-testRouter.post('/deleteTest',checkAuth,testsController.deleteTest)
+testRouter.post('/deleteTest', checkAuth, testsController.deleteTest);
 
-testRouter.post('/addScoreUsingExcel',xcelUpload,testsController.addScoreUsingExcel)
+testRouter.post('/addScoreUsingExcel', xcelUpload, testsController.addScoreUsingExcel);
 
-testRouter.post('/getTestsForReports',checkAuth,testsController.getTestsForReports)
+testRouter.post('/getTestsForReports', checkAuth, testsController.getTestsForReports);
 
-testRouter.post('/getScoresOfStutdentByInstitute',checkAuth,testsController.getScoresOfStutdentByInstitute)
+testRouter.post(
+  '/getScoresOfStutdentByInstitute',
+  checkAuth,
+  testsController.getScoresOfStutdentByInstitute
+);
 
 module.exports = testRouter;
