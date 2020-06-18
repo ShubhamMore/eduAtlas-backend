@@ -29,23 +29,37 @@ const scheduleSchema = new Schema({
   },
   days: [
     {
+      select: {
+        type: Boolean,
+        default: false,
+      },
       day: {
         type: String,
+        default: '',
       },
       date: {
         type: String,
+        default: '',
       },
       startTime: {
         type: String,
+        default: '',
       },
       endTime: {
         type: String,
+        default: '',
       },
       teacher: {
         type: String,
+        default: '',
       },
       topic: {
         type: String,
+        default: '',
+      },
+      attendanceMark: {
+        type: Boolean,
+        default: false,
       },
     },
   ],
