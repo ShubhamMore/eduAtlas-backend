@@ -5,6 +5,7 @@ const schema = require('../service/joi');
 const response = require('../service/response');
 const Institute = require('../model/institute.model');
 const Employee = require('../model/employee.model');
+const Student = require('../model/student.model');
 const { query } = require('express');
 
 exports.addSchedule = async (req, res, next) => {
@@ -30,7 +31,36 @@ exports.addSchedule = async (req, res, next) => {
     const batchSchedule = new Schedule(req.body);
 
     await batchSchedule.save();
-
+    const students = await Student.find({
+      $and: [
+        {
+          'instituteDetails.instituteId': req.body.instituteId,
+        },
+        {
+          'instituteDetails.courseId': req.body.courseId,
+        },
+        {
+          'instituteDetails.batchId': req.body.batchId,
+        },
+      ],
+    });
+    let mail = {};
+    mail.from = 'admin@eduatlas.in';
+    mail.subject = 'SCHEDULE ADDED';
+    for (var i = 0; i < students.length; i++) {
+      mail.to = students[i].basicDetails.email;
+      mail.html =
+        '<!DOCTYPE html>' +
+        '<html><head><title>SCHEDULE</title>' +
+        '</head><body><div>' +
+        '<p>Thank you for your appointment.</p>' +
+        '<p>Here is summery:</p>' +
+        '<p>Name: James Falcon</p>' +
+        '<p>Date: Feb 2, 2017</p>' +
+        '<p>Package: Hair Cut </p>' +
+        '<p>Arrival time: 4:30 PM</p>' +
+        '</div></body></html>';
+    }
     response(res, 201, 'Schedule added successfully');
   } catch (error) {
     errorHandler(error, res);
@@ -78,7 +108,8 @@ exports.getScheduleByInstitute = async (req, res) => {
     }
 
     const instituteSchedule = await Schedule.find(details);
-
+    let instSchedule = [];
+    instSchedule = instSchedule;
     for (var i = 0; i < instituteSchedule.length; i++) {
       const institute = await Institute.aggregate([
         {
@@ -98,7 +129,34 @@ exports.getScheduleByInstitute = async (req, res) => {
 
       instituteSchedule[i].courseId = institute[0].course.name;
       instituteSchedule[i].batchId = institute[0].batch.batchCode;
+      const data = await Schedule.aggregate([
+        {
+          $unwind: '$days',
+        },
+        {
+          $match: {
+            _id: mongoose.Types.ObjectId(instituteSchedule[i]._id),
+          },
+        },
+        {
+          $project: {
+            teacherId: {
+              $toObjectId: 'days.teacherId',
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: 'employees',
+            localField: '$teacherId',
+            foreignField: '_id',
+            as: 'days.teacher',
+          },
+        },
+      ]);
     }
+
+    //teachername course name and batch nae
     res.status(200).send(instituteSchedule);
   } catch (error) {
     errorHandler(error, res);
@@ -122,6 +180,10 @@ exports.getScheduleByBatch = async (req, res) => {
         },
       ],
     });
+    for (var i = 0; i < batchSchedule.length; i++) {
+      con;
+    }
+    //teacher ID and teacher both needed
 
     res.status(200).send(batchSchedule);
   } catch (error) {
