@@ -31,6 +31,7 @@ exports.creatUser = async (req, res, next) => {
     const d = new Date();
 
     if (user.role === 'student') {
+      console.log(req.body);
       const studentId = eduatlasId[0].studentEduId.split('-');
       newEduAtlasId = 'EDU-' + d.getFullYear() + '-ST-' + (parseInt(studentId[3]) + 1);
       await EduAtlasId.updateOne(
@@ -46,9 +47,10 @@ exports.creatUser = async (req, res, next) => {
         basicDetails: {
           name: req.body.name,
           studentEmail: req.body.email,
-          studentContact: req.body.contact,
+          studentContact: req.body.phone,
         },
       };
+      // console.log(newStudent);
       const addStudent = new Student(newStudent);
       await addStudent.save();
     } else if (user.role === 'institute') {
@@ -86,6 +88,7 @@ exports.creatUser = async (req, res, next) => {
     response(res, 200, 'Verify OTP now');
   } catch (error) {
     console.log(error);
+    errorHandler(error, res);
   }
 };
 

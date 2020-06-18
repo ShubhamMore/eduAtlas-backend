@@ -7,9 +7,38 @@ const Fees = require('../model/fee.model');
 const User = require('../model/user.model');
 const userController = require('../controller/users');
 const EduAtlasId = require('../model/eduatlasId.model');
-
+const Institute = require('../model/institute.model');
+const send = require('../service/mail');
 exports.addStudent = async (req, res, next) => {
   try {
+    console.log('****************************body***********************************');
+    console.log(req.body);
+    if (req.body.instituteDetails.batchId) {
+      const checkRoll = await Student.findOne({
+        $and: [
+          {
+            'instituteDetails.instituteId': req.body.instituteDetails.instituteId,
+          },
+          {
+            'instituteDetails.courseId': req.body.instituteDetails.courseId,
+          },
+          {
+            'instituteDetails.batchId': req.body.instituteDetails.batchId,
+          },
+          {
+            'instituteDetails.rollNumber': req.body.instituteDetails.rollNumber,
+          },
+        ],
+      });
+      console.log('****************************checkRoll***********************************');
+      console.log(checkRoll);
+      if (checkRoll) {
+        const error = new Error('Roll Number is already used');
+        error.statusCode = 202;
+        throw error;
+      }
+    }
+
     const user = await User.find({
       $or: [
         {
@@ -20,6 +49,8 @@ exports.addStudent = async (req, res, next) => {
         },
       ],
     });
+    console.log('****************************user***********************************');
+
     console.log(user);
 
     if (user.length != 0) {
@@ -57,13 +88,79 @@ exports.addStudent = async (req, res, next) => {
       active: req.body.active,
       materialRecord: req.body.materialRecord,
     };
+    const instituteDetails = await Institute.aggregate([
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body.instituteDetails.instituteId),
+        },
+      },
+      {
+        $project: {
+          basicInfo: 1,
+          parentUser: {
+            $toObjectId: '$parentUser',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'parentUser',
+          foreignField: '_id',
+          as: 'parentInstitute',
+        },
+      },
+      {
+        $unwind: '$parentInstitute',
+      },
+      {
+        $project: {
+          basicInfo: 1,
+          'parentInstitute.name': 1,
+          'parentInstitute.email': 1,
+          'parentInstitute.phone': 1,
+        },
+      },
+    ]);
+    console.log('****************************PARENT INSTITUTE***********************************');
 
+    console.log(instituteDetails);
     // Send Mail Code Here
+    let mail = {
+      from: 'admin@eduatlas.in',
+      to: req.body.basicDetails.studentEmail,
+      subject: 'INSTITUTE REQUEST EDUATLAS',
+      html:
+        '<!DOCTYPE html>' +
+        '<html><head><title>YOUR ACCOUT HAS BEEN CREATED AT EDUATLAS.COM</title>' +
+        '</head><body><div>' +
+        '<p>Dear ' +
+        req.body.basicDetails.name +
+        ',<br> The Following Institute has added you</p>' +
+        '<p>INSTITUTE NAME:' +
+        instituteDetails[0].parentInstitute.name +
+        '</p>' +
+        '<p>BRANCH NAME: ' +
+        instituteDetails[0].basicInfo.name +
+        '</p>' +
+        '<p>CONTACT: ' +
+        instituteDetails[0].basicInfo.instituteContact +
+        '</p>' +
+        '<p>FOR LOGIN CREDENTIALS: </p>' +
+        '<p>EMAIL: ' +
+        req.body.basicDetails.phone +
+        '</p>' +
+        '<p>PASSWORD: ' +
+        req.body.basicDetails.name +
+        '</p>' +
+        '<p>Thank you </p>' +
+        '<p>EDUATLAS </p>' +
+        '</div></body></html>',
+    };
 
     const addStudent = new Student(newStudent);
     console.log(addStudent);
     await addStudent.save();
-
     console.log();
     await EduAtlasId.updateOne(
       { _id: eduatlasId[0]._id },
@@ -73,7 +170,9 @@ exports.addStudent = async (req, res, next) => {
         },
       }
     );
+
     res.status(200).send(addStudent);
+    await send(mail);
   } catch (error) {
     console.log(error);
     response(res, 500, error.message);
@@ -284,6 +383,9 @@ exports.updateStudentPersonalDetails = async (req, res) => {
 
 exports.updateStudentCourse = async (req, res) => {
   try {
+    let body = {};
+    console.log;
+
     const updateStudent = await Student.updateOne(
       {
         _id: req.body.studentId,
@@ -390,6 +492,7 @@ exports.getStudentsByBatch = async (req, res) => {
 
 exports.getStudentsByInstitute = async (req, res) => {
   try {
+    console.log(req.body);
     const students = await Student.find({
       'instituteDetails.instituteId': req.body.instituteId,
     });

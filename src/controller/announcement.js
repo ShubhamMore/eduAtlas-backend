@@ -73,3 +73,16 @@ exports.deleteAnnouncement = async (req, res, next) => {
     errorHandler(error, res);
   }
 };
+
+exports.updateAnnouncement = async (req, res) => {
+  try {
+    const update = await Announcement.updateOne(
+      {
+        _id: req.body._id,
+      },
+      req.body
+    );
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
