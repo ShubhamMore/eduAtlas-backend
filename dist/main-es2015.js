@@ -5724,12 +5724,13 @@ let SignUpComponent = class SignUpComponent {
         this.tnc = tnc;
     }
     onSignUp() {
+        this.signUpForm.markAllAsTouched();
         if (this.signUpForm.invalid) {
-            this.showToast('top-right', 'warning', 'Insufficient Data, Please fill all Fields Correctly');
+            this.showToast('top-right', 'danger', 'Insufficient Data, Please fill all Fields Correctly');
             return;
         }
         else if (!this.tnc) {
-            this.showToast('top-right', 'warning', 'Accept Terms and Conditions');
+            this.showToast('top-right', 'danger', 'Accept Terms and Conditions');
             return;
         }
         const user = {
@@ -6669,6 +6670,9 @@ let ApiService = class ApiService {
                 paidOn: curInstallment.paidOn,
                 amount: curInstallment.amount,
                 paymentMode: curInstallment.paymentMode,
+                bankDetails: curInstallment.bankDetails,
+                transDetails: curInstallment.transDetails,
+                paymentDate: curInstallment.paymentDate,
                 amountPending: curInstallment.amountPending,
             };
             data.installments.push(installment);
@@ -6695,6 +6699,9 @@ let ApiService = class ApiService {
                 paidOn: curInstallment.paidOn,
                 amount: curInstallment.amount,
                 paymentMode: curInstallment.paymentMode,
+                bankDetails: curInstallment.bankDetails,
+                transDetails: curInstallment.transDetails,
+                paymentDate: curInstallment.paymentDate,
                 amountPending: curInstallment.amountPending,
             };
             data.installments.push(installment);
@@ -7676,6 +7683,9 @@ let RoleAssignService = class RoleAssignService {
     constructor(http) {
         this.http = http;
     }
+    getRole() {
+        return this.role;
+    }
     addRole(role) {
         return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/role`, role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((res) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
     }
@@ -7690,6 +7700,7 @@ let RoleAssignService = class RoleAssignService {
     }
     assignRoles(role) {
         if (role && role === 'Counselor') {
+            this.role = role;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
@@ -7709,6 +7720,7 @@ let RoleAssignService = class RoleAssignService {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = false;
         }
         if (role && role === 'Teacher') {
+            this.role = role;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
@@ -7728,6 +7740,7 @@ let RoleAssignService = class RoleAssignService {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = true;
         }
         if (role && role === 'institute') {
+            this.role = role;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
@@ -7750,6 +7763,7 @@ let RoleAssignService = class RoleAssignService {
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = false;
         }
         else if (role && role === 'Manager') {
+            this.role = role;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;

@@ -8765,11 +8765,13 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
         value: function onSignUp() {
           var _this42 = this;
 
+          this.signUpForm.markAllAsTouched();
+
           if (this.signUpForm.invalid) {
-            this.showToast('top-right', 'warning', 'Insufficient Data, Please fill all Fields Correctly');
+            this.showToast('top-right', 'danger', 'Insufficient Data, Please fill all Fields Correctly');
             return;
           } else if (!this.tnc) {
-            this.showToast('top-right', 'warning', 'Accept Terms and Conditions');
+            this.showToast('top-right', 'danger', 'Accept Terms and Conditions');
             return;
           }
 
@@ -10009,6 +10011,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
               paidOn: curInstallment.paidOn,
               amount: curInstallment.amount,
               paymentMode: curInstallment.paymentMode,
+              bankDetails: curInstallment.bankDetails,
+              transDetails: curInstallment.transDetails,
+              paymentDate: curInstallment.paymentDate,
               amountPending: curInstallment.amountPending
             };
             data.installments.push(installment);
@@ -10037,6 +10042,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
               paidOn: curInstallment.paidOn,
               amount: curInstallment.amount,
               paymentMode: curInstallment.paymentMode,
+              bankDetails: curInstallment.bankDetails,
+              transDetails: curInstallment.transDetails,
+              paymentDate: curInstallment.paymentDate,
               amountPending: curInstallment.amountPending
             };
             data.installments.push(installment);
@@ -11517,6 +11525,11 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
       }
 
       _createClass(RoleAssignService, [{
+        key: "getRole",
+        value: function getRole() {
+          return this.role;
+        }
+      }, {
         key: "addRole",
         value: function addRole(role) {
           return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/role"), role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
@@ -11548,6 +11561,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
         key: "assignRoles",
         value: function assignRoles(role) {
           if (role && role === 'Counselor') {
+            this.role = role;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
@@ -11568,6 +11582,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
           }
 
           if (role && role === 'Teacher') {
+            this.role = role;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
@@ -11588,6 +11603,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
           }
 
           if (role && role === 'institute') {
+            this.role = role;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
@@ -11609,6 +11625,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][13].children[2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][14].hidden = false;
           } else if (role && role === 'Manager') {
+            this.role = role;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][1].hidden = true;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][2].hidden = false;
             _pages_pages_menu__WEBPACK_IMPORTED_MODULE_6__["MENU_ITEMS"][3].hidden = false;
