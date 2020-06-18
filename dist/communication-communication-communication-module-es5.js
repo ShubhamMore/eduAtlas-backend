@@ -2379,7 +2379,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\r\n  <nb-card-body>\r\n    <h5 style=\"color: #ffd500;\">START NEW THREAD</h5>\r\n    <hr />\r\n\r\n    <form [formGroup]=\"announcementForm\" (submit)=\"onSubmit()\">\r\n      <div class=\"form-group-inline\">\r\n        <label for=\"title\">TITLE</label>\r\n        <input nbInput type=\"text\" id=\"title\" status=\"warning\" formControlName=\"title\" fullWidth />\r\n      </div>\r\n\r\n      <br />\r\n\r\n      <angular-editor\r\n        rows=\"2\"\r\n        placeholder=\"Enter text here...\"\r\n        formControlName=\"text\"\r\n      ></angular-editor>\r\n\r\n      <br />\r\n\r\n      <div>\r\n        <label>SELECT ATTACHMENT</label>\r\n        <input\r\n          type=\"file\"\r\n          nbInput\r\n          fullWidth\r\n          status=\"basic\"\r\n          value=\"select Attachment\"\r\n          (change)=\"onFilePicked($event)\"\r\n        />\r\n      </div>\r\n\r\n      <hr />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-10\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <nb-select\r\n                placeholder=\"Select Batches\"\r\n                fullWidth\r\n                formControlName=\"batchCodes\"\r\n                multiple\r\n                status=\"warning\"\r\n              >\r\n                <nb-option [value]=\"undefined\">--Select Batch--</nb-option>\r\n                <nb-option *ngFor=\"let i of batches\" value=\"{{ i.batchCode }}\">{{\r\n                  i.batchCode\r\n                }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <nb-checkbox status=\"warning\" (checkedChange)=\"check($event)\">SELECT ALL</nb-checkbox>\r\n            </div>\r\n          </div>\r\n\r\n          <hr />\r\n\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <nb-select\r\n                placeholder=\"Select Category Tags\"\r\n                multiple\r\n                formControlName=\"categories\"\r\n                fullWidth\r\n                status=\"warning\"\r\n              >\r\n                <nb-option [value]=\"undefined\">--Select Category--</nb-option>\r\n                <nb-option *ngFor=\"let i of institute.category\" value=\"{{ i }}\">{{ i }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-2\" style=\"border-left: 1px solid lightgrey;\">\r\n          <a style=\"cursor: pointer;\" (click)=\"onSubmit()\">\r\n            <img src=\"../../../../assets/img/rarrow.png\" width=\"100px\" height=\"100px\" />\r\n          </a>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<nb-card>\r\n  <nb-card-header style=\"background: #ffd500;\">DISCUSSION THREADS</nb-card-header>\r\n  <nb-card-body>\r\n    <div class=\"table-responsive\" *ngIf=\"announcement.length > 0; else noAnnouncement\">\r\n      <table class=\"table table-borderless\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Title</th>\r\n            <th>Text</th>\r\n            <th>Attachment</th>\r\n            <th>Delete</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let item of announcement; let i = index\">\r\n            <td>\r\n              <span>Announcement {{ i + 1 }}</span>\r\n            </td>\r\n            <td>\r\n              <span> {{ item.title }}</span>\r\n            </td>\r\n            <td>\r\n              <div [innerHTML]=\"item.text | safeHtml\"></div>\r\n            </td>\r\n            <td>\r\n              <a [href]=\"item.attachment.secure_url\" *ngIf=\"item.attachment\">{{\r\n                item.attachment.file_name\r\n              }}</a>\r\n            </td>\r\n            <div>\r\n              <button nbButton status=\"danger\" (click)=\"onDelete(item._id)\">Delete</button>\r\n            </div>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <ng-template #noAnnouncement>\r\n      <p class=\"text-center pt-5\">No Announcements</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\r\n  <nb-card-body>\r\n    <h5 style=\"color: #ffd500;\">START NEW THREAD</h5>\r\n    <hr />\r\n\r\n    <form [formGroup]=\"announcementForm\" (submit)=\"onSubmit()\">\r\n      <div class=\"form-group-inline\">\r\n        <label for=\"title\">TITLE</label>\r\n        <input nbInput type=\"text\" id=\"title\" status=\"warning\" formControlName=\"title\" fullWidth />\r\n      </div>\r\n\r\n      <br />\r\n\r\n      <angular-editor\r\n        rows=\"2\"\r\n        placeholder=\"Enter text here...\"\r\n        formControlName=\"text\"\r\n      ></angular-editor>\r\n\r\n      <br />\r\n\r\n      <div>\r\n        <label>SELECT ATTACHMENT</label>\r\n        <input\r\n          type=\"file\"\r\n          nbInput\r\n          fullWidth\r\n          status=\"basic\"\r\n          value=\"select Attachment\"\r\n          (change)=\"onFilePicked($event)\"\r\n        />\r\n      </div>\r\n\r\n      <hr />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-10\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <nb-select\r\n                placeholder=\"Select Batches\"\r\n                fullWidth\r\n                formControlName=\"batchCodes\"\r\n                multiple\r\n                status=\"warning\"\r\n              >\r\n                <nb-option [value]=\"undefined\">--Select Batch--</nb-option>\r\n                <nb-option *ngFor=\"let i of batches\" value=\"{{ i.batchCode }}\">{{\r\n                  i.batchCode\r\n                }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <nb-checkbox status=\"warning\" (checkedChange)=\"check($event)\">SELECT ALL</nb-checkbox>\r\n            </div>\r\n          </div>\r\n\r\n          <hr />\r\n\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <nb-select\r\n                placeholder=\"Select Category Tags\"\r\n                multiple\r\n                formControlName=\"categories\"\r\n                fullWidth\r\n                status=\"warning\"\r\n              >\r\n                <nb-option [value]=\"undefined\">--Select Category--</nb-option>\r\n                <nb-option *ngFor=\"let i of institute.category\" value=\"{{ i }}\">{{ i }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-2\" style=\"border-left: 1px solid lightgrey;\">\r\n          <a style=\"cursor: pointer;\" (click)=\"onSubmit()\">\r\n            <img src=\"../../../../assets/img/rarrow.png\" width=\"100px\" height=\"100px\" />\r\n          </a>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<nb-card>\r\n  <nb-card-header style=\"background: #ffd500;\">DISCUSSION THREADS</nb-card-header>\r\n  <nb-card-body>\r\n    <div class=\"table-responsive\" *ngIf=\"announcements.length > 0; else noAnnouncement\">\r\n      <table class=\"table table-borderless\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Title</th>\r\n            <th>Text</th>\r\n            <th>Attachment</th>\r\n            <th>Delete</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let item of announcements; let i = index\">\r\n            <td>\r\n              <span>Announcement {{ i + 1 }}</span>\r\n            </td>\r\n            <td>\r\n              <span> {{ item.title }}</span>\r\n            </td>\r\n            <td>\r\n              <div [innerHTML]=\"item.text | safeHtml\"></div>\r\n            </td>\r\n            <td>\r\n              <a [href]=\"item.attachment.secure_url\" *ngIf=\"item.attachment\">{{\r\n                item.attachment.file_name\r\n              }}</a>\r\n            </td>\r\n            <div>\r\n              <button nbButton status=\"danger\" (click)=\"onDelete(item._id)\">Delete</button>\r\n            </div>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <ng-template #noAnnouncement>\r\n      <p class=\"text-center pt-5\">No Announcements</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -2399,7 +2399,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    Announcements\n    <button\n      class=\"btn btn-yellow-black float-right\"\n      [routerLink]=\"'/pages/communication/add-announcements/' + this.instituteId\"\n    >\n      ADD ANNOUNCEMENT\n    </button>\n  </nb-card-header>\n  <nb-card-body>\n    <ng-container *ngIf=\"announcements.length > 0; else noAnnouncements\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>ID</th>\n                  <th>Title</th>\n                  <th>Attachment</th>\n                  <th></th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let item of announcements; let i = index\">\n                  <td>\n                    <span> {{ i + 1 }}</span>\n                  </td>\n                  <td>\n                    <span> {{ item.title }}</span>\n                  </td>\n                  <td>\n                    <a [href]=\"item.attachment.secure_url\" *ngIf=\"item.attachment\">{{\n                      item.attachment.file_name\n                    }}</a\n                    ><span *ngIf=\"!item.attachment\">--</span>\n                  </td>\n                  <div>\n                    <button class=\"mr-3 mb-2\" nbButton (click)=\"onView(item._id)\">View</button>\n                    <button class=\"mb-2\" nbButton status=\"danger\" (click)=\"onDelete(item._id)\">\n                      Delete\n                    </button>\n                  </div>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n    <ng-template #noAnnouncements>\n      <p class=\"text-center pt-5\">No Announcements</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    Announcements\n    <button\n      class=\"btn btn-yellow-black float-right\"\n      [routerLink]=\"'/pages/communication/add-announcements/' + this.instituteId\"\n    >\n      ADD ANNOUNCEMENT\n    </button>\n  </nb-card-header>\n  <nb-card-body>\n    <ng-container *ngIf=\"announcements.length > 0; else noAnnouncements\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>ID</th>\n                  <th>Title</th>\n                  <th>Attachment</th>\n                  <th></th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let item of announcements; let i = index\">\n                  <td>\n                    <span> {{ i + 1 }}</span>\n                  </td>\n                  <td>\n                    <span> {{ item.title }}</span>\n                  </td>\n                  <td>\n                    <a\n                      [href]=\"item.attachment.secure_url\"\n                      *ngIf=\"item.attachment\"\n                      target=\"_blank\"\n                      >{{ item.attachment.file_name }}</a\n                    >\n                    <span *ngIf=\"!item.attachment\">--</span>\n                  </td>\n                  <div>\n                    <button class=\"mr-3 mb-2\" nbButton (click)=\"onView(item._id)\">View</button>\n                    <button class=\"mr-3 mb-2 btn btn-yellow\" (click)=\"edit(item._id)\">\n                      Edit\n                    </button>\n                    <button class=\"mr-3 mb-2\" nbButton status=\"success\" (click)=\"repeat(item._id)\">\n                      Repeat\n                    </button>\n                    <button class=\"mb-2\" nbButton status=\"danger\" (click)=\"onDelete(item._id)\">\n                      Delete\n                    </button>\n                  </div>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n    <ng-template #noAnnouncements>\n      <p class=\"text-center pt-5\">No Announcements</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -2419,7 +2419,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    <button class=\"btn btn-yellow float-right\" (click)=\"manageAnnouncement()\">\n      Back\n    </button>\n    <h3>{{ announcement.title }}</h3>\n  </nb-card-header>\n  <nb-card-body>\n    <div *ngIf=\"announcement.attachment\">\n      <a [href]=\"announcement.attachment.secure_url\">{{ announcement.attachment.file_name }}</a>\n    </div>\n    <div [innerHTML]=\"announcement.text | safeHtml\"></div>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    <button class=\"btn btn-yellow float-right\" (click)=\"manageAnnouncement()\">\n      Back\n    </button>\n    <h3>{{ announcement.title }}</h3>\n  </nb-card-header>\n  <nb-card-body>\n    <div *ngIf=\"announcement.attachment\">\n      <a [href]=\"announcement.attachment.secure_url\" target=\"_blank\">{{\n        announcement.attachment.file_name\n      }}</a>\n    </div>\n    <div [innerHTML]=\"announcement.text | safeHtml\"></div>\n  </nb-card-body>\n</nb-card>\n";
     /***/
   },
 
@@ -2439,7 +2439,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div>\r\n    <button (click)=\"back()\" class=\"btn btn-yellow-black float-right\">Forum Page</button>\r\n    <p style=\"font-weight: bold;\">Forum</p>\r\n  </div>\r\n  <br /><br />\r\n  <nb-card>\r\n    <nb-card-body>\r\n      <form [formGroup]=\"forumForm\" (ngSubmit)=\"onSubmit()\">\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-4\">\r\n            <label for=\"topic\">*Topic</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              id=\"topic\"\r\n              fullWidth\r\n              status=\"basic\"\r\n              formControlName=\"topic\"\r\n              [status]=\"f.topic.errors && submitted ? 'danger' : 'basic'\"\r\n              placeholder=\"Topic\"\r\n            />\r\n            <small *ngIf=\"f.topic.errors && submitted\">*Topic Required</small>\r\n          </div>\r\n          <div class=\"col-sm-4\">\r\n            <label for=\"course\">Course</label>\r\n            <nb-select placeholder=\"Course\" id=\"course\" status=\"basic\" fullWidth=\"true\" formControlName=\"courseId\">\r\n              <nb-option value=\"\">Select Course</nb-option>\r\n              <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{ course.name }}</nb-option>\r\n            </nb-select>\r\n          </div>\r\n         \r\n        </div>\r\n        <br />\r\n      \r\n        <br />\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-12\">\r\n            <label for=\"description\">*Description</label>\r\n            <textarea\r\n              type=\"text\"\r\n              nbInput\r\n              id=\"description\"\r\n              status=\"basic\"\r\n              fullWidth\r\n              formControlName=\"description\"\r\n              [status]=\"f.description.errors && submitted ? 'danger' : 'basic'\"\r\n              placeholder=\"Terms and Conditions\"\r\n              cols=\"15\"\r\n              rows=\"7\"\r\n            >\r\n            </textarea>\r\n            <small *ngIf=\"f.description.errors && submitted\"\r\n              >*Description is Required</small\r\n            >\r\n          </div>\r\n        </div>\r\n  \r\n        <div style=\"text-align: right; margin: 1rem;\">\r\n          <button type=\"submit\" class=\"btn btn-yellow-black\">\r\n            {{ edit ? 'Update' : 'Add' }}\r\n          </button>\r\n        </div>\r\n      </form>\r\n    </nb-card-body>\r\n  </nb-card>\r\n  ";
+    __webpack_exports__["default"] = "<div>\r\n  <button (click)=\"back()\" class=\"btn btn-yellow-black float-right\">Forum Page</button>\r\n  <p style=\"font-weight: bold;\">Forum</p>\r\n</div>\r\n<br /><br />\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"forumForm\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"topic\">*Topic</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"topic\"\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"topic\"\r\n            [status]=\"f.topic.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Topic\"\r\n          />\r\n          <small *ngIf=\"f.topic.errors && submitted\">*Topic Required</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"course\">Course</label>\r\n          <nb-select\r\n            placeholder=\"Course\"\r\n            id=\"course\"\r\n            status=\"basic\"\r\n            fullWidth=\"true\"\r\n            formControlName=\"courseId\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{\r\n              course.name\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n      </div>\r\n      <br />\r\n\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"description\">*Description</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"description\"\r\n            status=\"basic\"\r\n            fullWidth\r\n            formControlName=\"description\"\r\n            [status]=\"f.description.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Description\"\r\n            cols=\"15\"\r\n            rows=\"7\"\r\n          >\r\n          </textarea>\r\n          <small *ngIf=\"f.description.errors && submitted\">*Description is Required</small>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: right; margin: 1rem;\">\r\n        <button type=\"submit\" class=\"btn btn-yellow-black\">\r\n          {{ edit ? 'Update' : 'Add' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -2459,7 +2459,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"py-4\">\r\n  <button class=\"btn btn-yellow-black float-right\" (click)=\"back()\">\r\n    Back\r\n  </button>\r\n</div>\r\n<br /><br />\r\n<nb-card status=\"info\" *ngIf=\"forumCommentData\">\r\n  <nb-card-header>\r\n    <div class=\"row mb-2\">\r\n      <div class=\"col-sm-9\">\r\n        <h3 class=\"text-white\">{{ forumCommentData.title }}</h3>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-md-12\">Description : {{ forumCommentData.description }}</div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-md-3\">\r\n        <label>Crated By :</label><span> {{ forumCommentData.createdByName }}</span>\r\n      </div>\r\n      <div class=\"col-md-3\">\r\n        <label>Crated at :</label><span> {{ getFormattedDateTime(forumCommentData.date) }}</span>\r\n      </div>\r\n      <div class=\"col-md-3\" *ngIf=\"forumCommentData.courseName\">\r\n        <label>Course Name : </label><span> {{ forumCommentData.courseName }}</span>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <hr />\r\n    <div *ngFor=\"let comment of forumCommentData.comments\" class=\"commentBox\">\r\n      <div class=\"row\">\r\n        <div class=\"col-md-9\">\r\n          <label>Comment By : </label><span>{{ comment.userName }}</span>\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n          <label>Comment At : </label><span>{{ getFormattedDateTime(comment.commentDate) }}</span>\r\n        </div>\r\n      </div>\r\n      <div class=\"my-4\">\r\n        {{ comment.comment }}\r\n        <div\r\n          class=\"deleteComment\"\r\n          (click)=\"deleteComment(comment._id)\"\r\n          *ngIf=\"comment.userId == authService.getUser()._id\"\r\n        >\r\n          <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div *ngIf=\"forumCommentData.comments.length === 0\">\r\n      <p class=\"text-center\">You Are The First One To Comment</p>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-md-12\">\r\n        <label>Your Comment :</label>\r\n        <textarea\r\n          type=\"text\"\r\n          nbInput\r\n          fullWidth\r\n          status=\"basic\"\r\n          [(ngModel)]=\"userComment\"\r\n          rows=\"5\"\r\n          placeholder=\"Comment\"\r\n        >\r\n        </textarea>\r\n      </div>\r\n    </div>\r\n    <hr />\r\n\r\n    <button class=\"float-right mt-3 btn btn-yellow-black\" (click)=\"submitComment()\" type=\"submit\">\r\n      Submit\r\n    </button>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<div class=\"py-4\">\r\n  <button class=\"btn btn-yellow-black float-right\" (click)=\"back()\">\r\n    Back\r\n  </button>\r\n</div>\r\n<br /><br />\r\n<nb-card status=\"info\" *ngIf=\"forumCommentData\">\r\n  <nb-card-header>\r\n    <div class=\"row mb-2\">\r\n      <div class=\"col-sm-9\">\r\n        <h3 class=\"text-white\">{{ forumCommentData.title }}</h3>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-md-12\">Description : {{ forumCommentData.description }}</div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-md-3\">\r\n        <label>Created By :</label><span> {{ forumCommentData.createdByName }}</span>\r\n      </div>\r\n      <div class=\"col-md-3\">\r\n        <label>Created at :</label><span> {{ getFormattedDateTime(forumCommentData.date) }}</span>\r\n      </div>\r\n      <div class=\"col-md-3\" *ngIf=\"forumCommentData.courseName\">\r\n        <label>Course Name : </label><span> {{ forumCommentData.courseName }}</span>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <hr />\r\n    <div *ngFor=\"let comment of forumCommentData.comments\" class=\"commentBox\">\r\n      <div class=\"row\">\r\n        <div class=\"col-md-9\">\r\n          <label>Comment By : </label><span>{{ comment.userName }}</span>\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n          <label>Comment At : </label><span>{{ getFormattedDateTime(comment.commentDate) }}</span>\r\n        </div>\r\n      </div>\r\n      <div class=\"my-4\">\r\n        {{ comment.comment }}\r\n        <div\r\n          class=\"deleteComment\"\r\n          (click)=\"deleteComment(comment._id)\"\r\n          *ngIf=\"comment.userId == authService.getUser()._id\"\r\n        >\r\n          <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div *ngIf=\"forumCommentData.comments.length === 0\">\r\n      <p class=\"text-center\">You Are The First One To Comment</p>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-md-12\">\r\n        <label>Your Comment :</label>\r\n        <textarea\r\n          type=\"text\"\r\n          nbInput\r\n          fullWidth\r\n          status=\"basic\"\r\n          [(ngModel)]=\"userComment\"\r\n          rows=\"5\"\r\n          placeholder=\"Comment\"\r\n        >\r\n        </textarea>\r\n      </div>\r\n    </div>\r\n    <hr />\r\n\r\n    <button class=\"float-right mt-3 btn btn-yellow-black\" (click)=\"submitComment()\" type=\"submit\">\r\n      Submit\r\n    </button>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -2499,7 +2499,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"py-4\">\r\n  <button (click)=\"back()\" class=\"btn btn-yellow-black float-right\">Forum Page</button>\r\n</div>\r\n<br /><br />\r\n<nb-card status=\"info\">\r\n  <nb-card-header>\r\n    <div class=\"row mb-2\" *ngIf=\"courses\">\r\n      <div class=\"col-sm-9\">\r\n        <h3 class=\"text-white\">My Forums</h3>\r\n      </div>\r\n      <div class=\"col-sm-3\">\r\n        <nb-select placeholder=\"Select Course\" status=\"basic\" fullWidth (selectedChange)=\"onSelectCourse($event)\">\r\n          <nb-option value=\"\">All</nb-option>\r\n          <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{\r\n            course.name\r\n          }}</nb-option>\r\n        </nb-select>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <table class=\"table table-borderless text-center\" *ngIf=\"myForums; else noForums\">\r\n      <thead>\r\n        <tr>\r\n          <th>Topic</th>\r\n          <th>Course</th>\r\n          <th>Date</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let myforum of myForums;let i = index\">\r\n          <td>{{ myforum.title }}</td>\r\n          <td>{{ myforum.courseId }}</td>\r\n          <td>{{myforum.date}}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3 mb-2 btn btn-yellow\" (click)=\"edit(myforum._id)\">Edit</button>\r\n            <button class=\"mb-2\" nbButton status=\"danger\" (click)=\"delete(myforum._id,i)\">\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ng-template #noForums>\r\n      <p class=\"mt-5 mb-5 text-center\">No Record Found</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>";
+    __webpack_exports__["default"] = "<div class=\"py-4\">\r\n  <button (click)=\"back()\" class=\"btn btn-yellow-black float-right\">Forum Page</button>\r\n</div>\r\n<br /><br />\r\n<nb-card status=\"info\">\r\n  <nb-card-header>\r\n    <div class=\"row mb-2\" *ngIf=\"courses\">\r\n      <div class=\"col-sm-9\">\r\n        <h3 class=\"text-white\">My Forums</h3>\r\n      </div>\r\n      <div class=\"col-sm-3\">\r\n        <nb-select\r\n          placeholder=\"Select Course\"\r\n          status=\"basic\"\r\n          fullWidth\r\n          (selectedChange)=\"onSelectCourse($event)\"\r\n        >\r\n          <nb-option value=\"\">All</nb-option>\r\n          <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{\r\n            course.name\r\n          }}</nb-option>\r\n        </nb-select>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <table class=\"table table-borderless text-center\" *ngIf=\"myForums.length > 0; else noForums\">\r\n      <thead>\r\n        <tr>\r\n          <th>Topic</th>\r\n          <th>Course</th>\r\n          <th>Date</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let myforum of myForums; let i = index\">\r\n          <td>{{ myforum.title }}</td>\r\n          <td>{{ myforum.courseId }}</td>\r\n          <td>{{ myforum.date }}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3 mb-2 btn btn-yellow\" (click)=\"edit(myforum._id)\">Edit</button>\r\n            <button class=\"mb-2\" nbButton status=\"danger\" (click)=\"delete(myforum._id, i)\">\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ng-template #noForums>\r\n      <p class=\"mt-5 mb-5 text-center\">No Record Found</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
     /***/
   },
 
@@ -2601,14 +2601,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.api = api;
         this.active = active;
         this.announceService = announceService;
-        this.announcement = [];
+        this.announcements = [];
         this.display = false;
       }
 
       _createClass(AnnouncementsComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          var _this9 = this;
+
           this.routerId = this.active.snapshot.paramMap.get('id');
+          this.active.queryParams.subscribe(function (data) {
+            _this9.announcementId = data.announcement;
+            _this9.edit = data.edit;
+          });
           this.batches = [];
           this.announcementForm = this.fb.group({
             title: [''],
@@ -2618,51 +2624,67 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             categories: []
           });
           this.getInstitute(this.routerId);
-          this.getAnnouncement(this.routerId);
+          this.getAnnouncements(this.routerId);
         }
       }, {
         key: "getBatches",
         value: function getBatches(id) {
-          var _this9 = this;
+          var _this10 = this;
 
           this.api.getBatches(id).subscribe(function (data) {
-            _this9.batches = data.batch;
-            _this9.display = true; // console.log('my batch' + JSON.parse(JSON.stringify(data)));
+            _this10.batches = data.batch;
+
+            if (_this10.edit) {
+              _this10.getSingleAnnouncement(_this10.announcementId);
+            } else {
+              _this10.display = true;
+            }
           });
         }
       }, {
-        key: "getAnnouncement",
-        value: function getAnnouncement(id) {
-          var _this10 = this;
+        key: "getAnnouncements",
+        value: function getAnnouncements(id) {
+          var _this11 = this;
 
           this.announceService.getAnnouncements(id).subscribe(function (data) {
-            _this10.announcement = data; // console.log('announce =>', this.announcement);
+            _this11.announcements = data;
+          });
+        }
+      }, {
+        key: "getSingleAnnouncement",
+        value: function getSingleAnnouncement(id) {
+          var _this12 = this;
+
+          this.announceService.getSingleAnnouncement(id).subscribe(function (res) {
+            _this12.announcement = res;
+
+            _this12.announcementForm.patchValue({
+              title: res.title,
+              text: res.text,
+              batchCodes: res.batchCodes,
+              categories: res.categories
+            });
+
+            _this12.display = true;
+          }, function (err) {
+            _this12.location.back();
           });
         }
       }, {
         key: "onFilePicked",
         value: function onFilePicked(event) {
-          var file = event.target.files[0]; // const imgExt: string[] = ['jpg', 'png'];
-          // const ext = file.name
-          // if (!(imgExt.indexOf(ext) !== -1)) {
-          // this.invalidImage = true;
-          // return;
-          // }
-          // this.imageRequired = false;
-          // this.invalidImage = false;
-
+          var file = event.target.files[0];
           this.file = file;
         }
       }, {
         key: "getInstitute",
         value: function getInstitute(id) {
-          var _this11 = this;
+          var _this13 = this;
 
           this.api.getInstitute(id).subscribe(function (data) {
-            _this11.institute = data.institute;
+            _this13.institute = data.institute;
 
-            _this11.getBatches(_this11.routerId); // console.log(this.institute.institute);
-
+            _this13.getBatches(_this13.routerId);
           });
         }
       }, {
@@ -2686,9 +2708,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this12 = this;
+          var _this14 = this;
 
-          // console.log('text =>', this.announce);
           var announce = new FormData();
           announce.append('title', this.announcementForm.value.title);
           announce.append('text', this.announcementForm.value.text);
@@ -2700,35 +2721,46 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             announce.append('announcement', this.file, this.announcementForm.value.title);
           }
 
-          this.announceService.postAnnouncement(announce).subscribe(function (res) {
-            _this12.showToast('top-right', 'success', 'Announcement Added Successfully');
+          if (this.edit) {
+            announce.append('_id', this.announcementId);
+            this.announceService.editAnnouncement(announce).subscribe(function (res) {
+              _this14.showToast('top-right', 'success', 'Announcement Edited Successfully');
 
-            _this12.location.back();
-          }, function (err) {
-            _this12.showToast('top-right', 'danger', err.err.message);
-          });
+              _this14.location.back();
+            }, function (err) {
+              _this14.showToast('top-right', 'danger', err.err.message);
+            });
+          } else {
+            this.announceService.postAnnouncement(announce).subscribe(function (res) {
+              _this14.showToast('top-right', 'success', 'Announcement Added Successfully');
+
+              _this14.location.back();
+            }, function (err) {
+              _this14.showToast('top-right', 'danger', err.err.message);
+            });
+          }
         }
       }, {
         key: "onDelete",
         value: function onDelete(id) {
-          var _this13 = this;
+          var _this15 = this;
 
           this.announceService.deleteAnnouncement(id).subscribe(function (res) {
             // console.log(res);
-            var i = _this13.announcement.findIndex(function (e) {
+            var i = _this15.announcements.findIndex(function (e) {
               return e._id === id;
             }); // console.log(i);
 
 
             if (i !== -1) {
-              _this13.announcement.splice(i, 1);
+              _this15.announcements.splice(i, 1);
 
-              _this13.showToast('top-right', 'success', 'Announcement Deleted Successfully');
+              _this15.showToast('top-right', 'success', 'Announcement Deleted Successfully');
             }
 
-            _this13.getAnnouncement(_this13.routerId);
+            _this15.getAnnouncements(_this15.routerId);
           }, function (err) {
-            _this13.showToast('top-right', 'danger', 'Announcement Deletion Failed');
+            _this15.showToast('top-right', 'danger', 'Announcement Deletion Failed');
           });
         }
       }, {
@@ -2877,32 +2909,45 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           });
         }
       }, {
+        key: "repeat",
+        value: function repeat(id) {}
+      }, {
+        key: "edit",
+        value: function edit(id) {
+          this.router.navigate(['/pages/communication/add-announcements/', this.instituteId], {
+            queryParams: {
+              announcement: id,
+              edit: true
+            }
+          });
+        }
+      }, {
         key: "getAnnouncement",
         value: function getAnnouncement(id) {
-          var _this14 = this;
+          var _this16 = this;
 
           this.announceService.getAnnouncements(id).subscribe(function (data) {
-            _this14.announcements = data;
-            _this14.display = true; // console.log('announce =>', this.announcement);
+            _this16.announcements = data;
+            _this16.display = true; // console.log('announce =>', this.announcement);
           });
         }
       }, {
         key: "onDelete",
         value: function onDelete(id) {
-          var _this15 = this;
+          var _this17 = this;
 
           this.announceService.deleteAnnouncement(id).subscribe(function (res) {
-            var i = _this15.announcements.findIndex(function (e) {
+            var i = _this17.announcements.findIndex(function (e) {
               return e._id === id;
             });
 
             if (i !== -1) {
-              _this15.announcements.splice(i, 1);
+              _this17.announcements.splice(i, 1);
             }
 
-            _this15.showToast('top-right', 'success', 'Announcement Deleted Successfully');
+            _this17.showToast('top-right', 'success', 'Announcement Deleted Successfully');
           }, function (err) {
-            _this15.showToast('top-right', 'danger', 'Announcement Deletion Failed');
+            _this17.showToast('top-right', 'danger', 'Announcement Deletion Failed');
           });
         }
       }, {
@@ -3034,12 +3079,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ViewAnnouncementsComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this16 = this;
+          var _this18 = this;
 
           this.display = false;
           this.instituteId = this.route.snapshot.paramMap.get('id');
           this.route.queryParams.subscribe(function (data) {
-            _this16.announcementId = data.announcement;
+            _this18.announcementId = data.announcement;
           });
 
           if (this.announcementId) {
@@ -3051,15 +3096,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getAnnouncement",
         value: function getAnnouncement(id) {
-          var _this17 = this;
+          var _this19 = this;
 
           this.announceService.getSingleAnnouncement(this.announcementId).subscribe(function (res) {
-            _this17.announcement = res;
-            _this17.display = true;
+            _this19.announcement = res;
+            _this19.display = true;
           }, function (err) {
-            _this17.showToast('top-right', 'danger', 'Announcement Not Found');
+            _this19.showToast('top-right', 'danger', 'Announcement Not Found');
 
-            _this17.location.back();
+            _this19.location.back();
           });
         }
       }, {
@@ -3514,15 +3559,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(AddForumComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this18 = this;
+          var _this20 = this;
 
           this.instituteId = this.active.snapshot.paramMap.get('id');
           this.active.queryParams.subscribe(function (data) {
-            _this18.forumId = data.forumId;
-            _this18.edit = data.edit;
+            _this20.forumId = data.forumId;
+            _this20.edit = data.edit;
 
-            if (_this18.edit === 'true') {
-              _this18.getForum();
+            if (_this20.edit === 'true') {
+              _this20.getForum();
             }
           });
           this.forumForm = this.fb.group({
@@ -3535,10 +3580,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCourses",
         value: function getCourses() {
-          var _this19 = this;
+          var _this21 = this;
 
           this.api.getCourseTD(this.instituteId).subscribe(function (data) {
-            _this19.courses = data.course;
+            _this21.courses = data.course;
           }, function (err) {
             return console.error(err);
           });
@@ -3546,12 +3591,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getForum",
         value: function getForum() {
-          var _this20 = this;
+          var _this22 = this;
 
           this.api.getSingleForum({
             '_id': this.forumId
           }).subscribe(function (data) {
-            _this20.forumForm.patchValue({
+            _this22.forumForm.patchValue({
               topic: data.title,
               description: data.description,
               courseId: data.courseId
@@ -3563,7 +3608,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this21 = this;
+          var _this23 = this;
 
           this.submitted = true;
           this.forumForm.markAllAsTouched();
@@ -3584,21 +3629,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.edit === 'true') {
             this.api.updateForum(forumReq).subscribe(function (data) {
-              _this21.showToast('top-right', 'success', 'Forum Updated Successfully');
+              _this23.showToast('top-right', 'success', 'Forum Updated Successfully');
 
-              _this21.router.navigate(['/pages/communication/forum/', _this21.instituteId]);
+              _this23.router.navigate(['/pages/communication/forum/', _this23.instituteId]);
             }, function (err) {
-              _this21.showToast('top-right', 'danger', err.error.message);
+              _this23.showToast('top-right', 'danger', err.error.message);
             });
           }
 
           if (!this.edit) {
             this.api.addForum(forumReq).subscribe(function () {
-              _this21.showToast('top-right', 'success', 'Forum Added Successfully');
+              _this23.showToast('top-right', 'success', 'Forum Added Successfully');
 
-              _this21.router.navigate(['/pages/communication/forum/', _this21.instituteId]);
+              _this23.router.navigate(['/pages/communication/forum/', _this23.instituteId]);
             }, function (err) {
-              _this21.showToast('top-right', 'danger', err.error.message);
+              _this23.showToast('top-right', 'danger', err.error.message);
             });
           }
         }
@@ -3754,24 +3799,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ForumDetailsComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this22 = this;
+          var _this24 = this;
 
           this.instituteId = this.route.snapshot.paramMap.get('id');
           this.route.queryParams.subscribe(function (data) {
-            _this22.forumId = data.forumId;
+            _this24.forumId = data.forumId;
 
-            _this22.getForum();
+            _this24.getForum();
           });
         }
       }, {
         key: "getForum",
         value: function getForum() {
-          var _this23 = this;
+          var _this25 = this;
 
           this.api.getSingleForum({
             _id: this.forumId
           }).subscribe(function (data) {
-            _this23.forumCommentData = data;
+            _this25.forumCommentData = data;
           }, function (err) {
             return console.error(err);
           });
@@ -3779,7 +3824,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "submitComment",
         value: function submitComment() {
-          var _this24 = this;
+          var _this26 = this;
 
           if (!this.userComment) {
             return;
@@ -3794,11 +3839,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             _id: this.forumId,
             comment: comment
           }).subscribe(function (data) {
-            _this24.userComment = null;
+            _this26.userComment = null;
 
-            _this24.showToast('top-right', 'success', 'Comment Added Succesfully');
+            _this26.showToast('top-right', 'success', 'Comment Added Succesfully');
 
-            _this24.getForum();
+            _this26.getForum();
           }, function (err) {
             return console.error(err);
           });
@@ -3822,7 +3867,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deleteComment",
         value: function deleteComment(commentId) {
-          var _this25 = this;
+          var _this27 = this;
 
           if (window.confirm('Do you want to delete your comment ?')) {
             this.api.deleteComment({
@@ -3830,11 +3875,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               commentId: commentId,
               userId: this.authService.getUser()._id
             }).subscribe(function (data) {
-              _this25.showToast('top-right', 'success', 'Comment Deleted Succesfully');
+              _this27.showToast('top-right', 'success', 'Comment Deleted Succesfully');
 
-              _this25.getForum();
+              _this27.getForum();
             }, function (err) {
-              return _this25.showToast('top-right', 'danger', err.error.message);
+              return _this27.showToast('top-right', 'danger', err.error.message);
             });
           }
         }
@@ -3968,10 +4013,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCourses",
         value: function getCourses() {
-          var _this26 = this;
+          var _this28 = this;
 
           this.api.getCourseTD(this.instituteId).subscribe(function (data) {
-            _this26.courses = data.course;
+            _this28.courses = data.course;
           }, function (err) {
             return console.error(err);
           });
@@ -3985,15 +4030,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getForums",
         value: function getForums() {
-          var _this27 = this;
+          var _this29 = this;
 
           this.api.getForumsByInstitute({
             instituteId: this.instituteId,
             courseId: this.selectedCourseId
           }).subscribe(function (res) {
-            _this27.allForums = res;
+            _this29.allForums = res;
 
-            _this27.allForums.map(function (myForum) {
+            _this29.allForums.map(function (myForum) {
               var date = new Date(myForum.date);
               myForum.date = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
               return myForum;
@@ -4153,10 +4198,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCourses",
         value: function getCourses() {
-          var _this28 = this;
+          var _this30 = this;
 
           this.api.getCourseTD(this.instituteId).subscribe(function (data) {
-            _this28.courses = data.course;
+            _this30.courses = data.course;
           }, function (err) {
             return console.error(err);
           });
@@ -4170,15 +4215,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getMyForums",
         value: function getMyForums() {
-          var _this29 = this;
+          var _this31 = this;
 
           this.api.getMyForum({
             'createdBy': this.authService.getUser()._id,
             'courseId': this.selectedCourseId
           }).subscribe(function (res) {
-            _this29.myForums = res;
+            _this31.myForums = res;
 
-            _this29.myForums.map(function (myForum) {
+            _this31.myForums.map(function (myForum) {
               var date = new Date(myForum.date);
               myForum.date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
               return myForum;
@@ -4198,14 +4243,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "delete",
         value: function _delete(id, index) {
-          var _this30 = this;
+          var _this32 = this;
 
           this.api.deleteForum({
             '_id': id
           }).subscribe(function () {
-            _this30.myForums.splice(index, 1);
+            _this32.myForums.splice(index, 1);
 
-            _this30.showToast('top-right', 'success', 'Forum Deleted Successfully');
+            _this32.showToast('top-right', 'success', 'Forum Deleted Successfully');
           }, function (err) {
             return console.error(err);
           });
@@ -4393,45 +4438,54 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }
 
       _createClass(AnnouncementService, [{
+        key: "editAnnouncement",
+        value: function editAnnouncement(announcement) {
+          var _this33 = this;
+
+          return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/announcement/editAnnouncement"), announcement).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (response) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (err) {
+            return _this33.handleError(err);
+          }));
+        }
+      }, {
         key: "postAnnouncement",
         value: function postAnnouncement(announcement) {
-          var _this31 = this;
+          var _this34 = this;
 
           return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/announcement/makeAnnouncement"), announcement).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (response) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (err) {
-            return _this31.handleError(err);
+            return _this34.handleError(err);
           }));
         }
       }, {
         key: "getAnnouncements",
         value: function getAnnouncements(id) {
-          var _this32 = this;
+          var _this35 = this;
 
           return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/announcement/getAnnouncement"), {
             instituteId: id
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (err) {
-            return _this32.handleError(err);
+            return _this35.handleError(err);
           }));
         }
       }, {
         key: "getSingleAnnouncement",
         value: function getSingleAnnouncement(id) {
-          var _this33 = this;
+          var _this36 = this;
 
           return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/announcement/getSingleAnnouncement"), {
             id: id
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (err) {
-            return _this33.handleError(err);
+            return _this36.handleError(err);
           }));
         }
       }, {
         key: "deleteAnnouncement",
         value: function deleteAnnouncement(id) {
-          var _this34 = this;
+          var _this37 = this;
 
           return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server, "/institute/announcement/deleteAnnouncement"), {
             _id: id
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (res) {}), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (err) {
-            return _this34.handleError(err);
+            return _this37.handleError(err);
           }));
         }
       }, {

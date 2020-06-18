@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\r\n  <nb-card-header>\r\n    <div>\r\n      <button class=\"btn btn-yellow-black float-right\" (click)=\"back()\">\r\n        MANAGE COURSES\r\n      </button>\r\n      <p style=\"color: black; font-weight: bold;\">Add Course Here</p>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"course\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"name\">Course Name</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"name\"\r\n            fullWidth\r\n            [status]=\"f.name.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"name\"\r\n            placeholder=\"Course Name\"\r\n          />\r\n          <small *ngIf=\"f.name.errors && submitted\">*Course name is req.</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"code\">Course Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"code\"\r\n            fullWidth\r\n            [status]=\"f.courseCode.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"courseCode\"\r\n            placeholder=\"Course Code\"\r\n          />\r\n          <small *ngIf=\"f.courseCode.errors && submitted\">*Course code is required</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"fees\">Course Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            #fees\r\n            (keyup)=\"courseFee(fees.value)\"\r\n            id=\"fees\"\r\n            formControlName=\"fees\"\r\n            placeholder=\"Course Fees\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">Course Duration (in Months)</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            [status]=\"f.duration.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"duration\"\r\n            maxlength=\"2\"\r\n            minlength=\"1\"\r\n            placeholder=\"Duration in Months\"\r\n          />\r\n          <small *ngIf=\"f.duration.errors && submitted\">*Course Duration is required</small>\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">GST</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"gstValue\"\r\n            #ex\r\n            (keyup)=\"exclusive(ex.value)\"\r\n            placeholder=\"Exclusive GST in %\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-1\"><br /><br />Or</div>\r\n        <div class=\"col-sm-2\">\r\n          <br />\r\n          <nb-checkbox\r\n            (checkedChange)=\"inclusiveGst($event)\"\r\n            [(ngModel)]=\"gstCheckBox\"\r\n            [ngModelOptions]=\"{ standalone: true }\"\r\n            fullWidth\r\n            status=\"warning\"\r\n            >Inclusive GST</nb-checkbox\r\n          >\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>Total Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"totalFee\"\r\n            disabled=\"true\"\r\n            placeholder=\"TotalFee\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"des\">Description</label>\r\n          <textarea\r\n            name=\"discription\"\r\n            id=\"des\"\r\n            status=\"basic\"\r\n            nbInput\r\n            fullWidth\r\n            formControlName=\"discription\"\r\n            placeholder=\"Description\"\r\n            cols=\"100\"\r\n            rows=\"4\"\r\n            id=\"dis\"\r\n          ></textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"display: block; margin-top: 1rem; text-align: right;\">\r\n        <button type=\"submit\" class=\"btn btn-yellow-black\">\r\n          {{ edit === 'true' ? 'Update Course' : 'Add Course' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\r\n  <nb-card-header>\r\n    <div>\r\n      <button class=\"btn btn-yellow-black float-right\" (click)=\"back()\">\r\n        MANAGE COURSES\r\n      </button>\r\n      <p style=\"color: black; font-weight: bold;\">Add Course Here</p>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"course\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"name\">Course Name</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"name\"\r\n            fullWidth\r\n            [status]=\"f.name.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"name\"\r\n            placeholder=\"Course Name\"\r\n          />\r\n          <small *ngIf=\"f.name.errors && submitted\">*Course name is req.</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"code\">Course Code</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"code\"\r\n            fullWidth\r\n            [status]=\"f.courseCode.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"courseCode\"\r\n            placeholder=\"Course Code\"\r\n          />\r\n          <small *ngIf=\"f.courseCode.errors && submitted\">*Course code is required</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"fees\">Course Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            [status]=\"f.fees.errors && submitted ? 'danger' : 'basic'\"\r\n            #fees\r\n            (keyup)=\"courseFee(fees.value)\"\r\n            id=\"fees\"\r\n            formControlName=\"fees\"\r\n            placeholder=\"Course Fees\"\r\n          />\r\n          <small *ngIf=\"f.fees.errors && submitted\">*Course Fees is required</small>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">Course Duration (in Months)</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            [status]=\"f.duration.errors && submitted ? 'danger' : 'basic'\"\r\n            formControlName=\"duration\"\r\n            maxlength=\"2\"\r\n            minlength=\"1\"\r\n            placeholder=\"Duration in Months\"\r\n          />\r\n          <small *ngIf=\"f.duration.errors && submitted\">*Course Duration is required</small>\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label for=\"gst\">GST</label>\r\n          <input\r\n            nbInput\r\n            type=\"text\"\r\n            pattern=\"\\d*\"\r\n            fullWidth\r\n            formControlName=\"gstValue\"\r\n            #ex\r\n            (keyup)=\"exclusive(ex.value)\"\r\n            placeholder=\"Exclusive GST in %\"\r\n          />\r\n        </div>\r\n        <div class=\"col-sm-1\"><br /><br />Or</div>\r\n        <div class=\"col-sm-2\">\r\n          <br />\r\n          <nb-checkbox\r\n            (checkedChange)=\"inclusiveGst($event)\"\r\n            [(ngModel)]=\"gstCheckBox\"\r\n            [ngModelOptions]=\"{ standalone: true }\"\r\n            fullWidth\r\n            status=\"warning\"\r\n            >Inclusive GST</nb-checkbox\r\n          >\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>Total Fees</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"totalFee\"\r\n            disabled=\"true\"\r\n            placeholder=\"TotalFee\"\r\n          />\r\n        </div>\r\n      </div>\r\n      <hr />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"des\">Description</label>\r\n          <textarea\r\n            name=\"discription\"\r\n            id=\"des\"\r\n            status=\"basic\"\r\n            nbInput\r\n            fullWidth\r\n            formControlName=\"discription\"\r\n            placeholder=\"Description\"\r\n            cols=\"100\"\r\n            rows=\"4\"\r\n            id=\"dis\"\r\n          ></textarea>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"display: block; margin-top: 1rem; text-align: right;\">\r\n        <button type=\"submit\" class=\"btn btn-yellow-black\">\r\n          {{ edit === 'true' ? 'Update Course' : 'Add Course' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -113,7 +113,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\r\n  <nb-card-header>\r\n    <p style=\"color: black; font-weight: bold;\">Add Role Form Here</p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit && !dataFetched\"\r\n      >Already Registered Employee</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasEmployeeForm\"\r\n      (ngSubmit)=\"onEmployeeFormSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch Employee</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.eduAtlasId.errors &&\r\n              eduAtlasEmployeeFormControl.eduAtlasId.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"eduAtlasId\"\r\n            fullWidth\r\n            formControlName=\"eduAtlasId\"\r\n            placeholder=\"Enter EduId or Email\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button class=\"btn btn-yellow-black\" type=\"submit\" *ngIf=\"!edit && !dataFetched\">\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n\r\n    <form [formGroup]=\"otpForm\" (ngSubmit)=\"verifyOtp()\" *ngIf=\"otpSent && alreadyRegistered\">\r\n      <p>OTP</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"otpForm.get('otp').errors && otpForm.get('otp').touched ? 'danger' : 'basic'\"\r\n            id=\"otp\"\r\n            fullWidth\r\n            formControlName=\"otp\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" class=\"btn btn-yellow-black\" *ngIf=\"!edit\">\r\n            Verify\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form\r\n      [formGroup]=\"employeeForm\"\r\n      (ngSubmit)=\"onSubmit()\"\r\n      *ngIf=\"!alreadyRegistered || (alreadyRegistered && employee) || (employee && edit)\"\r\n    >\r\n      <p>Employee Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">*Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Employee name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.employeeEmail.errors && f.employeeEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"employeeEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.employeeEmail.errors && f.employeeEmail.touched\"\r\n              >*Employee email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Employee Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Employee Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Employee Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>*Role</label>\r\n          <nb-select\r\n            placeholder=\"Select Role\"\r\n            [status]=\"f.role.errors && f.role.touched ? 'danger' : 'basic'\"\r\n            status=\"basic\"\r\n            formControlName=\"role\"\r\n          >\r\n            <nb-option [value]=\"null\">Select Role</nb-option>\r\n            <nb-option *ngFor=\"let role of roles\" value=\"{{ role }}\">{{ role }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.role.errors && f.role.touched\">*Employee Role is required.</small>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" class=\"btn btn-yellow-black\">\r\n          {{ employeeEduId ? 'Update Employee' : 'Add Employee' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card>\r\n  <nb-card-header>\r\n    <p style=\"color: black; font-weight: bold;\">{{ edit ? 'Edit' : 'Add' }} Role Form Here</p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <nb-checkbox\r\n      (checkedChange)=\"changeAlreadyRegistered($event)\"\r\n      [checked]=\"alreadyRegistered\"\r\n      fullWidth\r\n      status=\"warning\"\r\n      *ngIf=\"!edit && !dataFetched\"\r\n      >Already Registered Employee</nb-checkbox\r\n    >\r\n    <form\r\n      [formGroup]=\"eduAtlasEmployeeForm\"\r\n      (ngSubmit)=\"onEmployeeFormSearch()\"\r\n      *ngIf=\"alreadyRegistered\"\r\n    >\r\n      <p>Fetch Employee</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"\r\n              eduAtlasEmployeeFormControl.eduAtlasId.errors &&\r\n              eduAtlasEmployeeFormControl.eduAtlasId.touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            id=\"eduAtlasId\"\r\n            fullWidth\r\n            formControlName=\"eduAtlasId\"\r\n            placeholder=\"Enter EduId or Email\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button class=\"btn btn-yellow-black\" type=\"submit\" *ngIf=\"!edit && !dataFetched\">\r\n            Fetch\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n\r\n    <form [formGroup]=\"otpForm\" (ngSubmit)=\"verifyOtp()\" *ngIf=\"otpSent && alreadyRegistered\">\r\n      <p>OTP</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            [status]=\"otpForm.get('otp').errors && otpForm.get('otp').touched ? 'danger' : 'basic'\"\r\n            id=\"otp\"\r\n            fullWidth\r\n            formControlName=\"otp\"\r\n          />\r\n        </div>\r\n        <div style=\"text-align: right;\">\r\n          <button type=\"submit\" class=\"btn btn-yellow-black\" *ngIf=\"!edit\">\r\n            Verify\r\n          </button>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </form>\r\n\r\n    <form\r\n      [formGroup]=\"employeeForm\"\r\n      (ngSubmit)=\"onSubmit()\"\r\n      *ngIf=\"!alreadyRegistered || (alreadyRegistered && employee) || (employee && edit)\"\r\n    >\r\n      <p>Employee Basic Details</p>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">*Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"f.name.errors && f.name.touched ? 'danger' : 'basic'\"\r\n              id=\"name\"\r\n              fullWidth\r\n              formControlName=\"name\"\r\n              placeholder=\"Name\"\r\n            />\r\n            <small *ngIf=\"f.name.errors && f.name.touched\">*Employee name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"email\">*Email</label>\r\n            <input\r\n              type=\"email\"\r\n              nbInput\r\n              [status]=\"f.employeeEmail.errors && f.employeeEmail.touched ? 'danger' : 'basic'\"\r\n              id=\"email\"\r\n              formControlName=\"employeeEmail\"\r\n              fullWidth\r\n              placeholder=\"Email\"\r\n            />\r\n            <small *ngIf=\"f.employeeEmail.errors && f.employeeEmail.touched\"\r\n              >*Employee email is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-3\">\r\n          <div class=\"form-group\">\r\n            <label for=\"contact\">*Employee Contact Number</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              maxlength=\"10\"\r\n              [status]=\"f.contact.errors && f.contact.touched ? 'danger' : 'basic'\"\r\n              id=\"contact\"\r\n              formControlName=\"contact\"\r\n              fullWidth\r\n              placeholder=\"Employee Contact No.\"\r\n            />\r\n            <small *ngIf=\"f.contact.errors && f.contact.touched\"\r\n              >*Employee Contact Number is required.</small\r\n            >\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-3\">\r\n          <label>*Role</label>\r\n          <nb-select\r\n            placeholder=\"Select Role\"\r\n            [status]=\"f.role.errors && f.role.touched ? 'danger' : 'basic'\"\r\n            status=\"basic\"\r\n            formControlName=\"role\"\r\n          >\r\n            <nb-option [value]=\"null\">Select Role</nb-option>\r\n            <nb-option *ngFor=\"let role of roles\" value=\"{{ role }}\">{{ role }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"f.role.errors && f.role.touched\">*Employee Role is required.</small>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"address\">Address</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            status=\"basic\"\r\n            fullWidth\r\n            id=\"address\"\r\n            formControlName=\"address\"\r\n            fullWidth\r\n            placeholder=\"Address\"\r\n          >\r\n          </textarea>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n      <div style=\"text-align: right;\">\r\n        <button type=\"submit\" class=\"btn btn-yellow-black\">\r\n          {{ employeeEduId ? 'Update Employee' : 'Add Employee' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -272,8 +272,12 @@ let AddBatchesComponent = class AddBatchesComponent {
             let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpParams"]();
             param = param.append('instituteId', this.instituteId);
             param = param.append('batchId', this.batchId);
-            const batch = this.batchForm.value;
-            batch._id = this.batchId;
+            const batch = {
+                _id: this.batchId,
+                course: this.batchForm.value.course,
+                batchCode: this.batchForm.value.batchCode.trim(),
+                description: this.batchForm.value.description,
+            };
             this.api.updateBatch(param, batch).subscribe((res) => {
                 this.showToast('top-right', 'success', 'Successfully Updated');
                 this.router.navigate(['/pages/institute/branch-config/manage-batch/', this.instituteId]);
@@ -282,7 +286,12 @@ let AddBatchesComponent = class AddBatchesComponent {
             });
         }
         if (!this.edit) {
-            this.api.addBatch(this.instituteId, this.batchForm.value).subscribe(() => {
+            const batch = {
+                course: this.batchForm.value.course,
+                batchCode: this.batchForm.value.batchCode.trim(),
+                description: this.batchForm.value.description,
+            };
+            this.api.addBatch(this.instituteId, batch).subscribe(() => {
                 this.showToast('top-right', 'success', 'Successfully Added');
                 setTimeout(() => {
                     this.router.navigate([
@@ -493,7 +502,7 @@ let AddCourseComponent = class AddCourseComponent {
         this.course = this.fb.group({
             name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             courseCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            fees: [''],
+            fees: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             duration: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             gst: [''],
             gstValue: [''],
@@ -564,8 +573,17 @@ let AddCourseComponent = class AddCourseComponent {
             let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpParams"]();
             param = param.append('instituteId', this.instituteId);
             param = param.append('courseId', this.courseId);
-            const course = this.course.value;
-            course._id = this.courseId;
+            const course = {
+                _id: this.courseId,
+                name: this.course.value.name,
+                courseCode: this.course.value.courseCode.trim(),
+                fees: this.course.value.fees,
+                duration: this.course.value.duration,
+                gst: this.course.value.gst,
+                gstValue: this.course.value.gstValue,
+                discription: this.course.value.discription,
+                totalFee: this.course.value.totalFee,
+            };
             this.api.updateCourse(param, course).subscribe((res) => {
                 this.showToast('top-right', 'success', 'Course Updated');
                 setTimeout(() => {
@@ -579,7 +597,17 @@ let AddCourseComponent = class AddCourseComponent {
             });
         }
         if (!this.edit) {
-            this.api.addCourse(this.instituteId, this.course.value).subscribe((data) => {
+            const course = {
+                name: this.course.value.name,
+                courseCode: this.course.value.courseCode.trim(),
+                fees: this.course.value.fees,
+                duration: this.course.value.duration,
+                gst: this.course.value.gst,
+                gstValue: this.course.value.gstValue,
+                discription: this.course.value.discription,
+                totalFee: this.course.value.totalFee,
+            };
+            this.api.addCourse(this.instituteId, course).subscribe((data) => {
                 this.showToast('top-right', 'success', 'Course Added Successfully');
                 setTimeout(() => {
                     this.router.navigate([
@@ -723,15 +751,18 @@ let ManageCourseComponent = class ManageCourseComponent {
         });
     }
     delete(id) {
-        let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpParams"]();
-        param = param.append('instituteId', this.instituteId);
-        param = param.append('courseId', id);
-        this.api.deleteCourse(param).subscribe((res) => {
-            const i = this.courses.findIndex((e) => e._id === id);
-            if (i !== -1) {
-                this.courses.splice(i, 1);
-            }
-        }, (error) => console.error(error));
+        const confirm = window.confirm('Are u sure, you want to Delete This Course?');
+        if (confirm) {
+            let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpParams"]();
+            param = param.append('instituteId', this.instituteId);
+            param = param.append('courseId', id);
+            this.api.deleteCourse(param).subscribe((res) => {
+                const i = this.courses.findIndex((e) => e._id === id);
+                if (i !== -1) {
+                    this.courses.splice(i, 1);
+                }
+            }, (error) => console.error(error));
+        }
     }
     edit(id) {
         this.router.navigate([`/pages/institute/branch-config/add-courses/${this.instituteId}`], {
@@ -1140,7 +1171,14 @@ let DiscountComponent = class DiscountComponent {
             let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"]();
             param = param.append('instituteId', this.instituteId);
             param = param.append('discountId', this.discountId);
-            this.api.updateDiscount(param, this.discountForm.value).subscribe((res) => {
+            const discount = {
+                _id: this.discountId,
+                discountCode: this.discountForm.value.discountCode.trim(),
+                description: this.discountForm.value.description,
+                amount: this.discountForm.value.amount.trim(),
+                discountType: this.discountForm.value.discountType,
+            };
+            this.api.updateDiscount(param, discount).subscribe((res) => {
                 this.showToast('top-right', 'success', 'Discount Updated');
                 setTimeout(() => {
                     this.router.navigate([
@@ -1153,7 +1191,13 @@ let DiscountComponent = class DiscountComponent {
             });
         }
         else {
-            this.api.addDiscount(this.instituteId, this.discountForm.value).subscribe((data) => {
+            const discount = {
+                discountCode: this.discountForm.value.discountCode.trim(),
+                description: this.discountForm.value.description,
+                amount: this.discountForm.value.amount.trim(),
+                discountType: this.discountForm.value.discountType,
+            };
+            this.api.addDiscount(this.instituteId, discount).subscribe((data) => {
                 this.showToast('top-right', 'success', 'Discount Added Successfully');
                 setTimeout(() => {
                     this.router.navigate([
@@ -1264,7 +1308,7 @@ let ManageDiscountComponent = class ManageDiscountComponent {
         });
     }
     delete(id) {
-        const confirm = window.prompt('Are u sure, you want to Delete This Discount?');
+        const confirm = window.confirm('Are u sure, you want to Delete This Discount?');
         if (confirm) {
             let param = new _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpParams"]();
             param = param.append('instituteId', this.instituteId);

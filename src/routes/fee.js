@@ -10,8 +10,6 @@ feeRouter.post('/getFeeOfStudentByCourse', feeController.getFeeOfStudentByCourse
 
 feeRouter.post('/updateFeeOfStudent', feeController.updateFeeOfStudent);
 
-feeRouter.post('/getPendingFeeByInstitute',feeController.getPendingFeeByInstitute)
-
-
+feeRouter.post('/getPendingFeeByInstitute', feeController.getPendingFeeByInstitute);
 
 module.exports = feeRouter;

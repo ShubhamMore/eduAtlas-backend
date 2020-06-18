@@ -1715,7 +1715,7 @@ AngularEditorModule.decorators = [
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"display\">\r\n  <nb-card-body>\r\n    <h5 style=\"color: #ffd500;\">START NEW THREAD</h5>\r\n    <hr />\r\n\r\n    <form [formGroup]=\"announcementForm\" (submit)=\"onSubmit()\">\r\n      <div class=\"form-group-inline\">\r\n        <label for=\"title\">TITLE</label>\r\n        <input nbInput type=\"text\" id=\"title\" status=\"warning\" formControlName=\"title\" fullWidth />\r\n      </div>\r\n\r\n      <br />\r\n\r\n      <angular-editor\r\n        rows=\"2\"\r\n        placeholder=\"Enter text here...\"\r\n        formControlName=\"text\"\r\n      ></angular-editor>\r\n\r\n      <br />\r\n\r\n      <div>\r\n        <label>SELECT ATTACHMENT</label>\r\n        <input\r\n          type=\"file\"\r\n          nbInput\r\n          fullWidth\r\n          status=\"basic\"\r\n          value=\"select Attachment\"\r\n          (change)=\"onFilePicked($event)\"\r\n        />\r\n      </div>\r\n\r\n      <hr />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-10\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <nb-select\r\n                placeholder=\"Select Batches\"\r\n                fullWidth\r\n                formControlName=\"batchCodes\"\r\n                multiple\r\n                status=\"warning\"\r\n              >\r\n                <nb-option [value]=\"undefined\">--Select Batch--</nb-option>\r\n                <nb-option *ngFor=\"let i of batches\" value=\"{{ i.batchCode }}\">{{\r\n                  i.batchCode\r\n                }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <nb-checkbox status=\"warning\" (checkedChange)=\"check($event)\">SELECT ALL</nb-checkbox>\r\n            </div>\r\n          </div>\r\n\r\n          <hr />\r\n\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <nb-select\r\n                placeholder=\"Select Category Tags\"\r\n                multiple\r\n                formControlName=\"categories\"\r\n                fullWidth\r\n                status=\"warning\"\r\n              >\r\n                <nb-option [value]=\"undefined\">--Select Category--</nb-option>\r\n                <nb-option *ngFor=\"let i of institute.category\" value=\"{{ i }}\">{{ i }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-2\" style=\"border-left: 1px solid lightgrey;\">\r\n          <a style=\"cursor: pointer;\" (click)=\"onSubmit()\">\r\n            <img src=\"../../../../assets/img/rarrow.png\" width=\"100px\" height=\"100px\" />\r\n          </a>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<nb-card>\r\n  <nb-card-header style=\"background: #ffd500;\">DISCUSSION THREADS</nb-card-header>\r\n  <nb-card-body>\r\n    <div class=\"table-responsive\" *ngIf=\"announcement.length > 0; else noAnnouncement\">\r\n      <table class=\"table table-borderless\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Title</th>\r\n            <th>Text</th>\r\n            <th>Attachment</th>\r\n            <th>Delete</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let item of announcement; let i = index\">\r\n            <td>\r\n              <span>Announcement {{ i + 1 }}</span>\r\n            </td>\r\n            <td>\r\n              <span> {{ item.title }}</span>\r\n            </td>\r\n            <td>\r\n              <div [innerHTML]=\"item.text | safeHtml\"></div>\r\n            </td>\r\n            <td>\r\n              <a [href]=\"item.attachment.secure_url\" *ngIf=\"item.attachment\">{{\r\n                item.attachment.file_name\r\n              }}</a>\r\n            </td>\r\n            <div>\r\n              <button nbButton status=\"danger\" (click)=\"onDelete(item._id)\">Delete</button>\r\n            </div>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <ng-template #noAnnouncement>\r\n      <p class=\"text-center pt-5\">No Announcements</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"display\">\r\n  <nb-card-body>\r\n    <h5 style=\"color: #ffd500;\">START NEW THREAD</h5>\r\n    <hr />\r\n\r\n    <form [formGroup]=\"announcementForm\" (submit)=\"onSubmit()\">\r\n      <div class=\"form-group-inline\">\r\n        <label for=\"title\">TITLE</label>\r\n        <input nbInput type=\"text\" id=\"title\" status=\"warning\" formControlName=\"title\" fullWidth />\r\n      </div>\r\n\r\n      <br />\r\n\r\n      <angular-editor\r\n        rows=\"2\"\r\n        placeholder=\"Enter text here...\"\r\n        formControlName=\"text\"\r\n      ></angular-editor>\r\n\r\n      <br />\r\n\r\n      <div>\r\n        <label>SELECT ATTACHMENT</label>\r\n        <input\r\n          type=\"file\"\r\n          nbInput\r\n          fullWidth\r\n          status=\"basic\"\r\n          value=\"select Attachment\"\r\n          (change)=\"onFilePicked($event)\"\r\n        />\r\n      </div>\r\n\r\n      <hr />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-10\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <nb-select\r\n                placeholder=\"Select Batches\"\r\n                fullWidth\r\n                formControlName=\"batchCodes\"\r\n                multiple\r\n                status=\"warning\"\r\n              >\r\n                <nb-option [value]=\"undefined\">--Select Batch--</nb-option>\r\n                <nb-option *ngFor=\"let i of batches\" value=\"{{ i.batchCode }}\">{{\r\n                  i.batchCode\r\n                }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n\r\n            <div class=\"col-sm-3\">\r\n              <nb-checkbox status=\"warning\" (checkedChange)=\"check($event)\">SELECT ALL</nb-checkbox>\r\n            </div>\r\n          </div>\r\n\r\n          <hr />\r\n\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <nb-select\r\n                placeholder=\"Select Category Tags\"\r\n                multiple\r\n                formControlName=\"categories\"\r\n                fullWidth\r\n                status=\"warning\"\r\n              >\r\n                <nb-option [value]=\"undefined\">--Select Category--</nb-option>\r\n                <nb-option *ngFor=\"let i of institute.category\" value=\"{{ i }}\">{{ i }}</nb-option>\r\n              </nb-select>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-2\" style=\"border-left: 1px solid lightgrey;\">\r\n          <a style=\"cursor: pointer;\" (click)=\"onSubmit()\">\r\n            <img src=\"../../../../assets/img/rarrow.png\" width=\"100px\" height=\"100px\" />\r\n          </a>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<nb-card>\r\n  <nb-card-header style=\"background: #ffd500;\">DISCUSSION THREADS</nb-card-header>\r\n  <nb-card-body>\r\n    <div class=\"table-responsive\" *ngIf=\"announcements.length > 0; else noAnnouncement\">\r\n      <table class=\"table table-borderless\">\r\n        <thead>\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>Title</th>\r\n            <th>Text</th>\r\n            <th>Attachment</th>\r\n            <th>Delete</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let item of announcements; let i = index\">\r\n            <td>\r\n              <span>Announcement {{ i + 1 }}</span>\r\n            </td>\r\n            <td>\r\n              <span> {{ item.title }}</span>\r\n            </td>\r\n            <td>\r\n              <div [innerHTML]=\"item.text | safeHtml\"></div>\r\n            </td>\r\n            <td>\r\n              <a [href]=\"item.attachment.secure_url\" *ngIf=\"item.attachment\">{{\r\n                item.attachment.file_name\r\n              }}</a>\r\n            </td>\r\n            <div>\r\n              <button nbButton status=\"danger\" (click)=\"onDelete(item._id)\">Delete</button>\r\n            </div>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <ng-template #noAnnouncement>\r\n      <p class=\"text-center pt-5\">No Announcements</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -1728,7 +1728,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    Announcements\n    <button\n      class=\"btn btn-yellow-black float-right\"\n      [routerLink]=\"'/pages/communication/add-announcements/' + this.instituteId\"\n    >\n      ADD ANNOUNCEMENT\n    </button>\n  </nb-card-header>\n  <nb-card-body>\n    <ng-container *ngIf=\"announcements.length > 0; else noAnnouncements\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>ID</th>\n                  <th>Title</th>\n                  <th>Attachment</th>\n                  <th></th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let item of announcements; let i = index\">\n                  <td>\n                    <span> {{ i + 1 }}</span>\n                  </td>\n                  <td>\n                    <span> {{ item.title }}</span>\n                  </td>\n                  <td>\n                    <a [href]=\"item.attachment.secure_url\" *ngIf=\"item.attachment\">{{\n                      item.attachment.file_name\n                    }}</a\n                    ><span *ngIf=\"!item.attachment\">--</span>\n                  </td>\n                  <div>\n                    <button class=\"mr-3 mb-2\" nbButton (click)=\"onView(item._id)\">View</button>\n                    <button class=\"mb-2\" nbButton status=\"danger\" (click)=\"onDelete(item._id)\">\n                      Delete\n                    </button>\n                  </div>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n    <ng-template #noAnnouncements>\n      <p class=\"text-center pt-5\">No Announcements</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    Announcements\n    <button\n      class=\"btn btn-yellow-black float-right\"\n      [routerLink]=\"'/pages/communication/add-announcements/' + this.instituteId\"\n    >\n      ADD ANNOUNCEMENT\n    </button>\n  </nb-card-header>\n  <nb-card-body>\n    <ng-container *ngIf=\"announcements.length > 0; else noAnnouncements\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"table-responsive\">\n            <table class=\"table table-borderless\">\n              <thead>\n                <tr>\n                  <th>ID</th>\n                  <th>Title</th>\n                  <th>Attachment</th>\n                  <th></th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let item of announcements; let i = index\">\n                  <td>\n                    <span> {{ i + 1 }}</span>\n                  </td>\n                  <td>\n                    <span> {{ item.title }}</span>\n                  </td>\n                  <td>\n                    <a\n                      [href]=\"item.attachment.secure_url\"\n                      *ngIf=\"item.attachment\"\n                      target=\"_blank\"\n                      >{{ item.attachment.file_name }}</a\n                    >\n                    <span *ngIf=\"!item.attachment\">--</span>\n                  </td>\n                  <div>\n                    <button class=\"mr-3 mb-2\" nbButton (click)=\"onView(item._id)\">View</button>\n                    <button class=\"mr-3 mb-2 btn btn-yellow\" (click)=\"edit(item._id)\">\n                      Edit\n                    </button>\n                    <button class=\"mr-3 mb-2\" nbButton status=\"success\" (click)=\"repeat(item._id)\">\n                      Repeat\n                    </button>\n                    <button class=\"mb-2\" nbButton status=\"danger\" (click)=\"onDelete(item._id)\">\n                      Delete\n                    </button>\n                  </div>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n    <ng-template #noAnnouncements>\n      <p class=\"text-center pt-5\">No Announcements</p>\n    </ng-template>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -1741,7 +1741,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    <button class=\"btn btn-yellow float-right\" (click)=\"manageAnnouncement()\">\n      Back\n    </button>\n    <h3>{{ announcement.title }}</h3>\n  </nb-card-header>\n  <nb-card-body>\n    <div *ngIf=\"announcement.attachment\">\n      <a [href]=\"announcement.attachment.secure_url\">{{ announcement.attachment.file_name }}</a>\n    </div>\n    <div [innerHTML]=\"announcement.text | safeHtml\"></div>\n  </nb-card-body>\n</nb-card>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    <button class=\"btn btn-yellow float-right\" (click)=\"manageAnnouncement()\">\n      Back\n    </button>\n    <h3>{{ announcement.title }}</h3>\n  </nb-card-header>\n  <nb-card-body>\n    <div *ngIf=\"announcement.attachment\">\n      <a [href]=\"announcement.attachment.secure_url\" target=\"_blank\">{{\n        announcement.attachment.file_name\n      }}</a>\n    </div>\n    <div [innerHTML]=\"announcement.text | safeHtml\"></div>\n  </nb-card-body>\n</nb-card>\n");
 
 /***/ }),
 
@@ -1754,7 +1754,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div>\r\n    <button (click)=\"back()\" class=\"btn btn-yellow-black float-right\">Forum Page</button>\r\n    <p style=\"font-weight: bold;\">Forum</p>\r\n  </div>\r\n  <br /><br />\r\n  <nb-card>\r\n    <nb-card-body>\r\n      <form [formGroup]=\"forumForm\" (ngSubmit)=\"onSubmit()\">\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-4\">\r\n            <label for=\"topic\">*Topic</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              id=\"topic\"\r\n              fullWidth\r\n              status=\"basic\"\r\n              formControlName=\"topic\"\r\n              [status]=\"f.topic.errors && submitted ? 'danger' : 'basic'\"\r\n              placeholder=\"Topic\"\r\n            />\r\n            <small *ngIf=\"f.topic.errors && submitted\">*Topic Required</small>\r\n          </div>\r\n          <div class=\"col-sm-4\">\r\n            <label for=\"course\">Course</label>\r\n            <nb-select placeholder=\"Course\" id=\"course\" status=\"basic\" fullWidth=\"true\" formControlName=\"courseId\">\r\n              <nb-option value=\"\">Select Course</nb-option>\r\n              <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{ course.name }}</nb-option>\r\n            </nb-select>\r\n          </div>\r\n         \r\n        </div>\r\n        <br />\r\n      \r\n        <br />\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-12\">\r\n            <label for=\"description\">*Description</label>\r\n            <textarea\r\n              type=\"text\"\r\n              nbInput\r\n              id=\"description\"\r\n              status=\"basic\"\r\n              fullWidth\r\n              formControlName=\"description\"\r\n              [status]=\"f.description.errors && submitted ? 'danger' : 'basic'\"\r\n              placeholder=\"Terms and Conditions\"\r\n              cols=\"15\"\r\n              rows=\"7\"\r\n            >\r\n            </textarea>\r\n            <small *ngIf=\"f.description.errors && submitted\"\r\n              >*Description is Required</small\r\n            >\r\n          </div>\r\n        </div>\r\n  \r\n        <div style=\"text-align: right; margin: 1rem;\">\r\n          <button type=\"submit\" class=\"btn btn-yellow-black\">\r\n            {{ edit ? 'Update' : 'Add' }}\r\n          </button>\r\n        </div>\r\n      </form>\r\n    </nb-card-body>\r\n  </nb-card>\r\n  ");
+/* harmony default export */ __webpack_exports__["default"] = ("<div>\r\n  <button (click)=\"back()\" class=\"btn btn-yellow-black float-right\">Forum Page</button>\r\n  <p style=\"font-weight: bold;\">Forum</p>\r\n</div>\r\n<br /><br />\r\n<nb-card>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"forumForm\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"topic\">*Topic</label>\r\n          <input\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"topic\"\r\n            fullWidth\r\n            status=\"basic\"\r\n            formControlName=\"topic\"\r\n            [status]=\"f.topic.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Topic\"\r\n          />\r\n          <small *ngIf=\"f.topic.errors && submitted\">*Topic Required</small>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"course\">Course</label>\r\n          <nb-select\r\n            placeholder=\"Course\"\r\n            id=\"course\"\r\n            status=\"basic\"\r\n            fullWidth=\"true\"\r\n            formControlName=\"courseId\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{\r\n              course.name\r\n            }}</nb-option>\r\n          </nb-select>\r\n        </div>\r\n      </div>\r\n      <br />\r\n\r\n      <br />\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n          <label for=\"description\">*Description</label>\r\n          <textarea\r\n            type=\"text\"\r\n            nbInput\r\n            id=\"description\"\r\n            status=\"basic\"\r\n            fullWidth\r\n            formControlName=\"description\"\r\n            [status]=\"f.description.errors && submitted ? 'danger' : 'basic'\"\r\n            placeholder=\"Description\"\r\n            cols=\"15\"\r\n            rows=\"7\"\r\n          >\r\n          </textarea>\r\n          <small *ngIf=\"f.description.errors && submitted\">*Description is Required</small>\r\n        </div>\r\n      </div>\r\n\r\n      <div style=\"text-align: right; margin: 1rem;\">\r\n        <button type=\"submit\" class=\"btn btn-yellow-black\">\r\n          {{ edit ? 'Update' : 'Add' }}\r\n        </button>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -1767,7 +1767,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"py-4\">\r\n  <button class=\"btn btn-yellow-black float-right\" (click)=\"back()\">\r\n    Back\r\n  </button>\r\n</div>\r\n<br /><br />\r\n<nb-card status=\"info\" *ngIf=\"forumCommentData\">\r\n  <nb-card-header>\r\n    <div class=\"row mb-2\">\r\n      <div class=\"col-sm-9\">\r\n        <h3 class=\"text-white\">{{ forumCommentData.title }}</h3>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-md-12\">Description : {{ forumCommentData.description }}</div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-md-3\">\r\n        <label>Crated By :</label><span> {{ forumCommentData.createdByName }}</span>\r\n      </div>\r\n      <div class=\"col-md-3\">\r\n        <label>Crated at :</label><span> {{ getFormattedDateTime(forumCommentData.date) }}</span>\r\n      </div>\r\n      <div class=\"col-md-3\" *ngIf=\"forumCommentData.courseName\">\r\n        <label>Course Name : </label><span> {{ forumCommentData.courseName }}</span>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <hr />\r\n    <div *ngFor=\"let comment of forumCommentData.comments\" class=\"commentBox\">\r\n      <div class=\"row\">\r\n        <div class=\"col-md-9\">\r\n          <label>Comment By : </label><span>{{ comment.userName }}</span>\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n          <label>Comment At : </label><span>{{ getFormattedDateTime(comment.commentDate) }}</span>\r\n        </div>\r\n      </div>\r\n      <div class=\"my-4\">\r\n        {{ comment.comment }}\r\n        <div\r\n          class=\"deleteComment\"\r\n          (click)=\"deleteComment(comment._id)\"\r\n          *ngIf=\"comment.userId == authService.getUser()._id\"\r\n        >\r\n          <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div *ngIf=\"forumCommentData.comments.length === 0\">\r\n      <p class=\"text-center\">You Are The First One To Comment</p>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-md-12\">\r\n        <label>Your Comment :</label>\r\n        <textarea\r\n          type=\"text\"\r\n          nbInput\r\n          fullWidth\r\n          status=\"basic\"\r\n          [(ngModel)]=\"userComment\"\r\n          rows=\"5\"\r\n          placeholder=\"Comment\"\r\n        >\r\n        </textarea>\r\n      </div>\r\n    </div>\r\n    <hr />\r\n\r\n    <button class=\"float-right mt-3 btn btn-yellow-black\" (click)=\"submitComment()\" type=\"submit\">\r\n      Submit\r\n    </button>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"py-4\">\r\n  <button class=\"btn btn-yellow-black float-right\" (click)=\"back()\">\r\n    Back\r\n  </button>\r\n</div>\r\n<br /><br />\r\n<nb-card status=\"info\" *ngIf=\"forumCommentData\">\r\n  <nb-card-header>\r\n    <div class=\"row mb-2\">\r\n      <div class=\"col-sm-9\">\r\n        <h3 class=\"text-white\">{{ forumCommentData.title }}</h3>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-md-12\">Description : {{ forumCommentData.description }}</div>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-md-3\">\r\n        <label>Created By :</label><span> {{ forumCommentData.createdByName }}</span>\r\n      </div>\r\n      <div class=\"col-md-3\">\r\n        <label>Created at :</label><span> {{ getFormattedDateTime(forumCommentData.date) }}</span>\r\n      </div>\r\n      <div class=\"col-md-3\" *ngIf=\"forumCommentData.courseName\">\r\n        <label>Course Name : </label><span> {{ forumCommentData.courseName }}</span>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <hr />\r\n    <div *ngFor=\"let comment of forumCommentData.comments\" class=\"commentBox\">\r\n      <div class=\"row\">\r\n        <div class=\"col-md-9\">\r\n          <label>Comment By : </label><span>{{ comment.userName }}</span>\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n          <label>Comment At : </label><span>{{ getFormattedDateTime(comment.commentDate) }}</span>\r\n        </div>\r\n      </div>\r\n      <div class=\"my-4\">\r\n        {{ comment.comment }}\r\n        <div\r\n          class=\"deleteComment\"\r\n          (click)=\"deleteComment(comment._id)\"\r\n          *ngIf=\"comment.userId == authService.getUser()._id\"\r\n        >\r\n          <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div *ngIf=\"forumCommentData.comments.length === 0\">\r\n      <p class=\"text-center\">You Are The First One To Comment</p>\r\n    </div>\r\n    <hr />\r\n    <div class=\"row\">\r\n      <div class=\"col-md-12\">\r\n        <label>Your Comment :</label>\r\n        <textarea\r\n          type=\"text\"\r\n          nbInput\r\n          fullWidth\r\n          status=\"basic\"\r\n          [(ngModel)]=\"userComment\"\r\n          rows=\"5\"\r\n          placeholder=\"Comment\"\r\n        >\r\n        </textarea>\r\n      </div>\r\n    </div>\r\n    <hr />\r\n\r\n    <button class=\"float-right mt-3 btn btn-yellow-black\" (click)=\"submitComment()\" type=\"submit\">\r\n      Submit\r\n    </button>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -1793,7 +1793,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"py-4\">\r\n  <button (click)=\"back()\" class=\"btn btn-yellow-black float-right\">Forum Page</button>\r\n</div>\r\n<br /><br />\r\n<nb-card status=\"info\">\r\n  <nb-card-header>\r\n    <div class=\"row mb-2\" *ngIf=\"courses\">\r\n      <div class=\"col-sm-9\">\r\n        <h3 class=\"text-white\">My Forums</h3>\r\n      </div>\r\n      <div class=\"col-sm-3\">\r\n        <nb-select placeholder=\"Select Course\" status=\"basic\" fullWidth (selectedChange)=\"onSelectCourse($event)\">\r\n          <nb-option value=\"\">All</nb-option>\r\n          <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{\r\n            course.name\r\n          }}</nb-option>\r\n        </nb-select>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <table class=\"table table-borderless text-center\" *ngIf=\"myForums; else noForums\">\r\n      <thead>\r\n        <tr>\r\n          <th>Topic</th>\r\n          <th>Course</th>\r\n          <th>Date</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let myforum of myForums;let i = index\">\r\n          <td>{{ myforum.title }}</td>\r\n          <td>{{ myforum.courseId }}</td>\r\n          <td>{{myforum.date}}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3 mb-2 btn btn-yellow\" (click)=\"edit(myforum._id)\">Edit</button>\r\n            <button class=\"mb-2\" nbButton status=\"danger\" (click)=\"delete(myforum._id,i)\">\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ng-template #noForums>\r\n      <p class=\"mt-5 mb-5 text-center\">No Record Found</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"py-4\">\r\n  <button (click)=\"back()\" class=\"btn btn-yellow-black float-right\">Forum Page</button>\r\n</div>\r\n<br /><br />\r\n<nb-card status=\"info\">\r\n  <nb-card-header>\r\n    <div class=\"row mb-2\" *ngIf=\"courses\">\r\n      <div class=\"col-sm-9\">\r\n        <h3 class=\"text-white\">My Forums</h3>\r\n      </div>\r\n      <div class=\"col-sm-3\">\r\n        <nb-select\r\n          placeholder=\"Select Course\"\r\n          status=\"basic\"\r\n          fullWidth\r\n          (selectedChange)=\"onSelectCourse($event)\"\r\n        >\r\n          <nb-option value=\"\">All</nb-option>\r\n          <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{\r\n            course.name\r\n          }}</nb-option>\r\n        </nb-select>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <table class=\"table table-borderless text-center\" *ngIf=\"myForums.length > 0; else noForums\">\r\n      <thead>\r\n        <tr>\r\n          <th>Topic</th>\r\n          <th>Course</th>\r\n          <th>Date</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let myforum of myForums; let i = index\">\r\n          <td>{{ myforum.title }}</td>\r\n          <td>{{ myforum.courseId }}</td>\r\n          <td>{{ myforum.date }}</td>\r\n          <td class=\"text-right\">\r\n            <button class=\"mr-3 mb-2 btn btn-yellow\" (click)=\"edit(myforum._id)\">Edit</button>\r\n            <button class=\"mb-2\" nbButton status=\"danger\" (click)=\"delete(myforum._id, i)\">\r\n              Delete\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ng-template #noForums>\r\n      <p class=\"mt-5 mb-5 text-center\">No Record Found</p>\r\n    </ng-template>\r\n  </nb-card-body>\r\n</nb-card>\r\n");
 
 /***/ }),
 
@@ -1844,11 +1844,15 @@ let AnnouncementsComponent = class AnnouncementsComponent {
         this.api = api;
         this.active = active;
         this.announceService = announceService;
-        this.announcement = [];
+        this.announcements = [];
         this.display = false;
     }
     ngOnInit() {
         this.routerId = this.active.snapshot.paramMap.get('id');
+        this.active.queryParams.subscribe((data) => {
+            this.announcementId = data.announcement;
+            this.edit = data.edit;
+        });
         this.batches = [];
         this.announcementForm = this.fb.group({
             title: [''],
@@ -1858,38 +1862,46 @@ let AnnouncementsComponent = class AnnouncementsComponent {
             categories: [],
         });
         this.getInstitute(this.routerId);
-        this.getAnnouncement(this.routerId);
+        this.getAnnouncements(this.routerId);
     }
     getBatches(id) {
         this.api.getBatches(id).subscribe((data) => {
             this.batches = data.batch;
-            this.display = true;
-            // console.log('my batch' + JSON.parse(JSON.stringify(data)));
+            if (this.edit) {
+                this.getSingleAnnouncement(this.announcementId);
+            }
+            else {
+                this.display = true;
+            }
         });
     }
-    getAnnouncement(id) {
+    getAnnouncements(id) {
         this.announceService.getAnnouncements(id).subscribe((data) => {
-            this.announcement = data;
-            // console.log('announce =>', this.announcement);
+            this.announcements = data;
+        });
+    }
+    getSingleAnnouncement(id) {
+        this.announceService.getSingleAnnouncement(id).subscribe((res) => {
+            this.announcement = res;
+            this.announcementForm.patchValue({
+                title: res.title,
+                text: res.text,
+                batchCodes: res.batchCodes,
+                categories: res.categories,
+            });
+            this.display = true;
+        }, (err) => {
+            this.location.back();
         });
     }
     onFilePicked(event) {
         const file = event.target.files[0];
-        // const imgExt: string[] = ['jpg', 'png'];
-        // const ext = file.name
-        // if (!(imgExt.indexOf(ext) !== -1)) {
-        // this.invalidImage = true;
-        // return;
-        // }
-        // this.imageRequired = false;
-        // this.invalidImage = false;
         this.file = file;
     }
     getInstitute(id) {
         this.api.getInstitute(id).subscribe((data) => {
             this.institute = data.institute;
             this.getBatches(this.routerId);
-            // console.log(this.institute.institute);
         });
     }
     check(event) {
@@ -1903,7 +1915,6 @@ let AnnouncementsComponent = class AnnouncementsComponent {
         }
     }
     onSubmit() {
-        // console.log('text =>', this.announce);
         const announce = new FormData();
         announce.append('title', this.announcementForm.value.title);
         announce.append('text', this.announcementForm.value.text);
@@ -1913,23 +1924,34 @@ let AnnouncementsComponent = class AnnouncementsComponent {
         if (this.file) {
             announce.append('announcement', this.file, this.announcementForm.value.title);
         }
-        this.announceService.postAnnouncement(announce).subscribe((res) => {
-            this.showToast('top-right', 'success', 'Announcement Added Successfully');
-            this.location.back();
-        }, (err) => {
-            this.showToast('top-right', 'danger', err.err.message);
-        });
+        if (this.edit) {
+            announce.append('_id', this.announcementId);
+            this.announceService.editAnnouncement(announce).subscribe((res) => {
+                this.showToast('top-right', 'success', 'Announcement Edited Successfully');
+                this.location.back();
+            }, (err) => {
+                this.showToast('top-right', 'danger', err.err.message);
+            });
+        }
+        else {
+            this.announceService.postAnnouncement(announce).subscribe((res) => {
+                this.showToast('top-right', 'success', 'Announcement Added Successfully');
+                this.location.back();
+            }, (err) => {
+                this.showToast('top-right', 'danger', err.err.message);
+            });
+        }
     }
     onDelete(id) {
         this.announceService.deleteAnnouncement(id).subscribe((res) => {
             // console.log(res);
-            const i = this.announcement.findIndex((e) => e._id === id);
+            const i = this.announcements.findIndex((e) => e._id === id);
             // console.log(i);
             if (i !== -1) {
-                this.announcement.splice(i, 1);
+                this.announcements.splice(i, 1);
                 this.showToast('top-right', 'success', 'Announcement Deleted Successfully');
             }
-            this.getAnnouncement(this.routerId);
+            this.getAnnouncements(this.routerId);
         }, (err) => {
             this.showToast('top-right', 'danger', 'Announcement Deletion Failed');
         });
@@ -2019,6 +2041,12 @@ let ManageAnnouncementsComponent = class ManageAnnouncementsComponent {
     onView(id) {
         this.router.navigate(['/pages/communication/view-announcements/', this.instituteId], {
             queryParams: { announcement: id },
+        });
+    }
+    repeat(id) { }
+    edit(id) {
+        this.router.navigate(['/pages/communication/add-announcements/', this.instituteId], {
+            queryParams: { announcement: id, edit: true },
         });
     }
     getAnnouncement(id) {
@@ -2909,6 +2937,11 @@ __webpack_require__.r(__webpack_exports__);
 let AnnouncementService = class AnnouncementService {
     constructor(http) {
         this.http = http;
+    }
+    editAnnouncement(announcement) {
+        return this.http
+            .post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].server}/institute/announcement/editAnnouncement`, announcement)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])((response) => { }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((err) => this.handleError(err)));
     }
     postAnnouncement(announcement) {
         return this.http
