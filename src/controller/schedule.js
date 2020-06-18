@@ -167,10 +167,17 @@ exports.getScheduleByInstitute = async (req, res) => {
           },
         },
       ]);
-      let data = {};
-      instituteSchedule[i].teacherData = teacherData;
-      data = instituteSchedule[i];
-      //data.teacherData = teacherData;
+      let data = {
+        recurrence: instituteSchedule[i].recurrence,
+        _id: instituteSchedule[i]._id,
+        instituteId: instituteSchedule[i].instituteId,
+        courseId: instituteSchedule[i].courseId,
+        batchId: instituteSchedule[i].batchId,
+        scheduleStart: instituteSchedule[i].scheduleStart,
+        scheduleEnd: instituteSchedule[i].scheduleEnd,
+        days: instituteSchedule[i].days,
+        teacherData: teacherData,
+      };
       instSchedule.push(data);
     }
 
