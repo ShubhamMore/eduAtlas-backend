@@ -340,6 +340,32 @@ exports.addCourseStudent = async (req, res, next) => {
       throw error;
     }
 
+    if (req.body.instituteDetails.batchId) {
+      const checkRoll = await Student.findOne({
+        $and: [
+          {
+            'instituteDetails.instituteId': req.body.instituteDetails.instituteId,
+          },
+          {
+            'instituteDetails.courseId': req.body.instituteDetails.courseId,
+          },
+          {
+            'instituteDetails.batchId': req.body.instituteDetails.batchId,
+          },
+          {
+            'instituteDetails.rollNumber': req.body.instituteDetails.rollNumber,
+          },
+        ],
+      });
+      console.log('****************************checkRoll***********************************');
+      console.log(checkRoll);
+      if (checkRoll) {
+        const error = new Error('Roll Number is already used');
+        error.statusCode = 202;
+        throw error;
+      }
+    }
+
     //const studentInfo = req.body;
     // console.log(req.body, req.body.eduAtlasId);
     const updatedStudent = await Student.update(
@@ -385,6 +411,37 @@ exports.updateStudentCourse = async (req, res) => {
   try {
     let body = {};
     console.log;
+    if (req.body.instituteDetails.batchId) {
+      const checkRoll = await Student.findOne({
+        $and: [
+          {
+            _id: {
+              $ne: req.body._id,
+            },
+          },
+
+          {
+            'instituteDetails.instituteId': req.body.instituteDetails.instituteId,
+          },
+          {
+            'instituteDetails.courseId': req.body.instituteDetails.courseId,
+          },
+          {
+            'instituteDetails.batchId': req.body.instituteDetails.batchId,
+          },
+          {
+            'instituteDetails.rollNumber': req.body.instituteDetails.rollNumber,
+          },
+        ],
+      });
+      console.log('****************************checkRoll***********************************');
+      console.log(checkRoll);
+      if (checkRoll) {
+        const error = new Error('Roll Number is already used');
+        error.statusCode = 202;
+        throw error;
+      }
+    }
 
     const updateStudent = await Student.updateOne(
       {
@@ -581,4 +638,4 @@ exports.getCoursesOfStudentByInstitute = async (req, res) => {
   }
 };
 
-exports.pendingStudents = async (req, res) => {};
+//exports.pendingStudents = async (req, res) => {};
