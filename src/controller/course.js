@@ -75,7 +75,7 @@ exports.deleteCourse = async (req, res, next) => {
         if (err) {
           throw err;
         }
-        res.status(200).send('Course Deleted Successfully');
+        res.status(200).send({ success: true });
       }
     );
   } catch (error) {
