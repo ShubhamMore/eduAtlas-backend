@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const attendanceSchema = new Schema({
+  scheduleId: {
+    type: String,
+  },
+  lectureId: {
+    type: String,
+  },
   date: {
     type: String,
     required: true,

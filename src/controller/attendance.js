@@ -2,6 +2,7 @@ const Attendance = require('../model/attendance.model');
 const Institute = require('../model/institute.model');
 const errorHandler = require('../service/errorHandler');
 const Student = require('../model/student.model');
+const Schedule = require('../model/schedule.model');
 const mongoose = require('mongoose');
 exports.addAttendance = async (req, res) => {
   try {
@@ -48,8 +49,107 @@ exports.addAttendance = async (req, res) => {
         upsert: true,
       }
     );
-
+    const updateSchedule = await Schedule.updateOne(
+      {
+        _id: req.body.scheduleId,
+        'days._id': req.body.lectureId,
+      },
+      {
+        $set: {
+          'days.$.attendanceMark': true,
+        },
+      }
+    );
     res.status(200).send(addAtt);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
+
+exports.getAttendanceByInstitute = async (req, res) => {
+  try {
+    details = {};
+
+    if (!req.body.batchId && !req.body.courseId) {
+      details = {
+        instituteId: req.body.instituteId,
+      };
+    } else if (!req.body.batchId && req.body.courseId) {
+      details = {
+        instituteId: req.body.instituteId,
+        courseId: req.body.courseId,
+      };
+    } else if (req.body.batchId) {
+      details = {
+        instituteId: req.body.instituteId,
+        courseId: req.body.courseId,
+        batchId: req.body.batchId,
+      };
+    } else {
+      const error = new Error('No Institute available');
+      error.statusCode = 400;
+      throw error;
+    }
+
+    const date = new Date();
+    const currentDate = date.getFullYear() + date.getMonth + date.getDate() + 'T00:00:00';
+
+    //yyyy-mm-ddT00:00:00
+    const marked = await Schedule.aggregate([
+      {
+        $unwind: '$days',
+      },
+      {
+        $project: {
+          instituteId: 1,
+          courseId: 1,
+          batchId: 1,
+          days: 1,
+          date: {
+            $dateFromString: {
+              dateString: '$days.date',
+            },
+          },
+        },
+      },
+      {
+        $match: {
+          details,
+          'days.attendanceMark': true,
+          'days.date': {
+            $lt: currentDate,
+          },
+        },
+      },
+    ]);
+    const unmarked = await Schedule.aggregate([
+      {
+        $unwind: '$days',
+      },
+      {
+        $project: {
+          instituteId: 1,
+          courseId: 1,
+          batchId: 1,
+          days: 1,
+          date: {
+            $dateFromString: {
+              dateString: '$days.date',
+            },
+          },
+        },
+      },
+      {
+        $match: {
+          details,
+          'days.attendanceMark': false,
+          'days.date': {
+            $lt: currentDate,
+          },
+        },
+      },
+    ]);
+    res.status(200).send(marked, unmarked);
   } catch (error) {
     errorHandler(error, res);
   }
