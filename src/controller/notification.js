@@ -4,8 +4,12 @@ const Notification = require('../model/notification.model');
 
 exports.getNotifications = async (req, res) => {
   try {
-    const notifications = await Notification.find({ eduatlasId: req.user.eduAtlasId })
-      .notifications;
+    const notifications = await Notification.findOne(
+      { eduatlasId: req.user.eduAtlasId },
+      { _id: 0, notifications: 1 }
+    );
+
+    console.log(notifications);
 
     notifications.sort((msg1, msg2) => {
       const msg1Id = msg1._id;
