@@ -372,13 +372,15 @@ exports.getScheduleByBatch = async (req, res) => {
         days: instituteSchedule[i].days,
         teacherData: teacherData,
       };
+
       instSchedule.push(data);
     }
 
     //teacher ID and teacher both needed
 
-    res.status(200).send(batchSchedule);
+    res.status(200).send(instSchedule);
   } catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 };

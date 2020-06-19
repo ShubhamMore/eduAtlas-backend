@@ -51,7 +51,7 @@ const scheduleSchema = new Schema({
       },
       teacher: {
         type: String,
-        default: '',
+        default: null,
       },
       topic: {
         type: String,

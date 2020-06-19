@@ -4,18 +4,24 @@ const Notification = require('../model/notification.model');
 
 exports.getNotifications = async (req, res) => {
   try {
-    const notifications = await Notification.find({ eduatlasId: req.body.eduAtlasId })
-      .notifications;
+    const notifications = await Notification.findOne(
+      { eduatlasId: req.user.eduAtlasId },
+      { _id: 0, notifications: 1 }
+    );
 
-    notifications.sort((msg1, msg2) => {
-      const msg1Id = msg1._id;
-      const msg2Id = msg2._id;
-      if (msg1Id > msg2Id) {
-        return -1;
-      } else {
-        return 1;
-      }
-    });
+    if (!notifications) {
+      notifications.sort((msg1, msg2) => {
+        const msg1Id = msg1._id;
+        const msg2Id = msg2._id;
+        if (msg1Id > msg2Id) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
+    } else {
+      notifications = [];
+    }
 
     res.status(200).send(notifications);
   } catch (error) {
@@ -27,7 +33,7 @@ exports.getNotifications = async (req, res) => {
 exports.deleteNotification = async (req, res) => {
   try {
     const deleteNotification = await Notification.findOneAndUpdate(
-      { eduatlasId: req.body.eduAtlasId },
+      { eduatlasId: req.user.eduAtlasId },
       { $pull: { notifications: { _id: notificationId } } },
       { new: true }
     );
