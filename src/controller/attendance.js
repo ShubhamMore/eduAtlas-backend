@@ -176,14 +176,18 @@ exports.getAttendanceByInstitute = async (req, res) => {
           },
         },
       ]);
-      console.log('course: ', course);
+      //console.log('course: ', course);
       let data = {};
       data = marked[i];
-      console.log(data);
+      //console.log(data);
+      // console.log(course[0].course.name);
+
       data.days.courseName = course[0].course.name;
       data.days.batchName = course[0].batch.batchCode;
+      // console.log(data.days.courseName);
+      // console.log(data.days.batchName);
 
-      console.log(marked[i].days.teacher);
+      //console.log(marked[i].days.teacher);
       const teacher = await Employee.findOne({
         _id: marked[i].days.teacher,
       });
@@ -222,27 +226,32 @@ exports.getAttendanceByInstitute = async (req, res) => {
         },
       },
     ]);
-    console.log(unmarked);
+    //console.log(unmarked);
     const ulength = unmarked.length;
     for (var i = 0; i < ulength; i++) {
-      const course = await Institute.findOne({
-        $and: [
-          {
-            _id: req.body.instituteId,
-          },
-          {
-            'course._id': unmarked[i].courseId,
-          },
-          {
-            'batch._id': unmarked[i].batchId,
-          },
-        ],
-      });
+      const course = await Institute.aggregate([
+        {
+          $unwind: '$course',
+        },
+        {
+          $unwind: '$batch',
+        },
+        {
+          $match: {
+            _id: mongoose.Types.ObjectId(req.body.instituteId),
 
+            'course._id': mongoose.Types.ObjectId(unmarked[i].courseId),
+
+            'batch._id': mongoose.Types.ObjectId(unmarked[i].batchId),
+          },
+        },
+      ]);
+      // console.log('**********************');
+      // console.log(course[0].course.name);
       let data = {};
       data = unmarked[i];
-      data.days.courseName = course.course.name;
-      data.days.batchName = course.batch.batchCode;
+      data.days.courseName = course[0].course.name;
+      data.days.batchName = course[0].batch.batchCode;
 
       const teacher = await Employee.findOne({
         _id: unmarked[i].days.teacher,
@@ -254,7 +263,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
       unmarkedData.push(data);
     }
 
-    console.log({ markedData, unmarkedData });
+    //console.log({ markedData, unmarkedData });
 
     res.status(200).send({ markedData, unmarkedData });
   } catch (error) {
