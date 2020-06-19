@@ -5,6 +5,13 @@ const Student = require('../model/student.model');
 const Schedule = require('../model/schedule.model');
 const Employee = require('../model/employee.model');
 
+const appendZero = (n) => {
+  if (n < 10) {
+    return '0' + n;
+  }
+  return '' + n;
+};
+
 const mongoose = require('mongoose');
 exports.addAttendance = async (req, res) => {
   try {
@@ -92,10 +99,15 @@ exports.getAttendanceByInstitute = async (req, res) => {
       error.statusCode = 400;
       throw error;
     }
-
+    console.log(req.body);
     const date = new Date();
     const currentDate =
-      date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + 'T00:00:00';
+      date.getFullYear() +
+      '-' +
+      appendZero(date.getMonth() + 1) +
+      '-' +
+      appendZero(date.getDate()) +
+      'T00:00:00';
     console.log(currentDate);
     //yyyy-mm-ddT00:00:00
     const markedData = [];
@@ -120,7 +132,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
         $match: {
           'days.attendanceMark': true,
           date: {
-            $lt: new Date('2020-08-22T00:00:00'),
+            $lt: new Date(currentDate),
           },
         },
       },
@@ -147,6 +159,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
       data.days.courseName = course.course.name;
       data.days.batchName = course.batch.name;
 
+      console.log(marked[i].days.teacher);
       const teacher = await Employee.findOne({
         _id: marked[i].days.teacher,
       });
