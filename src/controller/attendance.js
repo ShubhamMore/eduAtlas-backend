@@ -4,6 +4,8 @@ const errorHandler = require('../service/errorHandler');
 const Student = require('../model/student.model');
 const Schedule = require('../model/schedule.model');
 const Employee = require('../model/employee.model');
+const fs = require('fs').promises;
+const path = require('path');
 const excelToJson = require('convert-excel-to-json');
 const sendNotification = require('../notifications/notification');
 const XLSX = require('xlsx');
@@ -13,6 +15,19 @@ const appendZero = (n) => {
     return '0' + n;
   }
   return '' + n;
+};
+
+const deleteFile = (filePath) => {
+  fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
+    console.log('deleteFile');
+    if (error) {
+      console.log(error);
+      const err = new Error('Error while deleting the File');
+      err.statusCode = 500;
+      throw err;
+    }
+    console.log('File Deleted successfully');
+  });
 };
 
 const mongoose = require('mongoose');
@@ -346,8 +361,99 @@ exports.getAttendanceForStudentByCourse = async (req, res) => {
 };
 
 exports.attendanceByFile = async (req, res) => {
-  console.log('in here', path.join(__dirname + '../../../' + req.file.path));
-
   try {
+    console.log('in here', path.join(__dirname + '../../../' + req.file.path));
+    const excelData = excelToJson({
+      sourceFile: file,
+
+      sheets: [
+        {
+          name: 'Sheet1',
+
+          header: {
+            rows: 1,
+          },
+
+          columnToKey: {
+            A: 'rollNo',
+            B: 'name',
+            C: 'attendanceStatus',
+          },
+        },
+      ],
+    });
+    const s = Sheet1.length;
+    for (var i = 0; i < s; i++) {
+      // Sheet1[i].attendanceStatus =
+      //   Sheet1[i].attendanceStatus == 'P' || Sheet1[i].attendanceStatus == 'p' ? true : false;
+      let attendance = [];
+      const student = await Student.findOne({
+        $and: [
+          {
+            'instituteDetails.instituteId': req.body.instituteId,
+          },
+          {
+            'instituteDetails.courseId': req.body.courseId,
+          },
+          {
+            'instituteDetails.batchId': req.body.batchId,
+          },
+          {
+            'instituteDetails.rollNumber': Sheet[i].rollNo,
+          },
+        ],
+      });
+
+      attendance.push({
+        studentId: student._id,
+        attendanceStatus:
+          Sheet1[i].attendanceStatus == 'P' || Sheet1[i].attendanceStatus == 'p' ? true : false,
+      });
+      const attBody = {
+        instituteId: req.body.instituteId,
+        courseId: req.body.courseId,
+        batchId: req.body.batchId,
+        date: req.body.date,
+        scheduleId: req.body.scheduleId,
+        lectureId: req.body.lectureId,
+        attendance,
+      };
+      const addAtt = await Attendance.updateOne(
+        {
+          $and: [
+            {
+              date: req.body.date,
+            },
+            {
+              instituteId: req.body.instituteId,
+            },
+            {
+              courseId: req.body.courseId,
+            },
+            {
+              batchId: req.body.batchId,
+            },
+          ],
+        },
+        attBody,
+        {
+          upsert: true,
+        }
+      );
+      const updateSchedule = await Schedule.updateOne(
+        {
+          _id: req.body.scheduleId,
+          'days._id': req.body.lectureId,
+        },
+        {
+          $set: {
+            'days.$.attendanceMark': true,
+          },
+        }
+      );
+    }
+    deleteFile(req.file.path);
+
+    res.status(200).send(addAtt);
   } catch (error) {}
 };

@@ -455,7 +455,7 @@ exports.getScheduleDetails = async (req, res) => {
     singleSchedule.batchId = courseDetails[0].batch.batchCode;
 
     for (var i = 0; i < singleSchedule.days.length; i++) {
-      if (singleSchedule.days[i].teacher != '') {
+      if (singleSchedule.days[i].teacher) {
         const teacherInfo = await Employee.findOne({
           _id: singleSchedule.days[i].teacher,
         });
