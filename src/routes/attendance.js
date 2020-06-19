@@ -12,4 +12,6 @@ attendanceRouter.post(
 );
 
 attendanceRouter.post('/getAttendanceByInstitute', attendanceController.getAttendanceByInstitute);
+
+attendanceRouter.post('/attendanceByFile', attendanceController.attendanceByFile);
 module.exports = attendanceRouter;

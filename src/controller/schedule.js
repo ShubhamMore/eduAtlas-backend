@@ -9,6 +9,7 @@ const Institute = require('../model/institute.model');
 const Employee = require('../model/employee.model');
 const Student = require('../model/student.model');
 const { query } = require('express');
+const sendNotification = require('../notifications/notification');
 
 exports.addSchedule = async (req, res, next) => {
   try {
@@ -96,7 +97,18 @@ exports.addSchedule = async (req, res, next) => {
         '<p>Thankyou </p>' +
         '<p>EDUATLAS</p>' +
         '</div></body></html>';
-
+      const notify = {
+        title: 'NEW SCHEDULE',
+        message:
+          'New Schedule has been added for ' +
+          courseName +
+          ' starting from ' +
+          startDate +
+          ' till ' +
+          endDate,
+        receiverId: students[0].eduatlasId,
+      };
+      sendNotification(notify);
       send(mail);
     }
   } catch (error) {
@@ -172,6 +184,18 @@ exports.updateSchedule = async (req, res, next) => {
         '<p>Thankyou </p>' +
         '<p>EDUATLAS</p>' +
         '</div></body></html>';
+      const notify = {
+        title: 'NEW SCHEDULE',
+        message:
+          'Schedule has been updated for ' +
+          courseName +
+          ' starting from ' +
+          startDate +
+          ' till ' +
+          endDate,
+        receiverId: students[0].eduatlasId,
+      };
+      sendNotification(notify);
 
       send(mail);
     }

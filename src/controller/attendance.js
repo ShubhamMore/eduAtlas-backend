@@ -4,6 +4,9 @@ const errorHandler = require('../service/errorHandler');
 const Student = require('../model/student.model');
 const Schedule = require('../model/schedule.model');
 const Employee = require('../model/employee.model');
+const excelToJson = require('convert-excel-to-json');
+const sendNotification = require('../notifications/notification');
+const XLSX = require('xlsx');
 
 const appendZero = (n) => {
   if (n < 10) {
@@ -337,4 +340,11 @@ exports.getAttendanceForStudentByCourse = async (req, res) => {
   } catch (error) {
     errorHandler(error, res);
   }
+};
+
+exports.attendanceByFile = async (req, res) => {
+  console.log('in here', path.join(__dirname + '../../../' + req.file.path));
+
+  try {
+  } catch (error) {}
 };
