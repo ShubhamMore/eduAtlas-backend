@@ -16,6 +16,9 @@ const testSchema = new mongoose.Schema({
   batchId: {
     type: String,
   },
+  testCode: {
+    type: String,
+  },
   totalMarks: {
     type: String,
   },
