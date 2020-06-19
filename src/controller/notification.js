@@ -9,17 +9,19 @@ exports.getNotifications = async (req, res) => {
       { _id: 0, notifications: 1 }
     );
 
-    console.log(notifications);
-
-    notifications.sort((msg1, msg2) => {
-      const msg1Id = msg1._id;
-      const msg2Id = msg2._id;
-      if (msg1Id > msg2Id) {
-        return -1;
-      } else {
-        return 1;
-      }
-    });
+    if (!notifications) {
+      notifications.sort((msg1, msg2) => {
+        const msg1Id = msg1._id;
+        const msg2Id = msg2._id;
+        if (msg1Id > msg2Id) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
+    } else {
+      notifications = [];
+    }
 
     res.status(200).send(notifications);
   } catch (error) {
