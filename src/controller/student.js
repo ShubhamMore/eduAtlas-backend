@@ -11,7 +11,7 @@ const Institute = require('../model/institute.model');
 const send = require('../service/mail');
 exports.addStudent = async (req, res, next) => {
   try {
-    console.log('****************************body***********************************');
+    //    console.log('****************************body***********************************');
     console.log(req.body);
     if (req.body.instituteDetails.batchId) {
       const checkRoll = await Student.findOne({
@@ -30,7 +30,7 @@ exports.addStudent = async (req, res, next) => {
           },
         ],
       });
-      console.log('****************************checkRoll***********************************');
+      //  console.log('****************************checkRoll***********************************');
       console.log(checkRoll);
       if (checkRoll) {
         const error = new Error('Roll Number is already used');
@@ -49,7 +49,7 @@ exports.addStudent = async (req, res, next) => {
         },
       ],
     });
-    console.log('****************************user***********************************');
+    //    console.log('****************************user***********************************');
 
     console.log(user);
 
@@ -367,7 +367,7 @@ exports.addCourseStudent = async (req, res, next) => {
     }
 
     //const studentInfo = req.body;
-    // console.log(req.body, req.body.eduAtlasId);
+    //console.log(req.body, req.body.eduAtlasId);
     const updatedStudent = await Student.update(
       {
         eduAtlasId: req.body.eduAtlasId,
@@ -379,10 +379,74 @@ exports.addCourseStudent = async (req, res, next) => {
         },
       }
     );
-
+    const instituteDetails = await Institute.aggregate([
+      {
+        $unwind: '$course',
+      },
+      {
+        $unwind: '$batch',
+      },
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body.instituteDetails.instituteId),
+          'course._id': mongoose.Types.ObjectId(req.body.instituteDetails.courseId),
+          'batch._id': mongoose.Types.ObjectId(req.body.instituteDetails.batchId),
+        },
+      },
+      {
+        $project: {
+          course: 1,
+          batch: 1,
+          basicInfo: 1,
+          parentUser: {
+            $toObjectId: '$parentUser',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'parentUser',
+          foreignField: '_id',
+          as: 'parentInstitute',
+        },
+      },
+    ]);
     const studentId = await Student.findOne({ eduAtlasId: req.body.eduAtlasId }, { _id: 1 });
+    let mail = {
+      from: 'admin@eduatlas.in',
+      to: req.body.basicDetails.studentEmail,
+      subject: 'INSTITUTE REQUEST EDUATLAS',
+      html:
+        '<!DOCTYPE html>' +
+        '<html><head><title>YOUR ACCOUT HAS BEEN CREATED AT EDUATLAS.COM</title>' +
+        '</head><body><div>' +
+        '<p>Dear ' +
+        req.body.basicDetails.name +
+        ',<br> You have been added in the course</p>' +
+        '<p>INSTITUTE NAME:' +
+        instituteDetails[0].parentInstitute.name +
+        '</p>' +
+        '<p>BRANCH NAME: ' +
+        req.body.instituteDetails.instituteId +
+        '</p>' +
+        '<p>CONTACT: ' +
+        instituteDetails[0].basicInfo.instituteContact +
+        '</p>' +
+        '<p>FOR LOGIN CREDENTIALS: </p>' +
+        '<p>EMAIL: ' +
+        req.body.basicDetails.phone +
+        '</p>' +
+        '<p>PASSWORD: ' +
+        req.body.basicDetails.name +
+        '</p>' +
+        '<p>Thank you </p>' +
+        '<p>EDUATLAS </p>' +
+        '</div></body></html>',
+    };
 
     res.status(200).json(studentId);
+    send(mail);
   } catch (error) {
     console.log(error);
     errorHandler(error, res);

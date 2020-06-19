@@ -94,12 +94,12 @@ exports.creatUser = async (req, res, next) => {
 
 exports.verifyEmail = async (req, res) => {
   try {
-    const decoded = jwt.verify(req.body.token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(req.query.token, process.env.JWT_SECRET);
 
     const user = await User.findOneAndUpdate(
       {
         _id: decoded._id,
-        'tokens.token': req.body.token,
+        'tokens.token': req.query.token,
       },
       { verifyEmail: '1' }
     );

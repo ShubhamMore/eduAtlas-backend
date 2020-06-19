@@ -128,24 +128,28 @@ exports.getAttendanceByInstitute = async (req, res) => {
     console.log(marked.length);
     const mlength = marked.length;
     for (var i = 0; i < mlength; i++) {
-      const course = await Institute.findOne({
-        $and: [
-          {
-            _id: req.body.instituteId,
-          },
-          {
+      const course = await Institute.aggregate([
+        {
+          $unwind: '$course',
+        },
+        {
+          $unwind: '$batch',
+        },
+        {
+          $match: {
+            _id: mongoose.Types.ObjectId(req.body.instituteId),
+
             'course._id': marked[i].courseId,
-          },
-          {
+
             'batch._id': marked[i].batchId,
           },
-        ],
-      });
+        },
+      ]);
       let data = {};
       data = marked[i];
       console.log(data);
       data.days.courseName = course.course.name;
-      data.days.batchName = course.batch.name;
+      data.days.batchName = course.batch.batchCode;
 
       const teacher = await Employee.findOne({
         _id: marked[i].days.teacher,
@@ -200,10 +204,11 @@ exports.getAttendanceByInstitute = async (req, res) => {
           },
         ],
       });
+
       let data = {};
       data = unmarked[i];
       data.days.courseName = course.course.name;
-      data.days.batchName = course.batch.name;
+      data.days.batchName = course.batch.batchCode;
 
       const teacher = await Employee.findOne({
         _id: unmarked[i].days.teacher,
@@ -295,6 +300,7 @@ exports.getAttendanceByDate = async (req, res) => {
     errorHandler(error, res);
   }
 };
+
 exports.getAttendanceForStudentByCourse = async (req, res) => {
   try {
     const student = await Attendance.aggregate([
