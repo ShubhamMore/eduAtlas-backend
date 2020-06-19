@@ -4,7 +4,7 @@ const Notification = require('../model/notification.model');
 
 exports.getNotifications = async (req, res) => {
   try {
-    const notifications = await Notification.find({ eduatlasId: req.body.eduAtlasId })
+    const notifications = await Notification.find({ eduatlasId: req.user.eduAtlasId })
       .notifications;
 
     notifications.sort((msg1, msg2) => {
@@ -27,7 +27,7 @@ exports.getNotifications = async (req, res) => {
 exports.deleteNotification = async (req, res) => {
   try {
     const deleteNotification = await Notification.findOneAndUpdate(
-      { eduatlasId: req.body.eduAtlasId },
+      { eduatlasId: req.user.eduAtlasId },
       { $pull: { notifications: { _id: notificationId } } },
       { new: true }
     );

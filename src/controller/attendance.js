@@ -214,6 +214,9 @@ exports.getAttendanceByInstitute = async (req, res) => {
 
       unmarkedData.push(data);
     }
+
+    console.log({ markedData, unmarkedData });
+
     res.status(200).send({ markedData, unmarkedData });
   } catch (error) {
     errorHandler(error, res);
