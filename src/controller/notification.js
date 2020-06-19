@@ -9,7 +9,7 @@ exports.getNotifications = async (req, res) => {
       { _id: 0, notifications: 1 }
     );
 
-    if (!notifications) {
+    if (notifications) {
       notifications.sort((msg1, msg2) => {
         const msg1Id = msg1._id;
         const msg2Id = msg2._id;
