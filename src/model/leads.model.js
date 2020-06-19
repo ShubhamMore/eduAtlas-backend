@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const leadsSchema = new mongoose.Schema({
-  leadName: {
+  leadsName: {
     type: String,
   },
   leadContact: {
@@ -10,16 +10,28 @@ const leadsSchema = new mongoose.Schema({
   leadEmail: {
     type: String,
   },
+  courseId: {
+    type: String,
+  },
   instituteId: {
     type: String,
   },
-  courseId: {
+  address: {
+    type: String,
+  },
+  date: {
+    type: String,
+  },
+  followUpDate: {
     type: String,
   },
   status: {
     type: String,
   },
-  addedDate: {
+  strength: {
+    type: String,
+  },
+  mode: {
     type: String,
   },
   source: {
