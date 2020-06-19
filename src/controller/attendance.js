@@ -133,6 +133,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
       },
       {
         $match: {
+          'days.select': true,
           'days.attendanceMark': true,
           date: {
             $lt: new Date(currentDate),
@@ -154,17 +155,18 @@ exports.getAttendanceByInstitute = async (req, res) => {
           $match: {
             _id: mongoose.Types.ObjectId(req.body.instituteId),
 
-            'course._id': marked[i].courseId,
+            'course._id': mongoose.Types.ObjectId(marked[i].courseId),
 
-            'batch._id': marked[i].batchId,
+            'batch._id': mongoose.Types.ObjectId(marked[i].batchId),
           },
         },
       ]);
+      console.log('course: ', course);
       let data = {};
       data = marked[i];
       console.log(data);
-      data.days.courseName = course.course.name;
-      data.days.batchName = course.batch.batchCode;
+      data.days.courseName = course[0].course.name;
+      data.days.batchName = course[0].batch.batchCode;
 
       console.log(marked[i].days.teacher);
       const teacher = await Employee.findOne({
@@ -197,6 +199,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
       },
       {
         $match: {
+          'days.select': true,
           'days.attendanceMark': false,
           date: {
             $lt: new Date('2020-08-22T00:00:00'),
