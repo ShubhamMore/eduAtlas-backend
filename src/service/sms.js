@@ -3,7 +3,7 @@ const sms = require('../config').sms;
 
 exports.sendSms = async (phone, msg) => {
   const url = baseUrl(sms.profileId, sms.password, 'Eduatlas', phone, msg);
-
+  console.log(url);
   return axios.get(url);
 };
 

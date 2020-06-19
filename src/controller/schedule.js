@@ -2,11 +2,14 @@ const mongoose = require('mongoose');
 const Schedule = require('../model/schedule.model');
 const errorHandler = require('../service/errorHandler');
 const schema = require('../service/joi');
+const send = require('../service/mail');
+
 const response = require('../service/response');
 const Institute = require('../model/institute.model');
 const Employee = require('../model/employee.model');
 const Student = require('../model/student.model');
 const { query } = require('express');
+const sendNotification = require('../notifications/notification');
 
 exports.addSchedule = async (req, res, next) => {
   try {
@@ -44,24 +47,70 @@ exports.addSchedule = async (req, res, next) => {
         },
       ],
     });
+    console.log(req.body);
+    const instDetails = await Institute.aggregate([
+      {
+        $unwind: '$course',
+      },
+      {
+        $unwind: '$batch',
+      },
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body.instituteId),
+          'course._id': mongoose.Types.ObjectId(req.body.courseId),
+          'batch._id': mongoose.Types.ObjectId(req.body.batchId),
+        },
+      },
+    ]);
+    console.log(instDetails);
+    let courseName = instDetails[0].course.name;
+    let batchName = instDetails[0].batch.batchCode;
+    console.log('****', instDetails[0].course.name, '****', instDetails[0].batch.batchCode);
     let mail = {};
     mail.from = 'admin@eduatlas.in';
     mail.subject = 'SCHEDULE ADDED';
+    const startDate = req.body.scheduleStart;
+    const endDate = req.body.scheduleEnd;
+    response(res, 201, 'Schedule added successfully');
+
     for (var i = 0; i < students.length; i++) {
-      mail.to = students[i].basicDetails.email;
+      mail.to = students[i].basicDetails.studentEmail;
       mail.html =
         '<!DOCTYPE html>' +
         '<html><head><title>SCHEDULE</title>' +
         '</head><body><div>' +
-        '<p>Thank you for your appointment.</p>' +
-        '<p>Here is summery:</p>' +
-        '<p>Name: James Falcon</p>' +
-        '<p>Date: Feb 2, 2017</p>' +
-        '<p>Package: Hair Cut </p>' +
-        '<p>Arrival time: 4:30 PM</p>' +
+        '<p>Dear Student,</p>' +
+        '<p>New Schedule has been Added: </p>' +
+        '<p>Course: ' +
+        courseName +
+        ' </p>' +
+        '<p>Batch: ' +
+        batchName +
+        ' </p>' +
+        '<p>Start Date: ' +
+        startDate +
+        '</p>' +
+        '<p>End Date: ' +
+        endDate +
+        '</p>' +
+        '<p>Thankyou </p>' +
+        '<p>EDUATLAS</p>' +
         '</div></body></html>';
+      const notify = {
+        title: 'NEW SCHEDULE',
+        message:
+          'New Schedule has been added for ' +
+          courseName +
+          ' starting from ' +
+          startDate +
+          ' till ' +
+          endDate,
+        receiverId: students[0].eduatlasId,
+      };
+      sendNotification(notify);
+      send(mail);
     }
-    response(res, 201, 'Schedule added successfully');
   } catch (error) {
     errorHandler(error, res);
   }
@@ -76,8 +125,80 @@ exports.updateSchedule = async (req, res, next) => {
       { $set: req.body },
       { upsert: true }
     );
-
+    const students = await Student.find({
+      $and: [
+        {
+          'instituteDetails.instituteId': req.body.instituteId,
+        },
+        {
+          'instituteDetails.courseId': req.body.courseId,
+        },
+        {
+          'instituteDetails.batchId': req.body.batchId,
+        },
+      ],
+    });
+    const instDetails = await Institute.aggregate([
+      {
+        $unwind: '$course',
+      },
+      {
+        $unwind: '$batch',
+      },
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body.instituteId),
+          'course._id': mongoose.Types.ObjectId(req.body.courseId),
+          'batch._id': mongoose.Types.ObjectId(req.body.batchId),
+        },
+      },
+    ]);
+    let courseName = instDetails[0].course.name;
+    let batchName = instDetails[0].batch.batchCode;
+    const startDate = req.body.scheduleStart;
+    const endDate = req.body.scheduleEnd;
+    let mail = {};
+    mail.from = 'admin@eduatlas.in';
+    mail.subject = 'SCHEDULE UPDATE';
     res.status(200).json(updatedSchedule);
+    for (var i = 0; i < students.length; i++) {
+      mail.to = students[i].basicDetails.email;
+      mail.html =
+        '<!DOCTYPE html>' +
+        '<html><head><title>SCHEDULE</title>' +
+        '</head><body><div>' +
+        '<p>Dear Student,</p>' +
+        '<p>New Schedule has been Updated: </p>' +
+        '<p>Course: ' +
+        courseName +
+        ' </p>' +
+        '<p>Batch: ' +
+        batchName +
+        ' </p>' +
+        '<p>Start Date: ' +
+        startDate +
+        '</p>' +
+        '<p>End Date: ' +
+        endDate +
+        '</p>' +
+        '<p>Thankyou </p>' +
+        '<p>EDUATLAS</p>' +
+        '</div></body></html>';
+      const notify = {
+        title: 'NEW SCHEDULE',
+        message:
+          'Schedule has been updated for ' +
+          courseName +
+          ' starting from ' +
+          startDate +
+          ' till ' +
+          endDate,
+        receiverId: students[0].eduatlasId,
+      };
+      sendNotification(notify);
+
+      send(mail);
+    }
   } catch (error) {
     errorHandler(error, res);
   }

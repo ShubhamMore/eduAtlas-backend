@@ -4,12 +4,30 @@ const errorHandler = require('../service/errorHandler');
 const Student = require('../model/student.model');
 const Schedule = require('../model/schedule.model');
 const Employee = require('../model/employee.model');
+const fs = require('fs').promises;
+const path = require('path');
+const excelToJson = require('convert-excel-to-json');
+const sendNotification = require('../notifications/notification');
+const XLSX = require('xlsx');
 
 const appendZero = (n) => {
   if (n < 10) {
     return '0' + n;
   }
   return '' + n;
+};
+
+const deleteFile = (filePath) => {
+  fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
+    console.log('deleteFile');
+    if (error) {
+      console.log(error);
+      const err = new Error('Error while deleting the File');
+      err.statusCode = 500;
+      throw err;
+    }
+    console.log('File Deleted successfully');
+  });
 };
 
 const mongoose = require('mongoose');
@@ -130,6 +148,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
       },
       {
         $match: {
+          'days.select': true,
           'days.attendanceMark': true,
           date: {
             $lt: new Date(currentDate),
@@ -140,26 +159,35 @@ exports.getAttendanceByInstitute = async (req, res) => {
     console.log(marked.length);
     const mlength = marked.length;
     for (var i = 0; i < mlength; i++) {
-      const course = await Institute.findOne({
-        $and: [
-          {
-            _id: req.body.instituteId,
+      const course = await Institute.aggregate([
+        {
+          $unwind: '$course',
+        },
+        {
+          $unwind: '$batch',
+        },
+        {
+          $match: {
+            _id: mongoose.Types.ObjectId(req.body.instituteId),
+
+            'course._id': mongoose.Types.ObjectId(marked[i].courseId),
+
+            'batch._id': mongoose.Types.ObjectId(marked[i].batchId),
           },
-          {
-            'course._id': marked[i].courseId,
-          },
-          {
-            'batch._id': marked[i].batchId,
-          },
-        ],
-      });
+        },
+      ]);
+      //console.log('course: ', course);
       let data = {};
       data = marked[i];
-      console.log(data);
-      data.days.courseName = course.course.name;
-      data.days.batchName = course.batch.name;
+      //console.log(data);
+      // console.log(course[0].course.name);
 
-      console.log(marked[i].days.teacher);
+      data.days.courseName = course[0].course.name;
+      data.days.batchName = course[0].batch.batchCode;
+      // console.log(data.days.courseName);
+      // console.log(data.days.batchName);
+
+      //console.log(marked[i].days.teacher);
       const teacher = await Employee.findOne({
         _id: marked[i].days.teacher,
       });
@@ -190,6 +218,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
       },
       {
         $match: {
+          'days.select': true,
           'days.attendanceMark': false,
           date: {
             $lt: new Date('2020-08-22T00:00:00'),
@@ -197,26 +226,32 @@ exports.getAttendanceByInstitute = async (req, res) => {
         },
       },
     ]);
-    console.log(unmarked);
+    //console.log(unmarked);
     const ulength = unmarked.length;
     for (var i = 0; i < ulength; i++) {
-      const course = await Institute.findOne({
-        $and: [
-          {
-            _id: req.body.instituteId,
+      const course = await Institute.aggregate([
+        {
+          $unwind: '$course',
+        },
+        {
+          $unwind: '$batch',
+        },
+        {
+          $match: {
+            _id: mongoose.Types.ObjectId(req.body.instituteId),
+
+            'course._id': mongoose.Types.ObjectId(unmarked[i].courseId),
+
+            'batch._id': mongoose.Types.ObjectId(unmarked[i].batchId),
           },
-          {
-            'course._id': unmarked[i].courseId,
-          },
-          {
-            'batch._id': unmarked[i].batchId,
-          },
-        ],
-      });
+        },
+      ]);
+      // console.log('**********************');
+      // console.log(course[0].course.name);
       let data = {};
       data = unmarked[i];
-      data.days.courseName = course.course.name;
-      data.days.batchName = course.batch.name;
+      data.days.courseName = course[0].course.name;
+      data.days.batchName = course[0].batch.batchCode;
 
       const teacher = await Employee.findOne({
         _id: unmarked[i].days.teacher,
@@ -228,7 +263,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
       unmarkedData.push(data);
     }
 
-    console.log({ markedData, unmarkedData });
+    //console.log({ markedData, unmarkedData });
 
     res.status(200).send({ markedData, unmarkedData });
   } catch (error) {
@@ -311,6 +346,7 @@ exports.getAttendanceByDate = async (req, res) => {
     errorHandler(error, res);
   }
 };
+
 exports.getAttendanceForStudentByCourse = async (req, res) => {
   try {
     const student = await Attendance.aggregate([
@@ -331,4 +367,102 @@ exports.getAttendanceForStudentByCourse = async (req, res) => {
   } catch (error) {
     errorHandler(error, res);
   }
+};
+
+exports.attendanceByFile = async (req, res) => {
+  try {
+    console.log('in here', path.join(__dirname + '../../../' + req.file.path));
+    const excelData = excelToJson({
+      sourceFile: file,
+
+      sheets: [
+        {
+          name: 'Sheet1',
+
+          header: {
+            rows: 1,
+          },
+
+          columnToKey: {
+            A: 'rollNo',
+            B: 'name',
+            C: 'attendanceStatus',
+          },
+        },
+      ],
+    });
+    const s = Sheet1.length;
+    for (var i = 0; i < s; i++) {
+      // Sheet1[i].attendanceStatus =
+      //   Sheet1[i].attendanceStatus == 'P' || Sheet1[i].attendanceStatus == 'p' ? true : false;
+      let attendance = [];
+      const student = await Student.findOne({
+        $and: [
+          {
+            'instituteDetails.instituteId': req.body.instituteId,
+          },
+          {
+            'instituteDetails.courseId': req.body.courseId,
+          },
+          {
+            'instituteDetails.batchId': req.body.batchId,
+          },
+          {
+            'instituteDetails.rollNumber': Sheet[i].rollNo,
+          },
+        ],
+      });
+
+      attendance.push({
+        studentId: student._id,
+        attendanceStatus:
+          Sheet1[i].attendanceStatus == 'P' || Sheet1[i].attendanceStatus == 'p' ? true : false,
+      });
+      const attBody = {
+        instituteId: req.body.instituteId,
+        courseId: req.body.courseId,
+        batchId: req.body.batchId,
+        date: req.body.date,
+        scheduleId: req.body.scheduleId,
+        lectureId: req.body.lectureId,
+        attendance,
+      };
+      const addAtt = await Attendance.updateOne(
+        {
+          $and: [
+            {
+              date: req.body.date,
+            },
+            {
+              instituteId: req.body.instituteId,
+            },
+            {
+              courseId: req.body.courseId,
+            },
+            {
+              batchId: req.body.batchId,
+            },
+          ],
+        },
+        attBody,
+        {
+          upsert: true,
+        }
+      );
+      const updateSchedule = await Schedule.updateOne(
+        {
+          _id: req.body.scheduleId,
+          'days._id': req.body.lectureId,
+        },
+        {
+          $set: {
+            'days.$.attendanceMark': true,
+          },
+        }
+      );
+    }
+    deleteFile(req.file.path);
+
+    res.status(200).send(addAtt);
+  } catch (error) {}
 };

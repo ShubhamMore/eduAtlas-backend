@@ -10,6 +10,7 @@ const generateOTP = (ph) => {
   // for (let i = 0; i < 4; i++) {
   //   OTP += digits[Math.floor(Math.random() * 10)];
   // }
+  console.log(OTP);
   setTimeout(() => {
     OneTimePassword.deleteOTP(ph);
   }, 60000);
@@ -19,11 +20,15 @@ const generateOTP = (ph) => {
 exports.sendOtp = async (req, res, next) => {
   try {
     const phone = req.params.phone;
-
+    //const email = req.params.email;
     if (!phone) {
       response(res, 400, 'Phone number not provided');
       return;
     }
+    // if (!email) {
+    //   response(res, 400, 'Email not provided');
+    //   return;
+    // }
 
     new OneTimePassword(phone, generateOTP(phone));
 
@@ -101,13 +106,24 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
     }
 
     new OneTimePassword(user.phone, generateOTP(user.phone));
+    const otp = OneTimePassword.getOTP(phone);
 
-    // const smsRes = await smsService.sendSms(
-    //   phone,
-    //   'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
-    // );
+    //const smsRes = await smsService.sendSms(phone, 'Your OTP (One Time Password): ' + otp);
+    let mail = {
+      to: user.email,
+      from: 'admin@eduatlas.in',
+      subject: 'OTP for Eduatlas',
+      html:
+        '<!DOCTYPE html>' +
+        '<html><head><title>OTP</title>' +
+        '</head><body><div>' +
+        '<p>Dear Eduatlas User,</p>' +
+        '<p>YOUR OTP IS :</p>' +
+        otp +
+        '</div></body></html>',
+    };
 
-    const smsRes = 'send sms'; // remove later
+    //const smsRes = 'send sms'; // remove later
     console.log('send');
 
     res.status(200).send({ message: `${smsRes} to  ${user.phone}`, phone: user.phone }); //Change later
