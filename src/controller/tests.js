@@ -30,7 +30,7 @@ exports.addTest = async (req, res) => {
     const addTest = new Test(req.body);
     await addTest.save();
 
-    //
+    //TEST EMAIL WHILE WRITING
     // const students = await Student.find({
     //   $and: [
     //     {

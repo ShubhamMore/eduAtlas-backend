@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const OnlineClass = require('../model/onlineClass.model');
 const Leads = require('../model/leads.model');
 const errorHandler = require('../service/errorHandler');
+const Schedule = require('../model/schedule.model');
 
 const appendZero = (n) => {
   if (n < 10) {
@@ -30,7 +31,7 @@ exports.getDashboardInfo = async (req, res) => {
     query.startTime = date;
 
     console.log(query);
-
+    const sch = await Schedule.aggregate([{}]);
     data.upcomingClass = await OnlineClass.find(query);
     console.log(data.upcomingClass);
 
@@ -68,7 +69,7 @@ exports.getDashboardInfo = async (req, res) => {
         studentName: student.basicDetails.name,
         courseId: pendingFees[i].courseId,
         courseName: course[0].course.name,
-        pendingAmount: pendingFees[0].pendingAmount,
+        pendingAmount: pendingFees[i].pendingAmount,
       };
       fee.push(obj);
     }
@@ -101,7 +102,7 @@ exports.getDashboardInfo = async (req, res) => {
 
     const leads = await Leads.find({
       status: {
-        $in: ['Contacted', 'Pending'],
+        $in: ['OPEN'],
       },
     });
 

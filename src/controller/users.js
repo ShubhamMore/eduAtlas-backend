@@ -164,6 +164,20 @@ exports.loginUser = async (req, res, next) => {
     } else {
       res.status(200).send({ verifyOtp: true, phone: user.phone });
     }
+    if (user.emailVerified === '0') {
+      const token = await user.generateAuthToken();
+      const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
+
+      // Send Mail Here
+      const mail = {
+        to: req.body.email,
+        from: 'admin@eduatlas.in',
+        subject: 'EDUATLAS: VERIFY EMAIL',
+        html: `<a href= '${url}'> ${url} </a>`,
+      };
+
+      send(mail);
+    }
   } catch (e) {
     console.log(e);
     let err = '' + e;
