@@ -85479,7 +85479,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\r\n  <nb-card-header>\r\n    <p style=\"color: black; font-weight: bold;\">Create Test</p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"createTestForm\" (submit)=\"createTest()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"courseId\">*Course</label>\r\n          <nb-select\r\n            placeholder=\"Select Course\"\r\n            id=\"courseId\"\r\n            [status]=\"\r\n              createTestForm.get('courseId').invalid && createTestForm.get('courseId').touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n            fullWidth\r\n            formControlName=\"courseId\"\r\n            (selectedChange)=\"onSelectCourse($event)\"\r\n          >\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let i of institute.course\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n          </nb-select>\r\n          <small\r\n            *ngIf=\"createTestForm.get('courseId').invalid && createTestForm.get('courseId').touched\"\r\n            >*Course is required</small\r\n          >\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"batchId\">*Batch</label>\r\n          <nb-select\r\n            placeholder=\"Select Batch\"\r\n            id=\"batchId\"\r\n            formControlName=\"batchId\"\r\n            fullWidth\r\n            [status]=\"\r\n              createTestForm.get('batchId').invalid && createTestForm.get('batchId').touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \"\r\n          >\r\n            <nb-option value=\"\">Select Batch</nb-option>\r\n            <nb-option *ngFor=\"let item of batches\" [value]=\"item._id\">{{\r\n              item.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n          <small\r\n            *ngIf=\"createTestForm.get('batchId').invalid && createTestForm.get('batchId').touched\"\r\n            >*Batch is required</small\r\n          >\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"date\">*Date</label>\r\n            <input\r\n              type=\"date\"\r\n              nbInput\r\n              [status]=\"\r\n                createTestForm.get('date').invalid && createTestForm.get('date').touched\r\n                  ? 'danger'\r\n                  : 'basic'\r\n              \"\r\n              id=\"date\"\r\n              fullWidth\r\n              formControlName=\"date\"\r\n              placeholder=\"date\"\r\n            />\r\n            <small *ngIf=\"createTestForm.get('date').invalid && createTestForm.get('date').touched\"\r\n              >*Date is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"testName\">*Test Name</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              [status]=\"\r\n                createTestForm.get('testName').invalid && createTestForm.get('testName').touched\r\n                  ? 'danger'\r\n                  : 'basic'\r\n              \"\r\n              id=\"testName\"\r\n              fullWidth\r\n              formControlName=\"testName\"\r\n              placeholder=\"Test Name\"\r\n            />\r\n            <small\r\n              *ngIf=\"\r\n                createTestForm.get('testName').invalid && createTestForm.get('testName').touched\r\n              \"\r\n              >*Test Name is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"totalMarks\">*Total Marks</label>\r\n            <input\r\n              type=\"text\"\r\n              nbInput\r\n              pattern=\"\\d*\"\r\n              maxlength=\"3\"\r\n              [status]=\"\r\n                createTestForm.get('totalMarks').invalid && createTestForm.get('totalMarks').touched\r\n                  ? 'danger'\r\n                  : 'basic'\r\n              \"\r\n              id=\"totalMarks\"\r\n              fullWidth\r\n              formControlName=\"totalMarks\"\r\n              placeholder=\"Total Marks\"\r\n            />\r\n            <small\r\n              *ngIf=\"\r\n                createTestForm.get('totalMarks').invalid && createTestForm.get('totalMarks').touched\r\n              \"\r\n              >*Marks is required</small\r\n            >\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <button type=\"submit\" class=\"btn btn-primary float-right\">Save</button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>\r\n";
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\r\n  <nb-card-header>\r\n    <p style=\"color: black; font-weight: bold;\">Create Test</p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <form [formGroup]=\"createTestForm\" (submit)=\"createTest()\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"courseId\">*Course</label>\r\n          <nb-select placeholder=\"Select Course\" id=\"courseId\" [status]=\"\r\n              createTestForm.get('courseId').invalid && createTestForm.get('courseId').touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \" fullWidth formControlName=\"courseId\" (selectedChange)=\"onSelectCourse($event)\">\r\n            <nb-option value=\"\">Select Course</nb-option>\r\n            <nb-option *ngFor=\"let i of institute.course\" [value]=\"i._id\">{{ i.name }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"createTestForm.get('courseId').invalid && createTestForm.get('courseId').touched\">*Course is\r\n            required</small>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <label for=\"batchId\">*Batch</label>\r\n          <nb-select placeholder=\"Select Batch\" id=\"batchId\" formControlName=\"batchId\" fullWidth [status]=\"\r\n              createTestForm.get('batchId').invalid && createTestForm.get('batchId').touched\r\n                ? 'danger'\r\n                : 'basic'\r\n            \">\r\n            <nb-option value=\"\">Select Batch</nb-option>\r\n            <nb-option *ngFor=\"let item of batches\" [value]=\"item._id\">{{\r\n              item.batchCode\r\n            }}</nb-option>\r\n          </nb-select>\r\n          <small *ngIf=\"createTestForm.get('batchId').invalid && createTestForm.get('batchId').touched\">*Batch is\r\n            required</small>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"date\">*Date</label>\r\n            <input type=\"date\" nbInput [status]=\"\r\n                createTestForm.get('date').invalid && createTestForm.get('date').touched\r\n                  ? 'danger'\r\n                  : 'basic'\r\n              \" id=\"date\" fullWidth formControlName=\"date\" placeholder=\"date\" />\r\n            <small *ngIf=\"createTestForm.get('date').invalid && createTestForm.get('date').touched\">*Date is\r\n              required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"testName\">*Test Name</label>\r\n            <input type=\"text\" nbInput [status]=\"\r\n                createTestForm.get('testName').invalid && createTestForm.get('testName').touched\r\n                  ? 'danger'\r\n                  : 'basic'\r\n              \" id=\"testName\" fullWidth formControlName=\"testName\" placeholder=\"Test Name\" />\r\n            <small *ngIf=\"\r\n                createTestForm.get('testName').invalid && createTestForm.get('testName').touched\r\n              \">*Test Name is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"testCode\">*Test Code</label>\r\n            <input type=\"text\" nbInput [status]=\"\r\n                createTestForm.get('testCode').invalid && createTestForm.get('testCode').touched\r\n                  ? 'danger'\r\n                  : 'basic'\r\n              \" id=\"testCode\" fullWidth formControlName=\"testCode\" placeholder=\"Test Code\" />\r\n            <small *ngIf=\"\r\n                createTestForm.get('testCode').invalid && createTestForm.get('testCode').touched\r\n              \">*Code is required</small>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"form-group\">\r\n            <label for=\"totalMarks\">*Test Marks</label>\r\n            <input type=\"text\" nbInput pattern=\"\\d*\" maxlength=\"3\" [status]=\"\r\n                createTestForm.get('totalMarks').invalid && createTestForm.get('totalMarks').touched\r\n                  ? 'danger'\r\n                  : 'basic'\r\n              \" id=\"totalMarks\" fullWidth formControlName=\"totalMarks\" placeholder=\"Test Marks\" />\r\n            <small *ngIf=\"\r\n                createTestForm.get('totalMarks').invalid && createTestForm.get('totalMarks').touched\r\n              \">*Marks is required</small>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <button type=\"submit\" class=\"btn btn-primary float-right\">Save</button>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </nb-card-body>\r\n</nb-card>";
     /***/
   },
 
@@ -85499,7 +85499,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\n  <nb-card-header>\n    <p style=\"color: black; font-weight: bold;\">Test Score</p>\n  </nb-card-header>\n  <nb-card-body>\n    <div class=\"row\">\n      <div class=\"col-sm-4\">\n        <label for=\"courseId\"><strong>Course: </strong>{{ course }}</label>\n      </div>\n\n      <div class=\"col-sm-4\">\n        <label for=\"batchId\"><strong>Batch: </strong>{{ batch }}</label>\n      </div>\n\n      <div class=\"col-sm-4\">\n        <div class=\"form-group\">\n          <label for=\"date\"><strong>Date: </strong>{{ test.date }}</label>\n        </div>\n      </div>\n\n      <div class=\"col-sm-4\">\n        <div class=\"form-group\">\n          <label for=\"testName\"><strong>Test Name: </strong>{{ test.testName }}</label>\n        </div>\n      </div>\n\n      <div class=\"col-sm-4\">\n        <div class=\"form-group\">\n          <label for=\"totalMarks\"><strong>Total Marks: </strong>{{ test.totalMarks }}</label>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"row mb-2\">\n      <div class=\"col-12\">\n        <nb-checkbox\n          (checkedChange)=\"changeFieUpload($event)\"\n          [(ngModel)]=\"fileUpload\"\n          fullWidth\n          status=\"basic\"\n          >Upload Test File</nb-checkbox\n        >\n        <a class=\"ml-3\" [href]=\"sampleExcel\" *ngIf=\"fileUpload\">Sample File</a>\n      </div>\n    </div>\n\n    <div *ngIf=\"!fileUpload\">\n      <div *ngIf=\"studentScore.length > 0; else noStudents\">\n        <div class=\"row\">\n          <div class=\"col-12\">\n            <table class=\"table table-borderless text-center\">\n              <thead>\n                <tr>\n                  <th class=\"\">Roll No</th>\n                  <th class=\"\">Score</th>\n                </tr>\n              </thead>\n              <tbody>\n                <ng-container *ngFor=\"let student of studentScore; let i = index\">\n                  <tr>\n                    <td>{{ student.rollNo }}</td>\n\n                    <td>\n                      <input\n                        type=\"number\"\n                        nbInput\n                        pattern=\"\\d*\"\n                        maxlength=\"3\"\n                        [id]=\"student.studentId\"\n                        [value]=\"student.marks\"\n                        (input)=\"addMarks($event, i)\"\n                      />\n                    </td>\n                  </tr>\n                </ng-container>\n              </tbody>\n            </table>\n          </div>\n        </div>\n      </div>\n      <ng-template #noStudents>\n        <p class=\"pt-5 text-center\">No Students Found</p>\n      </ng-template>\n    </div>\n    <div *ngIf=\"fileUpload\">\n      <input\n        type=\"file\"\n        nbInput\n        status=\"basic\"\n        fullWidth\n        id=\"score\"\n        (change)=\"onFilePicked($event)\"\n      />\n      <span style=\"color: #f00;\" *ngIf=\"invalidFile\"\n        >*File format must be *.xsl, *.xlsx, *.csv</span\n      >\n      <p *ngIf=\"file && !invalidFile\">{{ file.name }}</p>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12\">\n        <button type=\"submit\" class=\"btn btn-primary float-right\" (click)=\"addScore()\">\n          Save\n        </button>\n      </div>\n    </div>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<!-- <nb-card *ngIf=\"display\">\r\n  <nb-card-header>\r\n    <p style=\"color: black; font-weight: bold;\">Test Score</p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-4\">\r\n        <label for=\"courseId\"><strong>Course: </strong>{{ course }}</label>\r\n      </div>\r\n\r\n      <div class=\"col-sm-4\">\r\n        <label for=\"batchId\"><strong>Batch: </strong>{{ batch }}</label>\r\n      </div>\r\n\r\n      <div class=\"col-sm-4\">\r\n        <div class=\"form-group\">\r\n          <label for=\"date\"><strong>Date: </strong>{{ test.date }}</label>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"col-sm-4\">\r\n        <div class=\"form-group\">\r\n          <label for=\"testName\"><strong>Test Name: </strong>{{ test.testName }}</label>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"col-sm-4\">\r\n        <div class=\"form-group\">\r\n          <label for=\"totalMarks\"><strong>Total Marks: </strong>{{ test.totalMarks }}</label>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"row mb-2\">\r\n      <div class=\"col-12\">\r\n        <nb-checkbox (checkedChange)=\"changeFieUpload($event)\" [(ngModel)]=\"fileUpload\" fullWidth status=\"basic\">Upload\r\n          Test File</nb-checkbox>\r\n        <a class=\"ml-3\" [href]=\"sampleExcel\" *ngIf=\"fileUpload\">Sample File</a>\r\n      </div>\r\n    </div>\r\n\r\n    <div *ngIf=\"!fileUpload\">\r\n      <div *ngIf=\"studentScore.length > 0; else noStudents\">\r\n        <div class=\"row\">\r\n          <div class=\"col-12\">\r\n            <table class=\"table table-borderless text-center\">\r\n              <thead>\r\n                <tr>\r\n                  <th class=\"\">Roll No</th>\r\n                  <th class=\"\">Score</th>\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <ng-container *ngFor=\"let student of studentScore; let i = index\">\r\n                  <tr>\r\n                    <td>{{ student.rollNo }}</td>\r\n\r\n                    <td>\r\n                      <input type=\"number\" nbInput pattern=\"\\d*\" maxlength=\"3\" [id]=\"student.studentId\"\r\n                        [value]=\"student.marks\" (input)=\"addMarks($event, i)\" />\r\n                    </td>\r\n                  </tr>\r\n                </ng-container>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <ng-template #noStudents>\r\n        <p class=\"pt-5 text-center\">No Students Found</p>\r\n      </ng-template>\r\n    </div>\r\n    <div *ngIf=\"fileUpload\">\r\n      <input type=\"file\" nbInput status=\"basic\" fullWidth id=\"score\" (change)=\"onFilePicked($event)\" />\r\n      <span style=\"color: #f00;\" *ngIf=\"invalidFile\">*File format must be *.xsl, *.xlsx, *.csv</span>\r\n      <p *ngIf=\"file && !invalidFile\">{{ file.name }}</p>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-12\">\r\n        <button type=\"submit\" class=\"btn btn-primary float-right\" (click)=\"addScore()\">\r\n          Save\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card> -->\r\n\r\n<nb-card>\r\n  <nb-card-header>\r\n    <span class=\"boldText\">MARK TEST</span>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <hr>\r\n    <div class=\"uploadInstructions\">\r\n      <div class=\"boldText\">BULK UPLOAD</div>\r\n      <div>To bulk upload the attendance of this class, please follow the below mentioned steps:</div>\r\n      <div>1.Download the template by clicking on the \"Download\" button</div>\r\n      <div>2.Fill the roll nos. of the students \"PRESENT\" in column 1</div>\r\n      <div>3.Save as *.CSV file</div>\r\n      <div class=\"boldText lastLine\">\r\n        <span>Upload the file using the \"Upload\" button</span>\r\n        <div>\r\n          <a class=\"btn btn-yellow-black\" style=\"color:black;padding: 10px;\" [href]=\"sampleExcel\">Download</a>\r\n          <button nbButton status=\"success\" (click)=\"fileInput.click()\">Upload</button>\r\n          <input type=\"file\" nbInput status=\"basic\" style=\"display: none;\" fullWidth (change)=\"onFilePicked($event)\"\r\n            #fileInput />\r\n          <button *ngIf=\"file && !invalidFile\" style=\"margin-left: 0px;\" class=\"btn btn-yellow-black\"\r\n            (click)=\"uploadFile()\">Submit</button>\r\n        </div>\r\n      </div>\r\n      <div class=\"text-right\" style=\"margin-right: 20px;\">\r\n        <span style=\"color: #f00;\" *ngIf=\"invalidFile\">*File format must be *.xsl, *.xlsx, *.csv</span>\r\n        <span style=\"font-weight: bold;\" *ngIf=\"file && !invalidFile\">{{ file.name }}</span>\r\n      </div>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<nb-card>\r\n  <nb-card-header>\r\n    <div class=\"boldText\">\r\n      MARK TEST\r\n    </div>\r\n    <hr>\r\n    <div class=\"row\">\r\n      <div class=\"col-md-1\">\r\n        <div class=\"date-block\">\r\n          <span class=\"day\">{{ getDay(attendanceBasicDetail.days.date) }}</span>\r\n          <span class=\"month\">{{ getMonth(attendanceBasicDetail.days.date) }}</span>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-md-3\">\r\n        <div>\r\n          <label>Date : </label><span class=\"boldText\">{{attendanceBasicDetail.days.date}}</span>\r\n        </div>\r\n        <div>\r\n          <label>Time : </label><span class=\"boldText\">{{attendanceBasicDetail.days.startTime}} -\r\n            {{attendanceBasicDetail.days.endTime}}</span>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-md-3\">\r\n        <div>\r\n          <label>Topic : </label><span class=\"boldText\">{{attendanceBasicDetail.days.topic}}</span>\r\n        </div>\r\n        <div>\r\n          <label>Teacher : </label><span class=\"boldText\">{{attendanceBasicDetail.days.teacherName}}</span>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-md-3\">\r\n        <label>Batch : </label><span class=\"boldText\">{{attendanceBasicDetail.days.batchName}}</span>\r\n      </div>\r\n    </div>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <div class=\"lastLine\">\r\n      <span>Check the students that are/were present in this class or select all by clicking on the button</span>\r\n      <button class=\"btn btn-yellow-black\"\r\n        (click)=\"markAllAttendance()\">{{markAllCheckBox?'Select All':'Deselect ALl'}}</button>\r\n    </div>\r\n    <div class=\"table-responsive attendanceTable\">\r\n      <table class=\"table table-borderless text-center\">\r\n        <thead>\r\n          <tr>\r\n            <th></th>\r\n            <th class=\"text-center\">STUDENT NAME</th>\r\n            <th class=\"text-center\">ROLL NO.</th>\r\n            <th class=\"text-center\">PRESENT</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let singleAttendance of attendance ;let i = index\">\r\n            <td></td>\r\n            <td>{{singleAttendance.studentName}}</td>\r\n            <td>{{singleAttendance.studentRollNo}}</td>\r\n            <td>\r\n              <nb-checkbox (checkedChange)=\"markSingleAttendance($event, i)\"\r\n                [checked]=\"singleAttendance.attendanceStatus\">\r\n              </nb-checkbox>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div class=\"text-right\">\r\n      <button nbButton status=\"success\" (click)=\"saveAttendance()\">SAVE ATTENDANCE</button>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>";
     /***/
   },
 
@@ -85519,7 +85519,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card>\n  <nb-card-header>\n    <button class=\"btn btn-yellow float-right\" (click)=\"createTest()\">\n      Create Test\n    </button>\n    <p style=\"color: black; font-weight: bold;\">Define Tests</p>\n  </nb-card-header>\n</nb-card>\n<nb-card status=\"info\" *ngIf=\"display\">\n  <nb-card-header>\n    <div class=\"row mb-2\">\n      <div class=\"col-sm-6\">\n        <h3 class=\"text-white\">Test</h3>\n      </div>\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Course\"\n          status=\"basic\"\n          fullWidth\n          (selectedChange)=\"onSelectCourse($event)\"\n        >\n          <nb-option value=\"\">Select Course</nb-option>\n          <nb-option *ngFor=\"let course of courses\" [value]=\"course._id\">{{\n            course.name\n          }}</nb-option>\n        </nb-select>\n      </div>\n\n      <div class=\"col-sm-3\">\n        <nb-select\n          placeholder=\"Select Batch\"\n          fullWidth\n          status=\"basic\"\n          (selectedChange)=\"onSelectBatch($event)\"\n        >\n          <nb-option value=\"\">Select Batch</nb-option>\n          <nb-option *ngFor=\"let batch of batches\" [value]=\"batch._id\">{{\n            batch.batchCode\n          }}</nb-option>\n        </nb-select>\n      </div>\n    </div>\n  </nb-card-header>\n  <nb-card-body>\n    <div class=\"row\" style=\"width: 100%;\">\n      <div class=\"col-md-12\">\n        <div class=\"table-responsive\" *ngIf=\"tests.length > 0; else noTests\">\n          <table class=\"table table-borderless\">\n            <thead>\n              <tr>\n                <th>Test Title</th>\n                <th>Test Date</th>\n                <th></th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let test of tests; let i = index\">\n                <td>{{ test.testName }}</td>\n                <td>{{ test.date }}</td>\n                <td>\n                  <button class=\"mr-3 mb-1 btn btn-yellow\" (click)=\"edit(test._id)\">\n                    Edit\n                  </button>\n                  <button class=\"mr-3 mb-1\" nbButton (click)=\"score(test._id, test.batchId)\">\n                    Score\n                  </button>\n                  <button\n                    class=\"mr-3 mb-1\"\n                    nbButton\n                    status=\"danger\"\n                    (click)=\"deleteTest(test._id, i)\"\n                  >\n                    Delete\n                  </button>\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n        <ng-template #noTests>\n          <p class=\"text-center pt-5\">No Tests Available</p>\n        </ng-template>\n      </div>\n    </div>\n  </nb-card-body>\n</nb-card>\n";
+    __webpack_exports__["default"] = "<nb-card>\r\n  <nb-card-body>\r\n    <nb-tabset fullWidth>\r\n      <nb-tab tabTitle=\"UPCOMING/PENDING TESTS\">\r\n        <div *ngIf=\"tests && tests.unmarked.length>0;else noRecords\">\r\n          <div class=\"row\" *ngFor=\"let unmarkedTest of tests.unmarked\">\r\n            <div class=\"col-md-1\">\r\n              <div class=\"date-block\">\r\n                <span class=\"day\">{{ getDay(unmarkedTest.days.date) }}</span>\r\n                <span class=\"month\">{{ getMonth(unmarkedTest.days.date) }}</span>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n              <div>\r\n                <span class=\"boldText\">{{unmarkedTest.days.date}}</span>\r\n              </div>\r\n              <div>\r\n                <label>Time : </label><span class=\"boldText\">{{unmarkedTest.days.startTime}} -\r\n                  {{unmarkedTest.days.endTime}}</span>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n              <div>\r\n                <label></label><span class=\"boldText\"></span>\r\n              </div>\r\n              <div>\r\n                <label>Teacher : </label><span class=\"boldText\">{{unmarkedTest.days.teacherName}}</span>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n              <div>\r\n                <label></label><span class=\"boldText\"></span>\r\n              </div>\r\n              <div>\r\n                <label>Batch : </label><span class=\"boldText\">{{unmarkedTest.days.batchName}}</span>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n              <button nbButton status=\"success\" (click)=\"editAttendance(markedAttendance)\">MARK</button>\r\n              <button class=\"btn btn-yellow-black\" (click)=\"editAttendance(markedAttendance)\">EDIT MARKS</button>\r\n              <button nbButton status=\"success\" (click)=\"editAttendance(markedAttendance)\">DELETE</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <hr>\r\n        <div class=\"text-center\">\r\n          <button class=\"btn btn-yellow-black\" (click)=\"createTest(markedTest)\">ADD TEST</button>\r\n        </div>\r\n      </nb-tab>\r\n      <nb-tab tabTitle=\"MARKED TESTS\">\r\n        <div *ngIf=\"tests && tests.marked.length>0;else noRecords\">\r\n          <div class=\"row\" *ngFor=\"let markedTest of tests.marked\">\r\n            <div class=\"col-md-1\">\r\n              <div class=\"date-block\">\r\n                <span class=\"day\">{{ getDay(markedTest.days.date) }}</span>\r\n                <span class=\"month\">{{ getMonth(markedTest.days.date) }}</span>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n              <div>\r\n                <span class=\"boldText\">{{markedTest.days.date}}</span>\r\n              </div>\r\n              <div>\r\n                <label>Time : </label><span class=\"boldText\">{{markedTest.days.startTime}} -\r\n                  {{markedTest.days.endTime}}</span>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n              <div>\r\n                <label></label><span class=\"boldText\"></span>\r\n              </div>\r\n              <div>\r\n                <label>Teacher : </label><span class=\"boldText\">{{markedTest.days.teacherName}}</span>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n              <div>\r\n                <label></label>\r\n                <span class=\"boldText\"></span>\r\n              </div>\r\n              <div>\r\n                <label>Batch : </label><span class=\"boldText\">{{markedTest.days.batchName}}</span>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n              <button class=\"btn btn-yellow-black\" (click)=\"editAttendance(markedTest)\">EDIT MARKS</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <hr>\r\n        <div class=\"text-center\">\r\n          <button class=\"btn btn-yellow-black\" (click)=\"createTest(markedTest)\">ADD TEST</button>\r\n        </div>\r\n      </nb-tab>\r\n    </nb-tabset>\r\n  </nb-card-body>\r\n</nb-card>\r\n<ng-template #noRecords>\r\n  <p class=\"text-center pt-5\">No Records Found</p>\r\n</ng-template>";
     /***/
   },
 
@@ -85559,7 +85559,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\r\n  <nb-card-header>\r\n    <p style=\"color: black; font-weight: bold;\">\r\n      <strong>Test</strong>&nbsp;{{ test.testName | uppercase }}\r\n    </p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-4\">\r\n        <label for=\"courseId\"><strong>Course: </strong>{{ course }}</label>\r\n      </div>\r\n\r\n      <div class=\"col-sm-4\">\r\n        <label for=\"batchId\"><strong>Batch: </strong>{{ batch }}</label>\r\n      </div>\r\n\r\n      <div class=\"col-sm-4\">\r\n        <div class=\"form-group\">\r\n          <label for=\"date\"><strong>Date: </strong>{{ test.date }}</label>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"col-sm-4\">\r\n        <div class=\"form-group\">\r\n          <label for=\"testName\"><strong>Test Name: </strong>{{ test.testName }}</label>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"col-sm-4\">\r\n        <div class=\"form-group\">\r\n          <label for=\"totalMarks\"><strong>Total Marks: </strong>{{ test.totalMarks }}</label>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div *ngIf=\"!fileUpload\">\r\n      <div *ngIf=\"studentScore.length > 0; else noStudents\">\r\n        <div class=\"row\">\r\n          <div class=\"col-12\">\r\n            <table class=\"table table-borderless text-center\">\r\n              <thead>\r\n                <tr>\r\n                  <th class=\"\">Roll No</th>\r\n                  <th class=\"\">Score</th>\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <ng-container *ngFor=\"let student of studentScore; let i = index\">\r\n                  <tr>\r\n                    <td>{{ student.rollNo }}</td>\r\n                    <td>{{ student.marks }}</td>\r\n                    <td>\r\n                      <button\r\n                        class=\"mr-3 mb-1\"\r\n                        nbButton\r\n                        status=\"warning\"\r\n                        (click)=\"getStudentTestReport(student.studentId, dialog)\"\r\n                      >\r\n                        Student Graph\r\n                      </button>\r\n                    </td>\r\n                  </tr>\r\n                </ng-container>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <ng-template #noStudents>\r\n        <p class=\"pt-5 text-center\">No Students Found</p>\r\n      </ng-template>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<ng-template #dialog let-data let-ref=\"dialogRef\">\r\n  <nb-card>\r\n    <nb-card-header>Student Progress</nb-card-header>\r\n    <nb-card-body>\r\n      <div style=\"display: block; width: 1000px;\">\r\n        <canvas\r\n          baseChart\r\n          [datasets]=\"barChartData\"\r\n          [labels]=\"barChartLabels\"\r\n          [options]=\"barChartOptions\"\r\n          [legend]=\"barChartLegend\"\r\n          [chartType]=\"barChartType\"\r\n        >\r\n        </canvas>\r\n      </div>\r\n    </nb-card-body>\r\n    <nb-card-footer>\r\n      <button class=\"float-right\" nbButton (click)=\"ref.close()\">Close Dialog</button>\r\n    </nb-card-footer>\r\n  </nb-card>\r\n</ng-template>\r\n";
+    __webpack_exports__["default"] = "<nb-card *ngIf=\"display\">\r\n  <nb-card-header>\r\n    <p style=\"color: black; font-weight: bold;\">\r\n      <strong>Test</strong>&nbsp;{{ test.testName | uppercase }}\r\n    </p>\r\n  </nb-card-header>\r\n  <nb-card-body>\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-4\">\r\n        <label for=\"courseId\"><strong>Course: </strong>{{ course }}</label>\r\n      </div>\r\n\r\n      <div class=\"col-sm-4\">\r\n        <label for=\"batchId\"><strong>Batch: </strong>{{ batch }}</label>\r\n      </div>\r\n\r\n      <div class=\"col-sm-4\">\r\n        <div class=\"form-group\">\r\n          <label for=\"date\"><strong>Date: </strong>{{ test.date }}</label>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"col-sm-4\">\r\n        <div class=\"form-group\">\r\n          <label for=\"testName\"><strong>Test Name: </strong>{{ test.testName }}</label>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"col-sm-4\">\r\n        <div class=\"form-group\">\r\n          <label for=\"totalMarks\"><strong>Total Marks: </strong>{{ test.totalMarks }}</label>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div *ngIf=\"!fileUpload\">\r\n      <div *ngIf=\"studentScore.length > 0; else noStudents\">\r\n        <div class=\"row\">\r\n          <div class=\"col-12\">\r\n            <table class=\"table table-borderless text-center\">\r\n              <thead>\r\n                <tr>\r\n                  <th class=\"\">Roll No</th>\r\n                  <th class=\"\">Score</th>\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <ng-container *ngFor=\"let student of studentScore; let i = index\">\r\n                  <tr>\r\n                    <td>{{ student.rollNo }}</td>\r\n                    <td>{{ student.marks }}</td>\r\n                    <td>\r\n                      <button class=\"mr-3 mb-1\" nbButton status=\"warning\"\r\n                        (click)=\"getStudentTestReport(student.studentId, dialog)\">\r\n                        Student Graph\r\n                      </button>\r\n                    </td>\r\n                  </tr>\r\n                </ng-container>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <ng-template #noStudents>\r\n        <p class=\"pt-5 text-center\">No Students Found</p>\r\n      </ng-template>\r\n    </div>\r\n  </nb-card-body>\r\n</nb-card>\r\n\r\n<ng-template #dialog let-data let-ref=\"dialogRef\">\r\n  <nb-card>\r\n    <nb-card-header>Student Progress</nb-card-header>\r\n    <nb-card-body>\r\n      <div style=\"display: block; width: 1000px;\">\r\n        <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\" [options]=\"barChartOptions\"\r\n          [legend]=\"barChartLegend\" [chartType]=\"barChartType\">\r\n        </canvas>\r\n      </div>\r\n    </nb-card-body>\r\n    <nb-card-footer>\r\n      <button class=\"float-right\" nbButton (click)=\"ref.close()\">Close Dialog</button>\r\n    </nb-card-footer>\r\n  </nb-card>\r\n</ng-template>";
     /***/
   },
 
@@ -85773,6 +85773,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             instituteId: [this.instituteId],
             date: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
             testName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+            testCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
             totalMarks: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]
           });
         }
@@ -85791,6 +85792,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               courseId: _this8.test.courseId,
               date: _this8.test.date,
               testName: _this8.test.testName,
+              testCode: _this8.test.testCode,
               totalMarks: _this8.test.totalMarks
             });
 
@@ -85911,7 +85913,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2luc3RpdHV0ZS90ZXN0cy9jcmVhdGUtdGVzdHMtc2NvcmUvY3JlYXRlLXRlc3RzLXNjb3JlLmNvbXBvbmVudC5zY3NzIn0= */";
+    __webpack_exports__["default"] = ".boldText {\n  font-weight: bold; }\n\n.date-block {\n  float: left;\n  width: 70px;\n  height: 70px;\n  background-color: #ffd500;\n  margin-bottom: 10px; }\n\n.month {\n  display: block;\n  text-align: center;\n  color: #000;\n  font-weight: bold;\n  margin-top: 10px;\n  font-size: 25px; }\n\n.day {\n  display: block;\n  text-align: center;\n  color: #000;\n  font-weight: bold;\n  margin-top: 10px;\n  font-size: 20px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL3Rlc3RzL2NyZWF0ZS10ZXN0cy1zY29yZS9FOlxcUHJvamVjdHNcXEZyZWVsYW5jZSBQcm9qZWN0c1xcRWR1QXRsYXNcXGVkdWF0bGFzMVxcY2xpZW50L3NyY1xcYXBwXFxwYWdlc1xcaW5zdGl0dXRlXFx0ZXN0c1xcY3JlYXRlLXRlc3RzLXNjb3JlXFxjcmVhdGUtdGVzdHMtc2NvcmUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxpQkFBaUIsRUFBQTs7QUFFckI7RUFDSSxXQUFXO0VBQ1gsV0FBVztFQUNYLFlBQVk7RUFDWix5QkFBeUI7RUFDekIsbUJBQW1CLEVBQUE7O0FBR3JCO0VBQ0UsY0FBYztFQUNkLGtCQUFrQjtFQUNsQixXQUFXO0VBQ1gsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixlQUFlLEVBQUE7O0FBR2pCO0VBQ0UsY0FBYztFQUNkLGtCQUFrQjtFQUNsQixXQUFXO0VBQ1gsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixlQUFlLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvdGVzdHMvY3JlYXRlLXRlc3RzLXNjb3JlL2NyZWF0ZS10ZXN0cy1zY29yZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ib2xkVGV4dHtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcbi5kYXRlLWJsb2NrIHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgd2lkdGg6IDcwcHg7XHJcbiAgICBoZWlnaHQ6IDcwcHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZkNTAwO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMTBweDtcclxuICB9XHJcbiAgXHJcbiAgLm1vbnRoIHtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgY29sb3I6ICMwMDA7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxuICAgIG1hcmdpbi10b3A6IDEwcHg7XHJcbiAgICBmb250LXNpemU6IDI1cHg7XHJcbiAgfVxyXG4gIFxyXG4gIC5kYXkge1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBjb2xvcjogIzAwMDtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgbWFyZ2luLXRvcDogMTBweDtcclxuICAgIGZvbnQtc2l6ZTogMjBweDtcclxuICB9Il19 */";
     /***/
   },
 
@@ -85992,6 +85994,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.route = route;
         this.location = location;
         this.toasterService = toasterService;
+        this.months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
       }
 
       _createClass(CreateTestsScoreComponent, [{
@@ -86138,6 +86141,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
         }
       }, {
+        key: "getMonth",
+        value: function getMonth(date) {
+          var month = date.split('-')[1];
+          return this.months[+month - 1];
+        }
+      }, {
+        key: "getDay",
+        value: function getDay(date) {
+          return date.split('-')[2];
+        }
+      }, {
         key: "showToast",
         value: function showToast(position, status, message) {
           this.toasterService.show(status, message, {
@@ -86192,7 +86206,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2luc3RpdHV0ZS90ZXN0cy9tYW5hZ2UtdGVzdHMvbWFuYWdlLXRlc3RzLmNvbXBvbmVudC5zY3NzIn0= */";
+    __webpack_exports__["default"] = ".boldText {\n  font-weight: bold; }\n\n.date-block {\n  float: left;\n  width: 70px;\n  height: 70px;\n  background-color: #ffd500;\n  margin-bottom: 10px; }\n\n.month {\n  display: block;\n  text-align: center;\n  color: #000;\n  font-weight: bold;\n  margin-top: 10px;\n  font-size: 25px; }\n\n.day {\n  display: block;\n  text-align: center;\n  color: #000;\n  font-weight: bold;\n  margin-top: 10px;\n  font-size: 20px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL3Rlc3RzL21hbmFnZS10ZXN0cy9FOlxcUHJvamVjdHNcXEZyZWVsYW5jZSBQcm9qZWN0c1xcRWR1QXRsYXNcXGVkdWF0bGFzMVxcY2xpZW50L3NyY1xcYXBwXFxwYWdlc1xcaW5zdGl0dXRlXFx0ZXN0c1xcbWFuYWdlLXRlc3RzXFxtYW5hZ2UtdGVzdHMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxpQkFBaUIsRUFBQTs7QUFFckI7RUFDSSxXQUFXO0VBQ1gsV0FBVztFQUNYLFlBQVk7RUFDWix5QkFBeUI7RUFDekIsbUJBQW1CLEVBQUE7O0FBR3JCO0VBQ0UsY0FBYztFQUNkLGtCQUFrQjtFQUNsQixXQUFXO0VBQ1gsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixlQUFlLEVBQUE7O0FBR2pCO0VBQ0UsY0FBYztFQUNkLGtCQUFrQjtFQUNsQixXQUFXO0VBQ1gsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixlQUFlLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9pbnN0aXR1dGUvdGVzdHMvbWFuYWdlLXRlc3RzL21hbmFnZS10ZXN0cy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ib2xkVGV4dHtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcbi5kYXRlLWJsb2NrIHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgd2lkdGg6IDcwcHg7XHJcbiAgICBoZWlnaHQ6IDcwcHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZkNTAwO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMTBweDtcclxuICB9XHJcbiAgXHJcbiAgLm1vbnRoIHtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgY29sb3I6ICMwMDA7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxuICAgIG1hcmdpbi10b3A6IDEwcHg7XHJcbiAgICBmb250LXNpemU6IDI1cHg7XHJcbiAgfVxyXG4gIFxyXG4gIC5kYXkge1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBjb2xvcjogIzAwMDtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgbWFyZ2luLXRvcDogMTBweDtcclxuICAgIGZvbnQtc2l6ZTogMjBweDtcclxuICB9Il19 */";
     /***/
   },
 
@@ -86254,51 +86268,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.router = router;
         this.route = route;
         this.toasterService = toasterService;
-        this.batches = [];
-        this.courses = [];
+        this.tests = {};
+        this.months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
       }
 
       _createClass(ManageTestsComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          this.tests.unmarked = [];
+          this.tests.marked = [];
           this.display = false;
-          this.tests = [];
           this.instituteId = this.route.snapshot.paramMap.get('id');
           console.log(this.route.snapshot.paramMap, this.instituteId);
-          this.getCourses(this.instituteId);
           this.getTests({
             instituteId: this.instituteId
-          });
-        }
-      }, {
-        key: "getCourses",
-        value: function getCourses(id) {
-          var _this16 = this;
-
-          this.api.getCourseTD(id).subscribe(function (data) {
-            // console.log(data);
-            _this16.institute = data;
-
-            if (data) {
-              _this16.courses = _this16.institute.course;
-            }
-          });
-        }
-      }, {
-        key: "onSelectCourse",
-        value: function onSelectCourse(id) {
-          this.courseId = id;
-          this.batches = this.institute.batch.filter(function (b) {
-            return b.course === id;
-          });
-        }
-      }, {
-        key: "onSelectBatch",
-        value: function onSelectBatch(batchId) {
-          this.batch = batchId;
-          this.getTests({
-            instituteId: this.instituteId,
-            batchId: batchId
           });
         }
       }, {
@@ -86331,26 +86314,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deleteTest",
         value: function deleteTest(id, i) {
-          var _this17 = this;
+          var _this16 = this;
 
           this.api.deleteTest({
             _id: id
           }).subscribe(function (res) {
-            _this17.tests.splice(i, 1);
+            _this16.tests.splice(i, 1);
 
-            _this17.showToast('top right', 'success', 'Test Deleted Successfully');
+            _this16.showToast('top right', 'success', 'Test Deleted Successfully');
           }, function (err) {
-            _this17.showToast('top right', 'danger', err.err.message);
+            _this16.showToast('top right', 'danger', err.err.message);
           });
         }
       }, {
         key: "getTests",
         value: function getTests(data) {
-          var _this18 = this;
+          var _this17 = this;
 
           this.api.getTestByInstitute(data).subscribe(function (res) {
-            _this18.tests = res;
-            _this18.display = true;
+            _this17.tests = res;
+            _this17.display = true;
             console.log(res);
           }, function (err) {
             console.log(err);
@@ -86363,6 +86346,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             position: position,
             status: status
           });
+        }
+      }, {
+        key: "getMonth",
+        value: function getMonth(date) {
+          var month = date.split('-')[1];
+          return this.months[+month - 1];
+        }
+      }, {
+        key: "getDay",
+        value: function getDay(date) {
+          return date.split('-')[2];
         }
       }]);
 
@@ -86486,12 +86480,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCourses",
         value: function getCourses(id) {
-          var _this19 = this;
+          var _this18 = this;
 
           this.api.getCourseTD(id).subscribe(function (data) {
-            _this19.institute = data;
+            _this18.institute = data;
             console.log(data);
-            _this19.display = true;
+            _this18.display = true;
           });
         }
       }, {
@@ -86520,13 +86514,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getTestsForReports",
         value: function getTestsForReports(instituteId, batchId) {
-          var _this20 = this;
+          var _this19 = this;
 
           this.api.getTestsForReports({
             instituteId: instituteId,
             batchId: batchId
           }).subscribe(function (res) {
-            _this20.tests = res;
+            _this19.tests = res;
             console.log(res);
           }, function (err) {
             console.log(err);
@@ -86682,14 +86676,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ViewReportComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this21 = this;
+          var _this20 = this;
 
           this.display = false;
           this.invalidFile = false;
           this.fileUpload = false;
           this.instituteId = this.route.snapshot.paramMap.get('id');
           this.route.queryParams.subscribe(function (param) {
-            _this21.testId = param.testId;
+            _this20.testId = param.testId;
           });
           this.getCourses(this.instituteId);
           this.students = [];
@@ -86698,52 +86692,52 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCourses",
         value: function getCourses(id) {
-          var _this22 = this;
+          var _this21 = this;
 
           this.api.getCourseTD(id).subscribe(function (data) {
-            _this22.institute = data;
+            _this21.institute = data;
 
-            if (_this22.testId) {
-              _this22.getTest(_this22.testId);
+            if (_this21.testId) {
+              _this21.getTest(_this21.testId);
             } else {
-              _this22.location.back();
+              _this21.location.back();
             }
           });
         }
       }, {
         key: "getTest",
         value: function getTest(id) {
-          var _this23 = this;
+          var _this22 = this;
 
           this.api.getSingleTest({
             _id: id
           }).subscribe(function (res) {
-            _this23.test = res;
-            _this23.course = _this23.institute.course.find(function (c) {
-              return c._id === _this23.test.courseId;
+            _this22.test = res;
+            _this22.course = _this22.institute.course.find(function (c) {
+              return c._id === _this22.test.courseId;
             }).courseCode;
-            _this23.batch = _this23.institute.batch.find(function (b) {
-              return b._id === _this23.test.batchId;
+            _this22.batch = _this22.institute.batch.find(function (b) {
+              return b._id === _this22.test.batchId;
             }).batchCode;
 
-            if (_this23.test.students.length > 0) {
-              _this23.studentScore = _this23.test.students;
+            if (_this22.test.students.length > 0) {
+              _this22.studentScore = _this22.test.students;
             } else {
-              _this23.getStudents(res.instituteId, res.batchId, res.courseId);
+              _this22.getStudents(res.instituteId, res.batchId, res.courseId);
             }
 
-            _this23.display = true;
+            _this22.display = true;
           }, function (err) {});
         }
       }, {
         key: "getStudents",
         value: function getStudents(instituteID, batchId, courseId) {
-          var _this24 = this;
+          var _this23 = this;
 
           this.api.getStudentsByBatch(instituteID, courseId, batchId).subscribe(function (res) {
-            _this24.students = res;
+            _this23.students = res;
 
-            _this24.students.sort(function (student1, student2) {
+            _this23.students.sort(function (student1, student2) {
               if (+student1.instituteDetails.rollNumber >= +student2.instituteDetails.rollNumber) {
                 return 1;
               } else {
@@ -86751,21 +86745,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }
             });
 
-            _this24.students.forEach(function (student) {
+            _this23.students.forEach(function (student) {
               var scoreData = {
                 studentId: student._id,
                 rollNo: student.instituteDetails.rollNumber,
                 marks: ''
               };
 
-              _this24.studentScore.push(scoreData);
+              _this23.studentScore.push(scoreData);
             });
           });
         }
       }, {
         key: "getStudentTestReport",
         value: function getStudentTestReport(studentId, dialog) {
-          var _this25 = this;
+          var _this24 = this;
 
           this.api.getScoresOfStutdentByInstitute({
             'studentId': studentId,
@@ -86787,19 +86781,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             var labelsArray = res.map(function (test) {
               return test.testName + "(" + test.date + ")";
             });
-            _this25.barChartLabels = labelsArray;
-            _this25.barChartType = 'line';
-            _this25.barChartLegend = true;
-            _this25.barChartData = [{
+            _this24.barChartLabels = labelsArray;
+            _this24.barChartType = 'line';
+            _this24.barChartLegend = true;
+            _this24.barChartData = [{
               data: percentageArray,
               label: res[0].students.studentName
             }];
 
-            _this25.dialogService.open(dialog, {
+            _this24.dialogService.open(dialog, {
               context: 'this is some additional data passed to dialog'
             });
           }, function (err) {
-            _this25.showToast('top-right', 'danger', err.error.message);
+            _this24.showToast('top-right', 'danger', err.error.message);
           });
         }
       }, {
@@ -87127,7 +87121,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     TestsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       declarations: [_tests_component__WEBPACK_IMPORTED_MODULE_4__["TestsComponent"], _create_test_create_test_component__WEBPACK_IMPORTED_MODULE_5__["CreateTestComponent"], _create_tests_score_create_tests_score_component__WEBPACK_IMPORTED_MODULE_10__["CreateTestsScoreComponent"], _manage_tests_manage_tests_component__WEBPACK_IMPORTED_MODULE_6__["ManageTestsComponent"], _test_report_test_report_component__WEBPACK_IMPORTED_MODULE_11__["TestReportComponent"], _test_report_view_report_view_report_component__WEBPACK_IMPORTED_MODULE_12__["ViewReportComponent"]],
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _tests_routing_module__WEBPACK_IMPORTED_MODULE_3__["TestsRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbCardModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbLayoutModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbInputModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbButtonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbCheckboxModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbDatepickerModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbSelectModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbMenuModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbAccordionModule"], _nebular_eva_icons__WEBPACK_IMPORTED_MODULE_8__["NbEvaIconsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbListModule"], ng2_charts__WEBPACK_IMPORTED_MODULE_13__["ChartsModule"]]
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _tests_routing_module__WEBPACK_IMPORTED_MODULE_3__["TestsRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbCardModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbLayoutModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbInputModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbButtonModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbCheckboxModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbDatepickerModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbSelectModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbMenuModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbAccordionModule"], _nebular_eva_icons__WEBPACK_IMPORTED_MODULE_8__["NbEvaIconsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbListModule"], ng2_charts__WEBPACK_IMPORTED_MODULE_13__["ChartsModule"], _nebular_theme__WEBPACK_IMPORTED_MODULE_7__["NbTabsetModule"]]
     })], TestsModule);
     /***/
   }
