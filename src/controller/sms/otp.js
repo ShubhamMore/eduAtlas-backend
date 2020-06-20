@@ -101,7 +101,7 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
       response(res, 400, 'EduAtlas Id or Email Not Provided');
       return;
     }
-
+    console.log(req.body);
     const user = await User.findOne({
       $or: [
         {
@@ -117,9 +117,10 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
     if (!user) {
       throw new Error('User not found with for ID ' + id);
     }
+    console.log(user);
 
     new OneTimePassword(user.phone, generateOTP(user.phone));
-    const otp = OneTimePassword.getOTP(phone);
+    const otp = OneTimePassword.getOTP(user.phone);
 
     //const smsRes = await smsService.sendSms(phone, 'Your OTP (One Time Password): ' + otp);
     let mail = {
@@ -137,6 +138,7 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
     };
 
     //const smsRes = 'send sms'; // remove later
+    const smsRes = 'send sms';
     console.log('send');
 
     res.status(200).send({ message: `${smsRes} to  ${user.phone}`, phone: user.phone }); //Change later
