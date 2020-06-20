@@ -83,7 +83,10 @@ exports.creatUser = async (req, res, next) => {
     user.eduAtlasId = newEduAtlasId.split('-').join('');
 
     await new User(user).save();
-    const token = await user.generateAuthToken();
+    const newUser = await User.find({
+      email: req.body.email,
+    });
+    const token = await newUser.generateAuthToken();
     const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
 
     // Send Mail Here

@@ -29,6 +29,24 @@ exports.addTest = async (req, res) => {
   try {
     const addTest = new Test(req.body);
     await addTest.save();
+    const students = await Student.find({
+      $and: [
+        {
+          'instituteDetails.instituteId': req.body.instituteId,
+        },
+        {
+          'instituteDetails.courseId': req.body.courseId,
+        },
+        {
+          'instituteDetails.batchId': req.body.batchId,
+        },
+      ],
+    });
+
+    let mail = {};
+    mail.from = 'admin@eduatlas.in';
+    mail.subject = 'SCHEDULE UPDATE';
+
     res.status(200).send(addTest);
   } catch (error) {
     res.status(400).send(error);
