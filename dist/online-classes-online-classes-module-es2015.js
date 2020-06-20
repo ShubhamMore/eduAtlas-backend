@@ -52,6 +52,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/online-classes/online-classes-upgrade/online-classes-upgrade.component.html":
+/*!***************************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/online-classes/online-classes-upgrade/online-classes-upgrade.component.html ***!
+  \***************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\n  <div class=\"col-md-8 mx-auto\">\n    <nb-card>\n      <nb-card-body>\n        <div class=\"text-center\">\n          <img\n            src=\"../../../../../assets/img/warning.png\"\n            width=\"100px\"\n            height=\"auto\"\n            alt=\"WARNING\"\n          />\n          <br />\n          <h2>BEFORE WE BEGIN!</h2>\n          <br />\n          <p>YOU NEED TO UPGRADE YOUR PLAN TO <strong>VALUE/POWER</strong> TO USE EDUATLAS LIVE.</p>\n          <br />\n          <div class=\"text-left\" style=\"width: 75%;\">\n            <p class=\"note\">PLEASE NOTE:</p>\n            <ul style=\"list-style-type: disc;\">\n              <li>\n                EDUATLAS LIVE OFFERS SEEMLESS INTEGRATION OF YOUR CLASSES CONDUCTED THROUGH ZOOM.US.\n                TO BE ABLE TO USE THIS FEATURES YOU NEED TO BE AN ACTIVE ZOOM.US USER.\n              </li>\n              <li>\n                ANY CHARGES OR PLANS OF ZOOM.US ARE SOLELY ON THEIR DISCRETION AND EDUATLAS IN NO\n                PART IS ASSOCIATED OR BOUND BY TERMS & CONDITIONS OF ZOOM.US.\n              </li>\n              <li>\n                ONCE YOU ARE UPGRADED TO THE CORRECT PLAN, YOU WILL NEED TO INTEGRATE YOUR ZOOM ID\n                WITH EDUATLAS. THIS WILL BE REQUIRED ONCE AND CAN BE USED FOR ALL BRANCHES THAT ARE\n                IN VALUE/POWER PLAN.\n              </li>\n            </ul>\n          </div>\n          <br />\n          <button class=\"btn btn-yellow-black\">\n            <strong>UPGRADE YOUR EA PLAN HERE</strong>\n          </button>\n          <br />\n          <br />\n          <P>NEED A ZOOM.US ACCOUNT? <a href=\"https://zoom.us/\">CLICK HERE</a></P>\n          <br /><br />\n        </div>\n      </nb-card-body>\n    </nb-card>\n  </div>\n</div>\n");
+
+/***/ }),
+
 /***/ "./src/app/pages/institute/online-classes/online-classes-conf/add-online-class/add-online-class.component.scss":
 /*!*********************************************************************************************************************!*\
   !*** ./src/app/pages/institute/online-classes/online-classes-conf/add-online-class/add-online-class.component.scss ***!
@@ -537,12 +550,14 @@ OnlineClassesConfComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OnlineClassesRoutingModule", function() { return OnlineClassesRoutingModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _online_classes_conf_online_classes_conf_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./online-classes-conf/online-classes-conf.component */ "./src/app/pages/institute/online-classes/online-classes-conf/online-classes-conf.component.ts");
-/* harmony import */ var _online_classes_conf_add_online_class_add_online_class_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./online-classes-conf/add-online-class/add-online-class.component */ "./src/app/pages/institute/online-classes/online-classes-conf/add-online-class/add-online-class.component.ts");
-/* harmony import */ var _online_classes_conf_online_class_settings_online_class_settings_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./online-classes-conf/online-class-settings/online-class-settings.component */ "./src/app/pages/institute/online-classes/online-classes-conf/online-class-settings/online-class-settings.component.ts");
-/* harmony import */ var _online_classes_conf_manage_online_class_manage_online_class_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./online-classes-conf/manage-online-class/manage-online-class.component */ "./src/app/pages/institute/online-classes/online-classes-conf/manage-online-class/manage-online-class.component.ts");
+/* harmony import */ var _online_classes_upgrade_online_classes_upgrade_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./online-classes-upgrade/online-classes-upgrade.component */ "./src/app/pages/institute/online-classes/online-classes-upgrade/online-classes-upgrade.component.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _online_classes_conf_online_classes_conf_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./online-classes-conf/online-classes-conf.component */ "./src/app/pages/institute/online-classes/online-classes-conf/online-classes-conf.component.ts");
+/* harmony import */ var _online_classes_conf_add_online_class_add_online_class_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./online-classes-conf/add-online-class/add-online-class.component */ "./src/app/pages/institute/online-classes/online-classes-conf/add-online-class/add-online-class.component.ts");
+/* harmony import */ var _online_classes_conf_online_class_settings_online_class_settings_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./online-classes-conf/online-class-settings/online-class-settings.component */ "./src/app/pages/institute/online-classes/online-classes-conf/online-class-settings/online-class-settings.component.ts");
+/* harmony import */ var _online_classes_conf_manage_online_class_manage_online_class_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./online-classes-conf/manage-online-class/manage-online-class.component */ "./src/app/pages/institute/online-classes/online-classes-conf/manage-online-class/manage-online-class.component.ts");
+
 
 
 
@@ -553,23 +568,69 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: '',
-        component: _online_classes_conf_online_classes_conf_component__WEBPACK_IMPORTED_MODULE_3__["OnlineClassesConfComponent"],
+        component: _online_classes_conf_online_classes_conf_component__WEBPACK_IMPORTED_MODULE_4__["OnlineClassesConfComponent"],
         children: [
-            { path: 'settings/:id', component: _online_classes_conf_online_class_settings_online_class_settings_component__WEBPACK_IMPORTED_MODULE_5__["OnlineClassSettingsComponent"] },
-            { path: 'create-class/:id', component: _online_classes_conf_add_online_class_add_online_class_component__WEBPACK_IMPORTED_MODULE_4__["AddOnlineClassComponent"] },
-            { path: 'create-class/:id/edit', component: _online_classes_conf_add_online_class_add_online_class_component__WEBPACK_IMPORTED_MODULE_4__["AddOnlineClassComponent"] },
-            { path: 'manage-class/:id', component: _online_classes_conf_manage_online_class_manage_online_class_component__WEBPACK_IMPORTED_MODULE_6__["ManageOnlineClassComponent"] },
+            { path: 'settings/:id', component: _online_classes_conf_online_class_settings_online_class_settings_component__WEBPACK_IMPORTED_MODULE_6__["OnlineClassSettingsComponent"] },
+            { path: 'create-class/:id', component: _online_classes_conf_add_online_class_add_online_class_component__WEBPACK_IMPORTED_MODULE_5__["AddOnlineClassComponent"] },
+            { path: 'create-class/:id/edit', component: _online_classes_conf_add_online_class_add_online_class_component__WEBPACK_IMPORTED_MODULE_5__["AddOnlineClassComponent"] },
+            { path: 'manage-class/:id', component: _online_classes_conf_manage_online_class_manage_online_class_component__WEBPACK_IMPORTED_MODULE_7__["ManageOnlineClassComponent"] },
+            { path: ':id', component: _online_classes_upgrade_online_classes_upgrade_component__WEBPACK_IMPORTED_MODULE_1__["OnlineClassesUpgradeComponent"] },
         ],
     },
 ];
 let OnlineClassesRoutingModule = class OnlineClassesRoutingModule {
 };
 OnlineClassesRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
-        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"]],
     })
 ], OnlineClassesRoutingModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/institute/online-classes/online-classes-upgrade/online-classes-upgrade.component.scss":
+/*!*************************************************************************************************************!*\
+  !*** ./src/app/pages/institute/online-classes/online-classes-upgrade/online-classes-upgrade.component.scss ***!
+  \*************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".note,\nul li {\n  font-size: 75%;\n  color: #f00; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvaW5zdGl0dXRlL29ubGluZS1jbGFzc2VzL29ubGluZS1jbGFzc2VzLXVwZ3JhZGUvRTpcXFByb2plY3RzXFxGcmVlbGFuY2UgUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXGNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGluc3RpdHV0ZVxcb25saW5lLWNsYXNzZXNcXG9ubGluZS1jbGFzc2VzLXVwZ3JhZGVcXG9ubGluZS1jbGFzc2VzLXVwZ3JhZGUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0VBRUUsY0FBYztFQUNkLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2luc3RpdHV0ZS9vbmxpbmUtY2xhc3Nlcy9vbmxpbmUtY2xhc3Nlcy11cGdyYWRlL29ubGluZS1jbGFzc2VzLXVwZ3JhZGUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubm90ZSxcclxudWwgbGkge1xyXG4gIGZvbnQtc2l6ZTogNzUlO1xyXG4gIGNvbG9yOiAjZjAwO1xyXG59XHJcbiJdfQ== */");
+
+/***/ }),
+
+/***/ "./src/app/pages/institute/online-classes/online-classes-upgrade/online-classes-upgrade.component.ts":
+/*!***********************************************************************************************************!*\
+  !*** ./src/app/pages/institute/online-classes/online-classes-upgrade/online-classes-upgrade.component.ts ***!
+  \***********************************************************************************************************/
+/*! exports provided: OnlineClassesUpgradeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OnlineClassesUpgradeComponent", function() { return OnlineClassesUpgradeComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let OnlineClassesUpgradeComponent = class OnlineClassesUpgradeComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+};
+OnlineClassesUpgradeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'ngx-online-classes-upgrade',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./online-classes-upgrade.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/institute/online-classes/online-classes-upgrade/online-classes-upgrade.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./online-classes-upgrade.component.scss */ "./src/app/pages/institute/online-classes/online-classes-upgrade/online-classes-upgrade.component.scss")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+], OnlineClassesUpgradeComponent);
 
 
 
@@ -596,6 +657,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @nebular/theme */ "./node_modules/@nebular/theme/fesm2015/index.js");
 /* harmony import */ var _nebular_eva_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @nebular/eva-icons */ "./node_modules/@nebular/eva-icons/fesm2015/index.js");
 /* harmony import */ var _online_classes_conf_online_classes_conf_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./online-classes-conf/online-classes-conf.component */ "./src/app/pages/institute/online-classes/online-classes-conf/online-classes-conf.component.ts");
+/* harmony import */ var _online_classes_upgrade_online_classes_upgrade_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./online-classes-upgrade/online-classes-upgrade.component */ "./src/app/pages/institute/online-classes/online-classes-upgrade/online-classes-upgrade.component.ts");
+
 
 
 
@@ -616,6 +679,7 @@ OnlineClassesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _online_classes_conf_online_class_settings_online_class_settings_component__WEBPACK_IMPORTED_MODULE_4__["OnlineClassSettingsComponent"],
             _online_classes_conf_manage_online_class_manage_online_class_component__WEBPACK_IMPORTED_MODULE_5__["ManageOnlineClassComponent"],
             _online_classes_conf_add_online_class_add_online_class_component__WEBPACK_IMPORTED_MODULE_6__["AddOnlineClassComponent"],
+            _online_classes_upgrade_online_classes_upgrade_component__WEBPACK_IMPORTED_MODULE_11__["OnlineClassesUpgradeComponent"],
         ],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
