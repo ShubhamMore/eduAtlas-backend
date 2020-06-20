@@ -326,6 +326,7 @@ exports.addScoreUsingExcel = async (req, res) => {
         _id: req.body._id,
       },
       {
+        scored: true,
         $set: {
           students: excelData.Sheet1,
         },

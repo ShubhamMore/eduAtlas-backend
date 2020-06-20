@@ -45,6 +45,18 @@ exports.addEmployee = async (req, res) => {
 
     const addUser = new User(newUser);
     await addUser.save();
+
+    const token = await addUser.generateAuthToken();
+    const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
+
+    // Send Mail Here
+    const mail = {
+      to: req.body.email,
+      from: 'admin@eduatlas.in',
+      subject: 'EDUATLAS: VERIFY EMAIL',
+      html: `<a href= '${url}'> ${url} </a>`,
+    };
+
     console.log('ID', eduatlasId[0]._id);
 
     const newEmployee = {

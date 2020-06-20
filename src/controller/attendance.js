@@ -371,7 +371,10 @@ exports.getAttendanceForStudentByCourse = async (req, res) => {
 
 exports.attendanceByFile = async (req, res) => {
   try {
+    console.log(req.body);
     console.log('in here', path.join(__dirname + '../../../' + req.file.path));
+    const file = path.join(__dirname + '../../../' + req.file.path);
+
     const excelData = excelToJson({
       sourceFile: file,
 
@@ -393,10 +396,11 @@ exports.attendanceByFile = async (req, res) => {
     });
     console.log(excelData);
     const s = excelData.Sheet1.length;
+    let attendance = [];
     for (var i = 0; i < s; i++) {
       // Sheet1[i].attendanceStatus =
       //   Sheet1[i].attendanceStatus == 'P' || Sheet1[i].attendanceStatus == 'p' ? true : false;
-      let attendance = [];
+
       const student = await Student.findOne({
         $and: [
           {
@@ -409,7 +413,7 @@ exports.attendanceByFile = async (req, res) => {
             'instituteDetails.batchId': req.body.batchId,
           },
           {
-            'instituteDetails.rollNumber': excelData.Sheet[i].rollNo,
+            'instituteDetails.rollNumber': excelData.Sheet1[i].rollNo,
           },
         ],
       });
@@ -422,49 +426,49 @@ exports.attendanceByFile = async (req, res) => {
             ? true
             : false,
       });
-      const attBody = {
-        instituteId: req.body.instituteId,
-        courseId: req.body.courseId,
-        batchId: req.body.batchId,
-        date: req.body.date,
-        scheduleId: req.body.scheduleId,
-        lectureId: req.body.lectureId,
-        attendance,
-      };
-      const addAtt = await Attendance.updateOne(
-        {
-          $and: [
-            {
-              date: req.body.date,
-            },
-            {
-              instituteId: req.body.instituteId,
-            },
-            {
-              courseId: req.body.courseId,
-            },
-            {
-              batchId: req.body.batchId,
-            },
-          ],
-        },
-        attBody,
-        {
-          upsert: true,
-        }
-      );
-      const updateSchedule = await Schedule.updateOne(
-        {
-          _id: req.body.scheduleId,
-          'days._id': req.body.lectureId,
-        },
-        {
-          $set: {
-            'days.$.attendanceMark': true,
-          },
-        }
-      );
     }
+    const attBody = {
+      instituteId: req.body.instituteId,
+      courseId: req.body.courseId,
+      batchId: req.body.batchId,
+      date: req.body.date,
+      scheduleId: req.body.scheduleId,
+      lectureId: req.body.lectureId,
+      attendance,
+    };
+    const addAtt = await Attendance.updateOne(
+      {
+        $and: [
+          {
+            date: req.body.date,
+          },
+          {
+            instituteId: req.body.instituteId,
+          },
+          {
+            courseId: req.body.courseId,
+          },
+          {
+            batchId: req.body.batchId,
+          },
+        ],
+      },
+      attBody,
+      {
+        upsert: true,
+      }
+    );
+    const updateSchedule = await Schedule.updateOne(
+      {
+        _id: req.body.scheduleId,
+        'days._id': req.body.lectureId,
+      },
+      {
+        $set: {
+          'days.$.attendanceMark': true,
+        },
+      }
+    );
     deleteFile(req.file.path);
 
     res.status(200).send(addAtt);
