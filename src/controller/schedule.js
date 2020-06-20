@@ -221,6 +221,7 @@ exports.getScheduleByInstitute = async (req, res) => {
       details = {
         instituteId: req.body.instituteId,
         courseId: req.body.courseId,
+        batchId: req.body.batchId,
       };
     } else {
       const error = new Error('No Institute available');

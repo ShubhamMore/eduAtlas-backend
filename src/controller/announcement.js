@@ -1,4 +1,6 @@
 const Announcement = require('../model/announcement.model');
+const errorHandler = require('../service/errorHandler');
+
 const fs = require('fs');
 const path = require('path');
 
@@ -38,6 +40,7 @@ exports.makeAnnouncement = async (req, res) => {
       attachment: attachment,
       instituteId: req.body.instituteId,
       title: req.body.title,
+      date: req.body.date,
       text: req.body.text,
       batchCodes: JSON.parse(req.body.batchCodes),
       categories: JSON.parse(req.body.categories),
@@ -83,6 +86,7 @@ exports.editAnnouncement = async (req, res) => {
       attachment: attachment,
       instituteId: req.body.instituteId,
       title: req.body.title,
+      date: req.body.date,
       text: req.body.text,
       batchCodes: JSON.parse(req.body.batchCodes),
       categories: JSON.parse(req.body.categories),
