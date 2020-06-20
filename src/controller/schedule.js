@@ -106,7 +106,7 @@ exports.addSchedule = async (req, res, next) => {
           startDate +
           ' till ' +
           endDate,
-        receiverId: students[0].eduAtlasId,
+        receiverId: students[i].eduAtlasId,
       };
       sendNotification(notify);
       send(mail);
@@ -193,7 +193,7 @@ exports.updateSchedule = async (req, res, next) => {
           startDate +
           ' till ' +
           endDate,
-        receiverId: students[0].eduAtlasId,
+        receiverId: students[i].eduAtlasId,
       };
       sendNotification(notify);
 
