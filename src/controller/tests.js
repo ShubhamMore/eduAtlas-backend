@@ -68,6 +68,7 @@ exports.getTestByInstitute = async (req, res) => {
     const umarkedTest = await Test.aggregate([
       {
         $match: {
+          instituteId: req.body.instituteId,
           scored: false,
         },
       },
@@ -108,6 +109,7 @@ exports.getTestByInstitute = async (req, res) => {
     const markedTest = await Test.aggregate([
       {
         $match: {
+          instituteId: req.body.instituteId,
           scored: true,
         },
       },
