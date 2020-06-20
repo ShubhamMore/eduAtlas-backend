@@ -174,8 +174,7 @@ exports.addStudent = async (req, res, next) => {
     res.status(200).send(addStudent);
     await send(mail);
   } catch (error) {
-    console.log(error);
-    response(res, 500, error.message);
+    errorHandler(error, res);
   }
 };
 
@@ -205,7 +204,9 @@ exports.getActiveStudents = async (req, res) => {
     //   })
     console.log(students);
     res.status(200).send(students);
-  } catch (error) {}
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
 exports.getPendingStudents = async (req, res) => {
@@ -224,7 +225,9 @@ exports.getPendingStudents = async (req, res) => {
     ]);
     console.log(students);
     res.status(200).send(students);
-  } catch (error) {}
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
 exports.getAllStudents = async (req, res, next) => {
@@ -275,7 +278,9 @@ exports.getOneStudentByInstitute = async (req, res) => {
     student[0].fees = fee;
 
     res.status(200).send(student);
-  } catch (error) {}
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
 exports.getOneStudent = async (req, res, next) => {
@@ -331,8 +336,6 @@ exports.addCourseStudent = async (req, res, next) => {
       ],
     });
 
-    console.log(courseAvailable);
-
     if (courseAvailable.length != 0) {
       console.log('length ', courseAvailable.length);
       const error = new Error('Student Already enrolled to this Course');
@@ -357,11 +360,10 @@ exports.addCourseStudent = async (req, res, next) => {
           },
         ],
       });
-      console.log('****************************checkRoll***********************************');
-      console.log(checkRoll);
       if (checkRoll) {
         const error = new Error('Roll Number is already used');
-        error.statusCode = 202;
+        console.log('errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+        error.statusCode = 400;
         throw error;
       }
     }
@@ -379,6 +381,7 @@ exports.addCourseStudent = async (req, res, next) => {
         },
       }
     );
+
     const instituteDetails = await Institute.aggregate([
       {
         $unwind: '$course',
@@ -412,40 +415,46 @@ exports.addCourseStudent = async (req, res, next) => {
         },
       },
     ]);
-    const studentId = await Student.findOne({ eduAtlasId: req.body.eduAtlasId }, { _id: 1 });
+
+    const student = await Student.findOne(
+      { eduAtlasId: req.body.eduAtlasId },
+      { _id: 1, basicDetails: 1 }
+    );
+    console.log(student);
+    res.status(200).json(student);
+
     let mail = {
       from: 'admin@eduatlas.in',
-      to: req.body.basicDetails.studentEmail,
+      to: student.basicDetails.studentEmail,
       subject: 'INSTITUTE REQUEST EDUATLAS',
       html:
         '<!DOCTYPE html>' +
-        '<html><head><title>YOUR ACCOUT HAS BEEN CREATED AT EDUATLAS.COM</title>' +
+        '<html><head><title>YOUR ACCOUNT HAS BEEN CREATED AT EDUATLAS.COM</title>' +
         '</head><body><div>' +
         '<p>Dear ' +
-        req.body.basicDetails.name +
+        student.basicDetails.name +
         ',<br> You have been added in the course</p>' +
         '<p>INSTITUTE NAME:' +
         instituteDetails[0].parentInstitute.name +
         '</p>' +
         '<p>BRANCH NAME: ' +
-        req.body.instituteDetails.instituteId +
+        student.instituteDetails[0].instituteId +
         '</p>' +
         '<p>CONTACT: ' +
         instituteDetails[0].basicInfo.instituteContact +
         '</p>' +
         '<p>FOR LOGIN CREDENTIALS: </p>' +
         '<p>EMAIL: ' +
-        req.body.basicDetails.phone +
+        student.basicDetails.phone +
         '</p>' +
         '<p>PASSWORD: ' +
-        req.body.basicDetails.name +
+        student.basicDetails.name +
         '</p>' +
         '<p>Thank you </p>' +
         '<p>EDUATLAS </p>' +
         '</div></body></html>',
     };
 
-    res.status(200).json(studentId);
     send(mail);
   } catch (error) {
     console.log(error);
@@ -468,13 +477,15 @@ exports.updateStudentPersonalDetails = async (req, res) => {
       }
     );
     res.status(200).send({ success: true });
-  } catch (error) {}
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
 exports.updateStudentCourse = async (req, res) => {
   try {
     let body = {};
-    console.log;
+
     if (req.body.instituteDetails.batchId) {
       const checkRoll = await Student.findOne({
         $and: [
@@ -502,7 +513,8 @@ exports.updateStudentCourse = async (req, res) => {
       console.log(checkRoll);
       if (checkRoll) {
         const error = new Error('Roll Number is already used');
-        error.statusCode = 202;
+        console.log('errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+        error.statusCode = 400;
         throw error;
       }
     }
@@ -520,25 +532,27 @@ exports.updateStudentCourse = async (req, res) => {
       }
     );
     res.status(200).send({ success: true });
-  } catch (error) {}
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
 exports.updateStudentCourseFee = async (req, res) => {
   try {
-    try {
-      const updateStudent = await Student.updateOne(
-        {
-          _id: req.body.studentId,
-          'fee._id': req.body.feeId,
+    const updateStudent = await Student.updateOne(
+      {
+        _id: req.body.studentId,
+        'fee._id': req.body.feeId,
+      },
+      {
+        $set: {
+          'fee.$': req.body.fee,
         },
-        {
-          $set: {
-            'fee.$': req.body.fee,
-          },
-        }
-      );
-    } catch (error) {}
-  } catch (error) {}
+      }
+    );
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
 exports.deleteStudentCourse = async (req, res) => {
@@ -558,8 +572,7 @@ exports.deleteStudentCourse = async (req, res) => {
     );
     res.status(200).send(deleteStudent);
   } catch (error) {
-    console.log(error);
-    res.send(error);
+    errorHandler(error, res);
   }
 };
 
@@ -580,9 +593,7 @@ exports.deleteStudent = async (req, res, next) => {
 
     res.status(202).json({ message: 'Student deleted successfully' });
   } catch (error) {
-    console.log('========================');
-    console.log(error);
-    response(res, error.prototype.statusCode || 500, error.message);
+    errorHandler(error, res);
   }
 };
 exports.getStudentsByBatch = async (req, res) => {
@@ -604,7 +615,7 @@ exports.getStudentsByBatch = async (req, res) => {
 
     res.status(200).send(students);
   } catch (error) {
-    res.status(400).send(error);
+    errorHandler(error, res);
   }
 };
 //Api for accepting invites
