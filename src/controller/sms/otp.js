@@ -138,7 +138,7 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
     };
 
     //const smsRes = 'send sms'; // remove later
-    const smsRes = '';
+    const smsRes = 'send sms';
     console.log('send');
 
     res.status(200).send({ message: `${smsRes} to  ${user.phone}`, phone: user.phone }); //Change later
