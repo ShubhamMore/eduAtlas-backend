@@ -11,7 +11,6 @@ exports.getNotifications = async (req, res) => {
     let notifications = [];
     if (notification) {
       notifications = notification.notifications;
-
       notifications.sort((msg1, msg2) => {
         const msg1Id = msg1._id;
         const msg2Id = msg2._id;
@@ -22,7 +21,6 @@ exports.getNotifications = async (req, res) => {
         }
       });
     }
-
     res.status(200).send(notifications);
   } catch (error) {
     error.statusCode = 400;
