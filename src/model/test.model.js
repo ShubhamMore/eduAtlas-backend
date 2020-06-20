@@ -16,6 +16,9 @@ const testSchema = new mongoose.Schema({
   batchId: {
     type: String,
   },
+  batchName: {
+    type: String,
+  },
   testCode: {
     type: String,
   },
@@ -36,6 +39,9 @@ const testSchema = new mongoose.Schema({
   students: [
     {
       studentId: {
+        type: String,
+      },
+      studentName: {
         type: String,
       },
       rollNo: {
