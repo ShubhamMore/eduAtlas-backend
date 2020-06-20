@@ -96,9 +96,9 @@ exports.creatUser = async (req, res, next) => {
       subject: 'EDUATLAS: VERIFY EMAIL',
       html: `<a href= '${url}'> ${url} </a>`,
     };
-    await send(mail);
 
     response(res, 200, 'Verify OTP now');
+    send(mail);
   } catch (error) {
     console.log(error);
     errorHandler(error, res);
