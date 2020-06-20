@@ -131,12 +131,14 @@ exports.getEmployeeInstitutes = async (req, res) => {
     const empInst = employeeInstitutes[0].instituteDetails;
 
     const instituteArray = new Array();
-    const institutes = await Institute.find({}, { _id: 1, basicInfo: 1, address: 1, active: 1 });
+    const institutes = await Institute.find(
+      {},
+      { _id: 1, basicInfo: 1, address: 1, active: 1, currentPlan: 1 }
+    );
 
     empInst.forEach((inst) => {
       const institute = institutes.find((curInst) => curInst._id == inst.instituteId);
 
-      console.log(institute);
       if (institute) {
         const data = {
           _id: institute._id,
@@ -144,12 +146,11 @@ exports.getEmployeeInstitutes = async (req, res) => {
           basicInfo: institute.basicInfo,
           address: institute.address,
           active: institute.active,
+          currentPlan: institute.currentPlan,
         };
         instituteArray.push(data);
       }
     });
-
-    console.log(instituteArray);
 
     console.log(instituteArray);
 
