@@ -29,23 +29,27 @@ exports.addTest = async (req, res) => {
   try {
     const addTest = new Test(req.body);
     await addTest.save();
-    const students = await Student.find({
-      $and: [
-        {
-          'instituteDetails.instituteId': req.body.instituteId,
-        },
-        {
-          'instituteDetails.courseId': req.body.courseId,
-        },
-        {
-          'instituteDetails.batchId': req.body.batchId,
-        },
-      ],
-    });
 
-    let mail = {};
-    mail.from = 'admin@eduatlas.in';
-    mail.subject = 'SCHEDULE UPDATE';
+    //
+    // const students = await Student.find({
+    //   $and: [
+    //     {
+    //       'instituteDetails.instituteId': req.body.instituteId,
+    //     },
+    //     {
+    //       'instituteDetails.courseId': req.body.courseId,
+    //     },
+    //     {
+    //       'instituteDetails.batchId': req.body.batchId,
+    //     },
+    //   ],
+    // });
+
+    // let mail = {
+
+    // };
+    // mail.from = 'admin@eduatlas.in';
+    // mail.subject = 'SCHEDULE UPDATE';
 
     res.status(200).send(addTest);
   } catch (error) {
@@ -189,13 +193,52 @@ exports.getTestsForReports = async (req, res) => {
 
 exports.getSingleTest = async (req, res) => {
   try {
-    console.log(req.body);
-    const singleTest = await Test.findOne({
-      _id: req.body._id,
-    });
-    if (!singleTest) {
-      throw new Error('No test Found');
-    }
+    // console.log(req.body);
+    // const singleTest = await Test.findOne({
+    //   _id: req.body._id,
+    // });
+    // if (!singleTest) {
+    //   throw new Error('No test Found');
+    // }
+
+    const singleTest = await Test.aggregate([
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body._id),
+        },
+      },
+      {
+        $addFields: {
+          batchId: {
+            $toObjectId: '$batchId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'batchId',
+          foreignField: 'batch._id',
+          as: 'batch',
+        },
+      },
+      {
+        $unwind: '$batch',
+      },
+      {
+        $unwind: '$batch.batch',
+      },
+      {
+        $addFields: {
+          batchCode: '$batch.batch.batchCode',
+        },
+      },
+      {
+        $project: {
+          batch: false,
+        },
+      },
+    ]);
     res.status(200).send(singleTest);
   } catch (error) {
     res.status(400).send(error);
