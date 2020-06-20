@@ -8,6 +8,8 @@ const User = require('../model/user.model');
 const userController = require('../controller/users');
 const EduAtlasId = require('../model/eduatlasId.model');
 const Institute = require('../model/institute.model');
+const Fee = require('../model/fee.model');
+
 const send = require('../service/mail');
 exports.addStudent = async (req, res, next) => {
   try {
@@ -362,7 +364,6 @@ exports.addCourseStudent = async (req, res, next) => {
       });
       if (checkRoll) {
         const error = new Error('Roll Number is already used');
-        console.log('errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
         error.statusCode = 400;
         throw error;
       }
@@ -393,13 +394,13 @@ exports.addCourseStudent = async (req, res, next) => {
         $match: {
           _id: mongoose.Types.ObjectId(req.body.instituteDetails.instituteId),
           'course._id': mongoose.Types.ObjectId(req.body.instituteDetails.courseId),
-          'batch._id': mongoose.Types.ObjectId(req.body.instituteDetails.batchId),
+          // 'batch._id': mongoose.Types.ObjectId(req.body.instituteDetails.batchId),
         },
       },
       {
         $project: {
           course: 1,
-          batch: 1,
+          // batch: 1,
           basicInfo: 1,
           parentUser: {
             $toObjectId: '$parentUser',
@@ -420,6 +421,7 @@ exports.addCourseStudent = async (req, res, next) => {
       { eduAtlasId: req.body.eduAtlasId },
       { _id: 1, basicDetails: 1 }
     );
+
     console.log(student);
     res.status(200).json(student);
 
@@ -438,7 +440,7 @@ exports.addCourseStudent = async (req, res, next) => {
         instituteDetails[0].parentInstitute.name +
         '</p>' +
         '<p>BRANCH NAME: ' +
-        student.instituteDetails[0].instituteId +
+        instituteDetails[0].instituteId +
         '</p>' +
         '<p>CONTACT: ' +
         instituteDetails[0].basicInfo.instituteContact +
@@ -556,7 +558,6 @@ exports.updateStudentCourseFee = async (req, res) => {
 };
 
 exports.deleteStudentCourse = async (req, res) => {
-  console.log(req.body);
   try {
     const deleteStudent = await Student.updateOne(
       {
@@ -570,6 +571,13 @@ exports.deleteStudentCourse = async (req, res) => {
         },
       }
     );
+
+    await Fee.findOneAndDelete({
+      studentId: req.body.studentId,
+      instituteId: req.body.instituteId,
+      courseId: req.body.courseId,
+    });
+
     res.status(200).send(deleteStudent);
   } catch (error) {
     errorHandler(error, res);
