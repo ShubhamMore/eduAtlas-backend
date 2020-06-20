@@ -10,6 +10,9 @@ const announcementSchema = new Schema({
     type: String,
     required: true,
   },
+  date: {
+    type: String,
+  },
   selectAll: {
     type: Boolean,
     default: false,
