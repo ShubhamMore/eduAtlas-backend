@@ -3,7 +3,7 @@ const response = require('../../service/response');
 const smsService = require('../../service/sms');
 const errorHandler = require('../../service/errorHandler');
 const { NewUser, OneTimePassword } = require('../../clientStore');
-
+const send = require('../../service/mail');
 const generateOTP = (ph) => {
   var digits = '0123456789';
   let OTP = '1234';
@@ -20,15 +20,15 @@ const generateOTP = (ph) => {
 exports.sendOtp = async (req, res, next) => {
   try {
     const phone = req.params.phone;
-    //const email = req.params.email;
+    const email = req.params.email;
     if (!phone) {
       response(res, 400, 'Phone number not provided');
       return;
     }
-    // if (!email) {
-    //   response(res, 400, 'Email not provided');
-    //   return;
-    // }
+    if (!email) {
+      response(res, 400, 'Email not provided');
+      return;
+    }
 
     new OneTimePassword(phone, generateOTP(phone));
 
@@ -36,10 +36,23 @@ exports.sendOtp = async (req, res, next) => {
     //   phone,
     //   'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
     // );
+    // const user = await User.findOne({
+    //   email: req.params.email,
+    // });
+    // const token = await user.generateAuthToken();
 
+    // const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
+    // console.log(url);
     const smsRes = 'send sms'; // remove later
-    console.log('send');
+    // const mail = {
+    //   to: req.params.email,
+    //   from: 'admin@eduatlas.in',
+    //   subject: 'EDUATLAS: VERIFY EMAIL',
+    //   html: `<a href= '${url}'> ${url} </a>`,
+    // };
 
+    console.log('send');
+    //await send(mail);
     res.status(200).send({ message: `${smsRes} to  ${phone}` }); //Change later
   } catch (error) {
     console.log(error);

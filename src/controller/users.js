@@ -6,6 +6,7 @@ const EduAtlasId = require('../model/eduatlasId.model');
 const Announcement = require('../model/announcement.model');
 const Student = require('../model/student.model');
 const smsService = require('../service/sms');
+const send = require('../service/mail');
 
 const schema = require('../service/joi');
 
@@ -82,8 +83,17 @@ exports.creatUser = async (req, res, next) => {
     user.eduAtlasId = newEduAtlasId.split('-').join('');
 
     await new User(user).save();
+    const token = await user.generateAuthToken();
+    const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
 
     // Send Mail Here
+    const mail = {
+      to: req.body.email,
+      from: 'admin@eduatlas.in',
+      subject: 'EDUATLAS: VERIFY EMAIL',
+      html: `<a href= '${url}'> ${url} </a>`,
+    };
+    await send(mail);
 
     response(res, 200, 'Verify OTP now');
   } catch (error) {
