@@ -3470,7 +3470,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "input,\nnb-select {\n  display: block; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9mb3J1bS9hZGQtZm9ydW0vRTpcXFByb2plY3RzXFxGcmVlbGFuY2UgUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXGNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGNvbW11bmljYXRpb25cXGZvcnVtXFxhZGQtZm9ydW1cXGFkZC1mb3J1bS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7RUFFRSxjQUFjLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9jb21tdW5pY2F0aW9uL2ZvcnVtL2FkZC1mb3J1bS9hZGQtZm9ydW0uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpbnB1dCxcclxubmItc2VsZWN0IHtcclxuICBkaXNwbGF5OiBibG9jaztcclxufSJdfQ== */";
+    __webpack_exports__["default"] = "input,\nnb-select {\n  display: block; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9mb3J1bS9hZGQtZm9ydW0vRTpcXFByb2plY3RzXFxGcmVlbGFuY2UgUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXGNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGNvbW11bmljYXRpb25cXGZvcnVtXFxhZGQtZm9ydW1cXGFkZC1mb3J1bS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7RUFFRSxjQUFjLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9jb21tdW5pY2F0aW9uL2ZvcnVtL2FkZC1mb3J1bS9hZGQtZm9ydW0uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpbnB1dCxcclxubmItc2VsZWN0IHtcclxuICBkaXNwbGF5OiBibG9jaztcclxufVxyXG4iXX0= */";
     /***/
   },
 
@@ -3594,7 +3594,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this22 = this;
 
           this.api.getSingleForum({
-            '_id': this.forumId
+            _id: this.forumId
           }).subscribe(function (data) {
             _this22.forumForm.patchValue({
               topic: data.title,
@@ -3618,13 +3618,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           var forumReq = {
-            'instituteId': this.instituteId,
-            'courseId': this.forumForm.get('courseId').value,
-            'createdBy': this.authService.getUser()._id,
-            'createdByName': this.authService.getUser().name,
-            'title': this.forumForm.get('topic').value,
-            'description': this.forumForm.get('description').value,
-            '_id': this.forumId
+            instituteId: this.instituteId,
+            courseId: this.forumForm.get('courseId').value,
+            createdBy: this.authService.getUser()._id,
+            createdByName: this.authService.getUser().name,
+            title: this.forumForm.get('topic').value,
+            description: this.forumForm.get('description').value,
+            _id: this.forumId
           };
 
           if (this.edit === 'true') {
@@ -3724,7 +3724,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".commentBox {\n  background-color: #f1efef;\n  border-radius: 10px;\n  padding: 10px;\n  margin-bottom: 10px;\n  position: relative; }\n\n.commentBox label {\n  font-weight: bold; }\n\n.commentBox span {\n  font-weight: bold; }\n\n.deleteComment {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  cursor: pointer; }\n\n.deleteComment i {\n  color: red; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9mb3J1bS9mb3J1bS1kZXRhaWxzL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxjb21tdW5pY2F0aW9uXFxmb3J1bVxcZm9ydW0tZGV0YWlsc1xcZm9ydW0tZGV0YWlscy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHlCQUF5QjtFQUN6QixtQkFBbUI7RUFDbkIsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQixrQkFBa0IsRUFBQTs7QUFFdEI7RUFDSSxpQkFBaUIsRUFBQTs7QUFFckI7RUFDSSxpQkFBaUIsRUFBQTs7QUFHckI7RUFDSSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLFdBQVc7RUFDWCxlQUFlLEVBQUE7O0FBRW5CO0VBQ0ksVUFBUyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9mb3J1bS9mb3J1bS1kZXRhaWxzL2ZvcnVtLWRldGFpbHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29tbWVudEJveHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNmMWVmZWY7XHJcbiAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xyXG4gICAgcGFkZGluZzogMTBweDtcclxuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbn1cclxuLmNvbW1lbnRCb3ggbGFiZWx7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxufVxyXG4uY29tbWVudEJveCBzcGFue1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn1cclxuXHJcbi5kZWxldGVDb21tZW50e1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgYm90dG9tOiAxMHB4O1xyXG4gICAgcmlnaHQ6IDEwcHg7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbn1cclxuLmRlbGV0ZUNvbW1lbnQgaSB7XHJcbiAgICBjb2xvcjpyZWQ7XHJcbn0iXX0= */";
+    __webpack_exports__["default"] = ".commentBox {\n  background-color: #f1efef;\n  border-radius: 10px;\n  padding: 10px;\n  margin-bottom: 10px;\n  position: relative; }\n\n.commentBox label {\n  font-weight: bold; }\n\n.commentBox span {\n  font-weight: bold; }\n\n.deleteComment {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  cursor: pointer; }\n\n.deleteComment i {\n  color: red; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9mb3J1bS9mb3J1bS1kZXRhaWxzL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxjb21tdW5pY2F0aW9uXFxmb3J1bVxcZm9ydW0tZGV0YWlsc1xcZm9ydW0tZGV0YWlscy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUF5QjtFQUN6QixtQkFBbUI7RUFDbkIsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQixrQkFBa0IsRUFBQTs7QUFFcEI7RUFDRSxpQkFBaUIsRUFBQTs7QUFFbkI7RUFDRSxpQkFBaUIsRUFBQTs7QUFHbkI7RUFDRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLFdBQVc7RUFDWCxlQUFlLEVBQUE7O0FBRWpCO0VBQ0UsVUFBVSxFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9mb3J1bS9mb3J1bS1kZXRhaWxzL2ZvcnVtLWRldGFpbHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29tbWVudEJveCB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogI2YxZWZlZjtcclxuICBib3JkZXItcmFkaXVzOiAxMHB4O1xyXG4gIHBhZGRpbmc6IDEwcHg7XHJcbiAgbWFyZ2luLWJvdHRvbTogMTBweDtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbn1cclxuLmNvbW1lbnRCb3ggbGFiZWwge1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcbi5jb21tZW50Qm94IHNwYW4ge1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcblxyXG4uZGVsZXRlQ29tbWVudCB7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIGJvdHRvbTogMTBweDtcclxuICByaWdodDogMTBweDtcclxuICBjdXJzb3I6IHBvaW50ZXI7XHJcbn1cclxuLmRlbGV0ZUNvbW1lbnQgaSB7XHJcbiAgY29sb3I6IHJlZDtcclxufVxyXG4iXX0= */";
     /***/
   },
 
@@ -4218,14 +4218,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this31 = this;
 
           this.api.getMyForum({
-            'createdBy': this.authService.getUser()._id,
-            'courseId': this.selectedCourseId
+            createdBy: this.authService.getUser()._id,
+            courseId: this.selectedCourseId
           }).subscribe(function (res) {
             _this31.myForums = res;
 
             _this31.myForums.map(function (myForum) {
               var date = new Date(myForum.date);
-              myForum.date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+              myForum.date = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
               return myForum;
             });
           });
@@ -4246,7 +4246,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this32 = this;
 
           this.api.deleteForum({
-            '_id': id
+            _id: id
           }).subscribe(function () {
             _this32.myForums.splice(index, 1);
 

@@ -2375,7 +2375,7 @@ CommunicationModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("input,\nnb-select {\n  display: block; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9mb3J1bS9hZGQtZm9ydW0vRTpcXFByb2plY3RzXFxGcmVlbGFuY2UgUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXGNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGNvbW11bmljYXRpb25cXGZvcnVtXFxhZGQtZm9ydW1cXGFkZC1mb3J1bS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7RUFFRSxjQUFjLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9jb21tdW5pY2F0aW9uL2ZvcnVtL2FkZC1mb3J1bS9hZGQtZm9ydW0uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpbnB1dCxcclxubmItc2VsZWN0IHtcclxuICBkaXNwbGF5OiBibG9jaztcclxufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("input,\nnb-select {\n  display: block; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9mb3J1bS9hZGQtZm9ydW0vRTpcXFByb2plY3RzXFxGcmVlbGFuY2UgUHJvamVjdHNcXEVkdUF0bGFzXFxlZHVhdGxhczFcXGNsaWVudC9zcmNcXGFwcFxccGFnZXNcXGNvbW11bmljYXRpb25cXGZvcnVtXFxhZGQtZm9ydW1cXGFkZC1mb3J1bS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7RUFFRSxjQUFjLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9jb21tdW5pY2F0aW9uL2ZvcnVtL2FkZC1mb3J1bS9hZGQtZm9ydW0uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpbnB1dCxcclxubmItc2VsZWN0IHtcclxuICBkaXNwbGF5OiBibG9jaztcclxufVxyXG4iXX0= */");
 
 /***/ }),
 
@@ -2428,7 +2428,7 @@ let AddForumComponent = class AddForumComponent {
         this.forumForm = this.fb.group({
             topic: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             description: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            courseId: ['']
+            courseId: [''],
         });
         this.getCourses();
     }
@@ -2438,7 +2438,7 @@ let AddForumComponent = class AddForumComponent {
         }, (err) => console.error(err));
     }
     getForum() {
-        this.api.getSingleForum({ '_id': this.forumId }).subscribe((data) => {
+        this.api.getSingleForum({ _id: this.forumId }).subscribe((data) => {
             this.forumForm.patchValue({
                 topic: data.title,
                 description: data.description,
@@ -2455,22 +2455,19 @@ let AddForumComponent = class AddForumComponent {
         if (this.forumForm.invalid) {
             return;
         }
-        var forumReq = {
-            'instituteId': this.instituteId,
-            'courseId': this.forumForm.get('courseId').value,
-            'createdBy': this.authService.getUser()._id,
-            'createdByName': this.authService.getUser().name,
-            'title': this.forumForm.get('topic').value,
-            'description': this.forumForm.get('description').value,
-            '_id': this.forumId
+        const forumReq = {
+            instituteId: this.instituteId,
+            courseId: this.forumForm.get('courseId').value,
+            createdBy: this.authService.getUser()._id,
+            createdByName: this.authService.getUser().name,
+            title: this.forumForm.get('topic').value,
+            description: this.forumForm.get('description').value,
+            _id: this.forumId,
         };
         if (this.edit === 'true') {
             this.api.updateForum(forumReq).subscribe((data) => {
                 this.showToast('top-right', 'success', 'Forum Updated Successfully');
-                this.router.navigate([
-                    '/pages/communication/forum/',
-                    this.instituteId,
-                ]);
+                this.router.navigate(['/pages/communication/forum/', this.instituteId]);
             }, (err) => {
                 this.showToast('top-right', 'danger', err.error.message);
             });
@@ -2478,10 +2475,7 @@ let AddForumComponent = class AddForumComponent {
         if (!this.edit) {
             this.api.addForum(forumReq).subscribe(() => {
                 this.showToast('top-right', 'success', 'Forum Added Successfully');
-                this.router.navigate([
-                    '/pages/communication/forum/',
-                    this.instituteId,
-                ]);
+                this.router.navigate(['/pages/communication/forum/', this.instituteId]);
             }, (err) => {
                 this.showToast('top-right', 'danger', err.error.message);
             });
@@ -2537,7 +2531,7 @@ AddForumComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".commentBox {\n  background-color: #f1efef;\n  border-radius: 10px;\n  padding: 10px;\n  margin-bottom: 10px;\n  position: relative; }\n\n.commentBox label {\n  font-weight: bold; }\n\n.commentBox span {\n  font-weight: bold; }\n\n.deleteComment {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  cursor: pointer; }\n\n.deleteComment i {\n  color: red; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9mb3J1bS9mb3J1bS1kZXRhaWxzL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxjb21tdW5pY2F0aW9uXFxmb3J1bVxcZm9ydW0tZGV0YWlsc1xcZm9ydW0tZGV0YWlscy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHlCQUF5QjtFQUN6QixtQkFBbUI7RUFDbkIsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQixrQkFBa0IsRUFBQTs7QUFFdEI7RUFDSSxpQkFBaUIsRUFBQTs7QUFFckI7RUFDSSxpQkFBaUIsRUFBQTs7QUFHckI7RUFDSSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLFdBQVc7RUFDWCxlQUFlLEVBQUE7O0FBRW5CO0VBQ0ksVUFBUyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9mb3J1bS9mb3J1bS1kZXRhaWxzL2ZvcnVtLWRldGFpbHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29tbWVudEJveHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNmMWVmZWY7XHJcbiAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xyXG4gICAgcGFkZGluZzogMTBweDtcclxuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbn1cclxuLmNvbW1lbnRCb3ggbGFiZWx7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxufVxyXG4uY29tbWVudEJveCBzcGFue1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn1cclxuXHJcbi5kZWxldGVDb21tZW50e1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgYm90dG9tOiAxMHB4O1xyXG4gICAgcmlnaHQ6IDEwcHg7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbn1cclxuLmRlbGV0ZUNvbW1lbnQgaSB7XHJcbiAgICBjb2xvcjpyZWQ7XHJcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".commentBox {\n  background-color: #f1efef;\n  border-radius: 10px;\n  padding: 10px;\n  margin-bottom: 10px;\n  position: relative; }\n\n.commentBox label {\n  font-weight: bold; }\n\n.commentBox span {\n  font-weight: bold; }\n\n.deleteComment {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  cursor: pointer; }\n\n.deleteComment i {\n  color: red; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9mb3J1bS9mb3J1bS1kZXRhaWxzL0U6XFxQcm9qZWN0c1xcRnJlZWxhbmNlIFByb2plY3RzXFxFZHVBdGxhc1xcZWR1YXRsYXMxXFxjbGllbnQvc3JjXFxhcHBcXHBhZ2VzXFxjb21tdW5pY2F0aW9uXFxmb3J1bVxcZm9ydW0tZGV0YWlsc1xcZm9ydW0tZGV0YWlscy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUF5QjtFQUN6QixtQkFBbUI7RUFDbkIsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQixrQkFBa0IsRUFBQTs7QUFFcEI7RUFDRSxpQkFBaUIsRUFBQTs7QUFFbkI7RUFDRSxpQkFBaUIsRUFBQTs7QUFHbkI7RUFDRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLFdBQVc7RUFDWCxlQUFlLEVBQUE7O0FBRWpCO0VBQ0UsVUFBVSxFQUFBIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvY29tbXVuaWNhdGlvbi9mb3J1bS9mb3J1bS1kZXRhaWxzL2ZvcnVtLWRldGFpbHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29tbWVudEJveCB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogI2YxZWZlZjtcclxuICBib3JkZXItcmFkaXVzOiAxMHB4O1xyXG4gIHBhZGRpbmc6IDEwcHg7XHJcbiAgbWFyZ2luLWJvdHRvbTogMTBweDtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbn1cclxuLmNvbW1lbnRCb3ggbGFiZWwge1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcbi5jb21tZW50Qm94IHNwYW4ge1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcblxyXG4uZGVsZXRlQ29tbWVudCB7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIGJvdHRvbTogMTBweDtcclxuICByaWdodDogMTBweDtcclxuICBjdXJzb3I6IHBvaW50ZXI7XHJcbn1cclxuLmRlbGV0ZUNvbW1lbnQgaSB7XHJcbiAgY29sb3I6IHJlZDtcclxufVxyXG4iXX0= */");
 
 /***/ }),
 
@@ -2816,11 +2810,13 @@ let MyForumComponent = class MyForumComponent {
         this.getMyForums();
     }
     getMyForums() {
-        this.api.getMyForum({ 'createdBy': this.authService.getUser()._id, 'courseId': this.selectedCourseId }).subscribe((res) => {
+        this.api
+            .getMyForum({ createdBy: this.authService.getUser()._id, courseId: this.selectedCourseId })
+            .subscribe((res) => {
             this.myForums = res;
             this.myForums.map((myForum) => {
-                var date = new Date(myForum.date);
-                myForum.date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+                const date = new Date(myForum.date);
+                myForum.date = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
                 return myForum;
             });
         });
@@ -2831,7 +2827,7 @@ let MyForumComponent = class MyForumComponent {
         });
     }
     delete(id, index) {
-        this.api.deleteForum({ '_id': id }).subscribe(() => {
+        this.api.deleteForum({ _id: id }).subscribe(() => {
             this.myForums.splice(index, 1);
             this.showToast('top-right', 'success', 'Forum Deleted Successfully');
         }, (err) => console.error(err));
