@@ -1,6 +1,7 @@
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
 const Notification = require('../model/notification.model');
+const mongoose = require('mongoose');
 
 exports.getNotifications = async (req, res) => {
   try {
@@ -33,7 +34,7 @@ exports.deleteNotification = async (req, res) => {
     console.log();
     const deleteNotification = await Notification.findOneAndUpdate(
       { eduatlasId: req.user.eduAtlasId },
-      { $pull: { notifications: { _id: req.body.notificationId } } },
+      { $pull: { notifications: { _id: mongoose.Types.ObjectId(req.body.notificationId) } } },
       { new: true }
     );
 
@@ -46,8 +47,11 @@ exports.deleteNotification = async (req, res) => {
 exports.seenNotification = async (req, res) => {
   try {
     const notification = await Notification.updateOne(
-      { eduatlasId: req.user.eduAtlasId, 'notifications._id': req.body.notificationId },
-      { $set: { 'notifications.$.seen': true } }
+      {
+        eduatlasId: req.user.eduAtlasId,
+        'notifications._id': mongoose.Types.ObjectId(req.body.notificationId),
+      },
+      { $set: { 'notifications.$': { seen: true } } }
     );
 
     res.status(200).send(notification);
