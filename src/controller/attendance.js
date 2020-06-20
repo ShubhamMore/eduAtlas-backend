@@ -391,7 +391,8 @@ exports.attendanceByFile = async (req, res) => {
         },
       ],
     });
-    const s = Sheet1.length;
+    console.log(excelData);
+    const s = excelData.Sheet1.length;
     for (var i = 0; i < s; i++) {
       // Sheet1[i].attendanceStatus =
       //   Sheet1[i].attendanceStatus == 'P' || Sheet1[i].attendanceStatus == 'p' ? true : false;
@@ -408,7 +409,7 @@ exports.attendanceByFile = async (req, res) => {
             'instituteDetails.batchId': req.body.batchId,
           },
           {
-            'instituteDetails.rollNumber': Sheet[i].rollNo,
+            'instituteDetails.rollNumber': excelData.Sheet[i].rollNo,
           },
         ],
       });
@@ -416,7 +417,10 @@ exports.attendanceByFile = async (req, res) => {
       attendance.push({
         studentId: student._id,
         attendanceStatus:
-          Sheet1[i].attendanceStatus == 'P' || Sheet1[i].attendanceStatus == 'p' ? true : false,
+          excelData.Sheet1[i].attendanceStatus == 'PRESENT' ||
+          excelData.Sheet1[i].attendanceStatus == 'p'
+            ? true
+            : false,
       });
       const attBody = {
         instituteId: req.body.instituteId,
@@ -464,5 +468,8 @@ exports.attendanceByFile = async (req, res) => {
     deleteFile(req.file.path);
 
     res.status(200).send(addAtt);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    errorHandler(error, res);
+  }
 };

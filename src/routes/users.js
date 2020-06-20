@@ -11,7 +11,7 @@ authRouter.post('/login', userController.loginUser);
 authRouter.post('/autoLogin', checkAuth, userController.autoLogin);
 authRouter.post('/logout', checkAuth, userController.logoutUser);
 
-authRouter.get('/sendOTP/:phone', otpController.sendOtp);
+authRouter.get('/sendOTP/:phone/:email', otpController.sendOtp);
 authRouter.get('/sendOtpForRegisteredUser/:phone', otpController.sendOtpForRegisteredUser);
 authRouter.post('/sendOtpForGetUserDetails', otpController.sendOtpForGetUserDetails);
 authRouter.post('/verifyUserOTP', otpController.verifyUserOTP);
@@ -22,6 +22,8 @@ authRouter.post('/findUser', userController.findUser);
 authRouter.patch('/resetPassword', userController.resetPassword);
 
 authRouter.post('/changePassword', checkAuth, userController.changePassword);
+
+authRouter.get('/verifyEmail', userController.verifyEmail);
 
 // authRouter.delete('', userController.deleteAllUsers);
 

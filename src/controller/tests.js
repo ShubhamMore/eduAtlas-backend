@@ -39,21 +39,112 @@ exports.getTestByInstitute = async (req, res) => {
   try {
     console.log(req.body);
 
-    let query = {};
+    // let query = {};
 
-    if (!req.body.batchId) {
-      query = {
-        instituteId: req.body.instituteId,
-      };
-    } else {
-      query = {
-        instituteId: req.body.instituteId,
-        batchId: req.body.batchId,
-      };
-    }
-    const batchTest = await Test.find(query);
+    // if (!req.body.batchId) {
+    //   query = {
+    //     instituteId: req.body.instituteId,
+    //   };
+    // } else {
+    //   query = {
+    //     instituteId: req.body.instituteId,
+    //     batchId: req.body.batchId,
+    //   };
+    // }
 
-    res.status(200).send(batchTest);
+    // const umarkedTest = await Test.find({
+    //   instituteId: req.body.instituteId,
+    //   students: {
+    //     $eq: [],
+    //   },
+    // });
+
+    // const markedTest = await Test.find({
+    //   instituteId: req.body.instituteId,
+    //   students: {
+    //     $ne: [],
+    //   },
+    // });
+    const umarkedTest = await Test.aggregate([
+      {
+        $match: {
+          scored: false,
+        },
+      },
+      {
+        $addFields: {
+          batchId: {
+            $toObjectId: '$batchId',
+          },
+        },
+      },
+
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'batchId',
+          foreignField: 'batch._id',
+          as: 'batch',
+        },
+      },
+      {
+        $unwind: '$batch',
+      },
+      {
+        $unwind: '$batch.batch',
+      },
+      {
+        $addFields: {
+          batchCode: '$batch.batch.batchCode',
+        },
+      },
+      {
+        $project: {
+          batch: false,
+        },
+      },
+    ]);
+
+    const markedTest = await Test.aggregate([
+      {
+        $match: {
+          scored: true,
+        },
+      },
+      {
+        $addFields: {
+          batchId: {
+            $toObjectId: '$batchId',
+          },
+        },
+      },
+
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'batchId',
+          foreignField: 'batch._id',
+          as: 'batch',
+        },
+      },
+      {
+        $unwind: '$batch',
+      },
+      {
+        $unwind: '$batch.batch',
+      },
+      {
+        $addFields: {
+          batchCode: '$batch.batch.batchCode',
+        },
+      },
+      {
+        $project: {
+          batch: false,
+        },
+      },
+    ]);
+    res.status(200).send({ markedTest, umarkedTest });
   } catch (error) {
     res.status(400).send(error);
   }

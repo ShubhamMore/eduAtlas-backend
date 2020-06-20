@@ -160,7 +160,7 @@ exports.getOneInstitute = async (req, res, next) => {
 
 exports.getAllInstitutes = async (req, res, next) => {
   try {
-    const institutes = await Institute.find({ userPhone: req.user.phone });
+    const institutes = await Institute.find({ parentUser: req.user._id });
 
     res.status(200).send(institutes);
   } catch (error) {

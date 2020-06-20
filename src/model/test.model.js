@@ -22,6 +22,17 @@ const testSchema = new mongoose.Schema({
   totalMarks: {
     type: String,
   },
+  startTime: {
+    type: String,
+  },
+  toTime: {
+    type: String,
+  },
+  scored: {
+    type: Boolean,
+    default: false,
+  },
+
   students: [
     {
       studentId: {
