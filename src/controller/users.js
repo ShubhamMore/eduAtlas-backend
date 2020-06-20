@@ -86,19 +86,20 @@ exports.creatUser = async (req, res, next) => {
     const newUser = await User.find({
       email: req.body.email,
     });
-    const token = await newUser.generateAuthToken();
-    const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
+    // console.log(newUser);
+    // const token = await newUser.generateAuthToken();
+    // const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
 
-    // Send Mail Here
-    const mail = {
-      to: req.body.email,
-      from: 'admin@eduatlas.in',
-      subject: 'EDUATLAS: VERIFY EMAIL',
-      html: `<a href= '${url}'> ${url} </a>`,
-    };
+    // // Send Mail Here
+    // const mail = {
+    //   to: req.body.email,
+    //   from: 'admin@eduatlas.in',
+    //   subject: 'EDUATLAS: VERIFY EMAIL',
+    //   html: `<a href= '${url}'> ${url} </a>`,
+    // };
 
     response(res, 200, 'Verify OTP now');
-    send(mail);
+    // send(mail);
   } catch (error) {
     console.log(error);
     errorHandler(error, res);
