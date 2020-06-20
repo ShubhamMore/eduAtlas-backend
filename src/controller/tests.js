@@ -252,6 +252,7 @@ exports.addTestScore = async (req, res) => {
         _id: req.body._id,
       },
       {
+        scored: true,
         $set: {
           students: req.body.scores,
         },
