@@ -221,7 +221,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
           'days.select': true,
           'days.attendanceMark': false,
           date: {
-            $lt: new Date('2020-08-22T00:00:00'),
+            $lt: new Date(currentDate),
           },
         },
       },

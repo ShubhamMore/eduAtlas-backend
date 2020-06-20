@@ -247,11 +247,13 @@ exports.getSingleTest = async (req, res) => {
 
 exports.addTestScore = async (req, res) => {
   try {
+    console.log(req.body);
     const updateScore = await Test.updateOne(
       {
         _id: req.body._id,
       },
       {
+        batchName: req.body.batchName,
         scored: true,
         $set: {
           students: req.body.scores,
@@ -313,13 +315,11 @@ exports.addScoreUsingExcel = async (req, res) => {
           },
         },
       ]);
-      if (student.length == 0) {
-        const error = new Error('student not Found');
-        error.statusCode = 400;
-        throw error;
+
+      if (student.length > 0) {
+        excelData.Sheet1[i].studentId = student[0]._id;
+        excelData.Sheet1[i].studentName = student[0].basicDetails.name;
       }
-      console.log(student);
-      excelData.Sheet1[i].studentId = student[0]._id;
     }
     console.log(excelData);
     const updateScore = await Test.updateOne(
