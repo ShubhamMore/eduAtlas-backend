@@ -47,7 +47,7 @@ exports.seenNotification = async (req, res) => {
   try {
     const notification = await Notification.updateOne(
       { eduatlasId: req.user.eduAtlasId, 'notifications._id': req.body.notificationId },
-      { $set: { 'notifications.$': { seen: true } } }
+      { $set: { 'notifications.$.seen': true } }
     );
 
     res.status(200).send(notification);
