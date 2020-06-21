@@ -6703,7 +6703,7 @@ if (typeof SVGElement.prototype.contains === 'undefined') {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\Projects\Freelance Projects\EduAtlas\eduatlas1\client\src\polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! G:\Projects\EduAtlas\EduAtlas Web\eduAtlas-client\src\polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })

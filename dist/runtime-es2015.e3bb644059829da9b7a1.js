@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({}[chunkId]||chunkId) +    "-es5." + {"0":"b8209dc68ab06e4c68e7","1":"337c52d254d9481220cd","2":"891f882ebcffde6c9894","3":"bb5926defe7ff6f0ffd7","4":"154a6f34d49285b0fbb4","5":"5e2ee11abdcd0012f1ce","6":"b80891b8657009c5b4a3","7":"0c0b464a5798753a9eb2","8":"b7b0ec48c33c3b8afef4"}[chunkId] + ".js"
+/******/ 		return __webpack_require__.p + "" + ({}[chunkId]||chunkId) + "-es2015." + {"0":"b8209dc68ab06e4c68e7","1":"036e3071fa85f2b333e4","2":"891f882ebcffde6c9894","3":"bb5926defe7ff6f0ffd7","4":"c31e37fe7d6c6321ddcb","5":"5e2ee11abdcd0012f1ce","6":"b80891b8657009c5b4a3","7":"0c0b464a5798753a9eb2","8":"b7b0ec48c33c3b8afef4"}[chunkId] + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
