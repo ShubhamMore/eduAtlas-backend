@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node eduatlas.js",
-    "dev": "env-cmd -f ./config/dev.env nodemon eduatlas.js"
+    "dev": "env-cmd -f ./config/dev.env nodemon eduatlas.js",
+    "prod": "env-cmd -f ./config/prod.env pm2 start eduatlas.js"
   },
   "engines": {
     "node": "12.16.1",
