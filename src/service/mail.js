@@ -1,34 +1,36 @@
 const nodemailer = require('nodemailer');
-//const { google } = require('googleapis');
-//const OAuth2 = google.auth.OAuth2;
+const { google } = require('googleapis');
+const OAuth2 = google.auth.OAuth2;
 
-// const oauth2Client = new OAuth2(
-//   process.env.GMAIL_CLIENT_ID, // ClientID
-//   process.env.GMAIL_CLIENT_SECRET, // Client Secret
-//   'https://developers.google.com/oauthplayground' // Redirect URL
-// );
+const oauth2Client = new OAuth2(
+  process.env.GMAIL_CLIENT_ID, // ClientID
+  process.env.GMAIL_CLIENT_SECRET, // Client Secret
+  'https://developers.google.com/oauthplayground' // Redirect URL
+);
 
-// oauth2Client.setCredentials({
-//   refresh_token: process.env.GMAIL_REFRESH_TOKEN,
-// });
+oauth2Client.setCredentials({
+  refresh_token: process.env.GMAIL_REFRESH_TOKEN,
+});
 
-//const accessToken = oauth2Client.getAccessToken();
+const accessToken = oauth2Client.getAccessToken();
 
 const sendMail = async (mail) => {
   console.log('inhere');
   // create reusable transporter object using the default SMTP transport
   const smtpTransport = nodemailer.createTransport({
-    host: 'smtp.zoho.com',
-    port: 465,
-    secure: true, //ssl
+    service: 'gmail',
+    host: 'smtp.gmail.com',
     auth: {
-      user: 'admin@eduatlas.in',
-      pass: 'Something@123',
+      type: 'OAuth2',
+      user: process.env.GMAIL_USER,
+      clientId: process.env.GMAIL_CLIENT_ID,
+      clientSecret: process.env.GMAIL_CLIENT_SECRET,
+      refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+      accessToken: accessToken,
     },
   });
-
   const mailOptions = {
-    from: mail.from, // sender address
+    from: process.env.GMAIL_USER, // sender address
     to: mail.to, // list of receivers
     subject: mail.subject, // Subject line
     generateTextFromHTML: true,

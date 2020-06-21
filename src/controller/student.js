@@ -150,10 +150,10 @@ exports.addStudent = async (req, res, next) => {
         '</p>' +
         '<p>FOR LOGIN CREDENTIALS: </p>' +
         '<p>EMAIL: ' +
-        req.body.basicDetails.phone +
+        req.body.basicDetails.email +
         '</p>' +
         '<p>PASSWORD: ' +
-        req.body.basicDetails.name +
+        req.body.basicDetails.phone +
         '</p>' +
         '<p>Thank you </p>' +
         '<p>EDUATLAS </p>' +

@@ -95,7 +95,22 @@ exports.creatUser = async (req, res, next) => {
       to: req.body.email,
       from: 'admin@eduatlas.in',
       subject: 'EDUATLAS: VERIFY EMAIL',
-      html: `<a href= '${url}'> ${url} </a>`,
+      html: `<h2>Confirm your Eduatlas account</h2>
+      <p>You just signed up for a new Eduatlas account with the following details:</p>
+      <strong>Name: ${newUser.name}</strong><br>
+      <strong>Email: ${newUser.email}</strong><br>
+      <strong>Contact No.: ${newUser.phone}</strong><br>
+       
+      <p>To finish creating your account, click on the link below:</p>
+       
+      <a style="text-decoration: none; color: #000; background-color: #ffd500; padding: 10px 20px; font-size: 25px; font-weight: bold;" href="${url}">CONFIRM</a>
+       
+      <p>Having trouble? Click on this link instead: <br>
+          <a href="${url}">${url}</a>  
+      </p>
+      
+      <strong>_ _ _ _</strong><br>
+      <strong>The Eduatlas Team</strong>`,
     };
 
     response(res, 200, 'Verify OTP now');
@@ -173,7 +188,22 @@ exports.loginUser = async (req, res, next) => {
         to: req.body.email,
         from: 'admin@eduatlas.in',
         subject: 'EDUATLAS: VERIFY EMAIL',
-        html: `<a href= '${url}'> ${url} </a>`,
+        html: `<h2>Confirm your Eduatlas account</h2>
+        <p>You just signed up for a new Eduatlas account with the following details:</p>
+        <strong>Name: ${user.name}</strong><br>
+        <strong>Email: ${user.email}</strong><br>
+        <strong>Contact No.: ${user.phone}</strong><br>
+         
+        <p>To finish creating your account, click on the link below:</p>
+         
+        <a style="text-decoration: none; color: #000; background-color: #ffd500; padding: 10px 20px; font-size: 25px; font-weight: bold;" href="${url}">CONFIRM</a>
+         
+        <p>Having trouble? Click on this link instead: <br>
+            <a href="${url}">${url}</a>  
+        </p>
+        
+        <strong>_ _ _ _</strong><br>
+        <strong>The Eduatlas Team</strong>`,
       };
 
       send(mail);

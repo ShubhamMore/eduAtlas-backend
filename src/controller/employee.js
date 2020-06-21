@@ -5,6 +5,8 @@ const EduAtlasId = require('../model/eduatlasId.model');
 const Employee = require('../model/employee.model');
 const Institute = require('../model/institute.model');
 const mongoose = require('mongoose');
+const send = require('../service/mail');
+
 exports.addEmployee = async (req, res) => {
   try {
     console.log(req.body);
@@ -46,16 +48,16 @@ exports.addEmployee = async (req, res) => {
     const addUser = new User(newUser);
     await addUser.save();
 
-    const token = await addUser.generateAuthToken();
-    const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
+    // const token = await addUser.generateAuthToken();
+    // const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
 
-    // Send Mail Here
-    const mail = {
-      to: req.body.email,
-      from: 'admin@eduatlas.in',
-      subject: 'EDUATLAS: VERIFY EMAIL',
-      html: `<a href= '${url}'> ${url} </a>`,
-    };
+    // // Send Mail Here
+    // const mail = {
+    //   to: req.body.email,
+    //   from: 'admin@eduatlas.in',
+    //   subject: 'EDUATLAS: VERIFY EMAIL',
+    //   html: `<a href= '${url}'> ${url} </a>`,
+    // };
 
     console.log('ID', eduatlasId[0]._id);
 
@@ -79,10 +81,80 @@ exports.addEmployee = async (req, res) => {
         },
       }
     );
+    const instituteDetails = await Institute.aggregate([
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body.instituteDetails.instituteId),
+        },
+      },
+      {
+        $project: {
+          basicInfo: 1,
+          parentUser: {
+            $toObjectId: '$parentUser',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'parentUser',
+          foreignField: '_id',
+          as: 'parentInstitute',
+        },
+      },
+      {
+        $unwind: '$parentInstitute',
+      },
+      {
+        $project: {
+          basicInfo: 1,
+          'parentInstitute.name': 1,
+          'parentInstitute.email': 1,
+          'parentInstitute.phone': 1,
+        },
+      },
+    ]);
 
     // Send Mail Here
+    // Send Mail Code Here
+    let mail = {
+      from: 'admin@eduatlas.in',
+      to: req.body.basicDetails.employeeEmail,
+      subject: 'INSTITUTE REQUEST EDUATLAS',
+      html:
+        '<!DOCTYPE html>' +
+        '<html><head><title>YOUR ACCOUT HAS BEEN CREATED AT EDUATLAS.COM</title>' +
+        '</head><body><div>' +
+        '<p>Dear ' +
+        req.body.basicDetails.name +
+        ',<br> The Following Institute has added you</p>' +
+        '<p>INSTITUTE NAME:' +
+        instituteDetails[0].parentInstitute.name +
+        '</p>' +
+        '<p>BRANCH NAME: ' +
+        instituteDetails[0].basicInfo.name +
+        '</p>' +
+        '<p>CONTACT: ' +
+        instituteDetails[0].basicInfo.instituteContact +
+        '</p>' +
+        '<p>EDUATLAS ID: ' +
+        newEduAtlasId +
+        '</p>' +
+        '<p>FOR LOGIN CREDENTIALS: </p>' +
+        '<p>EMAIL: ' +
+        req.body.basicDetails.email +
+        '</p>' +
+        '<p>PASSWORD: ' +
+        req.body.basicDetails.phone +
+        '</p>' +
+        '<p>Thank you</p>' +
+        '<p>EDUATLAS </p>' +
+        '</div></body></html>',
+    };
 
     res.status(200).send(addUser);
+    await send(mail);
   } catch (error) {
     console.log(error);
     response(res, 500, error.message);
@@ -91,6 +163,7 @@ exports.addEmployee = async (req, res) => {
 
 exports.addEmployeeInstitute = async (req, res) => {
   try {
+    console.log(req.body);
     const check = await Employee.find({
       $and: [
         {
@@ -122,8 +195,73 @@ exports.addEmployeeInstitute = async (req, res) => {
     );
 
     console.log(updateEmployee);
+    const instituteDetails = await Institute.aggregate([
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body.instituteDetails.instituteId),
+        },
+      },
+      {
+        $project: {
+          basicInfo: 1,
+          parentUser: {
+            $toObjectId: '$parentUser',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'parentUser',
+          foreignField: '_id',
+          as: 'parentInstitute',
+        },
+      },
+      {
+        $unwind: '$parentInstitute',
+      },
+      {
+        $project: {
+          basicInfo: 1,
+          'parentInstitute.name': 1,
+          'parentInstitute.email': 1,
+          'parentInstitute.phone': 1,
+        },
+      },
+    ]);
+    const empDetails = await Employee.findOne({
+      eduAtlasId: req.body.eduAtlasId,
+    });
+    console.log(empDetails);
+    // Send Mail Here
+    // Send Mail Code Here
+    let mail = {
+      from: 'admin@eduatlas.in',
+      to: empDetails.basicDetails.employeeEmail,
+      subject: 'INSTITUTE REQUEST EDUATLAS',
+      html:
+        '<!DOCTYPE html>' +
+        '<html><head><title>COURSE ADDED</title>' +
+        '</head><body><div>' +
+        '<p>Dear ' +
+        empDetails.basicDetails.employeeName +
+        ',<br> The Following Institute has added you</p>' +
+        '<p>INSTITUTE NAME:' +
+        instituteDetails[0].parentInstitute.name +
+        '</p>' +
+        '<p>BRANCH NAME: ' +
+        instituteDetails[0].basicInfo.name +
+        '</p>' +
+        '<p>CONTACT: ' +
+        instituteDetails[0].basicInfo.instituteContact +
+        '</p>' +
+        '<p>Thank you</p>' +
+        '<p>EDUATLAS </p>' +
+        '</div></body></html>',
+    };
 
     res.status(200).json(updateEmployee);
+    send(mail);
   } catch (error) {
     errorHandler(error, res);
   }
