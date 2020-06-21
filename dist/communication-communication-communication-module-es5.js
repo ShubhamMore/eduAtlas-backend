@@ -2614,6 +2614,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.active.queryParams.subscribe(function (data) {
             _this9.announcementId = data.announcement;
             _this9.edit = data.edit;
+            _this9.repeat = data.repeat;
           });
           this.batches = [];
           this.announcementForm = this.fb.group({
@@ -2635,7 +2636,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.api.getBatches(id).subscribe(function (data) {
             _this10.batches = data.batch;
 
-            if (_this10.edit) {
+            if (_this10.edit || _this10.repeat) {
               _this10.getSingleAnnouncement(_this10.announcementId);
             } else {
               _this10.display = true;
@@ -2728,6 +2729,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             announce.append('_id', this.announcementId);
             this.announceService.editAnnouncement(announce).subscribe(function (res) {
               _this14.showToast('top-right', 'success', 'Announcement Edited Successfully');
+
+              _this14.location.back();
+            }, function (err) {
+              _this14.showToast('top-right', 'danger', err.err.message);
+            });
+          } else if (this.repeat) {
+            this.announceService.postAnnouncement(announce).subscribe(function (res) {
+              _this14.showToast('top-right', 'success', 'Announcement Repeated Successfully');
 
               _this14.location.back();
             }, function (err) {
@@ -2913,7 +2922,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
       }, {
         key: "repeat",
-        value: function repeat(id) {}
+        value: function repeat(id) {
+          this.router.navigate(['/pages/communication/add-announcements/', this.instituteId], {
+            queryParams: {
+              announcement: id,
+              repeat: true
+            }
+          });
+        }
       }, {
         key: "edit",
         value: function edit(id) {

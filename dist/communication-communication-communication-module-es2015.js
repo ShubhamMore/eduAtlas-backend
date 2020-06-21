@@ -1852,6 +1852,7 @@ let AnnouncementsComponent = class AnnouncementsComponent {
         this.active.queryParams.subscribe((data) => {
             this.announcementId = data.announcement;
             this.edit = data.edit;
+            this.repeat = data.repeat;
         });
         this.batches = [];
         this.announcementForm = this.fb.group({
@@ -1868,7 +1869,7 @@ let AnnouncementsComponent = class AnnouncementsComponent {
     getBatches(id) {
         this.api.getBatches(id).subscribe((data) => {
             this.batches = data.batch;
-            if (this.edit) {
+            if (this.edit || this.repeat) {
                 this.getSingleAnnouncement(this.announcementId);
             }
             else {
@@ -1931,6 +1932,14 @@ let AnnouncementsComponent = class AnnouncementsComponent {
             announce.append('_id', this.announcementId);
             this.announceService.editAnnouncement(announce).subscribe((res) => {
                 this.showToast('top-right', 'success', 'Announcement Edited Successfully');
+                this.location.back();
+            }, (err) => {
+                this.showToast('top-right', 'danger', err.err.message);
+            });
+        }
+        else if (this.repeat) {
+            this.announceService.postAnnouncement(announce).subscribe((res) => {
+                this.showToast('top-right', 'success', 'Announcement Repeated Successfully');
                 this.location.back();
             }, (err) => {
                 this.showToast('top-right', 'danger', err.err.message);
@@ -2046,7 +2055,11 @@ let ManageAnnouncementsComponent = class ManageAnnouncementsComponent {
             queryParams: { announcement: id },
         });
     }
-    repeat(id) { }
+    repeat(id) {
+        this.router.navigate(['/pages/communication/add-announcements/', this.instituteId], {
+            queryParams: { announcement: id, repeat: true },
+        });
+    }
     edit(id) {
         this.router.navigate(['/pages/communication/add-announcements/', this.instituteId], {
             queryParams: { announcement: id, edit: true },
