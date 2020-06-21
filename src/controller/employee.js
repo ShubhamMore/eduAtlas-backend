@@ -143,10 +143,10 @@ exports.addEmployee = async (req, res) => {
         '</p>' +
         '<p>FOR LOGIN CREDENTIALS: </p>' +
         '<p>EMAIL: ' +
-        req.body.basicDetails.email +
+        req.body.basicDetails.employeeEmail +
         '</p>' +
         '<p>PASSWORD: ' +
-        req.body.basicDetails.phone +
+        req.body.basicDetails.employeeContact +
         '</p>' +
         '<p>Thank you</p>' +
         '<p>EDUATLAS </p>' +

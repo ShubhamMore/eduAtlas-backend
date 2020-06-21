@@ -447,10 +447,10 @@ exports.addCourseStudent = async (req, res, next) => {
         '</p>' +
         '<p>FOR LOGIN CREDENTIALS: </p>' +
         '<p>EMAIL: ' +
-        student.basicDetails.phone +
+        student.basicDetails.studentEmail +
         '</p>' +
         '<p>PASSWORD: ' +
-        student.basicDetails.name +
+        student.basicDetails.studentContact +
         '</p>' +
         '<p>Thank you </p>' +
         '<p>EDUATLAS </p>' +
