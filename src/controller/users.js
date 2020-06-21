@@ -161,7 +161,7 @@ exports.loginUser = async (req, res, next) => {
   try {
     const user = await User.findByCredentials(req.body.userId, req.body.password);
 
-    if (user.verifyOTP === '1') {
+    if (user.verifyOTP === '1' && user.emailVerified === '1') {
       const token = await user.generateAuthToken();
       const data = {
         _id: user._id,
@@ -177,7 +177,9 @@ exports.loginUser = async (req, res, next) => {
 
       res.status(200).send(data);
     } else {
-      res.status(200).send({ verifyOtp: true, phone: user.phone });
+      res
+        .status(200)
+        .send({ verifyOtp: true, emailVerified: user.emailVerified == 0, phone: user.phone });
     }
     if (user.emailVerified === '0') {
       const token = await user.generateAuthToken();
