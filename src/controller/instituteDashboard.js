@@ -31,7 +31,7 @@ exports.getDashboardInfo = async (req, res) => {
     query.startTime = date;
 
     console.log(query);
-    const sch = await Schedule.aggregate([{}]);
+    // const sch = await Schedule.aggregate([{}]);
     data.upcomingClass = await OnlineClass.find(query);
     console.log(data.upcomingClass);
 
