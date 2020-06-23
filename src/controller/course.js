@@ -33,7 +33,7 @@ exports.addCourse = async (req, res, next) => {
     });
 
     if (alredyExist) {
-      throw new Error('This Course Alredy Exist');
+      throw new Error('This Course Already Exist');
     }
 
     const updatedInstitute = await Institute.updateOne(
