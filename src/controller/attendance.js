@@ -150,9 +150,9 @@ exports.getAttendanceByInstitute = async (req, res) => {
         $match: {
           'days.select': true,
           'days.attendanceMark': true,
-          date: {
-            $lt: new Date(currentDate),
-          },
+          // date: {
+          //   $lt: new Date(currentDate),
+          // },
         },
       },
     ]);
@@ -220,9 +220,9 @@ exports.getAttendanceByInstitute = async (req, res) => {
         $match: {
           'days.select': true,
           'days.attendanceMark': false,
-          date: {
-            $lt: new Date(currentDate),
-          },
+          // date: {
+          //   $lt: new Date(currentDate),
+          // },
         },
       },
     ]);
