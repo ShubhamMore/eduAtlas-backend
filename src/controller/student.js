@@ -182,17 +182,28 @@ exports.addStudent = async (req, res, next) => {
 
 exports.getActiveStudents = async (req, res) => {
   try {
-    const students = await Student.aggregate([
-      {
-        $unwind: '$instituteDetails',
-      },
-      {
+    let match = {};
+    if (!req.body.courseId && req.body.instituteId) {
+      match = {
+        $match: {
+          'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.active': true,
+        },
+      };
+    } else if (req.body.courseId && req.body.instituteId) {
+      match = {
         $match: {
           'instituteDetails.instituteId': req.body.instituteId,
           'instituteDetails.courseId': req.body.courseId,
           'instituteDetails.active': true,
         },
+      };
+    }
+    const students = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
       },
+      match,
     ]);
     //  const students = await Student.agg({
     //    $and:[ {
@@ -213,17 +224,28 @@ exports.getActiveStudents = async (req, res) => {
 
 exports.getPendingStudents = async (req, res) => {
   try {
+    let match = {};
+    if (!req.body.courseId && req.body.instituteId) {
+      match = {
+        $match: {
+          'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.active': true,
+        },
+      };
+    } else if (req.body.courseId && req.body.instituteId) {
+      match = {
+        $match: {
+          'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.courseId': req.body.courseId,
+          'instituteDetails.active': true,
+        },
+      };
+    }
     const students = await Student.aggregate([
       {
         $unwind: '$instituteDetails',
       },
-      {
-        $match: {
-          'instituteDetails.instituteId': req.body.instituteId,
-          'instituteDetails.courseId': req.body.courseId,
-          'instituteDetails.active': false,
-        },
-      },
+      match,
     ]);
     console.log(students);
     res.status(200).send(students);
