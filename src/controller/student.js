@@ -229,7 +229,7 @@ exports.getPendingStudents = async (req, res) => {
       match = {
         $match: {
           'instituteDetails.instituteId': req.body.instituteId,
-          'instituteDetails.active': true,
+          'instituteDetails.active': false,
         },
       };
     } else if (req.body.courseId && req.body.instituteId) {
@@ -237,7 +237,7 @@ exports.getPendingStudents = async (req, res) => {
         $match: {
           'instituteDetails.instituteId': req.body.instituteId,
           'instituteDetails.courseId': req.body.courseId,
-          'instituteDetails.active': true,
+          'instituteDetails.active': false,
         },
       };
     }
