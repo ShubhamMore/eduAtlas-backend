@@ -181,6 +181,7 @@ exports.loginUser = async (req, res, next) => {
         verifyOtp: user.verifyOTP === '0',
         verifyEmail: user.verifyEmail === '0',
         phone: user.phone,
+        email: user.email,
       });
     }
     if (user.verifyEmail === '0') {
@@ -189,7 +190,7 @@ exports.loginUser = async (req, res, next) => {
 
       // Send Mail Here
       const mail = {
-        to: req.body.email,
+        to: user.email,
         from: 'admin@eduatlas.in',
         subject: 'EDUATLAS: VERIFY EMAIL',
         html: `<h2>Confirm your Eduatlas account</h2>

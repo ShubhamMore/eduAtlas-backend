@@ -15,7 +15,7 @@ oauth2Client.setCredentials({
 const accessToken = oauth2Client.getAccessToken();
 
 const sendMail = async (mail) => {
-  console.log('inhere');
+  // console.log('inhere');
   // create reusable transporter object using the default SMTP transport
   const smtpTransport = nodemailer.createTransport({
     service: 'gmail',

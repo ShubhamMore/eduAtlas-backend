@@ -181,19 +181,21 @@ exports.verifyUserOTP = async (req, res, next) => {
       if (verifyType === 'createUser') {
         res.status(200).send({ success: 'New User Created Successfully' });
       } else if (verifyType === 'loginUser') {
-        const token = await user.generateAuthToken();
-
-        const data = {
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          phone: user.phone,
-          role: user.role,
-          token,
-          expiresIn: 36000,
-        };
-
-        res.status(200).send(data);
+        if (user.verifyEmail === '1') {
+          const token = await user.generateAuthToken();
+          const data = {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            role: user.role,
+            token,
+            expiresIn: 36000,
+          };
+          res.status(200).send(data);
+        } else {
+          res.status(200).send({ verifyEmail: true });
+        }
       } else {
         throw new Error('Invalid verify Type');
       }
