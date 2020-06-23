@@ -155,6 +155,11 @@ exports.getAttendanceByInstitute = async (req, res) => {
           // },
         },
       },
+      {
+        $sort: {
+          date: 1,
+        },
+      },
     ]);
     console.log(marked.length);
     const mlength = marked.length;
@@ -223,6 +228,11 @@ exports.getAttendanceByInstitute = async (req, res) => {
           // date: {
           //   $lt: new Date(currentDate),
           // },
+        },
+      },
+      {
+        $sort: {
+          date: 1,
         },
       },
     ]);
