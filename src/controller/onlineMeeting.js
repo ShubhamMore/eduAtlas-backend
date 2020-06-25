@@ -70,7 +70,7 @@ exports.createMeeting = async (req, res) => {
         registration_type: 1,
         audio: 'both',
         alternative_hosts: teacher.basicDetails.employeeEmail,
-        auto_recording: 'none',
+        auto_recording: 'cloud',
         enforce_login: false,
         enforce_login_domains: null,
         alternative_hosts: null,
@@ -325,5 +325,51 @@ exports.deleteMeeting = async (req, res) => {
     res.status(200).send(deletedMeeting);
   } catch (error) {
     res.status(400).send(error);
+  }
+};
+exports.listAllRecordedMeetings = async (req, res) => {
+  try {
+    var options = {
+      method: 'GET',
+      url: 'https://api.zoom.us/v2/users/me/recordings',
+      port: null,
+      headers: {
+        authorization: 'Bearer ' + req.zoom.access_token,
+      },
+    };
+
+    let meetings = await rp(options);
+    let recMeetings = [];
+
+    if (meetings) {
+      for (var i = 0; i < meetings.meetings.length; i++) {
+        const meeting = await OnlineClass.findOne({
+          $and: [{ instituteId: req.body.instituteId }, { meetingId: meetings.meetings[i].id }],
+        });
+
+        if (meeting) {
+          recMeetings.push(meeting);
+        }
+      }
+    }
+    res.status(200).send(recMeetings);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
+exports.getRecordedMeeting = async (req, res) => {
+  try {
+    var options = {
+      method: 'GET',
+      url: 'https://api.zoom.us/v2/meetings/' + req.body.meetingId + '/recordings',
+      port: null,
+      headers: {
+        authorization: 'Bearer ' + req.zoom.access_token,
+      },
+    };
+    let recMeeting = await rp(options);
+    res.status(200).send(recMeeting);
+  } catch (error) {
+    errorHandler(error, res);
   }
 };
