@@ -21,6 +21,12 @@ zoomRouter.post(
   zoomCheckToken,
   onlineMeetingController.getMeetingsFromZoom
 );
+zoomRouter.post(
+  '/listAllRecordedMeetings',
+  checkAuth,
+  zoomCheckToken,
+  onlineMeetingController.listAllRecordedMeetings
+);
 zoomRouter.post('/getMeetingByBatch', checkAuth, onlineMeetingController.getMeetingByBatch);
 zoomRouter.post('/getOneMeeting', checkAuth, onlineMeetingController.getOneMeeting);
 module.exports = zoomRouter;
