@@ -61,9 +61,15 @@ const feeSchema = new Schema({
       },
       paymentMode: {
         type: String,
+        default: '',
       },
       amountPending: {
         type: String,
+        default: '',
+      },
+      receiptLink: {
+        type: String,
+        default: '',
       },
     },
   ],

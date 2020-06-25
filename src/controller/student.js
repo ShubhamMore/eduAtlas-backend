@@ -537,7 +537,6 @@ exports.updateStudentCourse = async (req, res) => {
       console.log(checkRoll);
       if (checkRoll) {
         const error = new Error('Roll Number is already used');
-        console.log('errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
         error.statusCode = 400;
         throw error;
       }

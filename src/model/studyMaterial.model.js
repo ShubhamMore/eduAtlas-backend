@@ -36,7 +36,7 @@ const studyMaterialSchema = new mongoose.Schema({
     required: true,
   },
   courseId: {
-    type: String,
+    type: [String],
     required: true,
   },
 });

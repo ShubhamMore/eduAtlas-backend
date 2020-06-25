@@ -16,6 +16,7 @@ app.use(express.json({ limit: '100mb' }));
 app.use(cors());
 
 app.use('/images', express.static(path.join('images')));
+app.use('/receipts', express.static(path.join('receipts')));
 app.use('/sample', express.static(path.join('sample')));
 app.use('/announcements', express.static(path.join('announcements')));
 app.use('/studyMaterial', express.static(path.join('studyMaterial')));

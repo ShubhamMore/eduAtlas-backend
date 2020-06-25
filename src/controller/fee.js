@@ -5,6 +5,11 @@ const Institute = require('../model/institute.model');
 const Student = require('../model/student.model');
 const Fee = require('../model/fee.model');
 
+var fs = require('fs');
+var path = require('path');
+
+var conversion = require('phantom-html-to-pdf')();
+
 exports.addFee = async (req, res) => {
   try {
     const checkStudent = await Student.find({
@@ -23,16 +28,39 @@ exports.addFee = async (req, res) => {
 
     if (checkStudent.length == 0) {
       console.log('in error');
-      const error = new Error('Course for Student doesnt exists');
+      const error = new Error("Course for Student doesn't exists");
       //error.prototype.statusCode = 400;
       throw error;
     }
 
-    console.log(req.body);
+    const fees = new Fee(req.body);
 
-    const fee = new Fee(req.body);
-    await fee.save();
-    res.status(200).send(fee);
+    fees.installments.forEach(async (curInstallment, i) => {
+      // console.log(
+      //   curInstallment.paidStatus === 'true',
+      //   curInstallment.receiptLink === '',
+      //   curInstallment
+      // );
+      if (curInstallment.paidStatus === 'true' && curInstallment.receiptLink === '') {
+        const html = `
+          <h1>Receipt</h1>
+        `;
+        const receiptUrl = path.join(__dirname, `../../receipts/receipt-${curInstallment._id}.pdf`);
+        conversion({ html }, async (err, pdf) => {
+          console.log(err);
+          const output = fs.createWriteStream(receiptUrl);
+          fees.installments[i].receiptLink =
+            process.env.SERVER + `receipts/receipt-${curInstallment._id}.pdf`.toString();
+          console.log(fees.installments[i].receiptLink);
+          console.log(pdf.logs);
+          pdf.stream.pipe(output);
+          await fees.save();
+        });
+      }
+    });
+
+    await fees.save();
+    res.status(200).send(fees);
   } catch (error) {
     res.status(400).send(error);
   }
@@ -51,7 +79,9 @@ exports.getFeeOfStudent = async (req, res) => {
     }
 
     res.status(200).send(studentFee);
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
 
 exports.getFeeOfStudentByCourse = async (req, res) => {
@@ -70,10 +100,43 @@ exports.getFeeOfStudentByCourse = async (req, res) => {
 
 exports.updateFeeOfStudent = async (req, res) => {
   try {
-    const updateFee = await Fee.findByIdAndUpdate(req.body._id, req.body);
+    const fees = await Fee.findById(req.body._id);
 
-    res.status(200).send(updateFee);
+    if (!fees) {
+      throw new Error('Fees Not Found');
+    }
+
+    fees.installments = req.body.installments;
+
+    fees.installments.forEach(async (curInstallment, i) => {
+      // console.log(
+      //   curInstallment.paidStatus === 'true',
+      //   curInstallment.receiptLink === '',
+      //   curInstallment
+      // );
+      if (curInstallment.paidStatus === 'true' && curInstallment.receiptLink === '') {
+        const html = `
+          <h1>Receipt</h1>
+        `;
+        const receiptUrl = path.join(__dirname, `../../receipts/receipt-${curInstallment._id}.pdf`);
+        conversion({ html }, async (err, pdf) => {
+          console.log(err);
+          const output = fs.createWriteStream(receiptUrl);
+          fees.installments[i].receiptLink =
+            process.env.SERVER + `receipts/receipt-${curInstallment._id}.pdf`.toString();
+          console.log(fees.installments[i].receiptLink);
+          console.log(pdf.logs);
+          pdf.stream.pipe(output);
+          await fees.save();
+        });
+      }
+    });
+
+    await fees.save();
+
+    res.status(200).send(fees);
   } catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 };

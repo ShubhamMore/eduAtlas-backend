@@ -42,7 +42,7 @@ exports.addStudyMaterial = async (req, res) => {
 
     const studyMaterialData = {
       instituteId: req.body.instituteId,
-      courseId: req.body.courseId,
+      courseId: JSON.parse(req.body.courseId),
       title: req.body.title,
       category: req.body.category,
       file: materialFile,
@@ -100,7 +100,7 @@ exports.editStudyMaterial = async (req, res) => {
 
     const studyMaterialData = {
       instituteId: req.body.instituteId,
-      courseId: req.body.courseId,
+      courseId: JSON.parse(req.body.courseId),
       title: req.body.title,
       category: req.body.category,
       file: materialFile,
@@ -121,8 +121,10 @@ exports.getStudyMaterial = async (req, res, next) => {
     const query = { instituteId: req.body.instituteId };
 
     if (req.body.courseId) {
-      query.courseId = req.body.courseId;
+      query.courseId = { $in: [req.body.courseId] };
     }
+
+    console.log(query);
 
     const studyMaterials = await StudyMaterial.find(query);
 
