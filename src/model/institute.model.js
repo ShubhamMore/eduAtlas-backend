@@ -103,6 +103,7 @@ const receiptConfigSchema = new Schema(
   {
     businessName: {
       type: String,
+      required: false,
     },
 
     address: {
@@ -112,6 +113,12 @@ const receiptConfigSchema = new Schema(
 
     gstNumber: {
       type: String,
+      required: false,
+    },
+
+    invoiceNo: {
+      type: String,
+      default: '0',
     },
 
     termsAndCondition: {
