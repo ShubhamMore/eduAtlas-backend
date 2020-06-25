@@ -95,22 +95,59 @@ exports.creatUser = async (req, res, next) => {
       to: req.body.email,
       from: 'admin@eduatlas.in',
       subject: 'EDUATLAS: VERIFY EMAIL',
-      html: `<h2>Confirm your Eduatlas account</h2>
-      <p>You just signed up for a new Eduatlas account with the following details:</p>
-      <strong>Name: ${newUser.name}</strong><br>
-      <strong>Email: ${newUser.email}</strong><br>
-      <strong>Contact No.: ${newUser.phone}</strong><br>
-       
-      <p>To finish creating your account, click on the link below:</p>
-       
-      <a style="text-decoration: none; color: #000; background-color: #ffd500; padding: 10px 20px; font-size: 25px; font-weight: bold;" href="${url}">CONFIRM</a>
-       
-      <p>Having trouble? Click on this link instead: <br>
-          <a href="${url}">${url}</a>  
-      </p>
+      html: `<html>
+
+      <center>
       
-      <strong>_ _ _ _</strong><br>
-      <strong>The Eduatlas Team</strong>`,
+      <table style="width:100%">
+        <tr align="center" width=100% style="background-color:#ffd500";>
+          <th><img src="${process.env.SERVER}sample/ealogo-300x138.png" /></th>
+        </tr>
+        <tr align="center" width=100% >
+          <th><h4 style="text-align:center;display:block;margin:0;padding:0;color:#949494;font-family:Georgia; font-size:20px;font-style:italic; font-weight:normal; line-height:125%; letter-spacing:normal"><BR><BR>We are glad you are here!<BR><BR></h4></th>
+        </tr>
+        <tr align="center" width=100% >
+          <th><h1 style="text-align:center;display:block;margin:0;padding:0;color:#222222;font-family:Helvetica;font-size:40px;font-style:normal;font-weight:bold;line-height:120%;letter-spacing:normal">HELLO, ${newUser.name}</h1>
+      </th></tr>
+      
+        <tr align="center" width=100% >
+          <th>
+        <BR><BR>
+        <style>
+      .button {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+      
+      .button1 {background-color: #e95a59;}
+      </style>
+      <button href= ${url} class="button button1">VERIFY EMAIL</button></th></tr>
+      
+      <tr>
+          <th><p style="text-align:center;margin:10px 0;padding:0;color:#757575;font-family:Helvetica;font-size:16px;line-height:150%">(Just making sure you are you!)</p></th>
+      </tr>
+      <tr>
+          <th>
+        <hr>
+        <h3 style=3D"display:block;margin:0;padding:0;color:#444444;font-family:Helvetica;font-size:22px;font-style:normal;font-weight:bold;line-height:100%;letter-spacing:normal;text-align:left"><span style=3D"font-size:14px">
+        Having trouble? Click on this link instead: </span></h3>
+        <h5 style="text-align:center;color:#949494;font-family:Georgia; font-size:14px; font-weight:normal;"> <a>${url}</a></h5>
+        </th>
+      </tr> 
+        <tr align="center" width=100% style="background-color:#333333; color:#ffffff";>
+          <th><br><Br><em>Copyright (C) 2020, Eduatlas.com. All rights reserved.</em><br>
+      <br>
+      <strong>Get in touch:</strong><br>contact@eduatlas.com<br><br><br></th>
+        </tr>
+      </table>  </html>
+      `,
     };
 
     response(res, 200, 'Verify OTP now');
@@ -193,22 +230,59 @@ exports.loginUser = async (req, res, next) => {
         to: user.email,
         from: 'admin@eduatlas.in',
         subject: 'EDUATLAS: VERIFY EMAIL',
-        html: `<h2>Confirm your Eduatlas account</h2>
-        <p>You just signed up for a new Eduatlas account with the following details:</p>
-        <strong>Name: ${user.name}</strong><br>
-        <strong>Email: ${user.email}</strong><br>
-        <strong>Contact No.: ${user.phone}</strong><br>
-         
-        <p>To finish creating your account, click on the link below:</p>
-         
-        <a style="text-decoration: none; color: #000; background-color: #ffd500; padding: 10px 20px; font-size: 25px; font-weight: bold;" href="${url}">CONFIRM</a>
-         
-        <p>Having trouble? Click on this link instead: <br>
-            <a href="${url}">${url}</a>  
-        </p>
+        html: `<html>
+
+        <center>
         
-        <strong>_ _ _ _</strong><br>
-        <strong>The Eduatlas Team</strong>`,
+        <table style="width:100%">
+          <tr align="center" width=100% style="background-color:#ffd500";>
+            <th><img src="${process.env.SERVER}sample/ealogo-300x138.png" /></th>
+          </tr>
+          <tr align="center" width=100% >
+            <th><h4 style="text-align:center;display:block;margin:0;padding:0;color:#949494;font-family:Georgia; font-size:20px;font-style:italic; font-weight:normal; line-height:125%; letter-spacing:normal"><BR><BR>We are glad you are here!<BR><BR></h4></th>
+          </tr>
+          <tr align="center" width=100% >
+            <th><h1 style="text-align:center;display:block;margin:0;padding:0;color:#222222;font-family:Helvetica;font-size:40px;font-style:normal;font-weight:bold;line-height:120%;letter-spacing:normal">HELLO, ${user.name}</h1>
+        </th></tr>
+        
+          <tr align="center" width=100% >
+            <th>
+          <BR><BR>
+          <style>
+        .button {
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+        }
+        
+        .button1 {background-color: #e95a59;}
+        </style>
+        <button href= ${url} class="button button1">VERIFY EMAIL</button></th></tr>
+        
+        <tr>
+            <th><p style="text-align:center;margin:10px 0;padding:0;color:#757575;font-family:Helvetica;font-size:16px;line-height:150%">(Just making sure you are you!)</p></th>
+        </tr>
+        <tr>
+            <th>
+          <hr>
+          <h3 style=3D"display:block;margin:0;padding:0;color:#444444;font-family:Helvetica;font-size:22px;font-style:normal;font-weight:bold;line-height:100%;letter-spacing:normal;text-align:left"><span style=3D"font-size:14px">
+          Having trouble? Click on this link instead: </span></h3>
+          <h5 style="text-align:center;color:#949494;font-family:Georgia; font-size:14px; font-weight:normal;"> <a>${url}</a></h5>
+          </th>
+        </tr> 
+          <tr align="center" width=100% style="background-color:#333333; color:#ffffff";>
+            <th><br><Br><em>Copyright (C) 2020, Eduatlas.com. All rights reserved.</em><br>
+        <br>
+        <strong>Get in touch:</strong><br>contact@eduatlas.com<br><br><br></th>
+          </tr>
+        </table>  </html>
+        `,
       };
 
       send(mail);
