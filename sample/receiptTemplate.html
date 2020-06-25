@@ -1,17 +1,123 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <mate charest="utf-8" />
-    <title>Hello world!</title>
-  </head>
-  <body>
-    <h1>User List</h1>
-    <ul>
-      {{#each users}}
-      <li>Name: {{this.name}}</li>
-      <li>Age: {{this.age}}</li>
-      <br />
-      {{/each}}
-    </ul>
-  </body>
-</html>
+<style>
+  .padding {
+    padding: 3px 5px;
+  }
+
+  .padding-large {
+    padding: 8px 5px;
+  }
+
+  .border {
+    border: 1px solid #000;
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-right {
+    text-align: center;
+  }
+  .float-left {
+    float: left;
+  }
+  .float-right {
+    float: right;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+</style>
+<div class="padding border">
+  <p>Tax/GST Number ${}</p>
+</div>
+<br />
+<div class="padding border text-center">
+  <h4>${}</h4>
+  <p>${}</p>
+</div>
+<br />
+
+<div class="text-center">
+  <h3>Receipt</h3>
+</div>
+
+<div>
+  <div class="float-right text-right">
+    <p class=""><strong>Dated</strong><br />${}</p>
+    <p class=""><strong>Receipt Number</strong><br />${}</p>
+  </div>
+  <div class="">
+    <h4>Student Details</h4>
+    <p>${}<br />Roll No. ${}<br />Email: ${}<br /></p>
+  </div>
+</div>
+<br />
+<div>
+  <table>
+    <thead>
+      <tr class="text-center">
+        <th>Details/Description</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Course Code/Name: ${} <br />
+          Total Amount Before tax <br />Add CGST: 9% <br />Add SGST: 9%
+        </td>
+        <td><br />${} <br />${} <br />${}</td>
+      </tr>
+      <tr>
+        <td>
+          <p><strong>Total After Tax</strong></p>
+        </td>
+        <td>
+          <p><strong>${}</strong></p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><strong>Amount Collected</strong></p>
+        </td>
+        <td>
+          <p><strong>${}</strong></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br />
+<div class="padding-large border">
+  <p>Mode of Payment: ${}</p>
+</div>
+<br />
+<div class="padding-large border">
+  <p>Amount Collected in Words: ${}</p>
+</div>
+<br />
+
+<div class="padding-large border">
+  <p>Remark :</p>
+  <br /><br /><br />
+</div>
+<br />
+<div>
+  <h5>INVOICE NOTES/ TERMS & CONDITIONS:</h5>
+  <p>${}</p>
+</div>
+<br /><br />
+<div>
+  <p class="text-center">
+    <small>This is an electronic receipt and does not require a physical stamp or signature.</small>
+    <br /><br />
+    <span>STUDY MONITOR APP powered by EDUATLAS.COM</span>
+  </p>
+</div>
