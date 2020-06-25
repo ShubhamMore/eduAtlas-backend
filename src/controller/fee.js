@@ -7,8 +7,8 @@ const Fee = require('../model/fee.model');
 const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
-var numberToWords = require('number-to-words');
-
+const numberToWords = require('number-to-words');
+const send = require('../service/mail');
 const conversion = require('phantom-html-to-pdf')();
 
 const getHtml = (receipt) => {
@@ -185,7 +185,6 @@ const getReceiptData = async (studentId, courseId, instituteId) => {
     gstNo: receiptData.gstNumber,
     companyName: receiptData.businessName,
     address: receiptData.address,
-
     date,
     studentName: student[0].basicDetails.name,
     rollNo: student[0].instituteDetails.rollNumber,
@@ -261,11 +260,25 @@ exports.addFee = async (req, res) => {
         conversion({ html }, async (err, pdf) => {
           console.log(err);
           const output = fs.createWriteStream(receiptUrl);
-          fees.installments[i].receiptLink =
+          const receiptLink =
             process.env.SERVER + `receipts/receipt-${curInstallment._id}.pdf`.toString();
-          console.log(fees.installments[i].receiptLink);
+          (fees.installments[i].receiptLink = receiptLink),
+            console.log(fees.installments[i].receiptLink);
           console.log(pdf.logs);
           pdf.stream.pipe(output);
+
+          const mail = {
+            to: receipt.email,
+            from: process.env.GMAIL_USER,
+            subject: 'Receipt',
+            html: `
+              <h2>Invoice from ${receipt.companyName}</h2>
+              Click Here <a href="${receiptLink}">Download Receipt</a>
+            `,
+          };
+
+          await send(mail);
+
           await fees.save();
           await Institute.updateOne(
             { _id: mongoose.Types.ObjectId(fees.instituteId) },
@@ -363,11 +376,26 @@ exports.updateFeeOfStudent = async (req, res) => {
         conversion({ html }, async (err, pdf) => {
           console.log(err);
           const output = fs.createWriteStream(receiptUrl);
-          fees.installments[i].receiptLink =
+          const receiptLink =
             process.env.SERVER + `receipts/receipt-${curInstallment._id}.pdf`.toString();
+          fees.installments[i].receiptLink = receiptLink;
+
           console.log(fees.installments[i].receiptLink);
           console.log(pdf.logs);
           pdf.stream.pipe(output);
+
+          const mail = {
+            to: receipt.email,
+            from: process.env.GMAIL_USER,
+            subject: 'Receipt',
+            html: `
+              <h2>Invoice from ${receipt.companyName}</h2>
+              Click Here <a href="${receiptLink}">Download Receipt</a>
+            `,
+          };
+
+          await send(mail);
+
           await fees.save();
           await Institute.updateOne(
             { _id: mongoose.Types.ObjectId(fees.instituteId) },
