@@ -116,6 +116,7 @@ exports.getTestByInstitute = async (req, res) => {
       {
         $unwind: '$batch.batch',
       },
+
       {
         $addFields: {
           batchCode: '$batch.batch.batchCode',
@@ -365,11 +366,35 @@ exports.getScoreOfStudentByBatch = async (req, res) => {
           highestScore: {
             $max: '$students.marks',
           },
+          highestPercentage: {
+            $multiply: [
+              {
+                $divide: [{ $max: '$students.marks' }, '$totalMarks'],
+              },
+              100,
+            ],
+          },
           lowestMarks: {
             $min: '$students.marks',
           },
+          lowestPercentage: {
+            $multiply: [
+              {
+                $divide: [{ $min: '$students.marks' }, '$totalMarks'],
+              },
+              100,
+            ],
+          },
           averageMarks: {
             $avg: '$students.marks',
+          },
+          averagePercentage: {
+            $multiply: [
+              {
+                $divide: [{ $avg: '$students.marks' }, '$totalMarks'],
+              },
+              100,
+            ],
           },
         },
       },

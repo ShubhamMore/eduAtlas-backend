@@ -23,7 +23,7 @@ const testSchema = new mongoose.Schema({
     type: String,
   },
   totalMarks: {
-    type: String,
+    type: Number,
   },
   startTime: {
     type: String,
