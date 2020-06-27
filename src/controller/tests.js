@@ -361,6 +361,19 @@ exports.getScoreOfStudentByBatch = async (req, res) => {
   try {
     const studentScoreByBatch = await Test.aggregate([
       {
+        $addFields: {
+          highestScore: {
+            $max: '$students.marks',
+          },
+          lowestMarks: {
+            $min: '$students.marks',
+          },
+          averageMarks: {
+            $avg: '$students.marks',
+          },
+        },
+      },
+      {
         $unwind: '$students',
       },
       {
@@ -369,6 +382,7 @@ exports.getScoreOfStudentByBatch = async (req, res) => {
           'students.studentId': req.body.studentId,
         },
       },
+      {},
     ]);
 
     res.status(200).send(studentScoreByBatch);

@@ -48,7 +48,7 @@ const testSchema = new mongoose.Schema({
         type: String,
       },
       marks: {
-        type: String,
+        type: Number,
       },
     },
   ],
