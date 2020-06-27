@@ -419,6 +419,18 @@ exports.getScoreOfStudentByBatch = async (req, res) => {
           'students.studentId': req.body.studentId,
         },
       },
+      {
+        $addFields: {
+          'students.studentPercentage': {
+            $multiply: [
+              {
+                $divide: [{ $avg: '$students.marks' }, '$totalMarks'],
+              },
+              100,
+            ],
+          },
+        },
+      },
     ]);
 
     res.status(200).send(studentScoreByBatch);
