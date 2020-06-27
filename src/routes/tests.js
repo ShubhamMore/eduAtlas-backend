@@ -26,4 +26,6 @@ testRouter.post(
   testsController.getScoresOfStutdentByInstitute
 );
 
+testRouter.post('/getScoreOfStudentByBatch', checkAuth, testsController.getScoreOfStudentByBatch);
+
 module.exports = testRouter;
