@@ -7,6 +7,7 @@ announcements/*
 !announcements/.gitkeep
 studyMaterial/*
 !studyMaterial/.gitkeep
-
 attendance/*
 !announcements/.gitkeep
+receipts/*
+!receipts/.gitkeep
