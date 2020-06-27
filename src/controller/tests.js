@@ -116,7 +116,13 @@ exports.getTestByInstitute = async (req, res) => {
       {
         $unwind: '$batch.batch',
       },
-
+      {
+        $match: {
+          $expr: {
+            $eq: ['$batch.batch._id', '$batchId'],
+          },
+        },
+      },
       {
         $addFields: {
           batchCode: '$batch.batch.batchCode',
@@ -157,6 +163,13 @@ exports.getTestByInstitute = async (req, res) => {
       },
       {
         $unwind: '$batch.batch',
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$batch.batch._id', '$batchId'],
+          },
+        },
       },
       {
         $addFields: {
