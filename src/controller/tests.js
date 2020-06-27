@@ -382,7 +382,6 @@ exports.getScoreOfStudentByBatch = async (req, res) => {
           'students.studentId': req.body.studentId,
         },
       },
-      {},
     ]);
 
     res.status(200).send(studentScoreByBatch);
