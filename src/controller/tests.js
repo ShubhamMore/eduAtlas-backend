@@ -101,7 +101,6 @@ exports.getTestByInstitute = async (req, res) => {
           },
         },
       },
-
       {
         $lookup: {
           from: 'institutes',
@@ -115,6 +114,13 @@ exports.getTestByInstitute = async (req, res) => {
       },
       {
         $unwind: '$batch.batch',
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$batch.batch._id', '$batchId'],
+          },
+        },
       },
       {
         $addFields: {
@@ -156,6 +162,13 @@ exports.getTestByInstitute = async (req, res) => {
       },
       {
         $unwind: '$batch.batch',
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$batch.batch._id', '$batchId'],
+          },
+        },
       },
       {
         $addFields: {
@@ -365,11 +378,35 @@ exports.getScoreOfStudentByBatch = async (req, res) => {
           highestScore: {
             $max: '$students.marks',
           },
+          highestPercentage: {
+            $multiply: [
+              {
+                $divide: [{ $max: '$students.marks' }, '$totalMarks'],
+              },
+              100,
+            ],
+          },
           lowestMarks: {
             $min: '$students.marks',
           },
+          lowestPercentage: {
+            $multiply: [
+              {
+                $divide: [{ $min: '$students.marks' }, '$totalMarks'],
+              },
+              100,
+            ],
+          },
           averageMarks: {
             $avg: '$students.marks',
+          },
+          averagePercentage: {
+            $multiply: [
+              {
+                $divide: [{ $avg: '$students.marks' }, '$totalMarks'],
+              },
+              100,
+            ],
           },
         },
       },
@@ -380,6 +417,18 @@ exports.getScoreOfStudentByBatch = async (req, res) => {
         $match: {
           batchId: req.body.batchId,
           'students.studentId': req.body.studentId,
+        },
+      },
+      {
+        $addFields: {
+          'students.studentPercentage': {
+            $multiply: [
+              {
+                $divide: [{ $avg: '$students.marks' }, '$totalMarks'],
+              },
+              100,
+            ],
+          },
         },
       },
     ]);

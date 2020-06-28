@@ -183,14 +183,14 @@ exports.addStudent = async (req, res, next) => {
 exports.getActiveStudents = async (req, res) => {
   try {
     let match = {};
-    if (!req.body.courseId && req.body.instituteId) {
+    if (!req.body.batchId && !req.body.courseId && req.body.instituteId) {
       match = {
         $match: {
           'instituteDetails.instituteId': req.body.instituteId,
           'instituteDetails.active': true,
         },
       };
-    } else if (req.body.courseId && req.body.instituteId) {
+    } else if (!req.body.batchId && req.body.courseId && req.body.instituteId) {
       match = {
         $match: {
           'instituteDetails.instituteId': req.body.instituteId,
@@ -198,7 +198,17 @@ exports.getActiveStudents = async (req, res) => {
           'instituteDetails.active': true,
         },
       };
+    } else if (req.body.batchId && req.body.courseId && req.body.instituteId) {
+      match = {
+        $match: {
+          'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.courseId': req.body.courseId,
+          'instituteDetails.batchId': req.body.batchId,
+          'instituteDetails.active': true,
+        },
+      };
     }
+
     const students = await Student.aggregate([
       {
         $unwind: '$instituteDetails',
