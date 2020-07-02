@@ -49,6 +49,8 @@ exports.getRemarkOfStudentByInstitute = async (req, res) => {
       instData,
     ]);
 
-    res.status();
-  } catch (error) {}
+    res.status(200).send(studentRemarks);
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };

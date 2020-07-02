@@ -2,6 +2,10 @@ const remarkRouter = require('express').Router();
 const checkAuth = require('../middleware/checkAuth');
 const remarkController = require('../controller/remark');
 const remarkModel = require('../model/remarks');
-remarkRouter.post('/addRemark', remarkController.addRemark);
-remarkRouter.post('/getRemarkOfStudentByInstitute', remarkController.getRemarkOfStudentByInstitute);
+remarkRouter.post('/addRemark', checkAuth, remarkController.addRemark);
+remarkRouter.post(
+  '/getRemarkOfStudentByInstitute',
+  checkAuth,
+  remarkController.getRemarkOfStudentByInstitute
+);
 module.exports = remarkRouter;

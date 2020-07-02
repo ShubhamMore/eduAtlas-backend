@@ -27,21 +27,11 @@ const sendScheduleUpdate = async () => {
       $unwind: '$days',
     },
     {
-      $addFields: {
-        date: {
-          $dateFromString: {
-            dateString: '$days.date',
-          },
-        },
-      },
-    },
-    {
       $match: {
-        date: {
-          $eq: [new Date(date), '$date'],
-        },
+        'days.date': date,
       },
     },
+    {},
   ]);
   //   const students = await Student.find({ birthDate: date }, { _id: 0, name: 1, email: 1 });
   //   const n = students.length;
