@@ -11,13 +11,16 @@ const remarksSchema = new mongoose.Schema({
       courseId: {
         type: String,
       },
-      branchId: {
+      batchId: {
         type: String,
       },
       teacherId: {
         type: String,
       },
       remark: {
+        type: String,
+      },
+      suggestion: {
         type: String,
       },
       date: {
