@@ -2,9 +2,22 @@ const Remarks = require('../model/remarks');
 
 exports.addRemark = async (req, res) => {
   try {
-    const newRemark = new Remarks(req.body);
-    await newRemark.save();
-    res.status(200).send(newRemark);
+    const addRemark = await Remarks.updateOne(
+      {
+        studentId: req.body.studentId,
+      },
+      {
+        $push: {
+          remarks: req.body.remarks,
+        },
+      },
+      {
+        upsert: true,
+      }
+    );
+    // const newRemark = new Remarks(req.body);
+    // await newRemark.save();
+    res.status(200).send(addRemark);
   } catch (error) {
     errorHandler(error, res);
   }
