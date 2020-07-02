@@ -370,6 +370,41 @@ exports.getAttendanceForStudentByCourse = async (req, res) => {
           courseId: req.body.courseId,
         },
       },
+      {
+        $addFields: {
+          scheduleId: {
+            $toObjectId: '$scheduleId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'schedule',
+          localField: 'scheduleId',
+          foreignField: '_id',
+          as: 'schedule',
+        },
+      },
+      {
+        $unwind: '$schedule',
+      },
+      {
+        $unwind: '$schedule.days',
+      },
+      {
+        $addFields: {
+          lectureId: {
+            $toObjectId: '$lectureId',
+          },
+        },
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$lectureId', '$schedule.days._id'],
+          },
+        },
+      },
     ]);
 
     console.log(student);
