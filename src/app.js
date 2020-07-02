@@ -65,7 +65,7 @@ app.use('/institute/mentoring', require('./routes/mentoring'));
 app.use('/institute/leads', require('./routes/leads'));
 app.use('/institute/studyMaterial', require('./routes/studyMaterial'));
 app.use('/institute/notification', require('./routes/notification'));
-app.use('institute/remark', require('./routes/remarks'));
+app.use('/institute/remark', require('./routes/remarks'));
 app.use('/institute/forum', require('./routes/forum'));
 app.use('/institute/chats', require('./routes/chats'));
 app.use('/mail', require('./controller/sendmail'));
