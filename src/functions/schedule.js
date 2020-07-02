@@ -31,7 +31,38 @@ const sendScheduleUpdate = async () => {
         'days.date': date,
       },
     },
-    {},
+    {
+      $lookup: {
+        from: 'students',
+        localField: 'instituteId',
+        foreignField: 'instituteDetails.instituteId',
+        as: 'students',
+      },
+    },
+    {
+      $addFields: {
+        'days.teacher': {
+          $toObjectId: '$days.teacher',
+        },
+      },
+    },
+    {
+      $lookup: {
+        from: 'employees',
+        localField: 'days.teacher',
+        foreignField: '_id',
+        as: 'teacher',
+      },
+    },
+    {
+      $project: {
+        days: 1,
+        'students.basicDetails.studentEmail': 1,
+        'students.eduAtlasId': 1,
+        'teacher.basicDetails.employeeEmail': 1,
+        'teacher.eduAtlasId': 1,
+      },
+    },
   ]);
   //   const students = await Student.find({ birthDate: date }, { _id: 0, name: 1, email: 1 });
   //   const n = students.length;
