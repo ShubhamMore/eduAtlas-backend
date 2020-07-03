@@ -3,6 +3,7 @@ const Employee = require('../model/employee.model');
 const Institute = require('../model/institute.model');
 const Schedule = require('../model/schedule.model');
 const send = require('../service/mail');
+const sendNotification = require('../notifications/notification');
 
 const appendZero = (n) => {
   if (n < 10) {
@@ -64,20 +65,49 @@ const sendScheduleUpdate = async () => {
       },
     },
   ]);
-  //   const students = await Student.find({ birthDate: date }, { _id: 0, name: 1, email: 1 });
-  //   const n = students.length;
-  for (let i = 0; i < n; i++) {
-    const mail = {
-      from: 'admin@eduatlas.in',
-      to: students[i].email,
-      subject: `Happy Birthday ${students[i].name.toUpperCase()} From Way2Success`,
-      text: '',
-      html: `<strong>Happy Birthday <em>${students[
-        i
-      ].name.toUpperCase()}</em></strong><br><p>Wishing you happiness, good health and a great year ahead. Wishing you all the best that life has to offer on your birthday. May you always stay happy and blessed! May this day bring countless happiness and endless joy and live with peace and serenity.</p><br><p style="text-align: right;">From Way2Success</p>`,
+
+  schedule.forEach((schedule) => {
+    const message = `
+      <h3>Schedule Reminder</h3>
+      <p>You have lecture on ${new Date(schedule.days.date)} of topic ${schedule.days.topic} 
+      from ${schedule.days.startTime} to ${schedule.days.endTime} </p>
+      <p>Be present on time for lecture</p>
+      <p>----<br>Eduatlas Team</p>
+    `;
+
+    const notification = {
+      title: 'Schedule Reminder',
+      message: `You have lecture on ${new Date(schedule.days.date)} of topic ${
+        schedule.days.topic
+      } from ${schedule.days.startTime} tp ${schedule.days.endTime}`,
     };
-    await sendMail(mail);
-  }
+
+    schedule.students.forEach((student) => {
+      const mail = {
+        from: process.env.GMAIL_USER,
+        to: students.basicDetails.studentEmail,
+        subject: `Schedule Reminder from Eduatlas`,
+        text: '',
+        html: message,
+      };
+      sendMail(mail);
+      notification.receiverId = student.eduAtlasId;
+      sendNotification(notification);
+    });
+
+    schedule.teacher.forEach((teacher) => {
+      const mail = {
+        from: process.env.GMAIL_USER,
+        to: teacher.basicDetails.employeeEmail,
+        subject: `Schedule Reminder from Eduatlas`,
+        text: '',
+        html: message,
+      };
+      sendMail(mail);
+      notification.receiverId = teacher.eduAtlasId;
+      sendNotification(notification);
+    });
+  });
 };
 
 const dailySchedule = async () => {
