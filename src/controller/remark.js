@@ -80,10 +80,14 @@ exports.getRemarkOfStudentByInstitute = async (req, res) => {
         $unwind: '$teacher',
       },
       {
+        $addFields: {
+          'remarks.teacherName': '$teacher.basicDetails.name',
+        },
+      },
+      {
         $project: {
           studentId: 1,
           remarks: 1,
-          'teacher.basicDetails': 1,
         },
       },
     ]);
