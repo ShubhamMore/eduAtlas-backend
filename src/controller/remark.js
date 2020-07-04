@@ -1,4 +1,5 @@
 const Remarks = require('../model/remarks');
+const errorHandler = require('../service/errorHandler');
 
 exports.addRemark = async (req, res) => {
   try {
