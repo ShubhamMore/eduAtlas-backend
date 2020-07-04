@@ -61,6 +61,31 @@ exports.getRemarkOfStudentByInstitute = async (req, res) => {
         $unwind: '$remarks',
       },
       instData,
+      {
+        $addFields: {
+          'remarks.teacherId': {
+            $toObjectId: '$remarks.teacherId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'employees',
+          localField: 'remarks.teacherId',
+          foreignField: '_id',
+          as: 'teacher',
+        },
+      },
+      {
+        $unwind: '$teacher',
+      },
+      {
+        $project: {
+          studentId: 1,
+          remarks: 1,
+          'teacher.basicDetails': 1,
+        },
+      },
     ]);
 
     res.status(200).send(studentRemarks);
