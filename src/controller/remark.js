@@ -34,7 +34,7 @@ exports.getRemarkOfStudentByInstitute = async (req, res) => {
           'remarks.instituteId': req.body.instituteId,
         },
       };
-    } else if ((!req, body.batchId && req.body.courseId)) {
+    } else if (!req.body.batchId && req.body.courseId) {
       instData = {
         $match: {
           'remarks.instituteId': req.body.instituteId,
