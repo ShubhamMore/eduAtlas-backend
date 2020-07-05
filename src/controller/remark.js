@@ -1,4 +1,5 @@
 const Remarks = require('../model/remarks');
+const errorHandler = require('../service/errorHandler');
 
 exports.addRemark = async (req, res) => {
   try {
@@ -27,20 +28,20 @@ exports.getRemarkOfStudentByInstitute = async (req, res) => {
   try {
     let instData = {};
 
-    if ((!req.body.courseId && !req, body.batchId)) {
+    if (!req.body.courseId && !req.body.batchId) {
       instData = {
         $match: {
           'remarks.instituteId': req.body.instituteId,
         },
       };
-    } else if ((!req, body.batchId && req.body.courseId)) {
+    } else if (!req.body.batchId && req.body.courseId) {
       instData = {
         $match: {
           'remarks.instituteId': req.body.instituteId,
           'remarks.courseId': req.body.courseId,
         },
       };
-    } else if ((req.body.courseId && req, body.batchId)) {
+    } else if (req.body.courseId && req.body.batchId) {
       instData = {
         $match: {
           'remarks.instituteId': req.body.instituteId,
@@ -60,6 +61,35 @@ exports.getRemarkOfStudentByInstitute = async (req, res) => {
         $unwind: '$remarks',
       },
       instData,
+      {
+        $addFields: {
+          'remarks.teacherId': {
+            $toObjectId: '$remarks.teacherId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'employees',
+          localField: 'remarks.teacherId',
+          foreignField: '_id',
+          as: 'teacher',
+        },
+      },
+      {
+        $unwind: '$teacher',
+      },
+      {
+        $addFields: {
+          'remarks.teacherName': '$teacher.basicDetails.name',
+        },
+      },
+      {
+        $project: {
+          studentId: 1,
+          remarks: 1,
+        },
+      },
     ]);
 
     res.status(200).send(studentRemarks);

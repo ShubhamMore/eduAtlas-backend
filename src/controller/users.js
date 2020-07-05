@@ -5,6 +5,7 @@ const User = require('../model/user.model');
 const EduAtlasId = require('../model/eduatlasId.model');
 const Announcement = require('../model/announcement.model');
 const Student = require('../model/student.model');
+const Employee = require('../model/employee.model');
 const smsService = require('../service/sms');
 const send = require('../service/mail');
 
@@ -209,6 +210,16 @@ exports.loginUser = async (req, res, next) => {
         token,
         expiresIn: 36000,
       };
+
+      if (user.role == 'employee') {
+        data._id = await Employee.findOne({
+          eduAtlasId: user.eduAtlasId,
+        });
+      } else if (user.role == 'student') {
+        data._id = await Student.findOne({
+          eduAtlasId: user.eduAtlasId,
+        });
+      }
 
       console.log(data);
 
