@@ -1,13 +1,13 @@
 const instituteRouter = require('express').Router();
 const instituteController = require('../controller/institute');
 const couseConroller = require('../controller/course');
-const scheduleController = require('../controller/schedule');
+// const scheduleController = require('../controller/schedule');
 const dashboardController = require('../controller/instituteDashboard');
 const checkAuth = require('../middleware/checkAuth');
 const checkPayment = require('../middleware/checkPayment');
 const extractFile = require('../middleware/file');
-const roleController = require('../controller/role');
-const { varyfyOTP } = require('../controller/users');
+// const roleController = require('../controller/role');
+// const { varyfyOTP } = require('../controller/users');
 //@Institute_Routes
 instituteRouter.post(
   '/addInstitute',
@@ -17,6 +17,7 @@ instituteRouter.post(
   instituteController.addInstitute
 );
 instituteRouter.post('/activateInstitute', checkAuth, instituteController.activateInstitute);
+instituteRouter.post('/deactivateInstitute', checkAuth, instituteController.deactivateInstitute);
 instituteRouter.get('/all', checkAuth, checkPayment, instituteController.getAllInstitutes);
 instituteRouter.delete('/:id', checkAuth, instituteController.deleteInstitute);
 instituteRouter.get('/oneInstitute/:id', checkAuth, instituteController.getOneInstitute);
@@ -55,15 +56,15 @@ instituteRouter.delete('/course/discount', checkAuth, couseConroller.deleteDisco
 instituteRouter.delete('/course/reciept/:instituteId', checkAuth, couseConroller.deleteReciept);
 
 //@make_anounce
-instituteRouter.post('/announcement', checkAuth, instituteController.makeAnouncement);
+// instituteRouter.post('/announcement', checkAuth, instituteController.makeAnouncement);
 
 //@Attendence_Routes
-instituteRouter.post('/attendence/:instituteId', checkAuth, instituteController.addAttendence);
-instituteRouter.patch('/attendence', checkAuth, instituteController.updateAttendence);
-instituteRouter.get('/attendence', checkAuth, instituteController.getAttendece);
+// instituteRouter.post('/attendence/:instituteId', checkAuth, instituteController.addAttendence);
+// instituteRouter.patch('/attendence', checkAuth, instituteController.updateAttendence);
+// instituteRouter.get('/attendence', checkAuth, instituteController.getAttendece);
 
 //@Role_assigne
-instituteRouter.post('/role', checkAuth, roleController.assignRole);
+// instituteRouter.post('/role', checkAuth, roleController.assignRole);
 
 //@Dashboard
 instituteRouter.post('/getDashboardInfo', checkAuth, dashboardController.getDashboardInfo);

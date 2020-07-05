@@ -81,23 +81,6 @@ const discountSchema = new Schema(
   { toJSON: { getters: true }, toObject: { getters: true } }
 );
 
-// Attendance schema
-const attendanceSchema = new Schema({
-  batchId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
-
-  allPresent: {
-    type: Boolean,
-    default: true,
-  },
-
-  absentStudents: {
-    type: [Schema.Types.ObjectId],
-  },
-});
-
 // Receipt schema
 const receiptConfigSchema = new Schema(
   {
@@ -150,6 +133,14 @@ const paymentDetailsSchema = new Schema(
       required: true,
     },
     planType: {
+      type: String,
+      required: true,
+    },
+    activationDate: {
+      type: String,
+      required: true,
+    },
+    expiryDate: {
       type: String,
       required: true,
     },
@@ -258,11 +249,6 @@ const instituteSchema = new Schema(
       default: null,
     },
 
-    attendence: {
-      type: [attendanceSchema],
-      default: [],
-    },
-
     paymentDetails: {
       type: [paymentDetailsSchema],
       default: [],
@@ -270,11 +256,13 @@ const instituteSchema = new Schema(
 
     currentPlan: {
       type: String,
+      default: null,
       // required: true,
     },
 
     expiryDate: {
       type: Date,
+      default: null,
       // required: true,
     },
 

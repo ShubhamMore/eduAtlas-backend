@@ -212,13 +212,16 @@ exports.loginUser = async (req, res, next) => {
       };
 
       if (user.role == 'employee') {
-        data._id = await Employee.findOne({
+        const employee = await Employee.findOne({
           eduAtlasId: user.eduAtlasId,
         });
+        data._id = employee._id;
+        console.log('employee*******************************************');
       } else if (user.role == 'student') {
-        data._id = await Student.findOne({
+        const student = await Student.findOne({
           eduAtlasId: user.eduAtlasId,
         });
+        data._id = student._id;
       }
 
       console.log(data);
