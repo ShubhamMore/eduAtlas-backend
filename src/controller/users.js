@@ -263,7 +263,7 @@ exports.loginUser = async (req, res, next) => {
         
         .button1 {background-color: #e95a59;}
         </style>
-        <button href= ${url} class="button button1">VERIFY EMAIL</button></th></tr>
+        <button href="${url}" class="button button1">VERIFY EMAIL</button></th></tr>
         
         <tr>
             <th><p style="text-align:center;margin:10px 0;padding:0;color:#757575;font-family:Helvetica;font-size:16px;line-height:150%">(Just making sure you are you!)</p></th>
@@ -273,7 +273,7 @@ exports.loginUser = async (req, res, next) => {
           <hr>
           <h3 style=3D"display:block;margin:0;padding:0;color:#444444;font-family:Helvetica;font-size:22px;font-style:normal;font-weight:bold;line-height:100%;letter-spacing:normal;text-align:left"><span style=3D"font-size:14px">
           Having trouble? Click on this link instead: </span></h3>
-          <h5 style="text-align:center;color:#949494;font-family:Georgia; font-size:14px; font-weight:normal;"> <a>${url}</a></h5>
+          <h5 style="text-align:center;color:#949494;font-family:Georgia; font-size:14px; font-weight:normal;"> <a href="${url}">${url}</a></h5>
           </th>
         </tr> 
           <tr align="center" width=100% style="background-color:#333333; color:#ffffff";>

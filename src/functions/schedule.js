@@ -13,7 +13,8 @@ const appendZero = (n) => {
 };
 
 const sendScheduleUpdate = async () => {
-  const now = new Date() + 86400000;
+  const now = new Date(new Date().getTime() + 86400000);
+
   const date = new RegExp(
     '.*' +
       now.getFullYear() +
@@ -113,7 +114,8 @@ const sendScheduleUpdate = async () => {
 const dailySchedule = async () => {
   const now = new Date();
   let milliSecTill7 =
-    new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 00, 0, 0) - now; // subtract 5 hrs and 30 mins for indian Time
+    new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 04, 00, 0) - now; // subtract 5 hrs and 30 mins for indian Time
+  // console.log(milliSecTill7);
   if (milliSecTill7 < 0) {
     milliSecTill7 += 86400000; // it's after 7am, try 7am tomorrow.
   }
