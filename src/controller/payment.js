@@ -1,12 +1,24 @@
 const Razorpay = require('razorpay');
 const Order = require('../model/order.model');
 const Receipt = require('../model/receipt.model');
+const Plan = require('../model/plans.model');
+
 const crypto = require('crypto');
 
 var instance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
+
+exports.getAllPlans = async (req, res) => {
+  try {
+    const plans = await Plan.find();
+
+    res.status(200).send(plans);
+  } catch (e) {
+    res.status(400).send();
+  }
+};
 
 exports.deleteOrder = async (req, res) => {
   try {
@@ -20,7 +32,15 @@ exports.deleteOrder = async (req, res) => {
 
 exports.orderGenerate = async (req, res) => {
   try {
-    const receipt = new Receipt(req.body);
+    const receiptData = req.body;
+    console.log(req.body);
+    const plan = await Plan.findOne({ planType: req.body.planType });
+    if (!plan) {
+      throw new Error('Invalid Plan');
+    }
+    const gstCalculatedAmount = (+plan.amount + +plan.amount * 0.18).toFixed(2);
+    receiptData.amount = gstCalculatedAmount;
+    const receipt = new Receipt(receiptData);
 
     const options = {
       amount: +receipt.amount * 100, // amount in the smallest currency unit

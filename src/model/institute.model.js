@@ -12,10 +12,10 @@ const courseSchema = new Schema(
     courseCode: {
       type: String,
       required: true,
-      // unique: true,
     },
     fees: {
       type: String,
+      required: true,
     },
     discription: {
       type: String,
@@ -32,12 +32,15 @@ const courseSchema = new Schema(
     },
     gstValue: {
       type: String,
+      default: null,
     },
     totalFee: {
       type: String,
+      required: true,
     },
     duration: {
       type: String,
+      default: null,
     },
   },
   { toJSON: { getters: true }, toObject: { getters: true } }
@@ -52,10 +55,10 @@ const batchSchema = new Schema({
   batchCode: {
     type: String,
     required: true,
-    // unique: true,
   },
   description: {
     type: String,
+    default: null,
   },
 });
 
@@ -76,6 +79,7 @@ const discountSchema = new Schema(
     },
     description: {
       type: String,
+      default: null,
     },
   },
   { toJSON: { getters: true }, toObject: { getters: true } }
@@ -257,13 +261,11 @@ const instituteSchema = new Schema(
     currentPlan: {
       type: String,
       default: null,
-      // required: true,
     },
 
     expiryDate: {
       type: Date,
       default: null,
-      // required: true,
     },
 
     active: {
