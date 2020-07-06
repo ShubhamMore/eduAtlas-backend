@@ -753,3 +753,174 @@ exports.getCoursesOfStudentByInstitute = async (req, res) => {
 };
 
 //exports.pendingStudents = async (req, res) => {};
+
+//---------------------------for student Model------------------------------//
+
+exports.getInstitutesOfStudent = async (req, res) => {
+  try {
+    const studentInstitute = await Student.aggregate([
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body._id),
+        },
+      },
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $group: {
+          _id: '$instituteDetails.instituteId',
+        },
+      },
+      {
+        $addFields: {
+          _id: {
+            $toObjectId: '$_id',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: '_id',
+          foreignField: '_id',
+          as: 'instituteDetails',
+        },
+      },
+      {
+        $match: {
+          'instituteDetails.active': true,
+        },
+      },
+    ]);
+
+    res.status(200).send(studentInstitute);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
+
+exports.getStudentCoursesByInstitutes = async (req, res) => {
+  try {
+    const studentCourses = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body._id),
+          'instituteDetails.instituteId': req.body.instituteId,
+        },
+      },
+      {
+        $addFields: {
+          instId: {
+            $toObjectId: '$instituteDetails.instituteId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'instId',
+          foreignField: '_id',
+          as: 'instituteCourse',
+        },
+      },
+      {
+        $unwind: '$instituteCourse',
+      },
+      {
+        $addFields: {
+          courseId: {
+            $toObjectId: '$instituteDetails.courseId',
+          },
+          batchId: {
+            $toObjectId: '$instituteDetails.batchId',
+          },
+        },
+      },
+      {
+        $unwind: '$instituteCourse.course',
+      },
+      {
+        $unwind: '$instituteCourse.batch',
+      },
+      {
+        $match: {
+          $expr: {
+            $and: [
+              {
+                $eq: ['$instituteCourse.course._id', '$courseId'],
+              },
+              {
+                $eq: ['$instituteCourse.batch._id', '$batchId'],
+              },
+            ],
+          },
+        },
+      },
+      {
+        $project: {
+          course: '$instituteCourse.course',
+          batch: '$instituteCourse.batch',
+        },
+      },
+    ]);
+
+    res.status(200).send(studentCourses);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
+
+exports.getStudentDashboard = async (req, res) => {
+  try {
+  } catch (error) {}
+};
+
+exports.getStudentFeesByCourse = async (req, res) => {
+  try {
+  } catch (error) {}
+};
+
+exports.getStudentAnnouncements = async (req, res) => {
+  try {
+    const studentAnnoucements = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+    ]);
+  } catch (error) {}
+};
+
+exports.getStudentSchedule = async (req, res) => {
+  try {
+    const studentSchedule = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+      {},
+    ]);
+  } catch (error) {}
+};
+
+exports.getStudentAttendance = async (req, res) => {
+  try {
+  } catch (error) {}
+};
+
+exports.getStudentStudyMaterials = async (req, res) => {
+  try {
+  } catch (error) {}
+};
+
+exports.getStudentTestSchedule = async (req, res) => {
+  try {
+  } catch (error) {}
+};
+
+exports.getStudentReports = async (req, res) => {
+  try {
+  } catch (error) {}
+};

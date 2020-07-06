@@ -276,3 +276,5 @@ exports.getChats = async (req, res) => {
     errorHandler(err, res);
   }
 };
+
+//get student chat Members (only teachers and institutes)

@@ -193,6 +193,7 @@ const getReceiptData = async (studentId, courseId, instituteId) => {
     termsConditions: receiptData.termsAndCondition,
     invoiceNo: receiptData.invoiceNo,
   };
+
   return receipt;
 };
 
@@ -291,6 +292,7 @@ exports.addFee = async (req, res) => {
     await fees.save();
     res.status(200).send(fees);
   } catch (error) {
+    console.log('fee: ', error);
     res.status(400).send(error);
   }
 };
