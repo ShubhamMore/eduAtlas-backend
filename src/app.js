@@ -9,6 +9,8 @@ const mailController = require('./controller/sendmail');
 const indexRouter = require('./routes/index');
 const bodyParser = require('body-parser');
 
+const dailySchedule = require('./functions/schedule');
+
 const app = express();
 
 app.use(express.json({ limit: '100mb' }));
@@ -49,6 +51,7 @@ app.use((req, res, next) => {
 
 app.use(logger('dev'));
 
+app.use('/admin', require('./routes/admin'));
 app.use('/users', require('./routes/users'));
 app.use('/institute', require('./routes/institute'));
 app.use('/institute/payment', require('./routes/payment'));
@@ -83,5 +86,7 @@ app.use((error, req, res, next) => {
     },
   });
 });
+
+dailySchedule();
 
 module.exports = app;

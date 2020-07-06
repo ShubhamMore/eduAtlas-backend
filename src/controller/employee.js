@@ -282,7 +282,7 @@ exports.getEmployeeInstitutes = async (req, res) => {
 
     const instituteArray = new Array();
     const institutes = await Institute.find(
-      {},
+      { active: true },
       { _id: 1, basicInfo: 1, address: 1, active: 1, currentPlan: 1 }
     );
 

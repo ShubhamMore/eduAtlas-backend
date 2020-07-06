@@ -339,6 +339,8 @@ exports.updateFeeOfStudent = async (req, res) => {
 
     const receipt = await getReceiptData(fees.studentId, fees.courseId, fees.instituteId);
 
+    fees.amountCollected = req.body.amountCollected;
+    fees.pendingAmount = req.body.pendingAmount;
     fees.installments = req.body.installments;
 
     fees.installments.forEach(async (curInstallment, i) => {

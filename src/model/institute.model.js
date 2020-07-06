@@ -12,10 +12,10 @@ const courseSchema = new Schema(
     courseCode: {
       type: String,
       required: true,
-      // unique: true,
     },
     fees: {
       type: String,
+      required: true,
     },
     discription: {
       type: String,
@@ -32,12 +32,15 @@ const courseSchema = new Schema(
     },
     gstValue: {
       type: String,
+      default: null,
     },
     totalFee: {
       type: String,
+      required: true,
     },
     duration: {
       type: String,
+      default: null,
     },
   },
   { toJSON: { getters: true }, toObject: { getters: true } }
@@ -52,10 +55,10 @@ const batchSchema = new Schema({
   batchCode: {
     type: String,
     required: true,
-    // unique: true,
   },
   description: {
     type: String,
+    default: null,
   },
 });
 
@@ -76,27 +79,11 @@ const discountSchema = new Schema(
     },
     description: {
       type: String,
+      default: null,
     },
   },
   { toJSON: { getters: true }, toObject: { getters: true } }
 );
-
-// Attendance schema
-const attendanceSchema = new Schema({
-  batchId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
-
-  allPresent: {
-    type: Boolean,
-    default: true,
-  },
-
-  absentStudents: {
-    type: [Schema.Types.ObjectId],
-  },
-});
 
 // Receipt schema
 const receiptConfigSchema = new Schema(
@@ -150,6 +137,14 @@ const paymentDetailsSchema = new Schema(
       required: true,
     },
     planType: {
+      type: String,
+      required: true,
+    },
+    activationDate: {
+      type: String,
+      required: true,
+    },
+    expiryDate: {
       type: String,
       required: true,
     },
@@ -258,11 +253,6 @@ const instituteSchema = new Schema(
       default: null,
     },
 
-    attendence: {
-      type: [attendanceSchema],
-      default: [],
-    },
-
     paymentDetails: {
       type: [paymentDetailsSchema],
       default: [],
@@ -270,12 +260,12 @@ const instituteSchema = new Schema(
 
     currentPlan: {
       type: String,
-      // required: true,
+      default: null,
     },
 
     expiryDate: {
       type: Date,
-      // required: true,
+      default: null,
     },
 
     active: {
