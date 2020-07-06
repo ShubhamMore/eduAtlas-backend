@@ -51,6 +51,7 @@ app.use((req, res, next) => {
 
 app.use(logger('dev'));
 
+app.use('/admin', require('./routes/admin'));
 app.use('/users', require('./routes/users'));
 app.use('/institute', require('./routes/institute'));
 app.use('/institute/payment', require('./routes/payment'));
