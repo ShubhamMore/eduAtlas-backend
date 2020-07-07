@@ -11,6 +11,13 @@ const Institute = require('../model/institute.model');
 const Fee = require('../model/fee.model');
 
 const send = require('../service/mail');
+const appendZero = (n) => {
+  if (n < 10) {
+    return '0' + n;
+  }
+  return '' + n;
+};
+
 exports.addStudent = async (req, res, next) => {
   try {
     //    console.log('****************************body***********************************');
@@ -874,11 +881,6 @@ exports.getStudentCoursesByInstitutes = async (req, res) => {
   }
 };
 
-exports.getStudentDashboard = async (req, res) => {
-  try {
-  } catch (error) {}
-};
-
 exports.getStudentFeesByCourse = async (req, res) => {
   try {
   } catch (error) {}
@@ -891,36 +893,108 @@ exports.getStudentAnnouncements = async (req, res) => {
         $unwind: '$instituteDetails',
       },
     ]);
+
+    res.status(200).send(studentAnnoucements);
   } catch (error) {}
 };
 
 exports.getStudentSchedule = async (req, res) => {
   try {
+    const date = new Date();
+    const currentDate =
+      date.getFullYear() +
+      '-' +
+      appendZero(date.getMonth() + 1) +
+      '-' +
+      appendZero(date.getDate()) +
+      'T00:00:00';
+    console.log(currentDate);
+
     const studentSchedule = await Student.aggregate([
       {
         $unwind: '$instituteDetails',
       },
-      {},
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body._id),
+          instituteId: req.body.instituteId,
+        },
+      },
+      {
+        $lookup: {
+          from: 'schedules',
+          localField: 'instituteDetails.instituteId',
+          foreignField: 'instituteId',
+          as: 'schedule',
+        },
+      },
+      {
+        $unwind: '$schedule',
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$instituteDetails.batchId', '$schedule.batchId'],
+          },
+          'schedule.scheduleEnd': {
+            $gte: currentDate,
+          },
+        },
+      },
     ]);
-  } catch (error) {}
+
+    res.status(200).send(studentSchedule);
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
-exports.getStudentAttendance = async (req, res) => {
+exports.getStudentAttendanceByInstitute = async (req, res) => {
   try {
   } catch (error) {}
 };
 
-exports.getStudentStudyMaterials = async (req, res) => {
+exports.getStudentStudyMaterialsByInstitute = async (req, res) => {
   try {
   } catch (error) {}
 };
 
-exports.getStudentTestSchedule = async (req, res) => {
+exports.getStudentTestScheduleByInstitute = async (req, res) => {
   try {
-  } catch (error) {}
+    const test = await Student.aggregate([
+      {
+        $unwind: 'instituteDetails',
+      },
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body._id),
+          'instituteDetails.instituteId': req.body.instituteId,
+        },
+      },
+      {
+        $lookup: {
+          from: 'tests',
+          localField: 'instituteDetails.instituteId',
+          foreignField: 'instituteId',
+          as: 'tests',
+        },
+      },
+      { $unwind: '$tests' },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$test.batchId', 'instituteDetails.batchId'],
+          },
+        },
+      },
+    ]);
+    res.status(200).send(test);
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
-exports.getStudentReports = async (req, res) => {
+exports.getStudentReportsByInstitute = async (req, res) => {
   try {
   } catch (error) {}
 };

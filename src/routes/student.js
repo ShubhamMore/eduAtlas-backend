@@ -54,4 +54,18 @@ studentRouter.post(
   studentController.getCoursesOfStudentByInstitute
 );
 
+/**
+ * Student Login ROutes
+ */
+
+studentRouter.post('/getStudentsByInstitute', checkAuth, studentController.getStudentsByInstitute);
+
+studentRouter.post(
+  '/getStudentCoursesByInstitutes',
+  checkAuth,
+  studentController.getStudentCoursesByInstitutes
+);
+
+studentRouter.post('/getStudentSchedule', checkAuth, studentController.getStudentSchedule);
+
 module.exports = studentRouter;
