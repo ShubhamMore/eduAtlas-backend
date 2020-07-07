@@ -58,7 +58,7 @@ studentRouter.post(
  * Student Login ROutes
  */
 
-studentRouter.post('/getStudentsByInstitute', checkAuth, studentController.getStudentsByInstitute);
+studentRouter.post('/getInstitutesOfStudent', checkAuth, studentController.getInstitutesOfStudent);
 
 studentRouter.post(
   '/getStudentCoursesByInstitutes',
