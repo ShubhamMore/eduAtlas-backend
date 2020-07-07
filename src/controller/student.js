@@ -11,6 +11,7 @@ const Institute = require('../model/institute.model');
 const Fee = require('../model/fee.model');
 
 const send = require('../service/mail');
+const { array } = require('@hapi/joi');
 const appendZero = (n) => {
   if (n < 10) {
     return '0' + n;
@@ -801,7 +802,12 @@ exports.getInstitutesOfStudent = async (req, res) => {
       },
     ]);
 
-    res.status(200).send(studentInstitute);
+    const institutes = new Array();
+    studentInstitute.forEach((institute) => {
+      institutes.push(institute.instituteDetails[0]);
+    });
+
+    res.status(200).send(institutes);
   } catch (error) {
     errorHandler(error, res);
   }

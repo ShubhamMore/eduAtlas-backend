@@ -192,6 +192,7 @@ exports.getMembers = async (req, res) => {
       //     },
       //   },
       // ]);
+    } else if (req.user.role == 'student') {
     }
     console.log('data ', data);
 

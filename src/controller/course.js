@@ -518,6 +518,7 @@ exports.getCoursesTD = async (req, res) => {
       course: 1,
       batch: 1,
       discount: 1,
+      reciept: 1,
       _id: 0,
     });
 
