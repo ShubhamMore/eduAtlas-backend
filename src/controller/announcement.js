@@ -111,6 +111,18 @@ exports.getAnnouncement = async (req, res, next) => {
   }
 };
 
+exports.getStudentAnnouncements = async (req, res, next) => {
+  try {
+    const instituteId = req.body.instituteId;
+    const batch = req.body.batch;
+    console.log(req.body);
+    const announcements = await Announcement.find({ instituteId, batchCodes: { $in: [batch] } });
+    res.status(200).json(announcements);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
+
 exports.getSingleAnnouncement = async (req, res, next) => {
   try {
     const _id = req.body.id;

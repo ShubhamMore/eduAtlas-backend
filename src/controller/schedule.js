@@ -228,7 +228,7 @@ exports.getScheduleByInstitute = async (req, res) => {
       error.statusCode = 400;
       throw error;
     }
-
+    console.log(req.body);
     const instituteSchedule = await Schedule.find(details);
     let instSchedule = [];
 
@@ -309,6 +309,7 @@ exports.getScheduleByInstitute = async (req, res) => {
     errorHandler(error, res);
   }
 };
+
 exports.getScheduleByBatch = async (req, res) => {
   try {
     const instituteSchedule = await Schedule.find({

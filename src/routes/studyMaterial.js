@@ -23,6 +23,12 @@ studyMaterialRouter.post(
   studyMaterialController.getSingleStudyMaterial
 );
 
+studyMaterialRouter.post(
+  '/getStudyMaterialForStudent',
+  checkAuth,
+  studyMaterialController.getStudyMaterialForStudent
+);
+
 studyMaterialRouter.post('/getStudyMaterial', checkAuth, studyMaterialController.getStudyMaterial);
 
 studyMaterialRouter.post(

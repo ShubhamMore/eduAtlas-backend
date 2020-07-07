@@ -134,6 +134,24 @@ exports.getStudyMaterial = async (req, res, next) => {
   }
 };
 
+exports.getStudyMaterialForStudent = async (req, res, next) => {
+  try {
+    const query = { instituteId: req.body.instituteId };
+
+    if (req.body.batch) {
+      query.batches = { $in: [req.body.batch] };
+    }
+
+    console.log(query);
+
+    const studyMaterials = await StudyMaterial.find(query);
+
+    res.status(200).json(studyMaterials);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
+
 exports.getSingleStudyMaterial = async (req, res, next) => {
   try {
     const _id = req.body.id;

@@ -7,6 +7,7 @@ announcementRouter.post('/makeAnnouncement', file, announcementController.makeAn
 announcementRouter.post('/editAnnouncement', file, announcementController.editAnnouncement);
 announcementRouter.post('/getSingleAnnouncement', announcementController.getSingleAnnouncement);
 announcementRouter.post('/getAnnouncement', announcementController.getAnnouncement);
+announcementRouter.post('/getStudentAnnouncements', announcementController.getStudentAnnouncements);
 announcementRouter.post('/deleteAnnouncement', announcementController.deleteAnnouncement);
 
 module.exports = announcementRouter;
