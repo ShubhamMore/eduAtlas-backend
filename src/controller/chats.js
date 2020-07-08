@@ -9,7 +9,7 @@ const Chat = require('../model/chats.model');
 
 exports.getMembers = async (req, res) => {
   try {
-    let data = {};
+    let data = [{}];
     console.log('user ', req.user);
     if (req.user.role == 'institute') {
       //req.user.role == 'institute'
@@ -193,6 +193,7 @@ exports.getMembers = async (req, res) => {
       //   },
       // ]);
     } else if (req.user.role == 'student') {
+      console.log('chat API:', req.user.eduAtlasId);
       const institutes = await Student.aggregate([
         {
           $match: {
@@ -287,12 +288,11 @@ exports.getMembers = async (req, res) => {
           $unwind: '$teachers',
         },
       ]);
-
-      data[0].instiuteDetails = institutes;
+      data[0].instituteDetails = institutes;
       data[0].teacherDetails = teachers;
     }
 
-    console.log('data ', data);
+    //    console.log('data ', data);
 
     res.status(200).send(data);
   } catch (error) {
