@@ -193,7 +193,105 @@ exports.getMembers = async (req, res) => {
       //   },
       // ]);
     } else if (req.user.role == 'student') {
+      const institutes = await Student.aggregate([
+        {
+          $match: {
+            eduAtlasId: req.user.eduAtlasId,
+          },
+        },
+        {
+          $unwind: '$instituteDetails',
+        },
+        {
+          $group: {
+            _id: {
+              $toObjectId: '$instituteDetails.instituteId',
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: 'institutes',
+            localField: '_id',
+            foreignField: '_id',
+            as: 'institutes',
+          },
+        },
+        {
+          $unwind: '$institutes',
+        },
+        {
+          $group: {
+            _id: {
+              $toObjectId: '$institutes.parentUser',
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: '_id',
+            foreignField: '_id',
+            as: 'instituteUsers',
+          },
+        },
+        {
+          $unwind: '$instituteUsers',
+        },
+        {
+          $project: {
+            instituteUsers: 1,
+          },
+        },
+      ]);
+
+      const teachers = await Student.aggregate([
+        {
+          $match: {
+            eduAtlasId: req.user.eduAtlasId,
+          },
+        },
+        {
+          $unwind: '$instituteDetails',
+        },
+        {
+          $group: {
+            _id: '$instituteDetails.instituteId',
+          },
+        },
+        {
+          $lookup: {
+            from: 'employees',
+            localField: '_id',
+            foreignField: 'instituteDetails.instituteId',
+            as: 'teachers',
+          },
+        },
+        {
+          $unwind: '$teachers',
+        },
+        {
+          $group: {
+            _id: '$teachers.eduAtlasId',
+          },
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: '_id',
+            foreignField: 'eduAtlasId',
+            as: 'teachers',
+          },
+        },
+        {
+          $unwind: '$teachers',
+        },
+      ]);
+
+      data[0].instiuteDetails = institutes;
+      data[0].teacherDetails = teachers;
     }
+
     console.log('data ', data);
 
     res.status(200).send(data);
