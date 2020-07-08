@@ -198,7 +198,7 @@ exports.deleteForum = async (req, res) => {
 exports.deleteComment = async (req, res) => {
   try {
     let query = {};
-    if (req.body.eduAtlasId != req.user.eduAtlasId) {
+    if (req.body.userId != req.user._id) {
       const error = new Error('You cant Delete this comment');
       error.statusCode = 400;
       throw error;
