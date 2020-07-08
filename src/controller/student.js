@@ -1048,12 +1048,13 @@ exports.getStudentAllCoursesByInstitute = async (req, res) => {
       },
       {
         $addFields: {
-          'instiuteDetails.courseInfo': '$instituteCourse.course',
+          courseDetails: '$instituteCourse.course',
         },
       },
       {
         $project: {
           instituteDetails: 1,
+          courseDetails: 1,
         },
       },
     ]);
