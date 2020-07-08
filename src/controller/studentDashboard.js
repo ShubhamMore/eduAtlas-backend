@@ -314,5 +314,7 @@ exports.getStudentDashboard = async (req, res) => {
       test,
       schedule,
     });
-  } catch (error) {}
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };

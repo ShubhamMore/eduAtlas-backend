@@ -2,6 +2,7 @@ const checkAuth = require('../middleware/checkAuth');
 
 const studentRouter = require('express').Router({ caseSensitive: true });
 const studentController = require('../controller/student');
+const studentDashboardController = require('../controller/studentDashboard');
 //to add new student - 1. create new user 2. add student
 studentRouter.post('/add', checkAuth, studentController.addStudent); //done
 
@@ -73,5 +74,10 @@ studentRouter.post(
   checkAuth,
   studentController.getStudentAllCoursesByInstitute
 );
-
+/**  --------------------- STUDENT DASHBOARD -------------------------- */
+studentRouter.post(
+  '/getStudentDashboard',
+  checkAuth,
+  studentDashboardController.getStudentDashboard
+);
 module.exports = studentRouter;
