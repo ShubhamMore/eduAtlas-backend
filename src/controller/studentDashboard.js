@@ -27,9 +27,17 @@ exports.getStudentDashboard = async (req, res) => {
 
     const announcements = await Student.aggregate([
       {
+        $match: {
+          eduAtlasId: req.user.eduAtlasId,
+        },
+      },
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
         $lookup: {
           from: 'announcements',
-          localField: 'instituteDetails.instituteId',
+          localField: '$instituteDetails.instituteId',
           foreignField: 'instituteId',
           as: 'announcements',
         },
