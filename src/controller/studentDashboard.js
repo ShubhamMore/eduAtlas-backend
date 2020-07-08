@@ -108,15 +108,7 @@ exports.getStudentDashboard = async (req, res) => {
         },
       },
     ]);
-    const schedule = await Schedule.aggregate([
-      {
-        $match: {
-          eduAtlasId: req.user.eduAtlasId,
-        },
-      },
-      {},
-    ]);
-    const test = await Test.aggregate([
+    const schedule = await Student.aggregate([
       {
         $match: {
           eduAtlasId: req.user.eduAtlasId,
@@ -145,10 +137,16 @@ exports.getStudentDashboard = async (req, res) => {
       },
       {
         $addFields: {
+          courseId: {
+            $toObjectId: '$instituteDetails.courseId',
+          },
           batchId: {
             $toObjectId: '$instituteDetails.batchId',
           },
         },
+      },
+      {
+        $unwind: '$instituteCourse.course',
       },
       {
         $unwind: '$instituteCourse.batch',
@@ -157,6 +155,113 @@ exports.getStudentDashboard = async (req, res) => {
         $match: {
           $expr: {
             $and: [
+              {
+                $eq: ['$instituteCourse.course._id', '$courseId'],
+              },
+              {
+                $eq: ['$instituteCourse.batch._id', '$batchId'],
+              },
+            ],
+          },
+        },
+      },
+      {
+        $addFields: {
+          'instituteDetails.instituteId': {
+            $toString: '$instituteDetails.instituteId',
+          },
+          batchId: {
+            $toString: '$instituteDetails.batchId',
+          },
+          courseId: {
+            $toString: 'instituteDetails.courseId',
+          },
+        },
+      },
+
+      {
+        $lookup: {
+          from: 'schedules',
+          localField: 'instituteDetails.instituteId',
+          foreignField: 'instituteId',
+          as: 'schedule',
+        },
+      },
+      { $unwind: '$schedule' },
+      { $unwind: '$schedule.days' },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$batchId', '$schedule.batchId'],
+          },
+          'schedule.days.select': true,
+          'schedule.days.date': { $gte: '2020-07-10' },
+        },
+      },
+      {
+        $sort: {
+          'schedule.days.date': 1,
+        },
+      },
+      {
+        $project: {
+          instituteName: '$instituteCourse.basicInfo.name',
+          batchCode: '$instituteCourse.batch.batchCode',
+          courseName: '$instituteCourse.course.name',
+          lecture: '$schedule.days',
+        },
+      },
+    ]);
+    const test = await Student.aggregate([
+      {
+        $match: {
+          eduAtlasId: req.user.eduAtlasId,
+        },
+      },
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $addFields: {
+          'instituteDetails.instituteId': {
+            $toObjectId: '$instituteDetails.instituteId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'instituteDetails.instituteId',
+          foreignField: '_id',
+          as: 'instituteCourse',
+        },
+      },
+      {
+        $unwind: '$instituteCourse',
+      },
+      {
+        $addFields: {
+          courseId: {
+            $toObjectId: '$instituteDetails.courseId',
+          },
+          batchId: {
+            $toObjectId: '$instituteDetails.batchId',
+          },
+        },
+      },
+      {
+        $unwind: '$instituteCourse.course',
+      },
+      {
+        $unwind: '$instituteCourse.batch',
+      },
+      {
+        $match: {
+          $expr: {
+            $and: [
+              {
+                $eq: ['$instituteCourse.course._id', '$courseId'],
+              },
               {
                 $eq: ['$instituteCourse.batch._id', '$batchId'],
               },
@@ -198,9 +303,16 @@ exports.getStudentDashboard = async (req, res) => {
         $project: {
           instituteName: '$instituteCourse.basicInfo.name',
           batchCode: '$instituteCourse.batch.batchCode',
+          courseName: '$instituteCourse.course.name',
           test: 1,
         },
       },
     ]);
+
+    res.status(200).send({
+      announcements,
+      test,
+      schedule,
+    });
   } catch (error) {}
 };
