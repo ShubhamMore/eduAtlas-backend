@@ -68,4 +68,10 @@ studentRouter.post(
 
 studentRouter.post('/getStudentSchedule', checkAuth, studentController.getStudentSchedule);
 
+studentRouter.post(
+  '/getStudentAllCoursesByInstitute',
+  checkAuth,
+  studentController.getStudentAllCoursesByInstitute
+);
+
 module.exports = studentRouter;

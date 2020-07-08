@@ -999,8 +999,82 @@ exports.getStudentTestScheduleByInstitute = async (req, res) => {
     errorHandler(error, res);
   }
 };
+exports.getStudentAllCoursesByInstitute = async (req, res) => {
+  try {
+    const studentCourses = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(req.body._id),
+          'instituteDetails.instituteId': req.body.instituteId,
+        },
+      },
+      {
+        $addFields: {
+          instId: {
+            $toObjectId: '$instituteDetails.instituteId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'instId',
+          foreignField: '_id',
+          as: 'instituteCourse',
+        },
+      },
+      {
+        $unwind: '$instituteCourse',
+      },
+      {
+        $addFields: {
+          courseId: {
+            $toObjectId: '$instituteDetails.courseId',
+          },
+        },
+      },
+      {
+        $unwind: '$instituteCourse.course',
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$instituteCourse.course._id', '$courseId'],
+          },
+        },
+      },
+      {
+        $addFields: {
+          'instiuteDetails.courseInfo': '$instituteCourse.course',
+        },
+      },
+      {
+        $project: {
+          instituteDetails: 1,
+        },
+      },
+    ]);
+
+    res.status(200).send(studentCourses);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
 
 exports.getStudentReportsByInstitute = async (req, res) => {
+  try {
+  } catch (error) {}
+};
+
+exports.getStudentPTMByInstitutes = async (req, res) => {
+  try {
+  } catch (error) {}
+};
+
+exports.getStudentMentoringByInstitute = async (req, res) => {
   try {
   } catch (error) {}
 };
