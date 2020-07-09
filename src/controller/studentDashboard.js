@@ -547,7 +547,7 @@ exports.studentInstituteDashboard = async (req, res) => {
     ]);
 
     res.status(200).send({
-      test,
+      tests,
       announcements,
       schedule,
     });
