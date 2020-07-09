@@ -9,7 +9,8 @@ const userController = require('../controller/users');
 const EduAtlasId = require('../model/eduatlasId.model');
 const Institute = require('../model/institute.model');
 const Fee = require('../model/fee.model');
-
+const Ptm = require('../model/ptm.model');
+const Mentoring = require('../model/mentoring.model');
 const send = require('../service/mail');
 const { array } = require('@hapi/joi');
 const appendZero = (n) => {
@@ -1072,10 +1073,198 @@ exports.getStudentReportsByInstitute = async (req, res) => {
 
 exports.getStudentPTMByInstitutes = async (req, res) => {
   try {
-  } catch (error) {}
+    const date = new Date();
+    const currentDate =
+      date.getFullYear() +
+      '-' +
+      appendZero(date.getMonth() + 1) +
+      '-' +
+      appendZero(date.getDate()) +
+      'T00:00:00';
+    let pastMeetings = [],
+      upcomingMeetings = [];
+    pastMeetings = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          eduAtlasId: req.user.eduAtlasId,
+          'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.active': true,
+        },
+      },
+      {
+        $lookup: {
+          from: 'ptms',
+          localField: 'instituteDetails.instituteId',
+          foreignField: 'instituteId',
+          as: 'meetingDetails',
+        },
+      },
+      {
+        $unwind: '$meetingDetails',
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$instituteDetails.batchId', '$meetingDetails.batchId'],
+          },
+          'meetingDetails.date': {
+            $lt: currentDate,
+          },
+        },
+      },
+      {
+        $project: {
+          meeting: '$meetingDetails',
+        },
+      },
+    ]);
+
+    upcomingMeetings = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          eduAtlasId: req.user.eduAtlasId,
+          'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.active': true,
+        },
+      },
+      {
+        $lookup: {
+          from: 'ptms',
+          localField: 'instituteDetails.instituteId',
+          foreignField: 'instituteId',
+          as: 'meetingDetails',
+        },
+      },
+      {
+        $unwind: '$meetingDetails',
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$instituteDetails.batchId', '$meetingDetails.batchId'],
+          },
+          'meetingDetails.date': {
+            $gte: currentDate,
+          },
+        },
+      },
+      {
+        $project: {
+          meeting: '$meetingDetails',
+        },
+      },
+    ]);
+
+    res.status(200).send({
+      pastMeetings,
+      upcomingMeetings,
+    });
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
 
 exports.getStudentMentoringByInstitute = async (req, res) => {
   try {
-  } catch (error) {}
+    const date = new Date();
+    const currentDate =
+      date.getFullYear() +
+      '-' +
+      appendZero(date.getMonth() + 1) +
+      '-' +
+      appendZero(date.getDate()) +
+      'T00:00:00';
+    let pastMentorings = [],
+      upcomingMentorings = [];
+    pastMentorings = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          eduAtlasId: req.user.eduAtlasId,
+          'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.active': true,
+        },
+      },
+      {
+        $lookup: {
+          from: 'mentorings',
+          localField: 'instituteDetails.instituteId',
+          foreignField: 'instituteId',
+          as: 'mentoringDetails',
+        },
+      },
+      {
+        $unwind: '$mentoringDetails',
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$instituteDetails.batchId', '$mentoringDetails.batchId'],
+          },
+          'mentoringDetails.date': {
+            $lt: currentDate,
+          },
+        },
+      },
+      {
+        $project: {
+          mentoring: '$mentoringDetails',
+        },
+      },
+    ]);
+
+    upcomingMentorings = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          eduAtlasId: req.user.eduAtlasId,
+          'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.active': true,
+        },
+      },
+      {
+        $lookup: {
+          from: 'mentorings',
+          localField: 'instituteDetails.instituteId',
+          foreignField: 'instituteId',
+          as: 'mentoringDetails',
+        },
+      },
+      {
+        $unwind: '$mentoringDetails',
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$instituteDetails.batchId', '$mentoringDetails.batchId'],
+          },
+          'meetingDetails.date': {
+            $gte: currentDate,
+          },
+        },
+      },
+      {
+        $project: {
+          mentoring: '$mentoringDetails',
+        },
+      },
+    ]);
+
+    res.status(200).send({
+      pastMentorings,
+      upcomingMentorings,
+    });
+  } catch (error) {
+    errorHandler(error, res);
+  }
 };
