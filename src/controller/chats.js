@@ -10,7 +10,7 @@ const Chat = require('../model/chats.model');
 exports.getMembers = async (req, res) => {
   try {
     let data = [{}];
-    console.log('user ', req.user);
+    //console.log('user ', req.user);
     if (req.user.role == 'institute') {
       //req.user.role == 'institute'
       data = await Institute.aggregate([
@@ -193,7 +193,7 @@ exports.getMembers = async (req, res) => {
       //   },
       // ]);
     } else if (req.user.role == 'student') {
-      console.log('chat API:', req.user.eduAtlasId);
+      //console.log('chat API:', req.user.eduAtlasId);
       const institutes = await Student.aggregate([
         {
           $match: {
@@ -287,6 +287,11 @@ exports.getMembers = async (req, res) => {
         {
           $unwind: '$teachers',
         },
+        {
+          $project: {
+            'teachers.token': -1,
+          },
+        },
       ]);
       data[0].instituteDetails = institutes;
       data[0].teacherDetails = teachers;
@@ -343,7 +348,7 @@ exports.getChats = async (req, res) => {
       messages.push(...senderMessages[0].chats);
     }
 
-    console.log(messages);
+    //    console.log(messages);
 
     messages.sort((msg1, msg2) => {
       const msg1Date = msg1._id;

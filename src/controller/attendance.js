@@ -379,7 +379,7 @@ exports.getAttendanceForStudentByCourse = async (req, res) => {
       },
       {
         $lookup: {
-          from: 'schedule',
+          from: 'schedules',
           localField: 'scheduleId',
           foreignField: '_id',
           as: 'schedule',
