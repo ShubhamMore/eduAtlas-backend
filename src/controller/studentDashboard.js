@@ -24,12 +24,7 @@ exports.getStudentDashboard = async (req, res) => {
   try {
     const date = new Date();
     const currentDate =
-      date.getFullYear() +
-      '-' +
-      appendZero(date.getMonth() + 1) +
-      '-' +
-      appendZero(date.getDate()) +
-      'T00:00:00';
+      date.getFullYear() + '-' + appendZero(date.getMonth() + 1) + '-' + appendZero(date.getDate());
     console.log(currentDate);
 
     const announcements = await Student.aggregate([
@@ -324,12 +319,7 @@ exports.studentInstituteDashboard = async (req, res) => {
   try {
     const date = new Date();
     const currentDate =
-      date.getFullYear() +
-      '-' +
-      appendZero(date.getMonth() + 1) +
-      '-' +
-      appendZero(date.getDate()) +
-      'T00:00:00';
+      date.getFullYear() + '-' + appendZero(date.getMonth() + 1) + '-' + appendZero(date.getDate());
     console.log(currentDate);
 
     const tests = await Student.aggregate([
