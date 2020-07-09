@@ -95,28 +95,6 @@ exports.addAttendance = async (req, res) => {
 
 exports.getAttendanceByInstitute = async (req, res) => {
   try {
-    details = {};
-
-    if (!req.body.batchId && !req.body.courseId) {
-      details = {
-        instituteId: req.body.instituteId,
-      };
-    } else if (!req.body.batchId && req.body.courseId) {
-      details = {
-        instituteId: req.body.instituteId,
-        courseId: req.body.courseId,
-      };
-    } else if (req.body.batchId) {
-      details = {
-        instituteId: req.body.instituteId,
-        courseId: req.body.courseId,
-        batchId: req.body.batchId,
-      };
-    } else {
-      const error = new Error('No Institute available');
-      error.statusCode = 400;
-      throw error;
-    }
     console.log(req.body);
     const date = new Date();
     const currentDate =
@@ -130,6 +108,11 @@ exports.getAttendanceByInstitute = async (req, res) => {
     //yyyy-mm-ddT00:00:00
     const markedData = [];
     const marked = await Schedule.aggregate([
+      {
+        $match: {
+          instituteId: req.body.instituteId,
+        },
+      },
       {
         $unwind: '$days',
       },
@@ -205,6 +188,11 @@ exports.getAttendanceByInstitute = async (req, res) => {
 
     let unmarkedData = [];
     const unmarked = await Schedule.aggregate([
+      {
+        $match: {
+          instituteId: req.body.instituteId,
+        },
+      },
       {
         $unwind: '$days',
       },
