@@ -999,6 +999,7 @@ exports.getStudentTestScheduleByInstitute = async (req, res) => {
     errorHandler(error, res);
   }
 };
+
 exports.getStudentAllCoursesByInstitute = async (req, res) => {
   try {
     const studentCourses = await Student.aggregate([

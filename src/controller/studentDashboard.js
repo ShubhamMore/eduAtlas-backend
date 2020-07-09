@@ -25,7 +25,6 @@ exports.getStudentDashboard = async (req, res) => {
     const date = new Date();
     const currentDate =
       date.getFullYear() + '-' + appendZero(date.getMonth() + 1) + '-' + appendZero(date.getDate());
-    console.log(currentDate);
 
     const announcements = await Student.aggregate([
       {
@@ -322,6 +321,7 @@ exports.studentInstituteDashboard = async (req, res) => {
       date.getFullYear() + '-' + appendZero(date.getMonth() + 1) + '-' + appendZero(date.getDate());
     console.log(currentDate);
 
+    console.log(req.body);
     const tests = await Student.aggregate([
       {
         $unwind: '$institutDetails',
@@ -329,7 +329,7 @@ exports.studentInstituteDashboard = async (req, res) => {
       {
         $match: {
           eduAtlasId: req.user.eduAtlasId,
-          'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.instituteId': req.body.onlineClasses,
           'instituteDetails.active': true,
         },
       },
@@ -535,6 +535,8 @@ exports.studentInstituteDashboard = async (req, res) => {
         },
       },
     ]);
+
+    console.log(tests, announcements, schedule);
 
     res.status(200).send({
       tests,
