@@ -195,7 +195,7 @@ exports.getStudentDashboard = async (req, res) => {
             $eq: ['$batchId', '$schedule.batchId'],
           },
           'schedule.days.select': true,
-          'schedule.days.date': { $gte: '2020-07-10' },
+          'schedule.days.date': { $gte: '2020-07-09' },
         },
       },
       {
