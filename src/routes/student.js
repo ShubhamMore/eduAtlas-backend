@@ -80,4 +80,10 @@ studentRouter.post(
   checkAuth,
   studentDashboardController.getStudentDashboard
 );
+
+studentRouter.post(
+  '/studentInstituteDashboard',
+  checkAuth,
+  studentDashboardController.studentInstituteDashboard
+);
 module.exports = studentRouter;
