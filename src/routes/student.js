@@ -74,6 +74,19 @@ studentRouter.post(
   checkAuth,
   studentController.getStudentAllCoursesByInstitute
 );
+
+studentRouter.post(
+  '/getStudentPTMByInstitutes',
+  checkAuth,
+  studentController.getStudentPTMByInstitutes
+);
+
+studentRouter.post(
+  '/getStudentMentoringByInstitute',
+  checkAuth,
+  studentController.getStudentMentoringByInstitute
+);
+
 /**  --------------------- STUDENT DASHBOARD -------------------------- */
 studentRouter.post(
   '/getStudentDashboard',
@@ -86,4 +99,5 @@ studentRouter.post(
   checkAuth,
   studentDashboardController.studentInstituteDashboard
 );
+
 module.exports = studentRouter;
