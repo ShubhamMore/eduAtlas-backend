@@ -36,6 +36,11 @@ exports.getStudentDashboard = async (req, res) => {
         $unwind: '$instituteDetails',
       },
       {
+        $match: {
+          'instituteDetails.active': true,
+        },
+      },
+      {
         $addFields: {
           'instituteDetails.instituteId': {
             $toObjectId: '$instituteDetails.instituteId',
@@ -111,6 +116,11 @@ exports.getStudentDashboard = async (req, res) => {
       },
       {
         $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          'instituteDetails.active': true,
+        },
       },
       {
         $addFields: {
@@ -211,6 +221,11 @@ exports.getStudentDashboard = async (req, res) => {
       {
         $match: {
           eduAtlasId: req.user.eduAtlasId,
+        },
+      },
+      {
+        $match: {
+          'instituteDetails.active': true,
         },
       },
       {
