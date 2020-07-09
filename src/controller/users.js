@@ -207,6 +207,7 @@ exports.loginUser = async (req, res, next) => {
         email: user.email,
         phone: user.phone,
         role: user.role,
+        eduAtlasId: user.eduAtlasId,
         token,
         expiresIn: 36000,
       };
@@ -310,10 +311,12 @@ exports.loginUser = async (req, res, next) => {
 
 exports.logoutUser = async (req, res) => {
   try {
-    req.user.tokens = req.user.tokens.filter((token) => {
+    const user = await User.findOne({ email: req.user.email });
+
+    user.tokens = req.user.tokens.filter((token) => {
       return token.token !== req.token;
     });
-    await req.user.save();
+    await user.save();
 
     res.send({ success: true });
   } catch (e) {
@@ -373,7 +376,6 @@ exports.resetPassword = async (req, res, next) => {
 
 exports.changePassword = async (req, res) => {
   try {
-    console.log(req.body);
     const user = await User.findByCredentials(req.body.email, req.body.password);
     console.log(user);
     if (!user) {

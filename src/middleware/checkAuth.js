@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../model/user.model');
+const Student = require('../model/student.model');
+const Employee = require('../model/employee.model');
 
 const auth = async (req, res, next) => {
   try {
@@ -13,6 +15,19 @@ const auth = async (req, res, next) => {
     if (!user) {
       throw new Error();
     }
+
+    if (user.role == 'employee') {
+      const employee = await Employee.findOne({
+        eduAtlasId: user.eduAtlasId,
+      });
+      user._id = employee._id;
+    } else if (user.role == 'student') {
+      const student = await Student.findOne({
+        eduAtlasId: user.eduAtlasId,
+      });
+      user._id = student._id;
+    }
+
     req.token = token;
     req.user = user;
     next();

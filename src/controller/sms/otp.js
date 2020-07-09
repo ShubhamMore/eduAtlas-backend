@@ -189,6 +189,7 @@ exports.verifyUserOTP = async (req, res, next) => {
             email: user.email,
             phone: user.phone,
             role: user.role,
+            eduAtlasId: user.eduAtlasId,
             token,
             expiresIn: 36000,
           };
