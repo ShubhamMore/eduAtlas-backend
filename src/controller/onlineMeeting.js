@@ -180,6 +180,18 @@ exports.getMeetingByBatch = async (req, res) => {
   }
 };
 
+exports.notifyMeeting = async (req, res) => {
+  try {
+    const meeting = await OnlineClass.findById(req.body.id);
+    if (!meeting) {
+      throw new Error('Meeting Not Found');
+    }
+    res.status(200).send(meeting);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 exports.getOneMeeting = async (req, res) => {
   try {
     const meeting = await OnlineClass.findById(req.body.id);

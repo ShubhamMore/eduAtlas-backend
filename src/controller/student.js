@@ -823,6 +823,7 @@ exports.getStudentCoursesByInstitutes = async (req, res) => {
         $match: {
           _id: mongoose.Types.ObjectId(req.body._id),
           'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.active': true,
         },
       },
       {

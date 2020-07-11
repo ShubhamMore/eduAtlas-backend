@@ -11,7 +11,7 @@ const checkTokenAuth = async (req, res, next) => {
     let userId = '';
     if (req.user.role == 'institute') {
       userId = req.user._id;
-    } else if (req.user.role == 'employee') {
+    } else if (req.user.role == 'employee' || req.user.role == 'student') {
       const inst = await Institute.findOne({
         _id: req.body.instituteId,
       });

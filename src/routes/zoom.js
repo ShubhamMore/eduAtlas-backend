@@ -13,6 +13,7 @@ zoomRouter.post('/addCredentials', checkAuth, onlineMeetingController.addCredent
 zoomRouter.get('/getCredentials', checkAuth, onlineMeetingController.getCredentials);
 zoomRouter.post('/createMeeting', checkAuth, zoomCheckToken, onlineMeetingController.createMeeting);
 zoomRouter.post('/updateMeeting', checkAuth, zoomCheckToken, onlineMeetingController.updateMeeting);
+zoomRouter.post('/notifyMeeting', checkAuth, zoomCheckToken, onlineMeetingController.notifyMeeting);
 zoomRouter.post('/deleteMeeting', checkAuth, zoomCheckToken, onlineMeetingController.deleteMeeting);
 zoomRouter.post('/getAllMeetings', checkAuth, onlineMeetingController.getAllMeetings);
 zoomRouter.post(
