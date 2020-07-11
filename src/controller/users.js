@@ -33,7 +33,6 @@ exports.creatUser = async (req, res, next) => {
     const d = new Date();
 
     if (user.role === 'student') {
-      console.log(req.body);
       const studentId = eduatlasId[0].studentEduId.split('-');
       newEduAtlasId = 'EDU-' + d.getFullYear() + '-ST-' + (parseInt(studentId[3]) + 1);
       await EduAtlasId.updateOne(
@@ -45,7 +44,7 @@ exports.creatUser = async (req, res, next) => {
         }
       );
       let newStudent = {
-        eduatlasId: newEduAtlasId,
+        eduAtlasId: newEduAtlasId.split('-').join(''),
         basicDetails: {
           name: req.body.name,
           studentEmail: req.body.email,
@@ -211,17 +210,16 @@ exports.loginUser = async (req, res, next) => {
         token,
         expiresIn: 36000,
       };
-
       if (user.role == 'employee') {
         const employee = await Employee.findOne({
           eduAtlasId: user.eduAtlasId,
         });
         data._id = employee._id;
-        console.log('employee*******************************************');
       } else if (user.role == 'student') {
         const student = await Student.findOne({
           eduAtlasId: user.eduAtlasId,
         });
+
         data._id = student._id;
       }
 

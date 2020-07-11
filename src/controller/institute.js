@@ -89,6 +89,7 @@ exports.activateInstitute = async (req, res, next) => {
     console.log(currentPlan);
 
     const date = new Date();
+    const startDate = date;
     const year = date.getFullYear() + 1;
     date.setFullYear(year);
 
@@ -96,7 +97,7 @@ exports.activateInstitute = async (req, res, next) => {
     console.log(expiryDate);
 
     const paymentDetails = req.body.paymentDetails;
-    paymentDetails.activationDate = date;
+    paymentDetails.activationDate = startDate;
     paymentDetails.expiryDate = expiryDate;
 
     const inst = await Institute.updateOne(
@@ -107,6 +108,7 @@ exports.activateInstitute = async (req, res, next) => {
         active: true,
         $push: { paymentDetails: paymentDetails },
         currentPlan,
+        startDate,
         expiryDate,
       }
     );
