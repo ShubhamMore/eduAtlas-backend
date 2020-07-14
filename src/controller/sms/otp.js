@@ -62,18 +62,20 @@ exports.sendOtp = async (req, res, next) => {
 
 exports.sendOtpForRegisteredUser = async (req, res, next) => {
   try {
-    const phone = req.params.phone;
+    const email = req.params.email;
 
-    if (!phone) {
-      response(res, 400, 'Phone number not provided');
+    if (!email) {
+      response(res, 400, 'Email not provided');
       return;
     }
 
-    const user = await User.findOne({ phone });
+    const user = await User.findOne({ email });
 
     if (!user) {
-      throw new Error('User not found with ' + phone);
+      throw new Error('User not found with ' + email);
     }
+
+    const phone = user.phone;
 
     new OneTimePassword(phone, generateOTP(phone));
 
@@ -85,7 +87,7 @@ exports.sendOtpForRegisteredUser = async (req, res, next) => {
     const smsRes = 'send sms'; // remove later
     console.log('send');
 
-    res.status(200).send({ message: `${smsRes} to  ${phone}` }); //Change later
+    res.status(200).send({ message: `${smsRes} to  ${phone}`, phone }); //Change later
   } catch (error) {
     console.log(error);
     response(res, 500, 'Internal server error');
