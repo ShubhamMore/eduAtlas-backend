@@ -87,6 +87,12 @@ studentRouter.post(
   studentController.getStudentMentoringByInstitute
 );
 
+studentRouter.post(
+  '/getStudentTestScheduleByInstitute',
+  checkAuth,
+  studentController.getStudentTestScheduleByInstitute
+);
+
 /**  --------------------- STUDENT DASHBOARD -------------------------- */
 studentRouter.post(
   '/getStudentDashboard',
