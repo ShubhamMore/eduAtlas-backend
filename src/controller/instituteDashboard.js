@@ -103,6 +103,13 @@ exports.getDashboardInfo = async (req, res) => {
       },
     ]);
 
+    const pendingFees = await Fee.find({
+      instituteId: req.body.instituteId,
+      pendingAmount: {
+        $ne: '0',
+      },
+    });
+
     let fee = new Array();
 
     for (var i = 0; i < pendingFees.length; i++) {
@@ -180,6 +187,7 @@ exports.getDashboardInfo = async (req, res) => {
 
     res.status(200).send(data);
   } catch (error) {
+    console.log(error);
     errorHandler(error, res);
   }
 };
