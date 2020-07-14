@@ -187,7 +187,6 @@ exports.getDashboardInfo = async (req, res) => {
 
     res.status(200).send(data);
   } catch (error) {
-    console.log(error);
     errorHandler(error, res);
   }
 };
