@@ -949,6 +949,10 @@ exports.getStudentStudyMaterialsByInstitute = async (req, res) => {
 
 exports.getStudentTestScheduleByInstitute = async (req, res) => {
   try {
+    const date = new Date();
+    const currentDate =
+      date.getFullYear() + '-' + appendZero(date.getMonth() + 1) + '-' + appendZero(date.getDate());
+
     const test = await Student.aggregate([
       {
         $unwind: '$instituteDetails',
@@ -957,6 +961,7 @@ exports.getStudentTestScheduleByInstitute = async (req, res) => {
         $match: {
           eduAtlasId: req.user.eduAtlasId,
           'instituteDetails.instituteId': req.body.instituteId,
+          'instituteDetails.active': true,
         },
       },
       {
@@ -964,15 +969,53 @@ exports.getStudentTestScheduleByInstitute = async (req, res) => {
           from: 'tests',
           localField: 'instituteDetails.instituteId',
           foreignField: 'instituteId',
-          as: 'tests',
+          as: 'test',
         },
       },
-      { $unwind: '$tests' },
+      { $unwind: '$test' },
       {
         $match: {
           $expr: {
-            $eq: ['$tests.batchId', '$instituteDetails.batchId'],
+            $eq: ['$instituteDetails.batchId', '$test.batchId'],
           },
+        },
+      },
+      {
+        $addFields: {
+          'instituteDetails.instituteId': {
+            $toObjectId: '$instituteDetails.instituteId',
+          },
+          batchId: {
+            $toObjectId: '$instituteDetails.batchId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'instituteDetails.instituteId',
+          foreignField: '_id',
+          as: 'instituteCourse',
+        },
+      },
+      {
+        $unwind: '$instituteCourse',
+      },
+      { $unwind: '$instituteCourse.batch' },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$instituteCourse.batch._id', '$batchId'],
+          },
+          'test.date': {
+            $gte: currentDate,
+          },
+        },
+      },
+      {
+        $project: {
+          test: 1,
+          batchCode: '$instituteCourse.batch.batchCode',
         },
       },
     ]);

@@ -342,7 +342,7 @@ exports.studentInstituteDashboard = async (req, res) => {
       {
         $match: {
           eduAtlasId: req.user.eduAtlasId,
-          'instituteDetails.instituteId': req.body.onlineClasses,
+          'instituteDetails.instituteId': req.body.instituteId,
           'instituteDetails.active': true,
         },
       },
