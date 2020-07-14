@@ -30,7 +30,7 @@ exports.getDashboardInfo = async (req, res) => {
       { $unwind: '$days' },
       {
         $match: {
-          instituteId: '5f0301e228fc9205dc984d69',
+          instituteId: req.body.instituteId,
           'days.date': date,
         },
       },
