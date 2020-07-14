@@ -951,7 +951,7 @@ exports.getStudentTestScheduleByInstitute = async (req, res) => {
   try {
     const test = await Student.aggregate([
       {
-        $unwind: 'instituteDetails',
+        $unwind: '$instituteDetails',
       },
       {
         $match: {
