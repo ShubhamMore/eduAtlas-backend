@@ -955,7 +955,7 @@ exports.getStudentTestScheduleByInstitute = async (req, res) => {
       },
       {
         $match: {
-          _id: mongoose.Types.ObjectId(req.body._id),
+          eduAtlasId: req.user.eduAtlasId,
           'instituteDetails.instituteId': req.body.instituteId,
         },
       },
