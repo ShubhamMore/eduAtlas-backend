@@ -31,7 +31,6 @@ exports.getNotifications = async (req, res) => {
 
 exports.deleteNotification = async (req, res) => {
   try {
-    console.log();
     const deleteNotification = await Notification.findOneAndUpdate(
       { eduatlasId: req.user.eduAtlasId },
       { $pull: { notifications: { _id: mongoose.Types.ObjectId(req.body.notificationId) } } },
@@ -46,8 +45,6 @@ exports.deleteNotification = async (req, res) => {
 
 exports.seenNotification = async (req, res) => {
   try {
-    console.log(req.body);
-
     const notification = await Notification.updateOne(
       {
         eduatlasId: req.user.eduAtlasId,
@@ -55,8 +52,6 @@ exports.seenNotification = async (req, res) => {
       },
       { $set: { 'notifications.$.seen': true } }
     );
-
-    console.log(notification);
 
     res.status(200).send(notification);
   } catch (error) {

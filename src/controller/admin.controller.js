@@ -8,7 +8,6 @@ exports.getAllInstitutes = async (req, res) => {
 
     Promise.all([activeInstitutes, inactiveInstitutes])
       .then((data) => {
-        console.log(data);
         res.send({
           activeInstitutes: data[0],
           inactiveInstitutes: data[1],

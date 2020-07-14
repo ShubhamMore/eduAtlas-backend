@@ -27,13 +27,11 @@ exports.getDashboardInfo = async (req, res) => {
     const month = new Date().getMonth() + 1;
     const day = new Date().getDate();
     const date = new RegExp('.*' + year + '-' + appendZero(month) + '-' + appendZero(day) + '.*');
-    console.log(date);
+
     query.startTime = date;
 
-    console.log(query);
     // const sch = await Schedule.aggregate([{}]);
     data.upcomingClass = await OnlineClass.find(query);
-    console.log(data.upcomingClass);
 
     const pendingFees = await Fee.find({
       instituteId: req.body.instituteId,

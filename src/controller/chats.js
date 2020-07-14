@@ -10,7 +10,7 @@ const Chat = require('../model/chats.model');
 exports.getMembers = async (req, res) => {
   try {
     let data = [{}];
-    //console.log('user ', req.user);
+    //
     if (req.user.role == 'institute') {
       //req.user.role == 'institute'
       data = await Institute.aggregate([
@@ -55,7 +55,7 @@ exports.getMembers = async (req, res) => {
       ]);
     } else if (req.user.role == 'employee') {
       //req.user.role == 'employee'
-      //console.log(typeof req.user.eduAtlasId, ' ', req.user.eduAtlasId);
+      //
       data = await Employee.aggregate([
         {
           $unwind: '$instituteDetails',
@@ -93,7 +93,7 @@ exports.getMembers = async (req, res) => {
           },
         },
       ]);
-      //console.log(data);
+      //
       // data = data[0];
       let studentsDetails = [];
       let employeeDetails = [];
@@ -193,7 +193,7 @@ exports.getMembers = async (req, res) => {
       //   },
       // ]);
     } else if (req.user.role == 'student') {
-      //console.log('chat API:', req.user.eduAtlasId);
+      //
       const institutes = await Student.aggregate([
         {
           $match: {
@@ -297,7 +297,7 @@ exports.getMembers = async (req, res) => {
       data[0].teacherDetails = teachers;
     }
 
-    //    console.log('data ', data);
+    //
 
     res.status(200).send(data);
   } catch (error) {
@@ -348,7 +348,7 @@ exports.getChats = async (req, res) => {
       messages.push(...senderMessages[0].chats);
     }
 
-    //    console.log(messages);
+    //
 
     messages.sort((msg1, msg2) => {
       const msg1Date = msg1._id;

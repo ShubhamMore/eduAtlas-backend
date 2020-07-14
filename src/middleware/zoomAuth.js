@@ -15,7 +15,6 @@ const zoomAuth = async (req, res, next) => {
 
     res.send({ authLink });
   } catch (error) {
-    console.log(error);
     res.status(400).send(error);
   }
 };

@@ -33,7 +33,7 @@ exports.deleteOrder = async (req, res) => {
 exports.orderGenerate = async (req, res) => {
   try {
     const receiptData = req.body;
-    console.log(req.body);
+
     const plan = await Plan.findOne({ planType: req.body.planType });
     if (!plan) {
       throw new Error('Invalid Plan');
@@ -51,7 +51,6 @@ exports.orderGenerate = async (req, res) => {
 
     instance.orders.create(options, async (err, order) => {
       if (err) {
-        console.log(err);
         throw new Error(err);
       }
 
@@ -78,7 +77,6 @@ exports.orderGenerate = async (req, res) => {
       await receipt.save();
     });
   } catch (e) {
-    console.log(e);
     res.status(400).send(e);
   }
 };

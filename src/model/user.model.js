@@ -94,7 +94,6 @@ userSchema.methods.generateAuthToken = async function () {
     { _id: user._id.toString(), phone: user.phone.toString(), role: user.role.toString() },
     process.env.JWT_SECRET
   );
-  console.log(token);
 
   user.tokens = user.tokens.concat({ token });
   await user.save();
@@ -103,17 +102,8 @@ userSchema.methods.generateAuthToken = async function () {
 };
 
 userSchema.statics.findByCredentials = async (userId, password) => {
-  console.log(userId, password);
-
   const user = await User.findOne({
-    $or: [
-      {
-        phone: userId,
-      },
-      {
-        email: userId,
-      },
-    ],
+    email: userId,
   });
 
   if (!user) {

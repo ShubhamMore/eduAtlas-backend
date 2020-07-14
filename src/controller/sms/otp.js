@@ -10,7 +10,7 @@ const generateOTP = (ph) => {
   // for (let i = 0; i < 4; i++) {
   //   OTP += digits[Math.floor(Math.random() * 10)];
   // }
-  console.log(OTP);
+
   setTimeout(() => {
     OneTimePassword.deleteOTP(ph);
   }, 60000);
@@ -42,7 +42,7 @@ exports.sendOtp = async (req, res, next) => {
     // const token = await user.generateAuthToken();
 
     // const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
-    // console.log(url);
+    //
     const smsRes = 'send sms'; // remove later
     // const mail = {
     //   to: req.params.email,
@@ -51,11 +51,9 @@ exports.sendOtp = async (req, res, next) => {
     //   html: `<a href= '${url}'> ${url} </a>`,
     // };
 
-    console.log('send');
     //await send(mail);
     res.status(200).send({ message: `${smsRes} to  ${phone}` }); //Change later
   } catch (error) {
-    console.log(error);
     response(res, 500, 'Internal server error');
   }
 };
@@ -85,11 +83,9 @@ exports.sendOtpForRegisteredUser = async (req, res, next) => {
     // );
 
     const smsRes = 'send sms'; // remove later
-    console.log('send');
 
     res.status(200).send({ message: `${smsRes} to  ${phone}`, phone }); //Change later
   } catch (error) {
-    console.log(error);
     response(res, 500, 'Internal server error');
   }
 };
@@ -98,12 +94,11 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
   try {
     const id = req.body.eduAtlasId;
 
-    console.log(req.body);
     if (!id) {
       response(res, 400, 'EduAtlas Id or Email Not Provided');
       return;
     }
-    console.log(req.body);
+
     const user = await User.findOne({
       $or: [
         {
@@ -119,7 +114,6 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
     if (!user) {
       throw new Error('User not found with for ID ' + id);
     }
-    console.log(user);
 
     new OneTimePassword(user.phone, generateOTP(user.phone));
     const otp = OneTimePassword.getOTP(user.phone);
@@ -141,11 +135,9 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
 
     //const smsRes = 'send sms'; // remove later
     const smsRes = 'send sms';
-    console.log('send');
 
     res.status(200).send({ message: `${smsRes} to  ${user.phone}`, phone: user.phone }); //Change later
   } catch (error) {
-    console.log(error);
     response(res, 500, 'Internal server error');
   }
 };
@@ -155,7 +147,7 @@ exports.verifyUserOTP = async (req, res, next) => {
     const phone = req.body.phone;
     const clientOTP = req.body.otp;
     const verifyType = req.body.verifyType;
-    console.log(req.body);
+
     if (!clientOTP || !verifyType || !phone) {
       throw new Error('Insufficient or Wrong parameters provided');
     }
@@ -206,7 +198,6 @@ exports.verifyUserOTP = async (req, res, next) => {
       throw new Error('Unknown OTP error');
     }
   } catch (error) {
-    console.log(error);
     errorHandler(error, res);
   }
 };

@@ -18,7 +18,6 @@ exports.creatUser = async (req, res, next) => {
   try {
     const { error, value } = schema('signup').validate(req.body, { abortEarly: true });
     if (error) {
-      console.log(error);
       res.status(400).json({
         message: 'Insufficient parameters provided',
       });
@@ -51,7 +50,7 @@ exports.creatUser = async (req, res, next) => {
           studentContact: req.body.phone,
         },
       };
-      // console.log(newStudent);
+      //
       const addStudent = new Student(newStudent);
       await addStudent.save();
     } else if (user.role === 'institute') {
@@ -213,7 +212,6 @@ exports.creatUser = async (req, res, next) => {
     response(res, 200, 'Verify OTP now');
     send(mail);
   } catch (error) {
-    console.log(error);
     errorHandler(error, res);
   }
 };
@@ -283,8 +281,6 @@ exports.loginUser = async (req, res, next) => {
         data._id = student._id;
       }
 
-      console.log(data);
-
       res.status(200).send(data);
     } else {
       res.status(200).send({
@@ -295,7 +291,6 @@ exports.loginUser = async (req, res, next) => {
       });
     }
     if (user.verifyEmail === '0') {
-      console.log('x');
       const token = await user.generateAuthToken();
       const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
 
@@ -422,7 +417,6 @@ exports.loginUser = async (req, res, next) => {
       send(mail);
     }
   } catch (e) {
-    console.log(e);
     let err = '' + e;
     res.status(400).send(err.replace('Error: ', ''));
   }
@@ -439,7 +433,6 @@ exports.logoutUser = async (req, res) => {
 
     res.send({ success: true });
   } catch (e) {
-    console.log(e);
     let err = '' + e;
     res.status(400).send(err.replace('Error: ', ''));
   }
@@ -468,7 +461,6 @@ exports.findUser = async (req, res) => {
       res.status(200).send({ success: true });
     }
   } catch (error) {
-    console.log(error.message);
     res.status(400).send({ message: error.message });
   }
 };
@@ -497,7 +489,7 @@ exports.resetPassword = async (req, res, next) => {
 exports.changePassword = async (req, res) => {
   try {
     const user = await User.findByCredentials(req.body.email, req.body.password);
-    console.log(user);
+
     if (!user) {
       throw new Error('Old Password Does not Match, Please Try Again');
     }

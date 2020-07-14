@@ -10,7 +10,7 @@
 //     const { error, value } = schema('assignRole').validate(req.body);
 
 //     if (error) {
-//       console.log(error);
+//
 //       const err = new Error('Insufficient or wrong parameters provided');
 //       err.statusCode = 400;
 //       throw err;

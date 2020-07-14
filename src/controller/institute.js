@@ -11,12 +11,10 @@ const mongoose = require('mongoose');
 const deleteImage = (filePath) => {
   fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
     if (error) {
-      console.log(error);
       const err = new Error('Error while deleting the image');
       err.statusCode = 500;
       throw err;
     }
-    console.log('File Deleted successfully');
   });
 };
 
@@ -72,7 +70,6 @@ exports.addInstitute = async (req, res, next) => {
     await institute.save();
     res.status(200).send({ instituteId: institute._id });
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -86,7 +83,6 @@ exports.activateInstitute = async (req, res, next) => {
     }
 
     const currentPlan = req.body.paymentDetails.planType;
-    console.log(currentPlan);
 
     const date = new Date();
     const startDate = date;
@@ -94,7 +90,6 @@ exports.activateInstitute = async (req, res, next) => {
     date.setFullYear(year);
 
     const expiryDate = date;
-    console.log(expiryDate);
 
     const paymentDetails = req.body.paymentDetails;
     paymentDetails.activationDate = startDate;
@@ -114,7 +109,6 @@ exports.activateInstitute = async (req, res, next) => {
     );
     res.status(200).send(inst);
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -131,7 +125,6 @@ exports.deactivateInstitute = async (req, res, next) => {
 
     res.status(200).send(inst);
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -148,7 +141,6 @@ exports.deleteInstitute = async (req, res, next) => {
     }
     response(res, 202, 'Institute deleted successfully');
   } catch (error) {
-    console.log(error);
     response(res, 500, 'Internal Server Error while performing Deletion');
   }
 };
@@ -162,7 +154,6 @@ exports.getOneInstitute = async (req, res, next) => {
     const institute = await Institute.findById(req.params.id);
     res.status(200).json({ institute });
   } catch (error) {
-    console.log(error);
     response(res, 500, 'Internal server error while getting institute');
   }
 };
@@ -173,7 +164,6 @@ exports.getAllInstitutes = async (req, res, next) => {
 
     res.status(200).send(institutes);
   } catch (error) {
-    console.log(error);
     response(res, 500, error.message);
   }
 };
@@ -241,7 +231,6 @@ exports.updateInstitute = async (req, res, next) => {
 
     res.status(201).json({ updatedInstitute });
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };

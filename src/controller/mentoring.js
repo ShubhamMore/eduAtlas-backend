@@ -71,10 +71,9 @@ exports.getMentoringOfStudentByInstitute = async (req, res) => {
 
       studentMonitoring.push(mentoring);
     }
-    console.log(studentMonitoring);
+
     res.status(200).send(studentMonitoring);
   } catch (error) {
-    console.log(error);
     errorHandler(error, res);
   }
 };
@@ -87,7 +86,7 @@ exports.updateMentoring = async (req, res) => {
       },
       req.body
     );
-    console.log(req.body);
+
     res.status(200).send(updateMentoring);
   } catch (error) {
     res.status(400).send(error);

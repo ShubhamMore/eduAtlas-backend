@@ -69,8 +69,6 @@ exports.getSingleLeadToView = async (req, res) => {
       _id: req.body._id,
     });
 
-    console.log(lead);
-
     if (!lead) {
       throw new Error('Lead Not Found');
     }

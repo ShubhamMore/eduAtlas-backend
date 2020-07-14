@@ -29,7 +29,7 @@ const chatting = async (server) => {
     })
     .on('connection', (socket) => {
       new ChatSockets(socket.user.eduAtlasId, socket);
-      console.log(socket.user.eduAtlasId);
+
       socket.on('message', async (message) => {
         const chatMessage = {
           senderId: socket.user.eduAtlasId,

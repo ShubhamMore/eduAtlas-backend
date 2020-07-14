@@ -5,12 +5,10 @@ const path = require('path');
 const deleteFile = (filePath) => {
   fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
     if (error) {
-      console.log(error);
       const err = new Error('Error while deleting the image');
       err.statusCode = 500;
       throw err;
     }
-    console.log('File Deleted successfully');
   });
 };
 
@@ -53,7 +51,6 @@ exports.addStudyMaterial = async (req, res) => {
     await studyMaterial.save();
     res.status(201).json(studyMaterial);
   } catch (error) {
-    console.log(error);
     errorHandler(error, res);
   }
 };
@@ -72,7 +69,7 @@ exports.editStudyMaterial = async (req, res) => {
           req.file.filename.lastIndexOf('-')
         )}.${req.file.filename.substring(req.file.filename.lastIndexOf('.') + 1)}`,
       };
-      console.log('11');
+
       if (materialFile.public_id && oldStudyMaterial.category !== 'LEARNING VIDEO') {
         deleteFile(materialFile.public_id);
       }
@@ -111,7 +108,6 @@ exports.editStudyMaterial = async (req, res) => {
 
     res.status(201).json(updatedInstitute);
   } catch (error) {
-    console.log(error);
     errorHandler(error, res);
   }
 };
@@ -123,8 +119,6 @@ exports.getStudyMaterial = async (req, res, next) => {
     if (req.body.courseId) {
       query.courseId = { $in: [req.body.courseId] };
     }
-
-    console.log(query);
 
     const studyMaterials = await StudyMaterial.find(query);
 
@@ -141,8 +135,6 @@ exports.getStudyMaterialForStudent = async (req, res, next) => {
     if (req.body.batch) {
       query.batches = { $in: [req.body.batch] };
     }
-
-    console.log(query);
 
     const studyMaterials = await StudyMaterial.find(query);
 
@@ -169,7 +161,6 @@ exports.deleteStudyMaterial = async (req, res, next) => {
   try {
     const material = await StudyMaterial.findByIdAndDelete(req.body._id);
     if (material.category !== 'LEARNING VIDEO') {
-      console.log('cc');
       deleteFile(material.file.public_url);
     }
     res.status(200).json({ message: 'Deleted successfully' });

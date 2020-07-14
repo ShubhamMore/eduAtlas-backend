@@ -21,8 +21,8 @@ const appendZero = (n) => {
 
 exports.addStudent = async (req, res, next) => {
   try {
-    //    console.log('****************************body***********************************');
-    console.log(req.body);
+    //
+
     if (req.body.instituteDetails.batchId) {
       const checkRoll = await Student.findOne({
         $and: [
@@ -40,8 +40,8 @@ exports.addStudent = async (req, res, next) => {
           },
         ],
       });
-      //  console.log('****************************checkRoll***********************************');
-      console.log(checkRoll);
+      //
+
       if (checkRoll) {
         const error = new Error('Roll Number is already used');
         error.statusCode = 202;
@@ -59,23 +59,19 @@ exports.addStudent = async (req, res, next) => {
         },
       ],
     });
-    //    console.log('****************************user***********************************');
-
-    console.log(user);
+    //
 
     if (user.length != 0) {
-      console.log('length ', user.length);
       const error = new Error('User Already Exists');
       //error.prototype.statusCode = 400;
       throw error;
     }
     //EDU-2020-ST-000000
     const eduatlasId = await EduAtlasId.find({});
-    //   console.log("ID", eduatlasId[0])
+    //
     var studentId = eduatlasId[0].studentEduId.split('-');
     var d = new Date();
     var newEduAtlasId = 'EDU-' + d.getFullYear() + '-ST-' + (parseInt(studentId[3]) + 1);
-    console.log(newEduAtlasId);
 
     const newUser = {
       name: req.body.basicDetails.name,
@@ -87,7 +83,6 @@ exports.addStudent = async (req, res, next) => {
     };
     const addUser = new User(newUser);
     await addUser.save();
-    console.log('ID', eduatlasId[0]._id);
 
     const newStudent = {
       basicDetails: req.body.basicDetails,
@@ -132,9 +127,7 @@ exports.addStudent = async (req, res, next) => {
         },
       },
     ]);
-    console.log('****************************PARENT INSTITUTE***********************************');
 
-    console.log(instituteDetails);
     // Send Mail Code Here
     let mail = {
       from: 'admin@eduatlas.in',
@@ -169,9 +162,9 @@ exports.addStudent = async (req, res, next) => {
     };
 
     const addStudent = new Student(newStudent);
-    console.log(addStudent);
+
     await addStudent.save();
-    console.log();
+
     await EduAtlasId.updateOne(
       { _id: eduatlasId[0]._id },
       {
@@ -233,7 +226,7 @@ exports.getActiveStudents = async (req, res) => {
     //   }
     // ]
     //   })
-    console.log(students);
+
     res.status(200).send(students);
   } catch (error) {
     errorHandler(error, res);
@@ -265,7 +258,7 @@ exports.getPendingStudents = async (req, res) => {
       },
       match,
     ]);
-    console.log(students);
+
     res.status(200).send(students);
   } catch (error) {
     errorHandler(error, res);
@@ -285,7 +278,6 @@ exports.getAllStudents = async (req, res, next) => {
 
     res.status(200).json(students);
   } catch (error) {
-    console.log(error);
     const statusCode = error.prototype.statusCode || 500;
     response(res, statusCode, error.message);
   }
@@ -293,7 +285,6 @@ exports.getAllStudents = async (req, res, next) => {
 
 exports.getOneStudentByInstitute = async (req, res) => {
   try {
-    console.log(req.body);
     const student = await Student.aggregate([
       {
         $match: {
@@ -326,7 +317,6 @@ exports.getOneStudentByInstitute = async (req, res) => {
 };
 
 exports.getOneStudent = async (req, res, next) => {
-  console.log(req.body);
   try {
     if (!req.body.eduatlasId) {
       const error = new Error('Student Eduatlas ID not provided');
@@ -363,7 +353,6 @@ exports.getOneStudent = async (req, res, next) => {
 exports.addCourseStudent = async (req, res, next) => {
   //To add student in a course
   try {
-    console.log(req.body.instituteDetails.instituteId);
     const courseAvailable = await Student.find({
       $and: [
         {
@@ -379,7 +368,6 @@ exports.addCourseStudent = async (req, res, next) => {
     });
 
     if (courseAvailable.length != 0) {
-      console.log('length ', courseAvailable.length);
       const error = new Error('Student Already enrolled to this Course');
       error.statusCode = 400;
       throw error;
@@ -410,7 +398,7 @@ exports.addCourseStudent = async (req, res, next) => {
     }
 
     //const studentInfo = req.body;
-    //console.log(req.body, req.body.eduAtlasId);
+    //
     const updatedStudent = await Student.update(
       {
         eduAtlasId: req.body.eduAtlasId,
@@ -462,7 +450,6 @@ exports.addCourseStudent = async (req, res, next) => {
       { _id: 1, basicDetails: 1 }
     );
 
-    console.log(student);
     res.status(200).json(student);
 
     let mail = {
@@ -499,14 +486,12 @@ exports.addCourseStudent = async (req, res, next) => {
 
     send(mail);
   } catch (error) {
-    console.log(error);
     errorHandler(error, res);
   }
 };
 
 exports.updateStudentPersonalDetails = async (req, res) => {
   try {
-    console.log(req.body);
     const updateStudent = await Student.updateOne(
       {
         _id: req.body._id,
@@ -551,8 +536,7 @@ exports.updateStudentCourse = async (req, res) => {
           },
         ],
       });
-      console.log('****************************checkRoll***********************************');
-      console.log(checkRoll);
+
       if (checkRoll) {
         const error = new Error('Roll Number is already used');
         error.statusCode = 400;
@@ -626,13 +610,13 @@ exports.deleteStudentCourse = async (req, res) => {
 exports.deleteStudent = async (req, res, next) => {
   try {
     const studentInfo = req.query;
-    console.log('StudentInfo', studentInfo);
+
     if (!studentInfo.instituteId || !studentInfo.studentEmail) {
       const error = new Error('Student info not provided');
       error.statusCode = 400;
       throw error;
     }
-    console.log('StudentInfo', studentInfo);
+
     await Student.findOneAndDelete({
       instituteId: studentInfo.instituteId,
       'basicDetails.studentEmail': studentInfo.studentEmail,
@@ -671,7 +655,6 @@ exports.getStudentsByBatch = async (req, res) => {
 
 exports.getStudentsByInstitute = async (req, res) => {
   try {
-    console.log(req.body);
     const students = await Student.find({
       'instituteDetails.instituteId': req.body.instituteId,
     });
@@ -753,7 +736,6 @@ exports.getCoursesOfStudentByInstitute = async (req, res) => {
       // },
     ]);
 
-    console.log(student);
     res.status(200).send(student);
   } catch (error) {
     errorHandler(error, res);
@@ -915,7 +897,6 @@ exports.getStudentSchedule = async (req, res) => {
       '-' +
       appendZero(date.getDate()) +
       'T00:00:00';
-    console.log(currentDate);
 
     const studentSchedule = await Student.aggregate([
       {

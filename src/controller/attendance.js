@@ -19,21 +19,17 @@ const appendZero = (n) => {
 
 const deleteFile = (filePath) => {
   fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
-    console.log('deleteFile');
     if (error) {
-      console.log(error);
       const err = new Error('Error while deleting the File');
       err.statusCode = 500;
       throw err;
     }
-    console.log('File Deleted successfully');
   });
 };
 
 const mongoose = require('mongoose');
 exports.addAttendance = async (req, res) => {
   try {
-    console.log(req.body);
     const check = await Institute.find({
       $and: [
         {
@@ -95,7 +91,6 @@ exports.addAttendance = async (req, res) => {
 
 exports.getAttendanceByInstitute = async (req, res) => {
   try {
-    console.log(req.body);
     const date = new Date();
     const currentDate =
       date.getFullYear() +
@@ -104,7 +99,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
       '-' +
       appendZero(date.getDate()) +
       'T00:00:00';
-    console.log(currentDate);
+
     //yyyy-mm-ddT00:00:00
     const markedData = [];
     const marked = await Schedule.aggregate([
@@ -144,7 +139,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
         },
       },
     ]);
-    console.log(marked.length);
+
     const mlength = marked.length;
     for (var i = 0; i < mlength; i++) {
       const course = await Institute.aggregate([
@@ -164,18 +159,18 @@ exports.getAttendanceByInstitute = async (req, res) => {
           },
         },
       ]);
-      //console.log('course: ', course);
+      //
       let data = {};
       data = marked[i];
-      //console.log(data);
-      // console.log(course[0].course.name);
+      //
+      //
 
       data.days.courseName = course[0].course.name;
       data.days.batchName = course[0].batch.batchCode;
-      // console.log(data.days.courseName);
-      // console.log(data.days.batchName);
+      //
+      //
 
-      //console.log(marked[i].days.teacher);
+      //
       const teacher = await Employee.findOne({
         _id: marked[i].days.teacher,
       });
@@ -224,7 +219,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
         },
       },
     ]);
-    //console.log(unmarked);
+    //
     const ulength = unmarked.length;
     for (var i = 0; i < ulength; i++) {
       const course = await Institute.aggregate([
@@ -244,8 +239,8 @@ exports.getAttendanceByInstitute = async (req, res) => {
           },
         },
       ]);
-      // console.log('**********************');
-      // console.log(course[0].course.name);
+      //
+      //
       let data = {};
       data = unmarked[i];
       data.days.courseName = course[0].course.name;
@@ -261,7 +256,7 @@ exports.getAttendanceByInstitute = async (req, res) => {
       unmarkedData.push(data);
     }
 
-    //console.log({ markedData, unmarkedData });
+    //
 
     res.status(200).send({ markedData, unmarkedData });
   } catch (error) {
@@ -310,7 +305,7 @@ exports.getAttendanceByDate = async (req, res) => {
           studentName: curStudent.basicDetails.name,
           studentRollNo: curStudent.instituteDetails.rollNumber,
         };
-        console.log(student);
+
         studentsArray.push(student);
       });
     } else {
@@ -395,7 +390,6 @@ exports.getAttendanceForStudentByCourse = async (req, res) => {
       },
     ]);
 
-    console.log(student);
     res.status(200).send(student);
   } catch (error) {
     errorHandler(error, res);
@@ -404,8 +398,6 @@ exports.getAttendanceForStudentByCourse = async (req, res) => {
 
 exports.attendanceByFile = async (req, res) => {
   try {
-    console.log(req.body);
-    console.log('in here', path.join(__dirname + '../../../' + req.file.path));
     const file = path.join(__dirname + '../../../' + req.file.path);
 
     const excelData = excelToJson({
@@ -427,7 +419,7 @@ exports.attendanceByFile = async (req, res) => {
         },
       ],
     });
-    console.log(excelData);
+
     const s = excelData.Sheet1.length;
     let attendance = [];
     for (var i = 0; i < s; i++) {
@@ -506,7 +498,6 @@ exports.attendanceByFile = async (req, res) => {
 
     res.status(200).send(addAtt);
   } catch (error) {
-    console.log(error);
     errorHandler(error, res);
   }
 };

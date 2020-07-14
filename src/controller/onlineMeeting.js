@@ -24,7 +24,6 @@ exports.addCredentials = async (req, res) => {
 
     res.status(200).send(req.body);
   } catch (error) {
-    console.log(error);
     res.status(400).send(error);
   }
 };
@@ -36,7 +35,6 @@ exports.getCredentials = async (req, res) => {
     });
     res.status(200).send(credentials);
   } catch (error) {
-    console.log(error);
     res.status(400).send(error);
   }
 };
@@ -46,7 +44,7 @@ exports.createMeeting = async (req, res) => {
     const teacher = await Employee.findOne({
       _id: req.body.teacherId,
     });
-    console.log(req.body);
+
     //"start_time": "2020-06-02T12:02:00Z"
     let createMeeting = {
       topic: req.body.topic,
@@ -112,9 +110,7 @@ exports.createMeeting = async (req, res) => {
     await newOnlineClass.save();
 
     res.status(200).send(newOnlineClass);
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 exports.getMeetingsFromZoom = async (req, res) => {
@@ -139,14 +135,13 @@ exports.getMeetingsFromZoom = async (req, res) => {
         batchId: req.body.batchId,
         meetingId: listMeetings.meetings[i].id,
       });
-      console.log(listMeetings.meetings[i].id);
+
       if (meetings) {
         getMeetings.push(meetings);
       }
     }
     res.status(200).send(getMeetings);
   } catch (error) {
-    console.log(error);
     res.status(400).send(error);
   }
 };
@@ -240,8 +235,7 @@ exports.updateMeeting = async (req, res) => {
       },
     };
 
-    console.log(req.body);
-    // console.log(req.body.meetingId);
+    //
 
     // let tempOptions = {
     //     method: 'GET',
@@ -253,7 +247,7 @@ exports.updateMeeting = async (req, res) => {
     // }
 
     // let getMeeting = await rp(tempOptions)
-    //console.log("meeting :",getMeeting)
+    //
     let options = {
       method: 'PATCH',
       url: 'https://api.zoom.us/v2/meetings/' + req.body.meetingId,
@@ -264,10 +258,8 @@ exports.updateMeeting = async (req, res) => {
       body: updateMeeting,
       json: true,
     };
-    // console.log(req.zoom.access_token);
+    //
     let meetingDetails = await rp(options);
-
-    console.log(meetingDetails);
 
     // let newMeeting = {
     //   topic: req.body.topic,
@@ -305,7 +297,6 @@ exports.updateMeeting = async (req, res) => {
     );
     res.status(200).send(updatedMeeting);
   } catch (error) {
-    console.log(error);
     res.status(400).send(error);
   }
 };
@@ -315,7 +306,7 @@ exports.deleteMeeting = async (req, res) => {
     const meeting = await OnlineClass.findOne({
       _id: req.body._id,
     });
-    console.log('meeting found', meeting);
+
     if (!meeting) {
       throw new Error('No Meeting Found');
     }
@@ -329,7 +320,6 @@ exports.deleteMeeting = async (req, res) => {
       },
     };
     const info = await rp(options);
-    console.log(info);
 
     const deletedMeeting = await OnlineClass.deleteOne({
       _id: req.body._id,

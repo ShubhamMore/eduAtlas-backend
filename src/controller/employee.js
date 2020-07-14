@@ -9,7 +9,6 @@ const send = require('../service/mail');
 
 exports.addEmployee = async (req, res) => {
   try {
-    console.log(req.body);
     const user = await User.find({
       $or: [
         {
@@ -20,21 +19,18 @@ exports.addEmployee = async (req, res) => {
         },
       ],
     });
-    console.log(user);
 
     if (user.length != 0) {
-      console.log('length ', user.length);
       const error = new Error('User Already Exists');
       //error.prototype.statusCode = 400;
       throw error;
     }
     //EDU-2020-ST-000000
     const eduatlasId = await EduAtlasId.find({});
-    //   console.log("ID", eduatlasId[0])
+    //
     var studentId = eduatlasId[0].empEduId.split('-');
     var d = new Date();
     var newEduAtlasId = 'EDU-' + d.getFullYear() + '-EMP-' + (parseInt(studentId[3]) + 1);
-    console.log(newEduAtlasId);
 
     const newUser = {
       name: req.body.basicDetails.name,
@@ -59,20 +55,16 @@ exports.addEmployee = async (req, res) => {
     //   html: `<a href= '${url}'> ${url} </a>`,
     // };
 
-    console.log('ID', eduatlasId[0]._id);
-
     const newEmployee = {
       basicDetails: req.body.basicDetails,
       instituteDetails: req.body.instituteDetails,
       eduAtlasId: newEduAtlasId.split('-').join(''),
     };
-    console.log(newEmployee);
 
     const addEmployee = new Employee(newEmployee);
-    console.log(addEmployee);
+
     await addEmployee.save();
 
-    console.log();
     await EduAtlasId.updateOne(
       { _id: eduatlasId[0]._id },
       {
@@ -156,14 +148,12 @@ exports.addEmployee = async (req, res) => {
     res.status(200).send(addUser);
     await send(mail);
   } catch (error) {
-    console.log(error);
     response(res, 500, error.message);
   }
 };
 
 exports.addEmployeeInstitute = async (req, res) => {
   try {
-    console.log(req.body);
     const check = await Employee.find({
       $and: [
         {
@@ -181,8 +171,6 @@ exports.addEmployeeInstitute = async (req, res) => {
       throw error;
     }
 
-    console.log(req.body);
-
     const updateEmployee = await Employee.update(
       {
         eduAtlasId: req.body.eduAtlasId,
@@ -194,7 +182,6 @@ exports.addEmployeeInstitute = async (req, res) => {
       }
     );
 
-    console.log(updateEmployee);
     const instituteDetails = await Institute.aggregate([
       {
         $match: {
@@ -232,7 +219,7 @@ exports.addEmployeeInstitute = async (req, res) => {
     const empDetails = await Employee.findOne({
       eduAtlasId: req.body.eduAtlasId,
     });
-    console.log(empDetails);
+
     // Send Mail Here
     // Send Mail Code Here
     let mail = {
@@ -302,8 +289,6 @@ exports.getEmployeeInstitutes = async (req, res) => {
       }
     });
 
-    console.log(instituteArray);
-
     res.status(200).send(instituteArray);
   } catch (error) {
     errorHandler(error, res);
@@ -312,7 +297,6 @@ exports.getEmployeeInstitutes = async (req, res) => {
 
 exports.getEmployeeByEduatlasId = async (req, res) => {
   try {
-    console.log(req.body);
     const getEmployee = await Employee.findOne(
       {
         $or: [
@@ -329,8 +313,6 @@ exports.getEmployeeByEduatlasId = async (req, res) => {
         eduAtlasId: 1,
       }
     );
-
-    console.log(getEmployee);
 
     if (!getEmployee) {
       throw new Error('Wrong Employee Id');
@@ -357,7 +339,6 @@ exports.getOneEmployeeByInstitute = async (req, res) => {
     ]);
 
     if (getEmployee.length == 0) {
-      console.log('length ', getEmployee.length);
       const error = new Error('Employee Not Found');
       error.statusCode = 400;
       throw error;
@@ -397,8 +378,6 @@ exports.getEmployeesByInstituteId = async (req, res) => {
         },
       },
     ]);
-
-    console.log(getEmployees);
 
     res.status(200).send(getEmployees);
   } catch (error) {
@@ -463,8 +442,6 @@ exports.updateEmployeePersonalDetails = async (req, res) => {
         basicDetails: req.body.basicDetails,
       }
     );
-
-    console.log(updateEmployee);
   } catch (error) {
     errorHandler(error, res);
   }

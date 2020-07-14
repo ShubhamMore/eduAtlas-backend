@@ -24,10 +24,9 @@ const checkTokenAuth = async (req, res, next) => {
     });
 
     const currentTimeStamp = new Date().getTime() / 1000;
-    console.log(currentTimeStamp > user.expires_in);
 
     if (currentTimeStamp > user.expires_in) {
-      //console.log("refresh ",user.refresh_token,typeof(user.refresh_token))
+      //
       var options = {
         method: 'POST',
         url: 'https://zoom.us/oauth/token',
@@ -44,10 +43,8 @@ const checkTokenAuth = async (req, res, next) => {
       };
 
       let body = await rp(options);
-      //console.log(body)
+      //
       body = JSON.parse(body);
-
-      console.log('json', body);
 
       const currentTime = new Date().getTime() / 1000;
 
@@ -74,7 +71,6 @@ const checkTokenAuth = async (req, res, next) => {
     req.zoom = user;
     next();
   } catch (error) {
-    console.log(error);
     res.status(400).send(error);
   }
 };

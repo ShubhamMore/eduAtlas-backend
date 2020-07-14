@@ -10,7 +10,6 @@ exports.addCourse = async (req, res, next) => {
 
     if (!branchId || error) {
       if (error) {
-        console.log(error);
       }
       const err =
         error != undefined
@@ -23,8 +22,6 @@ exports.addCourse = async (req, res, next) => {
     const courses = await Institute.findById(branchId, { course: 1, _id: 0 });
 
     let alredyExist = false;
-
-    console.log(courses);
 
     courses.course.forEach((course) => {
       if (course.name === req.body.name) {
@@ -44,15 +41,12 @@ exports.addCourse = async (req, res, next) => {
       { $push: { course: req.body } }
     );
 
-    console.log('=======>', updatedInstitute);
-
     if (updatedInstitute.nModified > 0) {
       return res.status(200).json({ message: 'Course added successfully' });
     }
 
     response(res, 409, 'Course code already exists');
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -79,7 +73,6 @@ exports.deleteCourse = async (req, res, next) => {
       }
     );
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -101,7 +94,6 @@ exports.updateCourse = async (req, res, next) => {
 
     res.status(200).json('Updated successfully');
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -122,7 +114,6 @@ exports.getCourse = async (req, res, next) => {
 
     res.status(200).json(course);
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -130,7 +121,7 @@ exports.getCourse = async (req, res, next) => {
 exports.getCourses = async (req, res, next) => {
   try {
     const branchId = req.params.branchId;
-    console.log('br ', branchId);
+
     if (!branchId) {
       const error = new Error('Branch Id not provided');
       error.statusCode = 400;
@@ -141,7 +132,6 @@ exports.getCourses = async (req, res, next) => {
 
     res.status(200).json(courses);
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -173,14 +163,11 @@ exports.addBatch = async (req, res, next) => {
     }
     response(res, 409, 'Batch code already exists');
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
 
 exports.updateBatch = async (req, res, next) => {
-  console.log('params ', req.params);
-  console.log('body ', req.body);
   try {
     const batchInfo = req.query; // suppose to contain instituteId and batchId
 
@@ -197,7 +184,6 @@ exports.updateBatch = async (req, res, next) => {
 
     res.status(200).json('Updatted successfully');
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -224,7 +210,6 @@ exports.deleteBatch = async (req, res, next) => {
       }
     );
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -245,7 +230,6 @@ exports.getBatche = async (req, res, next) => {
 
     res.status(200).json(batch);
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -254,7 +238,6 @@ exports.getBatches = async (req, res, next) => {
   try {
     const branchId = req.params.branchId;
 
-    console.log('body batches ', req.body);
     if (!branchId) {
       const error = new Error('Branch Id not provided');
       error.statusCode = 400;
@@ -262,21 +245,18 @@ exports.getBatches = async (req, res, next) => {
     }
 
     const batches = await Institute.findById(branchId, { batch: 1, _id: 0 });
-    //console.log("batches ",batches)
+    //
     for (var i = 0; i < batches.batch.length; i++) {
-      console.log('c id ', batches.batch[i].course);
       let course = await Institute.findOne({ _id: branchId }, { course: 1, _id: 0 });
       course = course.course;
       course = course.filter((c) => c._id == batches.batch[i].course);
 
-      console.log('course ', course);
       batches.batch[i].course = course[0].name;
     }
-    console.log(batches);
-    //console.log(course)
+
+    //
     res.status(200).json(batches);
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -289,7 +269,6 @@ exports.addDiscount = async (req, res, next) => {
 
     if (!branchId || error) {
       if (error) {
-        console.log(error);
       }
       const err = error
         ? new Error('Insufficient parameter provided')
@@ -311,7 +290,6 @@ exports.addDiscount = async (req, res, next) => {
     }
     response(res, 409, 'Discount code already exists');
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -333,7 +311,6 @@ exports.updateDiscount = async (req, res, next) => {
 
     res.status(200).json('Updatted successfully');
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -360,7 +337,6 @@ exports.deleteDiscount = async (req, res, next) => {
       }
     );
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -374,7 +350,7 @@ exports.getDiscount = async (req, res, next) => {
       error.statusCode = 400;
       throw error;
     }
-    console.log(discountInfo);
+
     let discount = await Institute.findOne(
       { _id: discountInfo.instituteId },
       { discount: 1, _id: 0 }
@@ -384,7 +360,6 @@ exports.getDiscount = async (req, res, next) => {
 
     res.status(200).json(discount);
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -403,7 +378,6 @@ exports.getDiscounts = async (req, res, next) => {
 
     res.status(200).json(discounts);
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -417,7 +391,6 @@ exports.addReciept = async (req, res, next) => {
     if (!branchId || error) {
       let err;
       if (error) {
-        console.log(error);
         err = new Error('Insufficiant/Wrong parameters provided');
         throw err;
       }
@@ -425,7 +398,7 @@ exports.addReciept = async (req, res, next) => {
       err.statusCode = 400;
       throw err;
     }
-    console.log('========', req.body);
+
     const updatedInst = await Institute.updateOne(
       { _id: branchId },
       { $set: { reciept: req.body } }
@@ -433,14 +406,13 @@ exports.addReciept = async (req, res, next) => {
 
     res.status(201).json(updatedInst);
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
 
 exports.updateReciept = async (req, res, next) => {
   try {
-    //console.log('id ',req.params)
+    //
     const instituteId = req.params.instituteId; // suppose to contain instituteId and recieptId
 
     if (!instituteId) {
@@ -453,7 +425,6 @@ exports.updateReciept = async (req, res, next) => {
 
     res.status(200).json({ message: 'Updatted successfully' });
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -472,7 +443,6 @@ exports.getReciept = async (req, res, next) => {
 
     res.status(200).json(reciept);
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -499,7 +469,6 @@ exports.deleteReciept = async (req, res, next) => {
       }
     );
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
@@ -524,7 +493,6 @@ exports.getCoursesTD = async (req, res) => {
 
     res.status(200).json(courses);
   } catch (error) {
-    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };

@@ -115,7 +115,7 @@ const dailySchedule = async () => {
   const now = new Date();
   let milliSecTill7 =
     new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 04, 00, 0) - now; // subtract 5 hrs and 30 mins for indian Time
-  // console.log(milliSecTill7);
+  //
   if (milliSecTill7 < 0) {
     milliSecTill7 += 86400000; // it's after 7am, try 7am tomorrow.
   }

@@ -141,7 +141,6 @@ const getHtml = (receipt) => {
 };
 
 const getReceiptData = async (studentId, courseId, instituteId) => {
-  console.log(studentId, courseId, instituteId);
   let receiptData = await Institute.findById(instituteId, { reciept: 1, _id: 0 });
   receiptData = receiptData.reciept;
 
@@ -214,7 +213,6 @@ exports.addFee = async (req, res) => {
     });
 
     if (checkStudent.length == 0) {
-      console.log('in error');
       const error = new Error("Course for Student doesn't exists");
       //error.prototype.statusCode = 400;
       throw error;
@@ -225,11 +223,6 @@ exports.addFee = async (req, res) => {
     const receipt = await getReceiptData(fees.studentId, fees.courseId, fees.instituteId);
 
     fees.installments.forEach(async (curInstallment, i) => {
-      console.log(
-        curInstallment.paidStatus === 'true',
-        curInstallment.receiptLink === '',
-        curInstallment
-      );
       if (curInstallment.paidStatus === 'true' && curInstallment.receiptLink === '') {
         const gst = (+curInstallment.amount / 100) * 18;
 
@@ -259,14 +252,10 @@ exports.addFee = async (req, res) => {
 
         const receiptUrl = path.join(__dirname, `../../receipts/receipt-${curInstallment._id}.pdf`);
         conversion({ html }, async (err, pdf) => {
-          console.log(err);
           const output = fs.createWriteStream(receiptUrl);
           const receiptLink =
             process.env.SERVER + `receipts/receipt-${curInstallment._id}.pdf`.toString();
-          (fees.installments[i].receiptLink = receiptLink),
-            console.log(fees.installments[i].receiptLink);
-          console.log(pdf.logs);
-          pdf.stream.pipe(output);
+          (fees.installments[i].receiptLink = receiptLink), pdf.stream.pipe(output);
 
           const mail = {
             to: receipt.email,
@@ -292,7 +281,6 @@ exports.addFee = async (req, res) => {
     await fees.save();
     res.status(200).send(fees);
   } catch (error) {
-    console.log('fee: ', error);
     res.status(400).send(error);
   }
 };
@@ -344,11 +332,6 @@ exports.updateFeeOfStudent = async (req, res) => {
     fees.installments = req.body.installments;
 
     fees.installments.forEach(async (curInstallment, i) => {
-      console.log(
-        curInstallment.paidStatus === 'true',
-        curInstallment.receiptLink === '',
-        curInstallment
-      );
       if (curInstallment.paidStatus === 'true' && curInstallment.receiptLink === '') {
         const gst = (+curInstallment.amount / 100) * 18;
 
@@ -378,14 +361,11 @@ exports.updateFeeOfStudent = async (req, res) => {
 
         const receiptUrl = path.join(__dirname, `../../receipts/receipt-${curInstallment._id}.pdf`);
         conversion({ html }, async (err, pdf) => {
-          console.log(err);
           const output = fs.createWriteStream(receiptUrl);
           const receiptLink =
             process.env.SERVER + `receipts/receipt-${curInstallment._id}.pdf`.toString();
           fees.installments[i].receiptLink = receiptLink;
 
-          console.log(fees.installments[i].receiptLink);
-          console.log(pdf.logs);
           pdf.stream.pipe(output);
 
           const mail = {
@@ -413,7 +393,6 @@ exports.updateFeeOfStudent = async (req, res) => {
 
     res.status(200).send(fees);
   } catch (error) {
-    console.log(error);
     res.status(400).send(error);
   }
 };
@@ -455,7 +434,7 @@ exports.getPendingFeeByInstitute = async (req, res) => {
       //   }
       // },
     ]);
-    console.log(feeDetails2);
+
     res.status(200).send(feeDetails);
   } catch (error) {
     res.status(400).send(error);

@@ -47,7 +47,7 @@ exports.addSchedule = async (req, res, next) => {
         },
       ],
     });
-    console.log(req.body);
+
     const instDetails = await Institute.aggregate([
       {
         $unwind: '$course',
@@ -63,10 +63,10 @@ exports.addSchedule = async (req, res, next) => {
         },
       },
     ]);
-    console.log(instDetails);
+
     let courseName = instDetails[0].course.name;
     let batchName = instDetails[0].batch.batchCode;
-    console.log('****', instDetails[0].course.name, '****', instDetails[0].batch.batchCode);
+
     let mail = {};
     mail.from = 'admin@eduatlas.in';
     mail.subject = 'SCHEDULE ADDED';
@@ -228,7 +228,7 @@ exports.getScheduleByInstitute = async (req, res) => {
       error.statusCode = 400;
       throw error;
     }
-    console.log(req.body);
+
     const instituteSchedule = await Schedule.find(details);
     let instSchedule = [];
 
@@ -406,14 +406,12 @@ exports.getScheduleByBatch = async (req, res) => {
 
     res.status(200).send(instSchedule);
   } catch (error) {
-    console.log(error);
     res.status(400).send(error);
   }
 };
 
 exports.getSchedule = async (req, res, next) => {
   try {
-    console.log(req.body);
     const singleSchedule = await Schedule.findOne({
       _id: req.body.scheduleId,
     });
@@ -426,12 +424,11 @@ exports.getSchedule = async (req, res, next) => {
 
 exports.getScheduleDetails = async (req, res) => {
   try {
-    console.log(req.body);
     let singleSchedule = await Schedule.findOne({
       _id: req.body.scheduleId,
     });
     let schdeduleDetails = req.body;
-    console.log(singleSchedule);
+
     const courseDetails = await Institute.aggregate([
       {
         $unwind: '$course',
@@ -447,7 +444,7 @@ exports.getScheduleDetails = async (req, res) => {
         },
       },
     ]);
-    console.log('here ', courseDetails);
+
     if (courseDetails.length == 0) {
       const error = new Error('Batch not found');
       error.statusCode = 400;
@@ -461,7 +458,7 @@ exports.getScheduleDetails = async (req, res) => {
         const teacherInfo = await Employee.findOne({
           _id: singleSchedule.days[i].teacher,
         });
-        console.log(singleSchedule.days[i].teacher, teacherInfo);
+
         singleSchedule.days[i].teacher = teacherInfo.basicDetails.name;
       }
     }

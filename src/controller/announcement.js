@@ -5,15 +5,12 @@ const fs = require('fs');
 const path = require('path');
 
 const deleteFile = (filePath) => {
-  console.log(path.join(__dirname + '../../../' + filePath));
   fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
     if (error) {
-      console.log(error);
       const err = new Error('Error while deleting the image');
       err.statusCode = 500;
       throw err;
     }
-    console.log('File Deleted successfully');
   });
 };
 
@@ -50,14 +47,12 @@ exports.makeAnnouncement = async (req, res) => {
     await announcement.save();
     res.status(201).json(announcement);
   } catch (error) {
-    console.log(error);
     errorHandler(error, res);
   }
 };
 
 exports.editAnnouncement = async (req, res) => {
   try {
-    console.log(req.body);
     let oldAnnouncement = await Announcement.findById(req.body._id);
 
     let attachment = oldAnnouncement.attachment;
@@ -96,7 +91,6 @@ exports.editAnnouncement = async (req, res) => {
 
     res.status(201).json(updatedInstitute);
   } catch (error) {
-    console.log(error);
     errorHandler(error, res);
   }
 };
@@ -115,7 +109,7 @@ exports.getStudentAnnouncements = async (req, res, next) => {
   try {
     const instituteId = req.body.instituteId;
     const batch = req.body.batch;
-    console.log(req.body);
+
     const announcements = await Announcement.find({ instituteId, batchCodes: { $in: [batch] } });
     res.status(200).json(announcements);
   } catch (error) {

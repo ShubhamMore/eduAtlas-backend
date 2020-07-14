@@ -14,14 +14,11 @@ const rp = require('request-promise');
 
 const deleteFile = (filePath) => {
   fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
-    console.log('deleteFile');
     if (error) {
-      console.log(error);
       const err = new Error('Error while deleting the File');
       err.statusCode = 500;
       throw err;
     }
-    console.log('File Deleted successfully');
   });
 };
 
@@ -59,8 +56,6 @@ exports.addTest = async (req, res) => {
 
 exports.getTestByInstitute = async (req, res) => {
   try {
-    console.log(req.body);
-
     // let query = {};
 
     // if (!req.body.batchId) {
@@ -206,7 +201,7 @@ exports.getTestsForReports = async (req, res) => {
 
 exports.getSingleTest = async (req, res) => {
   try {
-    // console.log(req.body);
+    //
     // const singleTest = await Test.findOne({
     //   _id: req.body._id,
     // });
@@ -260,7 +255,6 @@ exports.getSingleTest = async (req, res) => {
 
 exports.addTestScore = async (req, res) => {
   try {
-    console.log(req.body);
     const updateScore = await Test.updateOne(
       {
         _id: req.body._id,
@@ -279,7 +273,6 @@ exports.addTestScore = async (req, res) => {
   }
 };
 exports.addScoreUsingExcel = async (req, res) => {
-  console.log('in here', path.join(__dirname + '../../../' + req.file.path));
   try {
     const file = path.join(__dirname + '../../../' + req.file.path);
     const excelData = excelToJson({
@@ -302,12 +295,9 @@ exports.addScoreUsingExcel = async (req, res) => {
       ],
     });
 
-    console.log(excelData);
-
     const testDetails = await Test.findOne({
       _id: req.body._id,
     });
-    console.log(testDetails);
 
     if (!testDetails) {
       const error = new Error('Test not Found');
@@ -334,7 +324,7 @@ exports.addScoreUsingExcel = async (req, res) => {
         excelData.Sheet1[i].studentName = student[0].basicDetails.name;
       }
     }
-    console.log(excelData);
+
     const updateScore = await Test.updateOne(
       {
         _id: req.body._id,
@@ -349,7 +339,7 @@ exports.addScoreUsingExcel = async (req, res) => {
     deleteFile(req.file.path);
     res.status(200).send(updateScore);
   } catch (error) {
-    // console.log(error);
+    //
     errorHandler(error, res);
   }
 };

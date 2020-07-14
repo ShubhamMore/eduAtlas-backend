@@ -4,7 +4,6 @@ const send = require('../service/mail');
 
 mailRouter.post('/sendmail', async (req, res) => {
   try {
-    console.log('function');
     let mail = {};
 
     mail.to = 'akashkulkarni796@gmail.com';
