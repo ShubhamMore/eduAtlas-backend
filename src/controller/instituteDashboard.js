@@ -7,6 +7,7 @@ const OnlineClass = require('../model/onlineClass.model');
 const Leads = require('../model/leads.model');
 const errorHandler = require('../service/errorHandler');
 const Schedule = require('../model/schedule.model');
+const Announcement = require('../model/announcement.model');
 
 const appendZero = (n) => {
   if (n < 10) {
@@ -19,19 +20,29 @@ exports.getDashboardInfo = async (req, res) => {
   try {
     let data = {};
 
-    let query = {};
-    query.instituteId = req.body.instituteId;
-
     const currentTime = new Date().getTime() / 1000;
     const year = new Date().getFullYear();
     const month = new Date().getMonth() + 1;
     const day = new Date().getDate();
     const date = new RegExp('.*' + year + '-' + appendZero(month) + '-' + appendZero(day) + '.*');
 
-    query.startTime = date;
-
-    // const sch = await Schedule.aggregate([{}]);
-    data.upcomingClass = await OnlineClass.find(query);
+    data.upcomingClass = await Schedule.aggregate([
+      { $unwind: '$days' },
+      {
+        $match: {
+          instituteId: '5f0301e228fc9205dc984d69',
+          'days.date': date,
+        },
+      },
+      {
+        $project: {
+          days: 1,
+          courseId: 1,
+          batchId: 1,
+          instituteId: 1,
+        },
+      },
+    ]);
 
     const pendingFees = await Fee.find({
       instituteId: req.body.instituteId,
@@ -105,6 +116,14 @@ exports.getDashboardInfo = async (req, res) => {
     });
 
     data.leads = leads;
+
+    const AnnouncementDate = new RegExp('.*' + year + '-' + appendZero(month) + '.*');
+
+    const announcements = await Announcement.find({
+      date: AnnouncementDate,
+    });
+
+    data.announcements = announcements;
 
     res.status(200).send(data);
   } catch (error) {
