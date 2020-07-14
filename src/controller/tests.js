@@ -175,6 +175,11 @@ exports.getTestByInstitute = async (req, res) => {
           batch: false,
         },
       },
+      {
+        $sort: {
+          date: 1,
+        },
+      },
     ]);
     res.status(200).send({ markedTest, umarkedTest });
   } catch (error) {

@@ -1018,6 +1018,11 @@ exports.getStudentTestScheduleByInstitute = async (req, res) => {
           batchCode: '$instituteCourse.batch.batchCode',
         },
       },
+      {
+        $sort: {
+          'test.date': 1,
+        },
+      },
     ]);
     res.status(200).send(test);
   } catch (error) {
