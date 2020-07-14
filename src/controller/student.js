@@ -971,7 +971,7 @@ exports.getStudentTestScheduleByInstitute = async (req, res) => {
       {
         $match: {
           $expr: {
-            $eq: ['$test.batchId', 'instituteDetails.batchId'],
+            $eq: ['$tests.batchId', '$instituteDetails.batchId'],
           },
         },
       },
