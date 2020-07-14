@@ -120,6 +120,7 @@ exports.getDashboardInfo = async (req, res) => {
     const AnnouncementDate = new RegExp('.*' + year + '-' + appendZero(month) + '.*');
 
     const announcements = await Announcement.find({
+      instituteId: req.body.instituteId,
       date: AnnouncementDate,
     });
 
