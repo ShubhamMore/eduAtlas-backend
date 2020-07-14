@@ -35,21 +35,73 @@ exports.getDashboardInfo = async (req, res) => {
         },
       },
       {
+        $addFields: {
+          'days.teacher': {
+            $toObjectId: '$days.teacher',
+          },
+
+          batchId: {
+            $toObjectId: '$batchId',
+          },
+          courseId: {
+            $toObjectId: '$courseId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'employees',
+          localField: 'days.teacher',
+          foreignField: '_id',
+          as: 'teacher',
+        },
+      },
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'batchId',
+          foreignField: 'batch._id',
+          as: 'institute',
+        },
+      },
+      {
+        $unwind: '$teacher',
+      },
+      {
+        $unwind: '$institute',
+      },
+      {
+        $unwind: '$institute.batch',
+      },
+      {
+        $unwind: '$institute.course',
+      },
+      {
+        $match: {
+          $expr: {
+            $and: [
+              {
+                $eq: ['$courseId', '$institute.course._id'],
+              },
+              {
+                $eq: ['$batchId', '$institute.batch._id'],
+              },
+            ],
+          },
+        },
+      },
+      {
         $project: {
           days: 1,
           courseId: 1,
           batchId: 1,
           instituteId: 1,
+          teacherName: '$teacher.basicDetails.name',
+          courseName: '$institute.course.name',
+          batchCode: '$institute.batch.batchCode',
         },
       },
     ]);
-
-    const pendingFees = await Fee.find({
-      instituteId: req.body.instituteId,
-      pendingAmount: {
-        $ne: '0',
-      },
-    });
 
     let fee = new Array();
 
