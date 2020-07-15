@@ -2271,7 +2271,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }
 
     function View_ManageOnlineClassComponent_Host_0(_l) {
-      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 1, "ngx-manage-online-class", [], null, null, null, View_ManageOnlineClassComponent_0, RenderType_ManageOnlineClassComponent)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](1, 114688, null, 0, _manage_online_class_component__WEBPACK_IMPORTED_MODULE_6__["ManageOnlineClassComponent"], [_angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"], _services_api_service__WEBPACK_IMPORTED_MODULE_8__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"]], null, null)], function (_ck, _v) {
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 1, "ngx-manage-online-class", [], null, null, null, View_ManageOnlineClassComponent_0, RenderType_ManageOnlineClassComponent)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](1, 114688, null, 0, _manage_online_class_component__WEBPACK_IMPORTED_MODULE_6__["ManageOnlineClassComponent"], [_angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"], _services_api_service__WEBPACK_IMPORTED_MODULE_8__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbToastrService"]], null, null)], function (_ck, _v) {
         _ck(_v, 1, 0);
       }, null);
     }
@@ -2334,29 +2334,36 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    var _nebular_theme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @nebular/theme */
+    "./node_modules/@nebular/theme/fesm2015/index.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
-    var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ../../../../../services/api.service */
     "./src/app/services/api.service.ts");
 
     var ManageOnlineClassComponent = /*#__PURE__*/function () {
-      function ManageOnlineClassComponent(route, api, router) {
+      function ManageOnlineClassComponent(route, api, router, toasterService) {
         _classCallCheck(this, ManageOnlineClassComponent);
 
         this.route = route;
         this.api = api;
         this.router = router;
+        this.toasterService = toasterService;
         this.batches = [];
         this.months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
       }
@@ -2429,10 +2436,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deleteMeeting",
         value: function deleteMeeting(id, meetingId) {
+          var _this7 = this;
+
           this.api.deleteMeeting({
             _id: id,
             meetingId: meetingId
-          }).subscribe(function (res) {}, function (err) {});
+          }).subscribe(function (res) {
+            var i = _this7.meetings.findIndex(function (meeting) {
+              return meeting._id === id;
+            });
+
+            _this7.meetings.splice(i, 1);
+          }, function (err) {});
         }
       }, {
         key: "createTime",
@@ -2443,15 +2458,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getUpcomingClasses",
         value: function getUpcomingClasses(instituteId, batchId) {
-          var _this7 = this;
+          var _this8 = this;
 
           this.api.getMeetingByBatch({
             instituteId: instituteId,
             batchId: batchId,
             type: 'upcoming'
           }).subscribe(function (res) {
-            _this7.meetings = res;
-          }, function (err) {});
+            _this8.meetings = res;
+
+            _this8.showToast('top right', 'success', 'Meeting Deleted Successfully');
+          }, function (err) {
+            _this8.showToast('top right', 'danger', err.err.message);
+          });
+        }
+      }, {
+        key: "showToast",
+        value: function showToast(position, status, message) {
+          this.toasterService.show(status, message, {
+            position: position,
+            status: status
+          });
         }
       }]);
 
@@ -2980,17 +3007,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(OnlineClassSettingsComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this8 = this;
+          var _this9 = this;
 
           this.instituteId = this.route.snapshot.paramMap.get('id');
           this.route.queryParams.subscribe(function (param) {
-            _this8.edit = param.edit;
+            _this9.edit = param.edit;
           });
           this.api.getCredentials().subscribe(function (res) {
             if (res && res.client_id) {
-              _this8.edit = 'true';
+              _this9.edit = 'true';
 
-              _this8.settingForm.patchValue({
+              _this9.settingForm.patchValue({
                 publicKey: res.client_id,
                 secretKey: res.client_secret_id
               });
@@ -3004,7 +3031,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this9 = this;
+          var _this10 = this;
 
           this.settingForm.markAllAsTouched();
 
@@ -3016,15 +3043,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             user_id: userId
           };
           this.api.addCredentials(requestData).subscribe(function (res) {
-            _this9.showToast('top-right', 'success', 'Settings Updated');
+            _this10.showToast('top-right', 'success', 'Settings Updated');
 
-            _this9.api.getZoomAuth({
+            _this10.api.getZoomAuth({
               userId: res.user_id
             }).subscribe(function (data) {
               window.open(data.authLink, '_blank', 'toolbar,scrollbars,resizable,top=500,left=500,width=400,height=400');
             });
 
-            _this9.router.navigate(['/pages/institute/online-classes/create-class/', _this9.instituteId]);
+            _this10.router.navigate(['/pages/institute/online-classes/create-class/', _this10.instituteId]);
           }, function (error) {
             return console.error(error);
           });
@@ -3549,11 +3576,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(OnlineClassesUpgradeComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this10 = this;
+          var _this11 = this;
 
           this.role = this.roleService.getRole();
           this.route.params.subscribe(function (param) {
-            _this10.instituteId = param.id;
+            _this11.instituteId = param.id;
           });
         }
       }, {
