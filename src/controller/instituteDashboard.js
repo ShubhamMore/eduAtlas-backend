@@ -169,6 +169,7 @@ exports.getDashboardInfo = async (req, res) => {
     data.studentCount = studentCount.length;
 
     const leads = await Leads.find({
+      instituteId: req.body.instituteId,
       status: {
         $in: ['OPEN'],
       },
