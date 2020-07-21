@@ -6,10 +6,12 @@ const { NewUser, OneTimePassword } = require('../../clientStore');
 const send = require('../../service/mail');
 const generateOTP = (ph) => {
   var digits = '0123456789';
-  let OTP = '1234';
-  // for (let i = 0; i < 4; i++) {
-  //   OTP += digits[Math.floor(Math.random() * 10)];
-  // }
+  let OTP = '';
+  for (let i = 0; i < 4; i++) {
+    OTP += digits[Math.floor(Math.random() * 10)];
+  }
+
+  console.log(OTP);
 
   setTimeout(() => {
     OneTimePassword.deleteOTP(ph);
@@ -32,10 +34,10 @@ exports.sendOtp = async (req, res, next) => {
 
     new OneTimePassword(phone, generateOTP(phone));
 
-    // const smsRes = await smsService.sendSms(
-    //   phone,
-    //   'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
-    // );
+    const smsRes = await smsService.sendSms(
+      phone,
+      'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
+    );
     // const user = await User.findOne({
     //   email: req.params.email,
     // });
@@ -43,7 +45,7 @@ exports.sendOtp = async (req, res, next) => {
 
     // const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
     //
-    const smsRes = 'send sms'; // remove later
+    // const smsRes = 'send sms'; // remove later
     // const mail = {
     //   to: req.params.email,
     //   from: 'admin@eduatlas.in',
@@ -51,8 +53,8 @@ exports.sendOtp = async (req, res, next) => {
     //   html: `<a href= '${url}'> ${url} </a>`,
     // };
 
-    //await send(mail);
-    res.status(200).send({ message: `${smsRes} to  ${phone}` }); //Change later
+    // await send(mail);
+    res.status(200).send({ message: `OTP Send to  ${phone}` }); //Change later
   } catch (error) {
     response(res, 500, 'Internal server error');
   }
@@ -77,14 +79,14 @@ exports.sendOtpForRegisteredUser = async (req, res, next) => {
 
     new OneTimePassword(phone, generateOTP(phone));
 
-    // const smsRes = await smsService.sendSms(
-    //   phone,
-    //   'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
-    // );
+    const smsRes = await smsService.sendSms(
+      phone,
+      'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
+    );
 
-    const smsRes = 'send sms'; // remove later
+    // const smsRes = 'send sms'; // remove later
 
-    res.status(200).send({ message: `${smsRes} to  ${phone}`, phone }); //Change later
+    res.status(200).send({ message: `OTP Send to  ${phone}`, phone }); //Change later
   } catch (error) {
     response(res, 500, 'Internal server error');
   }
@@ -118,7 +120,8 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
     new OneTimePassword(user.phone, generateOTP(user.phone));
     const otp = OneTimePassword.getOTP(user.phone);
 
-    //const smsRes = await smsService.sendSms(phone, 'Your OTP (One Time Password): ' + otp);
+    const smsRes = await smsService.sendSms(phone, 'Your OTP (One Time Password): ' + otp);
+
     let mail = {
       to: user.email,
       from: 'admin@eduatlas.in',
@@ -134,9 +137,9 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
     };
 
     //const smsRes = 'send sms'; // remove later
-    const smsRes = 'send sms';
+    // const smsRes = 'send sms';
 
-    res.status(200).send({ message: `${smsRes} to  ${user.phone}`, phone: user.phone }); //Change later
+    res.status(200).send({ message: `OTP Send to  ${user.phone}`, phone: user.phone }); //Change later
   } catch (error) {
     response(res, 500, 'Internal server error');
   }
