@@ -267,6 +267,10 @@ const instituteSchema = new Schema(
       type: Date,
       default: null,
     },
+    smsCount: {
+      type: Number,
+      default: 0,
+    },
 
     expiryDate: {
       type: Date,
