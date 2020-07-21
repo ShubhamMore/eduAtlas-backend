@@ -284,7 +284,7 @@ exports.loginUser = async (req, res, next) => {
       res.status(200).send(data);
     } else {
       res.status(200).send({
-        verifyOtp: user.verifyOTP === '0',
+        verifyOtp: user.verifyOTP === '1',
         verifyEmail: user.verifyEmail === '0',
         phone: user.phone,
         email: user.email,
