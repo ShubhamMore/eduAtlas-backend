@@ -256,7 +256,7 @@ exports.loginUser = async (req, res, next) => {
   try {
     const user = await User.findByCredentials(req.body.userId, req.body.password);
 
-    if (user.verifyOTP === '1' && user.verifyEmail === '1') {
+    if (user.verifyEmail === '1') {
       const token = await user.generateAuthToken();
       const data = {
         _id: user._id,
