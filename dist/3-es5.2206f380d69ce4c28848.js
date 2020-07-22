@@ -9310,7 +9310,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.getStudents(this.instituteId, null, null);
           } else if (id !== '') {
             this.course = id;
-            this.getStudents(this.instituteId, id, id);
+            this.getStudents(this.instituteId, id, null);
           }
         }
       }, {
@@ -16169,8 +16169,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 1, "small", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](-1, null, ["*Next Follow Up Date is Required"]))], null, null);
     }
 
+    function View_AddLeadComponent_13(_l) {
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 1, "small", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](-1, null, ["*Next Follow Up Time is Required"]))], null, null);
+    }
+
     function View_AddLeadComponent_0(_l) {
-      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 1, "ngx-institute-header", [], null, null, null, _institute_header_institute_header_component_ngfactory__WEBPACK_IMPORTED_MODULE_4__["View_InstituteHeaderComponent_0"], _institute_header_institute_header_component_ngfactory__WEBPACK_IMPORTED_MODULE_4__["RenderType_InstituteHeaderComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](1, 114688, null, 0, _institute_header_institute_header_component__WEBPACK_IMPORTED_MODULE_5__["InstituteHeaderComponent"], [_services_institute_service__WEBPACK_IMPORTED_MODULE_6__["InstituteService"]], null, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](2, 0, null, null, 220, "nb-card", [], [[2, "size-tiny", null], [2, "size-small", null], [2, "size-medium", null], [2, "size-large", null], [2, "size-giant", null], [2, "status-primary", null], [2, "status-info", null], [2, "status-success", null], [2, "status-warning", null], [2, "status-danger", null], [2, "status-basic", null], [2, "status-control", null], [2, "accent", null], [2, "accent-primary", null], [2, "accent-info", null], [2, "accent-success", null], [2, "accent-warning", null], [2, "accent-danger", null], [2, "accent-basic", null], [2, "accent-control", null]], null, null, _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["View_NbCardComponent_0"], _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["RenderType_NbCardComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](3, 49152, null, 0, _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbCardComponent"], [], null, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](4, 0, null, 0, 6, "nb-card-header", [], null, null, null, _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["View_NbCardHeaderComponent_0"], _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["RenderType_NbCardHeaderComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](5, 49152, null, 0, _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbCardHeaderComponent"], [], null, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](6, 0, null, 0, 4, "div", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](7, 0, null, null, 1, "button", [["class", "btn btn-yellow-black float-right"]], null, [[null, "click"]], function (_v, en, $event) {
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 1, "ngx-institute-header", [], null, null, null, _institute_header_institute_header_component_ngfactory__WEBPACK_IMPORTED_MODULE_4__["View_InstituteHeaderComponent_0"], _institute_header_institute_header_component_ngfactory__WEBPACK_IMPORTED_MODULE_4__["RenderType_InstituteHeaderComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](1, 114688, null, 0, _institute_header_institute_header_component__WEBPACK_IMPORTED_MODULE_5__["InstituteHeaderComponent"], [_services_institute_service__WEBPACK_IMPORTED_MODULE_6__["InstituteService"]], null, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](2, 0, null, null, 234, "nb-card", [], [[2, "size-tiny", null], [2, "size-small", null], [2, "size-medium", null], [2, "size-large", null], [2, "size-giant", null], [2, "status-primary", null], [2, "status-info", null], [2, "status-success", null], [2, "status-warning", null], [2, "status-danger", null], [2, "status-basic", null], [2, "status-control", null], [2, "accent", null], [2, "accent-primary", null], [2, "accent-info", null], [2, "accent-success", null], [2, "accent-warning", null], [2, "accent-danger", null], [2, "accent-basic", null], [2, "accent-control", null]], null, null, _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["View_NbCardComponent_0"], _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["RenderType_NbCardComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](3, 49152, null, 0, _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbCardComponent"], [], null, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](4, 0, null, 0, 6, "nb-card-header", [], null, null, null, _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["View_NbCardHeaderComponent_0"], _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["RenderType_NbCardHeaderComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](5, 49152, null, 0, _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbCardHeaderComponent"], [], null, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](6, 0, null, 0, 4, "div", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](7, 0, null, null, 1, "button", [["class", "btn btn-yellow-black float-right"]], null, [[null, "click"]], function (_v, en, $event) {
         var ad = true;
         var _co = _v.component;
 
@@ -16180,7 +16184,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         return ad;
-      }, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](-1, null, ["Manage Leads"])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](9, 0, null, null, 1, "p", [["style", "font-weight: bold;"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](-1, null, ["Add Lead"])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](11, 0, null, 1, 211, "nb-card-body", [], null, null, null, _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["View_NbCardBodyComponent_0"], _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["RenderType_NbCardBodyComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](12, 49152, null, 0, _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbCardBodyComponent"], [], null, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](13, 0, null, 0, 209, "form", [["novalidate", ""]], [[2, "ng-untouched", null], [2, "ng-touched", null], [2, "ng-pristine", null], [2, "ng-dirty", null], [2, "ng-valid", null], [2, "ng-invalid", null], [2, "ng-pending", null]], [[null, "ngSubmit"], [null, "submit"], [null, "reset"]], function (_v, en, $event) {
+      }, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](-1, null, ["Manage Leads"])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](9, 0, null, null, 1, "p", [["style", "font-weight: bold;"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](-1, null, ["Add Lead"])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](11, 0, null, 1, 225, "nb-card-body", [], null, null, null, _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["View_NbCardBodyComponent_0"], _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["RenderType_NbCardBodyComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](12, 49152, null, 0, _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbCardBodyComponent"], [], null, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](13, 0, null, 0, 223, "form", [["novalidate", ""]], [[2, "ng-untouched", null], [2, "ng-touched", null], [2, "ng-pristine", null], [2, "ng-dirty", null], [2, "ng-valid", null], [2, "ng-invalid", null], [2, "ng-pending", null]], [[null, "ngSubmit"], [null, "submit"], [null, "reset"]], function (_v, en, $event) {
         var ad = true;
         var _co = _v.component;
 
@@ -16354,7 +16358,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         ngForOf: [0, "ngForOf"]
       }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵand"](16777216, null, null, 1, null, View_AddLeadComponent_5)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](87, 16384, null, 0, _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewContainerRef"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["TemplateRef"]], {
         ngIf: [0, "ngIf"]
-      }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](88, 0, null, null, 15, "div", [["class", "col-sm-3"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](89, 0, null, null, 1, "label", [["for", "status"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](-1, null, ["Status"])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](91, 0, null, null, 10, "nb-select", [["formControlName", "status"], ["id", "status"], ["placeholder", "Status"], ["status", "basic"]], [[2, "appearance-outline", null], [2, "appearance-filled", null], [2, "appearance-hero", null], [2, "full-width", null], [2, "open", null], [2, "size-tiny", null], [2, "size-small", null], [2, "size-medium", null], [2, "size-large", null], [2, "size-giant", null], [2, "status-primary", null], [2, "status-info", null], [2, "status-success", null], [2, "status-warning", null], [2, "status-danger", null], [2, "status-basic", null], [2, "status-control", null], [2, "shape-rectangle", null], [2, "shape-round", null], [2, "shape-semi-round", null], [2, "ng-untouched", null], [2, "ng-touched", null], [2, "ng-pristine", null], [2, "ng-dirty", null], [2, "ng-valid", null], [2, "ng-invalid", null], [2, "ng-pending", null]], null, null, _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["View_NbSelectComponent_0"], _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["RenderType_NbSelectComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵprd"](6144, null, _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NB_SELECT_INJECTION_TOKEN"], null, [_nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbSelectComponent"]]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](93, 5423104, null, 2, _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbSelectComponent"], [_nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NB_DOCUMENT"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbOverlayService"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbPositionBuilderService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbTriggerStrategyBuilderService"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["ɵd"]], {
+      }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](88, 0, null, null, 15, "div", [["class", "col-sm-3"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](89, 0, null, null, 1, "label", [["for", "status"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](-1, null, ["*Status"])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](91, 0, null, null, 10, "nb-select", [["formControlName", "status"], ["id", "status"], ["placeholder", "Status"], ["status", "basic"]], [[2, "appearance-outline", null], [2, "appearance-filled", null], [2, "appearance-hero", null], [2, "full-width", null], [2, "open", null], [2, "size-tiny", null], [2, "size-small", null], [2, "size-medium", null], [2, "size-large", null], [2, "size-giant", null], [2, "status-primary", null], [2, "status-info", null], [2, "status-success", null], [2, "status-warning", null], [2, "status-danger", null], [2, "status-basic", null], [2, "status-control", null], [2, "shape-rectangle", null], [2, "shape-round", null], [2, "shape-semi-round", null], [2, "ng-untouched", null], [2, "ng-touched", null], [2, "ng-pristine", null], [2, "ng-dirty", null], [2, "ng-valid", null], [2, "ng-invalid", null], [2, "ng-pending", null]], null, null, _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["View_NbSelectComponent_0"], _node_modules_nebular_theme_index_ngfactory__WEBPACK_IMPORTED_MODULE_2__["RenderType_NbSelectComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵprd"](6144, null, _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NB_SELECT_INJECTION_TOKEN"], null, [_nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbSelectComponent"]]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](93, 5423104, null, 2, _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbSelectComponent"], [_nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NB_DOCUMENT"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbOverlayService"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbPositionBuilderService"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbTriggerStrategyBuilderService"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["ɵd"]], {
         status: [0, "status"],
         placeholder: [1, "placeholder"]
       }, null), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵqud"](603979776, 3, {
@@ -16690,7 +16694,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         name: [0, "name"]
       }, null), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵprd"](2048, null, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControl"], null, [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormControlName"]]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](192, 16384, null, 0, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatus"], [[4, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControl"]]], null, null), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](193, 16384, null, 0, _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbInputDirective"], [], {
         fullWidth: [0, "fullWidth"]
-      }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](194, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](195, 0, null, null, 27, "div", [["class", "row"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](196, 0, null, null, 11, "div", [["class", "col-sm-4"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](197, 0, null, null, 1, "label", [["for", "date"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](-1, null, ["*Date"])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](199, 0, null, null, 6, "input", [["formControlName", "date"], ["fullWidth", ""], ["nbInput", ""], ["placeholder", "Pick Date"], ["type", "date"]], [[2, "ng-untouched", null], [2, "ng-touched", null], [2, "ng-pristine", null], [2, "ng-dirty", null], [2, "ng-valid", null], [2, "ng-invalid", null], [2, "ng-pending", null], [2, "input-full-width", null], [2, "size-tiny", null], [2, "size-small", null], [2, "size-medium", null], [2, "size-large", null], [2, "size-giant", null], [2, "status-primary", null], [2, "status-info", null], [2, "status-success", null], [2, "status-warning", null], [2, "status-danger", null], [2, "status-basic", null], [2, "status-control", null], [2, "shape-rectangle", null], [2, "shape-semi-round", null], [2, "shape-round", null]], [[null, "input"], [null, "blur"], [null, "compositionstart"], [null, "compositionend"]], function (_v, en, $event) {
+      }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](194, 0, null, null, 0, "br", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](195, 0, null, null, 36, "div", [["class", "row"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](196, 0, null, null, 11, "div", [["class", "col-sm-4"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](197, 0, null, null, 1, "label", [["for", "date"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](-1, null, ["*Date"])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](199, 0, null, null, 6, "input", [["formControlName", "date"], ["fullWidth", ""], ["nbInput", ""], ["placeholder", "Pick Date"], ["type", "date"]], [[2, "ng-untouched", null], [2, "ng-touched", null], [2, "ng-pristine", null], [2, "ng-dirty", null], [2, "ng-valid", null], [2, "ng-invalid", null], [2, "ng-pending", null], [2, "input-full-width", null], [2, "size-tiny", null], [2, "size-small", null], [2, "size-medium", null], [2, "size-large", null], [2, "size-giant", null], [2, "status-primary", null], [2, "status-info", null], [2, "status-success", null], [2, "status-warning", null], [2, "status-danger", null], [2, "status-basic", null], [2, "status-control", null], [2, "shape-rectangle", null], [2, "shape-semi-round", null], [2, "shape-round", null]], [[null, "input"], [null, "blur"], [null, "compositionstart"], [null, "compositionend"]], function (_v, en, $event) {
         var ad = true;
 
         if ("input" === en) {
@@ -16756,7 +16760,40 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         fullWidth: [1, "fullWidth"]
       }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵand"](16777216, null, null, 1, null, View_AddLeadComponent_12)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](219, 16384, null, 0, _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewContainerRef"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["TemplateRef"]], {
         ngIf: [0, "ngIf"]
-      }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](220, 0, null, null, 2, "div", [["class", "col-sm-4 mt-5"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](221, 0, null, null, 1, "button", [["class", "btn btn-yellow-black float-right"], ["type", "submit"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](222, null, [" ", " Lead "]))], function (_ck, _v) {
+      }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](220, 0, null, null, 11, "div", [["class", "col-sm-4"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](221, 0, null, null, 1, "label", [["for", "followUpDate"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](-1, null, ["*Next Follow Up Time"])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](223, 0, null, null, 6, "input", [["formControlName", "followUpTime"], ["fullWidth", ""], ["nbInput", ""], ["placeholder", "Pick Time"], ["type", "time"]], [[2, "ng-untouched", null], [2, "ng-touched", null], [2, "ng-pristine", null], [2, "ng-dirty", null], [2, "ng-valid", null], [2, "ng-invalid", null], [2, "ng-pending", null], [2, "input-full-width", null], [2, "size-tiny", null], [2, "size-small", null], [2, "size-medium", null], [2, "size-large", null], [2, "size-giant", null], [2, "status-primary", null], [2, "status-info", null], [2, "status-success", null], [2, "status-warning", null], [2, "status-danger", null], [2, "status-basic", null], [2, "status-control", null], [2, "shape-rectangle", null], [2, "shape-semi-round", null], [2, "shape-round", null]], [[null, "input"], [null, "blur"], [null, "compositionstart"], [null, "compositionend"]], function (_v, en, $event) {
+        var ad = true;
+
+        if ("input" === en) {
+          var pd_0 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 224)._handleInput($event.target.value) !== false;
+          ad = pd_0 && ad;
+        }
+
+        if ("blur" === en) {
+          var pd_1 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 224).onTouched() !== false;
+          ad = pd_1 && ad;
+        }
+
+        if ("compositionstart" === en) {
+          var pd_2 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 224)._compositionStart() !== false;
+          ad = pd_2 && ad;
+        }
+
+        if ("compositionend" === en) {
+          var pd_3 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 224)._compositionEnd($event.target.value) !== false;
+          ad = pd_3 && ad;
+        }
+
+        return ad;
+      }, null, null)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](224, 16384, null, 0, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["DefaultValueAccessor"], [_angular_core__WEBPACK_IMPORTED_MODULE_1__["Renderer2"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"], [2, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["COMPOSITION_BUFFER_MODE"]]], null, null), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵprd"](1024, null, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NG_VALUE_ACCESSOR"], function (p0_0) {
+        return [p0_0];
+      }, [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["DefaultValueAccessor"]]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](226, 671744, null, 0, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormControlName"], [[3, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["ControlContainer"]], [8, null], [8, null], [6, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NG_VALUE_ACCESSOR"]], [2, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["ɵangular_packages_forms_forms_q"]]], {
+        name: [0, "name"]
+      }, null), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵprd"](2048, null, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControl"], null, [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormControlName"]]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](228, 16384, null, 0, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatus"], [[4, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControl"]]], null, null), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](229, 16384, null, 0, _nebular_theme__WEBPACK_IMPORTED_MODULE_3__["NbInputDirective"], [], {
+        status: [0, "status"],
+        fullWidth: [1, "fullWidth"]
+      }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵand"](16777216, null, null, 1, null, View_AddLeadComponent_13)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](231, 16384, null, 0, _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewContainerRef"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["TemplateRef"]], {
+        ngIf: [0, "ngIf"]
+      }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](232, 0, null, null, 0, "hr", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](233, 0, null, null, 3, "div", [["class", "row"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](234, 0, null, null, 2, "div", [["class", "col-sm-12"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](235, 0, null, null, 1, "button", [["class", "btn btn-yellow-black float-right"], ["type", "submit"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](236, null, [" ", " Lead "]))], function (_ck, _v) {
         var _co = _v.component;
 
         _ck(_v, 1, 0);
@@ -16974,6 +17011,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var currVal_421 = _co.f.followUpDate.errors && _co.submitted;
 
         _ck(_v, 219, 0, currVal_421);
+
+        var currVal_445 = "followUpTime";
+
+        _ck(_v, 226, 0, currVal_445);
+
+        var currVal_446 = _co.f.followUpTime.errors && _co.submitted ? "danger" : "basic";
+        var currVal_447 = "";
+
+        _ck(_v, 229, 0, currVal_446, currVal_447);
+
+        var currVal_448 = _co.f.followUpTime.errors && _co.submitted;
+
+        _ck(_v, 231, 0, currVal_448);
       }, function (_ck, _v) {
         var _co = _v.component;
 
@@ -17750,9 +17800,57 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _ck(_v, 211, 1, [currVal_395, currVal_396, currVal_397, currVal_398, currVal_399, currVal_400, currVal_401, currVal_402, currVal_403, currVal_404, currVal_405, currVal_406, currVal_407, currVal_408, currVal_409, currVal_410, currVal_411, currVal_412, currVal_413, currVal_414, currVal_415, currVal_416, currVal_417]);
 
-        var currVal_422 = _co.edit ? "Update" : "Add";
+        var currVal_422 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 228).ngClassUntouched;
 
-        _ck(_v, 222, 0, currVal_422);
+        var currVal_423 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 228).ngClassTouched;
+
+        var currVal_424 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 228).ngClassPristine;
+
+        var currVal_425 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 228).ngClassDirty;
+
+        var currVal_426 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 228).ngClassValid;
+
+        var currVal_427 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 228).ngClassInvalid;
+
+        var currVal_428 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 228).ngClassPending;
+
+        var currVal_429 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).fullWidth;
+
+        var currVal_430 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).tiny;
+
+        var currVal_431 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).small;
+
+        var currVal_432 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).medium;
+
+        var currVal_433 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).large;
+
+        var currVal_434 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).giant;
+
+        var currVal_435 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).primary;
+
+        var currVal_436 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).info;
+
+        var currVal_437 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).success;
+
+        var currVal_438 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).warning;
+
+        var currVal_439 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).danger;
+
+        var currVal_440 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).basic;
+
+        var currVal_441 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).control;
+
+        var currVal_442 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).rectangle;
+
+        var currVal_443 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).semiRound;
+
+        var currVal_444 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 229).round;
+
+        _ck(_v, 223, 1, [currVal_422, currVal_423, currVal_424, currVal_425, currVal_426, currVal_427, currVal_428, currVal_429, currVal_430, currVal_431, currVal_432, currVal_433, currVal_434, currVal_435, currVal_436, currVal_437, currVal_438, currVal_439, currVal_440, currVal_441, currVal_442, currVal_443, currVal_444]);
+
+        var currVal_449 = _co.edit ? "Update" : "Add";
+
+        _ck(_v, 236, 0, currVal_449);
       });
     }
 
@@ -17889,6 +17987,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             address: [''],
             date: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
             followUpDate: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            followUpTime: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
             instituteId: [this.instituteId],
             courseId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
             status: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
@@ -17930,7 +18029,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               strength: data.strength,
               mode: data.mode,
               source: data.source,
-              comment: data.comment
+              comment: data.comment,
+              followUpTime: data.followUpTime
             });
           }, function (err) {
             return console.error(err);
