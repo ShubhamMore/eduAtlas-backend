@@ -209,7 +209,7 @@ exports.creatUser = async (req, res, next) => {
       `,
     };
 
-    response(res, 200, 'Verify OTP now');
+    response(res, 200, 'Verify Email now');
     send(mail);
   } catch (error) {
     errorHandler(error, res);
@@ -286,7 +286,7 @@ exports.verifyEmail = async (req, res) => {
             <tr class="align-center" width='100%' >
               <td>
                 <h1 style="text-align:center;display:block;margin:0;padding:0;color:#222222;font-family:Helvetica;font-size:40px;font-style:normal;font-weight:bold;line-height:120%;letter-spacing:normal">
-                  <span>HELLO, ${user.name}</span>
+                  <span>Hello, ${user.name}</span>
                 </h1>
               </td>
             </tr>
@@ -295,7 +295,7 @@ exports.verifyEmail = async (req, res) => {
               <td>
                 <h4 style="text-align:center;display:block;margin:0;padding:0;color:#949494;font-family:Georgia; font-size:20px;font-style:italic; font-weight:normal; line-height:125%; letter-spacing:normal">
                   <br><br>
-                  <span> Your Email is Verifies Successfully!, Click on following Button to Login into your Account</span>
+                  <span> Your Email has been Verified Successfully!, Click on following Button to Login into your Account</span>
                   <br><br>
                 </h4>
               </td>
@@ -556,10 +556,10 @@ exports.findUser = async (req, res) => {
   }
 
   try {
-    const phoneExist = await User.findOne({ phone }, { phone: 1 });
-    if (phoneExist) {
-      throw new Error('Phone Number Already Exist');
-    }
+    // const phoneExist = await User.findOne({ phone }, { phone: 1 });
+    // if (phoneExist) {
+    //   throw new Error('Phone Number Already Exist');
+    // }
     const emailExist = await User.findOne({ email }, { email: 1 });
     if (emailExist) {
       throw new Error('Email Already Exist');
