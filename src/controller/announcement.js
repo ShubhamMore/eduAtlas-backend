@@ -120,6 +120,7 @@ exports.getStudentAnnouncements = async (req, res, next) => {
 exports.getSingleAnnouncement = async (req, res, next) => {
   try {
     const _id = req.body.id;
+
     const announcement = await Announcement.findById(_id);
     if (!announcement) {
       throw new Error('Announcement Not Found');

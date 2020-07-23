@@ -25,6 +25,9 @@ const leadsSchema = new mongoose.Schema({
   followUpDate: {
     type: String,
   },
+  followUpTime: {
+    type: String,
+  },
   status: {
     type: String,
   },

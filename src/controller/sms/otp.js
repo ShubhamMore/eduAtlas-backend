@@ -4,6 +4,82 @@ const smsService = require('../../service/sms');
 const errorHandler = require('../../service/errorHandler');
 const { NewUser, OneTimePassword } = require('../../clientStore');
 const send = require('../../service/mail');
+
+const generateHtml = (otp) => {
+  const htmlTemplate = `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Eduatlas OTP</title>
+        <style>
+          .align-center {
+            align-items: center;
+          }
+
+          .text-center {
+            text-align: center;
+          }
+        </style>
+      </head>
+      <body width="100vw">
+      <div  class="align-center">
+          
+        <table style="width:'100%'">
+          <thead>
+            <tr class="align-center" width='100%' style="background-color:#ffd500;">
+              <th>
+                <img src="${process.env.SERVER}sample/ealogo-300x138.png" />
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            
+            
+            <tr class="align-center" width='100%' >
+              <td>
+                <h4 style="text-align:center;display:block;margin:0;padding:0;color:#949494;font-family:Georgia; font-size:20px;font-style:italic; font-weight:normal; line-height:125%; letter-spacing:normal">
+                  <br><br>
+                  <span>Dear Eduatlas User</span>
+                  <br><br>
+                </h4>
+              </td>
+            </tr>
+          
+            <tr class="align-center" width='100%' >
+              <td class="text-center">
+                <br><br>
+                <p>Your One Time Password (OTP) is: <strong>${otp}</strong></p>
+              </td>
+            </tr>
+          
+            </tbody>
+
+          <tfoot>
+
+            <tr class="align-center" width='100%' style="background-color:#333333; color:#ffffff";>
+              <th>
+                <br><br>
+                <em>Copyright (C) 2020, Eduatlas.com. All rights reserved.</em>
+                <br><br>
+                <strong>Get in touch:</strong>
+                <br>
+                <span>contact@eduatlas.com</span>
+                <br><br><br>
+              </th>
+            </tr>
+          </tfoot>
+        </table>  
+      </body>
+    </html>
+  `;
+
+  return htmlTemplate;
+};
+
 const generateOTP = (ph) => {
   var digits = '0123456789';
   let OTP = '';
@@ -38,22 +114,15 @@ exports.sendOtp = async (req, res, next) => {
       phone,
       'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
     );
-    // const user = await User.findOne({
-    //   email: req.params.email,
-    // });
-    // const token = await user.generateAuthToken();
 
-    // const url = process.env.SERVER + 'users/verifyEmail?token=' + token;
-    //
-    // const smsRes = 'send sms'; // remove later
-    // const mail = {
-    //   to: req.params.email,
-    //   from: 'admin@eduatlas.in',
-    //   subject: 'EDUATLAS: VERIFY EMAIL',
-    //   html: `<a href= '${url}'> ${url} </a>`,
-    // };
+    const mail = {
+      to: req.params.email,
+      from: 'admin@eduatlas.in',
+      subject: 'EDUATLAS: OTP Verification',
+      html: generateHtml(OneTimePassword.getOTP(phone)),
+    };
 
-    // await send(mail);
+    await send(mail);
     res.status(200).send({ message: `OTP Send to  ${phone}` }); //Change later
   } catch (error) {
     response(res, 500, 'Internal server error');
@@ -84,7 +153,14 @@ exports.sendOtpForRegisteredUser = async (req, res, next) => {
       'Your OTP (One Time Password): ' + OneTimePassword.getOTP(phone)
     );
 
-    // const smsRes = 'send sms'; // remove later
+    const mail = {
+      to: req.params.email,
+      from: 'admin@eduatlas.in',
+      subject: 'EDUATLAS: OTP Verification',
+      html: generateHtml(OneTimePassword.getOTP(phone)),
+    };
+
+    await send(mail);
 
     res.status(200).send({ message: `OTP Send to  ${phone}`, phone }); //Change later
   } catch (error) {
@@ -122,22 +198,14 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
 
     const smsRes = await smsService.sendSms(phone, 'Your OTP (One Time Password): ' + otp);
 
-    let mail = {
+    const mail = {
       to: user.email,
       from: 'admin@eduatlas.in',
-      subject: 'OTP for Eduatlas',
-      html:
-        '<!DOCTYPE html>' +
-        '<html><head><title>OTP</title>' +
-        '</head><body><div>' +
-        '<p>Dear Eduatlas User,</p>' +
-        '<p>YOUR OTP IS :</p>' +
-        otp +
-        '</div></body></html>',
+      subject: 'EDUATLAS: OTP Verification',
+      html: generateHtml(OneTimePassword.getOTP(phone)),
     };
 
-    //const smsRes = 'send sms'; // remove later
-    // const smsRes = 'send sms';
+    await send(mail);
 
     res.status(200).send({ message: `OTP Send to  ${user.phone}`, phone: user.phone }); //Change later
   } catch (error) {

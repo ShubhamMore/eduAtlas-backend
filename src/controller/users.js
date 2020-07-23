@@ -209,7 +209,7 @@ exports.creatUser = async (req, res, next) => {
       `,
     };
 
-    response(res, 200, 'Verify OTP now');
+    response(res, 200, 'Verify Email now');
     send(mail);
   } catch (error) {
     errorHandler(error, res);
@@ -232,9 +232,115 @@ exports.verifyEmail = async (req, res) => {
       throw new Error('Verification Failed');
     }
 
-    const data = {
-      emailVerified: true,
-    };
+    const data = `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Verify Email</title>
+        <style>
+          .button {
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+          }
+          
+          .button1 {
+            background-color: #e95a59;
+            color: #fff;
+            border-radius: 3px;
+          }
+    
+          .align-center {
+            align-items: center;
+          }
+    
+          .text-center {
+            text-align: center;
+          }
+        </style>
+      </head>
+      <body width="100vw">
+      <div  class="align-center">
+          
+        <table style="width:'100%'">
+          <thead>
+            <tr class="align-center" width='100%' style="background-color:#ffd500;">
+              <th>
+                <img src="${process.env.SERVER}sample/ealogo-300x138.png" />
+              </th>
+            </tr>
+          </thead>
+    
+          <tbody>
+    
+            
+            <tr class="align-center" width='100%' >
+              <td>
+                <h1 style="text-align:center;display:block;margin:0;padding:0;color:#222222;font-family:Helvetica;font-size:40px;font-style:normal;font-weight:bold;line-height:120%;letter-spacing:normal">
+                  <span>Hello, ${user.name}</span>
+                </h1>
+              </td>
+            </tr>
+    
+            <tr class="align-center" width='100%' >
+              <td>
+                <h4 style="text-align:center;display:block;margin:0;padding:0;color:#949494;font-family:Georgia; font-size:20px;font-style:italic; font-weight:normal; line-height:125%; letter-spacing:normal">
+                  <br><br>
+                  <span> Your Email has been Verified Successfully!, Click on following Button to Login into your Account</span>
+                  <br><br>
+                </h4>
+              </td>
+            </tr>
+          
+            <tr class="align-center" width='100%' >
+              <td class="text-center">
+                <br><br>
+                <a href="${process.env.CLIENT_URL}" class="button button1">Go to Login</a>
+              </td>
+            </tr>
+          
+            <tr>
+              <th>
+                <hr>
+                <h3 style="display:block;margin:0;padding:0;color:#444444;font-family:Helvetica;font-size:22px;font-style:normal;font-weight:bold;line-height:'100%';letter-spacing:normal;text-align:left">
+                  <span style="font-size:14px">
+                    Having trouble? Click on this link instead: 
+                  </span>
+                </h3>
+                <h5 style="text-align:center;color:#949494;font-family:Georgia; font-size:14px; font-weight:normal;"> 
+                  <a href="${process.env.CLIENT_URL}">${process.env.CLIENT_URL}</a>
+                </h5>
+              </th>
+            </tr> 
+          </tbody>
+    
+          <tfoot>
+    
+            <tr class="align-center" width='100%' style="background-color:#333333; color:#ffffff";>
+              <th>
+                <br><br>
+                <em>Copyright (C) 2020, Eduatlas.com. All rights reserved.</em>
+                <br><br>
+                <strong>Get in touch:</strong>
+                <br>
+                <span>contact@eduatlas.com</span>
+                <br><br><br>
+              </th>
+            </tr>
+          </tfoot>
+        </table>  
+      </body>
+    </html>
+    `;
 
     res.status(200).send(data);
   } catch (e) {
@@ -450,10 +556,10 @@ exports.findUser = async (req, res) => {
   }
 
   try {
-    const phoneExist = await User.findOne({ phone }, { phone: 1 });
-    if (phoneExist) {
-      throw new Error('Phone Number Already Exist');
-    }
+    // const phoneExist = await User.findOne({ phone }, { phone: 1 });
+    // if (phoneExist) {
+    //   throw new Error('Phone Number Already Exist');
+    // }
     const emailExist = await User.findOne({ email }, { email: 1 });
     if (emailExist) {
       throw new Error('Email Already Exist');
