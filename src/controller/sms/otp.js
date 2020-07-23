@@ -171,7 +171,7 @@ exports.sendOtpForRegisteredUser = async (req, res, next) => {
 exports.sendOtpForGetUserDetails = async (req, res, next) => {
   try {
     const id = req.body.eduAtlasId;
-
+    console.log(id);
     if (!id) {
       response(res, 400, 'EduAtlas Id or Email Not Provided');
       return;
@@ -196,19 +196,20 @@ exports.sendOtpForGetUserDetails = async (req, res, next) => {
     new OneTimePassword(user.phone, generateOTP(user.phone));
     const otp = OneTimePassword.getOTP(user.phone);
 
-    const smsRes = await smsService.sendSms(phone, 'Your OTP (One Time Password): ' + otp);
+    const smsRes = await smsService.sendSms(user.phone, 'Your OTP (One Time Password): ' + otp);
 
     const mail = {
       to: user.email,
       from: 'admin@eduatlas.in',
       subject: 'EDUATLAS: OTP Verification',
-      html: generateHtml(OneTimePassword.getOTP(phone)),
+      html: generateHtml(OneTimePassword.getOTP(user.phone)),
     };
 
     await send(mail);
 
     res.status(200).send({ message: `OTP Send to  ${user.phone}`, phone: user.phone }); //Change later
   } catch (error) {
+    console.log(error);
     response(res, 500, 'Internal server error');
   }
 };
