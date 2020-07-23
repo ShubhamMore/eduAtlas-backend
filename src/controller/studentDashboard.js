@@ -209,6 +209,29 @@ exports.getStudentDashboard = async (req, res) => {
         },
       },
       {
+        $addFields: {
+          'schedule.days.teacher': {
+            $toObjectId: '$schedule.days.teacher',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'employees',
+          localField: 'schedule.days.teacher',
+          foreignField: '_id',
+          as: 'teacher',
+        },
+      },
+      {
+        $unwind: { path: '$teacher', preserveNullAndEmptyArrays: true },
+      },
+      {
+        $addFields: {
+          'schedule.days.teacherName': '$teacher.basicDetails.name',
+        },
+      },
+      {
         $project: {
           instituteName: '$instituteCourse.basicInfo.name',
           batchCode: '$instituteCourse.batch.batchCode',
