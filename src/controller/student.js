@@ -12,6 +12,8 @@ const Fee = require('../model/fee.model');
 const Ptm = require('../model/ptm.model');
 const Mentoring = require('../model/mentoring.model');
 const send = require('../service/mail');
+const smsService = require('../service/sms');
+
 const appendZero = (n) => {
   if (n < 10) {
     return '0' + n;
@@ -51,9 +53,9 @@ exports.addStudent = async (req, res, next) => {
 
     const user = await User.find({
       $or: [
-        {
-          phone: req.body.basicDetails.studentContact,
-        },
+        // {
+        //   phone: req.body.basicDetails.studentContact,
+        // },
         {
           email: req.body.basicDetails.studentEmail,
         },
@@ -124,6 +126,7 @@ exports.addStudent = async (req, res, next) => {
           'parentInstitute.name': 1,
           'parentInstitute.email': 1,
           'parentInstitute.phone': 1,
+          smsCount: 1,
         },
       },
     ]);
@@ -151,10 +154,10 @@ exports.addStudent = async (req, res, next) => {
         '</p>' +
         '<p>FOR LOGIN CREDENTIALS: </p>' +
         '<p>EMAIL: ' +
-        req.body.basicDetails.email +
+        req.body.basicDetails.studentEmail +
         '</p>' +
         '<p>PASSWORD: ' +
-        req.body.basicDetails.phone +
+        req.body.basicDetails.studentContact +
         '</p>' +
         '<p>Thank you </p>' +
         '<p>EDUATLAS </p>' +
@@ -173,10 +176,31 @@ exports.addStudent = async (req, res, next) => {
         },
       }
     );
+    let msgStatus = '';
+    if (instituteDetails[0].smsCount <= 0) {
+      msgStatus = 'SMS Balance is not sufficient';
+    } else {
+      const msgText = `Dear ${req.body.basicDetails.name},\nInstitute Name: ${instituteDetails[0].parentInstitute.name} \nBranch: ${instituteDetails[0].basicInfo.name}\nFor more details visit lms.eduatlas.in \nCredentials emailed on registered email ID: ${req.body.basicDetails.studentEmail}\nFrom Eduatlas`;
+      const smsRes = await smsService.sendSms(req.body.basicDetails.studentContact, msgText);
+      msgStatus = 'SMS send';
 
+      const updateSmsCount = Institute.update(
+        {
+          _id: req.body.instituteDetails.instituteId,
+        },
+        {
+          $inc: {
+            smsCount: -1,
+          },
+        }
+      );
+    }
+    addStudent.smsStatus = msgStatus;
+    console.log(addStudent);
     res.status(200).send(addStudent);
     await send(mail);
   } catch (error) {
+    console.log(error);
     errorHandler(error, res);
   }
 };

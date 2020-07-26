@@ -80,7 +80,7 @@ const sendScheduleUpdate = async () => {
       title: 'Schedule Reminder',
       message: `You have lecture on ${new Date(schedule.days.date)} of topic ${
         schedule.days.topic
-      } from ${schedule.days.startTime} tp ${schedule.days.endTime}`,
+      } from ${schedule.days.startTime} to ${schedule.days.endTime}`,
     };
 
     schedule.students.forEach((student) => {
