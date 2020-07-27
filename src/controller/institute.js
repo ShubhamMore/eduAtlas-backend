@@ -85,11 +85,11 @@ exports.activateInstitute = async (req, res, next) => {
     const currentPlan = req.body.paymentDetails.planType;
     var smsCount = 0;
     if (currentPlan == 'Lite') {
-      smsCount = 100;
+      smsCount = 0;
     } else if (currentPlan == 'Value') {
-      smsCount = 500;
+      smsCount = 5000;
     } else if (currentPlan == 'Power') {
-      smsCount = 1000;
+      smsCount = 10000;
     }
     const date = new Date();
     const startDate = date;
