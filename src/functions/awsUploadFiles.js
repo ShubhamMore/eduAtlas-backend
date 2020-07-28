@@ -3,7 +3,7 @@ const getImageSize = require('../shared/getImageSize');
 const fs = require('fs').promises;
 const s3 = require('./awsConfig');
 
-const uploadFilesToAWS = async (filePath, fileName, cloudeDirectory) => {
+const uploadFilesToAWS = async (filePath, fileName, cloudDirectory) => {
   try {
     let upload_len = filePath.length;
     let upload_res = new Array();
@@ -15,24 +15,22 @@ const uploadFilesToAWS = async (filePath, fileName, cloudeDirectory) => {
 
       // Setting up S3 upload parameters
       const params = {
-        Bucket: process.env.AWS_BUCKET_NAME + '/' + cloudeDirectory,
+        Bucket: process.env.AWS_BUCKET_NAME + '/' + cloudDirectory,
         Key: fileName[i], // File name you want to save as in S3
         Body: fileContent,
-        ACL: 'public-read'
+        ACL: 'public-read',
       };
       // Uploading files to the bucket
       const res = await s3.upload(params).promise();
 
       if (res.Location) {
-        res.size = await getImageSize(
-          path.join(__dirname, '../../', filePath[i])
-        );
+        res.size = await getImageSize(path.join(__dirname, '../../', filePath[i]));
         upload_res.push(res);
       } else {
         upload_err.push(res);
       }
 
-      fs.unlink(path.join(__dirname, '../../', filePath[i]), err => {
+      fs.unlink(path.join(__dirname, '../../', filePath[i]), (err) => {
         if (err) {
           file_err.push(err);
         }

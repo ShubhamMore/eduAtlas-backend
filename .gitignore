@@ -11,3 +11,5 @@ attendance/*
 !announcements/.gitkeep
 receipts/*
 !receipts/.gitkeep
+recordings/*
+!recordings/.gitkeep
