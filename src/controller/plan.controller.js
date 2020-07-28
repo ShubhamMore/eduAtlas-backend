@@ -41,7 +41,7 @@ exports.getPlan = async (req, res) => {
 
 exports.getAllPlans = async (req, res) => {
   try {
-    const plans = await Plan.find();
+    const plans = await Plan.find({});
 
     res.status(200).send(plans);
   } catch (e) {

@@ -34,11 +34,30 @@ exports.orderGenerate = async (req, res) => {
   try {
     const receiptData = req.body;
 
+    const amountType = req.body.amountType;
+    console.log(amountType);
+    if (!amountType && amountType !== 'new' && amountType !== 'upgrade') {
+      throw new Error('Invalid Amount Type');
+    }
+
     const plan = await Plan.findOne({ planType: req.body.planType });
     if (!plan) {
       throw new Error('Invalid Plan');
     }
-    const gstCalculatedAmount = (+plan.amount + +plan.amount * 0.18).toFixed(2);
+
+    let amount;
+
+    if (amountType === 'new') {
+      amount = +plan.amount;
+    } else if (amountType === 'upgrade') {
+      amount = +plan.upgradeAmount;
+    } else {
+      throw new Error('Invalid Amount Type');
+    }
+
+    const gstAmount = +amount * 0.18;
+
+    const gstCalculatedAmount = (amount + gstAmount).toFixed(2);
     receiptData.amount = gstCalculatedAmount;
     const receipt = new Receipt(receiptData);
 
