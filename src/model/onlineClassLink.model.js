@@ -39,6 +39,10 @@ const onlineClassLinkSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      fileSize: {
+        type: Number,
+        required: true,
+      },
       secureUrl: {
         type: String,
         required: true,

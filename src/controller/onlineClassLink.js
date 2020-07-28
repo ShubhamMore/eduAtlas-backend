@@ -57,6 +57,7 @@ exports.createMeetingLink = async (req, res) => {
 
     res.status(200).send(onlineMeetingLink);
   } catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 };
@@ -77,6 +78,14 @@ exports.getOneMeetingLink = async (req, res) => {
 
 exports.getMeetingLinks = async (req, res) => {
   try {
+    const date = new Date();
+    const currentDate =
+      date.getFullYear() +
+      '-' +
+      (date.getMonth() + 1).toString().padStart(2, '0') +
+      '-' +
+      date.getDate().toString().padStart(2, '0');
+
     const query = {
       instituteId: req.body.instituteId,
     };
@@ -89,9 +98,17 @@ exports.getMeetingLinks = async (req, res) => {
       query.batchId = req.body.batchId;
     }
 
-    const onlineMeetingLinks = await OnlineClassLink.find(query);
+    const upcomingMeetings = await OnlineClassLink.find({
+      ...query,
+      date: { $gte: currentDate },
+    });
 
-    res.status(200).send(onlineMeetingLinks);
+    const previousMeetings = await OnlineClassLink.find({
+      ...query,
+      date: { $lt: currentDate },
+    });
+
+    res.status(200).send({ upcomingMeetings, previousMeetings });
   } catch (error) {
     res.status(400).send(error);
   }
@@ -109,6 +126,8 @@ exports.addRecording = async (req, res) => {
 
     let filePath = file.path;
     let fileName = file.filename;
+    let fileSize = file.size;
+
     const cloudDirectory = req.body.InstituteId + '/recordings';
     const uploadResponce = await awsUploadFile(filePath, fileName, cloudDirectory);
 
@@ -116,6 +135,7 @@ exports.addRecording = async (req, res) => {
 
     const recording = {
       fileName: upload_res.key.split('/')[1],
+      fileSize,
       secureUrl: upload_res.Location,
       publicId: upload_res.key,
       createdAt: Date.now(),
@@ -129,11 +149,12 @@ exports.addRecording = async (req, res) => {
     );
 
     if (updateOnlineClassLink.nModified > 0) {
-      return res.status(200).json({ message: 'Recording added successfully' });
+      return res.status(200).send(recording);
     } else {
       throw Error('');
     }
   } catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 };
