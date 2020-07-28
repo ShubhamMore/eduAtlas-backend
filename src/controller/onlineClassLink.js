@@ -128,7 +128,7 @@ exports.addRecording = async (req, res) => {
     let fileName = file.filename;
     let fileSize = file.size;
 
-    const cloudDirectory = req.body.InstituteId + '/recordings';
+    const cloudDirectory = req.body.instituteId + '/recordings';
     const uploadResponce = await awsUploadFile(filePath, fileName, cloudDirectory);
 
     const upload_res = uploadResponce.upload_res;
@@ -168,7 +168,7 @@ exports.deleteRecording = async (req, res) => {
     }
 
     const index = onlineClassLink.recordings.findIndex(
-      (recording) => recording._id === recordingId
+      (recording) => recording._id == req.body.recordingId
     );
 
     if (index < 0) {
@@ -183,6 +183,7 @@ exports.deleteRecording = async (req, res) => {
 
     res.status(200).send({ success: true });
   } catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 };
