@@ -1,34 +1,33 @@
 const Announcement = require('../model/announcement.model');
 const errorHandler = require('../service/errorHandler');
 
-const fs = require('fs');
-const path = require('path');
-
-const deleteFile = (filePath) => {
-  fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
-    if (error) {
-      const err = new Error('Error while deleting the image');
-      err.statusCode = 500;
-      throw err;
-    }
-  });
-};
+const awsUploadFile = require('../functions/awsUploadFile');
+const awsRemoveFile = require('../functions/awsRemoveFile');
 
 exports.makeAnnouncement = async (req, res) => {
   try {
     let attachment = null;
     if (req.file !== undefined) {
-      const fileURL = {
-        filePath: req.file.path,
-        fileName: `${req.file.filename.substring(
-          0,
-          req.file.filename.lastIndexOf('-')
-        )}.${req.file.filename.substring(req.file.filename.lastIndexOf('.') + 1)}`,
-      };
+      let filePath = req.file.path;
+      let fileName = req.file.filename;
+      let fileSize = req.file.size;
+
+      const cloudDirectory = req.body.instituteId + '/announcements';
+      const uploadResponce = await awsUploadFile(filePath, fileName, cloudDirectory);
+
+      const upload_res = uploadResponce.upload_res;
+
       attachment = {
-        file_name: fileURL.fileName,
-        secure_url: process.env.SERVER + fileURL.filePath,
-        public_id: fileURL.filePath,
+        file_name: upload_res.key
+          .split('/')[2]
+          .substring(0, upload_res.key.split('/')[2].lastIndexOf('-'))
+          .split('-')
+          .join(' ')
+          .toUpperCase(),
+
+        file_size: fileSize,
+        secure_url: upload_res.Location,
+        public_id: upload_res.key,
         created_at: Date.now(),
       };
     }
@@ -47,6 +46,7 @@ exports.makeAnnouncement = async (req, res) => {
     await announcement.save();
     res.status(201).json(announcement);
   } catch (error) {
+    console.log(error);
     errorHandler(error, res);
   }
 };
@@ -57,22 +57,29 @@ exports.editAnnouncement = async (req, res) => {
 
     let attachment = oldAnnouncement.attachment;
     if (req.file !== undefined) {
-      const fileURL = {
-        filePath: req.file.path,
-        fileName: `${req.file.filename.substring(
-          0,
-          req.file.filename.lastIndexOf('-')
-        )}.${req.file.filename.substring(req.file.filename.lastIndexOf('.') + 1)}`,
-      };
+      let filePath = req.file.path;
+      let fileName = req.file.filename;
+      let fileSize = req.file.size;
+
+      const cloudDirectory = req.body.instituteId + '/announcements';
+      const uploadResponce = await awsUploadFile(filePath, fileName, cloudDirectory);
+
+      const upload_res = uploadResponce.upload_res;
 
       if (attachment.public_id) {
-        deleteFile(attachment.public_id);
+        await awsRemoveFile(attachment.public_id);
       }
 
       attachment = {
-        file_name: fileURL.fileName,
-        secure_url: process.env.SERVER + fileURL.filePath,
-        public_id: fileURL.filePath,
+        file_name: upload_res.key
+          .split('/')[2]
+          .substring(0, upload_res.key.split('/')[2].lastIndexOf('-'))
+          .split('-')
+          .join(' ')
+          .toUpperCase(),
+        file_size: fileSize,
+        secure_url: upload_res.Location,
+        public_id: upload_res.key,
         created_at: Date.now(),
       };
     }
@@ -135,10 +142,10 @@ exports.deleteAnnouncement = async (req, res, next) => {
   try {
     const announcement = await Announcement.findByIdAndDelete(req.body._id);
     if (announcement.attachment.public_id) {
-      deleteFile(announcement.attachment.public_id);
+      await awsRemoveFile(announcement.attachment.public_id);
     }
 
-    res.status(200).json({ message: 'Deleted successfully' });
+    res.status(200).json({ message: 'Announcement Deleted successfully' });
   } catch (error) {
     errorHandler(error, res);
   }

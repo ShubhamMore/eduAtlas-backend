@@ -271,7 +271,14 @@ const instituteSchema = new Schema(
       type: Number,
       default: 0,
     },
-
+    totalStorage: {
+      type: Number, // in bytes
+      default: 104857600, // 100 MB
+    },
+    storageUsed: {
+      type: Number,
+      default: 0,
+    },
     expiryDate: {
       type: Date,
       default: null,

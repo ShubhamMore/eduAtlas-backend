@@ -14,6 +14,10 @@ const studyMaterialSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
+    file_size: {
+      type: String,
+      required: true,
+    },
     secure_url: {
       type: String,
       required: true,

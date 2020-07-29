@@ -32,6 +32,9 @@ const announcementSchema = new Schema({
     file_name: {
       type: String,
     },
+    file_size: {
+      type: String,
+    },
     secure_url: {
       type: String,
     },

@@ -1,37 +1,37 @@
 const StudyMaterial = require('../model/studyMaterial.model');
-const fs = require('fs');
-const path = require('path');
 
-const deleteFile = (filePath) => {
-  fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
-    if (error) {
-      const err = new Error('Error while deleting the image');
-      err.statusCode = 500;
-      throw err;
-    }
-  });
-};
+const awsUploadFile = require('../functions/awsUploadFile');
+const awsRemoveFile = require('../functions/awsRemoveFile');
 
 exports.addStudyMaterial = async (req, res) => {
   try {
     let materialFile = null;
     if (req.file !== undefined) {
-      const fileURL = {
-        filePath: req.file.path,
-        fileName: `${req.file.filename.substring(
-          0,
-          req.file.filename.lastIndexOf('-')
-        )}.${req.file.filename.substring(req.file.filename.lastIndexOf('.') + 1)}`,
-      };
+      let filePath = req.file.path;
+      let fileName = req.file.filename;
+      let fileSize = req.file.size;
+
+      const cloudDirectory = req.body.instituteId + '/study-materials';
+      const uploadResponce = await awsUploadFile(filePath, fileName, cloudDirectory);
+
+      const upload_res = uploadResponce.upload_res;
+
       materialFile = {
-        file_name: fileURL.fileName,
-        secure_url: process.env.SERVER + fileURL.filePath,
-        public_id: fileURL.filePath,
+        file_name: upload_res.key
+          .split('/')[2]
+          .substring(0, upload_res.key.split('/')[2].lastIndexOf('-'))
+          .split('-')
+          .join(' ')
+          .toUpperCase(),
+        file_size: fileSize,
+        secure_url: upload_res.Location,
+        public_id: upload_res.key,
         created_at: Date.now(),
       };
     } else {
       materialFile = {
         file_name: req.body.title,
+        file_size: null,
         secure_url: req.body.link,
         public_id: req.body.link,
         created_at: Date.now(),
@@ -62,32 +62,40 @@ exports.editStudyMaterial = async (req, res) => {
     let materialFile = oldStudyMaterial.file;
 
     if (req.file !== undefined) {
-      const fileURL = {
-        filePath: req.file.path,
-        fileName: `${req.file.filename.substring(
-          0,
-          req.file.filename.lastIndexOf('-')
-        )}.${req.file.filename.substring(req.file.filename.lastIndexOf('.') + 1)}`,
-      };
+      let filePath = req.file.path;
+      let fileName = req.file.filename;
+      let fileSize = req.file.size;
+
+      const cloudDirectory = req.body.instituteId + '/study-materials';
+      const uploadResponce = await awsUploadFile(filePath, fileName, cloudDirectory);
+
+      const upload_res = uploadResponce.upload_res;
 
       if (materialFile.public_id && oldStudyMaterial.category !== 'LEARNING VIDEO') {
-        deleteFile(materialFile.public_id);
+        await awsRemoveFile(materialFile.public_id);
       }
 
       materialFile = {
-        file_name: fileURL.fileName,
-        secure_url: process.env.SERVER + fileURL.filePath,
-        public_id: fileURL.filePath,
+        file_name: upload_res.key
+          .split('/')[2]
+          .substring(0, upload_res.key.split('/')[2].lastIndexOf('-'))
+          .split('-')
+          .join(' ')
+          .toUpperCase(),
+        file_size: fileSize,
+        secure_url: upload_res.Location,
+        public_id: upload_res.key,
         created_at: Date.now(),
       };
     } else {
       if (req.body.category === 'LEARNING VIDEO') {
         if (oldStudyMaterial.category !== 'LEARNING VIDEO' && materialFile.public_id) {
-          deleteFile(materialFile.public_id);
+          await awsRemoveFile(materialFile.public_id);
         }
 
         materialFile = {
           file_name: req.body.title,
+          file_size: null,
           secure_url: req.body.link,
           public_id: req.body.link,
           created_at: Date.now(),
@@ -161,7 +169,7 @@ exports.deleteStudyMaterial = async (req, res, next) => {
   try {
     const material = await StudyMaterial.findByIdAndDelete(req.body._id);
     if (material.category !== 'LEARNING VIDEO') {
-      deleteFile(material.file.public_url);
+      await awsRemoveFile(material.file.public_id);
     }
     res.status(200).json({ message: 'Deleted successfully' });
   } catch (error) {

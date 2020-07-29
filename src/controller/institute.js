@@ -83,13 +83,22 @@ exports.activateInstitute = async (req, res, next) => {
     }
 
     const currentPlan = req.body.paymentDetails.planType;
-    var smsCount = 0;
+
+    let smsCount = 0;
+    let totalStorage = 104857600; // 100 MB
+
     if (currentPlan == 'Lite') {
       smsCount = 0;
+      totalStorage = 104857600; // 2 GB (1024*1024*100 Bytes)
+    } else if (currentPlan == 'Lite Plus') {
+      smsCount = 0;
+      totalStorage = 2147483648; // 2 GB (1024*1024*1024*2 Bytes)
     } else if (currentPlan == 'Value') {
       smsCount = 5000;
+      totalStorage = 2147483648; // 2 GB (1024*1024*1024*2 Bytes)
     } else if (currentPlan == 'Power') {
       smsCount = 10000;
+      totalStorage = 10737418240; // 10 GB (1024*1024*1024*10 Bytes)
     }
     const date = new Date();
     const startDate = date;
@@ -113,6 +122,7 @@ exports.activateInstitute = async (req, res, next) => {
         startDate,
         expiryDate,
         smsCount,
+        totalStorage,
       }
     );
     res.status(200).send(inst);

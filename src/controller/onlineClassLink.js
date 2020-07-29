@@ -134,7 +134,12 @@ exports.addRecording = async (req, res) => {
     const upload_res = uploadResponce.upload_res;
 
     const recording = {
-      fileName: upload_res.key.split('/')[1],
+      fileName: upload_res.key
+        .split('/')[2]
+        .substring(0, upload_res.key.split('/')[2].lastIndexOf('-'))
+        .split('-')
+        .join(' ')
+        .toUpperCase(),
       fileSize,
       secureUrl: upload_res.Location,
       publicId: upload_res.key,
