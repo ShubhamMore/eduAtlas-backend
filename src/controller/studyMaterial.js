@@ -2,6 +2,7 @@ const StudyMaterial = require('../model/studyMaterial.model');
 const Institute = require('../model/institute.model');
 const awsUploadFile = require('../functions/awsUploadFile');
 const awsRemoveFile = require('../functions/awsRemoveFile');
+const errorHandler = require('../service/errorHandler');
 
 exports.addStudyMaterial = async (req, res) => {
   try {
@@ -54,9 +55,7 @@ exports.addStudyMaterial = async (req, res) => {
     await studyMaterial.save();
 
     storageUsed = storageUsed + materialFile.file_size;
-    institute.storageUsed = storageUsed;
-
-    await institute.save();
+    await Institute.findByIdAndUpdate(institute._id, { storageUsed });
 
     res.status(201).json(studyMaterial);
   } catch (error) {
@@ -133,9 +132,7 @@ exports.editStudyMaterial = async (req, res) => {
     const updatedInstitute = await StudyMaterial.findByIdAndUpdate(req.body._id, studyMaterialData);
 
     storageUsed = storageUsed + materialFile.file_size;
-    institute.storageUsed = storageUsed;
-
-    await institute.save();
+    await Institute.findByIdAndUpdate(institute._id, { storageUsed });
 
     res.status(201).json(updatedInstitute);
   } catch (error) {
@@ -196,16 +193,18 @@ exports.deleteStudyMaterial = async (req, res, next) => {
     const material = await StudyMaterial.findByIdAndDelete(req.body._id);
     if (material.category !== 'LEARNING VIDEO') {
       await awsRemoveFile(material.file.public_id);
-      if (material.file_size) {
+      if (material.file.file_size) {
+        console.log(storageUsed);
         storageUsed = storageUsed - +material.file.file_size;
+        console.log(storageUsed);
       }
     }
 
-    institute.storageUsed = storageUsed;
-    await institute.save();
+    await Institute.findByIdAndUpdate(institute._id, { storageUsed });
 
     res.status(200).json({ message: 'Deleted successfully' });
   } catch (error) {
+    console.log(error);
     errorHandler(error, res);
   }
 };

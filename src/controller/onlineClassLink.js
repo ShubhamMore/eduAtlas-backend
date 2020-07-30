@@ -3,7 +3,7 @@ const errorHandler = require('../service/errorHandler');
 const OnlineClassLink = require('../model/onlineClassLink.model');
 const Institute = require('../model/institute.model');
 const mongoose = require('mongoose');
-
+const { ObjectId } = require('bson');
 const awsUploadFile = require('../functions/awsUploadFile');
 const awsRemoveFile = require('../functions/awsRemoveFile');
 
@@ -138,6 +138,7 @@ exports.addRecording = async (req, res) => {
     const upload_res = uploadResponce.upload_res;
 
     const recording = {
+      _id: new ObjectId(),
       fileName: upload_res.key
         .split('/')[2]
         .substring(0, upload_res.key.split('/')[2].lastIndexOf('-'))
@@ -159,14 +160,13 @@ exports.addRecording = async (req, res) => {
 
     if (updateOnlineClassLink.nModified > 0) {
       storageUsed = storageUsed + recording.fileSize;
-      institute.storageUsed = storageUsed;
 
-      await institute.save();
+      await Institute.findByIdAndUpdate(institute._id, { storageUsed });
 
       return res.status(200).send(recording);
     } else {
       await awsRemoveFile(recording.publicId);
-      throw Error('');
+      throw Error('Recording Uploading Failed');
     }
   } catch (error) {
     console.log(error);
@@ -176,6 +176,8 @@ exports.addRecording = async (req, res) => {
 
 exports.deleteRecording = async (req, res) => {
   try {
+    console.log(req.body);
+
     const institute = await Institute.findById(req.body.instituteId);
     let storageUsed = +institute.storageUsed;
 
@@ -188,21 +190,23 @@ exports.deleteRecording = async (req, res) => {
     const index = onlineClassLink.recordings.findIndex(
       (recording) => recording._id == req.body.recordingId
     );
+    console.log(index);
 
     if (index < 0) {
       throw new Error('Recording Not Found');
     }
 
-    await awsRemoveFile(onlineClassLink.recordings[index].publicId);
+    const recording = onlineClassLink.recordings[index];
+
+    await awsRemoveFile(recording.publicId);
 
     onlineClassLink.recordings.splice(index, 1);
 
     await onlineClassLink.save();
 
-    storageUsed = storageUsed - +onlineClassLink.recordings[index].fileSize;
-    institute.storageUsed = storageUsed;
+    storageUsed = storageUsed - +recording.fileSize;
 
-    await institute.save();
+    await Institute.findByIdAndUpdate(institute._id, { storageUsed });
 
     res.status(200).send({ success: true });
   } catch (error) {

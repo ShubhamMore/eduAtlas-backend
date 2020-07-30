@@ -50,9 +50,7 @@ exports.makeAnnouncement = async (req, res) => {
     await announcement.save();
 
     storageUsed = storageUsed + attachment.file_size;
-    institute.storageUsed = storageUsed;
-
-    await institute.save();
+    await Institute.findByIdAndUpdate(institute._id, { storageUsed });
 
     res.status(201).json(announcement);
   } catch (error) {
@@ -113,8 +111,7 @@ exports.editAnnouncement = async (req, res) => {
     const updated = await Announcement.findByIdAndUpdate(req.body._id, announcementData);
 
     storageUsed = storageUsed + attachment.file_size;
-    institute.storageUsed = storageUsed;
-    await institute.save();
+    await Institute.findByIdAndUpdate(institute._id, { storageUsed });
 
     res.status(201).json(updated);
   } catch (error) {
@@ -172,8 +169,7 @@ exports.deleteAnnouncement = async (req, res, next) => {
       }
     }
 
-    institute.storageUsed = storageUsed;
-    await institute.save();
+    await Institute.findByIdAndUpdate(institute._id, { storageUsed });
 
     res.status(200).json({ message: 'Announcement Deleted successfully' });
   } catch (error) {

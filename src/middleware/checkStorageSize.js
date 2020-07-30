@@ -14,7 +14,7 @@ const checkStorage = async (req, res, next) => {
       const totalStorage = +institute.totalStorage;
       const storageUsed = +institute.storageUsed;
 
-      if (totalStorage > storageUsed + req.file.size) {
+      if (totalStorage < storageUsed + req.file.size) {
         fs.unlink(path.join(__dirname, '../../', req.file.path), (err) => {
           if (err) {
             file_err = err;
@@ -26,6 +26,7 @@ const checkStorage = async (req, res, next) => {
 
     next();
   } catch (e) {
+    console.log(e);
     res.status(401).send(e);
   }
 };
