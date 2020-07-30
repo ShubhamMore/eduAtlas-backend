@@ -5,6 +5,7 @@ const dashboardController = require('../controller/instituteDashboard');
 const checkAuth = require('../middleware/checkAuth');
 const checkPayment = require('../middleware/checkPayment');
 const extractFile = require('../middleware/file');
+const checkStorage = require('../middleware/checkStorageSize');
 //@Institute_Routes
 instituteRouter.post(
   '/addInstitute',
@@ -22,8 +23,10 @@ instituteRouter.put(
   '/updateInstitute/:id',
   checkAuth,
   extractFile,
+  checkStorage,
   instituteController.updateInstitute
 );
+instituteRouter.post('/getInstituteStorage', checkAuth, instituteController.getInstituteStorage);
 
 //@course_Routes
 instituteRouter.post('/course/addCourse/:branchId', checkAuth, couseConroller.addCourse);

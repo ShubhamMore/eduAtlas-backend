@@ -1,22 +1,14 @@
 const Institute = require('../model/institute.model');
 const Student = require('../model/student.model');
+const { ObjectId } = require('bson');
 const Announcement = require('../model/announcement.model');
 const schema = require('../service/joi');
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
-const fs = require('fs');
-const path = require('path');
 const mongoose = require('mongoose');
 
-const deleteImage = (filePath) => {
-  fs.unlink(path.join(__dirname + '../../../' + filePath), (error) => {
-    if (error) {
-      const err = new Error('Error while deleting the image');
-      err.statusCode = 500;
-      throw err;
-    }
-  });
-};
+const awsUploadFile = require('../functions/awsUploadFile');
+const awsRemoveFile = require('../functions/awsRemoveFile');
 
 exports.addInstitute = async (req, res, next) => {
   try {
@@ -31,30 +23,48 @@ exports.addInstitute = async (req, res, next) => {
       throw new Error('Institute Logo is Required');
     }
 
-    const image = {
-      filePath: req.file.path,
-      fileName: `${req.file.filename.substring(
-        0,
-        req.file.filename.lastIndexOf('-')
-      )}.${req.file.filename.substring(req.file.filename.lastIndexOf('.') + 1)}`,
+    if (!req.user.phone) {
+      throw new Error('User Phone is Not Available');
+    }
+
+    const id = new ObjectId();
+
+    const instIdCount = await Institute.findById(id).count();
+
+    if (instIdCount > 0) {
+      throw new Error('Institute ID already Exist');
+    }
+
+    let filePath = req.file.path;
+    let fileName = req.file.filename;
+    let fileSize = req.file.size;
+
+    const cloudDirectory = id + '/logo';
+    const uploadResponce = await awsUploadFile(filePath, fileName, cloudDirectory);
+
+    const upload_res = uploadResponce.upload_res;
+
+    const logo = {
+      image_name: upload_res.key
+        .split('/')[2]
+        .substring(0, upload_res.key.split('/')[2].lastIndexOf('-'))
+        .split('-')
+        .join(' ')
+        .toUpperCase(),
+
+      file_size: fileSize,
+      secure_url: upload_res.Location,
+      public_id: upload_res.key,
+      created_at: Date.now(),
     };
 
     delete req.body.logo;
 
-    if (!req.user.phone) {
-      throw new Error('req.user.phone is empty');
-    }
-
     let institute = new Institute();
 
-    institute.basicInfo = Object.assign({}, req.body.basicInfo);
+    institute._id = id;
 
-    const logo = {
-      image_name: image.fileName,
-      secure_url: process.env.SERVER + image.filePath,
-      public_id: image.filePath,
-      created_at: Date.now(),
-    };
+    institute.basicInfo = Object.assign({}, req.body.basicInfo);
 
     institute.basicInfo.logo = logo;
 
@@ -63,6 +73,7 @@ exports.addInstitute = async (req, res, next) => {
     institute.category = req.body.category;
 
     institute.metaTag = req.body.metaTag;
+    institute.storageUsed = logo.file_size;
 
     institute.userPhone = req.user.phone;
     institute.parentUser = req.body.parentUser;
@@ -155,8 +166,9 @@ exports.deleteInstitute = async (req, res, next) => {
     }
     const institute = await Institute.findByIdAndDelete(id);
     if (institute.basicInfo.logo.public_id) {
-      deleteImage(institute.basicInfo.logo.public_id);
+      await awsRemoveFile(institute.basicInfo.logo.public_id);
     }
+
     response(res, 202, 'Institute deleted successfully');
   } catch (error) {
     response(res, 500, 'Internal Server Error while performing Deletion');
@@ -171,6 +183,28 @@ exports.getOneInstitute = async (req, res, next) => {
     }
     const institute = await Institute.findById(req.params.id);
     res.status(200).json({ institute });
+  } catch (error) {
+    response(res, 500, 'Internal server error while getting institute');
+  }
+};
+
+exports.getInstituteStorage = async (req, res, next) => {
+  try {
+    if (!req.body.id) {
+      response(res, 400, 'Institute id is required');
+      return;
+    }
+    const institute = await Institute.findById(req.body.id, {
+      _id: 1,
+      totalStorage: 1,
+      storageUsed: 1,
+    });
+
+    if (!institute) {
+      throw new Error('Institute Not Found');
+    }
+
+    res.status(200).json(institute);
   } catch (error) {
     response(res, 500, 'Internal server error while getting institute');
   }
@@ -204,42 +238,65 @@ exports.updateInstitute = async (req, res, next) => {
 
     const institute = await Institute.findById(id);
 
+    let totalStorage = 104857600; // 100 MB
+
+    if (institute.currentPlan == 'Lite') {
+      totalStorage = 104857600; // 100 MB (1024*1024*100 Bytes)
+    } else if (institute.currentPlan == 'Lite Plus') {
+      totalStorage = 2147483648; // 2 GB (1024*1024*1024*2 Bytes)
+    } else if (institute.currentPlan == 'Value') {
+      totalStorage = 2147483648; // 2 GB (1024*1024*1024*2 Bytes)
+    } else if (institute.currentPlan == 'Power') {
+      totalStorage = 10737418240; // 10 GB (1024*1024*1024*10 Bytes)
+    }
+
     let logo = institute.basicInfo.logo;
+    let storageUsed = institute.storageUsed;
 
     if (req.file) {
-      const image = {
-        filePath: req.file.path,
-        fileName: `${req.file.filename.substring(
-          0,
-          req.file.filename.lastIndexOf('-')
-        )}.${req.file.filename.substring(req.file.filename.lastIndexOf('.') + 1)}`,
-      };
+      let filePath = req.file.path;
+      let fileName = req.file.filename;
+      let fileSize = req.file.size;
+
+      const cloudDirectory = id + '/logo';
+      const uploadResponce = await awsUploadFile(filePath, fileName, cloudDirectory);
+
+      const upload_res = uploadResponce.upload_res;
 
       if (logo.public_id) {
-        deleteImage(logo.public_id);
+        await awsRemoveFile(logo.public_id);
+        if (logo.file_size) {
+          storageUsed = storageUsed - logo.file_size;
+        }
       }
 
       logo = {
-        image_name: image.fileName,
-        secure_url: process.env.SERVER + image.filePath,
-        public_id: image.filePath,
+        image_name: upload_res.key
+          .split('/')[2]
+          .substring(0, upload_res.key.split('/')[2].lastIndexOf('-'))
+          .split('-')
+          .join(' ')
+          .toUpperCase(),
+
+        file_size: fileSize,
+        secure_url: upload_res.Location,
+        public_id: upload_res.key,
         created_at: Date.now(),
       };
     }
 
+    storageUsed = storageUsed + logo.file_size;
+
     delete req.body.logo;
 
     newInstitute = {};
-
     newInstitute.basicInfo = Object.assign({}, req.body.basicInfo);
-
     newInstitute.basicInfo.logo = logo;
-
     newInstitute.address = Object.assign({}, req.body.address);
-
     newInstitute.category = req.body.category;
-
     newInstitute.metaTag = req.body.metaTag;
+    newInstitute.totalStorage = totalStorage;
+    newInstitute.storageUsed = storageUsed;
 
     const updatedInstitute = await Institute.findByIdAndUpdate(
       id,

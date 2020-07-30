@@ -1,6 +1,7 @@
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
 const OnlineClassLink = require('../model/onlineClassLink.model');
+const Institute = require('../model/institute.model');
 const mongoose = require('mongoose');
 
 const awsUploadFile = require('../functions/awsUploadFile');
@@ -116,6 +117,9 @@ exports.getMeetingLinks = async (req, res) => {
 
 exports.addRecording = async (req, res) => {
   try {
+    const institute = await Institute.findById(req.body.instituteId);
+    let storageUsed = +institute.storageUsed;
+
     // upload file code here
 
     const file = req.file;
@@ -154,8 +158,14 @@ exports.addRecording = async (req, res) => {
     );
 
     if (updateOnlineClassLink.nModified > 0) {
+      storageUsed = storageUsed + recording.fileSize;
+      institute.storageUsed = storageUsed;
+
+      await institute.save();
+
       return res.status(200).send(recording);
     } else {
+      await awsRemoveFile(recording.publicId);
       throw Error('');
     }
   } catch (error) {
@@ -166,6 +176,9 @@ exports.addRecording = async (req, res) => {
 
 exports.deleteRecording = async (req, res) => {
   try {
+    const institute = await Institute.findById(req.body.instituteId);
+    let storageUsed = +institute.storageUsed;
+
     const onlineClassLink = await OnlineClassLink.findById(req.body._id);
 
     if (!onlineClassLink) {
@@ -185,6 +198,11 @@ exports.deleteRecording = async (req, res) => {
     onlineClassLink.recordings.splice(index, 1);
 
     await onlineClassLink.save();
+
+    storageUsed = storageUsed - +onlineClassLink.recordings[index].fileSize;
+    institute.storageUsed = storageUsed;
+
+    await institute.save();
 
     res.status(200).send({ success: true });
   } catch (error) {

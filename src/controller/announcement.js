@@ -1,4 +1,5 @@
 const Announcement = require('../model/announcement.model');
+const Institute = require('../model/institute.model');
 const errorHandler = require('../service/errorHandler');
 
 const awsUploadFile = require('../functions/awsUploadFile');
@@ -6,6 +7,9 @@ const awsRemoveFile = require('../functions/awsRemoveFile');
 
 exports.makeAnnouncement = async (req, res) => {
   try {
+    const institute = await Institute.findById(req.body.instituteId);
+    let storageUsed = +institute.storageUsed;
+
     let attachment = null;
     if (req.file !== undefined) {
       let filePath = req.file.path;
@@ -44,6 +48,12 @@ exports.makeAnnouncement = async (req, res) => {
 
     const announcement = new Announcement(announcementData);
     await announcement.save();
+
+    storageUsed = storageUsed + attachment.file_size;
+    institute.storageUsed = storageUsed;
+
+    await institute.save();
+
     res.status(201).json(announcement);
   } catch (error) {
     console.log(error);
@@ -53,6 +63,9 @@ exports.makeAnnouncement = async (req, res) => {
 
 exports.editAnnouncement = async (req, res) => {
   try {
+    const institute = await Institute.findById(req.body.instituteId);
+    let storageUsed = +institute.storageUsed;
+
     let oldAnnouncement = await Announcement.findById(req.body._id);
 
     let attachment = oldAnnouncement.attachment;
@@ -68,6 +81,9 @@ exports.editAnnouncement = async (req, res) => {
 
       if (attachment.public_id) {
         await awsRemoveFile(attachment.public_id);
+        if (attachment.file_size) {
+          storageUsed = storageUsed - attachment.file_size;
+        }
       }
 
       attachment = {
@@ -94,9 +110,13 @@ exports.editAnnouncement = async (req, res) => {
       categories: JSON.parse(req.body.categories),
     };
 
-    const updatedInstitute = await Announcement.findByIdAndUpdate(req.body._id, announcementData);
+    const updated = await Announcement.findByIdAndUpdate(req.body._id, announcementData);
 
-    res.status(201).json(updatedInstitute);
+    storageUsed = storageUsed + attachment.file_size;
+    institute.storageUsed = storageUsed;
+    await institute.save();
+
+    res.status(201).json(updated);
   } catch (error) {
     errorHandler(error, res);
   }
@@ -140,10 +160,20 @@ exports.getSingleAnnouncement = async (req, res, next) => {
 
 exports.deleteAnnouncement = async (req, res, next) => {
   try {
+    const institute = await Institute.findById(req.body.instituteId);
+    let storageUsed = +institute.storageUsed;
+
     const announcement = await Announcement.findByIdAndDelete(req.body._id);
     if (announcement.attachment.public_id) {
       await awsRemoveFile(announcement.attachment.public_id);
+
+      if (announcement.attachment.file_size) {
+        storageUsed = storageUsed - +announcement.attachment.file_size;
+      }
     }
+
+    institute.storageUsed = storageUsed;
+    await institute.save();
 
     res.status(200).json({ message: 'Announcement Deleted successfully' });
   } catch (error) {

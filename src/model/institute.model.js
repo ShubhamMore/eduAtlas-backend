@@ -166,6 +166,10 @@ const instituteSchema = new Schema(
             type: String,
             required: true,
           },
+          file_size: {
+            type: Number,
+            required: true,
+          },
           secure_url: {
             type: String,
             required: true,

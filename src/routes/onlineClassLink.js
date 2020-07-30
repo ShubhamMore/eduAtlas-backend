@@ -2,6 +2,7 @@ const onlineClassLinkRouter = require('express').Router();
 const onlineClassLinkController = require('../controller/onlineClassLink');
 const uploadRecordings = require('../middleware/uploadRecordings');
 const checkAuth = require('../middleware/checkAuth');
+const checkStorage = require('../middleware/checkStorageSize');
 
 onlineClassLinkRouter.post(
   '/getAllMeetingLinks',
@@ -43,6 +44,7 @@ onlineClassLinkRouter.post(
   '/addRecording',
   checkAuth,
   uploadRecordings,
+  checkStorage,
   onlineClassLinkController.addRecording
 );
 

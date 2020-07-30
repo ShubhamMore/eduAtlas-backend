@@ -2,11 +2,13 @@ const studyMaterialRouter = require('express').Router();
 const studyMaterialController = require('../controller/studyMaterial');
 const file = require('../middleware/studyMaterialFile');
 const checkAuth = require('../middleware/checkAuth');
+const checkStorage = require('../middleware/checkStorageSize');
 
 studyMaterialRouter.post(
   '/addStudyMaterial',
   checkAuth,
   file,
+  checkStorage,
   studyMaterialController.addStudyMaterial
 );
 
@@ -14,6 +16,7 @@ studyMaterialRouter.post(
   '/editStudyMaterial',
   checkAuth,
   file,
+  checkStorage,
   studyMaterialController.editStudyMaterial
 );
 
