@@ -9,6 +9,7 @@ const path = require('path');
 const excelToJson = require('convert-excel-to-json');
 const sendNotification = require('../notifications/notification');
 const XLSX = require('xlsx');
+const smsService = require('../service/sms');
 
 const appendZero = (n) => {
   if (n < 10) {
@@ -497,6 +498,69 @@ exports.attendanceByFile = async (req, res) => {
     deleteFile(req.file.path);
 
     res.status(200).send(addAtt);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
+
+exports.sendAttendanceSMS = async (req, res) => {
+  try {
+    const checkSmsCount = Institute.aggregate(
+      {
+        _id: mongoose.Types.ObjectId(req.body.instituteId),
+      },
+      {
+        $unwind: '$course',
+      },
+      {
+        $unwond: '$batch',
+      },
+      {
+        $match: {
+          'course._id': mongoose.Types.ObjectId(req.body.courseId),
+          'batch.course': req.body.courseId,
+        },
+      },
+      {
+        smsCount: 1,
+        course: 1,
+        batch: 1,
+        basicInfo: 1,
+      }
+    );
+
+    if (checkSmsCount.smsCount <= 0) {
+      const err = new Error('Insufficient SMS Balance');
+      err.statusCode = 400;
+      throw err;
+    }
+    const studentInfo = Student.findOne(
+      {
+        _id: req.body.studentId,
+      },
+      {
+        basicDetails: 1,
+      }
+    );
+    if (!studentInfo) {
+      const err = new Error('Insufficient SMS Balance');
+      err.statusCode = 400;
+      throw err;
+    }
+
+    const msgText = `Dear ${req.body.studentName},\nAttendance Report:\nInstitute Name: ${checkSmsCount.basicInfo.name} \nCourse: ${checkSmsCount.course.name} Batch: ${checkSmsCount.batch.batchCode}\n Attendance: ${req.body.totalPresent}/${req.body.totalLectures} \n Percentage:${req.body.precentage}\nFor more details visit lms.eduatlas.in \nCredentials emailed on registered email ID: ${req.body.basicDetails.studentEmail}\nFrom Eduatlas`;
+    const smsRes = await smsService.sendSms(studentInfo.basicDetails.studentContact, msgText);
+    const updateSmsCount = Institute.update(
+      {
+        _id: req.body.instituteId,
+      },
+      {
+        $inc: {
+          smsCount: -1,
+        },
+      }
+    );
+    res.send({ status: 'SMS send' });
   } catch (error) {
     errorHandler(error, res);
   }
