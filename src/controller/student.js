@@ -13,6 +13,7 @@ const Ptm = require('../model/ptm.model');
 const Mentoring = require('../model/mentoring.model');
 const send = require('../service/mail');
 const smsService = require('../service/sms');
+const awsRemoveFile = require('../functions/awsRemoveFile');
 
 const appendZero = (n) => {
   if (n < 10) {
@@ -606,6 +607,14 @@ exports.updateStudentCourseFee = async (req, res) => {
 
 exports.deleteStudentCourse = async (req, res) => {
   try {
+    const institute = await Institute.findById(req.body.instituteId, { storageUsed });
+
+    if (!institute) {
+      throw new Error('Institute Not Found');
+    }
+
+    let storageUsed = institute.storageUsed;
+
     const deleteStudent = await Student.updateOne(
       {
         eduAtlasId: req.body.eduatlasId,
@@ -619,11 +628,20 @@ exports.deleteStudentCourse = async (req, res) => {
       }
     );
 
-    await Fee.findOneAndDelete({
+    const fees = await Fee.findOneAndDelete({
       studentId: req.body.studentId,
       instituteId: req.body.instituteId,
       courseId: req.body.courseId,
     });
+
+    fees.installments.forEach(async (installment) => {
+      if (installment.receipt.secureUrl) {
+        await awsRemoveFile(installment.receipt.publicId);
+        storageUsed = storageUsed - installment.receipt.fileSize;
+      }
+    });
+
+    await Institute.findByIdAndUpdate(req.body.instituteId, { storageUsed });
 
     res.status(200).send(deleteStudent);
   } catch (error) {

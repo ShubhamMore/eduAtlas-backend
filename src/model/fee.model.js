@@ -67,9 +67,27 @@ const feeSchema = new Schema({
         type: String,
         default: '',
       },
-      receiptLink: {
-        type: String,
-        default: '',
+      receipt: {
+        fileName: {
+          type: String,
+          default: null,
+        },
+        fileSize: {
+          type: Number,
+          default: null,
+        },
+        secureUrl: {
+          type: String,
+          default: null,
+        },
+        publicId: {
+          type: String,
+          default: null,
+        },
+        createdAt: {
+          type: String,
+          default: null,
+        },
       },
     },
   ],

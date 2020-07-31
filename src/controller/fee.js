@@ -11,6 +11,15 @@ const numberToWords = require('number-to-words');
 const send = require('../service/mail');
 const conversion = require('phantom-html-to-pdf')();
 
+const awsUploadFile = require('../functions/awsUploadFile');
+const awsRemoveFile = require('../functions/awsRemoveFile');
+
+// const getFileSizeInBytes = (filename) => {
+//   var stats = fs.statSync(filename);
+//   var fileSizeInBytes = stats['size'];
+//   return fileSizeInBytes;
+// };
+
 const getHtml = (receipt) => {
   const html = `
     <style>
@@ -213,9 +222,7 @@ exports.addFee = async (req, res) => {
     });
 
     if (checkStudent.length == 0) {
-      const error = new Error("Course for Student doesn't exists");
-      //error.prototype.statusCode = 400;
-      throw error;
+      throw new Error("Course for Student doesn't exists");
     }
 
     const fees = new Fee(req.body);
@@ -223,7 +230,7 @@ exports.addFee = async (req, res) => {
     const receipt = await getReceiptData(fees.studentId, fees.courseId, fees.instituteId);
 
     fees.installments.forEach(async (curInstallment, i) => {
-      if (curInstallment.paidStatus === 'true' && curInstallment.receiptLink === '') {
+      if (curInstallment.paidStatus === 'true' && !curInstallment.receipt.secureUrl) {
         const gst = (+curInstallment.amount / 100) * 18;
 
         const amount = (+curInstallment.amount - gst).toFixed(2);
@@ -250,12 +257,49 @@ exports.addFee = async (req, res) => {
 
         const html = getHtml(receipt);
 
-        const receiptUrl = path.join(__dirname, `../../receipts/receipt-${curInstallment._id}.pdf`);
+        const fileName = `receipt-${curInstallment._id}.pdf`;
+        const filePath = path.join(__dirname, `../../receipts/${fileName}`);
         conversion({ html }, async (err, pdf) => {
-          const output = fs.createWriteStream(receiptUrl);
-          const receiptLink =
-            process.env.SERVER + `receipts/receipt-${curInstallment._id}.pdf`.toString();
-          (fees.installments[i].receiptLink = receiptLink), pdf.stream.pipe(output);
+          const output = fs.createWriteStream(filePath);
+          pdf.stream.pipe(output);
+
+          const fileSize = 25100;
+          const cloudDirectory = fees.instituteId + '/receipts';
+
+          const institute = await Institute.findById(fees.instituteId, {
+            storageUsed: 1,
+            totalStorage: 1,
+          });
+
+          if (!institute) {
+            throw new Error('Institute Not Found');
+          }
+
+          let storageUsed = institute.storageUsed;
+
+          if (+institute.totalStorage < +storageUsed + fileSize) {
+            throw new Error('Your Storage is Full, Please Upgrade Your Plan for More storage');
+          }
+
+          const uploadResponce = await awsUploadFile(filePath, fileName, cloudDirectory);
+
+          const upload_res = uploadResponce.upload_res;
+
+          let receiptData = {
+            fileName: upload_res.key
+              .split('/')[2]
+              .substring(0, upload_res.key.split('/')[2].lastIndexOf('-'))
+              .split('-')
+              .join(' ')
+              .toUpperCase(),
+
+            fileSize: fileSize,
+            secureUrl: upload_res.Location,
+            publicId: upload_res.key,
+            createdAt: Date.now(),
+          };
+
+          fees.installments[i].receipt = receiptData;
 
           const mail = {
             to: receipt.email,
@@ -263,16 +307,19 @@ exports.addFee = async (req, res) => {
             subject: 'Receipt',
             html: `
               <h2>Invoice from ${receipt.companyName}</h2>
-              Click Here <a href="${receiptLink}">Download Receipt</a>
+              Click Here <a href="${receipt.secureUrl}">Download Receipt</a>
             `,
           };
 
           await send(mail);
 
           await fees.save();
+
+          storageUsed = storageUsed + fileSize;
+
           await Institute.updateOne(
             { _id: mongoose.Types.ObjectId(fees.instituteId) },
-            { 'reciept.invoiceNo': receipt.invoiceNo }
+            { 'reciept.invoiceNo': receipt.invoiceNo, storageUsed }
           );
         });
       }
@@ -327,12 +374,24 @@ exports.updateFeeOfStudent = async (req, res) => {
 
     const receipt = await getReceiptData(fees.studentId, fees.courseId, fees.instituteId);
 
+    const installments = fees.installments;
+
     fees.amountCollected = req.body.amountCollected;
     fees.pendingAmount = req.body.pendingAmount;
     fees.installments = req.body.installments;
-
     fees.installments.forEach(async (curInstallment, i) => {
-      if (curInstallment.paidStatus === 'true' && curInstallment.receiptLink === '') {
+      const institute = await Institute.findById(fees.instituteId, {
+        storageUsed: 1,
+        totalStorage: 1,
+      });
+
+      if (!institute) {
+        throw new Error('Institute Not Found');
+      }
+
+      let storageUsed = institute.storageUsed;
+
+      if (curInstallment.paidStatus === 'true' && !installments[i].receipt.secureUrl) {
         const gst = (+curInstallment.amount / 100) * 18;
 
         const amount = (+curInstallment.amount - gst).toFixed(2);
@@ -359,14 +418,42 @@ exports.updateFeeOfStudent = async (req, res) => {
 
         const html = getHtml(receipt);
 
-        const receiptUrl = path.join(__dirname, `../../receipts/receipt-${curInstallment._id}.pdf`);
+        const fileName = `receipt-${curInstallment._id}.pdf`;
+        const filePath = path.join(__dirname, `../../receipts/${fileName}`);
         conversion({ html }, async (err, pdf) => {
-          const output = fs.createWriteStream(receiptUrl);
-          const receiptLink =
-            process.env.SERVER + `receipts/receipt-${curInstallment._id}.pdf`.toString();
-          fees.installments[i].receiptLink = receiptLink;
-
+          const output = fs.createWriteStream(filePath);
           pdf.stream.pipe(output);
+
+          const fileSize = 25100;
+          const cloudDirectory = fees.instituteId + '/receipts';
+
+          if (+institute.totalStorage < +storageUsed + fileSize) {
+            throw new Error('Your Storage is Full, Please Upgrade Your Plan for More storage');
+          }
+
+          const uploadResponce = await awsUploadFile(
+            `receipts/${fileName}`,
+            fileName,
+            cloudDirectory
+          );
+
+          const upload_res = uploadResponce.upload_res;
+
+          let receiptData = {
+            fileName: upload_res.key
+              .split('/')[2]
+              .substring(0, upload_res.key.split('/')[2].lastIndexOf('-'))
+              .split('-')
+              .join(' ')
+              .toUpperCase(),
+
+            fileSize: fileSize,
+            secureUrl: upload_res.Location,
+            publicId: upload_res.key,
+            createdAt: Date.now(),
+          };
+
+          fees.installments[i].receipt = receiptData;
 
           const mail = {
             to: receipt.email,
@@ -374,20 +461,104 @@ exports.updateFeeOfStudent = async (req, res) => {
             subject: 'Receipt',
             html: `
               <h2>Invoice from ${receipt.companyName}</h2>
-              Click Here <a href="${receiptLink}">Download Receipt</a>
+              Click Here <a href="${receipt.secureUrl}">Download Receipt</a>
             `,
           };
 
           await send(mail);
 
           await fees.save();
+
+          storageUsed = storageUsed + fileSize;
+
           await Institute.updateOne(
             { _id: mongoose.Types.ObjectId(fees.instituteId) },
-            { 'reciept.invoiceNo': receipt.invoiceNo }
+            { 'reciept.invoiceNo': receipt.invoiceNo, storageUsed }
           );
         });
+      } else if (curInstallment.paidStatus === 'false' && installments[i].receipt.secureUrl) {
+        const curReceipt = installments[i].receipt;
+
+        await awsRemoveFile(curReceipt.publicId);
+
+        let receiptData = {
+          fileName: null,
+          fileSize: null,
+          secureUrl: null,
+          publicId: null,
+          createdAt: null,
+        };
+
+        fees.installments[i].receipt = receiptData;
+
+        await fees.save();
+
+        storageUsed = storageUsed - curReceipt.fileSize;
+
+        await Institute.updateOne(
+          { _id: mongoose.Types.ObjectId(fees.instituteId) },
+          { storageUsed }
+        );
       }
     });
+
+    // fees.installments.forEach(async (curInstallment, i) => {
+    //   if (curInstallment.paidStatus === 'true' && curInstallment.receiptLink === '') {
+    //     const gst = (+curInstallment.amount / 100) * 18;
+
+    //     const amount = (+curInstallment.amount - gst).toFixed(2);
+
+    //     receipt.invoiceNo = +receipt.invoiceNo + 1;
+
+    //     const receiptNo = receipt.invoiceNo;
+    //     const date = new Date();
+    //     const curYear = date.getFullYear();
+
+    //     const finantialYear =
+    //       date.getMonth() < 3
+    //         ? curYear - 1 + '-' + curYear.toString().substr(2)
+    //         : curYear + '-' + (curYear + 1).toString().substr(2);
+
+    //     receipt.receiptNo = finantialYear + '/' + receiptNo.toString().padStart(6, '0');
+    //     receipt.amount = amount;
+    //     receipt.cgst = (gst / 2).toFixed(2);
+    //     receipt.sgst = (gst / 2).toFixed(2);
+    //     receipt.total = curInstallment.amount;
+    //     receipt.amountCollected = curInstallment.amount;
+    //     receipt.paymentMode = curInstallment.paymentMode;
+    //     receipt.amountInWords = numberToWords.toWords(+receipt.amountCollected);
+
+    //     const html = getHtml(receipt);
+
+    //     const receiptUrl = path.join(__dirname, `../../receipts/receipt-${curInstallment._id}.pdf`);
+    //     conversion({ html }, async (err, pdf) => {
+    //       const output = fs.createWriteStream(receiptUrl);
+    //       const receiptLink =
+    //         process.env.SERVER + `receipts/receipt-${curInstallment._id}.pdf`.toString();
+    //       fees.installments[i].receiptLink = receiptLink;
+
+    //       pdf.stream.pipe(output);
+
+    //       const mail = {
+    //         to: receipt.email,
+    //         from: process.env.GMAIL_USER,
+    //         subject: 'Receipt',
+    //         html: `
+    //           <h2>Invoice from ${receipt.companyName}</h2>
+    //           Click Here <a href="${receiptLink}">Download Receipt</a>
+    //         `,
+    //       };
+
+    //       await send(mail);
+
+    //       await fees.save();
+    //       await Institute.updateOne(
+    //         { _id: mongoose.Types.ObjectId(fees.instituteId) },
+    //         { 'reciept.invoiceNo': receipt.invoiceNo }
+    //       );
+    //     });
+    //   }
+    // });
 
     await fees.save();
 
