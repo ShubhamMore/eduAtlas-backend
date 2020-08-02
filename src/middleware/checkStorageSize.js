@@ -5,7 +5,12 @@ const path = require('path');
 const checkStorage = async (req, res, next) => {
   try {
     if (req.file) {
-      const institute = await Institute.findById(req.body.instituteId);
+      let instId = req.body.instituteId;
+      if (!instId) {
+        instId = req.params.id;
+      }
+
+      let institute = await Institute.findById(instId);
 
       if (!institute) {
         throw new Error('Institute Not Found');
