@@ -102,7 +102,7 @@ exports.activateInstitute = async (req, res, next) => {
       smsCount = 0;
       totalStorage = 104857600; // 2 GB (1024*1024*100 Bytes)
     } else if (currentPlan == 'Lite Plus') {
-      smsCount = 0;
+      smsCount = 5000;
       totalStorage = 2147483648; // 2 GB (1024*1024*1024*2 Bytes)
     } else if (currentPlan == 'Value') {
       smsCount = 5000;

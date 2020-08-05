@@ -185,9 +185,9 @@ exports.addStudent = async (req, res, next) => {
       const smsRes = await smsService.sendSms(req.body.basicDetails.studentContact, msgText);
       msgStatus = 'SMS send';
 
-      const updateSmsCount = Institute.update(
+      const updateSmsCount = await Institute.update(
         {
-          _id: req.body.instituteDetails.instituteId,
+          _id: mongoose.Types.ObjectId(req.body.instituteDetails.instituteId),
         },
         {
           $inc: {

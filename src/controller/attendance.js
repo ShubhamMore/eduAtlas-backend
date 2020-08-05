@@ -505,36 +505,36 @@ exports.attendanceByFile = async (req, res) => {
 
 exports.sendAttendanceSMS = async (req, res) => {
   try {
-    const checkSmsCount = Institute.aggregate(
-      {
-        _id: mongoose.Types.ObjectId(req.body.instituteId),
-      },
+    const checkSmsCount = await Institute.aggregate([
       {
         $unwind: '$course',
       },
       {
-        $unwond: '$batch',
+        $unwind: '$batch',
       },
       {
         $match: {
+          _id: mongoose.Types.ObjectId(req.body.instituteId),
           'course._id': mongoose.Types.ObjectId(req.body.courseId),
           'batch.course': req.body.courseId,
         },
       },
       {
-        smsCount: 1,
-        course: 1,
-        batch: 1,
-        basicInfo: 1,
-      }
-    );
-
-    if (checkSmsCount.smsCount <= 0) {
+        $project: {
+          smsCount: 1,
+          course: 1,
+          batch: 1,
+          basicInfo: 1,
+        },
+      },
+    ]);
+    console.log('Hi ', checkSmsCount);
+    if (checkSmsCount[0].smsCount <= 0) {
       const err = new Error('Insufficient SMS Balance');
       err.statusCode = 400;
       throw err;
     }
-    const studentInfo = Student.findOne(
+    const studentInfo = await Student.findOne(
       {
         _id: req.body.studentId,
       },
@@ -548,11 +548,11 @@ exports.sendAttendanceSMS = async (req, res) => {
       throw err;
     }
 
-    const msgText = `Dear ${req.body.studentName},\nAttendance Report:\nInstitute Name: ${checkSmsCount.basicInfo.name} \nCourse: ${checkSmsCount.course.name} Batch: ${checkSmsCount.batch.batchCode}\n Attendance: ${req.body.totalPresent}/${req.body.totalLectures} \n Percentage:${req.body.precentage}\nFor more details visit lms.eduatlas.in \nCredentials emailed on registered email ID: ${req.body.basicDetails.studentEmail}\nFrom Eduatlas`;
+    const msgText = `Dear ${req.body.studentName},\nAttendance Report:\nInstitute Name: ${checkSmsCount[0].basicInfo.name} \nCourse: ${checkSmsCount[0].course.name} Batch: ${checkSmsCount[0].batch.batchCode}\n Attendance: ${req.body.totalPresent}/${req.body.totalLectures} \n Percentage:${req.body.percentage}\nFor more details visit lms.eduatlas.in \nFrom Eduatlas`;
     const smsRes = await smsService.sendSms(studentInfo.basicDetails.studentContact, msgText);
-    const updateSmsCount = Institute.update(
+    const updateSmsCount = await Institute.update(
       {
-        _id: req.body.instituteId,
+        _id: mongoose.Types.ObjectId(req.body.instituteId),
       },
       {
         $inc: {
@@ -562,6 +562,7 @@ exports.sendAttendanceSMS = async (req, res) => {
     );
     res.send({ status: 'SMS send' });
   } catch (error) {
+    console.log(error);
     errorHandler(error, res);
   }
 };
