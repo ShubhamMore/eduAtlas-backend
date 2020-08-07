@@ -1117,6 +1117,8 @@ class MembershipComponent {
         this.api.activateInstitute(id, paymentDetails).subscribe((data) => {
             // this.user = data;
             this.showToast('top-right', 'success', 'Institute Activated Successfully');
+            this.showToast('top-right', 'success', 'Verification Link Is Sent On Your Registered Mail');
+            this.showToast('top-right', 'success', 'Please Check Spam Folder Also');    
             setTimeout(() => {
                 this.router.navigate(['/pages/home'], { relativeTo: this.route });
             }, 1000);

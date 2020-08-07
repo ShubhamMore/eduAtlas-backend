@@ -5191,7 +5191,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.api.activateInstitute(id, paymentDetails).subscribe(function (data) {
             // this.user = data;
             _this13.showToast('top-right', 'success', 'Institute Activated Successfully');
-
+            _this13.showToast('top-right', 'success', 'Verification Link Is Sent On Your Registered Mail');
+            _this13.showToast('top-right', 'success', 'Please Check Spam Folder Also');
+          
             setTimeout(function () {
               _this13.router.navigate(['/pages/home'], {
                 relativeTo: _this13.route
