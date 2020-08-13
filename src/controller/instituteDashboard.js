@@ -27,6 +27,14 @@ exports.getDashboardInfo = async (req, res) => {
     const day = new Date().getDate();
     const date = new RegExp('.*' + year + '-' + appendZero(month) + '-' + appendZero(day) + '.*');
 
+    const Ndate = new Date();
+    const currentDate =
+      Ndate.getFullYear() +
+      '-' +
+      appendZero(Ndate.getMonth() + 1) +
+      '-' +
+      appendZero(Ndate.getDate());
+
     data.upcomingClass = await Schedule.aggregate([
       { $unwind: '$days' },
       {
@@ -188,7 +196,7 @@ exports.getDashboardInfo = async (req, res) => {
     data.announcements = announcements;
 
     const instituteType = await Institute.findOne({
-      _id: req.body.institueId,
+      _id: mongoose.Types.ObjectId(req.body.instituteId),
     });
     if (instituteType.currentPlan == 'Value') {
       const upcomingOnlineClasses = await OnlineClass.aggregate([
@@ -196,7 +204,7 @@ exports.getDashboardInfo = async (req, res) => {
           $match: {
             instituteId: req.body.instituteId,
             startTime: {
-              $gte: date,
+              $gte: currentDate,
             },
           },
         },
@@ -266,7 +274,7 @@ exports.getDashboardInfo = async (req, res) => {
           $match: {
             instituteId: req.body.instituteId,
             date: {
-              $gte: date,
+              $gte: currentDate,
             },
           },
         },
