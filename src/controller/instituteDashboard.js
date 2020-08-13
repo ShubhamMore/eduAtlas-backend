@@ -327,6 +327,7 @@ exports.getDashboardInfo = async (req, res) => {
           $addFields: {
             courseName: '$institute.course.name',
             batchName: '$institute.batch.batchCode',
+            startTime: '$fromTime',
           },
         },
       ]);

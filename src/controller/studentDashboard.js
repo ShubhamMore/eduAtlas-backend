@@ -342,6 +342,107 @@ exports.getStudentDashboard = async (req, res) => {
       },
     ]);
 
+    // const onlineClass = await Student.aggregate([
+    //   {
+    //     $match: {
+    //       eduAtlasId: req.user.eduAtlasId,
+    //     },
+    //   },
+    //   {
+    //     $match: {
+    //       'instituteDetails.active': true,
+    //     },
+    //   },
+    //   {
+    //     $unwind: '$instituteDetails',
+    //   },
+    //   {
+    //     $addFields: {
+    //       'instituteDetails.instituteId': {
+    //         $toObjectId: '$instituteDetails.instituteId',
+    //       },
+    //     },
+    //   },
+    //   {
+    //     $lookup: {
+    //       from: 'institutes',
+    //       localField: 'instituteDetails.instituteId',
+    //       foreignField: '_id',
+    //       as: 'instituteCourse',
+    //     },
+    //   },
+    //   {
+    //     $unwind: '$instituteCourse',
+    //   },
+    //   {
+    //     $addFields: {
+    //       courseId: {
+    //         $toObjectId: '$instituteDetails.courseId',
+    //       },
+    //       batchId: {
+    //         $toObjectId: '$instituteDetails.batchId',
+    //       },
+    //     },
+    //   },
+    //   {
+    //     $unwind: '$instituteCourse.course',
+    //   },
+    //   {
+    //     $unwind: '$instituteCourse.batch',
+    //   },
+    //   {
+    //     $match: {
+    //       $expr: {
+    //         $and: [
+    //           {
+    //             $eq: ['$instituteCourse.course._id', '$courseId'],
+    //           },
+    //           {
+    //             $eq: ['$instituteCourse.batch._id', '$batchId'],
+    //           },
+    //         ],
+    //       },
+    //     },
+    //   },
+    //   {
+    //     $addFields: {
+    //       'instituteDetails.instituteId': {
+    //         $toString: '$instituteDetails.instituteId',
+    //       },
+    //       batchId: {
+    //         $toString: '$instituteDetails.batchId',
+    //       },
+    //     },
+    //   },
+
+    //   {
+    //     $lookup: {
+    //       from: 'online',
+    //       localField: 'instituteDetails.instituteId',
+    //       foreignField: 'instituteId',
+    //       as: 'test',
+    //     },
+    //   },
+    //   { $unwind: '$test' },
+    //   {
+    //     $match: {
+    //       $expr: {
+    //         $eq: ['$batchId', '$test.batchId'],
+    //       },
+    //       'test.date': {
+    //         $gte: currentDate,
+    //       },
+    //     },
+    //   },
+    //   {
+    //     $project: {
+    //       instituteName: '$instituteCourse.basicInfo.name',
+    //       batchCode: '$instituteCourse.batch.batchCode',
+    //       courseName: '$instituteCourse.course.name',
+    //       test: 1,
+    //     },
+    //   },
+    // ]);
     res.status(200).send({
       announcements,
       test,
@@ -757,6 +858,11 @@ exports.studentInstituteDashboard = async (req, res) => {
                 },
               ],
             },
+          },
+        },
+        {
+          $addFields: {
+            '$onlineclass.startTime': '$onlineclass.fromTime',
           },
         },
         {
