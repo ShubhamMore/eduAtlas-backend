@@ -8,6 +8,7 @@ const Leads = require('../model/leads.model');
 const errorHandler = require('../service/errorHandler');
 const Schedule = require('../model/schedule.model');
 const Announcement = require('../model/announcement.model');
+const OnlineClassLink = require('../model/onlineClassLink.model');
 
 const appendZero = (n) => {
   if (n < 10) {
@@ -185,6 +186,144 @@ exports.getDashboardInfo = async (req, res) => {
     });
 
     data.announcements = announcements;
+
+    const instituteType = await Institute.findOne({
+      _id: req.body.institueId,
+    });
+    if (instituteType.currentPlan == 'Value') {
+      const upcomingOnlineClasses = await OnlineClass.aggregate([
+        {
+          $match: {
+            instituteId: req.body.instituteId,
+            startTime: {
+              $gte: date,
+            },
+          },
+        },
+        {
+          $addFields: {
+            instituteId: {
+              $toObjectId: '$instituteId',
+            },
+
+            batchId: {
+              $toObjectId: '$batchId',
+            },
+            courseId: {
+              $toObjectId: '$courseId',
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: 'institutes',
+            localField: 'instituteId',
+            foreignField: '_id',
+            as: 'institute',
+          },
+        },
+        {
+          $unwind: '$institute',
+        },
+        {
+          $unwind: '$institute.batch',
+        },
+        {
+          $unwind: '$institute.course',
+        },
+        {
+          $match: {
+            $expr: {
+              $and: [
+                {
+                  $eq: ['$courseId', '$institute.course._id'],
+                },
+                {
+                  $eq: ['$batchId', '$institute.batch._id'],
+                },
+              ],
+            },
+          },
+        },
+        {
+          $addFields: {
+            courseName: '$institute.course.name',
+            batchName: '$institute.batch.batchCode',
+            date: {
+              $substr: ['$startTime', 0, 10],
+            },
+
+            startTime: {
+              $substr: ['$startTime', 11, 17],
+            },
+          },
+        },
+      ]);
+      data.upcomingOnlineClasses = upcomingOnlineClasses;
+    } else if (instituteType.currentPlan == 'LitePlus') {
+      const upcomingOnlineClasses = await OnlineClassLink.aggregate([
+        {
+          $match: {
+            instituteId: req.body.instituteId,
+            date: {
+              $gte: date,
+            },
+          },
+        },
+        {
+          $addFields: {
+            instituteId: {
+              $toObjectId: '$instituteId',
+            },
+
+            batchId: {
+              $toObjectId: '$batchId',
+            },
+            courseId: {
+              $toObjectId: '$courseId',
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: 'institutes',
+            localField: 'instituteId',
+            foreignField: '_id',
+            as: 'institute',
+          },
+        },
+        {
+          $unwind: '$institute',
+        },
+        {
+          $unwind: '$institute.batch',
+        },
+        {
+          $unwind: '$institute.course',
+        },
+        {
+          $match: {
+            $expr: {
+              $and: [
+                {
+                  $eq: ['$courseId', '$institute.course._id'],
+                },
+                {
+                  $eq: ['$batchId', '$institute.batch._id'],
+                },
+              ],
+            },
+          },
+        },
+        {
+          $addFields: {
+            courseName: '$institute.course.name',
+            batchName: '$institute.batch.batchCode',
+          },
+        },
+      ]);
+      data.upcomingOnlineClasses = upcomingOnlineClasses;
+    }
 
     res.status(200).send(data);
   } catch (error) {
