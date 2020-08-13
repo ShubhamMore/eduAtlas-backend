@@ -595,12 +595,185 @@ exports.studentInstituteDashboard = async (req, res) => {
       },
     ]);
 
-    // const
-    // const onlineClass
+    const instituteType = await Institute.findOne({
+      _id: mongoose.Types.ObjectId(req.body.instituteId),
+    });
+    let onlineClass = [];
+    if (instituteType.currentPlan == 'Value') {
+      onlineClass = await Student.aggregate([
+        {
+          $unwind: '$instituteDetails',
+        },
+        {
+          $match: {
+            eduAtlasId: req.user.eduAtlasId,
+            'instituteDetails.instituteId': req.body.instituteId,
+            'instituteDetails.active': true,
+          },
+        },
+        {
+          $lookup: {
+            from: 'onlineclasses',
+            localField: 'instituteDetails.instituteId',
+            foreignField: 'instituteId',
+            as: 'onlineclass',
+          },
+        },
+        { $unwind: '$onlineclass' },
+        {
+          $addFields: {
+            'onlineclass.date': {
+              $substr: ['$onlineclass.startTime', 0, 10],
+            },
+            'onlineclass.startTime': {
+              $substr: ['$onlineclass.startTime', 11, 17],
+            },
+          },
+        },
+        {
+          $match: {
+            $expr: {
+              $eq: ['$instituteDetails.batchId', '$onlineclass.batchId'],
+            },
+            'onlineclass.date': {
+              $gte: currentDate,
+            },
+          },
+        },
+        {
+          $addFields: {
+            'instituteDetails.instituteId': {
+              $toObjectId: '$instituteDetails.instituteId',
+            },
+            batchId: {
+              $toObjectId: '$instituteDetails.batchId',
+            },
+            courseId: {
+              $toObjectId: '$instituteDetails.courseId',
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: 'institutes',
+            localField: 'instituteDetails.instituteId',
+            foreignField: '_id',
+            as: 'instituteCourse',
+          },
+        },
+        {
+          $unwind: '$instituteCourse',
+        },
+        { $unwind: '$instituteCourse.batch' },
+        { $unwind: '$instituteCourse.course' },
+        {
+          $match: {
+            $expr: {
+              $and: [
+                {
+                  $eq: ['$instituteCourse.batch._id', '$batchId'],
+                },
+                {
+                  $eq: ['$instituteCourse.course._id', '$courseId'],
+                },
+              ],
+            },
+          },
+        },
+        {
+          $project: {
+            onlineclass: '$onlineclass',
+            batchCode: '$instituteCourse.batch.batchCode',
+            course: '$instituteCourse.course.name',
+          },
+        },
+      ]);
+    } else if (instituteType.currentPlan == 'Lite Plus') {
+      onlineClass = await Student.aggregate([
+        {
+          $unwind: '$instituteDetails',
+        },
+        {
+          $match: {
+            eduAtlasId: req.user.eduAtlasId,
+            'instituteDetails.instituteId': req.body.instituteId,
+            'instituteDetails.active': true,
+          },
+        },
+        {
+          $lookup: {
+            from: 'onlineclasslinks',
+            localField: 'instituteDetails.instituteId',
+            foreignField: 'instituteId',
+            as: 'onlineclass',
+          },
+        },
+        { $unwind: '$onlineclass' },
+        {
+          $match: {
+            $expr: {
+              $eq: ['$instituteDetails.batchId', '$onlineclass.batchId'],
+            },
+            'onlineclass.date': {
+              $gte: currentDate,
+            },
+          },
+        },
+        {
+          $addFields: {
+            'instituteDetails.instituteId': {
+              $toObjectId: '$instituteDetails.instituteId',
+            },
+            batchId: {
+              $toObjectId: '$instituteDetails.batchId',
+            },
+            courseId: {
+              $toObjectId: '$instituteDetails.courseId',
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: 'institutes',
+            localField: 'instituteDetails.instituteId',
+            foreignField: '_id',
+            as: 'instituteCourse',
+          },
+        },
+        {
+          $unwind: '$instituteCourse',
+        },
+        { $unwind: '$instituteCourse.batch' },
+        { $unwind: '$instituteCourse.course' },
+        {
+          $match: {
+            $expr: {
+              $and: [
+                {
+                  $eq: ['$instituteCourse.batch._id', '$batchId'],
+                },
+                {
+                  $eq: ['$instituteCourse.course._id', '$courseId'],
+                },
+              ],
+            },
+          },
+        },
+        {
+          $project: {
+            onlineclass: '$onlineclass',
+            batchCode: '$instituteCourse.batch.batchCode',
+            course: '$instituteCourse.course.name',
+          },
+        },
+      ]);
+    }
+
     res.status(200).send({
       tests,
       announcements,
       schedule,
+      onlineClass,
     });
   } catch (error) {
     errorHandler(error, res);

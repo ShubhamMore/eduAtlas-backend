@@ -268,7 +268,7 @@ exports.getDashboardInfo = async (req, res) => {
         },
       ]);
       data.upcomingOnlineClasses = upcomingOnlineClasses;
-    } else if (instituteType.currentPlan == 'LitePlus') {
+    } else if (instituteType.currentPlan == 'Lite Plus') {
       const upcomingOnlineClasses = await OnlineClassLink.aggregate([
         {
           $match: {
