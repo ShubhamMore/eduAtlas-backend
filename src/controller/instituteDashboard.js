@@ -74,7 +74,10 @@ exports.getDashboardInfo = async (req, res) => {
         },
       },
       {
-        $unwind: '$teacher',
+        $unwind: {
+          path: '$teacher',
+          preserveNullAndEmptyArrays: true,
+        },
       },
       {
         $unwind: '$institute',

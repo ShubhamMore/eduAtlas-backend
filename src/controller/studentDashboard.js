@@ -342,107 +342,137 @@ exports.getStudentDashboard = async (req, res) => {
       },
     ]);
 
-    // const onlineClass = await Student.aggregate([
-    //   {
-    //     $match: {
-    //       eduAtlasId: req.user.eduAtlasId,
-    //     },
-    //   },
-    //   {
-    //     $match: {
-    //       'instituteDetails.active': true,
-    //     },
-    //   },
-    //   {
-    //     $unwind: '$instituteDetails',
-    //   },
-    //   {
-    //     $addFields: {
-    //       'instituteDetails.instituteId': {
-    //         $toObjectId: '$instituteDetails.instituteId',
-    //       },
-    //     },
-    //   },
-    //   {
-    //     $lookup: {
-    //       from: 'institutes',
-    //       localField: 'instituteDetails.instituteId',
-    //       foreignField: '_id',
-    //       as: 'instituteCourse',
-    //     },
-    //   },
-    //   {
-    //     $unwind: '$instituteCourse',
-    //   },
-    //   {
-    //     $addFields: {
-    //       courseId: {
-    //         $toObjectId: '$instituteDetails.courseId',
-    //       },
-    //       batchId: {
-    //         $toObjectId: '$instituteDetails.batchId',
-    //       },
-    //     },
-    //   },
-    //   {
-    //     $unwind: '$instituteCourse.course',
-    //   },
-    //   {
-    //     $unwind: '$instituteCourse.batch',
-    //   },
-    //   {
-    //     $match: {
-    //       $expr: {
-    //         $and: [
-    //           {
-    //             $eq: ['$instituteCourse.course._id', '$courseId'],
-    //           },
-    //           {
-    //             $eq: ['$instituteCourse.batch._id', '$batchId'],
-    //           },
-    //         ],
-    //       },
-    //     },
-    //   },
-    //   {
-    //     $addFields: {
-    //       'instituteDetails.instituteId': {
-    //         $toString: '$instituteDetails.instituteId',
-    //       },
-    //       batchId: {
-    //         $toString: '$instituteDetails.batchId',
-    //       },
-    //     },
-    //   },
+    const onlineClass = await Student.aggregate([
+      {
+        $match: {
+          eduAtlasId: 'EDU2020ST100010',
+        },
+      },
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $addFields: {
+          'instituteDetails.instituteId': {
+            $toObjectId: '$instituteDetails.instituteId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'instituteDetails.instituteId',
+          foreignField: '_id',
+          as: 'instituteCourse',
+        },
+      },
+      {
+        $unwind: '$instituteCourse',
+      },
+      {
+        $addFields: {
+          courseId: {
+            $toObjectId: '$instituteDetails.courseId',
+          },
+          batchId: {
+            $toObjectId: '$instituteDetails.batchId',
+          },
+        },
+      },
+      {
+        $unwind: '$instituteCourse.course',
+      },
+      {
+        $unwind: '$instituteCourse.batch',
+      },
+      {
+        $match: {
+          $expr: {
+            $and: [
+              {
+                $eq: ['$instituteCourse.course._id', '$courseId'],
+              },
+              {
+                $eq: ['$instituteCourse.batch._id', '$batchId'],
+              },
+            ],
+          },
+        },
+      },
+      {
+        $addFields: {
+          'instituteDetails.instituteId': {
+            $toString: '$instituteDetails.instituteId',
+          },
+          batchId: {
+            $toString: '$instituteDetails.batchId',
+          },
+        },
+      },
 
-    //   {
-    //     $lookup: {
-    //       from: 'online',
-    //       localField: 'instituteDetails.instituteId',
-    //       foreignField: 'instituteId',
-    //       as: 'test',
-    //     },
-    //   },
-    //   { $unwind: '$test' },
-    //   {
-    //     $match: {
-    //       $expr: {
-    //         $eq: ['$batchId', '$test.batchId'],
-    //       },
-    //       'test.date': {
-    //         $gte: currentDate,
-    //       },
-    //     },
-    //   },
-    //   {
-    //     $project: {
-    //       instituteName: '$instituteCourse.basicInfo.name',
-    //       batchCode: '$instituteCourse.batch.batchCode',
-    //       courseName: '$instituteCourse.course.name',
-    //       test: 1,
-    //     },
-    //   },
-    // ]);
+      {
+        $lookup: {
+          from: 'onlineclasses',
+          localField: 'instituteDetails.instituteId',
+          foreignField: 'instituteId',
+          as: 'onlineclasses',
+        },
+      },
+      { $unwind: { path: '$onlineclasses', preserveNullAndEmptyArrays: true } },
+      {
+        $lookup: {
+          from: 'onlineclasslinks',
+          localField: 'instituteDetails.instituteId',
+          foreignField: 'instituteId',
+          as: 'onlineclasslinks',
+        },
+      },
+      {
+        $unwind: {
+          path: '$onlineclasslinks',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $addFields: {
+          'onlineclasses.date': {
+            $substr: ['$onlineclasses.startTime', 0, 10],
+          },
+          'onlineclasses.startTime': {
+            $substr: ['$onlineclasses.startTime', 11, 17],
+          },
+        },
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$batchId', '$onlineclasses.batchId'],
+          },
+          'onlineclasses.date': {
+            $gte: '2020-08-01',
+          },
+        },
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$instituteDetails.batchId', '$onlineclasslinks.batchId'],
+          },
+          'onlineclasslinks.date': {
+            $gte: '2020-08-01',
+          },
+        },
+      },
+      {
+        $project: {
+          instituteName: '$instituteCourse.basicInfo.name',
+          batchCode: '$instituteCourse.batch.batchCode',
+          courseName: '$instituteCourse.course.name',
+          onlineclass: '$onlineclasses',
+          onlinelinkclassess: '$onlineclasslinks',
+        },
+      },
+    ]);
     res.status(200).send({
       announcements,
       test,
