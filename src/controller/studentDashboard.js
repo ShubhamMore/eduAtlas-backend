@@ -345,7 +345,7 @@ exports.getStudentDashboard = async (req, res) => {
     let onlineClass = await Student.aggregate([
       {
         $match: {
-          eduAtlasId: req.body.eduAtlasId,
+          eduAtlasId: req.user.eduAtlasId,
         },
       },
       {
@@ -457,7 +457,7 @@ exports.getStudentDashboard = async (req, res) => {
     const onlineLinkClass = await Student.aggregate([
       {
         $match: {
-          eduAtlasId: req.body.eduAtlasId,
+          eduAtlasId: req.user.eduAtlasId,
         },
       },
       {
