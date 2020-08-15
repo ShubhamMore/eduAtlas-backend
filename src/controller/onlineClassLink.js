@@ -1,6 +1,7 @@
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
 const OnlineClassLink = require('../model/onlineClassLink.model');
+const Student = require('../model/student.model');
 const Institute = require('../model/institute.model');
 const mongoose = require('mongoose');
 const { ObjectId } = require('bson');
