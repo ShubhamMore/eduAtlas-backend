@@ -4,6 +4,7 @@ const Institute = require('../model/institute.model');
 const Schedule = require('../model/schedule.model');
 const send = require('../service/mail');
 const sendNotification = require('../notifications/notification');
+var cron = require('node-cron');
 
 const appendZero = (n) => {
   if (n < 10) {
@@ -126,6 +127,165 @@ const dailySchedule = async () => {
       await sendScheduleUpdate();
     }, 86400000);
   }, milliSecTill7);
+
+  /*DEACTIVATE INSTITUTE CRON JOB*/
+
+  cron.schedule('*/2 * * * * *', async () => {
+    //console.log('cron');
+
+    const date = new Date();
+    console.log(date);
+    const currentDate =
+      date.getFullYear() + '-' + appendZero(date.getMonth() + 1) + '-' + appendZero(date.getDate());
+
+    const deactivate = await Institute.updateMany(
+      {
+        $and: [
+          { active: true },
+          {
+            expiryDate: {
+              $lt: date,
+            },
+          },
+        ],
+      },
+      { $set: { active: false } },
+      {
+        multi: true,
+      }
+    );
+    console.log(deactivate);
+  });
+
+  /**ATTENDANCE REMAINDER CRON JOB DAILY 11 PM Night*/
+  cron.schedule('0 23 * * *', async () => {
+    const date = new Date();
+    const currentDate =
+      date.getFullYear() + '-' + appendZero(date.getMonth() + 1) + '-' + appendZero(date.getDate());
+
+    const schdetails = await Schedule.aggregate([
+      {
+        $unwind: '$days',
+      },
+      {
+        $match: {
+          $expr: {
+            $and: [
+              {
+                $eq: ['$days.date', currentDate],
+              },
+              {
+                $eq: ['$days.attendanceMark', false],
+              },
+            ],
+          },
+        },
+      },
+      {
+        $addFields: {
+          instituteId: {
+            $toObjectId: '$instituteId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'instituteId',
+          foreignField: '_id',
+          as: 'instituteCourse',
+        },
+      },
+      {
+        $unwind: '$instituteCourse',
+      },
+      {
+        $addFields: {
+          courseId: {
+            $toObjectId: '$courseId',
+          },
+          batchId: {
+            $toObjectId: '$batchId',
+          },
+        },
+      },
+      {
+        $unwind: '$instituteCourse.course',
+      },
+      {
+        $unwind: '$instituteCourse.batch',
+      },
+      {
+        $match: {
+          $expr: {
+            $and: [
+              {
+                $eq: ['$instituteCourse.course._id', '$courseId'],
+              },
+              {
+                $eq: ['$instituteCourse.batch._id', '$batchId'],
+              },
+            ],
+          },
+        },
+      },
+      {
+        $addFields: {
+          'days.teacher': {
+            $toObjectId: '$days.teacher',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'employees',
+          localField: 'days.teacher',
+          foreignField: '_id',
+          as: 'teacher',
+        },
+      },
+      {
+        $unwind: '$teacher',
+      },
+      {
+        $project: {
+          days: 1,
+          eduatlasId: '$teacher.eduAtlasId',
+          courseName: '$instituteCourse.course.name',
+          batchCode: '$instituteCourse.batch.batchCode',
+          teacherName: '$teacher.basicDetails.name',
+          teacherEmail: '$teacher.basicDetails.employeeEmail',
+        },
+      },
+    ]);
+  });
+  schdetails.forEach((schedule) => {
+    const message = `
+      <h3>Attendance Reminder</h3>
+      <p>You had taken lecture on ${new Date(schedule.days.date)} of topic ${schedule.days.topic} 
+      from ${schedule.days.startTime} to ${schedule.days.endTime} </p>
+      <p>Please Mark the Attendance for the same.</p>
+      <p>----<br>Eduatlas Team</p>
+    `;
+
+    const notification = {
+      title: 'Attendance Reminder',
+      message: `Please mark Attendance for lecture - ${new Date(schedule.days.date)} of topic ${
+        schedule.days.topic
+      } from ${schedule.days.startTime} to ${schedule.days.endTime}`,
+    };
+
+    const mail = {
+      from: process.env.GMAIL_USER,
+      to: teacher.basicDetails.employeeEmail,
+      subject: `Schedule Reminder from Eduatlas`,
+      text: '',
+      html: message,
+    };
+    sendMail(mail);
+    notification.receiverId = teacher.eduAtlasId;
+    sendNotification(notification);
+  });
 };
 
 module.exports = dailySchedule;

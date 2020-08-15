@@ -345,11 +345,16 @@ exports.getStudentDashboard = async (req, res) => {
     const onlineClass = await Student.aggregate([
       {
         $match: {
-          eduAtlasId: 'EDU2020ST100010',
+          eduAtlasId: req.body.eduAtlasId,
         },
       },
       {
         $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          'instituteDetails.active': true,
+        },
       },
       {
         $addFields: {
@@ -420,20 +425,6 @@ exports.getStudentDashboard = async (req, res) => {
       },
       { $unwind: { path: '$onlineclasses', preserveNullAndEmptyArrays: true } },
       {
-        $lookup: {
-          from: 'onlineclasslinks',
-          localField: 'instituteDetails.instituteId',
-          foreignField: 'instituteId',
-          as: 'onlineclasslinks',
-        },
-      },
-      {
-        $unwind: {
-          path: '$onlineclasslinks',
-          preserveNullAndEmptyArrays: true,
-        },
-      },
-      {
         $addFields: {
           'onlineclasses.date': {
             $substr: ['$onlineclasses.startTime', 0, 10],
@@ -449,17 +440,7 @@ exports.getStudentDashboard = async (req, res) => {
             $eq: ['$batchId', '$onlineclasses.batchId'],
           },
           'onlineclasses.date': {
-            $gte: '2020-08-01',
-          },
-        },
-      },
-      {
-        $match: {
-          $expr: {
-            $eq: ['$instituteDetails.batchId', '$onlineclasslinks.batchId'],
-          },
-          'onlineclasslinks.date': {
-            $gte: '2020-08-01',
+            $gte: currentDate,
           },
         },
       },
@@ -469,14 +450,122 @@ exports.getStudentDashboard = async (req, res) => {
           batchCode: '$instituteCourse.batch.batchCode',
           courseName: '$instituteCourse.course.name',
           onlineclass: '$onlineclasses',
-          onlinelinkclassess: '$onlineclasslinks',
         },
       },
     ]);
+
+    const onlineLinkClass = await Student.aggregate([
+      {
+        $match: {
+          eduAtlasId: req.body.eduAtlasId,
+        },
+      },
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          'instituteDetails.active': true,
+        },
+      },
+      {
+        $addFields: {
+          'instituteDetails.instituteId': {
+            $toObjectId: '$instituteDetails.instituteId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'instituteDetails.instituteId',
+          foreignField: '_id',
+          as: 'instituteCourse',
+        },
+      },
+      {
+        $unwind: '$instituteCourse',
+      },
+      {
+        $addFields: {
+          courseId: {
+            $toObjectId: '$instituteDetails.courseId',
+          },
+          batchId: {
+            $toObjectId: '$instituteDetails.batchId',
+          },
+        },
+      },
+      {
+        $unwind: '$instituteCourse.course',
+      },
+      {
+        $unwind: '$instituteCourse.batch',
+      },
+      {
+        $match: {
+          $expr: {
+            $and: [
+              {
+                $eq: ['$instituteCourse.course._id', '$courseId'],
+              },
+              {
+                $eq: ['$instituteCourse.batch._id', '$batchId'],
+              },
+            ],
+          },
+        },
+      },
+      {
+        $addFields: {
+          'instituteDetails.instituteId': {
+            $toString: '$instituteDetails.instituteId',
+          },
+          batchId: {
+            $toString: '$instituteDetails.batchId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'onlineclasslinks',
+          localField: 'instituteDetails.instituteId',
+          foreignField: 'instituteId',
+          as: 'onlineclasses',
+        },
+      },
+      {
+        $unwind: {
+          path: '$onlineclasses',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: ['$batchId', '$onlineclasses.batchId'],
+          },
+          'onlineclasses.date': {
+            $gte: currentDate,
+          },
+        },
+      },
+      {
+        $project: {
+          instituteName: '$instituteCourse.basicInfo.name',
+          batchCode: '$instituteCourse.batch.batchCode',
+          courseName: '$instituteCourse.course.name',
+          onlineclass: '$onlineclasses',
+        },
+      },
+    ]);
+
+    onlineClass = onlineClass.concat(onlineLinkClass);
     res.status(200).send({
       announcements,
       test,
       schedule,
+      onlineClass,
     });
   } catch (error) {
     errorHandler(error, res);
