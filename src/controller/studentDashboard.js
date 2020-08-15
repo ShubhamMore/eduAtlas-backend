@@ -551,6 +551,11 @@ exports.getStudentDashboard = async (req, res) => {
         },
       },
       {
+        $addFields: {
+          'onlineclasses.startTime': '$onlineclasses.fromTime',
+        },
+      },
+      {
         $project: {
           instituteName: '$instituteCourse.basicInfo.name',
           batchCode: '$instituteCourse.batch.batchCode',
@@ -981,7 +986,7 @@ exports.studentInstituteDashboard = async (req, res) => {
         },
         {
           $addFields: {
-            '$onlineclass.startTime': '$onlineclass.fromTime',
+            'onlineclass.startTime': '$onlineclass.fromTime',
           },
         },
         {
