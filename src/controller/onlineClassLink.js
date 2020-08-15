@@ -57,6 +57,77 @@ exports.createMeetingLink = async (req, res) => {
     await onlineMeetingLink.save();
 
     res.status(200).send(onlineMeetingLink);
+
+    const studentlist = await Student.aggregate([
+      {
+        $unwind: $instituteDetails,
+      },
+      {
+        $match: {
+          $expr: {
+            $and: [
+              {
+                $eq: ['$instituteDetails.instituteId', req.body.instituteId],
+              },
+              {
+                $eq: ['$instituteDetails.courseId', req.body.courseId],
+              },
+              {
+                $eq: ['$instituteDetails.batchId', req.body.batchId],
+              },
+            ],
+          },
+        },
+      },
+      {
+        $project: {
+          eduAtlasId: '$eduAtlasId',
+        },
+      },
+    ]);
+
+    const instituteDetails = await Institute.aggregate([
+      {
+        $unwind: '$course',
+      },
+      {
+        $unwind: '$batch',
+      },
+      {
+        $match: {
+          $expr: {
+            $and: [
+              {
+                $eq: ['$_id', mongoose.Types.ObjectId(req.body.instituteId)],
+              },
+              {
+                $eq: ['$course._id', mongoose.Types.ObjectId(req.body.courseId)],
+              },
+              {
+                $eq: ['$batch._id', mongoose.Types.ObjectId(req.body.batchId)],
+              },
+            ],
+          },
+        },
+      },
+      {
+        $project: {
+          courseName: '$course.name',
+          batchCode: '$batch.batchCode',
+        },
+      },
+    ]);
+
+    studentlist.forEach((student) => {
+      const notification = {
+        title: 'New Online Lecture Scheduled',
+        message: `Online Lecture has been scheduled on ${new Date(req.body.data)} for course ${
+          instituteDetails.course.courseName
+        } from ${req.body.fromTime} on TOPIC ${req.body.topic}`,
+      };
+      notification.receiverId = student.eduAtlasId;
+      sendNotification(notification);
+    });
   } catch (error) {
     console.log(error);
     res.status(400).send(error);

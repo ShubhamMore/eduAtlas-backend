@@ -34,6 +34,8 @@ exports.makeAnnouncement = async (req, res) => {
         public_id: upload_res.key,
         created_at: Date.now(),
       };
+      storageUsed = storageUsed + attachment.file_size;
+      await Institute.findByIdAndUpdate(institute._id, { storageUsed });
     }
 
     const announcementData = {
@@ -48,9 +50,6 @@ exports.makeAnnouncement = async (req, res) => {
 
     const announcement = new Announcement(announcementData);
     await announcement.save();
-
-    storageUsed = storageUsed + attachment.file_size;
-    await Institute.findByIdAndUpdate(institute._id, { storageUsed });
 
     res.status(201).json(announcement);
   } catch (error) {

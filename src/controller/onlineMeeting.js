@@ -3,6 +3,9 @@ const Student = require('../model/student.model');
 const Zoomuser = require('../model/zoomCredentials.model');
 const Employee = require('../model/employee.model');
 const OnlineClass = require('../model/onlineClass.model');
+const sendNotification = require('../notifications/notification');
+
+const mongoose = require('mongoose');
 
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
@@ -108,6 +111,79 @@ exports.createMeeting = async (req, res) => {
     };
     const newOnlineClass = new OnlineClass(newMeeting);
     await newOnlineClass.save();
+
+    const studentlist = await Student.aggregate([
+      {
+        $unwind: $instituteDetails,
+      },
+      {
+        $match: {
+          $expr: {
+            $and: [
+              {
+                $eq: ['$instituteDetails.instituteId', req.body.instituteId],
+              },
+              {
+                $eq: ['$instituteDetails.courseId', req.body.courseId],
+              },
+              {
+                $eq: ['$instituteDetails.batchId', req.body.batchId],
+              },
+            ],
+          },
+        },
+      },
+      {
+        $project: {
+          eduAtlasId: '$eduAtlasId',
+        },
+      },
+    ]);
+
+    const instituteDetails = await Institute.aggregate([
+      {
+        $unwind: '$course',
+      },
+      {
+        $unwind: '$batch',
+      },
+      {
+        $match: {
+          $expr: {
+            $and: [
+              {
+                $eq: ['$_id', mongoose.Types.ObjectId(req.body.instituteId)],
+              },
+              {
+                $eq: ['$course._id', mongoose.Types.ObjectId(req.body.courseId)],
+              },
+              {
+                $eq: ['$batch._id', mongoose.Types.ObjectId(req.body.batchId)],
+              },
+            ],
+          },
+        },
+      },
+      {
+        $project: {
+          courseName: '$course.name',
+          batchCode: '$batch.batchCode',
+        },
+      },
+    ]);
+    var splitTime = req.body.startTime.split('T');
+    var date = splitTime[0];
+    var time = splitTime[1];
+    studentlist.forEach((student) => {
+      const notification = {
+        title: 'New Online Lecture Scheduled',
+        message: `Online Lecture has been scheduled on ${new Date(date)} for course ${
+          instituteDetails.course.courseName
+        } from ${time} on TOPIC ${req.body.topic}`,
+      };
+      notification.receiverId = student.eduAtlasId;
+      sendNotification(notification);
+    });
     res.status(200).send(newOnlineClass);
   } catch (error) {}
 };

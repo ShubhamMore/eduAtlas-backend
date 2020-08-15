@@ -130,7 +130,7 @@ const dailySchedule = async () => {
 
   /*DEACTIVATE INSTITUTE CRON JOB*/
 
-  cron.schedule('0 23 * * *', async () => {
+  cron.schedule('0 1 * * *', async () => {
     //console.log('cron');
 
     const date = new Date();
@@ -258,33 +258,36 @@ const dailySchedule = async () => {
         },
       },
     ]);
-  });
-  schdetails.forEach((schedule) => {
-    const message = `
-      <h3>Attendance Reminder</h3>
-      <p>You had taken lecture on ${new Date(schedule.days.date)} of topic ${schedule.days.topic} 
-      from ${schedule.days.startTime} to ${schedule.days.endTime} </p>
-      <p>Please Mark the Attendance for the same.</p>
-      <p>----<br>Eduatlas Team</p>
-    `;
 
-    const notification = {
-      title: 'Attendance Reminder',
-      message: `Please mark Attendance for lecture - ${new Date(schedule.days.date)} of topic ${
-        schedule.days.topic
-      } from ${schedule.days.startTime} to ${schedule.days.endTime}`,
-    };
+    schdetails.forEach((schdetails) => {
+      const message = `
+        <h3>Attendance Reminder</h3>
+        <p>You had taken lecture on ${new Date(schdetails.days.date)} of topic ${
+        schdetails.days.topic
+      } 
+        from ${schdetails.days.startTime} to ${schdetails.days.endTime} </p>
+        <p>Please Mark the Attendance for the same.</p>
+        <p>----<br>Eduatlas Team</p>
+      `;
 
-    const mail = {
-      from: process.env.GMAIL_USER,
-      to: teacher.basicDetails.employeeEmail,
-      subject: `Schedule Reminder from Eduatlas`,
-      text: '',
-      html: message,
-    };
-    sendMail(mail);
-    notification.receiverId = teacher.eduAtlasId;
-    sendNotification(notification);
+      const notification = {
+        title: 'Attendance Reminder',
+        message: `Please mark Attendance for lecture - ${new Date(schdetails.days.date)} of topic ${
+          schdetails.days.topic
+        } from ${schdetails.days.startTime} to ${schdetails.days.endTime}`,
+      };
+
+      const mail = {
+        from: process.env.GMAIL_USER,
+        to: schdetails.teacherEmail,
+        subject: `Schedule Reminder from Eduatlas`,
+        text: '',
+        html: message,
+      };
+      sendMail(mail);
+      notification.receiverId = schdetails.eduatlasId;
+      sendNotification(notification);
+    });
   });
 };
 
