@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const { ObjectId } = require('bson');
 const awsUploadFile = require('../functions/awsUploadFile');
 const awsRemoveFile = require('../functions/awsRemoveFile');
+const sendNotification = require('../notifications/notification');
 
 exports.getAllMeetingLinks = async (req, res) => {
   try {
