@@ -130,7 +130,7 @@ const dailySchedule = async () => {
 
   /*DEACTIVATE INSTITUTE CRON JOB*/
 
-  cron.schedule('*/2 * * * * *', async () => {
+  cron.schedule('0 23 * * *', async () => {
     //console.log('cron');
 
     const date = new Date();

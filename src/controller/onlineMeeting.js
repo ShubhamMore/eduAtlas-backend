@@ -108,7 +108,6 @@ exports.createMeeting = async (req, res) => {
     };
     const newOnlineClass = new OnlineClass(newMeeting);
     await newOnlineClass.save();
-
     res.status(200).send(newOnlineClass);
   } catch (error) {}
 };
