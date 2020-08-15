@@ -342,7 +342,7 @@ exports.getStudentDashboard = async (req, res) => {
       },
     ]);
 
-    const onlineClass = await Student.aggregate([
+    let onlineClass = await Student.aggregate([
       {
         $match: {
           eduAtlasId: req.body.eduAtlasId,
