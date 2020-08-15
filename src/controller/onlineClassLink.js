@@ -61,7 +61,7 @@ exports.createMeetingLink = async (req, res) => {
 
     const studentlist = await Student.aggregate([
       {
-        $unwind: $instituteDetails,
+        $unwind: '$instituteDetails',
       },
       {
         $match: {
@@ -122,7 +122,7 @@ exports.createMeetingLink = async (req, res) => {
     studentlist.forEach((student) => {
       const notification = {
         title: 'New Online Lecture Scheduled',
-        message: `Online Lecture has been scheduled on ${new Date(req.body.data)} for course ${
+        message: `Online Lecture has been scheduled on ${new Date(req.body.date)} for course ${
           instituteDetails.course.courseName
         } from ${req.body.fromTime} on TOPIC ${req.body.topic}`,
       };

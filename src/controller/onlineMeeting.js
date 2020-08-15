@@ -114,7 +114,7 @@ exports.createMeeting = async (req, res) => {
 
     const studentlist = await Student.aggregate([
       {
-        $unwind: $instituteDetails,
+        $unwind: '$instituteDetails',
       },
       {
         $match: {
