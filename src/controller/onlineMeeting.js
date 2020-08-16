@@ -178,7 +178,7 @@ exports.createMeeting = async (req, res) => {
       const notification = {
         title: 'New Online Lecture Scheduled',
         message: `Online Lecture has been scheduled on ${new Date(date)} for course ${
-          instituteDetails.course.courseName
+          instituteDetails.courseName
         } from ${time} on TOPIC ${req.body.topic}`,
       };
       notification.receiverId = student.eduAtlasId;
