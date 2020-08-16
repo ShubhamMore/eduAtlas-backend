@@ -123,7 +123,7 @@ exports.createMeetingLink = async (req, res) => {
     studentlist.forEach((student) => {
       const notification = {
         title: 'New Online Lecture Scheduled',
-        message: `Online Lecture has been scheduled on ${new Date(req.body.date)} for course 
+        message: `Online Lecture has been scheduled on ${req.body.date} for course 
           ${instituteDetails.courseName} from ${req.body.fromTime} on TOPIC ${req.body.topic}`,
       };
       notification.receiverId = student.eduAtlasId;

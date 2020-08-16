@@ -306,7 +306,7 @@ exports.updateInstitute = async (req, res, next) => {
 
     res.status(201).json({ updatedInstitute });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     response(res, error.statusCode || 500, error.message);
   }
 };
