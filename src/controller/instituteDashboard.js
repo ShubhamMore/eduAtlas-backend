@@ -40,7 +40,7 @@ exports.getDashboardInfo = async (req, res) => {
       {
         $match: {
           instituteId: req.body.instituteId,
-          'days.date': date,
+          'days.date': { $gte: currentDate },
         },
       },
       {

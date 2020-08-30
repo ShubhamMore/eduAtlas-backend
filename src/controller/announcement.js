@@ -1,9 +1,10 @@
 const Announcement = require('../model/announcement.model');
 const Institute = require('../model/institute.model');
 const errorHandler = require('../service/errorHandler');
-
+const Student = require('../model/student.model');
 const awsUploadFile = require('../functions/awsUploadFile');
 const awsRemoveFile = require('../functions/awsRemoveFile');
+const sendNotification = require('../notifications/notification');
 
 exports.makeAnnouncement = async (req, res) => {
   try {
@@ -48,9 +49,63 @@ exports.makeAnnouncement = async (req, res) => {
       categories: JSON.parse(req.body.categories),
     };
 
+    const studentlist = await Student.aggregate([
+      {
+        $unwind: '$instituteDetails',
+      },
+      {
+        $match: {
+          'instituteDetails.instituteId': req.body.instituteId,
+        },
+      },
+      {
+        $addFields: {
+          instituteId: {
+            $toObjectId: '$instituteDetails.instituteId',
+          },
+          batchId: {
+            $toObjectId: '$instituteDetails.batchId',
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'institutes',
+          localField: 'instituteId',
+          foreignField: '_id',
+          as: 'inst',
+        },
+      },
+      {
+        $unwind: '$inst',
+      },
+      {
+        $unwind: '$inst.batch',
+      },
+      {
+        $addFields: {
+          batchCode: '$inst.batch.batchCode',
+        },
+      },
+      {
+        $match: {
+          batchCode: {
+            $in: JSON.parse(req.body.batchCodes),
+          },
+        },
+      },
+    ]);
+
     const announcement = new Announcement(announcementData);
     await announcement.save();
-
+    studentlist.forEach((student) => {
+      const notification = {
+        title: 'New Announcement',
+        message: `Title = ${req.body.title} -> please check announcement section for further information`,
+      };
+      notification.receiverId = student.eduAtlasId;
+      sendNotification(notification);
+    });
     res.status(201).json(announcement);
   } catch (error) {
     console.log(error);
