@@ -59,7 +59,7 @@ const getHtml = (receipt) => {
       }
     </style>
     <div class="padding border">
-      <p>Tax/GST Number ${receipt.gstNo}</p>
+      <p>Tax/GST Number ${receipt.gstNo ? receipt.gstNo : '--'}</p>
     </div>
     <br />
     <div class="padding border text-center">
@@ -79,7 +79,9 @@ const getHtml = (receipt) => {
       </div>
       <div class="">
         <h4>Student Details</h4>
-        <p>${receipt.studentName}<br />Roll No. ${receipt.rollNo}<br />Email: ${receipt.email}<br /></p>
+        <p>${receipt.studentName}<br />Roll No. ${receipt.rollNo}<br />Email: ${
+    receipt.email
+  }<br /></p>
       </div>
     </div>
     <br />
@@ -95,7 +97,9 @@ const getHtml = (receipt) => {
           <tr>
             <td>
               Course Code/Name: ${receipt.courseCode} <br />
-              Total Amount Before tax <br />Add CGST: 9% <br />Add SGST: 9%
+              Total Amount Before tax <br />Add CGST: ${
+                receipt.gstNo ? '9' : '0'
+              }% <br />Add SGST: ${receipt.gstNo ? '9' : '0'}%
             </td>
             <td><br />${receipt.amount} <br />${receipt.cgst} <br />${receipt.sgst}</td>
           </tr>
@@ -231,7 +235,11 @@ exports.addFee = async (req, res) => {
 
     fees.installments.forEach(async (curInstallment, i) => {
       if (curInstallment.paidStatus === 'true' && !curInstallment.receipt.secureUrl) {
-        const gst = (+curInstallment.amount / 100) * 18;
+        let gst = 0;
+
+        if (receipt.gstNo && receipt.gstNo != undefined) {
+          gst = (+curInstallment.amount / 100) * 18;
+        }
 
         const amount = (+curInstallment.amount - gst).toFixed(2);
 
@@ -392,7 +400,11 @@ exports.updateFeeOfStudent = async (req, res) => {
       let storageUsed = institute.storageUsed;
 
       if (curInstallment.paidStatus === 'true' && !installments[i].receipt.secureUrl) {
-        const gst = (+curInstallment.amount / 100) * 18;
+        let gst = 0;
+
+        if (receipt.gstNo && receipt.gstNo != undefined) {
+          gst = (+curInstallment.amount / 100) * 18;
+        }
 
         const amount = (+curInstallment.amount - gst).toFixed(2);
 
@@ -504,8 +516,11 @@ exports.updateFeeOfStudent = async (req, res) => {
 
     // fees.installments.forEach(async (curInstallment, i) => {
     //   if (curInstallment.paidStatus === 'true' && curInstallment.receiptLink === '') {
-    //     const gst = (+curInstallment.amount / 100) * 18;
+    // let gst = 0;
 
+    //   if (receipt.gstNo && receipt.gstNo != undefined) {
+    //     gst = (+curInstallment.amount / 100) * 18;
+    //   }
     //     const amount = (+curInstallment.amount - gst).toFixed(2);
 
     //     receipt.invoiceNo = +receipt.invoiceNo + 1;
