@@ -19,6 +19,12 @@ const appendZero = (n) => {
 
 exports.getDashboardInfo = async (req, res) => {
   try {
+    const inst = await Institute.findById(req.body.instituteId);
+
+    if (inst.active != true) {
+      throw new Error('Please Activate Your Institute');
+    }
+
     let data = {};
 
     const currentTime = new Date().getTime() / 1000;

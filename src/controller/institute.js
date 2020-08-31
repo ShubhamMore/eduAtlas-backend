@@ -1,8 +1,7 @@
 const Institute = require('../model/institute.model');
 const Student = require('../model/student.model');
 const { ObjectId } = require('bson');
-const Announcement = require('../model/announcement.model');
-const schema = require('../service/joi');
+const Receipt = require('../model/receipt.model');
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
 const mongoose = require('mongoose');
@@ -91,6 +90,12 @@ exports.activateInstitute = async (req, res, next) => {
     req.body = JSON.parse(JSON.stringify(req.body));
     if (!id) {
       return response(res, 400, 'Institute Id not provided');
+    }
+
+    const receipt = await Receipt.findById(req.body.paymentDetails.ReceiptId);
+
+    if (receipt.success != '1') {
+      throw new Error('Payment Unsuccessful, Please Try Again.');
     }
 
     const currentPlan = req.body.paymentDetails.planType;

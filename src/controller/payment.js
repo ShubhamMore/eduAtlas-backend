@@ -35,7 +35,7 @@ exports.orderGenerate = async (req, res) => {
     const receiptData = req.body;
 
     const amountType = req.body.amountType;
-    console.log(amountType);
+    // console.log(amountType);
     if (!amountType && amountType !== 'new' && amountType !== 'upgrade') {
       throw new Error('Invalid Amount Type');
     }
