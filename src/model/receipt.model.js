@@ -28,6 +28,9 @@ const receiptSchema = mongoose.Schema({
     type: String,
     require: true,
   },
+  couponCode: {
+    type: String,
+  },
   success: {
     type: String,
     default: '0',

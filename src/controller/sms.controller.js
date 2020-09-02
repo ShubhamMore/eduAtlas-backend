@@ -1,4 +1,5 @@
 const SmsPack = require('../model/smspack.model');
+const Institute = require('../model/institute.model');
 const errorHandler = require('../service/errorHandler');
 
 exports.addSmsPack = async (req, res) => {
@@ -51,6 +52,27 @@ exports.getSmsPack = async (req, res) => {
       throw new Error('Sms Pack Not Found');
     }
     res.send(smsPack);
+  } catch (e) {
+    console.log(e);
+    errorHandler(e, res);
+  }
+};
+
+exports.rechargeSms = async (req, res) => {
+  try {
+    const smsPack = await SmsPack.findById(req.body.packId);
+    if (!smsPack) {
+      throw new Error('Sms Pack Not Found');
+    }
+
+    const institute = await Institute.findById(req.body.id);
+
+    let smsCount = +institute.smsCount;
+    smsCount = +smsCount + +smsPack.noOfSMS;
+
+    await Institute.findByIdAndUpdate(req.body.id, { smsCount });
+
+    res.send({ success: true });
   } catch (e) {
     console.log(e);
     errorHandler(e, res);

@@ -1,7 +1,9 @@
 const Razorpay = require('razorpay');
 const Order = require('../model/order.model');
+const Coupon = require('../model/coupon.model');
 const Receipt = require('../model/receipt.model');
 const Plan = require('../model/plans.model');
+const SmsPack = require('../model/smspack.model');
 
 const crypto = require('crypto');
 
@@ -40,19 +42,41 @@ exports.orderGenerate = async (req, res) => {
       throw new Error('Invalid Amount Type');
     }
 
-    const plan = await Plan.findOne({ planType: req.body.planType });
-    if (!plan) {
-      throw new Error('Invalid Plan');
-    }
+    let amount = 0;
 
-    let amount;
-
-    if (amountType === 'new') {
-      amount = +plan.amount;
-    } else if (amountType === 'upgrade') {
-      amount = +plan.upgradeAmount;
+    if (req.body.planType === 'SMS Recharge') {
+      const smsPack = await SmsPack.findById(req.body.packId);
+      if (!smsPack) {
+        throw new Error('Invalid SMS Pack');
+      }
+      amount = +smsPack.totalAmount;
     } else {
-      throw new Error('Invalid Amount Type');
+      const plan = await Plan.findOne({ planType: req.body.planType });
+      if (!plan) {
+        throw new Error('Invalid Plan');
+      }
+      if (amountType === 'new') {
+        amount = +plan.amount;
+      } else if (amountType === 'upgrade') {
+        amount = +plan.upgradeAmount;
+      } else {
+        throw new Error('Invalid Amount Type');
+      }
+
+      let coupon;
+
+      if (req.body.couponCode) {
+        coupon = await Coupon.findOne({ code: req.body.couponCode.toUpperCase() });
+      }
+
+      if (coupon) {
+        if (coupon.amountType === 'amount') {
+          amount = amount - +coupon.amount;
+        } else if (coupon.amountType === 'percentage') {
+          const percentageAmount = amount * (+coupon.amount / 100);
+          amount = amount - percentageAmount.toFixed(2);
+        }
+      }
     }
 
     const gstAmount = +amount * 0.18;
@@ -96,6 +120,7 @@ exports.orderGenerate = async (req, res) => {
       await receipt.save();
     });
   } catch (e) {
+    console.log(e);
     res.status(400).send(e);
   }
 };
