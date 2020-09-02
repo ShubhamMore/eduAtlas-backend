@@ -2,6 +2,7 @@ const Institute = require('../model/institute.model');
 const Student = require('../model/student.model');
 const { ObjectId } = require('bson');
 const Receipt = require('../model/receipt.model');
+const Plan = require('../model/plans.model');
 const response = require('../service/response');
 const errorHandler = require('../service/errorHandler');
 const mongoose = require('mongoose');
@@ -92,28 +93,43 @@ exports.activateInstitute = async (req, res, next) => {
       return response(res, 400, 'Institute Id not provided');
     }
 
-    const receipt = await Receipt.findById(req.body.paymentDetails.ReceiptId);
+    const plan = await Plan.findOne({ planType: req.body.paymentDetails.planType });
 
-    if (receipt.success != '1') {
-      throw new Error('Payment Unsuccessful, Please Try Again.');
+    if (!plan) {
+      throw new Error('Invalid Plan');
     }
+
+    if (+plan.amount > 0) {
+      const receipt = await Receipt.findById(req.body.paymentDetails.ReceiptId);
+
+      if (receipt.success != '1') {
+        throw new Error('Payment Unsuccessful, Please Try Again.');
+      }
+    }
+
+    const instituteData = await Institute.findById(req.body._id);
 
     const currentPlan = req.body.paymentDetails.planType;
 
     let smsCount = 0;
+
+    if (instituteData && instituteData.smsCount) {
+      smsCount = +instituteData.smsCount;
+    }
+
     let totalStorage = 104857600; // 100 MB
 
     if (currentPlan == 'Lite') {
-      smsCount = 0;
+      smsCount += 0;
       totalStorage = 104857600; // 2 GB (1024*1024*100 Bytes)
     } else if (currentPlan == 'Lite Plus') {
-      smsCount = 5000;
+      smsCount += 5000;
       totalStorage = 2147483648; // 2 GB (1024*1024*1024*2 Bytes)
     } else if (currentPlan == 'Value') {
-      smsCount = 5000;
+      smsCount += 5000;
       totalStorage = 2147483648; // 2 GB (1024*1024*1024*2 Bytes)
     } else if (currentPlan == 'Power') {
-      smsCount = 10000;
+      smsCount += 10000;
       totalStorage = 10737418240; // 10 GB (1024*1024*1024*10 Bytes)
     }
     const date = new Date();

@@ -52,6 +52,8 @@ app.use((req, res, next) => {
 app.use(logger('dev'));
 
 app.use('/admin', require('./routes/admin'));
+app.use('/coupon', require('./routes/coupon'));
+app.use('/sms', require('./routes/smsPack'));
 app.use('/users', require('./routes/users'));
 app.use('/institute', require('./routes/institute'));
 app.use('/institute/payment', require('./routes/payment'));
