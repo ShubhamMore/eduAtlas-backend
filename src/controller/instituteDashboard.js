@@ -156,7 +156,7 @@ exports.getDashboardInfo = async (req, res) => {
         courseId: pendingFees[i].courseId,
         courseName: course[0].course.name,
         pendingAmount: pendingFees[i].pendingAmount,
-        eduAtlasId: studentId.eduAtlasId,
+        eduAtlasId: student.eduAtlasId,
       };
       fee.push(obj);
     }
